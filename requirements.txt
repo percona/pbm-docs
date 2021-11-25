@@ -1,0 +1,14 @@
+Sphinx
+sphinx-copybutton
+sphinx-material
+sphinxcontrib-applehelp
+sphinxcontrib-contentui
+sphinxcontrib-devhelp
+sphinxcontrib-fulltoc
+sphinxcontrib-htmlhelp
+sphinxcontrib-jsmath
+sphinxcontrib-qthelp
+sphinxcontrib-serializinghtml
+sphinx-gitstamp
+sphinxcontrib-plantuml
+sphinx-togglebutton
