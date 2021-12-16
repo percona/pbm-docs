@@ -5,9 +5,6 @@ Configuration file options
 
 This page describes configuration file options available in |PBM|. For how to use configuration file, see :ref:`pbm.config`.
 
-.. contents::
-   :local:
-
 .. _pbm.storage.config.options:
 
 Remote backup storage options
@@ -24,12 +21,13 @@ Remote backup storage options
 - `Google Cloud Storage <https://cloud.google.com/storage>`_, 
 - `MinIO <https://min.io/>`_.
 
-.. option:: storage.type
+storage.type
+^^^^^^^^^^^^^^^^^^^
    
-   :type: string
-   :required: YES
+:type: string
+:required: YES
 
-   Remote backup storage type. Supported values: s3, filesystem, azure.
+Remote backup storage type. Supported values: ``s3``, ``filesystem``, ``azure``.
 
 S3 type storage options
 -------------------------------------------------------------------------------
@@ -49,84 +47,118 @@ S3 type storage options
          sseAlgorithm: aws:kms
          kmsKeyID: <your-kms-key-here>
 
-.. option:: storage.s3.provider
-   
-   :type: string
-   :required: NO
-   
-   The storage provider's name. Supported values: aws, gcs
-   
-.. option:: storage.s3.bucket
+storage.s3.provider
+^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:required: NO
+
+The storage provider's name. Supported values: aws, gcs
   
-   :type: string
-   :required: YES
-
-   The name of the storage :term:`bucket <Bucket>`. See the `AWS Bucket naming rules <https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules>`_ and `GCS bucket naming guidelines <https://cloud.google.com/storage/docs/naming-buckets#requirements>`_ for bucket name requirements
-
-.. option:: storage.s3.region
-
-   :type: string
-   :required: YES (for AWS and GCS)
+storage.s3.bucket
+^^^^^^^^^^^^^^^^^^^^^^^^
   
-   The location of the storage bucket. 
-   Use the `AWS region list <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`_ and `GCS region list <https://cloud.google.com/storage/docs/locations>`_ to define the bucket region
+:type: string
+:required: YES
+
+The name of the storage :term:`bucket <Bucket>`. See the `AWS Bucket naming rules <https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules>`_ and `GCS bucket naming guidelines <https://cloud.google.com/storage/docs/naming-buckets#requirements>`_ for bucket name requirements
+
+storage.s3.region
+^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:required: YES (for AWS and GCS)
+
+The location of the storage bucket. 
+Use the `AWS region list <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`_ and `GCS region list <https://cloud.google.com/storage/docs/locations>`_ to define the bucket region
+
+storage.s3.prefix
+^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:required: NO
+
+The path to the data directory on the bucket. If undefined, backups are stored in the bucket root directory
+
+storage.s3.endpointUrl
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:required: YES (for MinIO and GCS)
+
+The URL to access the bucket. The default value for GCS is ``https://storage.googleapis.com``
+
+storage.s3.credentials.access-key-id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:required: YES
+
+Your access key to the storage bucket. This option can be ommitted when you run |PBM| using an EC2 instance profile. To learn more, refer to :ref:`automate-s3-access`
    
-.. option:: storage.s3.prefix
+storage.s3.credentials.secret-access-key
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   :type: string
-   :required: NO
-   
-   The path to the data directory on the bucket. If undefined, backups are stored in the bucket root directory
+:type: string
+:required: YES
 
-.. option:: storage.s3.endpointUrl
+The key to sign your programmatic requests to the storage bucket. This option can be ommitted when you run |PBM| using an EC2 instance profile. To learn more, refer to :ref:`automate-s3-access` 
 
-   :type: string
-   :required: YES (for MinIO and GCS)
-
-   The URL to access the bucket. The default value for GCS is ``https://storage.googleapis.com``
-
-.. option:: storage.s3.credentials.access-key-id
-
-   :type: string
-   :required: YES
-   
-   Your access key to the storage bucket. This option can be ommitted when you run |PBM| using an EC2 instance profile. To learn more, refer to :ref:`automate-s3-access`
-   
-.. option:: storage.s3.credentials.secret-access-key
-
-  :type: string
-  :required: YES
-  
-  The key to sign your programmatic requests to the storage bucket. This option can be ommitted when you run |PBM| using an EC2 instance profile. To learn more, refer to :ref:`automate-s3-access` 
-
-.. option:: storage.s3.uploadPartSize
+storage.s3.uploadPartSize
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     
-   :type: int
-   :required: NO
-  
-   The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB
-       
-   |PBM| automatically increases the ``uploadPartSize`` value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of uploadPartSize * `maxUploadParts <https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants>`_ and is appr. 97,6 GB).
+:type: int
+:required: NO
 
-   The ``uploadPartSize`` value is printed in the :ref:`pbm-agent log <pbm-agent.log>`.
+The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB
+    
+|PBM| automatically increases the ``uploadPartSize`` value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of uploadPartSize * `maxUploadParts <https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants>`_ and is appr. 97,6 GB).
 
-   By setting this option, you can manually adjust the size of data chunks if |PBM| failed to do it for some reason. The defined ``uploadPartSize`` value overrides the default value and is used for calculating the max allowed file size
+The ``uploadPartSize`` value is printed in the :ref:`pbm-agent log <pbm-agent.log>`.
+
+By setting this option, you can manually adjust the size of data chunks if |PBM| failed to do it for some reason. The defined ``uploadPartSize`` value overrides the default value and is used for calculating the max allowed file size
+
+storage.s3.maxUploadParts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: int
+:required: NO
+:default: 10,000
+
+The maximum number of data chunks to be uploaded to the storage bucket. Default: 10,000
+
+By setting this option, you can override the value defined in the `AWS SDK <https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#MaxUploadParts>`_.
+
+It can be useful when using an S3 provider that supports a smaller number of chunks for multipart uploads.
+
+The ``maxUploadParts`` value is printed in the :ref:`pbm-agent log <pbm-agent.log>`.
+
+storage.s3.storageClass
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:required: NO
+
+The storage class assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used.
+
 
 .. rubric:: Server-side encryption options
 
-.. option:: serverSideEncryption.sseAlgorythm
+serverSideEncryption.sseAlgorythm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    
-   :type: string
-  
-   The key management mode used for server-side encryption 
+:type: string
 
-   Supported value: ``aws:kms``
+The key management mode used for server-side encryption 
+
+Supported value: ``aws:kms``
    
-.. option:: serverSideEncryption.kmsKeyID
+serverSideEncryption.kmsKeyID
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
      
-   :type: string
-  
-   Your customer-managed key
+:type: string
+
+Your customer-managed key
 
 Filesystem storage options
 -------------------------------------------------------------------------------
@@ -138,12 +170,13 @@ Filesystem storage options
      filesystem:
        path: <string>
 
-.. option:: storage.filesystem.path
+storage.filesystem.path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   :type: string
-   :required: YES
-   
-   The path to the backup directory
+:type: string
+:required: YES
+
+The path to the backup directory
 
 Microsoft Azure Blob storage options
 -------------------------------------
@@ -159,33 +192,38 @@ Microsoft Azure Blob storage options
        credentials:
          key: <your-access-key>
 
-.. option:: storage.azure.account  
 
-   :type: string      
-   :required: YES
+storage.azure.account
+^^^^^^^^^^^^^^^^^^^^^^  
 
-   The name of your storage account. 
+:type: string      
+:required: YES
 
-.. option:: storage.azure.container  
+The name of your storage account. 
 
-   :type: string      
-   :required: YES
+storage.azure.container
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 
-   The name of the storage :term:`container <Container>`. See the  `Container names <https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names>`_ for naming conventions.
+:type: string      
+:required: YES
 
-.. option:: storage.azure.prefix  
+The name of the storage :term:`container <Container>`. See the  `Container names <https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names>`_ for naming conventions.
 
-   :type: string      
-   :required: NO
+storage.azure.prefix
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 
-   The path (sub-folder) to the backups inside the container. If undefined, backups are stored in the container root directory.
+:type: string      
+:required: NO
 
-.. option:: storage.azure.credentials.key  
+The path (sub-folder) to the backups inside the container. If undefined, backups are stored in the container root directory.
 
-   :type: string      
-   :required: YES
+storage.azure.credentials.key 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
 
-   Your access key to authorize access to data in your storage account. 
+:type: string      
+:required: YES
+
+Your access key to authorize access to data in your storage account. 
 
 .. _pitr.config:
 
@@ -198,23 +236,25 @@ Point-in-time recovery options
      enabled: <boolean> 
      oplogSpanMin: <float64>
 
-.. option:: pitr.enabled
+pitr.enabled
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   
-   :type: boolean
-   
-   Enables point-in-time recovery
+:type: boolean
+
+Enables point-in-time recovery
 
 
-.. option:: pitr.oplogSpanMin
+pitr.oplogSpanMin
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   :type: float64
-   :default: 10
+:type: float64
+:default: 10
 
-   The duration of an oplog span in minutes. If set when the |pbm-agent| is making an oplog slice, the slice’s span is updated right away.
+The duration of an oplog span in minutes. If set when the |pbm-agent| is making an oplog slice, the slice’s span is updated right away.
 
-   If the new duration is smaller than the previous one, the |pbm-agent| is triggered to save a new slice with the updated span. If the duration is larger, then the next slice is saved with the updated span in scheduled time.  
+If the new duration is smaller than the previous one, the |pbm-agent| is triggered to save a new slice with the updated span. If the duration is larger, then the next slice is saved with the updated span in scheduled time.  
 
-.. _backup-config:
+
 .. _backup-options:
 
 Backup options
@@ -230,17 +270,18 @@ Backup options
        "localhost:27020": 2.0
        "localhost:27017": 0.1
 
-.. option:: priority
+priority
+^^^^^^^^^^^^
 
-   :type: array of strings
+:type: array of strings
 
-   The list of ``mongod`` nodes and their priority for making backups. The node with the highest priority is elected for making a backup. If several nodes have the same priority, the one among them is randomly elected to make a backup. 
+The list of ``mongod`` nodes and their priority for making backups. The node with the highest priority is elected for making a backup. If several nodes have the same priority, the one among them is randomly elected to make a backup. 
 
-   If not set, the replica set nodes have the default priority as follows: 
+If not set, the replica set nodes have the default priority as follows: 
 
-   - hidden nodes - 2.0, 
-   - secondary nodes - 1.0, 
-   - primary node - 0.5. 
+- hidden nodes - 2.0, 
+- secondary nodes - 1.0, 
+- primary node - 0.5. 
 
 .. _restore.config:
 
@@ -253,18 +294,20 @@ Restore options
      batchSize: <int>
      numInsertionWorkers: <int>
 
-.. option:: batchSize
+batchSize
+^^^^^^^^^^^
    
-   :type: int
-   :default: 500
+:type: int
+:default: 500
 
-   The number of documents to buffer. 
+The number of documents to buffer. 
 
-.. option:: numInsertionWorkers 
+numInsertionWorkers 
+^^^^^^^^^^^^^^^^^^^^^^
 
-   :type: int
-   :default: 10
+:type: int
+:default: 10
 
-   The number of workers that add the documents to buffer.      
+The number of workers that add the documents to buffer.      
        
 .. include:: .res/replace.txt      
