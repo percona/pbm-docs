@@ -84,7 +84,7 @@ Building from source code
 
 Building the project requires:
 
-- Go 1.11 or above
+- Go 1.15 or above
 - make
 - git
 - ``krb5-devel`` for Red Hat Enterprise Linux / CentOS or ``libkrb5-dev`` for Debian / Ubuntu. This package is required for Kerberos authentication in Percona Server for MongoDB.
@@ -145,23 +145,23 @@ Install from binary tarball
 
 Find the link to the binary tarballs under the *Generic Linux* menu item on `Percona website <https://www.percona.com/downloads/percona-backup-mongodb/>`_.
 
-1. Fetch the binary tarball. 
+1. Fetch the binary tarball. Replace the <version> with the required version.
    
    .. code-block:: bash
 
-      $ wget https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-1.5.0/binary/tarball/percona-backup-mongodb-1.5.0-x86_64.tar.gz
+      $ wget https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-<version>/binary/tarball/percona-backup-mongodb-<version>-x86_64.tar.gz
 
 2. Extract the tarball
 
    .. code-block:: bash
 
-      $ tar -xf percona-backup-mongodb-1.5.0-x86_64.tar.gz
+      $ tar -xf percona-backup-mongodb-<version>-x86_64.tar.gz
 
 3. Export the location of the binaries to the ``PATH`` variable. For example, if you've extracted the tarball to your ``home`` directory, the command would be the following:
    
    .. code-block:: bash
 
-      $ export PATH=~/percona-backup-mongodb-1.5.0/:$PATH
+      $ export PATH=~/percona-backup-mongodb-<version>/:$PATH
 
 
 After |pbm| is successfully installed on your system, you have |pbm.app|
