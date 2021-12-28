@@ -14,7 +14,9 @@ html_theme_options = {
     'repo_url': 'https://github.com/percona/percona-backup-mongodb',
     'repo_name': 'percona/percona-backup-mongodb',
     'color_accent': 'grey',
-    'color_primary': 'orange'
+    'color_primary': 'orange',
+    'google_analytics_account': 'UA-343802-3',
+    'globaltoc_collapse': True,
 }
 html_logo = '../_images/percona-logo.svg'
 html_favicon = '../_images/percona_favicon.ico'
