@@ -137,6 +137,15 @@ The easiest way to provide remote backup storage configuration is to specify it 
 
 The storage configuration itself is out of scope of the present document. We assume that you have configured one of the :ref:`supported remote backup storages <storage.config>`.
 
+.. important::
+
+      * When using a remote backup storage (S3 or Microsoft Azure), grant the  ``List/Get/Put/Delete`` permissions to the storage for the user identified by the access credentials. Please refer to the documentation of your selected storage for the permissions configuration.
+      * When using a filesystem storage, verify that the user running |PBM| is the owner of the backup folder.
+
+        .. code-block:: bash
+        
+           $ sudo chown pbm:pbm <backup_directory>
+
 1. Create a config file (e.g. :file:`pbm_config.yaml`).
 2. Specify the storage information within. 
    
@@ -151,14 +160,6 @@ The storage configuration itself is out of scope of the present document. We ass
    This is the sample configuration for filesystem storage:
 
    .. include:: .res/code-block/yaml/example-local-file-system-store.yaml
-
-   .. important::
-
-      When using a filesystem storage, verify that the user running |PBM| is the owner of the backup folder.
-
-      .. code-block:: bash
-      
-         $ sudo chown pbm:pbm <backup_directory>
 
    See more examples in :ref:`pbm.config.example_yaml`.
 
