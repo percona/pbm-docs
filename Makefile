@@ -43,9 +43,15 @@ clean:
 #	@echo "Netlify build finished. The HTML pages are in $(BUILDDIR)/html."
 
 netlify:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) -c source/conf-netlify $(BUILDDIR)/html
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) -c source/conf-material $(BUILDDIR)/html
 	@echo
 	@echo "Netlify build finished. The HTML pages are in $(BUILDDIR)/html."
+
+
+thtml:
+	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) -c source/conf-material $(BUILDDIR)/html
+	@echo
+	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 html:
 	@echo "Downloading percona-theme ..."
