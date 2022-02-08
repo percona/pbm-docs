@@ -3,18 +3,25 @@
 Remote backup storage 
 *********************************************************************************
 
+On this page: 
+
 .. contents::
    :local:
 
+Overview
+========
+
 |PBM| supports the following types of remote backup storages:
 
-* S3-compatible storage
-* Filesystem type storage
-* Microsoft Azure Blob storage 
+* :ref:`S3-compatible storage <s3>`
+* :ref:`Filesystem type storage <filesystem-remote>`
+* :ref:`Microsoft Azure Blob storage <azure>`
+
+.. _s3:
 
 .. rubric:: S3 compatible storage
 
-|PBM| should work with other S3-compatible storages but was only tested with the following ones:
+|PBM| should work with other S3-compatible storages, but was only tested with the following ones:
 
 - `Amazon Simple Storage Service <https://docs.aws.amazon.com/s3/index.html>`_ 
 - `Google Cloud Storage <https://cloud.google.com/storage>`_
@@ -59,6 +66,47 @@ above.
 As of v1.5.0, you can use `Microsoft Azure Blob Storage <https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction>`_ as the remote backup storage for |PBM|. 
 
 This gives users a vendor choice. Companies with Microsoft-based infrastructure can set up |PBM| with less administrative efforts.
+
+.. note:: 
+   
+   Regardless of the remote backup storage you use, grant the ``List/Get/Put/Delete`` permissions to this storage for the user identified by the access credentials.
+
+   The following example shows the permissions configuration to the ``pbm-testing`` bucket on the AWS S3 storage. 
+
+   .. code-block:: json
+
+      {
+          "Version": "2012-10-17",
+          "Statement": [
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:ListBucket"
+                  ],
+                  "Resource": "arn:aws:s3:::pbm-testing"
+              },
+              {
+                  "Effect": "Allow",
+                  "Action": [
+                      "s3:PutObject",
+                      "s3:PutObjectAcl",
+                      "s3:GetObject",
+                      "s3:GetObjectAcl",
+                      "s3:DeleteObject"
+                  ],
+                  "Resource": "arn:aws:s3:::pbm-testing/*"
+              }
+          ]
+      }
+      
+   Please refer to the documentation of your selected storage for the data access management.
+
+   .. seealso::
+
+      * AWS documentation: `Controlling access to a bucket with user policies <https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html>`_
+      * Google Cloud Storage documentation: `Overview of access control <https://cloud.google.com/storage/docs/access-control>`_
+      * Microsoft Azure documentation: `Assign an Azure role for access to blob data <https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal>`_
+      * MinIO documentation : `Policy Management <https://docs.min.io/minio/baremetal/security/minio-identity-management/policy-based-access-control.html>`_
 
 .. _pbm.config.example_yaml:
 
