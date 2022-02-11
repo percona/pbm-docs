@@ -3,32 +3,7 @@
 |pbm.app| commands
 **********************************************************************
 
-.. raw:: html
 
-   <style>
-   
-   .toggle {
-        background: none repeat scroll 0 0 #f5f5f5;
-        padding: 12px;
-        max-width: 850px;
-        line-height: 24px;
-        margin-bottom: 24px;
-    }
-   
-   .toggle .header {
-       display: block;
-       clear: both;
-       cursor: pointer;
-   }
-   
-   .toggle .header:after {
-       content: " ▶";
-   }
-   
-   .toggle .header.open:after {
-       content: " ▼";
-   }
-   </style>
 
 ``pbm CLI`` is the command line utility to control the backup system. This page describes |pbm.app| commands available in |PBM|.
 
@@ -73,11 +48,8 @@ The command accepts the following flags:
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
    
-.. container:: toggle
-
-   .. container:: header
-
-      **pbm config JSON output**
+.. admonition:: |PBM| configuration output
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -105,11 +77,8 @@ The command accepts the following flags:
         "backup": {}
       }
 
-.. container:: toggle
-
-   .. container:: header
-
-      **Setting a config value**
+.. admonition:: Setting a config value
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -150,11 +119,8 @@ The command accepts the following flags:
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
 
-.. container:: toggle
- 
-   .. container:: header
-
-      **JSON output**
+.. admonition:: JSON output
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -194,23 +160,17 @@ The command accepts the following flags:
    * - ``--base-snapshot``
      - Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in |PBM| starting from version 1.6.0.
        
-.. container:: toggle
-
-   .. container:: header
-
-      **JSON output**
-
+.. admonition:: Restore output
+   :class: toggle
+    
    .. code-block:: javascript
 
       {
         "snapshot": "<backup_name>"
       }
   
-.. container:: toggle
-
-   .. container:: header
-
-      **Point-in-time restore**
+.. admonition:: Point-in-time restore
+   :class: toggle 
 
    .. code-block:: javascript
 
@@ -236,11 +196,8 @@ The command accepts the following flags:
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
 
-.. container:: toggle
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: JSON output
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -283,13 +240,10 @@ The command accepts the following flags:
    * - ``--size=0``
      - Shows last N backups.
    * - ``-o``, ``--out=text``
-     - Shows the output format as either plain text or a JSON object. Supported values: text, json
+     - Shows the output format as either plain text or a JSON object. Supported values: ``text``, ``json``
 
-.. container:: toggle
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: List of backups
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -321,11 +275,8 @@ The command accepts the following flags:
         }
       }
 
-.. container:: toggle
-
-   .. container:: header
-
-      **Restores history**
+.. admonition:: Restore history
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -379,7 +330,8 @@ The command accepts the following flags:
 
 .. _delete-pitr:
 
-.. rubric:: pbm delete-pitr
+pbm delete-pitr
+=======================
 
 Deletes :term:`oplog slices <Oplog slice>` produced for :ref:`pitr`. 
 
@@ -443,13 +395,10 @@ The command accepts the following flags:
    * - ``--commit``
      - Shows only git commit info
    * - ``-o``, ``--out=text``
-     - Shows the output as either plain text or a JSON object. Supported values: text, json
+     - Shows the output as either plain text or a JSON object. Supported values: ``text``, ``json``
        
-.. container:: toggle "JSON"
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: Version information
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -488,11 +437,8 @@ The command accepts the following flags:
    * - ``-s``, ``--sections=SECTIONS``
      - Shows the status for the specified section. You can pass several flags to view the status for multiple sections. Supported values: cluster, pitr, running, backups. 
    
-.. container:: toggle "JSON"
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: Status information
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -602,11 +548,8 @@ The command accepts the following flags:
 
 Find the usage examples in :ref:`pbm.logs`.
 
-.. container:: toggle
-
-   .. container :: header
-
-      **JSON output**
+.. admonition:: Logs output
+   :class: toggle
 
    .. code-block:: javascript
 
