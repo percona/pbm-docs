@@ -11,6 +11,7 @@ Remote backup storage options
 ============================================================================
 
 |PBM| supports the following types of remote storages: 
+
 - S3-compatible storage,
 - `Microsoft Azure Blob storage <https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction>`_, and 
 - filesystem. 
@@ -21,8 +22,9 @@ Remote backup storage options
 - `Google Cloud Storage <https://cloud.google.com/storage>`_, 
 - `MinIO <https://min.io/>`_.
 
-storage.type
-^^^^^^^^^^^^^^^^^^^
+.. _storage.type:
+
+:command:`storage.type`
    
 :type: string
 :required: YES

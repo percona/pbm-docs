@@ -36,13 +36,15 @@ For how to get started with |PBM|, see :ref:`initial-setup`.
 
 .. _help:
 
-.. rubric:: pbm help
+pbm help
+===========
 
 Returns the help information about |pbm.app| commands.
 
 .. _config:
 
-.. rubric:: pbm config
+pbm config
+==================
 
 Sets, changes or lists |PBM| configuration.
 
@@ -120,7 +122,8 @@ The command accepts the following flags:
 
 .. _backup:
 
-.. rubric:: pbm backup
+pbm backup
+======================
 
 Creates a backup snapshot and saves it in the remote backup storage. 
 
@@ -163,7 +166,8 @@ The command accepts the following flags:
 
 .. _restore:
 
-.. rubric:: pbm restore
+pbm restore
+=====================
 
 Restores database from a specified backup / to a specified point in time. 
 
@@ -216,7 +220,8 @@ The command accepts the following flags:
 
 .. _cancel:       
 
-.. rubric:: pbm cancel-backup
+pbm cancel-backup
+========================
 
 Cancels a running backup. The backup is marked as canceled in the backup list.
 
@@ -245,7 +250,8 @@ The command accepts the following flags:
 
 .. _list:
 
-.. rubric:: pbm list
+pbm list
+=================
 
 Provides the list of backups. In versions 1.3.4 and earlier, the command lists all backups and their states. Backup states are the following:
 
@@ -344,7 +350,8 @@ The command accepts the following flags:
 
 .. _delete:
 
-.. rubric:: pbm delete-backup
+pbm delete-backup
+=======================
 
 Deletes the specified backup snapshot or all backup snapshots that are older than the specified time. The command deletes backups that are not running regardless of the remote backup storage being used.
 
@@ -418,7 +425,8 @@ The command accepts the following flags:
 
 .. _version:
 
-.. rubric:: pbm version
+pbm version
+======================
 
 Shows the version of |PBM|.
 
@@ -456,7 +464,8 @@ The command accepts the following flags:
 
 .. _status:
 
-.. rubric:: pbm status
+pbm status
+===================
 
 Shows the status of |PBM|. The output provides the following information:
 
@@ -543,7 +552,8 @@ The command accepts the following flags:
 
 .. _logs:
 
-.. rubric:: pbm logs
+pbm logs
+============
 
 Shows log information from all |pbm-agent| processes. 
 
@@ -587,6 +597,8 @@ The command accepts the following flags:
        The output includes both the specified severity level and all higher ones
    * - ``-i``, ``--opid=OPID``
      - Show logs for an operation in progress. The operation is identified by the :term:`OpID`
+   * - ``-x``, ``--extra``
+     - Show extra data in the text format
 
 Find the usage examples in :ref:`pbm.logs`.
 
