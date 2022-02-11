@@ -38,7 +38,7 @@ The set of :ref:`pbm sub-commands <pbm-commands>` enables you to manage backups 
 |pbm.app| does not have its own config and/or cache files. Setting the
 |env-pbm-mongodb-uri| environment variable in your shell is a
 configuration-like step that should be done for practical ease though. (Without
-|env-pbm-mongodb-uri| the |opt-mongodb-uri| command line argument will need to
+|env-pbm-mongodb-uri| the ``--mongodb-uri`` command line argument will need to
 be specified each time.) 
 
 To learn how to set the ``PBM_MONGODB_URI`` environment variable, see :ref:`set-mongodbURI-pbm.CLI`. For more information about MongoDB URI connection strings, see :ref:`pbm.auth`.

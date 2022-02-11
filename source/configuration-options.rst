@@ -22,17 +22,17 @@ Remote backup storage options
 - `Google Cloud Storage <https://cloud.google.com/storage>`_, 
 - `MinIO <https://min.io/>`_.
 
-.. _storage.type:
-
-:command:`storage.type`
+storage.type
+^^^^^^^^^^^^^^^^^^^
    
 :type: string
 :required: YES
 
 Remote backup storage type. Supported values: ``s3``, ``filesystem``, ``azure``.
 
-S3 type storage options
--------------------------------------------------------------------------------
+.. _s3-opt:
+
+.. rubric:: S3 type storage options
 
 .. code-block:: yaml
 
@@ -162,8 +162,9 @@ serverSideEncryption.kmsKeyID
 
 Your customer-managed key
 
-Filesystem storage options
--------------------------------------------------------------------------------
+.. _filesystem:
+
+.. rubric:: Filesystem storage options
 
 .. code-block:: yaml
 
@@ -180,8 +181,9 @@ storage.filesystem.path
 
 The path to the backup directory
 
-Microsoft Azure Blob storage options
--------------------------------------
+.. _azure-options:
+
+.. rubric:: Microsoft Azure Blob storage options
 
 .. code-block:: yaml
 
