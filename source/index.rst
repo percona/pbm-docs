@@ -46,6 +46,7 @@ Introduction
 ***********************************************
 
 .. toctree::
+   :caption: Introduction
    :maxdepth: 2
 
    intro
@@ -55,6 +56,7 @@ Getting started
 ***********************************************
 
 .. toctree::
+   :caption: Getting started
    :maxdepth: 2
 
    installation   
@@ -65,6 +67,7 @@ Usage
 ***********************************************
 
 .. toctree::
+   :caption: Usage
    :maxdepth: 2  
 
    running
@@ -75,6 +78,7 @@ Details
 ***********************************************
 
 .. toctree::
+   :caption: Details
    :maxdepth: 1
 
    architecture
@@ -86,6 +90,7 @@ How to
 ***********************************************
 
 .. toctree::
+   :caption: How to
    :maxdepth: 2
       
    schedule-backup
@@ -99,6 +104,7 @@ FAQ
 ***********************************************
 
 .. toctree::
+   :caption: FAQ
    :maxdepth: 1
 
    faq
@@ -107,6 +113,7 @@ Reference
 ***********************************************
    
 .. toctree::
+   :caption: Reference
    :maxdepth: 1
 
    pbm-commands
@@ -120,6 +127,7 @@ Release notes
 ***********************************************
    
 .. toctree::
+   :caption: Release notes
    :maxdepth: 1
    
    release-notes
