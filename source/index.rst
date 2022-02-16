@@ -69,7 +69,7 @@ Usage
 
    running
    point-in-time-recovery
-   status
+   
 
 Details
 ***********************************************
