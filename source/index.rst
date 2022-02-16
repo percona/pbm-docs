@@ -8,7 +8,7 @@
 
 |pbm| supports `Percona Server for MongoDB
 <https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_
-and MongoDB Community v3.6 or higher with `MongoDB Replication
+and MongoDB Community v4.0 or higher with `MongoDB Replication
 <https://docs.mongodb.com/manual/replication/>`_ enabled.
 
 .. note::
