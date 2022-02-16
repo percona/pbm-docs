@@ -3,32 +3,7 @@
 |pbm.app| commands
 **********************************************************************
 
-.. raw:: html
 
-   <style>
-   
-   .toggle {
-        background: none repeat scroll 0 0 #f5f5f5;
-        padding: 12px;
-        max-width: 850px;
-        line-height: 24px;
-        margin-bottom: 24px;
-    }
-   
-   .toggle .header {
-       display: block;
-       clear: both;
-       cursor: pointer;
-   }
-   
-   .toggle .header:after {
-       content: " ▶";
-   }
-   
-   .toggle .header.open:after {
-       content: " ▼";
-   }
-   </style>
 
 ``pbm CLI`` is the command line utility to control the backup system. This page describes |pbm.app| commands available in |PBM|.
 
@@ -36,13 +11,15 @@ For how to get started with |PBM|, see :ref:`initial-setup`.
 
 .. _help:
 
-.. rubric:: pbm help
+pbm help
+===========
 
 Returns the help information about |pbm.app| commands.
 
 .. _config:
 
-.. rubric:: pbm config
+pbm config
+==================
 
 Sets, changes or lists |PBM| configuration.
 
@@ -71,11 +48,8 @@ The command accepts the following flags:
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
    
-.. container:: toggle
-
-   .. container:: header
-
-      **pbm config JSON output**
+.. admonition:: |PBM| configuration output
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -103,11 +77,8 @@ The command accepts the following flags:
         "backup": {}
       }
 
-.. container:: toggle
-
-   .. container:: header
-
-      **Setting a config value**
+.. admonition:: Setting a config value
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -120,7 +91,8 @@ The command accepts the following flags:
 
 .. _backup:
 
-.. rubric:: pbm backup
+pbm backup
+======================
 
 Creates a backup snapshot and saves it in the remote backup storage. 
 
@@ -147,11 +119,8 @@ The command accepts the following flags:
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
 
-.. container:: toggle
- 
-   .. container:: header
-
-      **JSON output**
+.. admonition:: JSON output
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -163,7 +132,8 @@ The command accepts the following flags:
 
 .. _restore:
 
-.. rubric:: pbm restore
+pbm restore
+=====================
 
 Restores database from a specified backup / to a specified point in time. 
 
@@ -190,23 +160,17 @@ The command accepts the following flags:
    * - ``--base-snapshot``
      - Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in |PBM| starting from version 1.6.0.
        
-.. container:: toggle
-
-   .. container:: header
-
-      **JSON output**
-
+.. admonition:: Restore output
+   :class: toggle
+    
    .. code-block:: javascript
 
       {
         "snapshot": "<backup_name>"
       }
   
-.. container:: toggle
-
-   .. container:: header
-
-      **Point-in-time restore**
+.. admonition:: Point-in-time restore
+   :class: toggle 
 
    .. code-block:: javascript
 
@@ -216,7 +180,8 @@ The command accepts the following flags:
 
 .. _cancel:       
 
-.. rubric:: pbm cancel-backup
+pbm cancel-backup
+========================
 
 Cancels a running backup. The backup is marked as canceled in the backup list.
 
@@ -231,11 +196,8 @@ The command accepts the following flags:
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
 
-.. container:: toggle
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: JSON output
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -245,7 +207,8 @@ The command accepts the following flags:
 
 .. _list:
 
-.. rubric:: pbm list
+pbm list
+=================
 
 Provides the list of backups. In versions 1.3.4 and earlier, the command lists all backups and their states. Backup states are the following:
 
@@ -277,13 +240,10 @@ The command accepts the following flags:
    * - ``--size=0``
      - Shows last N backups.
    * - ``-o``, ``--out=text``
-     - Shows the output format as either plain text or a JSON object. Supported values: text, json
+     - Shows the output format as either plain text or a JSON object. Supported values: ``text``, ``json``
 
-.. container:: toggle
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: List of backups
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -315,11 +275,8 @@ The command accepts the following flags:
         }
       }
 
-.. container:: toggle
-
-   .. container:: header
-
-      **Restores history**
+.. admonition:: Restore history
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -344,7 +301,8 @@ The command accepts the following flags:
 
 .. _delete:
 
-.. rubric:: pbm delete-backup
+pbm delete-backup
+=======================
 
 Deletes the specified backup snapshot or all backup snapshots that are older than the specified time. The command deletes backups that are not running regardless of the remote backup storage being used.
 
@@ -372,7 +330,8 @@ The command accepts the following flags:
 
 .. _delete-pitr:
 
-.. rubric:: pbm delete-pitr
+pbm delete-pitr
+=======================
 
 Deletes :term:`oplog slices <Oplog slice>` produced for :ref:`pitr`. 
 
@@ -418,7 +377,8 @@ The command accepts the following flags:
 
 .. _version:
 
-.. rubric:: pbm version
+pbm version
+======================
 
 Shows the version of |PBM|.
 
@@ -435,13 +395,10 @@ The command accepts the following flags:
    * - ``--commit``
      - Shows only git commit info
    * - ``-o``, ``--out=text``
-     - Shows the output as either plain text or a JSON object. Supported values: text, json
+     - Shows the output as either plain text or a JSON object. Supported values: ``text``, ``json``
        
-.. container:: toggle "JSON"
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: Version information
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -456,7 +413,8 @@ The command accepts the following flags:
 
 .. _status:
 
-.. rubric:: pbm status
+pbm status
+===================
 
 Shows the status of |PBM|. The output provides the following information:
 
@@ -479,11 +437,8 @@ The command accepts the following flags:
    * - ``-s``, ``--sections=SECTIONS``
      - Shows the status for the specified section. You can pass several flags to view the status for multiple sections. Supported values: cluster, pitr, running, backups. 
    
-.. container:: toggle "JSON"
-
-   .. container:: header
-
-      **JSON output**
+.. admonition:: Status information
+   :class: toggle
 
    .. code-block:: javascript
 
@@ -543,7 +498,8 @@ The command accepts the following flags:
 
 .. _logs:
 
-.. rubric:: pbm logs
+pbm logs
+============
 
 Shows log information from all |pbm-agent| processes. 
 
@@ -587,14 +543,13 @@ The command accepts the following flags:
        The output includes both the specified severity level and all higher ones
    * - ``-i``, ``--opid=OPID``
      - Show logs for an operation in progress. The operation is identified by the :term:`OpID`
+   * - ``-x``, ``--extra``
+     - Show extra data in the text format
 
 Find the usage examples in :ref:`pbm.logs`.
 
-.. container:: toggle
-
-   .. container :: header
-
-      **JSON output**
+.. admonition:: Logs output
+   :class: toggle
 
    .. code-block:: javascript
 

@@ -13,7 +13,7 @@ The steps to automate S3 buckets access for PBM are the following:
 3.	Configure an S3 storage bucket and verify the connection from the EC2 instance to it.
 4.	Provide the :ref:`remote storage information for PBM in a config file <backup-config>`. Leave the ``s3.credentials`` array empty
 
-.. code-block:: yml
+.. code-block:: yaml
 
    storage:
      type: s3

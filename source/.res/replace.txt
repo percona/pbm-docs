@@ -7,7 +7,6 @@
 .. |mongodb| replace:: MongoDB
 .. |mongod| replace:: ``mongod``
 .. |mongos| replace:: ``mongos``
-.. |opt-mongodb-uri| replace:: :option:`--mongodb-uri`
 .. |pbm-agent-help| replace:: :program:`pbm-agent --help`
 .. |pbm-agent| replace:: :program:`pbm-agent`
 .. |pbm-restore| replace:: :command:`pbm restore`
