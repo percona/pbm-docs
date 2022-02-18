@@ -42,9 +42,13 @@ Remote backup storage type. Supported values: ``s3``, ``filesystem``, ``azure``.
        region: <string>
        bucket: <string>
        prefix: <string>
+       endpointUrl: <string>
        credentials:
          access-key-id: <your-access-key-id-here>
          secret-access-key: <your-secret-key-here>
+       uploadPartSize: <int>
+       maxUploadParts: <int>
+       storageClass: <string>
        serverSideEncryption:
          sseAlgorithm: aws:kms
          kmsKeyID: <your-kms-key-here>
@@ -136,12 +140,12 @@ It can be useful when using an S3 provider that supports a smaller number of chu
 The ``maxUploadParts`` value is printed in the :ref:`pbm-agent log <pbm-agent.log>`.
 
 storage.s3.storageClass
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :type: string
 :required: NO
 
-The storage class assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used.
+The `storage class <https://aws.amazon.com/s3/storage-classes/>`_ assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used. This option is available in |PBM| as of v1.7.0.
 
 
 .. rubric:: Server-side encryption options
