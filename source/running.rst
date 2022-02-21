@@ -53,6 +53,8 @@ For example, to start a backup with gzip compression, use the following command
 Supported compression types are: ``gzip``, ``snappy``, ``lz4``, ``pgzip``.  The ``none`` value means no compression is done during
 backup.
 
+As of version 1.7.0, you can configure the compression level for backups. Specify the value for the ``--compression-level`` flag. Note that the higher value you specify, the longer it takes to compress / retrieve the data.
+
 .. rubric:: Backup in sharded clusters
 
 .. important::
