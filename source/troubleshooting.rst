@@ -59,7 +59,7 @@ Run |pbm-speed-test-compression-help| for the full set of supported flags:
                                    Set collection as the data source
     -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
         --compression=s2           Compression type
-                                   <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>
+                                   <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
 
 
 Upload speed test
