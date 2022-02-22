@@ -112,6 +112,8 @@ The command accepts the following flags:
 
    * - Flag
      - Description
+   * - ``-t``, ``--type``
+     - The type of backup. Supported values: physical, logical (default). When not specified, |PBM| makes a logical backup.
    * - ``--compression``
      - Create a backup with compression. 
        Supported compression methods: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``. Default: ``s2``
@@ -135,7 +137,7 @@ The command accepts the following flags:
 pbm restore
 =====================
 
-Restores database from a specified backup / to a specified point in time. 
+Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical or physical restore.
 
 The command has the following syntax:
 
@@ -154,7 +156,9 @@ The command accepts the following flags:
    * - Flag
      - Description
    * - ``--time=TIME``
-     - Restores the database to the specified point in time. Available if :ref:`PITR` is enabled.
+     - Restores the database to the specified point in time. Available for logical restores and if :ref:`PITR` is enabled.
+   * - ``-w``
+     - Wait for the restore to finish. The flag blocks the shell session.
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
    * - ``--base-snapshot``

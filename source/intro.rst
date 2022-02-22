@@ -9,7 +9,7 @@ Even in a highly-available architecture, such as with |mongodb| replication, bac
 
 The following example illustrates how to use |PBM|.
 
-For example, imagine your web application's update was released on February 2nd 23:00 EDT but, by 11:23 the next day, someone realizes that the update has a bug that is wiping the historical data of any user who logged in. Nobody likes to have downtime, but it's time to roll back: what's the best backup to use?
+Imagine your web application’s update was released on February 2nd 23:00 EDT but, by 11:23 the next day, someone realizes that the update has a bug that is wiping the historical data of any user who logged in. Nobody likes to have downtime, but it’s time to roll back: what’s the best backup to use?
 
 .. code-block:: bash
 
@@ -33,7 +33,7 @@ Let's restore the one before that:
 
    $ pbm restore 2021-02-09T14:06:06Z 
 
-To be on the safe side, it might be best to make an extra backup manually before the next application release:
+To be on the safe side, it is a good practice to make an extra backup manually before the next application release:
 
 .. code-block:: bash
 

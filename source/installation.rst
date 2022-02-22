@@ -98,7 +98,7 @@ To build the project (from the project dir):
 
 .. code-block:: bash
 
-   $ git clone https://github.com/<your_name>/percona-backup-mongodb
+   $ git clone https://github.com/percona/percona-backup-mongodb
    $ cd percona-backup-mongodb
    $ make build
 
@@ -119,17 +119,61 @@ By running :program:`pbm version`, you can verify if |pbm| has been built correc
       Version:   [pbm version number]
       Platform:  linux/amd64
       GitCommit: [commit hash]
-      GitBranch: master
+      GitBranch: main
       BuildTime: [time when this version was produced in UTC format]
       GoVersion: [Go version number]
 
 .. tip::
 
-   Instead of specifying the path to pbm binaries, you can add it to the PATH environment variable:
+   Instead of specifying the path to pbm binaries, you can add it to the ``PATH`` environment variable:
 
    .. code-block:: bash
    
       export PATH=/percona-backup-mongodb/bin:$PATH
+
+Post-install steps
+-------------------------
+
+1. Create the environment file:
+
+   * The path for Debian and Ubuntu is :file:`/etc/default/pbm-agent`. 
+   * The path for RHEL and CentOS is :file:`/etc/sysconfig/pbm-agent`. 
+
+#. Create the :file:`pbm-agent.service` systemd unit file. 
+
+   In Ubuntu and Debian, the :file:`pbm-agent.service` systemd unit file is at the path :file:`/lib/systemd/system/pbm-agent.service`. 
+
+   In RHEL and CentOS, the path to this
+   file is :file:`/usr/lib/systemd/system/pbm-agent.service`.
+
+#. In the :file:`pbm-agent.service` file, specify the following:
+   
+   .. code-block:: init
+
+      [Unit]
+      Description=pbm-agent
+      After=time-sync.target network.target
+
+      [Service]
+      EnvironmentFile=-/etc/default/pbm-agent
+      Type=simple
+      User=mongod
+      Group=mongod
+      PermissionsStartOnly=true
+      ExecStart=/usr/bin/pbm-agent
+
+      [Install]
+      WantedBy=multi-user.target
+       
+   .. note::
+
+      Make sure that the ``ExecStart`` directory includes the |PBM| binaries. Otherwise, copy them from the ``./bin`` directory of you installation path.
+
+#. Make ``systemd`` aware of the new service:
+   
+   .. code-block:: bash
+
+      $ sudo systemctl daemon-reload
 
 .. _tarball:
 

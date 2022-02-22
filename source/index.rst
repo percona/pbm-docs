@@ -6,12 +6,17 @@
 |pbm| is a distributed, low-impact solution for achieving consistent backups of
 |mongodb| sharded clusters and replica sets.
 
-|pbm| supports `Percona Server for MongoDB
-<https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_
-and MongoDB Community v4.0 or higher with `MongoDB Replication
-<https://docs.mongodb.com/manual/replication/>`_ enabled.
+As of version 1.7.0, |pbm| supports both physical and logical backups and restores. :ref:`pitr` is currently supported only for logical backups.
 
-.. note::
+.. rubric:: Supported MongoDB versions
+
+|PBM| is compatible with the following MongoDB versions:
+
+* For *logical* backups - `Percona Server for MongoDB <https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_ and MongoDB Community v4.0 and higher with `MongoDB Replication <https://docs.mongodb.com/manual/replication/>`_ enabled.
+
+* For *physical* backups - `Percona Server for MongoDB <https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_ starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher with `MongoDB Replication <https://docs.mongodb.com/manual/replication/>`_ enabled.
+
+.. important::
 
    |PBM| doesn't work on standalone |mongodb| instances. This is because |PBM| requires an :term:`oplog <Oplog>` to guarantee backup consistency. Oplog is available on nodes with replication enabled.
 
@@ -27,14 +32,16 @@ which is no longer actively developed or supported.
 
 .. _pbm.feature:
 
-.. rubric:: Features
+Features
+=====================
 
 .. hlist::
    :columns: 2
 
-   - Logical backup and restore. Physical (a.k.a. 'hot') backup and restore are not supported
+   - Logical backup and restore
+   - Physical (a.k.a. 'hot') backup and restore (with |PSMDB| 4.2.15-16, 4.4.6-8, 5.0.2-1 and higher)
    - Works for both for sharded clusters and classic, non-sharded replica sets.
-   - Point-in-time Restore
+   - Point-in-time recovery (for logical backups only)
    - Simple command-line management utility
    - Simple, integrated-with-MongoDB authentication
    - Distributed transaction consistency with MongoDB 4.2+
@@ -83,6 +90,7 @@ Details
 
    architecture
    authentication
+   backup-types
    config
    storage-configuration
 
