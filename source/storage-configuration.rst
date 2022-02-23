@@ -27,11 +27,17 @@ Overview
 - `Google Cloud Storage <https://cloud.google.com/storage>`_
 - `MinIO <https://min.io/>`_
   
-As of v1.3.2, |PBM| supports :term:`server-side encryption <Server-side encryption>` for :term:`S3 buckets <Bucket>` with customer managed keys stored in |AWS KMS|.
+As of version 1.3.2, |PBM| supports :term:`server-side encryption <Server-side encryption>` for :term:`S3 buckets <Bucket>` with customer managed keys stored in |AWS KMS|.
 
 .. seealso::
 
    `Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) <https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html>`_
+
+.. versionadded:: 1.7.0
+
+   You can enable debug logging for different types of S3 requests in |PBM|. |PBM| prints S3 log messages in the ``pbm logs`` output so that you can debug and diagnose S3 request issues or failures. 
+
+   To enable S3 debug logging, set the ``storage.s3.DebugLogLevel`` option in |PBM| configuration. The supported values are: ``LogDebug``, ``Signing``, ``HTTPBody``, ``RequestRetries``, ``RequestErrors``, ``EventStreamBody``. 
 
 .. _filesystem-remote:
 
