@@ -33,11 +33,25 @@ As of v1.3.2, |PBM| supports :term:`server-side encryption <Server-side encrypti
 
    `Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) <https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html>`_
 
+As of version 1.7.0, you can set up the number of attempts for |PBM| to upload data to S3 storage as well as the min and max time to wait for the next retry. Set the options ``storage.s3.retryer.numMaxRetries``, ``storage.s3.retryer.minRetryDelay`` and ``storage.s3.retryer.maxRetryDelay`` in |PBM| configuration.
+
+.. code-block:: yaml
+
+   storage:
+     type: s3
+     s3:
+       retryer:
+          numMaxRetries: 3
+          minRetryDelay: 30
+          maxRetryDelay: 5
+
+This upload retry increases the chances of data upload completion in cases of unstable connection.
+
 .. _filesystem-remote:
 
 .. rubric:: Remote Filesystem Server Storage
 
-This storage must be a remote fileserver mounted to a local directory. It is the
+This storage must be a remote file server mounted to a local directory. It is the
 responsibility of the server administrators to guarantee that the same remote
 directory is mounted at exactly the same local path on all servers in the
 MongoDB cluster or non-sharded replica set.
