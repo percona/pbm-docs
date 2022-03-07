@@ -33,6 +33,20 @@ As of v1.3.2, |PBM| supports :term:`server-side encryption <Server-side encrypti
 
    `Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) <https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html>`_
 
+.. versionadded:: 1.7.0
+
+   |PBM| supports data upload to S3-like storage that supports self-issued TLS certificates. To make this happen, disable the TLS verification of the S3 storage in |PBM| configuration:
+
+   .. code-block:: bash
+
+      $ pbm config --set storage.s3.insecureSkipTLSVerify=True
+
+   .. warning::
+
+      Use this option with caution as it might leave a hole for man-in-the-middle attacks.
+
+
+
 .. _filesystem-remote:
 
 .. rubric:: Remote Filesystem Server Storage
@@ -76,7 +90,7 @@ This gives users a vendor choice. Companies with Microsoft-based infrastructure 
    .. code-block:: json
 
       {
-          "Version": "2012-10-17",
+          "Version": "2021-10-17",
           "Statement": [
               {
                   "Effect": "Allow",
