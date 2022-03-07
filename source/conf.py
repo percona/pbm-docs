@@ -32,13 +32,15 @@ sys.path.append(os.path.abspath('ext'))
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-author = "Percona LLC and/or its affiliates 2015-2021"
+author = "Percona LLC and/or its affiliates 2015-2022"
 extensions = ['sphinx.ext.intersphinx', 'sphinx.ext.todo', 
               'sphinx.ext.coverage', 'sphinx.ext.ifconfig', 
-              'sphinx.ext.extlinks', 'sphinxcontrib.plantuml']
+              'sphinx.ext.extlinks', 'sphinxcontrib.plantuml',
+              'sphinx_gitstamp', 'sphinx_copybutton',
+              'sphinx_togglebutton']
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ['_templates/theme']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -55,7 +57,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Percona Backup for MongoDB'
-copyright = 'Percona LLC and/or its affiliates 2009-2021'
+copyright = 'Percona LLC and/or its affiliates 2009-2022'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -137,22 +139,30 @@ extlinks = {'jirabug': ('https://jira.percona.com/browse/%s', '')
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'percona-theme'
+html_theme = 'sphinx_material'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'base_url': 'http://bashtage.github.io/sphinx-material/',
+    'repo_url': 'https://github.com/percona/pbm-docs',
+    'repo_name': 'percona/pbm-docs',
+    'color_accent': 'grey',
+    'color_primary': 'orange',
+    'google_analytics_account': 'UA-343802-3',
+    'globaltoc_collapse': True,
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = ['.', './percona-theme']
+#html_theme_path = ['.', './percona-theme']
 
 # Redirect info for Edit on Github link
 html_context = {
-    'repo_name': '/percona/percona-backup-mongodb',
-    'repo_url': 'https://github.com/percona/percona-backup-mongodb',
-    'edit_uri': 'edit/main/doc/source'
+    'repo_name': '/percona/pbm-docs',
+    'repo_url': 'https://github.com/percona/pbm-docs',
+    'edit_uri': 'edit/main/source'
 }
 
 # The name for this set of Sphinx documents.
@@ -168,18 +178,29 @@ html_short_title = ' '.join([project, version])
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
 #
-html_logo = 'percona-server-logo.jpg'
+html_logo = '_images/percona-logo.svg'
 
 # The name of an image file (relative to this directory) to use as a favicon of
 # the docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
 #
-# html_favicon = None
+html_favicon = '_images/percona_favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Path to custom css files. These will override the default css attribute if they exist
+html_css_files = [
+    '_static/custom.css',
+]
+
+pygments_style = 'emacs'
+gitstamp_fmt = "%b %d, %Y"
+copybutton_prompt_text = '$'
+plantuml = 'java -jar ../../bin/plantuml.jar'
+togglebutton_hint = "JSON output"
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -201,7 +222,7 @@ html_static_path = ['_static']
 # Custom sidebar templates, maps document names to template names.
 #
 html_sidebars = {
-        '**': ['localtoc.html', 'relations.html', 'sourcelink.html', 'edit.html'],
+        '**': ['globaltoc.html', 'searchbox.html', 'localtoc.html', 'logo-text.html', 'relations.html', 'sourcelink.html', 'edit.html'],
         'using/windows': ['windowssidebar.html'],
 }
 
