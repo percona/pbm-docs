@@ -18,6 +18,11 @@ When |PITR| is enabled, |pbm-agent| periodically saves consecutive slices of the
 
 By default, a slice covers a 10 minute span of oplog events. It can be shorter if |PITR| is disabled or interrupted by the start of a backup snapshot operation.
 
+
+.. important::
+
+   If you `reshard <https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/>`_ a collection in MongoDB 5.0 and higher versions, make a fresh backup and re-enable |PITR| oplog slicing to prevent data inconsistency and restore failure.
+
 As of version 1.6.0, you can change the duration of an oplog span via the configuration file. Specify the new value (in minutes) for the ``pitr.oplogSpanMin`` option.
 
 .. code-block:: bash
