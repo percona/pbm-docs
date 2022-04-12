@@ -10,11 +10,11 @@ To replay the oplog, do the following:
 
 1.	Stop |PITR|, if enabled, to release the lock. 
 2.	Run ``pbm status`` or ``pbm list`` commands to find oplog chunks available for replay. 
-3.	Run the ``pbm oplog replay`` command and specify the ``--start`` and ``--end`` flags with the timestamps. 
+3.	Run the ``pbm oplog-replay`` command and specify the ``--start`` and ``--end`` flags with the timestamps. 
 
     .. code-block:: bash
 
-       $ pbm oplog replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
+       $ pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
 
 4.	After the oplog replay, make a fresh backup and enable the |PITR| oplog slicing
 
