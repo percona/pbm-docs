@@ -4,7 +4,7 @@
 *Percona Backup for MongoDB* 1.7.0
 ================================================================================
 
-:Date:  , 2022
+:Date: April 14, 2022
 :Installation: `Installing Percona Backup for MongoDB <https://www.percona.com/doc/percona-backup-mongodb/installation.html>`_
 
 Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB
@@ -16,8 +16,8 @@ inspired by (and intends to replace) the Percona-Lab/mongodb_consistent_backup t
 Release highlights
 ======================
 
-* Support for :ref:`physical backups <backup-types>` in |PSMDB| starting from versions 4.2.15-16 and 4.4.6-8 and higher. Physical backups drastically speed up backup performance for large databases (several terabytes). This is a technical preview feature. 
-* :ref:`Oplog replay <oplog-replay>` from the arbitrary start time. This reduces Recovery Point Objective (RPO) when database is recovered from storage-level backup, for example LVM-snapshots.
+* Support for :ref:`physical backups <backup-types>` in |PSMDB| starting from versions 4.2.15-16 and 4.4.6-8 and higher. Physical backups drastically speed up backup and restore performance for large databases (several terabytes). This is a technical preview feature. 
+* :ref:`Oplog replay <oplog-replay>` from the arbitrary start time. This reduces Recovery Point Objective (RPO) when database is recovered from physical or storage-level backups.
 * Ability to configure compression method and level for |PITR| chunks and compression level for backups.
 * Ability to configure the number of S3 multipart upload chunks to comply with various S3-compatible storage provider requirements. 
 * Ability to configure the number of upload retries. This facilitates data upload in case of unstable network connection.
@@ -25,14 +25,15 @@ Release highlights
 Breaking Changes
 ================
 
-To use physical backups with filesystem-based backup storage, the `mongod` user must be the owner of the backup directory. 
+To use physical backups with filesystem-based backup storage, the `mongod` user must have the write access to the backup directory. 
 
 New Features
 ================================================================================
 
 * :jirabug:`PBM-734`: Add the config option to set :ref:`debug log levels <s3-debug-log-levels>` for S3  requests
-* :jirabug:`PBM-742`: Add the ability to :ref:`replay oplog <oplog-replay>` from arbitrary start time. This reduces Recovery Point Objective (RPO) when database is recovered from storage-level backup, for example LVM-snapshots.
 * :jirabug:`PBM-805`: Implement physical backups
+* :jirabug:`PBM-742`: Add the ability to :ref:`replay oplog <oplog-replay>` from arbitrary start time. This reduces Recovery Point Objective (RPO) when database is recovered from physical backups.
+
 
 
 
