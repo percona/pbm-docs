@@ -23,8 +23,13 @@ You can upgrade |PBM| to the **latest version** or to a **specific version**. Si
  
 1. Backward compatibility between data backup and restore is supported for upgrades within one major version only (for example, from 1.1.x to 1.2.y). When you upgrade |PBM| over several major versions (for example, from 1.0.x to 1.2.y), we recommend to make a backup right after the upgrade.
 2. |PBM| v1.5.0 and later is incompatible with |PBM| v1.4.1 and earlier due to different processing of system collections ``Users`` and ``Roles`` during backup / restore operations. After the upgrade to |PBM| v1.5.0 and later, make sure to make a fresh backup.
-3. Starting from version 1.3.0, |pbm| packages are stored in the *pbm* repository and the *tools* repository for backward compatibility. 
-4. Upgrade |PBM| on all nodes where it is installed.
+3. Starting from v1.7.0, the user running the ``pbm-agent`` process is changed from ``pbm`` to ``mongod``. This is done for the following reasons:
+   
+   -  To make physical backups and restores, the user running the ``pbm-agent`` process must have the read / write permissions to the MongoDB ``dataDir``.
+   -  To use the filesystem-based backup storage, the user running the ``pbm-agent`` process must also have the read / write permissions to the backup directory.
+
+#. Starting from version 1.3.0, |pbm| packages are stored in the *pbm* repository and the *tools* repository for backward compatibility. 
+#. Upgrade |PBM| on all nodes where it is installed.
       
 Enable |percona| repository
 ===========================
@@ -39,7 +44,7 @@ Enable the repository running the command as root or via |sudo|
 
 .. note:: 
 
-   For ``apt``-based systems, run :command:`apt update` to update the local cache.
+   For ``apt``-based systems, run :command:`$ sudo apt update` to update the local cache.
 
 Upgrade |PBM| using ``apt``
 ================================================================================
@@ -63,6 +68,14 @@ Upgrade to the latest version
    
       $ sudo apt install percona-backup-mongodb
 
+#. Starting from v1.7.0, reload the ``systemd`` process to update the unit file with the following command: 
+      
+   .. code-block:: bash
+
+      $ sudo systemctl daemon-reload
+
+  
+#. If you have a filesystem-based backup storage, grant read / write permissions to the backup directory to the ``mongod`` user.
 #. Start |pbm-agent|
 
    .. code-block:: bash
@@ -95,6 +108,14 @@ Upgrade to a specific version
    
       $ sudo apt install percona-backup-mongodb=1.3.1-1.stretch
 
+#. Starting from v1.7.0, reload the ``systemd`` process to update the unit file with the following command: 
+      
+   .. code-block:: bash
+
+      $ sudo systemctl daemon-reload
+
+  
+#. If you have a filesystem-based backup storage, grant read / write permissions to the backup directory to the ``mongod`` user.
 #. Start |pbm-agent|: 
 
    .. code-block:: bash
@@ -123,11 +144,21 @@ Upgrade to the latest version
    
       $ sudo yum install percona-backup-mongodb
 
+#. Starting from v1.7.0, reload the ``systemd`` process to update the unit file with the following command: 
+      
+   .. code-block:: bash
+
+      $ sudo systemctl daemon-reload
+
+  
+#. If you have a filesystem-based backup storage, grant read / write permissions to the backup directory to the ``mongod`` user.
+
 #. Start |pbm-agent|
 
    .. code-block:: bash
 
       $ sudo systemctl start pbm-agent
+
 
 Upgrade to a specific version 
 --------------------------------------------------------------------------------
@@ -154,6 +185,14 @@ Upgrade to a specific version
    
       $ sudo yum install percona-backup-mongodb-1.3.1-1.el7
 
+#. Starting from v1.7.0, reload the ``systemd`` process to update the unit file with the following command: 
+      
+   .. code-block:: bash
+
+      $ sudo systemctl daemon-reload
+
+  
+#. If you have a filesystem-based backup storage, grant read / write permissions to the backup directory to the ``mongod`` user.
 #. Start |pbm-agent|: 
 
    .. code-block:: bash
@@ -161,7 +200,9 @@ Upgrade to a specific version
       $ sudo systemctl start pbm-agent
 
 
-      
+.. note:: 
+
+   If MongoDB runs under a *different user than mongod* (the default configuration for |PSMDB|), use the same user to run the ``pbm-agent``. For filesystem-based storage, grant the read / write permissions to the backup directory for this user.  
 
 
 .. include:: .res/replace.txt           

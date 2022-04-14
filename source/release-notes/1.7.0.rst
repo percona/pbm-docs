@@ -4,7 +4,7 @@
 *Percona Backup for MongoDB* 1.7.0
 ================================================================================
 
-:Date: April 14, 2022
+:Date: April 18, 2022
 :Installation: `Installing Percona Backup for MongoDB <https://www.percona.com/doc/percona-backup-mongodb/installation.html>`_
 
 Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB
@@ -12,6 +12,25 @@ sharded clusters and replica sets. This is a tool for creating consistent backup
 across a MongoDB sharded cluster (or a single replica set), and for restoring
 those backups to a specific point in time. The project was
 inspired by (and intends to replace) the Percona-Lab/mongodb_consistent_backup tool.
+ 
+.. important:: 
+
+   To make :ref:`physical backups <backup-types>` and restores, the ``pbm-agent`` must have the read / write access to the ``dataDir``. If you use the filesystem-based backup storage, the ``pbm-agent`` must also have the read / write access to the backup directory. Therefore, starting from version 1.7.0, the user running the ``pbm-agent`` is changed from ``pbm`` to ``mongod`` in |PBM| packages.
+
+   To upgrade |PBM| to version 1.7.0, do the following:
+
+   1.	Stop the ``pbm-agent`` process
+   2.	:ref:`Upgrade <pbm.upgrade>` new version packages
+   3.	Reload the ``systemd`` process to update the unit file with the following command: 
+     	
+     	.. code-block:: bash
+
+     	   $ sudo  systemctl daemon-reload
+
+   5.	If you have a filesystem-based backup storage, grant read / write permissions to the backup directory to the ``mongod`` user.
+   6.	Restart the ``pbm-agent`` process.
+
+   If MongoDB runs under a *different user than mongod* (the default configuration for |PSMDB|), use the same user to run the ``pbm-agent``. For filesystem-based storage, grant the read / write permissions to the backup directory for this user.
 
 Release highlights
 ======================
@@ -21,17 +40,13 @@ Release highlights
 * Ability to configure compression method and level for |PITR| chunks and compression level for backups.
 * Ability to configure the number of S3 multipart upload chunks to comply with various S3-compatible storage provider requirements. 
 * Ability to configure the number of upload retries. This facilitates data upload in case of unstable network connection.
-  
-Breaking Changes
-================
-
-To use physical backups with filesystem-based backup storage, the `mongod` user must have the write access to the backup directory. 
+ 
 
 New Features
 ================================================================================
 
 * :jirabug:`PBM-734`: Add the config option to set :ref:`debug log levels <s3-debug-log-levels>` for S3  requests
-* :jirabug:`PBM-805`: Implement physical backups
+* :jirabug:`PBM-805`: Implement physical backups to improve performance for large databases
 * :jirabug:`PBM-742`: Add the ability to :ref:`replay oplog <oplog-replay>` from arbitrary start time. This reduces Recovery Point Objective (RPO) when database is recovered from physical backups.
 
 
@@ -41,12 +56,12 @@ Improvements
 ================================================================================
 
 * :jirabug:`PBM-680`: :ref:`Skip TLS verification <s3-skip-TLS>` for object storage. This can be useful for private object storage with self-signed certificates.
-* :jirabug:`PBM-770`: Support configurable compression method/level for |PITR| chunks (Thanks to Damiano Albani for reporting this issue and contributing to it)
+* :jirabug:`PBM-770`: Support configurable compression :ref:`method <pitr-compression>` / :ref:`level <pitr-compression-level>` for |PITR| chunks (Thanks to Damiano Albani for reporting this issue and contributing to it)
 * :jirabug:`PBM-764`: Support Zstandard compression format (Thanks to Damiano Albani for reporting this issue and contributing to it)
 * :jirabug:`PBM-750`: Make max number of S3 upload parts configurable (Thanks to Damiano Albani for reporting this issue and contributing to it)
-* :jirabug:`PBM-777`: Expand/fix the configuration API to support compression method for |PITR| chunks (Thanks to Damiano Albani for reporting and contributing to this issue)
+* :jirabug:`PBM-777`: Expand / fix the configuration API to support compression method for |PITR| chunks (Thanks to Damiano Albani for reporting and contributing to this issue)
 * :jirabug:`PBM-756`: Add the ability to configure :ref:`logging levels for S3 requests <s3-debug-log-levels>` to debug issues with object storage (Thanks to Damiano Albani for reporting this issue and contributing to it)
-* :jirabug:`PBM-577`: It is now possible to choose an S3 storage class for granular control over various S3 tiers (Thanks to Damiano Albani for the contribution)
+* :jirabug:`PBM-577`: It is now possible to choose an :ref:`S3 storage class <s3-storage-class>` for granular control over various S3 tiers (Thanks to Damiano Albani for the contribution)
 
 
 

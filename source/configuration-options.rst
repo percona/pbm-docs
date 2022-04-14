@@ -169,6 +169,8 @@ storage.s3.storageClass
 
 The `storage class <https://aws.amazon.com/s3/storage-classes/>`_ assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used. This option is available in |PBM| as of v1.7.0.
 
+.. _s3-debug-log-levels:
+
 storage.s3.debugLogLevels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 :type: string
@@ -363,6 +365,8 @@ The duration of an oplog span in minutes. If set when the |pbm-agent| is making 
 
 If the new duration is smaller than the previous one, the |pbm-agent| is triggered to save a new slice with the updated span. If the duration is larger, then the next slice is saved with the updated span in scheduled time.  
 
+.. _pitr-compression:
+
 pitr.compression
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -372,6 +376,8 @@ pitr.compression
 The compression method for |PITR| oplog slices. Available in |PBM| as of version 1.7.0.
 
 Supported values: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``. Default: ``s2``. 
+
+.. _pitr-compression-level:
 
 pitr.compressionLevel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
