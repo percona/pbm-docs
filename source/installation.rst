@@ -98,7 +98,7 @@ To build the project (from the project dir):
 
 .. code-block:: bash
 
-   $ git clone https://github.com/<your_name>/percona-backup-mongodb
+   $ git clone https://github.com/percona/percona-backup-mongodb
    $ cd percona-backup-mongodb
    $ make build
 

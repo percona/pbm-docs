@@ -42,9 +42,13 @@ Remote backup storage type. Supported values: ``s3``, ``filesystem``, ``azure``.
        region: <string>
        bucket: <string>
        prefix: <string>
+       endpointUrl: <string>
        credentials:
          access-key-id: <your-access-key-id-here>
          secret-access-key: <your-secret-key-here>
+       uploadPartSize: <int>
+       maxUploadParts: <int>
+       storageClass: <string>
        serverSideEncryption:
          sseAlgorithm: aws:kms
          kmsKeyID: <your-kms-key-here>
@@ -136,12 +140,12 @@ It can be useful when using an S3 provider that supports a smaller number of chu
 The ``maxUploadParts`` value is printed in the :ref:`pbm-agent log <pbm-agent.log>`.
 
 storage.s3.storageClass
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 :type: string
 :required: NO
 
-The storage class assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used.
+The `storage class <https://aws.amazon.com/s3/storage-classes/>`_ assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used. This option is available in |PBM| as of v1.7.0.
 
 storage.s3.debugLogLevels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -252,11 +256,14 @@ Point-in-time recovery options
    pitr:
      enabled: <boolean> 
      oplogSpanMin: <float64>
+     compression: <string>
+     compressionLevel: <int>
 
 pitr.enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   
 :type: boolean
+:default: False
 
 Enables point-in-time recovery
 
@@ -271,6 +278,24 @@ The duration of an oplog span in minutes. If set when the |pbm-agent| is making 
 
 If the new duration is smaller than the previous one, the |pbm-agent| is triggered to save a new slice with the updated span. If the duration is larger, then the next slice is saved with the updated span in scheduled time.  
 
+pitr.compression
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:default: s2
+
+The compression method for |PITR| oplog slices. Available in |PBM| as of version 1.7.0.
+
+Supported values: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``. Default: ``s2``. 
+
+pitr.compressionLevel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: int
+
+The compression level from ``0`` till ``10``. Default value depends on the compression method used. 
+
+Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data. 
 
 .. _backup-options:
 
