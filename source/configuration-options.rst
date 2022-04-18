@@ -147,6 +147,19 @@ storage.s3.storageClass
 
 The `storage class <https://aws.amazon.com/s3/storage-classes/>`_ assigned to objects stored in the S3 bucket. If not provided, the ``STANDARD`` storage class will be used. This option is available in |PBM| as of v1.7.0.
 
+storage.s3.debugLogLevels
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+:type: string
+:required: NO
+
+Enables S3 debug logging for different types of S3 requests. S3 log messages are printed in the ``pbm logs`` output.
+
+Supported values are: ``LogDebug``, ``Signing``, ``HTTPBody``, ``RequestRetries``, ``RequestErrors``, ``EventStreamBody``. 
+
+To specify several event types, separate them by comma. To lean more about the event types, see `the documentation <https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType>`_
+
+When undefined, no S3 debug logging is performed. 
+
 
 .. rubric:: Server-side encryption options
 
