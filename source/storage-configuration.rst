@@ -11,7 +11,7 @@ On this page:
 Overview
 ========
 
-|PBM| supports the following types of remote backup storages:
+|PBM| supports the following types of remote backup storage:
 
 * :ref:`S3-compatible storage <s3>`
 * :ref:`Filesystem type storage <filesystem-remote>`
@@ -32,6 +32,21 @@ As of v1.3.2, |PBM| supports :term:`server-side encryption <Server-side encrypti
 .. seealso::
 
    `Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) <https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html>`_
+
+As of version 1.7.0, |PBM| supports `Amazon S3 storage classes <https://aws.amazon.com/s3/storage-classes/>`_. Knowing your data access patterns, you can set the S3 storage class in |PBM| configuration. When |PBM| uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.
+
+To set the storage class, specify the ``storage.s3.storageClass`` option in |PBM| configuration file
+
+.. code-block:: yaml
+
+   storage:
+     type: s3
+     s3:
+       storageClass: INTELLIGENT_TIERING
+
+When the option is undefined, the S3 Standard storage type is used.
+
+.. seealso:: `Using Amazon S3 storage classes <https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html>`_
 
 .. _filesystem-remote:
 
