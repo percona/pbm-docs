@@ -239,11 +239,14 @@ Point-in-time recovery options
    pitr:
      enabled: <boolean> 
      oplogSpanMin: <float64>
+     compression: <string>
+     compressionLevel: <int>
 
 pitr.enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   
 :type: boolean
+:default: False
 
 Enables point-in-time recovery
 
@@ -258,6 +261,24 @@ The duration of an oplog span in minutes. If set when the |pbm-agent| is making 
 
 If the new duration is smaller than the previous one, the |pbm-agent| is triggered to save a new slice with the updated span. If the duration is larger, then the next slice is saved with the updated span in scheduled time.  
 
+pitr.compression
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: string
+:default: s2
+
+The compression method for |PITR| oplog slices. Available in |PBM| as of version 1.7.0.
+
+Supported values: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``. Default: ``s2``. 
+
+pitr.compressionLevel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: int
+
+The compression level from ``0`` till ``10``. Default value depends on the compression method used. 
+
+Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data. 
 
 .. _backup-options:
 

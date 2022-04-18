@@ -114,7 +114,7 @@ The command accepts the following flags:
      - Description
    * - ``--compression``
      - Create a backup with compression. 
-       Supported compression methods: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``. Default: ``s2``
+       Supported compression methods: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``. Default: ``s2``
        The ``none`` value means no compression is done during backup.
    * - ``--compression-level``
      - Configure the compression level from 0 to 10. The default value depends on the compression method used. 

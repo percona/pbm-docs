@@ -37,7 +37,7 @@ As of v1.3.2, |PBM| supports :term:`server-side encryption <Server-side encrypti
 
 .. rubric:: Remote Filesystem Server Storage
 
-This storage must be a remote fileserver mounted to a local directory. It is the
+This storage must be a remote file server mounted to a local directory. It is the
 responsibility of the server administrators to guarantee that the same remote
 directory is mounted at exactly the same local path on all servers in the
 MongoDB cluster or non-sharded replica set.
