@@ -80,7 +80,7 @@ Usage
    running
    point-in-time-recovery
    oplog-replay
-   status
+
 
 
 Details
