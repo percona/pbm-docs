@@ -28,6 +28,20 @@ If you set the new duration when the |pbm-agent| is making an oplog slice, the s
 
 If the new duration is shorter, this triggers the |pbm-agent| to make a new slice with the updated span immediately. If the new duration is larger,  the |pbm-agent| makes the next slice with the updated span in its scheduled time.
 
+The oplog slices are saved with the ``s2`` compression method by default. As of version 1.7.0, you can specify a different compression method via the configuration file. Specify the new value for the ``pitr.compression`` option.
+
+.. code-block:: bash
+  
+   $ pbm config --set pitr.compression=gzip
+
+Supported compression methods are: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``.  
+
+Additionally, you can override the compression level used by the compression method by setting the ``pitr.compressionLevel`` option. Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data. 
+
+.. note::
+
+   You can use different compression methods for backup snapshots and |PITR| slices. However, backup snapshot-related oplog is compressed with the same compression method as the backup itself.
+
 The oplog slices are stored in the :file:`pbmPitr` subdirectory in the :ref:`remote storage defined in the config <storage.config>`. A slice name reflects the start and end time this slice covers. 
 
 The |pbm-list| output includes the following information:
