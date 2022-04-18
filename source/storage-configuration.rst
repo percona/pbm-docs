@@ -33,7 +33,6 @@ As of version 1.3.2, |PBM| supports :term:`server-side encryption <Server-side e
 
    `Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) <https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html>`_
 
-
 .. versionadded:: 1.7.0
 
    You can enable debug logging for different types of S3 requests in |PBM|. |PBM| prints S3 log messages in the ``pbm logs`` output so that you can debug and diagnose S3 request issues or failures. 
@@ -71,6 +70,17 @@ As of version 1.7.0, you can set up the number of attempts for |PBM| to upload d
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
+.. versionadded:: 1.7.0
+
+   |PBM| supports data upload to S3-like storage that supports self-issued TLS certificates. To make this happen, disable the TLS verification of the S3 storage in |PBM| configuration:
+
+   .. code-block:: bash
+
+      $ pbm config --set storage.s3.insecureSkipTLSVerify=True
+
+   .. warning::
+
+      Use this option with caution as it might leave a hole for man-in-the-middle attacks.
 
 .. _filesystem-remote:
 
@@ -115,7 +125,7 @@ This gives users a vendor choice. Companies with Microsoft-based infrastructure 
    .. code-block:: json
 
       {
-          "Version": "2012-10-17",
+          "Version": "2021-10-17",
           "Statement": [
               {
                   "Effect": "Allow",

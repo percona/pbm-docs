@@ -22,6 +22,8 @@ Remote backup storage options
 - `Google Cloud Storage <https://cloud.google.com/storage>`_, 
 - `MinIO <https://min.io/>`_.
 
+.. _storage-type:
+
 storage.type
 ^^^^^^^^^^^^^^^^^^^
    
@@ -53,6 +55,8 @@ Remote backup storage type. Supported values: ``s3``, ``filesystem``, ``azure``.
          sseAlgorithm: aws:kms
          kmsKeyID: <your-kms-key-here>
 
+.. _storage-s3-provider:
+
 storage.s3.provider
 ^^^^^^^^^^^^^^^^^^^
 
@@ -61,6 +65,8 @@ storage.s3.provider
 
 The storage provider's name. Supported values: aws, gcs
   
+.. _storage-s3-bucket:
+
 storage.s3.bucket
 ^^^^^^^^^^^^^^^^^^^^^^^^
   
@@ -68,6 +74,8 @@ storage.s3.bucket
 :required: YES
 
 The name of the storage :term:`bucket <Bucket>`. See the `AWS Bucket naming rules <https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules>`_ and `GCS bucket naming guidelines <https://cloud.google.com/storage/docs/naming-buckets#requirements>`_ for bucket name requirements
+
+.. _storage-s3-region:
 
 storage.s3.region
 ^^^^^^^^^^^^^^^^^^^
@@ -78,6 +86,8 @@ storage.s3.region
 The location of the storage bucket. 
 Use the `AWS region list <https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region>`_ and `GCS region list <https://cloud.google.com/storage/docs/locations>`_ to define the bucket region
 
+.. _storage-s3-prefix:
+
 storage.s3.prefix
 ^^^^^^^^^^^^^^^^^^^
 
@@ -85,6 +95,8 @@ storage.s3.prefix
 :required: NO
 
 The path to the data directory on the bucket. If undefined, backups are stored in the bucket root directory
+
+.. _storage-s3-endpointurl:
 
 storage.s3.endpointUrl
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,6 +106,8 @@ storage.s3.endpointUrl
 
 The URL to access the bucket. The default value for GCS is ``https://storage.googleapis.com``
 
+.. _s3-cred-access-key:
+
 storage.s3.credentials.access-key-id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -102,6 +116,8 @@ storage.s3.credentials.access-key-id
 
 Your access key to the storage bucket. This option can be ommitted when you run |PBM| using an EC2 instance profile. To learn more, refer to :ref:`automate-s3-access`
    
+.. _s3-cred-secret:
+
 storage.s3.credentials.secret-access-key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -109,6 +125,8 @@ storage.s3.credentials.secret-access-key
 :required: YES
 
 The key to sign your programmatic requests to the storage bucket. This option can be ommitted when you run |PBM| using an EC2 instance profile. To learn more, refer to :ref:`automate-s3-access` 
+
+.. _s3-upload-part-size:
 
 storage.s3.uploadPartSize
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -124,6 +142,8 @@ The ``uploadPartSize`` value is printed in the :ref:`pbm-agent log <pbm-agent.lo
 
 By setting this option, you can manually adjust the size of data chunks if |PBM| failed to do it for some reason. The defined ``uploadPartSize`` value overrides the default value and is used for calculating the max allowed file size
 
+.. _s3-max-upload-parts:
+
 storage.s3.maxUploadParts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -138,6 +158,8 @@ By setting this option, you can override the value defined in the `AWS SDK <http
 It can be useful when using an S3 provider that supports a smaller number of chunks for multipart uploads.
 
 The ``maxUploadParts`` value is printed in the :ref:`pbm-agent log <pbm-agent.log>`.
+
+.. _s3-storage-class:
 
 storage.s3.storageClass
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -160,8 +182,26 @@ To specify several event types, separate them by comma. To lean more about the e
 
 When undefined, no S3 debug logging is performed. 
 
+.. _s3-skip-TLS:
+
+storage.s3.insecureSkipTLSVerify
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: bool
+:default: False
+:required: NO
+
+Disables the TLS verification of the S3 storage. This allows |PBM| to upload data to S3-like storages that use self-issued TLS certificates. Available in |PBM| as of version 1.7.0.
+
+.. warning::
+
+   Use this option with caution as it might leave a hole for man-in-the-middle attacks. 
+
+.. _server-encryption-options:
 
 .. rubric:: Server-side encryption options
+
+.. _sse-algorythm:
 
 serverSideEncryption.sseAlgorythm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -173,6 +213,8 @@ The key management mode used for server-side encryption
 
 Supported value: ``aws:kms``
    
+.. _kms-key-id:
+
 serverSideEncryption.kmsKeyID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
      
@@ -221,6 +263,8 @@ The maximum time (in minutes) to wait till the next retry. Available in |PBM| as
      filesystem:
        path: <string>
 
+.. _filesystem-path:
+
 storage.filesystem.path
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -244,6 +288,7 @@ The path to the backup directory
        credentials:
          key: <your-access-key>
 
+.. _azure-account:
 
 storage.azure.account
 ^^^^^^^^^^^^^^^^^^^^^^  
@@ -253,6 +298,8 @@ storage.azure.account
 
 The name of your storage account. 
 
+.. _azure-container:
+
 storage.azure.container
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 
@@ -261,6 +308,8 @@ storage.azure.container
 
 The name of the storage :term:`container <Container>`. See the  `Container names <https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names>`_ for naming conventions.
 
+.. _azure-prefix:
+
 storage.azure.prefix
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  
 
@@ -268,6 +317,8 @@ storage.azure.prefix
 :required: NO
 
 The path (sub-folder) to the backups inside the container. If undefined, backups are stored in the container root directory.
+
+.. _azure-cred-key:
 
 storage.azure.credentials.key 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
@@ -290,6 +341,8 @@ Point-in-time recovery options
      compression: <string>
      compressionLevel: <int>
 
+.. _pitr-enabled:
+
 pitr.enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   
@@ -298,6 +351,7 @@ pitr.enabled
 
 Enables point-in-time recovery
 
+.. _pitr-oplog-span:
 
 pitr.oplogSpanMin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -343,6 +397,8 @@ Backup options
        "localhost:27020": 2.0
        "localhost:27017": 0.1
 
+.. _backup-priority:
+
 priority
 ^^^^^^^^^^^^
 
@@ -367,6 +423,8 @@ Restore options
      batchSize: <int>
      numInsertionWorkers: <int>
 
+.. _restore-batch-size:
+
 batchSize
 ^^^^^^^^^^^
    
@@ -374,6 +432,8 @@ batchSize
 :default: 500
 
 The number of documents to buffer. 
+
+.. _restore-insertion-workers:
 
 numInsertionWorkers 
 ^^^^^^^^^^^^^^^^^^^^^^
