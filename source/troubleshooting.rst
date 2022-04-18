@@ -60,6 +60,10 @@ Run |pbm-speed-test-compression-help| for the full set of supported flags:
     -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
         --compression=s2           Compression type
                                    <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
+        --compression-level=COMPRESSION-LEVEL 
+                                   Compression level (specific to the compression type)                               
+                                   <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
+
 
 
 Upload speed test
@@ -94,7 +98,10 @@ Run |pbm-speed-test-storage-help| for the full set of available flags:
      -c, --sample-collection=SAMPLE-COLLECTION  
                                     Set collection as the data source
      -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
-         --compression=s2           Compression type <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>
+         --compression=s2           Compression type <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
+         --compression-level=COMPRESSION-LEVEL 
+                                   Compression level (specific to the compression type)                               
+
 
 Backup progress tracking
 ============================================================================
