@@ -50,8 +50,10 @@ For example, to start a backup with gzip compression, use the following command
 
    $ pbm backup --compression=gzip 
 
-Supported compression types are: ``gzip``, ``snappy``, ``lz4``, ``pgzip``.  The ``none`` value means no compression is done during
+Supported compression types are: ``gzip``, ``snappy``, ``lz4``, ``pgzip``, ``zstd``.  The ``none`` value means no compression is done during
 backup.
+
+As of version 1.7.0, you can configure the compression level for backups. Specify the value for the ``--compression-level`` flag. Note that the higher value you specify, the longer it takes to compress / retrieve the data.
 
 .. rubric:: Backup in sharded clusters
 
@@ -69,6 +71,10 @@ The following diagram illustrates the backup flow.
 .. image:: _images/pbm-backup-shard.png
 
 |
+
+.. important::
+
+   If you `reshard <https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/>`_ a collection in MongoDB 5.0 and higher versions, make a fresh backup to prevent data inconsistency and restore failure.
 
 .. rubric:: Adjust node priority for backups
 
