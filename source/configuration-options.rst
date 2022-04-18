@@ -167,6 +167,7 @@ serverSideEncryption.sseAlgorythm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
    
 :type: string
+:required: NO
 
 The key management mode used for server-side encryption 
 
@@ -176,8 +177,38 @@ serverSideEncryption.kmsKeyID
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
      
 :type: string
+:required: NO
 
 Your customer-managed key
+
+.. rubric:: Upload retry options
+
+retryer.numMaxRetries
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: int
+:required: NO
+:default: 3
+
+The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed. Available in |PBM| as of 1.7.0.
+
+retryer.minRetryDelay
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: time.Duration
+:required: NO
+:default: 30
+
+The minimum time (in ms) to wait till the next retry. Available in |PBM| as of 1.7.0.
+
+retryer.maxRetryDelay
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:type: time.Duration
+:required: NO
+:default: 5 
+
+The maximum time (in minutes) to wait till the next retry. Available in |PBM| as of 1.7.0.
 
 .. _filesystem:
 

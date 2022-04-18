@@ -45,6 +45,7 @@ Starting with version 1.7.0, |PBM| supports `Amazon S3 storage classes <https://
 
 To set the storage class, specify the ``storage.s3.storageClass`` option in |PBM| configuration file
 
+
 .. code-block:: yaml
 
    storage:
@@ -54,7 +55,21 @@ To set the storage class, specify the ``storage.s3.storageClass`` option in |PBM
 
 When the option is undefined, the S3 Standard storage type is used.
 
-.. seealso:: `Using Amazon S3 storage classes <https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html>`_
+.. seealso:: 
+
+   `Using Amazon S3 storage classes <https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html>`_
+
+
+As of version 1.7.0, you can set up the number of attempts for |PBM| to upload data to S3 storage as well as the min and max time to wait for the next retry. Set the options ``storage.s3.retryer.numMaxRetries``, ``storage.s3.retryer.minRetryDelay`` and ``storage.s3.retryer.maxRetryDelay`` in |PBM| configuration.
+
+.. code-block:: yaml
+ 
+   retryer:
+          numMaxRetries: 3
+          minRetryDelay: 30
+          maxRetryDelay: 5
+
+This upload retry increases the chances of data upload completion in cases of unstable connection.
 
 
 .. _filesystem-remote:
