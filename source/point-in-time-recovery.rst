@@ -20,6 +20,8 @@ Incremental backups
 
 When |PITR| is enabled, |pbm-agent| periodically saves consecutive slices of the :term:`oplog <Oplog>`. A method similar to the way replica set nodes elect a new primary is used to select the |pbm-agent| that saves the oplog slices. (Find more information in :ref:`pbm.architecture.agent`.)
 
+To start saving oplog, |PBM| requires a backup snapshot. Therefore, make sure  a backup exists when enabling |PITR|.
+
 By default, a slice covers a 10 minute span of oplog events. It can be shorter if |PITR| is disabled or interrupted by the start of a backup snapshot operation.
 
 
