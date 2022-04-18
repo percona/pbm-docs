@@ -140,11 +140,11 @@ The storage configuration itself is out of scope of the present document. We ass
 .. important::
 
       * When using a remote backup storage (S3 or Microsoft Azure), grant the  ``List/Get/Put/Delete`` permissions to the storage for the user identified by the access credentials. Please refer to the documentation of your selected storage for the permissions configuration.
-      * When using a filesystem storage, verify that the user running |PBM| is the owner of the backup folder.
+      * When using a filesystem storage, verify that the user running |PBM| is the owner of the backup directory. The recommended user is `mongod`, so it should be the owner of the backup directory.
 
         .. code-block:: bash
         
-           $ sudo chown pbm:pbm <backup_directory>
+           $ sudo chown mongod:mongod <backup_directory>
 
 1. Create a config file (e.g. :file:`pbm_config.yaml`).
 2. Specify the storage information within. 
@@ -185,26 +185,27 @@ Start |pbm-agent| on every server with the ``mongod`` node installed. It is best
    $ sudo systemctl start pbm-agent
    $ sudo systemctl status pbm-agent
 
-E.g. Imagine you put configsvr nodes (listen port 27019) collocated on the same
-servers as the first shard's ``mongod`` nodes (listen port 27018, replica set name
-"sh1rs"). In this server there should be two 
-|pbm-agent| processes, one connected to the shard
-(e.g. "mongodb://username:password@localhost:27018/") and one to the configsvr
-node (e.g. "mongodb://username:password@localhost:27019/").
+.. admonition:: Example
+
+   Imagine you put configsvr nodes (listen port 27019) collocated on the same
+   servers as the first shard's ``mongod`` nodes (listen port 27018, replica set name "sh1rs"). In this server there should be two |pbm-agent| processes, one connected to the shard (e.g. "mongodb://username:password@localhost:27018/") and one to the configsvr node (e.g. "mongodb://username:password@localhost:27019/").
 
 For reference, the following is an example of starting |pbm-agent| manually. The
-output is redirected to a file and the process is backgrounded. Alternatively
-you can run it on a shell terminal temporarily if you want to observe and/or
-debug the startup from the log messages.
+output is redirected to a file and the process is backgrounded. 
+
+.. attention::
+   
+   Start the ``pbm-agent`` as the ``mongod`` user. The ``pbm-agent`` requires write access to the MongoDB data directory to make physical restores.
 
 .. code-block:: bash
 
-   $ nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
+   $ su mongod nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
 
-.. tip::
-   
-   Running as the ``mongod`` user would be the most intuitive and convenient way.
-   But if you want it can be another user.
+Replace ``username`` and ``password`` with those of your ``pbm`` user. ``/data/mdb_node_xyz/`` is the path where |pbm-agent| log files will be written. Make sure you have created this directory and granted write permissions to it for the ``mongod`` user. 
+
+Alternatively,
+you can run ``pbm-agent`` on a shell terminal temporarily if you want to observe and/or
+debug the startup from the log messages.
 
 .. _pbm-agent.log:
 
@@ -213,8 +214,7 @@ How to see the pbm-agent log
 
 With the packaged systemd service, the log output to stdout is captured by
 systemd's default redirection to systemd-journald. You can view it with the
-command below. See :command:`man journalctl` for useful options such as '--lines',
-'--follow', etc.
+command below. See :command:`man journalctl` for useful options such as ``--lines``, ``--follow``, etc.
 
 .. code-block:: bash
 
@@ -229,7 +229,7 @@ If you started |pbm-agent| manually, see the file you redirected stdout and stde
 to.
 
 When a message *"pbm agent is listening for the commands"* is printed to the
-|pbm-agent| log file, it confirms that it has connected to its ``mongod`` node successfully.
+|pbm-agent| log file, |pbm-agent| confirms that it has connected to its ``mongod`` node successfully.
 
 
 .. include:: .res/replace.txt

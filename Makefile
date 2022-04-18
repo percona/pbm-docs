@@ -48,24 +48,24 @@ netlify:
 	@echo "Netlify build finished. The HTML pages are in $(BUILDDIR)/html."
 
 
-thtml:
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) -c source/conf-material $(BUILDDIR)/html
-	@echo
-	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
-
 html:
-	@echo "Downloading percona-theme ..."
-	@wget -O source/percona-theme.tar.gz https://www.percona.com/docs/theme-1-4
-	@echo "Extracting theme."
-	@tar -C source -mzxf source/percona-theme.tar.gz
-	@rm -rf source/percona-theme
-	@mv source/percona-theme-1-4 source/percona-theme
-	@rm source/percona-theme.tar.gz
-	@echo "Building html doc"
-
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
+
+#html:
+#	@echo "Downloading percona-theme ..."
+#	@wget -O source/percona-theme.tar.gz https://www.percona.com/docs/theme-1-4
+#	@echo "Extracting theme."
+#	@tar -C source -mzxf source/percona-theme.tar.gz
+#	@rm -rf source/percona-theme
+#	@mv source/percona-theme-1-4 source/percona-theme
+#	@rm source/percona-theme.tar.gz
+#	@echo "Building html doc"
+#
+#	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
+#	@echo
+#	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
 dirhtml:
 	$(SPHINXBUILD) -b dirhtml $(ALLSPHINXOPTS) $(BUILDDIR)/dirhtml

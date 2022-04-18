@@ -3,6 +3,10 @@
 Point-in-Time Recovery
 ********************************************************************************
 
+.. important::
+
+   |PITR| is currently supported only for logical backups.
+
 |PITR| is restoring a database up to a specific moment. |PITR| includes restoring the data from a backup snapshot and replaying all events that occurred to this data up to a specified moment from :term:`oplog slices <Oplog slice>`. |PITR| helps you prevent data loss during a disaster such as crashed database, accidental data deletion or drop of tables, unwanted update of multiple fields instead of a single one.
 
 |PITR| is available in |PBM| starting from v1.3.0. |PITR| is enabled via the ``pitr.enabled`` config option.
@@ -20,6 +24,11 @@ To start saving oplog, |PBM| requires a backup snapshot. Therefore, make sure  a
 
 By default, a slice covers a 10 minute span of oplog events. It can be shorter if |PITR| is disabled or interrupted by the start of a backup snapshot operation.
 
+
+.. important::
+
+   If you `reshard <https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/>`_ a collection in MongoDB 5.0 and higher versions, make a fresh backup and re-enable |PITR| oplog slicing to prevent data inconsistency and restore failure.
+
 As of version 1.6.0, you can change the duration of an oplog span via the configuration file. Specify the new value (in minutes) for the ``pitr.oplogSpanMin`` option.
 
 .. code-block:: bash
@@ -29,6 +38,20 @@ As of version 1.6.0, you can change the duration of an oplog span via the config
 If you set the new duration when the |pbm-agent| is making an oplog slice, the slice’s span is updated right away.  
 
 If the new duration is shorter, this triggers the |pbm-agent| to make a new slice with the updated span immediately. If the new duration is larger,  the |pbm-agent| makes the next slice with the updated span in its scheduled time.
+
+The oplog slices are saved with the ``s2`` compression method by default. As of version 1.7.0, you can specify a different compression method via the configuration file. Specify the new value for the ``pitr.compression`` option.
+
+.. code-block:: bash
+  
+   $ pbm config --set pitr.compression=gzip
+
+Supported compression methods are: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``.  
+
+Additionally, you can override the compression level used by the compression method by setting the ``pitr.compressionLevel`` option. Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data. 
+
+.. note::
+
+   You can use different compression methods for backup snapshots and |PITR| slices. However, backup snapshot-related oplog is compressed with the same compression method as the backup itself.
 
 The oplog slices are stored in the :file:`pbmPitr` subdirectory in the :ref:`remote storage defined in the config <storage.config>`. A slice name reflects the start and end time this slice covers. 
 
