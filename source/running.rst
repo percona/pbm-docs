@@ -39,7 +39,16 @@ Starting a backup
 
 .. code-block:: bash
 
-   $ pbm backup 
+   $ pbm backup --type=TYPE
+
+As of version 1.7.0, you can specify what type of a backup you wish to make: physical or logical. 
+
+When `physical` backup is selected, |PBM| copies the contents of the ``dbpath`` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
+
+During `logical` backups, |PBM| copies the actual data to the backup storage. When no ``--type`` flag is passed, |PBM| makes a logical backup.  
+
+For more information about backup types, see :ref:`backup-types`.
+
 
 By default, |PBM| uses ``s2`` compression method when making a backup. 
 You can start a backup with a different compression method by passing the ``--compression`` flag to the |pbm-backup| command. 
@@ -62,7 +71,7 @@ As of version 1.7.0, you can configure the compression level for backups. Specif
    For PBM v1.0 (only): before running |pbm-backup| on a cluster, stop the
    balancer.
 
-In sharded clusters, one of |pbm-agent| processes for every shard and the config server replica set writes backup snapshots and :term:`oplog slices <Oplog slice>` into the remote backup storage directly. To learn more about oplog slicing, see :ref:`pitr`.
+In sharded clusters, one of |pbm-agent| processes for every shard and the config server replica set writes backup snapshots  into the remote backup storage directly. For `logical` backups, ``pbm-agents`` also write :term:`oplog slices <Oplog slice>`. To learn more about oplog slicing, see :ref:`pitr`.
 
 The ``mongos`` nodes are not involved in the backup process.
 
@@ -131,6 +140,16 @@ Checking an in-progress backup
 For |PBM| version 1.3.4 and earlier, run the |pbm-list| command and you will see the running backup listed with a
 'In progress' label. When that is absent, the backup is complete.
 
+As of version 1.7.0, the ``pbm list`` output includes the type of backup.
+
+.. code-block:: bash
+
+   $ pbm list
+
+     Backup snapshots:
+       2021-12-13T13:05:14Z <physical> [complete: 2021-12-13T13:05:17]
+
+
 .. _pbm.running.backup.restoring:
 
 Restoring a backup
@@ -145,7 +164,7 @@ Restoring a backup
 
 To restore a backup that you have made using |pbm-backup|, use the
 |pbm-restore| command supplying the time stamp of the backup that you intend to
-restore. The database is restored up to the backup completion time (available in :ref:`pbm list output <pbm.running.backup.listing>` as of version 1.4.0)
+restore. Percona Backup for MongoDB identifies the type of the backup (physical or logical) and restores the database up to the backup completion time (available in pbm list output as of version 1.4.0).
 
 .. important::
 
@@ -195,6 +214,22 @@ During the restore, the |pbm-agent| processes write data to primary nodes in the
 
 After a cluster's restore is complete, restart all ``mongos`` nodes to reload the sharding metadata.
 
+.. admonition:: Physical restore known limitations
+
+   Tracking restore progress via ``pbm status`` is currently not available during physical restores. To check the restore status, the options are:
+   
+   - Check the stderr logs of the leader |pbm-agent|. The leader ID is printed once the restore has started.
+   - Check the status in the metadata file created on the remote storage for the restore. This file is in the root of the storage path and has the format ``.pbm.restore/<restore_timestamp>.json``
+     
+   After the restore is complete, do the following:
+
+   - Restart all ``mongod`` nodes
+   - Restart all ``pbm-agents`` 
+   - Run the following command to resync the backup list with the storage:
+     
+     .. code-block::
+
+        $ pbm config --force-resync
 
 .. _pbm.restore-new-env:
 
@@ -290,6 +325,10 @@ Viewing backup logs
 --------------------------------------------------------------------------------
 
 As of version 1.4.0, you can see the logs from all ``pbm-agents`` in your MongoDB environment using ``pbm CLI``. This reduces time for finding required information when troubleshooting issues.
+
+.. note::
+
+   The log information about restores from physical backups not available in pbm logs.
 
 To view |pbm-agent| logs, run the :command:`pbm logs` command and pass one or several flags to narrow down the search.
 
