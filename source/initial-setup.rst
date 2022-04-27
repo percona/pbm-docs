@@ -23,7 +23,7 @@ Configure authentication in MongoDB
 ================================================================================
 
 |pbm| has no authentication and authorization subsystem of its own - it uses
-the one of MongoDB. This means that to authenticate |pbm|, you need to create a corresponding ``pbm`` user in the ``admin`` database and set a valid MongoDB connection URI string for both |pbm-agent| and |pbm.app|.
+the one of MongoDB. This means that to authenticate |pbm|, you need to create a corresponding ``pbm`` user in the ``admin`` database and set a valid MongoDB connection URI string for both |pbm-agent| and ``pbm`` CLI.
 
 .. _pbm.auth.create_pbm_user:
 
@@ -127,6 +127,38 @@ Use the following command:
    export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27018/?replSetName=xxxx"
 
 For more information what connection string to specify, refer to :ref:`pbm.auth.pbm.app_conn_string` section.
+
+.. admonition:: "External authentication support in |PBM|""
+
+   In addition to SCRAM, |PBM| supports other `authentication method <https://docs.percona.com/percona-server-for-mongodb/5.0/authentication.html>`_ that you use in MongoDB or |PSMDB|. 
+
+   For external authentication, you :ref:`create the pbm user <pbm.auth.create_pbm_user>` in the format used by the authentication system and set the MongoDB connection URI string to include both the authentication method and authentication source.
+
+   For example, for `Kerberos authentication <https://docs.percona.com/percona-server-for-mongodb/5.0/authentication.html#kerberos-authentication>`_, create the ``pbm`` user in the ``$external`` database in the format ``<username@KERBEROS_REALM>`` (e.g. pbm@PERCONATEST.COM).
+
+   For MongoDB connection URI, define the following string:
+
+   .. code-block:: text
+
+      PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external"
+
+   Note that you must first obtain the ticket for the ``pbm`` user with the ``kinit`` command before you start the |pbm-agent|:
+
+   .. code-block:: bash
+
+      $ sudo -u {USER} kinit pbm  
+
+   Note that the ``{USER}`` is the user that you will run the pbm-agent process.
+
+   .. note::
+
+      For `authentication and authorization via Native LDAP <https://docs.percona.com/percona-server-for-mongodb/5.0/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap>`_, you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the ``$external`` database as your authentication source: 
+
+      .. code-block:: text
+
+         PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27018/?authMechanism=PLAIN&authSource=%24external"
+
+
 
 .. _backup-config:
 
