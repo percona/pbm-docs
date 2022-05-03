@@ -26,6 +26,13 @@
   Collection
      A collection is the way data is organized in MongoDB. It is analogous to a table in relational databases.
 
+  Completion time
+     The completion time is the time to which the sharded cluster / non-shared replica set will be returned to after the restore.  It is reflected in the "complete" section of the ``pbm list`` / ``pbm status`` command outputs.
+
+     In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, |PBM| waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
+
+     In `physical` backups, the completion time is only a few seconds after the backup start time. By holding the ``$backupCursor`` open guarantees that the checkpoint data won’t change during the backup, and |PBM| can define the completion time ahead.
+
   Consistency
      In the context of backup and restore, consistency means that the data restored will be consistent in a given point in time. Partial or incomplete writes to disk of atomic operations (for example, to table and index data structures separately) won't be served to the client after the restore. The same applies to multi-document transactions, that started but didn't complete by the time the backup was finished.
 
@@ -89,3 +96,6 @@
  
   Server-side encryption
      Server-side encryption is the encryption of data by the remote storage server as it receives it. The data is encrypted when it is written to S3 bucket and decrypted when you access the data. 
+
+
+.. include:: .res/replace.txt

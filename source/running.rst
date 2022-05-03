@@ -21,7 +21,7 @@ To view all completed backups, run the |pbm-list| command.
 
    $ pbm list
 
-As of version 1.4.0, the |pbm-list| output shows the completion time.
+As of version 1.4.0, the |pbm-list| output shows the completion time. This is the time to which the sharded cluster / non-shared replica set will be returned to after the restore.
 
 .. admonition:: Sample output
 
@@ -31,6 +31,11 @@ As of version 1.4.0, the |pbm-list| output shows the completion time.
         2021-01-13T15:50:54Z [complete: 2021-01-13T15:53:40]
         2021-01-13T16:10:20Z [complete: 2021-01-13T16:13:00]
         2021-01-20T17:09:46Z [complete: 2021-01-20T17:10:33]
+
+In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, |PBM| waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
+
+In `physical` backups, the completion time is only a few seconds after the backup start time. By holding the ``$backupCursor`` open guarantees that the checkpoint data won’t change during the backup, and |PBM| can define the completion time ahead.
+
 
 .. _pbm.running.backup.starting:
 
