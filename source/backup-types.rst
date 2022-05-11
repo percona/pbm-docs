@@ -10,6 +10,14 @@ As of version 2.0, |PBM| supports physical and logical backups and restores. Thi
 
 During physical backups and restores, ``pbm-agents`` don’t connect to the database and don’t read the data. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (multi-terabyte) databases.
 
+.. important::
+
+   Physical backups and restores are available for |PSMDB| starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. Since physical backups heavily rely on the WiredTiger $backupCursor functionality, they are available only for WiredTiger storage engine.
+
+   .. seealso::
+
+      Percona Blog: `$backupCursorExtend in Percona Server for MongoDB <https://www.percona.com/blog/2021/06/07/experimental-feature-backupcursorextend-in-percona-server-for-mongodb/>`_
+
 `Logical` backup is the copying of the actual database data. A ``pbm-agent`` connects to the database, retrieves the data and writes it to the remote backup storage. During the restore, the reverse process occurs: the ``pbm-agent`` retrieves the backup data from the storage and inserts it to the ``dbPath`` data directory.
 
 Logical backups allow for point in time recovery 

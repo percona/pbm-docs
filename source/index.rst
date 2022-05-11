@@ -14,7 +14,7 @@ As of version 1.7.0, |pbm| supports both physical and logical backups and restor
 
 * For *logical* backups - `Percona Server for MongoDB <https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_ and MongoDB Community v4.0 and higher with `MongoDB Replication <https://docs.mongodb.com/manual/replication/>`_ enabled.
 
-* For *physical* backups - `Percona Server for MongoDB <https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_ starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher with `MongoDB Replication <https://docs.mongodb.com/manual/replication/>`_ enabled.
+* For *physical* backups - `Percona Server for MongoDB <https://www.percona.com/software/mongo-database/percona-server-for-mongodb>`_ starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher with `MongoDB Replication <https://docs.mongodb.com/manual/replication/>`_ enabled and WiredTiger configured as the storage engine.
 
 .. important::
 
