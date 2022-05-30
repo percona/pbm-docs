@@ -247,6 +247,8 @@ The command accepts the following flags:
      - Shows last N backups.
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: ``text``, ``json``
+   * - ``--unbacked``
+     - Shows |PITR| oplog slices that were saved without the base backup snapshot. Available starting with version 1.8.0.
 
 .. admonition:: List of backups
    :class: toggle
@@ -275,7 +277,12 @@ The command accepts the following flags:
               "range": {
                 "start": Timestamp,
                 "end": Timestamp
-              }
+              },
+            {
+              "range": {
+                "start": Timestamp,
+                "end": Timestamp (no base snapshot)
+              }  
             }
           ]
         }
@@ -469,6 +476,12 @@ The command accepts the following flags:
                 "range": {
                   "start": Timestamp,
                   "end": Timestamp
+                }
+              },
+              {
+                "range": {
+                  "start": Timestamp,
+                  "end": Timestamp (no base snapshot) !!! no backup found
                 }
               },
             ],

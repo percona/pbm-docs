@@ -384,9 +384,20 @@ pitr.compressionLevel
 
 :type: int
 
-The compression level from ``0`` till ``10``. Default value depends on the compression method used. 
+The compression level is from ``0`` till ``10``. Default value depends on the compression method used. 
 
 Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data. 
+
+.. _pitr-oplog-only:
+
+pitr.oplogOnly
+^^^^^^^^^^^^^^
+
+:type: boolean
+:default: False
+:required: NO
+
+Controls whether the base backup is required to start |PITR| recovery oplog slicing. When set to true, |PBM| saves oplog chunks without the base backup snapshot. Available in |PBM| starting with version 1.8.0. To learn more about the usage, see :ref:`oplog-replay`.
 
 .. _backup-options:
 
