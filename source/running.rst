@@ -183,6 +183,8 @@ restore. Percona Backup for MongoDB identifies the type of the backup (physical 
 
    $ pbm restore 2019-06-09T07:03:50Z
 
+.. rubric:: Adjust memory consumption
+
 .. versionadded:: 1.3.2
 
    The |pbm| config includes the restore options to adjust the memory consumption by the |pbm-agent| in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.
@@ -199,7 +201,8 @@ The default values were adjusted to fit the setups with the memory allocation of
 
   The lower the values, the less memory is allocated for the restore. However, the performance decreases too.
 
-.. rubric:: Restoring a backup in sharded clusters
+Restoring a backup in sharded clusters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. important::
 
@@ -238,7 +241,8 @@ After a cluster's restore is complete, restart all ``mongos`` nodes to reload th
 
 .. _pbm.restore-new-env:
 
-.. rubric:: Restoring a backup into a new environment
+Restoring a backup into a new environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To restore a backup from one environment to another, consider the following key points about the destination environment:
 
@@ -247,6 +251,35 @@ To restore a backup from one environment to another, consider the following key 
 * |PBM| configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run |pbm-list| and see the backups made from the original environment, then you can run the |pbm-restore| command.
 
   Of course, make sure not to run |pbm-backup| from the new environment whilst the |PBM| config is pointing to the remote storage location of the original environment.
+
+Restoring into a cluster / replica set with a different name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names. 
+
+To restore data to the environment with different replica set names, configure the name mapping between the source and target environments. You can either set the ``PBM_REPLSET_REMAPPING`` environment variable for ``pbm`` CLI or use the ``--replset-remapping`` flag for PBM commands. The mapping format is ``<rsNew>=<rsOld>``.
+
+* Using the environment variable for ``pbm`` CLI in your shell:
+
+  .. code-block:: bash
+
+     $ export PBM_REPLSET_REMAPPING="rsX=rsA,rsY=rsB"
+
+* Using the command line:
+  
+  .. code-block:: bash
+
+     $ pbm restore <timestamp> --replset-remapping="rsX=rsA,rsY=rsB"
+
+The ``--replset-remapping`` flag is available for the following commands: ``pbm restore``, ``pbm list``, ``pbm status``, ``pbm oplog-replay``
+
+.. note::
+
+   Don't forget to make a fresh backup on the new environment after the restore is complete. 
+
+This ability to restore data to clusters with different replica set names and the number of shards extends the set of environments compatible for the restore.  
+
+
 
 .. _pbm.cancel.backup:
 

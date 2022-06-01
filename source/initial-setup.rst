@@ -128,7 +128,7 @@ Use the following command:
 
 For more information what connection string to specify, refer to :ref:`pbm.auth.pbm.app_conn_string` section.
 
-.. admonition:: "External authentication support in |PBM|""
+.. admonition:: External authentication support in |PBM|
 
    In addition to SCRAM, |PBM| supports other `authentication method <https://docs.percona.com/percona-server-for-mongodb/5.0/authentication.html>`_ that you use in MongoDB or |PSMDB|. 
 

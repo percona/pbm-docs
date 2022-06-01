@@ -165,6 +165,9 @@ The command accepts the following flags:
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
    * - ``--base-snapshot``
      - Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in |PBM| starting from version 1.6.0.
+   * - ``--replset-remapping`` 
+     - Maps the replica set names for the data restore / oplog replay. The value format is ``to_name_1=from_name_1,to_name_2=from_name_2``
+ 
        
 .. admonition:: Restore output
    :class: toggle
@@ -247,6 +250,8 @@ The command accepts the following flags:
      - Shows last N backups.
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: ``text``, ``json``
+   * - ``--replset-remapping`` 
+     - Maps the replica set names for the data restore / oplog replay. The value format is ``to_name_1=from_name_1,to_name_2=from_name_2``
 
 .. admonition:: List of backups
    :class: toggle
@@ -442,6 +447,9 @@ The command accepts the following flags:
      - Shows the status as either plain text or a JSON object. Supported values: text, json
    * - ``-s``, ``--sections=SECTIONS``
      - Shows the status for the specified section. You can pass several flags to view the status for multiple sections. Supported values: cluster, pitr, running, backups. 
+   * - ``--replset-remapping`` 
+     - Maps the replica set names for the data restore / oplog replay. The value format is ``to_name_1=from_name_1,to_name_2=from_name_2``
+
    
 .. admonition:: Status information
    :class: toggle
@@ -575,5 +583,33 @@ Find the usage examples in :ref:`pbm.logs`.
         },
         ....
       ]
+
+.. _pbm.oplog-replay:
+
+pbm oplog-replay
+===================
+
+Allows to replay the oplog on top of any backup: logical, physical, storage level snapshot (like EBS-snapshot) and restore it to a specific point in time. 
+
+To learn more about the usage, refer to :ref:`oplog-replay`.
+
+The command has the following syntax: 
+
+.. code-block:: bash
+
+   pbm oplog-replay [<flags>]
+
+The command accepts the following flags:
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: 30 70
+
+   * - ``start=timestamp``
+     - The start time for the oplog replay.
+   * - ``end=timestamp``
+     - The end time for the oplog replay.
+   * - ``--replset-remapping`` 
+     - Maps the replica set names for the oplog replay. The value format is ``to_name_1=from_name_1,to_name_2=from_name_2``.
 
 .. include:: .res/replace.txt
