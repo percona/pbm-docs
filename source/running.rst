@@ -28,9 +28,9 @@ As of version 1.4.0, the |pbm-list| output shows the completion time. This is th
    .. code-block:: text
 
       Backup snapshots:
-        2021-01-13T15:50:54Z [complete: 2021-01-13T15:53:40]
-        2021-01-13T16:10:20Z [complete: 2021-01-13T16:13:00]
-        2021-01-20T17:09:46Z [complete: 2021-01-20T17:10:33]
+        2021-01-13T15:50:54Z [complete: 2021-01-13T15:53:40Z]
+        2021-01-13T16:10:20Z [complete: 2021-01-13T16:13:00Z]
+        2021-01-20T17:09:46Z [complete: 2021-01-20T17:10:33Z]
 
 In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, |PBM| waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
 
@@ -152,7 +152,7 @@ As of version 1.7.0, the ``pbm list`` output includes the type of backup.
    $ pbm list
 
      Backup snapshots:
-       2021-12-13T13:05:14Z <physical> [complete: 2021-12-13T13:05:17]
+       2021-12-13T13:05:14Z <physical> [complete: 2021-12-13T13:05:17Z]
 
 
 .. _pbm.running.backup.restoring:
@@ -307,7 +307,7 @@ To delete backups that were created before the specified time, pass the ``--olde
 command. Specify the timestamp as an argument
 for :command:`pbm delete-backup` in the following format:
 
-* ``%Y-%M-%DT%H:%M:%S`` (for example, 2020-04-20T13:13:20) or
+* ``%Y-%M-%DT%H:%M:%S`` (for example, 2020-04-20T13:13:20Z) or
 * ``%Y-%M-%D`` (2020-04-20).
 
 .. code-block:: bash
