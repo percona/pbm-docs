@@ -257,7 +257,13 @@ Restoring into a cluster / replica set with a different name
 
 Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names. 
 
-To restore data to the environment with different replica set names, configure the name mapping between the source and target environments. You can either set the ``PBM_REPLSET_REMAPPING`` environment variable for ``pbm`` CLI or use the ``--replset-remapping`` flag for PBM commands. The mapping format is ``<rsNew>=<rsOld>``.
+To restore data to the environment with different replica set names, configure the name mapping between the source and target environments. You can either set the ``PBM_REPLSET_REMAPPING`` environment variable for ``pbm`` CLI or use the ``--replset-remapping`` flag for PBM commands. The mapping format is ``<rsTarget>=<rsSource>``.
+
+.. important::
+
+   Configure replica set name mapping for all shards in your cluster. Otherwise, |PBM| attempts to restore the unspecified shard to the target shard with the same name. If there is no shard with such name or it is already mapped to another source shard, the restore fails.
+
+Configure the replica set name mapping:
 
 * Using the environment variable for ``pbm`` CLI in your shell:
 
@@ -271,7 +277,7 @@ To restore data to the environment with different replica set names, configure t
 
      $ pbm restore <timestamp> --replset-remapping="rsX=rsA,rsY=rsB"
 
-The ``--replset-remapping`` flag is available for the following commands: ``pbm restore``, ``pbm list``, ``pbm status``, ``pbm oplog-replay``
+The ``--replset-remapping`` flag is available for the following commands: ``pbm restore``, ``pbm list``, ``pbm status``, ``pbm oplog-replay``.
 
 .. note::
 
