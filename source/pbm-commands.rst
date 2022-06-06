@@ -122,6 +122,9 @@ The command accepts the following flags:
      - Configure the compression level from 0 to 10. The default value depends on the compression method used. 
    * - ``-o``, ``--out=text``
      - Shows the output format as either plain text or a JSON object. Supported values: text, json
+   * - ``--wait``
+     - Wait for the backup to finish. The flag blocks the shell session.
+
 
 .. admonition:: JSON output
    :class: toggle
