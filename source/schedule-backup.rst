@@ -9,7 +9,7 @@ In |PBM| version 1.4.1 and earlier, we recommend using ``crond`` or similar serv
 
    Before configuring ``crond``, make sure that you have :ref:`installed <install>` and :ref:`configured <initial-setup>` |PBM| to make backups in your database. Start a backup manually to verify this: :command:`pbm backup`. 
 
-The recommended approach is to create a :file:`crontab` file in the :dir:`/ect/cron.d` directory and specify the command in it. This simplifies server administration especially if multiple users have access to it.
+The recommended approach is to create a :file:`crontab` file in the :dir:`/etc/cron.d` directory and specify the command in it. This simplifies server administration especially if multiple users have access to it.
 
 |pbm.app| CLI requires a valid MongoDB URI connection string to authenticate in MongoDB. Instead of specifying the MongoDB URI connection string as a command line argument, which is a potential security risk, we recommend creating an environment file and specify the ``export PBM_MONGODB_URI=$PBM_MONGODB_URI`` statement within.
 
