@@ -4,7 +4,14 @@
 |PITR| oplog replay
 *******************
 
-Starting with version 1.7.0, you can replay the :term:`oplog <Oplog>` for a specific period on top of any backup: logical, physical, storage level snapshot (like EBS-snapshot). In this way you can manually restore sharded clusters and non sharded replica sets to a specific point in time from a backup made by any tool and not only by |PBM|.
+Starting with version 1.7.0, you can replay the :term:`oplog <Oplog>` for a specific period on top of any backup: logical, physical, storage level snapshot (like EBS-snapshot). Starting with version 1.8.0, you can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the ``pitr.oplogOnly`` configuration parameter
+
+.. code-block:: yaml
+
+   pitr:
+      oplogOnly: true
+
+By replaying these oplog slices on top of the backup snapshot with the ``oplog replay`` command, you can manually restore sharded clusters and non sharded replica sets to a specific point in time from a backup made by any tool and not only by |PBM|. Plus, you reduce time, storage space and administration efforts on making the redundant base backup snapshot. 
 
 .. warning::
 
@@ -19,9 +26,9 @@ To replay the oplog on top of physical backups made with |PBM|, do the following
 2.	Run ``pbm status`` or ``pbm list`` commands to find oplog chunks available for replay. 
 3.	Run the ``pbm oplog-replay`` command and specify the ``--start`` and ``--end`` flags with the timestamps. 
 
-    .. code-block:: bash
+   .. code-block:: bash
 
-       $ pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
+     $ pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
 
 4. After the oplog replay, make a fresh backup and enable the |PITR| oplog slicing.
    
@@ -36,6 +43,11 @@ Storage-level snapshots are saved with |PITR| enabled. Thus, after the database 
 #. Delete the oplog slices that might have been created
 #. Resync the data from the storage
 #. Run the ``pbm oplog-replay`` command and specify the ``--start`` and ``--end`` flags with the timestamps.
+   
+   .. code-block:: bash
+
+      $ pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
+
 #. After the oplog replay, make a fresh backup and enable the |PITR| oplog slicing.
 
 
