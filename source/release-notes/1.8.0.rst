@@ -18,6 +18,7 @@ Release Highlights
 * Ability to :ref:`restore data to a replica set with a different name and configuration <pbm.restore-new-env>`. This extends the list of environments compatible for the restore.
 * When you use EBS-snapshots or other tools for physical backups, you :ref:`no longer have to create a mandatory base backup snapshot in |Percona Backup for MongoDB| as the starting point for Point-in-Time Recovery oplog slicing <pitr-oplog-only>`. This reduces time and effort on managing excessive backups and makes |PITR| from physical or storage-level backups more straightforward.
 * The ability to wait for the backup operation to finish before doing further actions through the session lock. This simplifies the automation of operations with |PBM|.
+* Ability to define backup compression level and method in |PBM| configuration.  
 * To simplify the |PBM| configuration, the example configuration file is now included in the |PBM| package. 
 
 
@@ -27,6 +28,7 @@ New Features
 * :jirabug:`PBM-776`: Allow data restore into the replica set with a different name
 * :jirabug:`PBM-866`: Add the ability to wait for the backup operation to finish and print the result
 * :jirabug:`PBM-782`: Allow saving |PITR| oplog  without base snapshot
+* :jirabug:`PBM-838`: Add the ability to configure default compression method and level for backups
 
 
 
