@@ -6,6 +6,7 @@ Release notes
 .. toctree::
    :maxdepth: 1
 
+   release-notes/1.8.0
    Percona Backup for MongoDB 1.7.0 (2022-04-18) <release-notes/1.7.0>
    Percona Backup for MongoDB 1.6.1 (2021-11-04) <release-notes/1.6.1>
    Percona Backup for MongoDB 1.6.0 (2021-08-16) <release-notes/1.6.0>
