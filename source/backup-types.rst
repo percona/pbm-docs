@@ -4,7 +4,7 @@
 Backup and restore types
 ************************
 
-As of version 2.0, |PBM| supports physical and logical backups and restores. This document describes each type.
+As of version 1.7.0, |PBM| supports physical and logical backups and restores. This document describes each type.
 
 `Physical` backup is copying of physical files from the |PSMDB| ``dbPath`` data directory to the remote backup storage. These files include data files, journal, index files, etc. Physical restore is the reverse process: ``pbm-agents`` shut down the ``mongod`` nodes, clean up the ``dbPath`` data directory and copy the physical files from the storage to it. 
 
