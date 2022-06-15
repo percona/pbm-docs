@@ -20,6 +20,7 @@ Release Highlights
 * The ability to wait for the backup operation to finish before doing further actions through the session lock. This simplifies the automation of operations with |PBM|.
 * Ability to define backup compression level and method in |PBM| configuration.  
 * To simplify the |PBM| configuration, the example configuration file is now included in the |PBM| package. 
+* Ubuntu 22.04 (Jammy Jellyfish) is added to the list of `supported platforms <https://www.percona.com/services/policies/percona-software-support-lifecycle#mongodb>`_
 
 
 New Features
