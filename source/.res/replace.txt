@@ -27,3 +27,5 @@
 .. |sudo| replace:: :program:`sudo`
 .. |PITR| replace:: Point-in-Time Recovery
 .. |AWS KMS| replace:: :abbr:`AWS KMS (AWS Key Management Service)`
+.. |SLA| replace:: :abbr:`SLA (Service License Agreement)`
+.. |GA| replace:: :abbr:`GA (General Availability)`

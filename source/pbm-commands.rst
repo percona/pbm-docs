@@ -114,6 +114,11 @@ The command accepts the following flags:
      - Description
    * - ``-t``, ``--type``
      - The type of backup. Supported values: physical, logical (default). When not specified, |PBM| makes a logical backup.
+       
+       .. note::
+
+          Physical backups feature is the technical preview quality.
+
    * - ``--compression``
      - Create a backup with compression. 
        Supported compression methods: ``gzip``, ``snappy``, ``lz4``, ``s2``, ``pgzip``, ``zstd``. Default: ``s2``
