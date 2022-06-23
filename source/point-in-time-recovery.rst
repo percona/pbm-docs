@@ -15,7 +15,7 @@ Point-in-Time Recovery
 
    $ pbm config --set pitr.enabled=true
 
-Incremental backups
+Oplog slicing
 ================================================================================
 
 When |PITR| is enabled, |pbm-agent| periodically saves consecutive slices of the :term:`oplog <Oplog>`. A method similar to the way replica set nodes elect a new primary is used to select the |pbm-agent| that saves the oplog slices. (Find more information in :ref:`pbm.architecture.agent`.)
@@ -83,7 +83,7 @@ The |pbm-list| output includes the following information:
 Restore to the point in time
 ============================
 
-A restore and |PITR| incremental backups are incompatible operations and cannot be run simultaneously. You must disable |PITR| before restoring a database:
+A restore and |PITR| oplog slicing are incompatible operations and cannot be run simultaneously. You must disable |PITR| before restoring a database:
 
 .. code-block:: bash
    
