@@ -48,7 +48,7 @@ Now, imagine that your web application’s update was released on February 7th 0
 
 The output lists the valid time ranges for the restore. The desired time (February 7th, 03:00 UTC) falls within the ``2021-02-03T08:08:36Z-2021-02-09T12:20:23Z`` range, so let’s restore the database up to that time. 
 
-Since the restore and saving oplog slices are exclusive operations and cannot  run together, let’s stop oplog slicing first:
+Since the restore and saving oplog slices are exclusive operations and cannot run together, let’s stop oplog slicing first:
 
 .. code-block:: bash
 
