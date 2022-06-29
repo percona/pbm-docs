@@ -9,7 +9,23 @@ Even in a highly-available architecture, such as with |mongodb| replication, bac
 
 The following example illustrates how to use |PBM|.
 
-Imagine your web application’s update was released on February 2nd 23:00 EDT but, by 11:23 the next day, someone realizes that the update has a bug that is wiping the historical data of any user who logged in. Nobody likes to have downtime, but it’s time to roll back: what’s the best backup to use?
+With |PBM| up and running in your environment, make a backup:
+
+.. code-block:: bash
+
+   $ pbm backup
+
+To also save all events that occurred to the data between the backups, enable saving oplog slices:
+
+.. code-block:: bash
+
+   $ pbm config --set pitr.enabled=true
+
+.. tip::
+
+   You can :ref:`schedule the frequency of backups <schedule>` via a cron task 
+
+Now, imagine that your web application’s update was released on February 7th 03:00 UTC. By 15:23 UTC, someone realizes that this update has a bug that is wiping the historical data of any user who logged in. To remediate this negative impact on data, it’s time to roll back up to the time of the application’s update - up to February 7th, 03:00 UTC
 
 .. code-block:: bash
 
@@ -20,24 +36,41 @@ Imagine your web application’s update was released on February 2nd 23:00 EDT b
    .. code-block:: text
 
       Backup snapshots:
-        2021-02-03T08:08:15Z [complete: 2021-02-03T08:08:35]
-        2021-02-05T13:55:55Z [complete: 2021-02-05T13:56:15]
-        2021-02-07T13:57:58Z [complete: 2021-02-07T13:58:17]
-        2021-02-09T14:06:06Z [complete: 2021-02-09T14:06:26]
-        2021-02-11T14:22:41Z [complete: 2021-02-11T14:23:01]
+        2021-02-03T08:08:15Z [complete: 2021-02-03T08:08:35Z]
+        2021-02-05T13:55:55Z [complete: 2021-02-05T13:56:15Z]
+        2021-02-07T13:57:58Z [complete: 2021-02-07T13:58:17Z]
+        2021-02-09T14:06:06Z [complete: 2021-02-09T14:06:26Z]
+        2021-02-11T14:22:41Z [complete: 2021-02-11T14:23:01Z]
 
-The most recent daily backup is 09:22 EDT (14:22 UTC), which would include 4 hours of damage caused by the bug.
-Let's restore the one before that:
+      PITR <on>:
+       2021-02-03T08:08:36Z-2021-02-09T12:20:23Z
+       2021-02-09T14:06:27Z-2021-02-11T14:22:40Z
+
+The output lists the valid time ranges for the restore. The desired time (February 7th, 03:00 UTC) falls within the ``2021-02-03T08:08:36Z-2021-02-09T12:20:23Z`` range, so let’s restore the database up to that time. 
+
+Since the restore and saving oplog slices are exclusive operations and cannot run together, let’s stop oplog slicing first:
 
 .. code-block:: bash
 
-   $ pbm restore 2021-02-09T14:06:06Z 
+   $ pbm config --set pitr.enabled=false
 
-To be on the safe side, it is a good practice to make an extra backup manually before the next application release:
+Now, restore the database:
+
+.. code-block:: bash
+
+   $ pbm restore --time 2021-02-07T02:59:59
+
+To be on the safe side, it is a good practice to make a fresh backup after the restore is complete.
 
 .. code-block:: bash
 
    $ pbm backup
+
+This backup refreshes the timeline and serves as the base for saving oplog slices. To re-enable this process, run:
+
+.. code-block:: bash 
+
+   $ pbm config --set pitr.enabled=true
 
 Find the full set of commands available in |PBM| in :ref:`pbm-commands`.
 
