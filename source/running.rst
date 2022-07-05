@@ -48,6 +48,10 @@ Starting a backup
 
 As of version 1.7.0, you can specify what type of a backup you wish to make: physical or logical. 
 
+.. note:: 
+
+   Physical backups is the tech preview feature [1]_. Before using them in production, we recommend that you test restoring from physical backups in your environment, and also use the alternative backup method for redundancy.
+
 When `physical` backup is selected, |PBM| copies the contents of the ``dbpath`` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
 
 During `logical` backups, |PBM| copies the actual data to the backup storage. When no ``--type`` flag is passed, |PBM| makes a logical backup.  
@@ -423,3 +427,6 @@ The output includes log messages of the specified severity type and all higher l
 Note that log information from ``pbmLog`` collection is shown in the UTC timezone and from the stderr - in the server's time zone.
 
 .. include:: .res/replace.txt
+
+.. [1] Tech Preview Features are not yet ready for enterprise use and are not included in support via |SLA|. They are included in this release so that users can provide feedback prior to the full release of the feature in a future |GA| release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.
+         
