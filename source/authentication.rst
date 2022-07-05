@@ -32,6 +32,13 @@ since approximately the release time of MongoDB server v3.6. The ``mongo`` shell
 a v4.0+ mongo shell is a recommended way to debug connection URI validity from
 the command line.
 
+ Since |PBM| must authenticate in MongoDB, we recommend specifying the authentication database associated with the ``pbm`` user’s credentials in the connection URI string using the ``authSource`` option. 
+
+ The `MongoDB Connection URI <https://docs.mongodb.com/manual/reference/connection-string/>`_ specification also allows specifying the authentication database via the ``defaultauthdb`` component. However, in this case, |PBM| makes a backup of only this specified database. 
+
+ If both ``authSource`` and ``defaultauthdb`` are unspecified, the authentication database defaults to the ``admin`` database.
+
+
 The `MongoDB Connection URI
 <https://docs.mongodb.com/manual/reference/connection-string/>`_ specification
 includes several non-default options you may need to use. For example the TLS
