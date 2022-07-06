@@ -1,0 +1,23 @@
+# Release notes
+
+* [Percona Backup for MongoDB 1.8.1](release-notes/1.8.1.md)
+* [Percona Backup for MongoDB 1.8.0](release-notes/1.8.0.md)
+* [Percona Backup for MongoDB 1.7.0](release-notes/1.7.0.md)
+* [Percona Backup for MongoDB 1.6.1](release-notes/1.6.1.md)
+* [Percona Backup for MongoDB 1.6.0](release-notes/1.6.0.md)
+* [Percona Backup for MongoDB 1.5.0](release-notes/1.5.0.md)
+* [Percona Backup for MongoDB 1.4.1](release-notes/1.4.1.md)
+* [Percona Backup for MongoDB 1.4.0](release-notes/1.4.0.md)
+* [Percona Backup for MongoDB 1.3.4](release-notes/1.3.4.md)
+* [Percona Backup for MongoDB 1.3.3](release-notes/1.3.3.md)
+* [Percona Backup for MongoDB 1.3.2](release-notes/1.3.2.md)
+* [Percona Backup for MongoDB 1.3.1](release-notes/1.3.1.md)
+* [Percona Backup for MongoDB 1.3.0](release-notes/1.3.0.md)
+* [Percona Backup for MongoDB 1.2.1](release-notes/1.2.1.md)
+* [Percona Backup for MongoDB 1.2.0](release-notes/1.2.0.md)
+* [Percona Backup for MongoDB 1.1.3](release-notes/1.1.3.md)
+* [Percona Backup for MongoDB 1.1.1](release-notes/1.1.1.md)
+* [Percona Backup for MongoDB 1.1.0](release-notes/1.1.0.md)
+* [Percona Backup for MongoDB 1.0.0](release-notes/1.0.0.md)
+* [Percona Backup for MongoDB 0.5.0](release-notes/0.5.0.md)
+   
