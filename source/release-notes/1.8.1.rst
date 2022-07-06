@@ -13,14 +13,7 @@ those backups to a specific point in time.
 Release Highlights
 =====================
 
-* Fixed the restore failure on a different cluster. Now the UUID of users and system collections are not preserved when replaying the oplog. 
-* The PITR chunks display is now consistent in both `pbm status` and `pbm list` outputs. 
+* :jirabug:`PBM-871` - Fixed the restore failure on a different cluster. Now the UUID of users and system collections are not preserved when replaying the oplog. 
+* :jirabug:`PBM-881` - The |PITR| chunks display is now consistent in both ``pbm status`` and ``pbm list`` outputs. 
 
-
-Bugs Fixed
-================================================================================
-
-* :jirabug:`PBM-871`: Fix replaying oplog on system collections during the restore (Thanks to Daniel Oliver for reporting this issue)
-* :jirabug:`PBM-881`: Correct the display of PITR chunks for `pbm status` output
-
-
+.. |PITR| replace:: :abbr:`PITR (Point-in-time recovery)`
