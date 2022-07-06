@@ -5,3 +5,4 @@ source/ext/__pycache__
 
 # Local Netlify folder
 .netlify
+site
