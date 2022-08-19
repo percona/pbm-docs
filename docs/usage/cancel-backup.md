@@ -10,7 +10,7 @@ pbm cancel-backup
 Backup cancellation has started
 ```
 
-After the command execution, the backup is marked as canceled in the [pbm status](../how-to/troubleshooting.md#percona-backup-for-mongodb-status) output:
+After the command execution, the backup is marked as canceled in the [pbm status](../manage/troubleshooting.md#percona-backup-for-mongodb-status) output:
 
 ```sh
 pbm status
