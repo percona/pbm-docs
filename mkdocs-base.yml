@@ -133,13 +133,13 @@ nav:
           - Overview:
               - details/storage-configuration.md
           - details/storage-config-example.md
-  - How to:
+  - Manage PBM:
       - Schedule backups: 
-          - how-to/schedule-backup.md
-      - 'Upgrade PBM': 'how-to/upgrading.md'
-      - 'Troubleshoot PBM': 'how-to/troubleshooting.md'
-      - 'Automate access to S3 buckets for PBM': 'how-to/automate-s3-access.md'
-      - 'Remove PBM': 'how-to/uninstalling.md'
+          - manage/schedule-backup.md
+      - 'Upgrade PBM': 'manage/upgrading.md'
+      - 'Troubleshoot PBM': 'manage/troubleshooting.md'
+      - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
+      - 'Remove PBM': 'manage/uninstalling.md'
   - FAQ:
       - faq.md
   - Reference:

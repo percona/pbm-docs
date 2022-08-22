@@ -2,7 +2,7 @@
 
 !!! note
 
-    As of version 1.4.0, the `pbm list` command provides the information only about completed backups. To check for running backups, use the [`pbm status`](../reference/pbm-commands.md#pbm-status). For more information, see [Percona Backup for MongoDB status](../how-to/troubleshooting.md#percona-backup-for-mongodb-status).
+    As of version 1.4.0, the `pbm list` command provides the information only about completed backups. To check for running backups, use the [`pbm status`](../reference/pbm-commands.md#pbm-status). For more information, see [Percona Backup for MongoDB status](../manage/troubleshooting.md#percona-backup-for-mongodb-status).
 
     For Percona Backup for MongoDB version 1.3.4 and earlier,  the `pbm list` command provides the running backup listed with an
     ‘In progress’ label. When that is absent, the backup is complete.
