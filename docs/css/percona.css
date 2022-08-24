@@ -17,6 +17,20 @@ ul li p {
 	margin: 0;
 }
 
+.md-typeset {
+  font-size: .7rem;
+  line-height: 1.6;
+}
+
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --md-text-font-family: var(--md-text-font, _), -apple-system, Chivo, Colfax, Franziska, sans-serif;
+    --md-code-font-family:var(--md-code-font, _), SFMono-Regular, Consolas, Menlo, monospace
+}
+
+
 /*.git-revision-date-localized-plugin:before {
   content: url('https://api.iconify.design/mdi/clock-edit-outline.svg');
 }*/
