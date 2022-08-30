@@ -124,7 +124,8 @@ The command accepts the following flags:
 
     ```json
     {
-      "snapshot": "<backup_name>"
+       "name": "<restore_name>"
+       "snapshot": "<backup_name>"
     }
     ```
 
@@ -132,7 +133,8 @@ The command accepts the following flags:
 
     ```json
     {
-      "point-in-time": "<backup_name>"
+      "name":"<restore_name>",
+      "point-in-time":"<backup_name>"
     }
     ```
 
@@ -163,7 +165,7 @@ Provides the list of backups. In versions 1.3.4 and earlier, the command lists a
 * Error - A backup was finished with an error
 * No status means a backup is complete
 
-As of version 1.4.0, only successfully completed backups are listed. To view currently running backup information, run [`pbm status`](#pbm-status).
+As of version 1.4.0, only successfully completed backups are listed. To view currently information about a running or a failed backup, run [`pbm status`](#pbm-status).
 
 When Point-in-Time Recovery is enabled, the `pbm list` also provides the list of valid time ranges for recovery and point-in-time recovery status.
 
@@ -177,7 +179,7 @@ The command accepts the following flags:
 
 | Flag                | Description                      |
 | ------------------- | -------------------------------- |
-| `--restore`         | Shows last N restores.           |
+| `--restore`         | Shows last N restores. Starting with version 2.0, the output shows restore names instead of backup names, as multiple restores can be done from a single backup.           |
 | `--size=0`          | Shows last N backups.            |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                 |
 | `--unbacked`        | Shows Point-in-Time Recovery oplog slices that were saved without the base backup snapshot. Available starting with version 1.8.0.|
@@ -229,7 +231,7 @@ The command accepts the following flags:
         "status": "done",
         "type": "snapshot",
         "snapshot": "<backup_name>",
-        "name": "2021-07-26T10:08:54.0867213Z"
+        "name": "<restore_name>"
       },
       {
         "start": Timestamp,
@@ -237,10 +239,88 @@ The command accepts the following flags:
         "type": "pitr",
         "snapshot": "<backup_name>",
         "point-in-time": Timestamp,
-        "name": "2021-07-26T11:09:53.7500545Z"
+        "name": "<restore_name>"
       }
     ]
     ```
+## pbm describe-restore
+
+Shows the detailed information about the restore.
+The command has the following syntax:
+
+```sh
+pbm describe-restore [<restore-timestamp>] [<flags>] 
+```
+
+The command accepts the following flags:
+
+| Flag                     | Description             |
+| ------------------------ | ----------------------- |
+| `-c`, `--config=CONFIG`  | Only for **physical restores**. Points Percona Backup for MongoDB to a configuration file so it can read the restore status from the remote storage. For example, `pbm describe-restore -c /etc/pbm/conf.yaml <restore-name>`.|
+| `-o`, `--out=TEXT`       | Shows the output as either the plain text (default) or a JSON object. Supported values: ``text``, ``json``.|
+
+??? admonition "Selective restore status"
+
+    ```json
+    {
+     "name": "2022-08-15T12:35:00.872256719Z",
+     "backup": "2022-08-15T12:34:19Z",
+     "restore_to": "1662047446""
+     "type": "logical",
+     "status": "done",
+     "namespaces": [
+        "Invoices.*"
+     ]
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "last_transition_time": "2022-09-01T18:54:12+03:00"
+       },
+       {
+        "name": "rs0",
+         "status": "done",
+         "last_transition_time": "2022-09-01T18:54:11+03:00"
+       },
+       {
+         "name": "cfg",
+         "status": "done",
+         "last_transition_time": "2022-09-01T18:54:12+03:00"
+       }
+     ],
+     "opid": "62fa3d7460d0d259449f7061",
+     "start": "2022-09-01T18:54:07+03:00",
+     "last_transition_time": "2022-09-01T18:54:13+03:00"
+    }
+
+??? admonition "Physical restore status"
+
+    ```json
+    {
+     "name": "2022-08-15T11:14:55.683148162Z",
+     "backup": "2022-08-15T11:14:32Z",
+     "type": "physical",
+     "status": "done",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "last_transition_time": "2022-09-01T16:45:21+03:00",
+         "nodes": [
+           {
+             "name": "127.0.0.1:27017",
+             "status": "done",
+             "last_transition_time": "2022-09-01T16:45:15+03:00"
+           }
+         ]
+       }
+     ],
+     "opid": "62fa2aaf6e8356a773a0a357",
+     "start": "2022-09-01T16:43:54+03:00",
+     "last_transition_time": "2022-09-01T16:45:22+03:00"
+    }
+    ```
+
 
 ## pbm delete-backup
 
