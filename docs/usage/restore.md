@@ -62,6 +62,10 @@ The default values were adjusted to fit the setups with the memory allocation of
 
 ## Physical restores
 
+!!! important
+
+    The MongoDB version for both backup and restore data must be within the same major release.
+
 During the physical restore, pbm-agent processes stop the mongod nodes, clean up the data directory and copy the data from the storage onto every node.
 
 The following diagram shows the physical restore flow:
@@ -88,7 +92,31 @@ After the restore is complete, do the following:
  $ pbm config --force-resync
  ```       
 
-### Restoring a backup into a new environment
+### Physical restores with data-at-rest encryption
+
+!!! admonition "Version added: 2.0.0"
+
+You can backup and restore the encrypted data at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
+
+This is how it works: 
+
+During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. This allows you to verify them using the `pbm describe-backup` command. Note that the encryption key is not stored nor shown.
+
+!!! important
+
+    Make sure that you know what encryption key was used and store it as this key is required for the restore.
+
+To restore the encrypted data from the backup, do the following:
+
+1. Put the encryption key / specify the path to the key on at least one node of every replica set. 
+
+2. Configure data-at-rest encryption in your destination cluster or replica set. 
+
+During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node. 
+
+Alternatively, you can place the encryption key to all nodes of the replica set. Then the restore is successful and complete on all nodes. This approach is faster and may suit for large data sets (terabytes of data). However, we recommend to rotate the encryption keys afterwards. Note, that key rotation is not available after the restore [for data-at-rest encryption with HashiCorp Vault key server](https://docs.percona.com/percona-server-for-mongodb/latest/vault.html#vault). In this case, consider using the scenario with partially done restore. 
+
+## Restoring a backup into a new environment
 
 To restore a backup from one environment to another, consider the following key points about the destination environment:
 
@@ -100,7 +128,7 @@ To restore a backup from one environment to another, consider the following key 
 
 Of course, make sure not to run **pbm backup** from the new environment whilst the Percona Backup for MongoDB config is pointing to the remote storage location of the original environment.
 
-### Restoring into a cluster / replica set with a different name
+## Restoring into a cluster / replica set with a different name
 
 Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names.
 
