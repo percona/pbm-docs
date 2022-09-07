@@ -224,15 +224,36 @@ The command accepts the following flags:
 
 ??? "Restore history"
  
+    Full restore 
+
     ```json
-    [
-      {
+     {
         "start": Timestamp,
         "status": "done",
         "type": "snapshot",
         "snapshot": "<backup_name>",
         "name": "<restore_name>"
-      },
+      }
+    ```
+
+    Selective restore
+
+    ```json
+      {
+        "start": Timestamp,
+        "status": "done",
+        "type": "snapshot",
+        "snapshot": "<backup_name>",
+        "name": "<restore_name>",
+        "namespaces": [
+          "<database.collection>"
+        ]
+      }
+    ```
+
+    Point-in-time restore
+
+    ```json
       {
         "start": Timestamp,
         "status": "done",
@@ -241,8 +262,25 @@ The command accepts the following flags:
         "point-in-time": Timestamp,
         "name": "<restore_name>"
       }
+    ```
+
+    Selective point-in-time restore
+
+    ```json
+    {
+        "start": Timestamp,
+        "status": "done",
+        "type": "pitr",
+        "snapshot": "<backup_name>",
+        "point-in-time": Timestamp,
+        "name": "<restore_name>",
+        "namespaces": [
+          "<database.collection>"
+        ]
+      }
     ]
     ```
+
 ## pbm describe-restore
 
 Shows the detailed information about the restore.
@@ -263,61 +301,62 @@ The command accepts the following flags:
 
     ```json
     {
-     "name": "2022-08-15T12:35:00.872256719Z",
-     "backup": "2022-08-15T12:34:19Z",
-     "restore_to": "1662047446""
+     "name": "<restore_name>",
+     "backup": "<backup_name>",
+     "restore_to": Timestamp
      "type": "logical",
      "status": "done",
      "namespaces": [
-        "Invoices.*"
+        "<database.*>"
      ]
      "replsets": [
        {
          "name": "rs1",
          "status": "done",
-         "last_transition_time": "2022-09-01T18:54:12+03:00"
+         "last_transition_time": "Timestamp"
        },
        {
         "name": "rs0",
          "status": "done",
-         "last_transition_time": "2022-09-01T18:54:11+03:00"
+         "last_transition_time": "Timestamp"
        },
        {
          "name": "cfg",
          "status": "done",
-         "last_transition_time": "2022-09-01T18:54:12+03:00"
+         "last_transition_time": "Timestamp"
        }
      ],
      "opid": "62fa3d7460d0d259449f7061",
-     "start": "2022-09-01T18:54:07+03:00",
-     "last_transition_time": "2022-09-01T18:54:13+03:00"
+     "start": "Timestamp",
+     "last_transition_time": "Timestamp"
     }
+    ```
 
 ??? admonition "Physical restore status"
 
     ```json
     {
-     "name": "2022-08-15T11:14:55.683148162Z",
-     "backup": "2022-08-15T11:14:32Z",
+     "name": "<restore_name>",
+     "backup": "<backup_name>",
      "type": "physical",
      "status": "done",
      "replsets": [
        {
          "name": "rs1",
          "status": "done",
-         "last_transition_time": "2022-09-01T16:45:21+03:00",
+         "last_transition_time": "Timestamp",
          "nodes": [
            {
-             "name": "127.0.0.1:27017",
+             "name": "IP:port",
              "status": "done",
-             "last_transition_time": "2022-09-01T16:45:15+03:00"
+             "last_transition_time": "Timestamp"
            }
          ]
        }
      ],
      "opid": "62fa2aaf6e8356a773a0a357",
-     "start": "2022-09-01T16:43:54+03:00",
-     "last_transition_time": "2022-09-01T16:45:22+03:00"
+     "start": "Timestamp",
+     "last_transition_time": "Timestamp"
     }
     ```
 
@@ -445,7 +484,7 @@ The command accepts the following flags:
           "nodes": [
             {
               "host": "<replSet_name>/example.mongodb:27017",
-              "agent": "v1.6.0",
+              "agent": "<version>",
               "ok": true
             }
           ]
