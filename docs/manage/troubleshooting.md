@@ -4,8 +4,7 @@ Percona Backup for MongoDB provides troubleshooting tools to operate data backup
 
 ## pbm-speed-test
 
-**pbm-speed-test** allows field-testing compression and backup upload speed. You
-can use it:
+**pbm-speed-test** allows field-testing compression and backup upload speed of logical backups. You can use it:
 
 * to check performance before starting a backup;
 
