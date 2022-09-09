@@ -151,6 +151,7 @@ Provides the detailed information about a backup:
 - last write timestamp 
 - last transition time - the timestamp when a backup changed its status
 - cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
+- replica set info: name, backup status, last write timestamp and last transition time, `mongod` security options, if encryption is configured.
 
 The command has the following syntax:
 

@@ -1,10 +1,10 @@
 # Selective backup and restore
 
-!!! admonition "Version added: 2.0"
+!!! admonition "Version added: 2.0.0"
 
 !!! important
 
-    Selective backup and restore is the technical preview feature
+    Selective backup and restore is the technical preview feature [^1]
 
 You can back up and restore certain namespaces - databases or collections. For example, if your "Payments" collection in the "Staff" database was corrupted, you can restore only this collection from your full backup up to a specific point in time. Or, if your "Invoices" database contains sensitive data and must be backed up frequently, you can configure the backup of only this database. This way you work only with the desired subset of data without disrupting the operations of your whole cluster. 
 
@@ -103,7 +103,7 @@ pbm restore --base-snapshot <backup_name> --time <timestamp> \
 --ns <db.collection>
 ```
 
-You can specify the selective backup as the base snapshot for the Point-in-time restore. In this case, Percona Backup for MongoDB restores only the backed up namespace to the specified time.
+You can specify the selective backup as the base snapshot for the Point-in-time restore. In this case, Percona Backup for MongoDB restores only the namespace(s) included in this backup to the specified time.
 
 Alternatively, you can use a full backup snapshot and restore the desired namespaces (databases or collections) up to the specific time from it. Specify them as the comma-separated list for the `pbm restore` command.
 
@@ -117,4 +117,5 @@ When point-in-time recovery is started, Percona Backup for MongoDB uses the prov
 4.	System collections in ``admin``, ``config`` and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
 5.	Point-in-time recovery slicing requires a full backup because it serves as the base for point-in-time recovery. Any selective backup will be ignored.
 
+[^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.
 
