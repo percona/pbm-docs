@@ -83,6 +83,7 @@ Usage
 
    running
    point-in-time-recovery
+   selective-backup
    oplog-replay
 
 

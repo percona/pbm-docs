@@ -4,11 +4,9 @@
 
 Percona Backup for MongoDB supports physical and logical backups and restores. This document describes each type.
 
-!!! note
+*Physical* backup is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0, Percona backup for MongoDB also copies the WiredTiger storage options to the backup’s metadata. 
 
-    Physical backups and restores is the technical preview feature [^1]. Before using them in production, we recommend that you test restoring from physical backups in your environment, and also use an alternative backup method for redundancy.
-
-*Physical* backup is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Physical restore is the reverse process: `pbm-agents` shut down the `mongod` nodes, clean up the `dbPath` data directory and copy the physical files from the storage to it. Starting with version 2.0, Percona backup for MongoDB also copies the WiredTiger storage options to the backup’s metadata.
+Physical restore is the reverse process: `pbm-agents` shut down the `mongod` nodes, clean up the `dbPath` data directory and copy the physical files from the storage to it. During this process, the ``pbm-agents`` temporarily start the ``mongod`` nodes using the the WiredTiger storage options retrieved from the backup’s metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore this file is deleted. However, it remains for debugging if the restore failed. 
 
 During physical backups and restores, ``pbm-agents`` don’t export / import data from / to the database. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (multi-terabyte) databases.
 
@@ -31,5 +29,3 @@ Logical backups allow for point in time recovery.
 | **Logical**  | - Easy to operate with, using a single command <br> - Support for incremental backups and point-in-time recovery <br> - The backup size is smaller as it includes only the data | - Much slower than physical backup / restore <br> - Adds database overhead on reading and inserting the data|
 
 
-
-[^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.

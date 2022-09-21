@@ -173,9 +173,12 @@ Restoring a backup
 
 To restore a backup that you have made using |pbm-backup|, use the
 |pbm-restore| command supplying the time stamp of the backup that you intend to
-restore. Percona Backup for MongoDB identifies the type of the backup (physical or logical) and restores the database up to the backup completion time (available in pbm list output as of version 1.4.0).
+restore. Percona Backup for MongoDB identifies the type of the backup (physical or logical) and restores the database up to the backup completion time (available in ``pbm list`` output as of version 1.4.0).
 
-.. important::
+Logical restore
+^^^^^^^^^^^^^^^^
+
+.. important:: 
 
    Consider these important notes on restore operation:
 
@@ -183,9 +186,27 @@ restore. Percona Backup for MongoDB identifies the type of the backup (physical 
    2. Whilst the restore is running, prevent clients from accessing the database. The data will naturally be incomplete whilst the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
    3. If you enabled :term:`Point-in-Time Recovery`, disable it before running |pbm-restore|. This is because |PITR| incremental backups and restore are incompatible operations and cannot be run together.
 
+.. rubric:: Preconditions for the restore in sharded clusters
+
+As preconditions for restoring a backup in a sharded cluster, complete the following steps:
+
+1. Stop the balancer.
+2. Shut down all ``mongos`` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
+3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see :ref:`pitr`.
+
 .. code-block:: bash
 
    $ pbm restore 2019-06-09T07:03:50Z
+
+Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see :ref:`pbm.restore-new-env`.
+
+During the restore, the |pbm-agent| processes write data to primary nodes in the cluster. The following diagram shows the restore flow.
+
+.. image:: _images/pbm-restore-shard.png
+
+|
+
+After a cluster's restore is complete, restart all ``mongos`` nodes to reload the sharding metadata.
 
 .. rubric:: Adjust memory consumption
 
@@ -205,43 +226,24 @@ The default values were adjusted to fit the setups with the memory allocation of
 
   The lower the values, the less memory is allocated for the restore. However, the performance decreases too.
 
-Restoring a backup in sharded clusters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Physical restore
+^^^^^^^^^^^^^^^^
 
-.. important::
+During the **physical restore**, |pbm-agent| processes stop the ``mongod`` nodes, clean up the data directory and copy the data from the storage onto every node.
 
-   As preconditions for restoring a backup in a sharded cluster, complete the following steps:
+The following diagram shows the physical restore flow:
 
-   1. Stop the balancer.
-   2. Shut down all ``mongos`` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
-   3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see :ref:`pitr`.
+.. image:: _images/pbm-phys-restore-shard.png
+  
+After the restore is complete, do the following:
 
-Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see :ref:`pbm.restore-new-env`.
-
-During the restore, the |pbm-agent| processes write data to primary nodes in the cluster. The following diagram shows the restore flow.
-
-.. image:: _images/pbm-restore-shard.png
-
-|
-
-After a cluster's restore is complete, restart all ``mongos`` nodes to reload the sharding metadata.
-
-.. admonition:: Physical restore known limitations
-
-   Tracking restore progress via ``pbm status`` is currently not available during physical restores. To check the restore status, the options are:
-   
-   - Check the stderr logs of the leader |pbm-agent|. The leader ID is printed once the restore has started.
-   - Check the status in the metadata file created on the remote storage for the restore. This file is in the root of the storage path and has the format ``.pbm.restore/<restore_timestamp>.json``
+- Restart all ``mongod`` nodes
+- Restart all ``pbm-agents`` 
+- Run the following command to resync the backup list with the storage:
      
-   After the restore is complete, do the following:
+  .. code-block::
 
-   - Restart all ``mongod`` nodes
-   - Restart all ``pbm-agents`` 
-   - Run the following command to resync the backup list with the storage:
-     
-     .. code-block::
-
-        $ pbm config --force-resync
+     $ pbm config --force-resync
 
 .. _pbm.restore-new-env:
 
@@ -289,7 +291,40 @@ The ``--replset-remapping`` flag is available for the following commands: ``pbm 
 
 This ability to restore data to clusters with different replica set names and the number of shards extends the set of environments compatible for the restore.  
 
+.. _restore-status:
 
+View restore progress
+-----------------------------
+
+Starting with version 2.0, you can track the status of both physical and logical restores. This gives you a clear understanding of the restore progress so that you can react accordingly. 
+
+To view the restore status, run the ``pbm describe-restore`` command and specify the restore name. To track the progress of a physical restore, also specify the path to the |PBM| configuration file. Since ``mongod`` nodes are shut down during a physical restore, |PBM| uses the configuration file to read the restore status on storage.
+
+.. code-block:: bash
+
+   $ pbm describe-restore 2022-08-15T11:14:55.683148162Z -c pbm_config.yaml
+
+The output provides the following information:
+
+-  Restore name
+-  The name of the backup that the database was restored from
+-  Type
+-  Status
+-  opID
+-  The timestamp of the restore start
+-  Last transition time – the timestamp when the restore process changed its status
+-  The name of every replica set, its restore status and the last transition time 
+
+For physical backups only, the following additional information is provided:
+
+- The node name
+- Restore status on the node
+- Last transition time
+
+For PBM version 1.8.1 and earlier, tracking restore progress during physical restores is not available. To check the restore status, the options are:
+   
+- Check the stderr logs of the leader |pbm-agent|. The leader ID is printed once the restore has started.
+- Check the status in the metadata file created on the remote storage for the restore. This file is in the root of the storage path and has the format ``.pbm.restore/<restore_timestamp>.json``
 
 .. _pbm.cancel.backup:
 

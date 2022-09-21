@@ -84,7 +84,7 @@ sudo percona-release enable pbm release
 
 Building the project requires:
 
-* Go 1.15 or above
+* Go 1.19 or above
 * make
 * git
 * `krb5-devel` for Red Hat Enterprise Linux / CentOS or `libkrb5-dev` for Debian / Ubuntu. This package is required for Kerberos authentication in Percona Server for MongoDB.

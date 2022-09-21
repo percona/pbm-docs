@@ -183,6 +183,7 @@ The command accepts the following flags:
    .. code-block:: javascript
 
       {
+        "name": "<restore_name>"
         "snapshot": "<backup_name>"
       }
   
@@ -192,7 +193,8 @@ The command accepts the following flags:
    .. code-block:: javascript
 
       {
-        "point-in-time": "<backup_name>"
+        "name":"<restore_name>",
+        "point-in-time":"<backup_name>"
       }
 
 .. _cancel:       
@@ -227,16 +229,18 @@ The command accepts the following flags:
 pbm list
 =================
 
-Provides the list of backups. In versions 1.3.4 and earlier, the command lists all backups and their states. Backup states are the following:
+Provides the list of backups / restores. 
+
+As of version 1.4.0, only successfully completed backups and restores are listed. To view information about running and failed backups, run :ref:`status`.
+  
+When :ref:`PITR` is enabled, the ``pbm list`` also provides the list of valid time ranges for recovery and point-in-time recovery status. 
+
+In versions 1.3.4 and earlier, the command listed all backups and their states such as:
 
 - In progress - A backup is running
 - Canceled - A backup was canceled
 - Error - A backup was finished with an error
 - No status means a backup is complete
-
-As of version 1.4.0, only successfully completed backups are listed. To view currently running backup information, run :ref:`status`.
-  
-When :ref:`PITR` is enabled, the ``pbm list`` also provides the list of valid time ranges for recovery and point-in-time recovery status. 
 
 The command has the following syntax:
 
@@ -253,7 +257,7 @@ The command accepts the following flags:
    * - Flag
      - Description
    * - ``--restore``
-     - Shows last N restores.
+     - Shows last N restores. Starting with version 2.0, the output shows restore names instead of backup names, as multiple restores can be done from a single backup. 
    * - ``--size=0``
      - Shows last N backups.
    * - ``-o``, ``--out=text``
@@ -312,15 +316,21 @@ The command accepts the following flags:
           "status": "done",
           "type": "snapshot",
           "snapshot": "<backup_name>",
-          "name": "2021-07-26T10:08:54.0867213Z"
+          "name": "<restore_name>"
         },
         {
           "start": Timestamp,
           "status": "done",
-          "type": "pitr",
+          "type": "snapshot",
           "snapshot": "<backup_name>",
-          "point-in-time": Timestamp,
-          "name": "2021-07-26T11:09:53.7500545Z"
+          "name": "<restore_name>"
+        },
+        {
+          "start": Timestamp,
+          "status": "done",
+          "type": "snapshot",
+          "snapshot": "<backup_name>",
+          "name": "<restore_name>"
         }
       ]
 
@@ -401,6 +411,80 @@ The command accepts the following flags:
    * - ``-o``, ``--out=json``
      - Shows the output as either the plain text (default) or a JSON object. Supported values: ``text``, ``json``.
 
+.. _describe-restore:
+
+pbm describe-restore
+====================
+
+Shows the detailed information about the restore.
+
+The command has the following syntax:
+
+.. code-block:: bash
+
+   $ pbm describe-restore [<restore-timestamp>] [<flags>] 
+
+
+The command accepts the following flags:
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: 30 70
+
+   * - Flag
+     - Description
+   * - ``-c``, ``--config=CONFIG``
+     - Only for **physical restores**. Points |PBM| to a configuration file so it can read the restore status from the remote storage. For example, ``pbm describe-restore -c /etc/pbm/conf.yaml <restore-name>``
+   * - ``-o``, ``--out=text``
+     - Shows the output as either the plain text (default) or a JSON object. Supported values: ``text``, ``json``.
+ 
+.. admonition:: "Logical restore status"
+   :class: toggle
+
+   {
+     "name": "2022-08-15T12:35:00.872256719Z",
+     "backup": "2022-08-15T12:34:19Z",
+     "type": "logical",
+     "status": "done",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "last_transition_ts": 1660566907
+       }
+     ],
+     "opid": "62fa3d7460d0d259449f7061",
+     "start_ts": 1660566901,
+     "last_transition_ts": 1660566908
+   }
+
+.. admonition:: "Physical restore status"
+   :class: toggle
+
+   {
+     "name": "2022-08-15T11:14:55.683148162Z",
+     "backup": "2022-08-15T11:14:32Z",
+     "type": "physical",
+     "status": "done",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "last_transition_ts": 1660562141,
+         "nodes": [
+           {
+             "name": "127.0.0.1:27017",
+             "status": "done",
+             "last_transition_ts": 1660562136
+           }
+         ]
+       }
+     ],
+     "opid": "62fa2aaf6e8356a773a0a357",
+     "start_ts": 1660562097,
+     "last_transition_ts": 1660562146
+   }
+
 .. _version:
 
 pbm version
@@ -421,7 +505,7 @@ The command accepts the following flags:
    * - ``--commit``
      - Shows only git commit info
    * - ``-o``, ``--out=text``
-     - Shows the output as either plain text or a JSON object. Supported values: ``text``, ``json``
+     - Shows the output as either a plain text or a JSON object. Supported values: ``text``, ``json``
        
 .. admonition:: Version information
    :class: toggle
@@ -436,6 +520,71 @@ The command accepts the following flags:
         "BuildTime": "2021-07-28_15:24_UTC",
         "GoVersion": "go1.16.6"
       }
+
+.. _describe-backup:
+
+pbm describe-backup
+===================
+
+Provides the detailed information about a backup:
+
+- backup name
+- type
+- status
+- namespaces - what was backed up during a selective backup.
+- size
+- error message for failed backup
+- last write timestamp 
+- cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
+
+The command has the following syntax:
+
+.. code-block:: bash
+
+   $ pbm describe-backup [<backup-name>] [<flags>] 
+
+The command accepts the following flags:
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: auto
+
+   * - Flag
+     - Description
+   * - ``-o``, ``--out=text``
+     - Shows the status as either plain text or a JSON object. Supported values: text, json
+       
+.. admonition:: "JSON output"
+   :class: toggle
+
+   {
+     "name": "2022-08-17T10:49:03Z",
+     "type": "logical",
+     "last_write_ts": {
+       "T": 1660733348,
+       "I": 2
+     },
+     "namespaces": [
+       "flight.*"
+     ],
+     "mongodb_version": "5.0.10-9",
+     "pbm_version": "2.0.0",
+     "status": "done",
+     "size": 10234670,
+     "error": "",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "iscs": false,
+         "last_write_ts": {
+           "T": 1660733348,
+           "I": 2
+         },
+         "error": ""
+       }
+     ]
+   }
 
 .. _status:
 

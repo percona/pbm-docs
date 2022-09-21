@@ -88,6 +88,7 @@ The command accepts the following flags:
 | `--compression-level` | Configure the compression level from 0 to 10. The default value depends on the compression method used.  |
 | `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
+| `--ns="database.collection"`| Backs up the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. In version 2.0.0, only a single namespace is supported for the backup.|
 
 ??? "JSON output"
 
@@ -119,12 +120,14 @@ The command accepts the following flags:
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
+| `--ns="database.collection"`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns="database.*"`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, ns="db1.*,db2.coll2,db3.coll1,db3.collX"|
 
 ??? "Restore output"
 
     ```json
     {
-      "snapshot": "<backup_name>"
+       "name": "<restore_name>"
+       "snapshot": "<backup_name>"
     }
     ```
 
@@ -132,9 +135,67 @@ The command accepts the following flags:
 
     ```json
     {
-      "point-in-time": "<backup_name>"
+      "name":"<restore_name>",
+      "point-in-time":"<backup_name>"
     }
     ```
+
+## pbm describe-backup
+
+Provides the detailed information about a backup:
+
+- backup name
+- type
+- status
+- namespaces - what was backed up during a selective backup
+- size
+- error message for failed backup
+- last write timestamp 
+- last transition time - the timestamp when a backup changed its status
+- cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
+- replica set info: name, backup status, last write timestamp and last transition time, `mongod` security options, if encryption is configured.
+
+The command has the following syntax:
+
+```sh
+pbm describe-backup [<backup-name>] [<flags>] 
+```
+
+| Flag                  | Description                           |
+| --------------------- | ------------------------------------- |
+| `-o`, `--out=text`    | Shows the status as either plain text or a JSON object. Supported values: `text`, `json`|
+
+??? admonition "JSON output"
+
+    ```json
+    {
+     "name": "2022-08-17T10:49:03Z",
+     "type": "logical",
+     "last_write_ts": 1662047326,17
+     "last_transition_ts": "1662047337"
+     },
+     "namespaces": [
+       "flight.*"
+     ],
+     "mongodb_version": "5.0.10-9",
+     "pbm_version": "2.0.0",
+     "status": "done",
+     "size": 10234670,
+     "error": "",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "iscs": false,
+         "last_write_ts": 1662047326,17
+         "last_transition_ts": "1662047337"
+         },
+         "error": ""
+       }
+     ]
+    }
+    ```
+
 
 ## pbm cancel-backup
 
@@ -163,7 +224,7 @@ Provides the list of backups. In versions 1.3.4 and earlier, the command lists a
 * Error - A backup was finished with an error
 * No status means a backup is complete
 
-As of version 1.4.0, only successfully completed backups are listed. To view currently running backup information, run [`pbm status`](#pbm-status).
+As of version 1.4.0, only successfully completed backups are listed. To view currently information about a running or a failed backup, run [`pbm status`](#pbm-status).
 
 When Point-in-Time Recovery is enabled, the `pbm list` also provides the list of valid time ranges for recovery and point-in-time recovery status.
 
@@ -177,8 +238,8 @@ The command accepts the following flags:
 
 | Flag                | Description                      |
 | ------------------- | -------------------------------- |
-| `--restore`         | Shows last N restores.           |
-| `--size=0`          | Shows last N backups.            |
+| `--restore`         | Shows last N restores. Starting with version 2.0, the output shows restore names instead of backup names, as multiple restores can be done from a single backup.           |
+| `--size=0`          | Shows last N backups.  It also provides the information whether the restore is a selective one.         |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                 |
 | `--unbacked`        | Shows Point-in-Time Recovery oplog slices that were saved without the base backup snapshot. Available starting with version 1.8.0.|
 | `--replset-remapping` | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
@@ -222,25 +283,142 @@ The command accepts the following flags:
 
 ??? "Restore history"
  
+    Full restore 
+
     ```json
-    [
+     {
+        "start": Timestamp,
+        "status": "done",
+        "type": "snapshot",
+        "snapshot": "<backup_name>",
+        "name": "<restore_name>"
+      }
+    ```
+
+    Selective restore
+
+    ```json
       {
         "start": Timestamp,
         "status": "done",
         "type": "snapshot",
         "snapshot": "<backup_name>",
-        "name": "2021-07-26T10:08:54.0867213Z"
-      },
+        "name": "<restore_name>",
+        "namespaces": [
+          "<database.collection>"
+        ]
+      }
+    ```
+
+    Point-in-time restore
+
+    ```json
       {
         "start": Timestamp,
         "status": "done",
         "type": "pitr",
         "snapshot": "<backup_name>",
         "point-in-time": Timestamp,
-        "name": "2021-07-26T11:09:53.7500545Z"
+        "name": "<restore_name>"
+      }
+    ```
+
+    Selective point-in-time restore
+
+    ```json
+    {
+        "start": Timestamp,
+        "status": "done",
+        "type": "pitr",
+        "snapshot": "<backup_name>",
+        "point-in-time": Timestamp,
+        "name": "<restore_name>",
+        "namespaces": [
+          "<database.collection>"
+        ]
       }
     ]
     ```
+
+## pbm describe-restore
+
+Shows the detailed information about the restore.
+The command has the following syntax:
+
+```sh
+pbm describe-restore [<restore-timestamp>] [<flags>] 
+```
+
+The command accepts the following flags:
+
+| Flag                     | Description             |
+| ------------------------ | ----------------------- |
+| `-c`, `--config=CONFIG`  | Only for **physical restores**. Points Percona Backup for MongoDB to a configuration file so it can read the restore status from the remote storage. For example, `pbm describe-restore -c /etc/pbm/conf.yaml <restore-name>`.|
+| `-o`, `--out=TEXT`       | Shows the output as either the plain text (default) or a JSON object. Supported values: ``text``, ``json``.|
+
+??? admonition "Selective restore status"
+
+    ```json
+    {
+     "name": "<restore_name>",
+     "backup": "<backup_name>",
+     "restore_to": Timestamp
+     "type": "logical",
+     "status": "done",
+     "namespaces": [
+        "<database.*>"
+     ]
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "last_transition_time": "Timestamp"
+       },
+       {
+        "name": "rs0",
+         "status": "done",
+         "last_transition_time": "Timestamp"
+       },
+       {
+         "name": "cfg",
+         "status": "done",
+         "last_transition_time": "Timestamp"
+       }
+     ],
+     "opid": "62fa3d7460d0d259449f7061",
+     "start": "Timestamp",
+     "last_transition_time": "Timestamp"
+    }
+    ```
+
+??? admonition "Physical restore status"
+
+    ```json
+    {
+     "name": "<restore_name>",
+     "backup": "<backup_name>",
+     "type": "physical",
+     "status": "done",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "last_transition_time": "Timestamp",
+         "nodes": [
+           {
+             "name": "IP:port",
+             "status": "done",
+             "last_transition_time": "Timestamp"
+           }
+         ]
+       }
+     ],
+     "opid": "62fa2aaf6e8356a773a0a357",
+     "start": "Timestamp",
+     "last_transition_time": "Timestamp"
+    }
+    ```
+
 
 ## pbm delete-backup
 
@@ -274,7 +452,7 @@ The command accepts the following flags:
 | Flag                     | Description               |
 | ------------------------ | ------------------------- |
 | `-a`, `--all`            | Deletes all oplog         |
-| `--older-than=TIMESTAMP` | Deletes oplog slices older than date / time specified in the format: <br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2020-04-20) <br><br> When you specify a timestamp, Percona Backup for MongoDB rounds it down to align with the completion time of the closest backup snapshot and deletes oplog slices that precede this time. Thus, extra slices remain. This is done to ensure oplog continuity. To illustrate, the PITR time range is `2021-08-11T11:16:21 - 2021-08-12T08:55:25` and backup snapshots are: <br><br> `2021-08-12T08:49:46Z 13.49MB [complete: 2021-08-12T08:50:06]` <br> `2021-08-11T11:36:17Z 7.37MB [complete: 2021-08-11T11:36:38]`<br> <br> Say you specify the timestamp `2021-08-11T19:16:21`. The closest backup is `2021-08-11T11:36:17Z 7.37KB [complete: 2021-08-11T11:36:38]`. PBM rounds down the timestamp to `2021-08-11T11:36:38` and deletes all slices that precede this time. As a result, your PITR time range is `2021-08-11T11:36:38 - 2021-08-12T09:00:25`. <br><br> **NOTE**: Percona Backup for MongoDB doesn’t delete the oplog slices that follow the most recent backup. This is done to ensure point in time recovery from that backup snapshot. For example, if the snapshot is `2021-07-20T07:05:23Z [complete: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:45`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.|
+| `--older-than=TIMESTAMP` | Deletes oplog slices older than date / time specified in the format: <br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2020-04-20) <br><br> When you specify a timestamp, Percona Backup for MongoDB rounds it down to align with the completion time of the closest backup snapshot and deletes oplog slices that precede this time. Thus, extra slices remain. This is done to ensure oplog continuity. To illustrate, the PITR time range is `2021-08-11T11:16:21 - 2021-08-12T08:55:25` and backup snapshots are: <br><br> `2021-08-12T08:49:46Z 13.49MB [restore_to_time: 2021-08-12T08:50:06]` <br> `2021-08-11T11:36:17Z 7.37MB [restore_to_time: 2021-08-11T11:36:38]`<br> <br> Say you specify the timestamp `2021-08-11T19:16:21`. The closest backup is `2021-08-11T11:36:17Z 7.37KB [restore_to_time: 2021-08-11T11:36:38]`. PBM rounds down the timestamp to `2021-08-11T11:36:38` and deletes all slices that precede this time. As a result, your PITR time range is `2021-08-11T11:36:38 - 2021-08-12T09:00:25`. <br><br> **NOTE**: Percona Backup for MongoDB doesn’t delete the oplog slices that follow the most recent backup. This is done to ensure point in time recovery from that backup snapshot. For example, if the snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:45`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.|
 | `--force`                | Forcibly deletes oplog slices without asking a user’s confirmation  |
 | `-o`, `--out=json`       | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.   |
 
@@ -365,7 +543,7 @@ The command accepts the following flags:
           "nodes": [
             {
               "host": "<replSet_name>/example.mongodb:27017",
-              "agent": "v1.6.0",
+              "agent": "<version>",
               "ok": true
             }
           ]

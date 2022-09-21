@@ -69,11 +69,11 @@ The [`pbm list`](../reference/pbm-commands.md#pbm-list) output includes the foll
    ```sh
    pbm list
 
-     2021-08-04T13:00:58Z [complete: 2021-08-04T13:01:23Z]
-     2021-08-05T13:00:47Z [complete: 2021-08-05T13:01:11Z]
-     2021-08-06T08:02:44Z [complete: 2021-08-06T08:03:09Z]
-     2021-08-06T08:03:43Z [complete: 2021-08-06T08:04:08Z]
-     2021-08-06T08:18:17Z [complete: 2021-08-06T08:18:41Z]
+     2021-08-04T13:00:58Z [restore_to_time: 2021-08-04T13:01:23Z]
+     2021-08-05T13:00:47Z [restore_to_time: 2021-08-05T13:01:11Z]
+     2021-08-06T08:02:44Z [restore_to_time: 2021-08-06T08:03:09Z]
+     2021-08-06T08:03:43Z [restore_to_time: 2021-08-06T08:04:08Z]
+     2021-08-06T08:18:17Z [restore_to_time: 2021-08-06T08:18:41Z]
 
    PITR <off>:
      2021-08-04T13:01:24 - 2021-08-05T13:00:11
@@ -101,7 +101,7 @@ pbm restore --time="2020-12-14T14:27:04"
 
 Restoring to the point in time requires both a backup snapshot and oplog slices that can be replayed on top of this backup. The timestamp you specify for the restore must  be within the time ranges in the PITR section of `pbm list` output. Percona Backup for MongoDB automatically selects the most recent backup in relation to the specified timestamp and uses that as the base for the restore.
 
-To illustrate this behavior, let’s use the `pbm list` output from the previous example. For timestamp `2021-08-06T08:10:10`, the backup snapshot `2021-08-06T08:02:44Z [complete: 2021-08-06T08:03:09]` is used as the base for the restore as it is the most recent one.
+To illustrate this behavior, let’s use the `pbm list` output from the previous example. For timestamp `2021-08-06T08:10:10`, the backup snapshot `2021-08-06T08:02:44Z [restore_to_time: 2021-08-06T08:03:09]` is used as the base for the restore as it is the most recent one.
 
 If you [select a backup snapshot for the restore with the `–base-snapshot` option](#selecting-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.
 
@@ -146,10 +146,10 @@ To illustrate this, let’s take the following `pbm list` output:
 ```sh
 pbm list
 Backup snapshots:
-2021-07-20T03:10:59Z [complete: 2021-07-20T03:21:19Z]
-2021-07-21T22:27:09Z [complete: 2021-07-21T22:36:58Z]
-2021-07-24T23:00:01Z [complete: 2021-07-24T23:09:02Z]
-2021-07-26T17:42:04Z [complete: 2021-07-26T17:52:21Z]
+2021-07-20T03:10:59Z [restore_to_time: 2021-07-20T03:21:19Z]
+2021-07-21T22:27:09Z [restore_to_time: 2021-07-21T22:36:58Z]
+2021-07-24T23:00:01Z [restore_to_time: 2021-07-24T23:09:02Z]
+2021-07-26T17:42:04Z [restore_to_time: 2021-07-26T17:52:21Z]
 
 PITR <on>:
 2021-07-21T22:36:59-2021-07-22T12:20:23
@@ -167,7 +167,7 @@ Running `pbm delete-pitr` allows you to delete old and/or unnecessary slices and
 pbm delete-pitr --older-than 2021-07-20T10:01:18
 ```
 
-To enable point in time recovery from the most recent backup snapshot, Percona Backup for MongoDB does not delete slices that were made after that snapshot. For example, if the most recent snapshot is `2021-07-20T07:05:23Z [complete: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:44`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.
+To enable point in time recovery from the most recent backup snapshot, Percona Backup for MongoDB does not delete slices that were made after that snapshot. For example, if the most recent snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:44`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.
 
 !!! admonition ""
 
