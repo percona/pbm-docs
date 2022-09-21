@@ -120,6 +120,7 @@ nav:
       - "Start a backup" : "usage/start-backup.md"
       - usage/list-backup.md
       - usage/restore.md
+      - usage/restore-progress.md
       - usage/cancel-backup.md
       - usage/delete-backup.md
       - usage/logs.md
@@ -155,7 +156,7 @@ nav:
           - reference/backup-options.md
           - reference/restore-options.md
       - reference/glossary.md  
-  - Release Notes:
+  - Release notes:
       - release-notes.md
       - release-notes/2.0.0.md
       - release-notes/1.8.1.md
