@@ -89,7 +89,7 @@ plugins:
   with-pdf: # https://github.com/orzih/mkdocs-with-pdf
           output_path: '_pdf/PerconaBackupforMongoDB.pdf'
           cover_title: 'Percona Backup for MongoDB Documentation'
-          cover_subtitle: 1.8.1 (July 12, 2022)
+          cover_subtitle: 2.0.0 (September 15, 2022)
           author: 'Percona Technical Documentation Team'
           cover_logo: docs/_images/Percona_Logo_Color.png
           debug_html: false
@@ -120,6 +120,7 @@ nav:
       - "Start a backup" : "usage/start-backup.md"
       - usage/list-backup.md
       - usage/restore.md
+      - usage/restore-progress.md
       - usage/cancel-backup.md
       - usage/delete-backup.md
       - usage/logs.md
@@ -155,8 +156,9 @@ nav:
           - reference/backup-options.md
           - reference/restore-options.md
       - reference/glossary.md  
-  - Release Notes:
+  - Release notes:
       - release-notes.md
+      - release-notes/2.0.0.md
       - release-notes/1.8.1.md
       - release-notes/1.8.0.md
       - 'Percona Backup for MongoDB 1.7.0 (2022-04-18)': 'release-notes/1.7.0.md'
