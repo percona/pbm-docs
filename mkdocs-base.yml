@@ -121,6 +121,7 @@ nav:
          - usage/start-backup.md
          - usage/list-backup.md
          - usage/restore.md
+         - usage/restore-progress.md
          - usage/cancel-backup.md
          - usage/delete-backup.md
          - usage/logs.md
