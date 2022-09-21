@@ -117,14 +117,13 @@ nav:
       - Set up and configure:
           - initial-setup.md
   - Run PBM: 
-      - Start a backup: 
-         - usage/start-backup.md
-         - usage/list-backup.md
-         - usage/restore.md
-         - usage/restore-progress.md
-         - usage/cancel-backup.md
-         - usage/delete-backup.md
-         - usage/logs.md
+      - "Start a backup" : "usage/start-backup.md"
+      - usage/list-backup.md
+      - usage/restore.md
+      - usage/cancel-backup.md
+      - usage/delete-backup.md
+      - usage/logs.md
+      - usage/selective-backup.md
       - usage/point-in-time-recovery.md
       - usage/oplog-replay.md
   - Details:

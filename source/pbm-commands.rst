@@ -521,6 +521,71 @@ The command accepts the following flags:
         "GoVersion": "go1.16.6"
       }
 
+.. _describe-backup:
+
+pbm describe-backup
+===================
+
+Provides the detailed information about a backup:
+
+- backup name
+- type
+- status
+- namespaces - what was backed up during a selective backup.
+- size
+- error message for failed backup
+- last write timestamp 
+- cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
+
+The command has the following syntax:
+
+.. code-block:: bash
+
+   $ pbm describe-backup [<backup-name>] [<flags>] 
+
+The command accepts the following flags:
+
+.. list-table:: 
+   :header-rows: 1
+   :widths: auto
+
+   * - Flag
+     - Description
+   * - ``-o``, ``--out=text``
+     - Shows the status as either plain text or a JSON object. Supported values: text, json
+       
+.. admonition:: "JSON output"
+   :class: toggle
+
+   {
+     "name": "2022-08-17T10:49:03Z",
+     "type": "logical",
+     "last_write_ts": {
+       "T": 1660733348,
+       "I": 2
+     },
+     "namespaces": [
+       "flight.*"
+     ],
+     "mongodb_version": "5.0.10-9",
+     "pbm_version": "2.0.0",
+     "status": "done",
+     "size": 10234670,
+     "error": "",
+     "replsets": [
+       {
+         "name": "rs1",
+         "status": "done",
+         "iscs": false,
+         "last_write_ts": {
+           "T": 1660733348,
+           "I": 2
+         },
+         "error": ""
+       }
+     ]
+   }
+
 .. _status:
 
 pbm status
