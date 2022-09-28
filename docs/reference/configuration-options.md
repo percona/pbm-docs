@@ -154,18 +154,25 @@ Disables the TLS verification of the S3 storage. This allows Percona Backup for 
 ### serverSideEncryption.sseAlgorythm
 
 *Type*: string <br>
-*Required*: NO
+*Required*: YES (for SSC-E)
 
-The key management mode used for server-side encryption
+The key management mode used for server-side encryption. For [server-side encryption with customer-provided keys (SSE-C)](../details/storage-configuration.md#server-side-encryption), the value must be `AES256`.
 
-Supported value: `aws:kms`
+Supported value: `aws:kms`, `AES256`
 
 ### serverSideEncryption.kmsKeyID
 
 *Type*: string <br>
 *Required*: NO
 
-Your customer-managed key
+Your customer-managed key stored in the AWS KMS.
+
+### serverSideEncryption.sseCustomerKey
+
+*Type*: string <br>
+*Required*: YES
+
+Your custom encryption key. This key is not stored on the S3 storage side. Thus, it is your responsibility to track what data is encrypted with what key and for storing the key. 
 
 ## Upload retry options
 
