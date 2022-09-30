@@ -172,7 +172,7 @@ Your customer-managed key stored in the AWS KMS.
 ### serverSideEncryption.sseCustomerAlgorithm
 
 *Type*: string <br>
-*Required*: YES 
+*Required*: NO 
 
 The key management mode for [server-side encryption with customer-provided keys (SSE-C)](../details/storage-configuration.md#server-side-encryption).
 
@@ -181,7 +181,7 @@ Supported value: `AES256`
 ### serverSideEncryption.sseCustomerKey
 
 *Type*: string <br>
-*Required*: YES
+*Required*: NO
 
 Your custom encryption key. This key is not stored on the S3 storage side. Thus, it is your responsibility to track what data is encrypted with what key and for storing the key. 
 
