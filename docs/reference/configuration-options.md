@@ -30,6 +30,8 @@ storage:
     serverSideEncryption:
       sseAlgorithm: aws:kms
       kmsKeyID: <your-kms-key-here>
+      sseCustomerAlgorithm: AES256
+      sseCustomerKey: <your_encryption_key>
     retryer:
       numMaxRetries: 3
       minRetryDelay: 30
@@ -151,14 +153,14 @@ Disables the TLS verification of the S3 storage. This allows Percona Backup for 
 
 ## Server-side encryption options
 
-### serverSideEncryption.sseAlgorythm
+### serverSideEncryption.sseAlgorithm
 
 *Type*: string <br>
-*Required*: YES (for SSC-E)
+*Required*: NO 
 
-The key management mode used for server-side encryption. For [server-side encryption with customer-provided keys (SSE-C)](../details/storage-configuration.md#server-side-encryption), the value must be `AES256`.
+The key management mode used for server-side encryption with the encryption keys stored in AWS KMS.
 
-Supported value: `aws:kms`, `AES256`
+Supported value: `aws:kms`
 
 ### serverSideEncryption.kmsKeyID
 
@@ -166,6 +168,15 @@ Supported value: `aws:kms`, `AES256`
 *Required*: NO
 
 Your customer-managed key stored in the AWS KMS.
+
+### serverSideEncryption.sseCustomerAlgorithm
+
+*Type*: string <br>
+*Required*: YES 
+
+The key management mode for [server-side encryption with customer-provided keys (SSE-C)](../details/storage-configuration.md#server-side-encryption).
+
+Supported value: `AES256`
 
 ### serverSideEncryption.sseCustomerKey
 
