@@ -1,6 +1,6 @@
 # Schedule backups
 
-In Percona Backup for MongoDB version 1.4.1 and earlier, we recommend using `crond` or similar services to schedule backup snapshots.
+We recommend using `crond` or similar services to schedule backup snapshots.
 
 !!! important
 
