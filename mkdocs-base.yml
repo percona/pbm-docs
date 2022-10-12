@@ -139,6 +139,7 @@ nav:
   - Manage PBM:
       - Schedule backups: 
           - manage/schedule-backup.md
+      - 'Configure PBM remotely': 'manage/configure-remotely.md'
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Troubleshoot PBM': 'manage/troubleshooting.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
