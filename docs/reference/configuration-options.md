@@ -30,6 +30,8 @@ storage:
     serverSideEncryption:
       sseAlgorithm: aws:kms
       kmsKeyID: <your-kms-key-here>
+      sseCustomerAlgorithm: AES256
+      sseCustomerKey: <your_encryption_key>
     retryer:
       numMaxRetries: 3
       minRetryDelay: 30
@@ -151,12 +153,12 @@ Disables the TLS verification of the S3 storage. This allows Percona Backup for 
 
 ## Server-side encryption options
 
-### serverSideEncryption.sseAlgorythm
+### serverSideEncryption.sseAlgorithm
 
 *Type*: string <br>
-*Required*: NO
+*Required*: NO 
 
-The key management mode used for server-side encryption
+The key management mode used for server-side encryption with the encryption keys stored in AWS KMS.
 
 Supported value: `aws:kms`
 
@@ -165,7 +167,23 @@ Supported value: `aws:kms`
 *Type*: string <br>
 *Required*: NO
 
-Your customer-managed key
+Your customer-managed key stored in the AWS KMS.
+
+### serverSideEncryption.sseCustomerAlgorithm
+
+*Type*: string <br>
+*Required*: NO 
+
+The key management mode for [server-side encryption with customer-provided keys (SSE-C)](../details/storage-configuration.md#server-side-encryption).
+
+Supported value: `AES256`
+
+### serverSideEncryption.sseCustomerKey
+
+*Type*: string <br>
+*Required*: NO
+
+Your custom encryption key. This key is not stored on the S3 storage side. Thus, it is your responsibility to track what data is encrypted with what key and for storing the key. 
 
 ## Upload retry options
 

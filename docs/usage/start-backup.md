@@ -10,10 +10,6 @@ pbm backup --type=TYPE
 
 You can specify what type of a backup you wish to make: *physical* or *logical*.
 
-!!! note 
-
-    Physical backups is the tech preview feature [^1]. Before using them in production, we recommend that you test restoring from physical backups in your environment, and also use the alternative backup method for redundancy.
-
 When *physical* backup is selected, Percona Backup for MongoDB copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
 
 During *logical* backups, Percona Backup for MongoDB copies the actual data to the backup storage. When no `--type` flag is passed, Percona Backup for MongoDB makes a logical backup.
@@ -99,4 +95,3 @@ If you haven’t listed any nodes for the `priority` option in the config, the n
 
 This ability to adjust node priority helps you manage your backup strategy by selecting specific nodes or nodes from preferred data centers. In geographically distributed infrastructures, you can reduce network latency by making backups from nodes in geographically closest locations.
 
-[^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.

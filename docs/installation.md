@@ -19,23 +19,25 @@ After the installation completes, you have the following tools:
 | `pbm-agent`     | An agent for running backup/restore actions on a database host |
 | `pbm-speed-test`| An interface for field-testing compression and backup upload speed|
 
-Install **pbm-agent** on every server that has `mongod` nodes in the
-MongoDB cluster (or non-sharded replica set). 
+## What nodes to install on
 
-!!! note
-    
-    You don’t need to install **pbm-agent** on arbiter nodes since they don’t have the data set.
+### `pbm-agent`
+
+Install `pbm-agent` on all servers that have `mongod` nodes in the
+MongoDB cluster (or non-sharded replica set). You don't need to start it on the `arbiter` node, since it doesn’t have the data set.
+
+### `pbm` CLI
 
 You can install `pbm` CLI on any or all servers or desktop computers you wish to use it from, so long as those computers aren’t network-blocked from accessing the MongoDB cluster.
 
-## Installing from Percona repositories
+## Install from Percona repositories
 
 Use the package manager of your operating system to install Percona Backup for MongoDB:
 
 * `apt` - for Debian and Ubuntu Linux
 * `yum` - for Red Hat Enterprise Linux and compatible Linux derivatives
 
-Percona provides the `percona-release` configuration tool that simplifies operating repositories and enables to install and update both Percona Backup for MongoDB packages and required dependencies smoothly.
+Percona provides the [`percona-release`](https://www.percona.com/doc/percona-repo-config/index.html) configuration tool that simplifies operating repositories and enables to install and update both Percona Backup for MongoDB packages and required dependencies smoothly.
 
 !!! important
 
@@ -240,7 +242,7 @@ You can download Percona Backup for MongoDB from [Percona website](https://www.p
 
 * Download and install Percona Backup for MongoDB [from binary tarballs](#install-from-binary-tarball).
 
-### Install from binary tarball
+## Install from binary tarball
 
 Find the link to the binary tarballs under the **Generic Linux** menu item on [Percona website](https://www.percona.com/downloads/percona-backup-mongodb/).
 

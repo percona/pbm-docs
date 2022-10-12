@@ -151,6 +151,7 @@ Provides the detailed information about a backup:
 - size
 - error message for failed backup
 - last write timestamp 
+- last write time - human-readable indication of the last write 
 - last transition time - the timestamp when a backup changed its status
 - cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
 - replica set info: name, backup status, last write timestamp and last transition time, `mongod` security options, if encryption is configured.
@@ -169,30 +170,31 @@ pbm describe-backup [<backup-name>] [<flags>]
 
     ```json
     {
-     "name": "2022-08-17T10:49:03Z",
-     "type": "logical",
-     "last_write_ts": 1662047326,17
-     "last_transition_ts": "1662047337"
-     },
-     "namespaces": [
-       "flight.*"
-     ],
-     "mongodb_version": "5.0.10-9",
-     "pbm_version": "2.0.0",
-     "status": "done",
-     "size": 10234670,
-     "error": "",
-     "replsets": [
-       {
-         "name": "rs1",
-         "status": "done",
-         "iscs": false,
-         "last_write_ts": 1662047326,17
-         "last_transition_ts": "1662047337"
-         },
-         "error": ""
-       }
-     ]
+      "name": "<backup_name>",
+      "opid": "<string>",
+      "type": "logical",
+      "last_write_ts": Timestamp,
+      "last_transition_ts": Timestamp,
+      "last_write_time": "2022-09-30T14:02:49Z",
+      "last_transition_time": "2022-09-30T14:02:54Z",
+      "namespaces": [
+        "flight.booking"
+      ],
+      "mongodb_version": "<version>",
+      "pbm_version": "<version>",
+      "status": "done",
+      "size": 470805945,
+      "size_h": "449.0 MiB",
+      "replsets": [
+        {
+          "name": "<name>",
+          "status": "done",
+          "last_write_ts": Timestamp,
+          "last_transition_ts": Timestamp,
+          "last_write_time": "2022-09-30T14:02:49Z",
+          "last_transition_time": "2022-09-30T14:02:53Z"
+        }
+      ]
     }
     ```
 
@@ -343,6 +345,7 @@ The command accepts the following flags:
 ## pbm describe-restore
 
 Shows the detailed information about the restore.
+
 The command has the following syntax:
 
 ```sh
@@ -361,10 +364,12 @@ The command accepts the following flags:
     ```json
     {
      "name": "<restore_name>",
+     "opid": "string",
      "backup": "<backup_name>",
-     "restore_to": Timestamp
      "type": "logical",
      "status": "done",
+     "ts_to_restore": Timestamp,
+     "time_to_restore": "Time",
      "namespaces": [
         "<database.*>"
      ]
@@ -372,22 +377,21 @@ The command accepts the following flags:
        {
          "name": "rs1",
          "status": "done",
-         "last_transition_time": "Timestamp"
+         "last_transition_ts": Timestamp,
+         "last_transition_time": "Time"
        },
        {
         "name": "rs0",
-         "status": "done",
-         "last_transition_time": "Timestamp"
+         "last_transition_ts": Timestamp,
+         "last_transition_time": "Time"
        },
        {
          "name": "cfg",
          "status": "done",
-         "last_transition_time": "Timestamp"
+         "last_transition_ts": Timestamp,
+         "last_transition_time": "Time"
        }
      ],
-     "opid": "62fa3d7460d0d259449f7061",
-     "start": "Timestamp",
-     "last_transition_time": "Timestamp"
     }
     ```
 
@@ -396,26 +400,28 @@ The command accepts the following flags:
     ```json
     {
      "name": "<restore_name>",
+     "opid": "string",
      "backup": "<backup_name>",
      "type": "physical",
      "status": "done",
+     "last_transition_ts": Timestamp,
+     "last_transition_time": "Time",
      "replsets": [
        {
          "name": "rs1",
          "status": "done",
+         "last_transition_ts": Timestamp,
          "last_transition_time": "Timestamp",
          "nodes": [
            {
              "name": "IP:port",
              "status": "done",
+             "last_transition_ts": Timestamp,
              "last_transition_time": "Timestamp"
            }
          ]
        }
      ],
-     "opid": "62fa2aaf6e8356a773a0a357",
-     "start": "Timestamp",
-     "last_transition_time": "Timestamp"
     }
     ```
 
@@ -582,7 +588,9 @@ The command accepts the following flags:
 | `-e`, `--event=EVENT`   | Shows logs filtered by a specified event. Supported events:<br> - backup<br> - restore <br> - resyncBcpList <br> - pitr <br> - pitrestore <br> - delete <br>  |
 | `-o`, `--out=text`      | Shows log information as text (default) or in JSON format. <br> Supported values: `text`, `json` |
 | `-n`, `--node=NODE`     | Shows logs for a specified node or a replica set.<br> Specify the node in the format `replset[/host:port]` |
+| `-f`, `--follow`        | Follow log output. Allow to view the logs dynamically |
 | `-s`, `--severity=I`    | Shows logs filtered by severity level.<br> Supported levels are (from low to high): D - Debug, I - Info (default), W - Warning, E - Error, F - Fatal.<br><br> The output includes both the specified severity level and all higher ones |
+| `--timezone`=TIMEZONE   | Timezone of the log output. <br>Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (e.g. `America/New_York`)
 | `-i`, `--opid=OPID`     | Show logs for an operation in progress. The operation is identified by the OpID |
 | `-x`, `--extra`         | Show extra data in the text format |
 
