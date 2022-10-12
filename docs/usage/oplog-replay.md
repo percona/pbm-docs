@@ -1,5 +1,6 @@
 # Point-in-time recovery oplog replay
 
+
 !!! admonition "Version added: 1.7.0"
 
 You can replay the [oplog](../reference/glossary.md#oplog) for a specific period on top of any backup: logical, physical, storage level snapshot (like EBS-snapshot). Starting with version 1.8.0, you can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the `pitr.oplogOnly` configuration parameter:
@@ -55,3 +56,4 @@ Storage-level snapshots are saved with point-in-time recovery enabled. Thus, aft
 ### Known limitations
 
 The oplog replay fails if you rename the entire database or a collection.
+
