@@ -66,19 +66,11 @@ The default values were adjusted to fit the setups with the memory allocation of
 
     The MongoDB version for both backup and restore data must be within the same major release.
 
-During the physical restore, pbm-agent processes stop the mongod nodes, clean up the data directory and copy the data from the storage onto every node.
+During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node.
 
 The following diagram shows the physical restore flow:
 
 ![image](../_images/pbm-phys-restore-shard.png)
-
-### Physical restore known limitations
-
-Tracking restore progress via `pbm status` is currently not available during physical restores. To check the restore status, the options are:
-
-* Check the stderr logs of the leader `pbm-agent`. The leader ID is printed once the restore has started.
-
-* Check the status in the metadata file created on the remote storage for the restore. This file is in the root of the storage path and has the format `.pbm.restore/<restore_timestamp>.json`
 
 After the restore is complete, do the following:
 
@@ -90,7 +82,24 @@ After the restore is complete, do the following:
 
  ```
  $ pbm config --force-resync
- ```       
+ ``` 
+
+### Tracking restore progress
+
+You can [track physical restore progress](restore-progress.md) in Percona Backup for MongoDB version 2.0.0 and higher. 
+
+For Percona Backup for MongoDB 1.8.1 and lower, the options to track the restore progress are:
+
+* Check the stderr logs of the leader `pbm-agent`. The leader ID is printed once the restore has started.
+
+* Check the status in the metadata file created on the remote storage for the restore. This file is in the root of the storage path and has the format `.pbm.restore/<restore_timestamp>.json`
+
+
+### Physical restore known limitations
+
+Physical restores are not supported for deployments with arbiter nodes. 
+
+      
 
 ### Physical restores with data-at-rest encryption
 
