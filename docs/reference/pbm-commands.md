@@ -582,7 +582,9 @@ The command accepts the following flags:
 | `-e`, `--event=EVENT`   | Shows logs filtered by a specified event. Supported events:<br> - backup<br> - restore <br> - resyncBcpList <br> - pitr <br> - pitrestore <br> - delete <br>  |
 | `-o`, `--out=text`      | Shows log information as text (default) or in JSON format. <br> Supported values: `text`, `json` |
 | `-n`, `--node=NODE`     | Shows logs for a specified node or a replica set.<br> Specify the node in the format `replset[/host:port]` |
+| `-f`, `--follow`        | Follow log output. Allow to view the logs dynamically |
 | `-s`, `--severity=I`    | Shows logs filtered by severity level.<br> Supported levels are (from low to high): D - Debug, I - Info (default), W - Warning, E - Error, F - Fatal.<br><br> The output includes both the specified severity level and all higher ones |
+| `--timezone`=TIMEZONE   | Timezone of the log output. <br>Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (e.g. `America/New_York`)
 | `-i`, `--opid=OPID`     | Show logs for an operation in progress. The operation is identified by the OpID |
 | `-x`, `--extra`         | Show extra data in the text format |
 
