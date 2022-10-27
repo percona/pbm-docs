@@ -6,8 +6,7 @@ Both Percona Backup for MongoDB and `mongodump` are ‘logical’ backup solutio
 
 
 * make consistent backups and restores in sharded clusters
-
-
+* backup / restore both the whole data set and specific namespaces - databases and collections (See [Selective backup and restore](usage/selective-backup.md) for more information)
 * restore your database to a specific point in time
 
 
@@ -17,11 +16,11 @@ Both Percona Backup for MongoDB and `mongodump` are ‘logical’ backup solutio
 
 `pbm-agents` use UTC time zone by design. The reason behind this is to avoid user misunderstandings when replica set / cluster nodes are distributed geographically in different time zones.
 
+Starting with version 2.0.1, you can change the time zone for ``pbm logs`` output.
+
 ## Can I restore a single collection with Percona Backup for MongoDB?
 
-No, Percona Backup for MongoDB makes backups of and restores the whole state of a replica set / sharded cluster.
-
-If single-collection restores are your primary requirement and you are not using a sharded cluster, or the sharded cluster is only 2 or 3 shards, we recommend using `-d` and `-c` options with `mongodump` and/or `mongorestore`. As `mongodump`/`mongorestore` connects directly to the primary (in a non-sharded replica set) or via a `mongos` node in a cluster, it sees the cluster as if it were a single node, making it simple. `mongodump`/`mongorestore` work in a single process, so if you aren’t reinserting to many shards, the lack of parallelization won’t be too bad.
+Yes. Starting with version 2.0.0, you can restore a single collection with Percona Backup for MongoDB. This functionality is available for logical backups and restores only. To learn more, see [Selective backup and restore](usage/selective-backup.md).
 
 ## Can I backup specific shards in a cluster?
 
