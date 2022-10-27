@@ -82,7 +82,7 @@ plugins:
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   macros:
       include_yaml:
-#        - 'variables.yml' # Use in markdown as '{{ VAR }}'
+        - 'variables.yml' # Use in markdown as '{{ VAR }}'
 # exclude: # Don't process these files
 #      glob:
 #         - file.md

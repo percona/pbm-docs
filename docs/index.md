@@ -4,9 +4,9 @@ Percona Backup for MongoDB is an open-source, distributed and low-impact solutio
 
 As of version 1.7.0, Percona Backup for MongoDB supports both [physical and logical backups and restores](details/backup-types.md). [Point-in-Time recovery](usage/point-in-time-recovery.md) is currently supported only for logical backups.
 
-!!! note
+!!! note ""
 
-    Physical backups and restores is the technical preview feature [^1]. Before using them in production, we recommend that you test restoring from physical backups in your environment, and also use an alternative backup method for redundancy.
+    This is the documentation for the latest release, **PBM {{release}}** ([Release Notes](release-notes/{{release}}.md)).
 
 ## Why Percona Backup for MongoDB?
 
