@@ -125,8 +125,10 @@ nav:
       - usage/delete-backup.md
       - usage/logs.md
       - usage/selective-backup.md
+      - usage/incremental-backup.md
       - usage/point-in-time-recovery.md
       - usage/oplog-replay.md
+
   - Details:
       - Architecture:
           - details/architecture.md
