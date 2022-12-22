@@ -160,7 +160,8 @@ nav:
           - reference/restore-options.md
       - reference/glossary.md  
   - Release notes:
-      - release-notes.md
+      - "Release notes index": "release-notes.md"
+      - release-notes/2.0.3.md
       - release-notes/2.0.2.md
       - release-notes/2.0.1.md
       - release-notes/2.0.0.md
