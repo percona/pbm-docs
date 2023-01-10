@@ -3,7 +3,7 @@
 site_name: Percona Backup for MongoDB
 site_description: Documentation
 site_author: Percona LLC
-copyright: Percona LLC, &#169; 2022
+copyright: Percona LLC, &#169; 2023
 
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
@@ -89,7 +89,7 @@ plugins:
   with-pdf: # https://github.com/orzih/mkdocs-with-pdf
           output_path: '_pdf/PerconaBackupforMongoDB.pdf'
           cover_title: 'Percona Backup for MongoDB Documentation'
-          cover_subtitle: 2.0.2 (October 27, 2022)
+          cover_subtitle: 2.0.3 (January 11, 2023)
           author: 'Percona Technical Documentation Team'
           cover_logo: docs/_images/Percona_Logo_Color.png
           debug_html: false
