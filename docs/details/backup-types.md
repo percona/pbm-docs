@@ -23,9 +23,9 @@ Physical backups and restores are available for Percona Server for MongoDB start
 
 Logical backups allow for point in time recovery. 
 
-| **Type**     | **Advantages**      | **Disadvantages** |
-| : ---------- | ------------------- | ----------------- |
-| **Physical** | - Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point in time recovery is not supported |
-| **Logical**  | - Easy to operate with, using a single command <br> - Support for incremental backups and point-in-time recovery <br> - The backup size is smaller as it includes only the data | - Much slower than physical backup / restore <br> - Adds database overhead on reading and inserting the data|
+| **Type**     | **Advantages**      | **Disadvantages** | **Supported deployments**|
+| : ---------- | ------------------- | ----------------- | --------------- | 
+| **Physical** | - Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point in time recovery is not supported | Sharded clusters and non-sharded replica sets | 
+| **Logical**  | - Easy to operate with, using a single command <br> - Support for point-in-time recovery <br> - The backup size is smaller as it includes only the data | - Much slower than physical backup / restore <br> - Adds database overhead on reading and inserting the data| Sharded clusters and non-sharded replica sets | 
 
 
