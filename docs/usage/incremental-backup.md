@@ -30,9 +30,8 @@ The incremental backup history looks like this:
 Snapshots:
     2022-11-25T14:13:43Z 139.82MB <incremental> [restore_to_time: 2022-11-25T14:13:45Z]
     2022-11-25T14:02:07Z 255.20MB <incremental> [restore_to_time: 2022-11-25T14:02:09Z]
-    2022-11-25T14:00:22Z 2.28MB <incremental> [restore_to_time: 2022-11-25T14:00:24Z]
-    2022-11-24T14:45:53Z 2.46MB <physical> [restore_to_time: 2022-11-24T14:45:55Z]
-    2022-11-23T16:15:20Z 883.51KB <incremental> [restore_to_time: 2022-11-23T16:15:22Z]
+    2022-11-25T14:00:22Z 228.30GB <incremental> [restore_to_time: 2022-11-25T14:00:24Z]
+    2022-11-24T14:45:53Z 220.13GB <physical> [restore_to_time: 2022-11-24T14:45:55Z]
 ```
 
 ## Restore from incremental backups

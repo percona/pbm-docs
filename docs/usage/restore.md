@@ -9,7 +9,6 @@
 To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](incremental-backup.md)) and restores the database up to the [backup completion time](../reference/glossary.md#completion-time) (available in `pbm list` output as of version 1.4.0).
 
 
-
 ## Logical restore
 
 !!! important 
