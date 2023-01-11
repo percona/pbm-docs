@@ -111,11 +111,12 @@ When point-in-time recovery is started, Percona Backup for MongoDB uses the prov
 
 ## Known limitations of selective backups and restores
 
-1. Only logical backups and restores are supported
-2. Sharding is not supported.
-3. Multiple namespaces are not yet supported for selective backups. Though you can specify several namespaces for the restore (e.g., restore several collections of a database).
-4.	System collections in ``admin``, ``config`` and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
-5.	Point-in-time recovery slicing requires a full backup because it serves as the base for point-in-time recovery. Any selective backup will be ignored.
+1. Only **logical** backups and restores are supported
+2. Selective backups and restores are supported in sharded clusters for unsharded collections starting with version 2.0.3. Sharded collections are not yet supported.
+3. Multiple namespaces are not yet supported for selective backups. However, you can specify several namespaces for the restore (e.g., restore several collections of a database).
+4. Multi-collection transactions are not yet supported for selective restore.
+5. System collections in ``admin``, ``config`` and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
+6.	Point-in-time recovery slicing requires a full backup because it serves as the base for point-in-time recovery. Any selective backup will be ignored.
 
 [^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.
 
