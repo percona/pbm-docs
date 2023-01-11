@@ -6,8 +6,7 @@
 
     The recommended approach is to make a fresh backup after upgrading Percona Backup for MongoDB to version 1.5.0.
 
-To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the time stamp of the backup that you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical or logical) and restores the database up to the [backup completion time](../reference/glossary.md#completion-time) (available in `pbm list` output as of version 1.4.0).
-
+To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](incremental-backup.md)) and restores the database up to the [backup completion time](../reference/glossary.md#completion-time) (available in `pbm list` output as of version 1.4.0).
 
 
 ## Logical restore
@@ -30,7 +29,7 @@ As preconditions for restoring from a backup in a sharded cluster, complete the 
 
 2. Shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
 
-3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see Point-in-Time Recovery.
+3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-Time Recovery](point-in-time-recovery.md).
 
 ```sh
 pbm restore 2019-06-09T07:03:50Z

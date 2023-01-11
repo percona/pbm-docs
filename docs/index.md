@@ -14,9 +14,11 @@ As of version 1.7.0, Percona Backup for MongoDB supports both [physical and logi
 
     * [Logical backups and restores](usage/start-backup.md)
     * [Physical (a.k.a. ‘hot’) backup and restore](details/backup-types.md). Available with Percona Server for MongoDB 4.2.15-16, 4.4.6-8, 5.0.2-1 and higher
+    * [Incremental physical backups](usage/incremental-backup.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature)). Available with Percona Server for MongoDB.
     * [Point-in-time recovery](usage/point-in-time-recovery.md) (for logical backups only)
-    * [Manual point-in-time recovery for any type of backup](usage/oplog-replay.md) (the technical preview feature [^1])
-    * [Selective logical backups and restores](usage/selective-backup.md)
+    * [Manual point-in-time recovery for any type of backup](usage/oplog-replay.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature))
+    * [Selective logical backups and restores](usage/selective-backup.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature))
+
 
 * [Works for both sharded clusters and non-sharded replica sets](deployments.md)
 * [Simple command-line management utility](reference/pbm-commands.md)
