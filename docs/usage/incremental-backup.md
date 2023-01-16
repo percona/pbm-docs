@@ -1,6 +1,6 @@
 # Incremental physical backups
 
-!!! admonition "Version added: 2.3.0"
+!!! admonition "Version added: 2.0.3"
 
 When owners of large datasets need to backup data frequently, making full physical backups every time is costly in terms of storage space. To optimize backup schemes and reduce storage costs, use incremental physical backups, available in Percona Backup for MongoDB starting with version 2.0.3. During incremental backups, Percona Backup for MongoDB saves only the data that was changed after the previous backup was taken. This results in faster backup / restore performance. Since incremental backups are smaller in size, you also save on storage costs.
 
