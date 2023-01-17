@@ -1,8 +1,6 @@
 # Percona Backup for MongoDB Documentation
 
-Percona Backup for MongoDB is an open-source, distributed and low-impact solution for consistent backups of [MongoDB sharded clusters and replica sets](deployments.md).
-
-As of version 1.7.0, Percona Backup for MongoDB supports both [physical and logical backups and restores](details/backup-types.md). [Point-in-Time recovery](usage/point-in-time-recovery.md) is currently supported only for logical backups.
+Percona Backup for MongoDB is an open-source, distributed and low-impact solution for consistent backups of [MongoDB sharded clusters and replica sets](deployments.md). It enables you to make logical, physical, incremental and selective backups and restores. [Point-in-Time recovery](usage/point-in-time-recovery.md) functionality allows you to recover your database to a specific timestamp.
 
 !!! note ""
 
@@ -15,8 +13,8 @@ As of version 1.7.0, Percona Backup for MongoDB supports both [physical and logi
     * [Logical backups and restores](usage/start-backup.md)
     * [Physical (a.k.a. ‘hot’) backup and restore](details/backup-types.md). Available with Percona Server for MongoDB 4.2.15-16, 4.4.6-8, 5.0.2-1 and higher
     * [Incremental physical backups](usage/incremental-backup.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature)). Available with Percona Server for MongoDB.
-    * [Point-in-time recovery](usage/point-in-time-recovery.md) (for logical backups only)
-    * [Manual point-in-time recovery for any type of backup](usage/oplog-replay.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature))
+    * [Point-in-time recovery](usage/point-in-time-recovery.md)
+    * [Manual point-in-time recovery for any type of backup](usage/oplog-replay.md)
     * [Selective logical backups and restores](usage/selective-backup.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature))
 
 
