@@ -4,8 +4,6 @@ INHERIT: mkdocs-base.yml
 
 site_url: "https://docs.percona.com/percona-backup-mongodb/"
 
-plugins:
-    section-index: {} # Adds links to nodes - comment out when creating PDF
 
 theme:
   name: material
@@ -17,16 +15,12 @@ theme:
     - search.highlight
     - navigation.top
     - navigation.tracking 
-    - content.tabs.link   
+    - content.tabs.link
+    - content.action.edit
+    - content.action.view
+    - content.code.copy      
 
-# Extensions
 
-  markdown_extensions:
-  - pymdownx.snippets:
-      auto_append:
-        - includes/abbreviations.md
-
-  
 #Google Analytics configuration 
 extra:
   analytics:
