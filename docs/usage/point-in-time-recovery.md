@@ -2,25 +2,28 @@
 
 !!! admonition "Version added: 1.3.0"
 
-!!! important
+Point-in-time recovery is restoring a database up to a specific timestamp. Point-in-time recovery includes restoring the data from a backup snapshot and replaying all events that occurred to this data up to a specified time from [oplog slices](../reference/glossary.md#oplog-slice). Point-in-time recovery helps you prevent data loss during a disaster such as crashed database, accidental data deletion or drop of tables, unwanted update of multiple fields instead of a single one.
 
-    Point-in-time recovery is supported for *logical* backups only.
+To enable point-in-time recovery, set the `pitr.enabled` configuration option.
 
-Point-in-time recovery is restoring a database up to a specific moment. Point-in-time recovery includes restoring the data from a backup snapshot and replaying all events that occurred to this data up to a specified moment from [oplog slices](../reference/glossary.md#oplog-slice). Point-in-time recovery helps you prevent data loss during a disaster such as crashed database, accidental data deletion or drop of tables, unwanted update of multiple fields instead of a single one.
+=== "Command line"
 
-Point-in-time recovery is enabled via the `pitr.enabled` config option.
+     ```sh
+     pbm config --set pitr.enabled=true
+     ```
 
-```sh
-pbm config --set pitr.enabled=true
-```
+=== "Configuration file"
+
+     ```yaml
+     pitr:
+       enabled: true
+     ```
 
 ## Oplog slicing
 
-When point-in-time recovery is enabled, `pbm-agent` periodically saves consecutive slices of the [oplog](../reference/glossary.md#oplog). A method similar to the way replica set nodes elect a new primary is used to select the `pbm-agent` that saves the oplog slices. (Find more information in [pbm-agent](../details/architecture.md#pbm-agent).)
+When point-in-time recovery is enabled, the `pbm-agent` periodically saves consecutive slices of the [oplog](../reference/glossary.md#oplog). A method similar to the way replica set nodes elect a new primary is used to select the `pbm-agent` that saves the oplog slices. (Find more information in [pbm-agent](../details/architecture.md#pbm-agent).)
 
-To start saving oplog, Percona Backup for MongoDB requires a backup snapshot. Therefore, make sure  a backup exists when enabling point-in-time recovery.
-
-By default, a slice covers a 10 minute span of oplog events. It can be shorter if point-in-time recovery is disabled or interrupted by the start of a backup snapshot operation.
+To start saving oplog, Percona Backup for MongoDB requires a backup snapshot. Therefore, make sure that a backup exists when you enable point-in-time recovery.
 
 !!! important
 
@@ -30,11 +33,22 @@ By default, a slice covers a 10 minute span of oplog events. It can be shorter i
 
 !!! admonition "Version added: 1.6.0"
 
+By default, a slice covers a 10 minute span of oplog events. It can be shorter if point-in-time recovery is disabled or interrupted by the start of a backup snapshot operation.
+
 You can change the duration of an oplog span via the configuration file. Specify the new value (in minutes) for the `pitr.oplogSpanMin` option.
 
-```sh
-pbm config --set pitr.oplogSpanMin=5
-```
+=== "Command line"
+
+     ```sh
+     pbm config --set pitr.oplogSpanMin=5
+     ```
+
+=== "Configuration file"
+
+     ```yaml
+     pitr:
+       oplogSpanMin: 5
+     ```
 
 If you set the new duration when the `pbm-agent` is making an oplog slice, the slice’s span is updated right away.
 
@@ -46,9 +60,18 @@ If the new duration is shorter, this triggers the `pbm-agent` to make a new slic
 
 The oplog slices are saved with the `s2` compression method by default. You can specify a different compression method via the configuration file. Specify the new value for the `pitr.compression` option.
 
-```sh
-pbm config --set pitr.compression=gzip
-```
+=== "Command line"
+
+     ```sh
+     pbm config --set pitr.compression=gzip
+     ```
+
+=== "Configuration file"
+
+     ```yaml
+     pitr:
+       compression: gzip
+     ```
 
 Supported compression methods are: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`.
 
@@ -93,6 +116,8 @@ A restore and point-in-time recovery oplog slicing are incompatible operations a
 pbm config --set pitr.enabled=false
 ```
 
+### From logical backups 
+
 Run [`pbm restore`](../reference/pbm-commands.md#pbm-restore) and specify the timestamp from the valid range:
 
 ```sh
@@ -121,7 +146,7 @@ Re-enable point-in-time recovery to resume saving oplog slices:
 pbm config --set pitr.enabled=true
 ```
 
-### Selecting a backup snapshot for the restore
+#### Selecting a backup snapshot for the restore
 
 !!! admonition "Version added: 1.6.0"
 
@@ -129,11 +154,44 @@ You can recover your database to the specific point in time using any backup sna
 
 To restore from any backup snapshot, Percona Backup for MongoDB requires continuous oplog. After the backup snapshot is made and point-in-time recovery is re-enabled, it copies the oplog saved with the backup snapshot and creates oplog slices from the end time of the latest slice to the new starting point thus making the oplog continuous.
 
+### From physical backups
+
+Making a point-in-time restore from a physical backup consists of two steps: firstly, restore the backup snapshot and then replay oplog events on top of it up to a specific timestamp.
+
+!!! tip
+
+    If you make only physical backup snapshots, set the `pitr.oplogOnly=true` configuration parameter to start oplog slicing without the mandatory logical base snapshot. 
+
+
+To restore the backup snapshot, run the `pbm restore` command specifying the backup name:
+
+```sh
+pbm restore <backup_name>
+```
+
+To replay the oplog to the particular timestamp, do the following:
+ 
+ 1. Stop oplog slicing, if enabled, to release the lock.
+
+ 2. Run `pbm status` or `pbm list` commands to find oplog chunks available for replay.
+
+ 3. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps. Specify the `--start` timestamp at least 1 sec before the `restore_to_time` value for the backup snapshot that you restored.
+
+     ```sh
+     pbm oplog-replay --start="<timestamp>" --end="<timestamp>"
+     ```
+
+ 4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
+
+!!! admonition "See also"
+
+    [Replay oplog from arbitrary start time](oplog-replay.md)
+
 ## Delete backups
 
 !!! admonition "Version added: 1.6.0"
 
-Backup snapshots and incremental backups (oplog slices) are deleted using separate commands: [`pbm delete-backup`](../reference/pbm-commands.md#pbm-delete-backup) and [`pbm delete-pitr`](../reference/pbm-commands.md#pbm-delete-pitr) respectively.
+Backup snapshots and oplog slices are deleted using separate commands: [`pbm delete-backup`](../reference/pbm-commands.md#pbm-delete-backup) and [`pbm delete-pitr`](../reference/pbm-commands.md#pbm-delete-pitr) respectively.
 
 ### Delete backup snapshots
 
