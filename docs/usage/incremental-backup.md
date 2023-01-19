@@ -2,13 +2,15 @@
 
 !!! admonition "Version added: 2.0.3"
 
-When owners of large datasets need to backup data frequently, making full physical backups every time is costly in terms of storage space. To optimize backup schemes and reduce storage costs, use incremental physical backups, available in Percona Backup for MongoDB starting with version 2.0.3. During incremental backups, Percona Backup for MongoDB saves only the data that was changed after the previous backup was taken. This results in faster backup / restore performance. Since incremental backups are smaller in size, you also save on storage costs.
+Owners of large datasets may need to backup data frequently. Making full physical backups every time is costly in terms of storage space. Incremental physical backups come handy in this scenario, enabling you to optimize backup strategy and reduce storage costs.
+
+During incremental backups, Percona Backup for MongoDB saves only the data that was changed after the previous backup was taken. This results in faster backup / restore performance. Since incremental backups are smaller in size compared to full backups, you also save on costs for their storage and transfer in case of cloud deployments.
 
 ## Considerations
 
 * This is a [tech preview feature](../reference/glossary.md#technical-preview-feature). We recommend using it only for testing purposes. 
 
-* Incremental backup implementation is based on the [`$backupCursor`](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) aggregation stage that is available in only Percona Server for MongoDB. Therefore, you must be running Percona Server for MongoDB in your deployment to use incremental physical backups.
+* Incremental backup implementation is based on the [`$backupCursor`](https://docs.percona.com/percona-server-for-mongodb/backup-cursor.html) aggregation stage that is available in only Percona Server for MongoDB. Therefore, you must be running Percona Server for MongoDB in your deployment to use incremental physical backups.
 
 ## Make incremental backups
 
@@ -44,7 +46,7 @@ pbm restore 2022-11-25T14:13:43Z
 
 Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.
 
-After the restore is complete, restart all `mongod` nodes, `pbm-agents` and resync the backup list from the storage
+After the restore is complete, restart all `mongod` nodes and `pbm-agents`, and resync the backup list from the storage. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
 
 ## Implementation specifics
 

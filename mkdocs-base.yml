@@ -118,6 +118,13 @@ nav:
           - installation.md
       - Set up and configure:
           - initial-setup.md
+  - Backup and restore types:
+    - Overview: details/backup-types.md
+    - Physical backups: details/physical.md
+    - usage/incremental-backup.md
+    - Logical backups: details/logical.md
+    - Selective backups: usage/selective-backup.md
+    - usage/point-in-time-recovery.md
   - Run PBM: 
       - "Start a backup" : "usage/start-backup.md"
       - usage/list-backup.md
@@ -125,17 +132,12 @@ nav:
       - usage/restore-progress.md
       - usage/cancel-backup.md
       - usage/delete-backup.md
-      - usage/logs.md
-      - usage/selective-backup.md
-      - usage/incremental-backup.md
-      - usage/point-in-time-recovery.md
+      - usage/logs.md     
       - usage/oplog-replay.md
-
   - Details:
       - Architecture:
           - details/architecture.md
       - details/authentication.md
-      - details/backup-types.md
       - Remote backup storage:
           - Overview:
               - details/storage-configuration.md
