@@ -1,4 +1,4 @@
-# Point-in-time recovery oplog replay
+# Replay oplog from arbitrary start time
 
 
 !!! admonition "Version added: 1.7.0"
@@ -10,7 +10,7 @@ pitr:
    oplogOnly: true
 ```
 
-By replaying these oplog slices on top of the backup snapshot with the [`pbm oplog replay`](../reference/pbm-commands.md#pbm-oplog-replay) command, you can manually restore sharded clusters and non sharded replica sets to a specific point in time from a backup made by any tool and not only by Percona Backup for MongoDB. Plus, you reduce time, storage space and administration efforts on making the redundant base backup snapshot.
+By replaying these oplog slices on top of the backup snapshot with the [`pbm oplog-replay`](../reference/pbm-commands.md#pbm-oplog-replay) command, you can manually restore sharded clusters and non sharded replica sets to a specific point in time from a backup made by any tool and not only by Percona Backup for MongoDB. Plus, you reduce time, storage space and administration efforts on making the redundant base backup snapshot.
 
 !!! warning
 
