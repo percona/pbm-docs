@@ -29,7 +29,7 @@ MongoDB cluster (or non-sharded replica set). You don't need to start it on the 
 
 ### `pbm` CLI
 
-You can install `pbm` CLI on any or all servers or desktop computers you wish to use it from, so long as those computers aren’t network-blocked from accessing the MongoDB cluster.
+You can install `pbm` CLI on any or all servers or desktop computers you wish to use it from. Those computers must not be network-blocked from accessing the MongoDB cluster.
 
 ## Install from Percona repositories
 
