@@ -8,15 +8,15 @@ During incremental backups, Percona Backup for MongoDB saves only the data that 
 
 ## Considerations
 
-* This is a [tech preview feature](../reference/glossary.md#technical-preview-feature). We recommend using it only for testing purposes. 
+* This is a [tech preview feature](../reference/glossary.md#technical-preview-feature). We recommend using it only for testing purposes.
 
-* Incremental backup implementation is based on the [`$backupCursor`](https://docs.percona.com/percona-server-for-mongodb/backup-cursor.html) aggregation stage that is available in only Percona Server for MongoDB. Therefore, you must be running Percona Server for MongoDB in your deployment to use incremental physical backups.
+* Incremental backup implementation is based on the [`$backupCursor`](https://docs.percona.com/percona-server-for-mongodb/backup-cursor) aggregation stage that is available in only Percona Server for MongoDB. Therefore, you must be running Percona Server for MongoDB in your deployment to use incremental physical backups.
 
 ## Make incremental backups
 
 To start incremental backups, first make a full incremental backup. It will serve as the base for subsequent incremental backups:
 
-```bash 
+```bash
 pbm backup -type incremental --base
 ```
 
@@ -28,7 +28,7 @@ pbm backup -type incremental
 
 The incremental backup history looks like this:
 
-```bash 
+```bash
 Snapshots:
     2022-11-25T14:13:43Z 139.82MB <incremental> [restore_to_time: 2022-11-25T14:13:45Z]
     2022-11-25T14:02:07Z 255.20MB <incremental> [restore_to_time: 2022-11-25T14:02:09Z]
