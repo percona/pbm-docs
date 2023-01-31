@@ -30,7 +30,9 @@ pbm backup --compression=gzip
 
 Supported compression types are: `gzip`, `snappy`, `lz4`, `pgzip`, `zstd`.  The `none` value means no compression is done during backup.
 
-As of version 1.7.0, you can configure the compression level for backups. Specify the value for the `--compression-level` flag. Note that the higher value you specify, the longer it takes to compress / retrieve the data.
+As of version 1.7.0, you can configure the compression level for backups. Specify the value for the [`--compression-level`](../reference/backup-options.md#backupcompressionlevel) flag in the range `0` to `10`.  
+
+Default compression levels differ per compression method used. Note that the higher value you specify, the longer it takes to compress / retrieve the data.
 
 ## Backups in sharded clusters
 
