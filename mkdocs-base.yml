@@ -14,11 +14,11 @@ use_directory_urls: false
 # Theme setup
 theme:
   name: material
-  logo: _images/percona-logo.png
+  logo: _images/percona-logo.svg
   favicon: _images/percona-favicon.ico
   custom_dir: _resource/overrides/
   font:
-    text: Chivo, Colfax, Franziska
+    text: Poppins
   palette:
 
     # Light mode
