@@ -11,13 +11,16 @@
     --md-primary-fg-color--light: #3e4875;
     --md-primary-fg-color--dark:  #080e2e;
     */
+    --md-typeset-a-color: #2cbea2;
     --md-hue: 210; /* [0, 360] */
   }
 ul li p {
 	margin: 0;
 }
 
-
+.md-clipboard {
+  color: #2cbea2;
+}
 
 .md-typeset {
   font-size: .7rem;
