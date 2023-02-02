@@ -22,13 +22,13 @@ With the selective backup and restore functionality you have the following optio
 To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
 
 ```sh
-pbm backup –ns=staff.Payments
+pbm backup --ns=staff.Payments
 ```
 
 To back up the "Invoices" database and all collections that it includes, run the ``pbm backup`` command as follows:
 
 ```sh
-pbm backup –ns=Invoices.*
+pbm backup --ns=Invoices.*
 ```
 
 During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
