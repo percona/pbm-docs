@@ -1,7 +1,19 @@
 # Remote backup storage
 
-Percona Backup for MongoDB supports the following types of remote backup storage:
+Percona Backup for MongoDB saves your files to a directory. Using [`pbm list`](../reference/pbm-commands.md#pbm-list), a user can scan this directory to find existing
+backups even if they never used `pbm` on their computer before.
 
+The files are prefixed with the (UTC) starting time of the backup. For each
+backup there is one metadata file. For each replica set, a backup includes the following:
+
+* A mongodump-format compressed archive that is the dump of collections
+* A (compressed) BSON file dump of the oplog covering the timespan of the backup.
+
+The end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.
+
+## Supported storage types
+
+Percona Backup for MongoDB supports the following storage types:
 
 * [S3-compatible storage](#s3-compatible-storage)
 
@@ -9,7 +21,7 @@ Percona Backup for MongoDB supports the following types of remote backup storage
 
 * [Microsoft Azure Blob storage](#microsoft-azure-blob-storage)
 
-## S3-compatible storage
+### S3-compatible storage
 
 Percona Backup for MongoDB should work with other S3-compatible storages, but was only tested with the following ones:
 
@@ -22,7 +34,7 @@ Percona Backup for MongoDB should work with other S3-compatible storages, but wa
 
 * [MinIO](https://min.io/)
 
-### Server-side encryption
+#### Server-side encryption
 
 As of version 1.3.2, Percona Backup for MongoDB supports [server-side encryption](https://docs.percona.com/percona-backup-mongodb/glossary.html#term-Server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with customer-provided keys stored in AWS KMS (SSE-KMS).
 
@@ -54,7 +66,7 @@ serverSideEncryption:
     * [Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
     * [Protecting data using server-side encryption with customer-provided encryption keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
 
-### Debug logging
+#### Debug logging
 
 !!! admonition "Version added: 1.7.0" 
 
@@ -62,7 +74,7 @@ You can enable debug logging for different types of S3 requests in Percona Backu
 
 To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
 
-### Storage classes 
+#### Storage classes 
 
 !!! admonition "Version added: 1.7.0" 
 
@@ -79,7 +91,7 @@ storage:
 
 When the option is undefined, the S3 Standard storage type is used.
 
-### Configure upload retries 
+#### Configure upload retries 
 
 !!! admonition "Version added: 1.7.0" 
 
@@ -94,7 +106,7 @@ retryer:
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
-### Data upload for storage with self-issued TLS certificates
+#### Data upload for storage with self-issued TLS certificates
 
 !!! admonition "Version added: 1.7.0"
 
@@ -108,7 +120,7 @@ pbm config --set storage.s3.insecureSkipTLSVerify=True
 
     Use this option with caution as it might leave a hole for man-in-the-middle attacks.
 
-## Remote Filesystem Server Storage
+### Remote Filesystem Server Storage
 
 This storage must be a remote file server mounted to a local directory. It is the responsibility of the server administrators to guarantee that the same remote directory is mounted at exactly the same local path on all servers in the
 MongoDB cluster or non-sharded replica set.
@@ -120,11 +132,11 @@ MongoDB cluster or non-sharded replica set.
     If the path is accidentally a normal local directory, errors will eventually
     occur, most likely during a restore attempt. This will happen because **pbm-agent** processes of other nodes in the same replica set can’t access backup archive files in a normal local directory on another server.
 
-## Local Filesystem Storage
+### Local Filesystem Storage
 
 This cannot be used except if you have a single-node replica set. (See the warning note above as to why). We recommend using any object store you might be already familiar with for testing. If you don’t have an object store yet, we recommend using MinIO for testing as it has simple setup. If you plan to use a remote filesytem-type backup server, please see the [Remote Filesystem Server Storage](#remote-filesystem-server-storage) above.
 
-## Microsoft Azure Blob Storage
+### Microsoft Azure Blob Storage
 
 !!! admonition "Version added: 1.5.0"
 
@@ -132,7 +144,7 @@ You can use [Microsoft Azure Blob Storage](https://docs.microsoft.com/en-us/azur
 
 This gives users a vendor choice. Companies with Microsoft-based infrastructure can set up Percona Backup for MongoDB with less administrative efforts.
 
-## Permissions setup
+### Permissions setup
 
 Regardless of the remote backup storage you use, grant the `List/Get/Put/Delete` permissions to this storage for the user identified by the access credentials.
 

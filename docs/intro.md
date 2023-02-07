@@ -4,15 +4,17 @@ Even in a highly-available architecture, such as with MongoDB replication, backu
 
 Percona Backup for MongoDB is a command line interface. It provides [the set of commands](reference/pbm-commands.md) to manage backup and restore operations in your database.
 
-The following example illustrates how to use Percona Backup for MongoDB.
+## Usage example
 
-With Percona Backup for MongoDB up and running in your environment, make a backup:
+Let's have a look at how Percona Backup for MongoDB works.
+
+With [Percona Backup for MongoDB up and running](installation.md) in your environment, make a backup:
 
 ```sh
 pbm backup
 ```
 
-To also save all events that occurred to the data between the backups, enable saving oplog slices:
+To save all events that occurred to the data between the backups, enable saving oplog slices:
 
 ```sh
 pbm config --set pitr.enabled=true
@@ -50,4 +52,6 @@ This backup refreshes the timeline and serves as the base for saving oplog slice
 pbm config --set pitr.enabled=true
 ```
 
+## Next steps
 
+[Install and get started with Percona Backup for MongoDB](installation.md)

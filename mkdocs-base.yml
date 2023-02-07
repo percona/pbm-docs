@@ -116,46 +116,46 @@ extra:
 
 
 nav:
-  - Home:
-      - index.md
-  - About PBM:    
+  - Home: index.md
+  - About PBM:   
+      - Feature comparison with MongoDB: 'comparison.md'
+      - Backup and restore types: 
+          - Overview: 'details/backup-types.md'
+          - details/logical.md
+          - details/physical.md
+          - usage/selective-backup.md
+          - usage/incremental-backup.md
+          - usage/point-in-time-recovery.md  
       - How PBM works:
-          - intro.md
-      - "Components": "pbm-components.md"
-      - versions.md
-      - deployments.md
-  - Get started:
-      - Install:
-          - installation.md
-      - Set up and configure:
-          - initial-setup.md
-  - Backup and restore types:
-    - Overview: details/backup-types.md
-    - Physical backups: details/physical.md
-    - usage/incremental-backup.md
-    - Logical backups: details/logical.md
-    - Selective backups: usage/selective-backup.md
-    - usage/point-in-time-recovery.md
-  - Run PBM: 
+          - Usage example: 'intro.md'
+          - Architecture:
+            - PBM architecture: 'details/architecture.md'
+            - details/pbm-agent.md
+            - PBM CLI: details/cli.md
+            - PBM control collections: details/control-collections.md
+            - Remote backup storage:
+                - Overview: details/storage.md
+                - details/storage-configuration.md
+                - details/storage-config-example.md
+          - details/authentication.md
+  - Installation and setup:
+      - Installation: install/installation.md 
+      - install/repos.md
+      - install/source.md
+      - install/tarball.md
+      - Set up and configure: 'initial-setup.md'       
+  - Use PBM: 
       - "Start a backup" : "usage/start-backup.md"
-      - usage/list-backup.md
       - usage/restore.md
-      - usage/restore-progress.md
-      - usage/cancel-backup.md
-      - usage/delete-backup.md
-      - usage/logs.md     
-      - usage/oplog-replay.md
-  - Details:
-      - Architecture:
-          - details/architecture.md
-      - details/authentication.md
-      - Remote backup storage:
-          - Overview:
-              - details/storage-configuration.md
-          - details/storage-config-example.md
+      - Manage backups:
+        - List backups: usage/list-backup.md
+        - usage/restore-progress.md
+        - usage/cancel-backup.md
+        - usage/delete-backup.md
+        - usage/logs.md  
+        - manage/schedule-backup.md   
+      - usage/oplog-replay.md 
   - Manage PBM:
-      - Schedule backups: 
-          - manage/schedule-backup.md
       - 'Configure PBM remotely': 'manage/configure-remotely.md'
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Troubleshoot PBM': 'manage/troubleshooting.md'

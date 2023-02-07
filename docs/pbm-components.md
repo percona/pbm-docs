@@ -18,5 +18,3 @@ Percona Backup for MongoDB consists of the following components:
 The following diagram illustrates how Percona Backup for MongoDB components communicate with MongoDB.
 
 ![image](_images/pbm-architecture.png){ align=center}
-
-To learn more about Percona Backup for MongoDB architecture, see [Architecture](details/architecture.md).
