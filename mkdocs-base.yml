@@ -116,8 +116,8 @@ extra:
 
 
 nav:
-  - Home: index.md
-  - About PBM:   
+  - Discover PBM: 
+      - Introduction: index.md  
       - Feature comparison with MongoDB: 'comparison.md'
       - Backup and restore types: 
           - Overview: 'details/backup-types.md'
