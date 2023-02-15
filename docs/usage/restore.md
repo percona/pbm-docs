@@ -83,6 +83,8 @@ After the restore is complete, do the following:
  $ pbm config --force-resync
  ``` 
 
+4. Start the balancer
+
 ### Tracking restore progress
 
 You can [track physical restore progress](restore-progress.md) in Percona Backup for MongoDB version 2.0.0 and higher. 
@@ -123,6 +125,22 @@ To restore the encrypted data from the backup, do the following:
 During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node. 
 
 Alternatively, you can place the encryption key to all nodes of the replica set. Then the restore is successful and complete on all nodes. This approach is faster and may suit for large data sets (terabytes of data). However, we recommend to rotate the encryption keys afterwards. Note, that key rotation is not available after the restore [for data-at-rest encryption with HashiCorp Vault key server](https://docs.percona.com/percona-server-for-mongodb/latest/vault.html#vault). In this case, consider using the scenario with partially done restore. 
+
+### Define `mongod` binary location
+
+!!! admonition "Version added: 2.0.4"
+
+During physical restores, Percona Backup for MongoDB performs several internal restarts of the database. For this, it uses the default path to the `mongod` binaries to access the database. If you have defined the custom path to the `mongod` binaries, you can make Percona Backup for MongoDB aware of it by specifying the path in the configuration file: 
+
+```yaml
+restore:
+    mongodLocation: /path/to/mongod
+    mongodLocationMap:
+       "node01:27017": /path/to/mongod
+       "node03:27017": /another/path/to/mongod
+```
+
+If, for some reason, you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.
 
 ## Restoring a backup into a new environment
 
