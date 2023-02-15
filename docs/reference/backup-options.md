@@ -39,6 +39,15 @@ Supported values: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2`.
 
 *Type*: int
 
-The compression level from `0` till `10`. Default value depends on the compression method used.
+The compression level. The default value depends on the compression method used. 
 
-Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data.
+The following table shows available compression levels per compression method:
+
+| Compression method   | Supported compression levels | Default
+| ------------------   | ---------------------------- | ----------
+| `zstd`               | 1 - fastest speed, 2 - default, 3 - better compression, 4 - best compression | 2
+| `snappy`             | no levels|
+| `lz4`                | From 1 (fastest) to 16 | 1
+| `gzip` and `pgzip`   | -1 - default compression, 0 - no compression, 1 - best speed, 9 - best compression| -1
+
+Note that the higher value you specify, the more time and computing resources it will take to compress the data.

@@ -75,7 +75,9 @@ The oplog slices are saved with the `s2` compression method by default. You can 
 
 Supported compression methods are: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`.
 
-Additionally, you can override the compression level used by the compression method by setting the `pitr.compressionLevel` option. Note that the higher value you specify, the more time and computing resources it will take to compress / retrieve the data.
+Additionally, you can override the compression level used by the compression method by setting the [`pitr.compressionLevel`](../reference/ptr-options.ms#pitrcompressionlevel) option. The default values differ for each compression level. 
+
+Note that the higher value you specify, the more time and computing resources it will take to compress the data.
 
 !!! note 
 
