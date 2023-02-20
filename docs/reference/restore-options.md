@@ -28,10 +28,10 @@ The number of workers that add the documents to buffer.
 
 *Type*: string
 
-The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB uses the default path to make internal database restarts during physical restore.
+The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB uses the default path to make database restarts during physical restore.
 
 ### mongodLocationMap
 
 *Type*: array of strings
 
-The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the vales to make internal restarts of the database during physical restore. 
+The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the values to make restarts of the database during physical restore. 

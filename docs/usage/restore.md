@@ -69,7 +69,7 @@ The default values were adjusted to fit the setups with the memory allocation of
 
 ### Preconditions
 
-As the precondition to a physical restore, shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
+As the precondition to a physical restore, shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
 
 ```sh
 pbm restore <backup_name>
@@ -144,7 +144,7 @@ Alternatively, you can place the encryption key to all nodes of the replica set.
 
 !!! admonition "Version added: 2.0.4"
 
-During physical restores, Percona Backup for MongoDB performs several internal restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it by specifying this path in the configuration file: 
+During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it by specifying this path in the configuration file: 
 
 ```yaml
 restore:
