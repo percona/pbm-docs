@@ -6,7 +6,7 @@
 
     The recommended approach is to make a fresh backup after upgrading Percona Backup for MongoDB to version 1.5.0.
 
-To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](incremental-backup.md)) and restores the database up to the [backup completion time](../reference/glossary.md#completion-time) (available in `pbm list` output as of version 1.4.0).
+To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](incremental-backup.md)) and restores the database up to the [restore_to_time](../reference/glossary.md#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
 
 
 ## Logical restore
@@ -129,7 +129,7 @@ Alternatively, you can place the encryption key to all nodes of the replica set.
 To restore a backup from one environment to another, consider the following key points about the destination environment:
 
 
-* Replica set names (both the config servers and the shards) in your new destination cluster and in the cluster that was backed up must be exactly the same.
+* For physical restore, replica set names (both the config servers and the shards) in your new destination cluster and in the cluster that was backed up must be exactly the same.
 
 
 * Percona Backup for MongoDB configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run **pbm list** and see the backups made from the original environment, then you can run the **pbm restore** command.
