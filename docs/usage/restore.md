@@ -41,7 +41,9 @@ During the restore, the `pbm-agent` processes write data to primary nodes in the
 
 ![image](../_images/pbm-restore-shard.png)
 
-After a cluster’s restore is complete, restart all `mongos` nodes to reload the sharding metadata.
+#### Post-restore steps
+
+After a cluster’s restore is complete, start the balancer and all `mongos` nodes to reload the sharding metadata. We recommend to make a fresh backup to serve as the new base for future restores. 
 
 ### Adjust memory consumption
 
@@ -65,11 +67,21 @@ The default values were adjusted to fit the setups with the memory allocation of
 
     The MongoDB version for both backup and restore data must be within the same major release.
 
+### Preconditions
+
+As the precondition to a physical restore, shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
+
+```sh
+pbm restore <backup_name>
+```
+
 During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node.
 
 The following diagram shows the physical restore flow:
 
 ![image](../_images/pbm-phys-restore-shard.png)
+
+#### Post-restore steps
 
 After the restore is complete, do the following:
 
@@ -82,6 +94,10 @@ After the restore is complete, do the following:
  ```
  $ pbm config --force-resync
  ``` 
+
+4. Start the balancer and start `mongos` nodes.
+
+We recommend to make a fresh backup to serve as the new base for future restores. 
 
 ### Tracking restore progress
 
@@ -123,6 +139,26 @@ To restore the encrypted data from the backup, do the following:
 During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node. 
 
 Alternatively, you can place the encryption key to all nodes of the replica set. Then the restore is successful and complete on all nodes. This approach is faster and may suit for large data sets (terabytes of data). However, we recommend to rotate the encryption keys afterwards. Note, that key rotation is not available after the restore [for data-at-rest encryption with HashiCorp Vault key server](https://docs.percona.com/percona-server-for-mongodb/latest/vault.html#vault). In this case, consider using the scenario with partially done restore. 
+
+### Define `mongod` binary location
+
+!!! admonition "Version added: 2.0.4"
+
+During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it by specifying this path in the configuration file: 
+
+```yaml
+restore:
+    mongodLocation: /path/to/mongod
+```
+
+If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.
+
+```yaml
+restore:
+    mongodLocationMap:
+       "node01:27017": /path/to/mongod
+       "node03:27017": /another/path/to/mongod
+```
 
 ## Restoring a backup into a new environment
 
