@@ -1,6 +1,0 @@
-.. code-block:: bash
-
-   $ pbm-agent --mongodb-uri "mongodb://pbmuser:secretpwd@localhost:27018/?authSource=admin"
-   $ #Alternatively:
-   $ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27018/?authSource=admin"
-   $ pbm-agent

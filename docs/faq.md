@@ -2,14 +2,11 @@
 
 ## What’s the difference between PBM and `mongodump`?
 
-Both Percona Backup for MongoDB and `mongodump` are ‘logical’ backup solutions and have equal performance for non-sharded replica sets. However, as opposed to `mongodump`, Percona Backup for MongoDB allows you to achieve the following goals:
-
+`mongodump` is a ‘logical’ backup solution only while Percona Backup for MongoDB supports both logical and physical backups. Both solutions have equal performance for non-sharded replica sets. However, as opposed to `mongodump`, Percona Backup for MongoDB allows you to achieve the following goals:
 
 * make consistent backups and restores in sharded clusters
 * backup / restore both the whole data set and specific namespaces - databases and collections (See [Selective backup and restore](usage/selective-backup.md) for more information)
 * restore your database to a specific point in time
-
-
 * run backups / restores on each replica set in parallel while `mongodump` runs in one process on `mongos` node.
 
 ## Why does Percona Backup for MongoDB use UTC timezone instead of server local timezone?

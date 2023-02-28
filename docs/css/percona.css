@@ -11,7 +11,7 @@
     --md-primary-fg-color--light: #3e4875;
     --md-primary-fg-color--dark:  #080e2e;
     */
-    --md-typeset-a-color: #2cbea2;
+    --md-typeset-a-color: #74e0cb;
     --md-hue: 210; /* [0, 360] */
   }
 ul li p {
@@ -44,7 +44,7 @@ margin: 1em 0 .54em;
 .md-typeset .md-button {
     border: .1rem solid;
     border-radius: 50px;
-    color: var(--md-primary-fg-color);
+    color: var(--md-typeset-a-color);
     cursor: pointer;
     display: inline-block;
     font-weight: 700;
@@ -63,6 +63,7 @@ margin: 1em 0 .54em;
     border-color: var(--md-accent-fg-color);
     color:var(--md-accent-bg-color)
 }
+
 
 
 /*.git-revision-date-localized-plugin:before {

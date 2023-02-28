@@ -4,27 +4,13 @@ This section contains information on installing Percona Backup for MongoDB
 
 ## Supported platforms
 
+### x86_64
+
 Percona Backup for MongoDB is available for the most 64-bit Linux distributions. Find the list of supported platforms on the [Percona Software and Platform Lifecycle](https://www.percona.com/services/policies/percona-software-platform-lifecycle#mongodb) page.
 
-A Docker image for Percona Backup for MongoDB is also available for ARM64 architectures.
+### ARM64
 
-## Supported MongoDB deployments
-
-Percona Backup for MongoDB works with sharded clusters and replica sets. It doesn’t work on standalone MongoDB instances. This is because Percona Backup for MongoDB requires [oplog](reference/glossary.md#oplog) to guarantee backup consistency. Oplog is available on nodes with replication enabled.
-
-For testing purposes, you can deploy Percona Backup for MongoDB on a single-node replica set. To convert a standalone server into a replica set, specify the `replication.replSetName` option in the configuration file.
-
-!!! admonition "See also"
-
-    MongoDB Documentation: [Convert a Standalone to a Replica Set](https://docs.mongodb.com/manual/tutorial/convert-standalone-to-replica-set/)
-
-## Supported MongoDB versions
-
-Percona Backup for MongoDB is compatible with the following MongoDB versions:
-
-* For *logical* backups - [Percona Server for MongoDB](https://www.percona.com/software/mongo-database/percona-server-for-mongodb) and MongoDB Community v4.0 and higher with [MongoDB Replication](https://docs.mongodb.com/manual/replication/) enabled.
-
-* For *physical* backups - [Percona Server for MongoDB](https://www.percona.com/software/mongo-database/percona-server-for-mongodb) starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher with [MongoDB Replication](https://docs.mongodb.com/manual/replication/) enabled and WiredTiger configured as the storage engine.
+A [Docker image] for Percona Backup for MongoDB is available for ARM64 architectures.
 
 ## Installation tutorials
 

@@ -138,6 +138,8 @@ nav:
                 - details/storage-configuration.md
                 - details/storage-config-example.md
           - details/authentication.md
+      - deployments.md
+      - versions.md
   - Installation and setup:
       - Installation: install/installation.md 
       - install/repos.md
