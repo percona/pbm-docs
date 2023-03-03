@@ -55,3 +55,8 @@ pbm config --set pitr.enabled=true
 ## Next steps
 
 [Install and get started with Percona Backup for MongoDB](installation.md)
+
+## Useful links
+
+* [PBM architecture]
+* [Backup types]

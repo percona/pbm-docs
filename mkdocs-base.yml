@@ -64,7 +64,11 @@ markdown_extensions:
   pymdownx.tabbed: 
       {alternate_style: true}
   pymdownx.tilde: {}
-  pymdownx.superfences: {}
+  pymdownx.superfences: 
+    custom_fences:
+      - name: mermaid
+        class: mermaid
+        format: !!python/name:pymdownx.superfences.fence_code_format
   pymdownx.highlight:
       linenums: false
   pymdownx.inlinehilite: {}
@@ -73,8 +77,7 @@ markdown_extensions:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
 
-       
-
+#Mkdocs plugins   
 plugins:
   section-index: {}
   search: 
@@ -95,6 +98,7 @@ plugins:
           author: 'Percona Technical Documentation Team'
           cover_logo: docs/_images/Percona_Logo_Color.png
           debug_html: false
+          two_columns_level: 3
           custom_template_path: _resource/templates
           enabled_if_env: ENABLE_PDF_EXPORT
   mike:
@@ -116,8 +120,8 @@ extra:
 
 
 nav:
+  - Home: index.md
   - Discover PBM: 
-      - Introduction: index.md  
       - Feature comparison with MongoDB: 'comparison.md'
       - Backup and restore types: 
           - Overview: 'details/backup-types.md'
@@ -140,29 +144,32 @@ nav:
           - details/authentication.md
       - deployments.md
       - versions.md
-  - Installation and setup:
-      - Installation: install/installation.md 
-      - install/repos.md
-      - install/source.md
-      - install/tarball.md
+  - Get started:
+      - Install:
+         - Overview: installation.md 
+         - Method 1. From repositories: install/repos.md
+         - Method 2. Build from source: install/source.md
+         - Method 3. Download tarballs: install/tarball.md
+         - Method 4. Deploy in a cloud: cloud.md
       - Set up and configure: 'initial-setup.md'       
-  - Use PBM: 
-      - "Start a backup" : "usage/start-backup.md"
-      - usage/restore.md
-      - Manage backups:
-        - List backups: usage/list-backup.md
-        - usage/restore-progress.md
-        - usage/cancel-backup.md
-        - usage/delete-backup.md
-        - usage/logs.md  
-        - manage/schedule-backup.md   
+      - Make a backup : "usage/start-backup.md"
+      - Make a restore: usage/restore.md
+      - Make a point-in-time restore: usage/pitr-tutorial.md
+  - Manage backups:
+      - List backups: usage/list-backup.md
+      - usage/restore-progress.md
+      - usage/cancel-backup.md
+      - usage/delete-backup.md
+      - usage/logs.md  
+      - manage/schedule-backup.md   
       - usage/oplog-replay.md 
   - Manage PBM:
       - 'Configure PBM remotely': 'manage/configure-remotely.md'
       - 'Upgrade PBM': 'manage/upgrading.md'
-      - 'Troubleshoot PBM': 'manage/troubleshooting.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
       - 'Remove PBM': 'manage/uninstalling.md'
+  - 'Troubleshooting': 
+      - 'manage/troubleshooting.md'
   - FAQ:
       - faq.md
   - Reference:
@@ -204,7 +211,7 @@ nav:
       - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
       - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - reference/contributing.md
-  - Copyright and Licensing:
+  - Copyright and licensing:
       - copyright.md
   - Trademark policy:
       - trademark-policy.md 

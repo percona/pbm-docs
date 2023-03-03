@@ -1,20 +1,12 @@
 # Install Percona Backup for MongoDB
 
-This section contains information on installing Percona Backup for MongoDB 
-
 ## Supported platforms
-
-### x86_64
 
 Percona Backup for MongoDB is available for the most 64-bit Linux distributions. Find the list of supported platforms on the [Percona Software and Platform Lifecycle](https://www.percona.com/services/policies/percona-software-platform-lifecycle#mongodb) page.
 
-### ARM64
-
-A [Docker image] for Percona Backup for MongoDB is available for ARM64 architectures.
-
 ## Installation tutorials
 
-Choose how you wish to install Percona Backup for MongoDB:
+Install Percona Backup for MongoDB in one of the following ways:
 
 * [from Percona repositories](#installing-from-percona-repositories) using the package manager of your operating system. This is the recommended way
 

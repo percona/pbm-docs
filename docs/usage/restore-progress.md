@@ -1,6 +1,6 @@
 # View restore progress
 
-!!! admonition "Version added: 2.0.0"
+!!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
 You can track the status of both physical and logical restores. This gives you a clear understanding of the restore progress so that you can react accordingly. 
 

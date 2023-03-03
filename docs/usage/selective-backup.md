@@ -1,10 +1,10 @@
 # Selective backup and restore
 
-!!! admonition "Version added: 2.0.0"
+!!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
 !!! important
 
-    Selective backup and restore is the technical preview feature [^1]
+    Selective backup and restore is the [technical preview feature](../reference/glossary.md#technical-preview-feature)
 
 You can back up and restore certain namespaces - databases or collections. For example, if your "Payments" collection in the "Staff" database was corrupted, you can restore only this collection from your full backup up to a specific point in time. Or, if your "Invoices" database contains sensitive data and must be backed up frequently, you can configure the backup of only this database. This way you work only with the desired subset of data without disrupting the operations of your whole cluster. 
 
@@ -17,23 +17,6 @@ With the selective backup and restore functionality you have the following optio
 3.	Restore certain databases and / or collections from a full backup
 4.	Make a point-in time recovery for the specified databases / collections.
 
-## Selective backup 
-
-To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
-
-```sh
-pbm backup --ns=staff.Payments
-```
-
-To back up the "Invoices" database and all collections that it includes, run the ``pbm backup`` command as follows:
-
-```sh
-pbm backup --ns=Invoices.*
-```
-
-During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
-
-Multi-format is now the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
 
 ## View information about a selective backup 
 
@@ -81,16 +64,7 @@ replsets:
   last_transition_ts: "1662039304"
   error: ""
 ```
-
-## Selective restore 
-
-To restore a specific database or a collection, run the ``pbm restore`` command in the format:
-
-```sh
-pbm restore <backup_name> --ns <database.collection>
-```
-
-During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.  
+ 
 
 ## Point-in-time recovery 
 
@@ -118,5 +92,5 @@ When point-in-time recovery is started, Percona Backup for MongoDB uses the prov
 5. System collections in ``admin``, ``config`` and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
 6.	Point-in-time recovery slicing requires a full backup because it serves as the base for point-in-time recovery. Any selective backup will be ignored.
 
-[^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.
-
+[Make a backup](../usage/start-backup.md){ .md-button .md-button }
+[Make a restore](../usage/restore.md){ .md-button .md-button }
