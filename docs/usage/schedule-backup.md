@@ -4,7 +4,7 @@ We recommend using `crond` or similar services to schedule backup snapshots.
 
 !!! important
 
-    Before configuring `crond`, make sure that you have [installed](../installation.md) and [configured](../initial-setup.md) Percona Backup for MongoDB to make backups in your database. Start a backup manually to verify this: 
+    Before configuring `crond`, make sure that you have [installed](../installation.md) and [configured](../install/initial-setup.md) Percona Backup for MongoDB to make backups in your database. Start a backup manually to verify this: 
 
     ```sh
     pbm backup
@@ -37,7 +37,7 @@ The steps are the following:
 2. Specify the environment variable in `pbm-cron`:
     
      ```sh
-     export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27018?/replSetName=xxxx"
+     export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017?/replSetName=xxxx"
      ```
 
 3. Grant access to the `pbm-cron` file for the user that will execute the `cron` task.
@@ -66,17 +66,17 @@ The steps are the following:
      grep CRON /var/log/syslog
      ```
 
-## Schedule backups with Point-in-Time Recovery running
+## Schedule backups with point-in-time recovery running
 
-It is convenient to automate making backups on a schedule using `crond` if you enabled [Point-in-Time Recovery](../usage/point-in-time-recovery.md).
+It is convenient to automate making backups on a schedule using `crond` if you enabled [point-in-time recovery](../features/point-in-time-recovery.md).
 
-You can configure Point-in-Time Recovery and `crond` in any order. Note, however, that Point-in-Time Recovery will only start running after at least one full backup has been made.
+You can configure point-in-time recovery and `crond` in any order. Note, however, that point-in-time recovery will only start running after at least one full backup has been made.
 
  * Make a fresh backup manually. It will serve as the starting point for incremental backups
  * Enable point-in-time recovery
  * Configure `crond` to run backup snapshots on a schedule
 
-When it is time for another backup snapshot, Percona Backup for MongoDB automatically disables Point-in-Time Recovery and re-enables it once the backup is complete.
+When it is time for another backup snapshot, Percona Backup for MongoDB automatically disables point-in-time recovery and re-enables it once the backup is complete.
 
 ## Backup storage cleanup
 

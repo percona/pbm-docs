@@ -47,3 +47,7 @@ sudo percona-release enable pbm release
     ```sh
     sudo yum install percona-backup-mongodb
     ```
+
+## Next steps
+
+[Set up PBM](initial-setup.md)

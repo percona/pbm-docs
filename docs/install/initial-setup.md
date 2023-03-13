@@ -1,6 +1,6 @@
 # Initial setup
 
-After you [installed Percona Backup for MongoDB](installation.md) on every server with the `mongod` node that is not an arbiter node, the setup steps are the following:
+After you [installed Percona Backup for MongoDB](../installation.md) on every server with the `mongod` node that is not an arbiter node, the setup steps are the following:
 
 1. [Configure authentication in MongoDB](#configure-authentication-in-mongodb)
 
@@ -10,7 +10,7 @@ After you [installed Percona Backup for MongoDB](installation.md) on every serve
 
 The following diagram outlines the installation and setup steps:
 
-![image](_images/setup.png)
+![image](../_images/setup.png)
 
 ## Configure authentication in MongoDB
 
@@ -51,6 +51,8 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem  
      ```
 
 You can specify the `username` and `password` values and other options of the `createUser` command as you require so long as the roles shown above are granted.
+
+#### Where to create
 
 Create the `pbm` user on every replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
 
@@ -103,20 +105,20 @@ The `pbm-agent.service` systemd unit file includes the environment file. You set
 
     Edit the environment file `/etc/default/pbm-agent` and specify the MongoDB connection URI string for the `pbm` user to the local `mongod` node.
 
-    For example, if `mongod` node listens on port 27018, the MongoDB connection URI string will be the following:
+    For example, if `mongod` node listens on port 27017, the MongoDB connection URI string will be the following:
 
     ```
-    PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27018/?authSource=admin"
+    PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
 
 === "On Red Hat Enterprise Linux and derivatives"
 
     Edit the environment file `/etc/sysconfig/pbm-agent` and specify the MongoDB connection URI string for the `pbm` user to the local `mongod` node. 
 
-    For example, if `mongod` node listens on port 27018, the MongoDB connection URI string will be the following:
+    For example, if `mongod` node listens on port 27017, the MongoDB connection URI string will be the following:
 
     ```
-    PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27018/?authSource=admin"
+    PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
 
 !!! note ""
@@ -128,7 +130,7 @@ The `pbm-agent.service` systemd unit file includes the environment file. You set
 If the password includes special characters like `#`, `@`, `/` and so on, you must convert these characters using the [percent-encoding mechanism](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1) when passing them to Percona Backup for MongoDB. For example, the password `secret#pwd` should be passed as follows in `PBM_MONGODB_URI`:
 
 ```
-PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27018/?authSource=admin"
+PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admin"
 ```
 
 ### Set the MongoDB connection URI for `pbm CLI`
@@ -138,18 +140,18 @@ Set the MongoDB URI connection string for `pbm` CLI in your shell. This allows y
 Use the following command:
 
 ```
-export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27018/?authSource=admin&replSetName=xxxx"
+export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin&replSetName=xxxx"
 ```
 
-For more information what connection string to specify, refer to the [pbm connection string](details/authentication.md#pbm-auth-pbm-app-conn-string) section.
+For more information what connection string to specify, refer to the [pbm connection string](../details/authentication.md#mongodb-connection-strings-a-reminder-or-primer) section.
 
 ### External authentication support in Percona Backup for MongoDB
 
-In addition to SCRAM, Percona Backup for MongoDB supports other [authentication methods](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html) that you use in MongoDB or Percona Server for MongoDB.
+In addition to SCRAM, Percona Backup for MongoDB supports other [authentication methods](https://docs.percona.com/percona-server-for-mongodb/6.0/authentication.html) that you use in MongoDB or Percona Server for MongoDB.
 
 For external authentication, you create the `pbm` user in the format used by the authentication system and set the MongoDB connection URI string to include both the authentication method and authentication source.
 
-For example, for [Kerberos authentication](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
+For example, for [Kerberos authentication](https://docs.percona.com/percona-server-for-mongodb/6.0/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
 
 Specify the following string for MongoDB connection URI:
 
@@ -165,10 +167,31 @@ sudo -u {USER} kinit pbm
 
 Note that the `{USER}` is the user that you will run the `pbm-agent` process.
 
-For [authentication and authorization via Native LDAP](https://docs.percona.com/percona-server-for-mongodb/latest/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
+For [authentication and authorization via Native LDAP](https://docs.percona.com/percona-server-for-mongodb/6.0/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
 
 ```
-PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27018/?authMechanism=PLAIN&authSource=%24external&replSetName=xxxx"
+PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27017/?authMechanism=PLAIN&authSource=%24external&replSetName=xxxx"
+```
+
+When using [AWS IAM authentication](), create the `pbm` user in the `$external` database with the username that contains the ARN of the IAM user/role.
+
+
+=== "User authentication"
+
+     ```
+     arn:aws:iam::<ARN>:user/<user_name>
+     ```
+
+=== "Role authentication"
+
+     ```
+     arn:aws:iam::<ARN>:role/<role_name>
+     ```
+
+The MongoDB connection URI string then looks like the following:
+
+```
+PBM_MONGODB_URI="mongodb://<aws_access_key_id>:<aws_secret_access_key>@<hostname>:27017/?authMechanism=MONGODB-AWS&authSource=%24external&replSetName=xxxx"
 ```
 
 ## Configure remote backup storage
@@ -221,7 +244,7 @@ The storage configuration itself is out of scope of the present document. We ass
         path: /data/local_backups
     ```
 
-    See more examples in [Configuration file examples](details/storage-config-example.md).
+    See more examples in [Configuration file examples](../details/storage-config-example.md).
 
 
 3. Insert the config file
@@ -267,10 +290,10 @@ systemd’s default redirection to `systemd-journald`. You can view it with the
 command below. See `man journalctl` for useful options such as `--lines`, `--follow`, etc.
 
 ```
-~journalctl -u pbm-agent.service
+$ journalctl -u pbm-agent.service
 -- Logs begin at Tue 2019-10-22 09:31:34 JST. --
-Jan 22 15:59:14 akira-x1 systemd[1]: Started pbm-agent.
-Jan 22 15:59:14 akira-x1 pbm-agent[3579]: pbm agent is listening for the commands
+Jan 22 15:59:14 : Started pbm-agent.
+Jan 22 15:59:14 pbm-agent[3579]: pbm agent is listening for the commands
 ...
 ...
 ```

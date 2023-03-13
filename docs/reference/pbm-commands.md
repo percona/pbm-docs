@@ -2,7 +2,7 @@
 
 `pbm` CLI is the command line utility to control the backup system. This page describes `pbm` commands available in Percona Backup for MongoDB.
 
-For how to get started with Percona Backup for MongoDB, see [Initial setup](../initial-setup.md).
+For how to get started with Percona Backup for MongoDB, see [Initial setup](../install/initial-setup.md).
 
 ## pbm help
 
@@ -116,7 +116,7 @@ The command accepts the following flags:
 
 | Flag                | Description                           |
 | ------------------- | ------------------------------------- |
-| `--time=TIME`       | Restores the database to the specified point in time. Available for logical restores and if [Point-in-Time Recovery](../usage/point-in-time-recovery.md) is enabled. |
+| `--time=TIME`       | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](../features/point-in-time-recovery.md) is enabled. |
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.|

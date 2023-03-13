@@ -46,6 +46,10 @@ A container is like a directory in Azure Blob storage that contains a set of [bl
    
 Once a transaction is committed, it will remain so.
 
+## EBS-snapshot
+
+An EBS (Amazon Elastic Block Storage) snapshot is the point-in-time copy of your data, and can be used to enable disaster recovery, migrate data across regions and accounts, and improve backup compliance.
+
 ## GCP
    
 GCP (Google Cloud Platform) is the set of services, including storage service, that runs on Google Cloud infrastructure.

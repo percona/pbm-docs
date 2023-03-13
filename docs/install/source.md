@@ -150,3 +150,7 @@ GoVersion: [Go version number]
          ```sh
          sudo systemctl daemon-reload
          ```
+
+## Next steps
+
+[Set up PBM](initial-setup.md)

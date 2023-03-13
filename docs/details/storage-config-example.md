@@ -1,6 +1,6 @@
 # Remote backup storage configuration examples
 
-Provide the remote backup storage configuration as a YAML config file. The following are the examples of config files for [supported remote storages](storage-configuration.md). For how to insert the config file, see [Insert the whole Percona Backup for MongoDB config from a YAML file](../reference/config.md).
+Provide the remote backup storage configuration as a YAML config file. The following are the examples of config files for [supported remote storages](storage-configuration.md#supported-storage-types). For how to insert the config file, see [Insert the whole Percona Backup for MongoDB config from a YAML file](../reference/config.md).
 
 ## S3-compatible remote storage
 

@@ -1,12 +1,12 @@
-# Configure Percona Backup for MongoDB remotely
+# Percona Backup for MongoDB configuration via pipelines
 
 !!! admonition "Version added: 2.0.1"
 
-To apply or update the configuration, Percona Backup for MongoDB reads the configuration file on the filesystem. When running Percona Backup for MongoDB remotely (in a cloud as Docker containers or pods in Kubernetes), you must upload the configuration file to the remote host's filesystem.  
+To apply or update the configuration, Percona Backup for MongoDB reads the configuration file on the filesystem. When you run PBM remotely (in a cloud as Docker containers or pods in Kubernetes), you must upload the configuration file to the remote host's filesystem every time you update it.  
 
-Starting with version 2.0.1, you can configure Percona Backup for MongoDB remotely. You manage the configuration file locally and use the pipeline to pass the file's contents to Percona Backup for MongoDB on a remote host/running in a container. As a result, your DBAs spend less time on administering Percona Backup for MongoDB and can focus on other activities instead.
+To simplify the configuration management, you can manage the configuration file locally and use the UNIX pipeline to pass the file's contents to Percona Backup for MongoDB on a remote host/running in a container. 
 
-Here’s how to configure Percona Backup for MongoDB remotely:
+Here’s how to do it:
 
 1. Create/update the configuration file (for example, `/etc/pbm_config.yaml`)
 2. Create an environment variable for the path to the configuration file
@@ -33,5 +33,4 @@ Here’s how to configure Percona Backup for MongoDB remotely:
 
         Specify the valid PBM_MONGODB_URI connection string, the ID of the network the container will connect to and the container ID.
 
-
-
+As a result, your DBAs spend less time on administering Percona Backup for MongoDB and can focus on other activities instead.

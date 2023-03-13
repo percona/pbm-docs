@@ -6,7 +6,7 @@
 
     The recommended approach is to make a fresh backup after upgrading Percona Backup for MongoDB to version 1.5.0.
 
-To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](incremental-backup.md)) and restores the database up to the [restore_to_time](../reference/glossary.md#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
+To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](../features/incremental-backup.md)) and restores the database up to the [restore_to_time](../reference/glossary.md#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
 
 ## Considerations
 
@@ -16,7 +16,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     2. Whilst the restore is running, prevent clients from accessing the database. The data will naturally be incomplete whilst the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
-    3. If you enabled [Point-in-Time Recovery](point-in-time-recovery.md), disable it before running pbm restore. This is because Point-in-Time Recovery incremental backups and restore are incompatible operations and cannot be run together.
+    3. If you enabled [Point-in-time recovery](../features/point-in-time-recovery.md), disable it before running `pbm restore`. This is because Point-in-Time Recovery oplog slicing and restore are incompatible operations and cannot be run together.
 
 === "Physical"
 
@@ -38,7 +38,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     2. Shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
 
-    3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-Time Recovery](point-in-time-recovery.md).
+    3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
 === "Physical"
 
@@ -46,7 +46,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === "Selective"
     
-    You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../usage/selective-backup.md#known-limitations-of-selective-backups-and-restores)
+    You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)
 
 === "Incremental"
 
@@ -127,7 +127,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     5. Make a fresh backup to serve as the new base for future restores. 
 
-    ### Define `mongod` binary location
+    ### Define a `mongod` binary location
 
     !!! admonition "Version added: 2.0.4"
 

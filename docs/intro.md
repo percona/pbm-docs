@@ -58,5 +58,5 @@ pbm config --set pitr.enabled=true
 
 ## Useful links
 
-* [PBM architecture]
-* [Backup types]
+* [PBM architecture](details/architecture.md)
+* [Backup types](features/backup-types.md)

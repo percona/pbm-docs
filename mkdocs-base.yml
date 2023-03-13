@@ -121,55 +121,55 @@ extra:
 
 nav:
   - Home: index.md
-  - Discover PBM: 
-      - Feature comparison with MongoDB: 'comparison.md'
+  - Features: 
       - Backup and restore types: 
-          - Overview: 'details/backup-types.md'
-          - details/logical.md
-          - details/physical.md
-          - usage/selective-backup.md
-          - usage/incremental-backup.md
-          - usage/point-in-time-recovery.md  
-      - How PBM works:
-          - Usage example: 'intro.md'
-          - Architecture:
-            - PBM architecture: 'details/architecture.md'
-            - details/pbm-agent.md
-            - PBM CLI: details/cli.md
-            - PBM control collections: details/control-collections.md
-            - Remote backup storage:
-                - Overview: details/storage.md
-                - details/storage-configuration.md
-                - details/storage-config-example.md
-          - details/authentication.md
-      - deployments.md
-      - versions.md
+          - Overview: 'features/backup-types.md'
+          - features/logical.md
+          - features/physical.md
+          - features/selective-backup.md
+          - features/incremental-backup.md
+          - features/point-in-time-recovery.md 
+      - Comparison with MongoDB: 'features/comparison.md' 
+  - Discover PBM:
+      - How PBM works: 'intro.md'
+      - Architecture:
+          - PBM architecture: 'details/architecture.md'
+          - details/pbm-agent.md
+          - PBM CLI: details/cli.md
+          - PBM control collections: details/control-collections.md
+          - Remote backup storage:
+              - Overview: details/storage-configuration.md
+              - details/storage-config-example.md
+      - details/authentication.md
+      - details/deployments.md
+      - details/versions.md
   - Get started:
       - Install:
          - Overview: installation.md 
          - Method 1. From repositories: install/repos.md
          - Method 2. Build from source: install/source.md
          - Method 3. Download tarballs: install/tarball.md
-         - Method 4. Deploy in a cloud: cloud.md
-      - Set up and configure: 'initial-setup.md'       
+         - Method 4. Deploy on Kubernetes: install/cloud.md
+      - Set up and configure: 'install/initial-setup.md'       
       - Make a backup : "usage/start-backup.md"
       - Make a restore: usage/restore.md
       - Make a point-in-time restore: usage/pitr-tutorial.md
   - Manage backups:
       - List backups: usage/list-backup.md
-      - usage/restore-progress.md
+      - usage/describe-backup.md
+      - usage/schedule-backup.md 
       - usage/cancel-backup.md
       - usage/delete-backup.md
-      - usage/logs.md  
-      - manage/schedule-backup.md   
+      - usage/restore-progress.md
       - usage/oplog-replay.md 
-  - Manage PBM:
-      - 'Configure PBM remotely': 'manage/configure-remotely.md'
-      - 'Upgrade PBM': 'manage/upgrading.md'
+      - usage/logs.md  
+  - Administer PBM:
+      - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
+      - 'Diagnose PBM': 'manage/troubleshooting.md'
+      - 'Check status': 'manage/status.md'
+      - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
-  - 'Troubleshooting': 
-      - 'manage/troubleshooting.md'
   - FAQ:
       - faq.md
   - Reference:
@@ -211,8 +211,6 @@ nav:
       - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
       - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - reference/contributing.md
-  - Copyright and licensing:
-      - copyright.md
-  - Trademark policy:
-      - trademark-policy.md 
+  - Copyright and licensing: copyright.md
+  - Trademark policy: trademark-policy.md 
 

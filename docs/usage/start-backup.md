@@ -2,8 +2,8 @@
 
 ## Before you start
 
-1. [Install] and [set up PBM]
-2. Check that `pbm agent` is running with [`pbm status`](../reference/pbm-commands.md#pbm-status) command
+1. [Install](../installation.md) and [set up Percona Backup for MongoDB](../install/initial-setup.md)
+2. Check that `pbm agent` is running with the [`pbm status`](../reference/pbm-commands.md#pbm-status) command
 
 ## Make a backup 
 
@@ -37,7 +37,7 @@
 
     !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-    Before you start, read about [selective backups known limitations](../usage/selective-backup.md#known-limitations-of-selective-backups-and-restores)  
+    Before you start, read about [selective backups known limitations](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)  
 
     To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
 
@@ -59,12 +59,12 @@
     
     !!! admonition "Version added: [2.0.3](../release-notes/2.0.3.md)"
 
-    Before you start, read more about [incremental backup](../usage/incremental-backup.md#considerations)
+    Before you start, read more about [incremental backup](../features/incremental-backup.md#considerations)
 
     To start incremental backups, first make a full incremental backup. It will serve as the base for subsequent incremental backups:
 
     ```bash 
-    pbm backup -type incremental --base
+    pbm backup --type incremental --base
     ```
 
     The `pbm-agent` starts tracking the incremental backup history to be able to calculate and save the difference in data blocks. After that you can run regular incremental backups:
@@ -182,6 +182,6 @@ This ability to adjust node priority helps you manage your backup strategy by se
 
 ## Useful links
 
-* [Backup and restore types](../details/backup-types.md).
-* [Schedule backups](../manage/schedule-backup.md)
+* [Backup and restore types](../features/backup-types.md).
+* [Schedule backups](../usage/schedule-backup.md)
 

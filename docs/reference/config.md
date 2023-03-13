@@ -14,7 +14,7 @@ Percona Backup for MongoDB config contains the following settings:
 
 * [Remote backup storage configuration](../details/storage-configuration.md) is available starting with version 1.0 or 1.1.
 
-* [Point-in-Time Recovery configuration](../usage/point-in-time-recovery.md) is available starting with version 1.3.0.
+* [Point-in-time recovery configuration](../features/point-in-time-recovery.md) is available starting with version 1.3.0.
 
 * [Restore options](configuration-options.md#restore-options) are available as starting with version 1.3.2.
 

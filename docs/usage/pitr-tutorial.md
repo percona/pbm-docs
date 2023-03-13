@@ -44,7 +44,7 @@ PITR <off>:
 
 For timestamp `2021-08-06T08:10:10`, the backup snapshot `2021-08-06T08:02:44Z [restore_to_time: 2021-08-06T08:03:09]` is used as the base for the restore as it is the most recent one.
 
-If you [select a backup snapshot for the restore with the `–base-snapshot` option](#selecting-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.
+If you [select a backup snapshot for the restore with the `–-base-snapshot` option](#select-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.
 
 !!! admonition "See also"
 
@@ -76,7 +76,7 @@ To restore from any backup snapshot, Percona Backup for MongoDB requires continu
 
 ## Restore selected databases and collections
 
-Before you start, read [known limitations for selective backups and restores](../usage/selective-backup.md#known-limitations-of-selective-backups-and-restores)
+Before you start, read [known limitations for selective backups and restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)
 
 To restore the desired database or a collection to a point in time, run the ``pbm restore`` command as follows:
 
@@ -123,9 +123,9 @@ To replay the oplog to the particular timestamp, do the following:
 
  4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
 
-!!! admonition "See also"
+## Useful links
 
-    * [Restore a backup](restore.md)
-    * [Replay oplog from arbitrary start time](oplog-replay.md)
+* [Restore a backup](restore.md)
+* [Replay oplog from arbitrary start time](oplog-replay.md)
 
 

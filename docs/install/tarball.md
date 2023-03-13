@@ -5,7 +5,6 @@ You can download Percona Backup for MongoDB from [Percona website](https://www.p
 * [From binary tarballs](#install-from-binary-tarball).
 * Manually, from the installation packages using `dpkg` (Debian and Ubuntu) or `rpm` (Red Hat Enterprise Linux and CentOS). However, you must make sure that all dependencies are satisfied.
 
-* Download and install Percona Backup for MongoDB [from binary tarballs](#install-from-binary-tarball).
 
 ## Install from binary tarball
 

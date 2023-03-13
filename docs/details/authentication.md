@@ -28,7 +28,7 @@ etc. as the `mongo` shell or `mongodump` command does.
      pbm-agent
      ```
      
-     Replace the `pbmuser:secretpwd` with the credentials of [the user who owns the pbm process](../initial-setup.md#create-the-pbm-user)
+     Replace the `pbmuser:secretpwd` with the credentials of [the user who owns the pbm process](../install/initial-setup.md#create-the-pbm-user)
 
 === "The `pbm` CLI connection string"
 
@@ -43,7 +43,7 @@ etc. as the `mongo` shell or `mongodump` command does.
      $ pbm list
      ```
      
-     Replace the `pbmuser:secretpwd` with the credentials of [the user who owns the pbm process](../initial-setup.md#create-the-pbm-user)
+     Replace the `pbmuser:secretpwd` with the credentials of [the user who owns the pbm process](../install/initial-setup.md#create-the-pbm-user)
 
      The `pbm` CLI will ultimately connect to the replica set with PBM Control Collections.
 

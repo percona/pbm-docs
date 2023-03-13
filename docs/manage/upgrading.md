@@ -1,13 +1,6 @@
 # Upgrade Percona Backup for MongoDB
 
-Similar to installing, the recommended and most convenient way to upgrade PBM is from the Percona repository.
-
-You can upgrade Percona Backup for MongoDB either to the **latest version** or to a **specific version**. Since all packages of Percona Backup for MongoDB are stored in the same repository, the following steps apply to both upgrade scenarios:
-
-1. Enable Percona repository.
-2. Stop `pbm-agent`.
-3. Install new version packages (the old ones are automatically removed).
-4. Start `pbm-agent`.
+The recommended and most convenient way to upgrade PBM is from Percona repositories.
 
 ## Important notes
 
@@ -25,23 +18,17 @@ You can upgrade Percona Backup for MongoDB either to the **latest version** or t
 
 5. Upgrade Percona Backup for MongoDB on all nodes where it is installed.
 
-!!! important 
+## Prerequisites 
 
-    Run all commands as root or via `sudo`.
+Run all commands as root or via `sudo`.
 
-## Prerequisites
+1. [Install `percona-release` tool](https://www.percona.com/doc/percona-repo-config/installing.html). If you have installed it before, [update](https://www.percona.com/doc/percona-repo-config/updating.html) it to the latest version.
 
-### 1. Install `percona-release`
+2. Enable the repository
 
-[Install `percona-release` tool](https://www.percona.com/doc/percona-repo-config/installing.html). If you have installed it before, [update](https://www.percona.com/doc/percona-repo-config/updating.html) it to the latest version.
-
-### 2. Enable the repository
-
-Run the following command as root or via `sudo`
-
-```sh
-sudo percona-release enable pbm release
-```
+    ```sh
+    sudo percona-release enable pbm release
+    ```
 
 !!! note
 
