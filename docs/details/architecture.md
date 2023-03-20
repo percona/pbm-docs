@@ -2,7 +2,7 @@
 
 Percona Backup for MongoDB consists of the following components:
 
-* [`pbm-agent`](../reference/glossary.md#pbm-agent) is a process running on every `mongod` node within the cluster or a replica set that performs backup and restore operations.
+* [`pbm-agent`](../reference/glossary.md#pbm-agent) is a process running on every `mongod` node within the cluster or within a replica set that performs backup and restore operations.
 
 * [`pbm` CLI](../reference/glossary.md#pbm-cli) is a command-line utility that instructs `pbm-agents` to perform an operation.
 

@@ -19,34 +19,34 @@ Building the project requires:
 
 ### 1. Clone the repository
 
-```sh
-git clone https://github.com/percona/percona-backup-mongodb
+```{.bash data-prompt="$"}
+$ git clone https://github.com/percona/percona-backup-mongodb
 ```
 
 ### 2. Go to the project directory and build it
 
-```sh
-cd percona-backup-mongodb
-make build
+```{.bash data-prompt="$"}
+$ cd percona-backup-mongodb
+$ make build
 ```
 
 After **make** completes, you can find `pbm` and `pbm-agent` binaries
 in the `./bin` directory:
 
-```sh
-cd bin
-./pbm version
+```{.bash data-prompt="$"}
+$ cd bin
+$ ./pbm version
 ```
 
 To verify if Percona Backup for MongoDB has been built correctly and is ready for use, run
 
-```sh
-pbm version
+```{.bash data-prompt="$"}
+$ pbm version
 ```
 
 Output
 
-```text
+```{.text .no-copy}
 Version:   [pbm version number]
 Platform:  linux/amd64
 GitCommit: [commit hash]
@@ -59,8 +59,8 @@ GoVersion: [Go version number]
 
     Instead of specifying the path to pbm binaries, you can add it to the PATH environment variable:
 
-    ```sh
-    export PATH=/percona-backup-mongodb/bin:$PATH
+    ```{.bash data-prompt="$"}
+    $ export PATH=/percona-backup-mongodb/bin:$PATH
     ```
 
 ## Post-install steps
@@ -69,14 +69,14 @@ GoVersion: [Go version number]
 
      1. Create the environment file:
 
-         ```sh
-         touch /etc/default/pbm-agent
+         ```{.bash data-prompt="$"}
+         $ touch /etc/default/pbm-agent
          ```
 
      2. Create the `pbm-agent.service` systemd unit file.
 
-         ```sh
-         sudo vim /lib/systemd/system/pbm-agent.service
+         ```{.bash data-prompt="$"}
+         $ sudo vim /lib/systemd/system/pbm-agent.service
          ```
 
      3. In the `pbm-agent.service` file, specify the following:
@@ -104,22 +104,22 @@ GoVersion: [Go version number]
 
      4. Make `systemd` aware of the new service:
 
-         ```sh
-         sudo systemctl daemon-reload
+         ```{.bash data-prompt="$"}
+         $ sudo systemctl daemon-reload
          ```
 
 === "On Red Hat Enterprise Linux and derivatives"
 
     1. Create the environment file:
    
-        ```sh
-        touch /etc/sysconfig/pbm-agent
+        ```{.bash data-prompt="$"}
+        $ touch /etc/sysconfig/pbm-agent
         ```
 
     2. Create the `pbm-agent.service` systemd unit file.
 
-        ```sh
-        sudo vim /usr/lib/systemd/system/pbm-agent.service
+        ```{.bash data-prompt="$"}
+        $ sudo vim /usr/lib/systemd/system/pbm-agent.service
         ```
 
     3. In the `pbm-agent.service` file, specify the following:
@@ -147,8 +147,8 @@ GoVersion: [Go version number]
 
      4. Make `systemd` aware of the new service:
 
-         ```sh
-         sudo systemctl daemon-reload
+         ```{.bash data-prompt="$"}
+         $ sudo systemctl daemon-reload
          ```
 
 ## Next steps

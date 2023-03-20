@@ -8,19 +8,19 @@ Run [`pbm status`](../reference/pbm-commands.md#pbm-status) or [`pbm list`](../r
 
 1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously. 
 
-    ```sh
-    pbm config --set pitr.enabled=false
+    ```{.bash data-prompt="$"}
+    $ pbm config --set pitr.enabled=false
     ```
 
-2. Stop the balancer and `mongos` nodes
+2. Stop the balancer and `mongos` nodes.
 3. Make sure no writes are made to the database during restore. 
 
 ## From logical backups 
 
 Run [`pbm restore`](../reference/pbm-commands.md#pbm-restore) and specify the timestamp from the valid range:
 
-```sh
-pbm restore --time="2022-12-14T14:27:04"
+```{.bash data-prompt="$"}
+$ pbm restore --time="2022-12-14T14:27:04"
 ```
 
 The timestamp you specify for the restore must be within the time ranges in the PITR section of `pbm list` output. Percona Backup for MongoDB automatically selects the most recent backup in relation to the specified timestamp and uses that as the base for the restore.
@@ -28,7 +28,7 @@ The timestamp you specify for the restore must be within the time ranges in the 
 To illustrate this behavior, let’s use the following `pbm list` output as the example. 
 
 ```{.bash .no-copy}
-pbm list
+$ pbm list
 
   2021-08-04T13:00:58Z [restore_to_time: 2021-08-04T13:01:23Z]
   2021-08-05T13:00:47Z [restore_to_time: 2021-08-05T13:01:11Z]
@@ -56,14 +56,14 @@ A restore operation changes the time line of oplog events. Therefore, all oplog 
 
 1. Make a new backup to serve as the starting point for oplog updates:
 
-    ```sh
-    pbm backup
+    ```{.bash data-prompt="$"}
+    $ pbm backup
     ```
 
 2. Re-enable point-in-time recovery to resume saving oplog slices:
 
-    ```sh
-    pbm config --set pitr.enabled=true
+    ```{.bash data-prompt="$"}
+    $ pbm config --set pitr.enabled=true
     ```
 
 ### Select a backup snapshot for the restore
@@ -80,8 +80,8 @@ Before you start, read [known limitations for selective backups and restores](..
 
 To restore the desired database or a collection to a point in time, run the ``pbm restore`` command as follows:
 
-```sh
-pbm restore --base-snapshot <backup_name> --time <timestamp> \
+```{.bash data-prompt="$"}
+$ pbm restore --base-snapshot <backup_name> --time <timestamp> \
 --ns <db.collection>
 ```
 
@@ -95,7 +95,7 @@ When point-in-time recovery is started, Percona Backup for MongoDB uses the prov
 
 A point-in-time restore from a physical backup consists of two steps: 
 
-1. Restore from the physical backup snapshot 
+1. Restore from the physical backup snapshot. 
 2. Manual replay of oplog events on top of it up to a specific timestamp.
 
 !!! tip
@@ -105,8 +105,8 @@ A point-in-time restore from a physical backup consists of two steps:
 
 To restore the backup snapshot, run the `pbm restore` command specifying the backup name:
 
-```sh
-pbm restore <backup_name>
+```{.bash data-prompt="$"}
+$ pbm restore <backup_name>
 ```
 
 To replay the oplog to the particular timestamp, do the following:
@@ -117,8 +117,8 @@ To replay the oplog to the particular timestamp, do the following:
 
  3. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps. Specify the `--start` timestamp at least 1 sec before the `restore_to_time` value for the backup snapshot that you restored.
 
-     ```sh
-     pbm oplog-replay --start="<timestamp>" --end="<timestamp>"
+     ```{.bash data-prompt="$"}
+     $ pbm oplog-replay --start="<timestamp>" --end="<timestamp>"
      ```
 
  4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.

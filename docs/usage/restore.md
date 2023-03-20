@@ -14,7 +14,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. Percona Backup for MongoDB is designed to be a full-database restore tool. As of version <=1.x, it performs a full all-databases, all collections restore and does not offer an option to restore only a subset of collections in the backup, as MongoDB’s `mongodump` tool does. But to avoid surprising `mongodump` users, as of versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
 
-    2. Whilst the restore is running, prevent clients from accessing the database. The data will naturally be incomplete whilst the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
+    2. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
     3. If you enabled [Point-in-time recovery](../features/point-in-time-recovery.md), disable it before running `pbm restore`. This is because Point-in-Time Recovery oplog slicing and restore are incompatible operations and cannot be run together.
 
@@ -46,7 +46,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === "Selective"
     
-    You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)
+    You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
 
 === "Incremental"
 
@@ -58,14 +58,14 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. List the backups to restore from
 
-        ```bash
-        pbm list
+        ```{.bash data-prompt="$"}
+        $ pbm list
         ```
 
     2. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
 
-       ```
-       pbm restore <backup_name>
+       ```{.bash data-prompt="$"}
+       $ pbm restore <backup_name>
        ```
 
     Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](#restoring-a-backup-into-a-new-environment).
@@ -97,14 +97,14 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. List the backups 
 
-        ```bash
-        pbm list
+        ```{.bash data-prompt="$"}
+        $ pbm list
         ```
 
     2. Make a restore
 
-        ```bash
-        pbm restore <backup_name>
+        ```{.bash data-prompt="$"}
+        $ pbm restore <backup_name>
         ```
 
     During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node.
@@ -119,7 +119,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     3. Run the following command to resync the backup list with the storage:
 
-        ```
+        ```{.bash data-prompt="$"}
         $ pbm config --force-resync
         ``` 
 
@@ -151,13 +151,13 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. List the backups 
 
-        ```bash
-        pbm list
+        ```{.bash data-prompt="$"}
+        $ pbm list
         ```
     2. Run the ``pbm restore`` command in the format:
 
-        ```bash
-        pbm restore <backup_name> --ns <database.collection>
+        ```{.bash data-prompt="$"}
+        $ pbm restore <backup_name> --ns <database.collection>
         ```
 
     During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
@@ -166,28 +166,24 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:
 
-    ```bash
-    pbm restore 2022-11-25T14:13:43Z
+    ```{.bash data-prompt="$"}
+    $ pbm restore 2022-11-25T14:13:43Z
     ```
 
     Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.
 
     After the restore is complete, do the following:
 
-    1. Restart all `mongod` nodes and `pbm-agents`, 
+    1. Restart all `mongod` nodes and `pbm-agents`. 
     2. Resync the backup list from the storage. 
     3. Start the balancer and the `mongos` node.
     4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
-
-
 
 ## Restoring a backup into a new environment
 
 To restore a backup from one environment to another, consider the following key points about the destination environment:
 
-
 * For physical restore, replica set names (both the config servers and the shards) in your new destination cluster and in the cluster that was backed up must be exactly the same.
-
 
 * Percona Backup for MongoDB configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run **pbm list** and see the backups made from the original environment, then you can run the **pbm restore** command.
 
@@ -208,13 +204,13 @@ Configure the replica set name mapping:
 
 === "Using the environment variable for `pbm` CLI in your shell"
 
-    ```
+    ```{.bash data-prompt="$"}
     $ export PBM_REPLSET_REMAPPING="rsX=rsA,rsY=rsB"
     ``` 
 
 === "Using the command line"
 
-    ```
+    ```{.bash data-prompt="$"}
     $ pbm restore <timestamp> --replset-remapping="rsX=rsA,rsY=rsB"
     ```
 

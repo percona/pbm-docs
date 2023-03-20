@@ -6,7 +6,7 @@ Point-in-time recovery is restoring a database up to a specific timestamp. This 
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
-| Helps you prevent data loss during a disaster such as crashed database, accidental data deletion or drop of tables, unwanted update of multiple fields instead of a single one | Restore takes longer since it requires to restore the backup and then replay oplog events on top of it|
+| Helps you prevent data loss during a disaster such as a crashed database, accidental data deletion or drop of tables, and unwanted update of multiple fields instead of a single one. | Restore takes longer since it requires you to restore the backup and then replay oplog events on top of it.|
 
 ## Enable point-in-time recovery
 
@@ -14,8 +14,8 @@ Set the `pitr.enabled` configuration option to `true`.
 
 === "Command line"
 
-     ```sh
-     pbm config --set pitr.enabled=true
+     ```{.bash data-prompt="$"}
+     $ pbm config --set pitr.enabled=true
      ```
 
 === "Configuration file"
@@ -28,13 +28,13 @@ Set the `pitr.enabled` configuration option to `true`.
 The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) periodically. A method similar to the way replica set nodes elect a new primary is used to select the `pbm-agent` that saves the oplog slices. (Find more information in [pbm-agent](../details/pbm-agent.md).)
 
 
-[Make a point-in-time restore ](../usage/pitr-tutorial.md){ .md-button .md-button }
+[Restore to a point-in-time](../usage/pitr-tutorial.md){ .md-button .md-button }
 
 ## Oplog slicing
 
 To start saving [oplog slices](../reference/glossary.md#oplog), the following preconditions must be met:
 
-* A full backup snapshot is required. Make sure that a [backup exists](../usage/list-backup.md). See the [Start a backup](../usage/start-backup.md) guide to make a backup snapshot.
+* A full backup snapshot is required. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
 * Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
 
 If you just enabled point-in-time recovery, it requires 10 minutes for the first chunk to appear in the [`pbm list`](../reference/pbm-commands.md#pbm-list) output.
@@ -49,14 +49,14 @@ If you just enabled point-in-time recovery, it requires 10 minutes for the first
 
 !!! admonition "Version added: [1.6.0](../release-notes/1.6.0.md)"
 
-By default, a slice covers a 10 minute span of oplog events. It can be shorter if point-in-time recovery is disabled or interrupted by the start of a backup snapshot operation.
+By default, a slice covers a 10-minute span of oplog events. It can be shorter if point-in-time recovery is disabled or interrupted by the start of a backup snapshot operation.
 
 You can change the duration of an oplog span via the configuration file. Specify the new value (in minutes) for the `pitr.oplogSpanMin` option.
 
 === "Command line"
 
-     ```sh
-     pbm config --set pitr.oplogSpanMin=5
+     ```{.bash data-prompt="$"}
+     $ pbm config --set pitr.oplogSpanMin=5
      ```
 
 === "Configuration file"
@@ -78,8 +78,8 @@ The oplog slices are saved with the `s2` compression method by default. You can 
 
 === "Command line"
 
-     ```sh
-     pbm config --set pitr.compression=gzip
+     ```{.bash data-prompt="$"}
+     $ pbm config --set pitr.compression=gzip
      ```
 
 === "Configuration file"
@@ -109,8 +109,8 @@ The [`pbm list`](../reference/pbm-commands.md#pbm-list) output includes the foll
 * Valid time ranges for recovery
 * Point-in-time recovery status
 
-   ```sh
-   pbm list
+   ```{.bash data-prompt="$"}
+   $ pbm list
 
      2021-08-04T13:00:58Z [restore_to_time: 2021-08-04T13:01:23Z]
      2021-08-05T13:00:47Z [restore_to_time: 2021-08-05T13:01:11Z]

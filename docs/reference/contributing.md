@@ -4,9 +4,9 @@ We're glad that you would like to become a Percona community member and particip
 
 There are many ways how you can contribute:
 
-* Submit bug reports or feature requests
-* Submit a code patch
-* Contribute to documentation
+* Submit bug reports or feature requests.
+* Submit a code patch.
+* Contribute to documentation.
 
 # Submit bug reports or feature requests
 
@@ -32,17 +32,17 @@ PBM control collections.
 As a general rule of thumb, try to create bug reports that are:
 
 
-* *Reproducible*: describe the steps to reproduce the problem.
+* *Reproducible*: Describe the steps to reproduce the problem.
 
 
-* *Specific*: include the version of Percona Backup for MongoDB, your environment, and so on.
+* *Specific*: Include the version of Percona Backup for MongoDB, your environment, and so on.
 
 
-* *Unique*: check if there already exists a JIRA ticket to describe
+* *Unique*: Check if there already exists a JIRA ticket to describe
 the problem.
 
 
-* *Scoped to a Single Bug*: only report one bug in one JIRA ticket.
+* *Scoped to a Single Bug*: Report only one bug in one JIRA ticket.
 
 ## Submit a code patch
 

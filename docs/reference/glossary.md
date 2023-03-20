@@ -30,13 +30,13 @@ Starting with version 2.0.0, the completion time is renamed "restore_to_time"
 
 The completion time is the time to which the sharded cluster / non-shared replica set will be returned to after the restore.  It is reflected in the "complete" section of the ``pbm list`` / ``pbm status`` command outputs.
 
-In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, |PBM| waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
+In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, Percona Backup for MongoDB waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
 
-In `physical` backups, the completion time is only a few seconds after the backup start time. By holding the ``$backupCursor`` open guarantees that the checkpoint data won't change during the backup, and Percona Backup for MongoDB can define the completion time ahead.
+In `physical` backups, the completion time is only a few seconds after the backup start time. By holding the ``$backupCursor`` open, Percona Backup for MongoDB guarantees that the checkpoint data won't change during the backup. In such a way Percona Backup for MongoDB can define the completion time ahead.
 
 ## Consistency
 
-In the context of backup and restore, consistency means that the data restored will be consistent in a given point in time. Partial or incomplete writes to disk of atomic operations (for example, to table and index data structures separately) won't be served to the client after the restore. The same applies to multi-document transactions, that started but didn't complete by the time the backup was finished.
+In the context of backup and restore, consistency means that the data restored will be consistent in a given point in time. Partial or incomplete writes to disk of atomic operations (for example, to table and index data structures separately) won't be served to the client after the restore. The same applies to multi-document transactions that started but didn't complete by the time the backup was finished.
 
 ## Container 
    
@@ -62,9 +62,9 @@ The Isolation requirement means that no transaction can interfere with another.
      
 [Jenkins](http://www.jenkins-ci.org) is a continuous integration system that we use to help ensure the continued quality of the software we produce. It helps us achieve the aims of:
 
-* no failed tests in trunk on any platform,
-* aid developers in ensuring merge requests build and test on all platforms,
-* no known performance regressions (without a damn good explanation).
+* No failed tests in trunk on any platform
+* Aid developers in ensuring merge requests build and test on all platforms,
+* No known performance regressions (without a damn good explanation).
 
 ## MinIO
 

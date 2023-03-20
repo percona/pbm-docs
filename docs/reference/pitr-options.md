@@ -49,7 +49,7 @@ The following table shows available compression levels per compression method:
 | `gzip` and `pgzip`   | -1 - default compression, 0 - no compression, 1 - best speed, 9 - best compression| -1
 
 
-Note that the higher value you specify, the more time and computing resources it will take to compress the data.
+Note that the greater value you specify, the more time and computing resources it will take to compress the data.
 
 ### pitr.oplogOnly
 

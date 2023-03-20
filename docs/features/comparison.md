@@ -1,6 +1,6 @@
 # Comparison with MongoDB 
 
-Percona Backup for MongoDB is a fully supported community backup solution that can perform cluster-wide consistent backups in MongoDB. The following table compares the Percona Backup for MongoDB with the MongoDB backup solutions
+Percona Backup for MongoDB is a fully supported community backup solution that can perform cluster-wide consistent backups in MongoDB. The following table compares Percona Backup for MongoDB with the MongoDB backup solutions:
 
 | Feature name | Percona Backup for MongoDB | MongoDB Community `mongodump` | MongoDB Enterprise | MongoDB Atlas |
 | -------------| -------------------------- | ----------- | ----------------- | --------------- 

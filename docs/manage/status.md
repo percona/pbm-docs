@@ -4,7 +4,7 @@
 
 You can check the status of Percona Backup for MongoDB running in your MongoDB environment using the [`pbm status`](../reference/pbm-commands.md#pbm-status) command.
 
-```sh
+```{.bash data-prompt="$"}
 $ pbm status
 ```
 
@@ -16,7 +16,7 @@ The output provides the information about:
 
 * Backups stored in the remote backup storage: backup name, completion time, size and status (complete, canceled, failed)
 
-* [Point-in-time recovery](../features/point-in-time-recovery.md) status (enabled or disabled).
+* [Point-in-time recovery](../features/point-in-time-recovery.md) status (enabled or disabled)
 
 * Valid time ranges for point-in-time recovery and the data size
 
@@ -24,7 +24,7 @@ This simplifies troubleshooting since the whole information is provided in one p
 
 **Sample output**
 
-```sh
+```{.bash .no-copy}
 pbm status
 
 Cluster:

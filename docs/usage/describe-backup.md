@@ -2,8 +2,8 @@
 
 To view a detailed information about a backup, run the following command:
 
-```sh
-pbm describe-backup <backup-name>
+```{.bash data-prompt="$"}
+$ pbm describe-backup <backup-name>
 ```
 
 The output provides the backup name, type, status, size and the information about the cluster topology it was taken in. For [selective backups](../features/selective-backup.md), it also shows the namespaces that were backed up:

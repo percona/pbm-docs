@@ -6,9 +6,9 @@ Percona Backup for MongoDB provides diagnostics tools to operate data backups.
 
 **pbm-speed-test** allows field-testing compression and backup upload speed of logical backups. You can use it:
 
-* to check performance before starting a backup;
+* To check performance before starting a backup
 
-* to find out what slows down the running backup.
+* To find out what slows down the running backup
 
 By default, **pbm-speed-test** operates with fake semi random data documents. To
 run **pbm-speed-test** on a real collection, provide a valid MongoDB connection URI string for the `--mongodb-uri` flag.
@@ -17,13 +17,13 @@ Run **pbm-speed-test** for the full set of available commands.
 
 ### Compression test
 
-```sh
+```{.bash data-prompt="$"}
 $ pbm-speed-test compression --compression=s2 --size-gb 10
 ```
 
 Output:
 
-```
+```{.bash .no-copy}
 Test started ....
 10.00GB sent in 8s.
 Avg upload rate = 1217.13MB/s.
@@ -38,7 +38,7 @@ To test compression on a real collection, pass the
 
 Run `pbm-speed-test compression --help` for the full set of supported flags:
 
-```
+```{.bash data-prompt="$"}
 $ pbm-speed-test compression --help
 usage: pbm-speed-test compression
 
@@ -60,7 +60,7 @@ Flags:
 
 ### Upload speed test
 
-```sh
+```{.bash data-prompt="$"}
 $ pbm-speed-test storage --compression=s2
 ```
 
@@ -104,7 +104,7 @@ If you have a large logical backup, you can track the backup progress in the log
 
 Start a backup:
 
-```sh
+```{.bash data-prompt="$"}
 $ pbm backup
 ```
 
@@ -112,13 +112,13 @@ Check backup progress:
 
 1. Check what `pbm-agent` makes the backup:
 
-    ```sh
+    ```{.bash data-prompt="$"}
     pbm logs
     ```
 
 2. Connect to the `mongod` server where the `pbm-agent` is running and check its logs
 
-    ```sh
+    ```{.bash data-prompt="$"}
     $ journalctl -u pbm-agent.service
     ```
 
@@ -155,7 +155,7 @@ To troubleshoot issues with specific events or node(s), use the [`pbm logs`](../
 
 `pbm logs` has the set of filters to refine logs for specific events like `backup`, `restore`, `pitr` or for a specific node, and to manage log verbosity level. For example, to view logs about a specific backup with the Debug verbosity level, run the `pbm logs` command as follows:
 
-```sh
+```{.bash data-prompt="$"}
 $ pbm logs --severity=D --event=backup/2020-10-15T17:42:54Z
 ```
 

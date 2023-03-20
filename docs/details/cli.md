@@ -10,7 +10,7 @@ The set of [pbm sub-commands](../reference/pbm-commands.md) enables you to manag
 `pbm` CLI does not have its own config and/or cache files. Setting the
 `PBM_MONGODB_URI` environment variable in your shell is a
 configuration-like step that should be done for practical ease though. (Without
-`PBM_MONGODB_URI` the `--mongodb-uri` command line argument will need to
+`PBM_MONGODB_URI`, the `--mongodb-uri` command line argument will need to
 be specified each time.)
 
 To learn how to set the `PBM_MONGODB_URI` environment variable, see [Set the MongoDB connection URI for `pbm` CLI](../install/initial-setup.md#set-mongodburi-pbm-cli). For more information about MongoDB URI connection strings, see [Authentication](authentication.md).

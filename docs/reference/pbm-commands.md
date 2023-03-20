@@ -14,8 +14,8 @@ Sets, changes or lists Percona Backup for MongoDB configuration.
 
 The command has the following syntax:
 
-```sh
-pbm config [<flags>] [<key>]
+```{.bash data-prompt="$"}
+$ pbm config [<flags>] [<key>]
 ```
 
 The command accepts the following flags:
@@ -73,8 +73,8 @@ Creates a backup snapshot and saves it in the remote backup storage.
 
 The command has the following syntax:
 
-```sh
-pbm backup [<flags>]
+```{.bash data-prompt="$"}
+$ pbm backup [<flags>]
 ```
 
 For more information about using `pbm backup`, see [Starting a backup](../usage/start-backup.md)
@@ -106,8 +106,8 @@ Restores database from a specified backup / to a specified point in time. Depend
 
 The command has the following syntax:
 
-```sh
-pbm restore [<flags>] [<backup_name>]
+```{.bash data-prompt="$"}
+$ pbm restore [<flags>] [<backup_name>]
 ```
 
 For more information about using `pbm restore`, see [Restoring a backup](../usage/restore.md).
@@ -159,8 +159,8 @@ Provides the detailed information about a backup:
 
 The command has the following syntax:
 
-```sh
-pbm describe-backup [<backup-name>] [<flags>] 
+```{.bash data-prompt="$"}
+$ pbm describe-backup [<backup-name>] [<flags>] 
 ```
 
 | Flag                  | Description                           |
@@ -233,8 +233,8 @@ When Point-in-Time Recovery is enabled, the `pbm list` also provides the list of
 
 The command has the following syntax:
 
-```sh
-pbm list [<flags>]
+```{.bash data-prompt="$"}
+$ pbm list [<flags>]
 ```
 
 The command accepts the following flags:
@@ -349,8 +349,8 @@ Shows the detailed information about the restore.
 
 The command has the following syntax:
 
-```sh
-pbm describe-restore [<restore-timestamp>] [<flags>] 
+```{.bash data-prompt="$"}
+$ pbm describe-restore [<restore-timestamp>] [<flags>] 
 ```
 
 The command accepts the following flags:
@@ -433,8 +433,8 @@ Deletes the specified backup snapshot or all backup snapshots that are older tha
 
 The following is the command syntax:
 
-```sh
-pbm delete-backup [<flags>] [<name>]
+```{.bash data-prompt="$"}
+$ pbm delete-backup [<flags>] [<name>]
 ```
 
 The command accepts the following flags:
@@ -450,7 +450,7 @@ Deletes oplog slices produced for Point-in-Time Recovery.
 
 The command has the following syntax:
 
-```sh
+```{.bash data-prompt="$"}
 pbm delete-pitr [<flags>]
 ```
 
@@ -494,9 +494,9 @@ The command accepts the following flags:
 
 Shows the status of Percona Backup for MongoDB. The output provides the following information:
 
-* `pbm-agent` processes version and state,
-* currently running backups or restores
-* backups stored in the remote storage
+* `pbm-agent` processes version and state
+* Currently running backups or restores
+* Backups stored in the remote storage
 * Point-in-Time Recovery status
 * Valid time ranges for point-in-time recovery and the data size
 
@@ -577,8 +577,8 @@ Shows log information from all `pbm-agent` processes.
 
 The command has the following syntax:
 
-```sh
-pbm logs [<flags>]
+```{.bash data-prompt="$"}
+$ pbm logs [<flags>]
 ```
 
 The command accepts the following flags:
@@ -626,8 +626,8 @@ To learn more about the usage, refer to Point-in-Time Recovery oplog replay.
 
 The command has the following syntax:
 
-```sh
-pbm oplog-replay [<flags>]
+```{.bash data-prompt="$"}
+$ pbm oplog-replay [<flags>]
 ```
 
 The command accepts the following flags:

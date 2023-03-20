@@ -22,22 +22,22 @@ The following diagram shows the physical restore flow:
 
 ![image](../_images/pbm-phys-restore-shard.png)
 
-During the restore, the ``pbm-agents`` temporarily start the ``mongod`` nodes using the the WiredTiger storage options retrieved from the backup’s metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore this file is deleted. However, it remains for debugging if the restore failed. 
+During the restore, the ``pbm-agents`` temporarily start the ``mongod`` nodes using the the WiredTiger storage options retrieved from the backup’s metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore, this file is deleted. However, it remains for debugging if the restore were to fail. 
 
 During physical backups and restores, ``pbm-agents`` don’t export / import data from / to the database. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (multi-terabyte) databases.
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
-|- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point in time recovery requires manual operations | Sharded clusters and non-sharded replica sets |
+|- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point-in-time recovery requires manual operations | Sharded clusters and non-sharded replica sets |
 
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }
-[Make a restore](../usage/restore.md){ .md-button .md-button }
+[Restore a backup](../usage/restore.md){ .md-button .md-button }
 
 ## Physical restores with data-at-rest encryption
 
 !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-    You can backup and restore the encrypted data at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
+    You can back up and restore the encrypted data at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
 
 This is how it works: 
 
@@ -45,7 +45,7 @@ During a backup, Percona Backup for MongoDB stores the encryption settings in th
 
 !!! important
 
-    Make sure that you know what encryption key was used and store it as this key is required for the restore.
+    Make sure that you know what encryption key was used and store it, as this key is required for the restore.
 
 To restore the encrypted data from the backup, do the following:
 

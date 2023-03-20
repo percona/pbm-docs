@@ -4,10 +4,10 @@ Percona Backup for MongoDB saves your files to a directory. Using [`pbm list`](.
 backups even if they never used `pbm` on their computer before.
 
 The files are prefixed with the (UTC) starting time of the backup. For each
-backup there is one metadata file. For each replica set, a backup includes the following:
+backup, there is one metadata file. For each replica set, a backup includes the following:
 
 * A mongodump-format compressed archive that is the dump of collections
-* A (compressed) BSON file dump of the oplog covering the time span of the backup.
+* A (compressed) BSON file dump of the oplog covering the time span of the backup
 
 The end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.
 
@@ -49,7 +49,7 @@ Starting with version 2.0.1, Percona Backup for MongoDB also supports server-sid
 !!! warning
 
     1. Enable/disable the server-side encryption only for the empty bucket. Otherwise, Percona Backup for MongoDB fails to save/retrieve objects to/from the storage properly.
-    2. S3 storage doesn't manage nor store the encryption key. It is your responsibility to track what key was used to encrypt what object in the bucket. If you lose the key, any request for an object without the encryption key fails and you lose the object. 
+    2. S3 storage doesn't manage or store the encryption key. It is your responsibility to track what key was used to encrypt what object in the bucket. If you lose the key, any request for an object without the encryption key fails and you lose the object. 
 
 To use the SSE-C encryption, specify the following parameters in the Percona Backup for MongoDB configuration file:
 

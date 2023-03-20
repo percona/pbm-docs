@@ -20,8 +20,8 @@ To install the software from Percona repositories means to subscribe to them. Pe
 
 Starting with of version 1.3.0, Percona Backup for MongoDB packages are stored in the *pbm* repository.
 
-```sh
-sudo percona-release enable pbm release
+```{.bash data-prompt="$"}
+$ sudo percona-release enable pbm release
 ```
 
 #### 3. Install Percona Backup for MongoDB
@@ -30,22 +30,22 @@ sudo percona-release enable pbm release
 
     1. Reload the local package database:
 
-        ```sh
-        sudo apt update
+        ```{.bash data-prompt="$"}
+        $ sudo apt update
         ```
 
     2. Install Percona Backup for MongoDB:
 
-        ```sh
-        sudo apt install percona-backup-mongodb
+        ```{.bash data-prompt="$"}
+        $ sudo apt install percona-backup-mongodb
         ```
 
 === "On Red Hat Enterprise Linux and derivatives"
     
     Install Percona Backup for MongoDB:
 
-    ```sh
-    sudo yum install percona-backup-mongodb
+    ```{.bash data-prompt="$"}
+    $ sudo yum install percona-backup-mongodb
     ```
 
 ## Next steps

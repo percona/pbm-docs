@@ -15,23 +15,23 @@ Find the link to the binary tarballs under the **Generic Linux** menu item on [P
 
 Replace the `<version>` with the required version.
 
-   ```sh
-   wget https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-<version>/binary/tarball/percona-backup-mongodb-<version>-x86_64.tar.gz
+   ```{.bash data-prompt="$"}
+   $ wget https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-<version>/binary/tarball/percona-backup-mongodb-<version>-x86_64.tar.gz
    ```
 
 
 ### 2. Extract the tarball
 
-  ```sh
-  tar -xf percona-backup-mongodb-<version>-x86_64.tar.gz
+  ```{.bash data-prompt="$"}
+  $ tar -xf percona-backup-mongodb-<version>-x86_64.tar.gz
   ```
 
 ### 3. Export the location of the binaries to the `PATH` variable
 
 For example, if you’ve extracted the tarball to your `home` directory, the command would be the following:
 
-  ```sh
-  export PATH=~/percona-backup-mongodb-<version>/:$PATH
+  ```{.bash data-prompt="$"}
+  $ export PATH=~/percona-backup-mongodb-<version>/:$PATH
   ```
 
 After Percona Backup for MongoDB is successfully installed on your system, you have `pbm` and `pbm-agent` programs available. See [Initial setup](initial-setup.md) for guidelines how to set up Percona Backup for MongoDB.

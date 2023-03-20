@@ -10,46 +10,46 @@ Let's have a look at how Percona Backup for MongoDB works.
 
 With [Percona Backup for MongoDB up and running](installation.md) in your environment, make a backup:
 
-```sh
-pbm backup
+```{.bash data-prompt="$"}
+$ pbm backup
 ```
 
 To save all events that occurred to the data between the backups, enable saving oplog slices:
 
-```sh
-pbm config --set pitr.enabled=true
+```{.bash data-prompt="$"}
+$ pbm config --set pitr.enabled=true
 ```
 
-Now, imagine that your web application’s update was released on February 7th 03:00 UTC. By 15:23 UTC, someone realizes that this update has a bug that is wiping the historical data of any user who logged in. To remediate this negative impact on data, it’s time to roll back up to the time of the application’s update - up to February 7th, 03:00 UTC.
+Now, imagine that your web application’s update was released on February 7 at 03:00 UTC. By 15:23 UTC, someone realizes that this update has a bug that is wiping the historical data of any user who logged in. To remediate this negative impact on data, it’s time to roll back up to the time of the application’s update - up to February 7, 03:00 UTC.
 
-```sh
-pbm list
+```{.bash data-prompt="$"}
+$ pbm list
 ```
 
-The output lists the valid time ranges for the restore. The desired time (February 7th, 03:00 UTC) falls within the `2021-02-03T08:08:36Z-2021-02-09T12:20:23Z` range, so let’s restore the database up to that time.
+The output lists the valid time ranges for the restore. The desired time (February 7, 03:00 UTC) falls within the `2021-02-03T08:08:36Z-2021-02-09T12:20:23Z` range, so let’s restore the database up to that time.
 
 Since the restore and saving oplog slices are exclusive operations and cannot run together, let’s stop the oplog slicing first:
 
-```
-pbm config --set pitr.enabled=false
+```{.bash data-prompt="$"}
+$ pbm config --set pitr.enabled=false
 ```
 
 Now, let's restore the database:
 
-```sh
-pbm restore --time 2021-02-07T02:59:59
+```{.bash data-prompt="$"}
+$ pbm restore --time 2021-02-07T02:59:59
 ```
 
 To be on the safe side, it is a good practice to make a fresh backup after the restore is complete.
 
-```sh
-pbm backup
+```{.bash data-prompt="$"}
+$ pbm backup
 ```
 
 This backup refreshes the timeline and serves as the base for saving oplog slices. To re-enable this process, run:
 
-```sh
-pbm config --set pitr.enabled=true
+```{.bash data-prompt="$"}
+$ pbm config --set pitr.enabled=true
 ```
 
 ## Next steps

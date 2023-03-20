@@ -32,20 +32,20 @@ The following are some examples of filtering logs:
 
 **Show logs for all backups**
 
-```
-pbm logs --event=backup
+```{.bash data-prompt="$"}
+$ pbm logs --event=backup
 ```
 
 **Show the last 100 lines of the log about a specific backup 2020-10-15T17:42:54Z**
 
-```
-pbm logs --tail=100 --event=backup/2020-10-15T17:42:54Z
+```{.bash data-prompt="$"}
+$ pbm logs --tail=100 --event=backup/2020-10-15T17:42:54Z
 ```
 
 **Include only errors from the specific replica set**
 
-```
-pbm logs -n rs1 -s E
+```{.bash data-prompt="$"}
+$ pbm logs -n rs1 -s E
 ```
 
 The output includes log messages of the specified severity type and all higher levels. Thus, when `ERROR` is specified, both `ERROR` and `FATAL` messages are shown in the output.

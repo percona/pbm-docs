@@ -1,7 +1,7 @@
 # Percona Backup for MongoDB Documentation
 
 
-Percona Backup for MongoDB (PBM) is an open source and distributed solution without notable performance and operating degradation for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md).
+Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md). There is no notable performance nor operating degradation associated with PBM.
 
 With Percona Backup for MongoDB, you can make backups on a running server and restore your database to a specific point in time using the command line. To do these tasks from a user interface, [use PBM with Percona Monitoring and Management](https://docs.percona.com/percona-monitoring-and-management/get-started/backup/index.html).
 
@@ -12,7 +12,8 @@ With Percona Backup for MongoDB, you can make backups on a running server and re
 ## What you can do
 
 
-![image](_images/backups-infographic.png)
+![image](_images/backups-infographic.png#only-light)
+![image](_images/backups-infographic-dark.png#only-dark)
 
 * [Logical backups](features/logical.md) to back up and / or migrate data to different platforms and database versions
 * [Physical backups](features/physical.md) to speed up performance for large (multi-terabyte) data sets
@@ -27,7 +28,7 @@ With Percona Backup for MongoDB, you can make backups on a running server and re
 ## What's in it for you?
 
 * Data consistency across clusters and replica sets
-* No vendor lock-in due to a variety of [supported storage types](details/storage-configuration.md)
+* A variety of [supported storage types](details/storage-configuration.md) means no vendor lock-in
 * Open source solution with [enterprise-grade features](features/comparison.md) 
 
 [Install and get started](installation.md){ .md-button .md-button--primary }

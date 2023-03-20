@@ -26,8 +26,8 @@ Run all commands as root or via `sudo`.
 
 2. Enable the repository
 
-    ```sh
-    sudo percona-release enable pbm release
+    ```{.bash data-prompt="$"}
+    $ sudo percona-release enable pbm release
     ```
 
 !!! note
@@ -40,22 +40,22 @@ Run all commands as root or via `sudo`.
 
     ### 1. Stop `pbm-agent`
 
-      ```sh
-      sudo systemctl stop pbm-agent
+      ```{.bash data-prompt="$"}
+      $ sudo systemctl stop pbm-agent
       ```
 
     ### 2. Install new packages
 
-      ```sh
-      sudo apt install percona-backup-mongodb
+      ```{.bash data-prompt="$"}
+      $ sudo apt install percona-backup-mongodb
       ```  
 
     ### 3. Reload the `systemd` process
 
     Starting from v1.7.0, reload the `systemd` process to update the unit file with the following command:
 
-     ```sh
-     sudo systemctl daemon-reload
+     ```{.bash data-prompt="$"}
+     $ sudo systemctl daemon-reload
      ```
 
     ### 4. Update permissions
@@ -65,30 +65,30 @@ Run all commands as root or via `sudo`.
 
     ### 5. Start `pbm-agent`
 
-      ```sh
-      sudo systemctl start pbm-agent
+      ```{.bash data-prompt="$"}
+      $ sudo systemctl start pbm-agent
       ```
 
 === "On Red Hat Enterprise Linux and derivatives"
 
     ### 1. Stop `pbm-agent`
 
-      ```sh
-      sudo systemctl stop pbm-agent
+      ```{.bash data-prompt="$"}
+      $ sudo systemctl stop pbm-agent
       ```
 
     ### 2. Install new packages
 
-      ```sh
-      sudo yum install percona-backup-mongodb
+      ```{.bash data-prompt="$"}
+      $ sudo yum install percona-backup-mongodb
       ```
 
     ### 3. Reload the `systemd` process
 
     Starting from v1.7.0, reload the `systemd` process to update the unit file with the following command:
 
-     ```sh
-     sudo systemctl daemon-reload
+     ```{.bash data-prompt="$"}
+     $ sudo systemctl daemon-reload
      ```
 
     ### 4. Update permissions
@@ -98,8 +98,8 @@ Run all commands as root or via `sudo`.
 
     ### 5. Start `pbm-agent`
 
-      ```sh
-      sudo systemctl start pbm-agent
+      ```{.bash data-prompt="$"}
+      $ sudo systemctl start pbm-agent
       ``` 
 
 ## Upgrade to a specific version
@@ -108,13 +108,13 @@ Run all commands as root or via `sudo`.
 
     ### 1. List available versions
 
-     ```sh
-     sudo apt-cache madison percona-backup-mongodb
+     ```{.bash data-prompt="$"}
+     $ sudo apt-cache madison percona-backup-mongodb
      ```
 
     Output:
 
-     ```text
+     ```{.text .no-copy}
      percona-backup-mongodb | 1.8.1-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
      percona-backup-mongodb | 1.8.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
      percona-backup-mongodb | 1.7.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
@@ -125,16 +125,16 @@ Run all commands as root or via `sudo`.
 
     ### 2. Stop `pbm-agent`
 
-       ```sh
-       sudo systemctl stop pbm-agent
+       ```{.bash data-prompt="$"}
+       $ sudo systemctl stop pbm-agent
        ```
 
     ### 3. Install packages
 
     Install a specific version packages. For example, to upgrade to Percona Backup for MongoDB 1.7.0, run the following command:
 
-     ```sh
-     sudo apt install percona-backup-mongodb=1.7.0-1.stretch
+     ```{.bash data-prompt="$"}
+     $ sudo apt install percona-backup-mongodb=1.7.0-1.stretch
      ```
  
     ### 4. Update permissions
@@ -144,21 +144,21 @@ Run all commands as root or via `sudo`.
 
     ### 5. Start `pbm-agent`
 
-      ```sh
-      sudo systemctl start pbm-agent
+      ```{.bash data-prompt="$"}
+      $ sudo systemctl start pbm-agent
       ``` 
 
 === "On Red Hat Enterprise Linux and derivatives"
   
     ### 1. List available versions
 
-     ```sh
-     sudo yum list percona-backup-mongodb --showduplicates
+     ```{.bash data-prompt="$"}
+     $ sudo yum list percona-backup-mongodb --showduplicates
      ```
 
     Output:
 
-     ```text
+     ```{.text .no-copy}
      Available Packages
      percona-backup-mongodb.x86_64    1.8-1.el7            pbm-release-x86_64
      percona-backup-mongodb.x86_64    1.8.0-1.el7          pbm-release-x86_64
@@ -170,16 +170,16 @@ Run all commands as root or via `sudo`.
 
     ### 2. Stop `pbm-agent`
 
-       ```sh
-       sudo systemctl stop pbm-agent
+       ```{.bash data-prompt="$"}
+       $ sudo systemctl stop pbm-agent
        ```
 
     ### 3. Install packages
 
     Install a specific version packages. For example, to upgrade to Percona Backup for MongoDB 1.7.1, run the following command:
 
-     ```sh
-     sudo yum install percona-backup-mongodb-1.7.1-1.el7
+     ```{.bash data-prompt="$"}
+     $ sudo yum install percona-backup-mongodb-1.7.1-1.el7
      ```
     
     ### 4. Update permissions
@@ -189,8 +189,8 @@ Run all commands as root or via `sudo`.
 
     ### 5. Start `pbm-agent`
 
-      ```sh
-      sudo systemctl start pbm-agent
+      ```{.bash data-prompt="$"}
+      $ sudo systemctl start pbm-agent
       ``` 
 
 !!! note

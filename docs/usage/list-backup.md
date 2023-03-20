@@ -9,8 +9,8 @@
 
 Use the `pbm list` command to view all completed backups. 
 
-```sh
-pbm list
+```{.bash data-prompt="$"}
+$ pbm list
 ```
 
 The output provides the following information:
@@ -22,7 +22,7 @@ The output provides the following information:
 
 **Sample output**
 
-```
+```{.text .no-copy}
 Backup snapshots:
   2023-03-10T10:44:52Z <logical> [restore_to_time: 2023-03-10T10:44:56Z]
   2023-03-10T10:49:20Z <physical> [restore_to_time: 2023-03-10T10:49:23Z]

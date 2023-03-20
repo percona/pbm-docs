@@ -1,12 +1,12 @@
 # Initial setup
 
-After you [installed Percona Backup for MongoDB](../installation.md) on every server with the `mongod` node that is not an arbiter node, the setup steps are the following:
+After you [install Percona Backup for MongoDB](../installation.md) on every server with the `mongod` node that is not an arbiter node, the setup steps are the following:
 
-1. [Configure authentication in MongoDB](#configure-authentication-in-mongodb)
+1. [Configure authentication in MongoDB](#configure-authentication-in-mongodb).
 
-2. [Configure the remote backup storage](#configure-remote-backup-storage)
+2. [Configure the remote backup storage](#configure-remote-backup-storage).
 
-3. [Start `pbm-agent` process](#start-the-pbm-agent-process)
+3. [Start `pbm-agent` process](#start-the-pbm-agent-process).
 
 The following diagram outlines the installation and setup steps:
 
@@ -16,9 +16,9 @@ The following diagram outlines the installation and setup steps:
 
 Percona Backup for MongoDB uses the authentication and authorization subsystem  of MongoDB. This means that to authenticate Percona Backup for MongoDB, you need to:
 
-* [create a corresponding `pbm` user](#create-the-pbm-user) in the `admin` database 
-* [set a valid MongoDB connection URI string for **pbm-agent**](#set-the-mongodb-connection-uri-for-pbm-agent) 
-* [set a valid MongoDB connection URI string for `pbm` CLI](#set-the-mongodb-connection-uri-for-pbm-cli)
+* [Create a corresponding `pbm` user](#create-the-pbm-user) in the `admin` database 
+* [Set a valid MongoDB connection URI string for **pbm-agent**](#set-the-mongodb-connection-uri-for-pbm-agent) 
+* [Set a valid MongoDB connection URI string for `pbm` CLI](#set-the-mongodb-connection-uri-for-pbm-cli)
 
 ### Create the `pbm` user
 
@@ -143,7 +143,7 @@ Use the following command:
 export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin&replSetName=xxxx"
 ```
 
-For more information what connection string to specify, refer to the [pbm connection string](../details/authentication.md#mongodb-connection-strings-a-reminder-or-primer) section.
+For more information about what connection string to specify, refer to the [pbm connection string](../details/authentication.md#mongodb-connection-strings-a-reminder-or-primer) section.
 
 ### External authentication support in Percona Backup for MongoDB
 
@@ -161,8 +161,8 @@ PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authM
 
 Note that you must first obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
 
-```sh
-sudo -u {USER} kinit pbm
+```{.bash data-prompt="$"}
+$ sudo -u {USER} kinit pbm
 ```
 
 Note that the `{USER}` is the user that you will run the `pbm-agent` process.
@@ -249,21 +249,21 @@ The storage configuration itself is out of scope of the present document. We ass
 
 3. Insert the config file
 
-```sh
-pbm config --file pbm_config.yaml
+```{.bash data-prompt="$"}
+$ pbm config --file pbm_config.yaml
 ```
 
-For a sharded cluster, run this command whilst connecting to config server replica set. Otherwise connect to the non-sharded replica set as normal.
+For a sharded cluster, run this command while connecting to the config server replica set. Otherwise connect to the non-sharded replica set as normal.
 
-To learn more about Percona Backup for MongoDB configuration, see Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set).
+To learn more about Percona Backup for MongoDB configuration, see [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).
 
 ## Start the `pbm-agent` process
 
 Start `pbm-agent` on every server with the `mongod` node installed. It is best to use the packaged service scripts to run `pbm-agent`.
 
-```sh
-sudo systemctl start pbm-agent
-sudo systemctl status pbm-agent
+```{.bash data-prompt="$"}
+$ sudo systemctl start pbm-agent
+$ sudo systemctl status pbm-agent
 ```
 
 For example, imagine that you put configsvr nodes (listen port `27019`) collocated on the same servers as the first shard’s `mongod` nodes (listen port `27018`, replica set name `sh1rs`). In this server there should be two `pbm-agent` processes, one connected to the shard (e.g. `“mongodb://username:password@localhost:27018/”`) and one to the configsvr node (e.g. `“mongodb://username:password@localhost:27019/”`).
@@ -275,8 +275,8 @@ output is redirected to a file and the process is backgrounded.
 
     Start the `pbm-agent` as the `mongod` user. The `pbm-agent` requires write access to the MongoDB data directory to make physical restores.
 
-```sh
-su mongod nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
+```{.bash data-prompt="$"}
+$ su mongod nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
 ```
 
 Replace `username` and `password` with those of your `pbm` user. `/data/mdb_node_xyz/` is the path where **pbm-agent** log files will be written. Make sure you have created this directory and granted write permissions to it for the `mongod` user.
@@ -289,7 +289,7 @@ With the packaged `systemd` service, the log output to `stdout` is captured by
 systemd’s default redirection to `systemd-journald`. You can view it with the
 command below. See `man journalctl` for useful options such as `--lines`, `--follow`, etc.
 
-```
+```{.bash data-prompt="$"}
 $ journalctl -u pbm-agent.service
 -- Logs begin at Tue 2019-10-22 09:31:34 JST. --
 Jan 22 15:59:14 : Started pbm-agent.
@@ -300,5 +300,5 @@ Jan 22 15:59:14 pbm-agent[3579]: pbm agent is listening for the commands
 
 If you started `pbm-agent` manually, see the file you redirected stdout and stderr to.
 
-When a message `“pbm agent is listening for the commands”` is printed to the
+When a message `pbm agent is listening for the commands` is printed to the
 `pbm-agent` log file, `pbm-agent` confirms that it has connected to its `mongod` node successfully.
