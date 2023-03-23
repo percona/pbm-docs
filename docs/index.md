@@ -11,7 +11,7 @@ With Percona Backup for MongoDB you can  design and implement the effective back
 
 ## Why Percona Backup for MongoDB?
 
-* Enterprise-grade features for free: 
+* Free of charge enterprise-grade features: 
 
     * [Logical backups and restores](details/logical.md)
     * [Physical (a.k.a. ‘hot’) backups and restores](details/physical.md). Available with Percona Server for MongoDB 4.2.15-16, 4.4.6-8, 5.0.2-1 and higher
