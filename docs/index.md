@@ -31,7 +31,7 @@ With Percona Backup for MongoDB, you can make backups on a running server and re
 * A variety of [supported storage types](details/storage-configuration.md) means no vendor lock-in
 * Open source solution with [enterprise-grade features](features/comparison.md) 
 
-[Install and get started](installation.md){ .md-button .md-button--primary }
+[Install and get started](installation.md){ .md-button .md-button }
 
 ## Go further with Percona Backup for MongoDB
 
