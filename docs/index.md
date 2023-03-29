@@ -11,7 +11,6 @@ With Percona Backup for MongoDB, you can make backups on a running server and re
 
 ## What you can do
 
-
 ![image](_images/backups-infographic.png#only-light)
 ![image](_images/backups-infographic-dark.png#only-dark)
 
