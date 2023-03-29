@@ -17,7 +17,7 @@ Using the IAM instance profile, you can automate access to S3 buckets for Percon
 3. Configure an S3 storage bucket and verify the connection from the EC2 instance to it.
 
 
-4. Provide the [remote storage information for PBM in a config file](../initial-setup.md#configure-remote-backup-storage). Leave the `s3.credentials` array empty
+4. Provide the [remote storage information for PBM in a config file](../install/initial-setup.md#configure-remote-backup-storage). Leave the `s3.credentials` array empty
     
     ```yaml
     storage:

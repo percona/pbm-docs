@@ -1,22 +1,89 @@
-# Start a backup
+# Make a backup
 
-To start a backup, run the following command:
+## Before you start
 
-```sh
-pbm backup --type=TYPE
-```
+1. [Install](../installation.md) and [set up Percona Backup for MongoDB](../install/initial-setup.md)
+2. Check that `pbm agent` is running with the [`pbm status`](../reference/pbm-commands.md#pbm-status) command
 
-!!! admonition "Version added: 1.7.0" 
+## Make a backup 
 
-You can specify what type of a backup you wish to make: *physical* or *logical*.
+=== "Logical"
 
-When *physical* backup is selected, Percona Backup for MongoDB copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
+     To make a backup, run the following command:
 
-During *logical* backups, Percona Backup for MongoDB copies the actual data to the backup storage. When no `--type` flag is passed, Percona Backup for MongoDB makes a logical backup.
+     ```{.bash data-prompt="$"}
+     $ pbm backup --type=logical
+     ```
+     
+     Logical backup is the default one so you can bypass the `--type` flag. 
 
-For more information about backup types, see [Backup and restore types](../details/backup-types.md).
+     During *logical* backups, Percona Backup for MongoDB copies the actual data to the backup storage.
 
-## Compressed backups
+     Starting with version 2.0.0, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
+
+     Multi-format is now the default data format since it allows [selective restore](restore.md). Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB.
+
+=== "Physical"
+     
+    !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
+
+     ```{.bash data-prompt="$"}
+     $ pbm backup --type-physical
+     ```
+
+     During a *physical* backup, Percona Backup for MongoDB copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
+
+=== "Selective"
+
+    !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
+
+    Before you start, read about [selective backups known limitations](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)  
+
+    To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
+
+     ```{.bash data-prompt="$"}
+     $ pbm backup --ns=staff.Payments
+     ```
+
+     To back up the "Invoices" database and all collections that it includes, run the ``pbm backup`` command as follows:
+
+     ```{.bash data-prompt="$"}
+     $ pbm backup --ns=Invoices.*
+     ```
+
+     During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
+
+     Multi-format is now the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
+
+=== "Incremental"
+    
+    !!! admonition "Version added: [2.0.3](../release-notes/2.0.3.md)"
+
+    Before you start, read more about [incremental backup](../features/incremental-backup.md#considerations)
+
+    To start incremental backups, first make a full incremental backup. It will serve as the base for subsequent incremental backups:
+
+    ```{.bash data-prompt="$"} 
+    $ pbm backup --type incremental --base
+    ```
+
+    The `pbm-agent` starts tracking the incremental backup history to be able to calculate and save the difference in data blocks. After that you can run regular incremental backups:
+
+    ```{.bash data-prompt="$"}
+    $ pbm backup -type incremental
+    ```
+
+    The incremental backup history looks like this:
+
+    ```{.bash .no-copy} 
+    Snapshots:
+        2022-11-25T14:13:43Z 139.82MB <incremental> [restore_to_time: 2022-11-25T14:13:45Z]
+        2022-11-25T14:02:07Z 255.20MB <incremental> [restore_to_time: 2022-11-25T14:02:09Z]
+        2022-11-25T14:00:22Z 228.30GB <incremental> [restore_to_time: 2022-11-25T14:00:24Z]
+        2022-11-24T14:45:53Z 220.13GB <physical> [restore_to_time: 2022-11-24T14:45:55Z]
+    ```
+
+### Compressed backups
 
 By default, Percona Backup for MongoDB uses the `s2` compression method when making a backup.
 
@@ -24,8 +91,8 @@ You can start a backup with a different compression method by passing the `--com
 
 For example, to start a backup with `gzip` compression, use the following command:
 
-```sh
-pbm backup --compression=gzip
+```{.bash data-prompt="$"}
+$ pbm backup --compression=gzip
 ```
 
 Supported compression types are: `gzip`, `snappy`, `lz4`, `pgzip`, `zstd`.  The `none` value means no compression is done during backup.
@@ -51,7 +118,7 @@ Note that the higher value you specify, the more time and computing resources it
 
     Before running pbm backup on a cluster, stop the balancer.
 
-In sharded clusters, one of **pbm-agent** processes for every shard and the config server replica set writes backup snapshots  into the remote backup storage directly. For logical backups, `pbm-agents` also write oplog slices. To learn more about oplog slicing, see Point-in-Time Recovery.
+In sharded clusters, one of the **pbm-agent** processes for every shard and the config server replica set writes backup snapshots  into the remote backup storage directly. For logical backups, `pbm-agents` also write oplog slices. To learn more about oplog slicing, see Point-in-Time Recovery.
 
 The `mongos` nodes are not involved in the backup process.
 
@@ -94,7 +161,7 @@ backup:
 
 The remaining secondaries and the primary nodes in the cluster receive priority `1.0`.
 
-The `mongod` node with the highest priority makes the backup. If this node is unavailable, next priority node is selected. If there are several nodes with the same priority, one of them is randomly elected to make the backup.
+The `mongod` node with the highest priority makes the backup. If this node is unavailable, the next priority node is selected. If there are several nodes with the same priority, one of them is randomly elected to make the backup.
 
 If you haven’t listed any nodes for the `priority` option in the config, the nodes have the default priority for making backups as follows:
 
@@ -107,4 +174,14 @@ If you haven’t listed any nodes for the `priority` option in the config, the n
     As soon as you adjust node priorities in the configuration file, it is assumed that you take manual control over them. The default rule to prefer secondary nodes over primary stops working.
 
 This ability to adjust node priority helps you manage your backup strategy by selecting specific nodes or nodes from preferred data centers. In geographically distributed infrastructures, you can reduce network latency by making backups from nodes in geographically closest locations.
+
+## Next steps
+
+* [List backups](../usage/list-backup.md)
+* [Make a restore](restore.md)
+
+## Useful links
+
+* [Backup and restore types](../features/backup-types.md)
+* [Schedule backups](../usage/schedule-backup.md)
 

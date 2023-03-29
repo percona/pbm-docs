@@ -1,45 +1,42 @@
 # Percona Backup for MongoDB Documentation
 
 
-Percona Backup for MongoDB is an open-source, distributed and low-impact solution for consistent backups of [MongoDB sharded clusters and replica sets](deployments.md). It enables you to make logical, physical, incremental and selective backups and restores. [Point-in-Time recovery](usage/point-in-time-recovery.md) functionality allows you to recover your database to a specific timestamp. 
+Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md). There is no notable performance nor operating degradation associated with PBM.
 
-With Percona Backup for MongoDB you can  design and implement the effective backup strategy that considers the size and usage patterns of your database, the resources it utilizes and the goals of your organization. 
+With Percona Backup for MongoDB, you can make backups on a running server and restore your database to a specific point in time using the command line. To do these tasks from a user interface, [use PBM with Percona Monitoring and Management](https://docs.percona.com/percona-monitoring-and-management/get-started/backup/index.html).
 
 !!! note ""
 
     This is the documentation for the latest release, **PBM {{release}}** ([Release Notes](release-notes/{{release}}.md)).
 
-## Why Percona Backup for MongoDB?
+## What you can do
 
-* Free of charge enterprise-grade features: 
+![image](_images/backups-infographic.png#only-light)
+![image](_images/backups-infographic-dark.png#only-dark)
 
-    * [Logical backups and restores](details/logical.md)
-    * [Physical (a.k.a. ‘hot’) backups and restores](details/physical.md). Available with Percona Server for MongoDB 4.2.15-16, 4.4.6-8, 5.0.2-1 and higher
-    * [Point-in-time recovery](usage/point-in-time-recovery.md)
-    * [Manual point-in-time recovery for any type of backup](usage/oplog-replay.md)
-    * [Selective logical backups and restores](usage/selective-backup.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature))
-    * [Incremental physical backups](usage/incremental-backup.md) (the [technical preview feature](reference/glossary.md#technical-preview-feature)). Available with Percona Server for MongoDB.
+* [Logical backups](features/logical.md) to back up and / or migrate data to different platforms and database versions
+* [Physical backups](features/physical.md) to speed up performance for large (multi-terabyte) data sets
+* [Selective backups](features/selective-backup.md) to work with the desired data set
+* [Incremental physical backups](features/incremental-backup.md) to ensure that critical data is regularly backed up and to save on costs for storage and transfer
+* [Restore the full database or specific data set](usage/restore.md) from a backup
+* [Restore the database to a specific point in time](features/point-in-time-recovery.md)
+* [Replay oplog](usage/oplog-replay.md) on top of [EBS-snapshots](reference/glossary.md#ebs-snapshot)
 
-* [Works for both sharded clusters and non-sharded replica sets](deployments.md)
-* [Simple command-line management utility](reference/pbm-commands.md)
-* Simple, [integrated-with-MongoDB authentication](initial-setup.md#external -authentication-support-in-percona-backup-for-mongodb)
-* Distributed transaction consistency with MongoDB 4.2+
-* Compatible with different storage types: [S3-compatible storage](details/storage-configuration.md#s3-compatible-storage), [Microsoft Azure Blob storage](details/storage-configuration.md#microsoft-azure-blob-storage), `filesystem` storage type for [locally-mounted remote filesystem backup servers](details/storage-configuration.md#remote-filesystem-server-storage)
+[Explore features](features/backup-types.md){ .md-button .md-button }
 
+## What's in it for you?
 
-The Percona Backup for MongoDB project is inherited from and replaces *mongodb_consistent_backup*, which is no longer actively developed or supported.
+* Data consistency across clusters and replica sets
+* A variety of [supported storage types](details/storage-configuration.md) means no vendor lock-in
+* Open source solution with [enterprise-grade features](features/comparison.md) 
 
-## Get started
+[Install and get started](installation.md){ .md-button .md-button }
 
-* [Install Percona Backup for MongoDB](installation.md)
-* [Set up Percona Backup for MongoDB](initial-setup.md)
-* [Use Percona Backup for MongoDB](reference/pbm-commands.md) CLI to manage backups and restores
+## Go further with Percona Backup for MongoDB
 
-## Read more
-
-* [How Percona Backup for MongoDB works](intro.md)
-* [Percona Backup for MongoDB components](pbm-components.md)
+* Learn [how Percona Backup for MongoDB works](intro.md)
+* [Manage PBM](manage/upgrading.md) 
+* [Contribute to PBM](reference/contributing.md) 
 
 
 
-[^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.

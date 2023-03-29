@@ -103,6 +103,14 @@ h3 {
     font-size: 100%;
 }
 
+article div.tabbed-content--wrap {
+  page-break-inside: auto !important;
+}
+article div.tabbed-content--wrap * {
+  page-break-before: auto !important;
+  page-break-inside: auto !important;
+}
+
 .md-typeset .admonition.note,
 .md-typeset details.note {
     color: #00162b;

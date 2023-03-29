@@ -4,8 +4,8 @@ The configuration information is stored in a single document of the `admin.pbmCo
 
 You can see the whole config by running
 
-```javascript
-db.getSiblingDB(“admin”).pbmConfig.findOne()
+```{.javascript  data-prompt=">"}
+> db.getSiblingDB(“admin”).pbmConfig.findOne()
 ```
 
 But you don’t have to use the `mongo` shell; the `pbm` CLI has a “config” subcommand to read and update it.
@@ -14,7 +14,7 @@ Percona Backup for MongoDB config contains the following settings:
 
 * [Remote backup storage configuration](../details/storage-configuration.md) is available starting with version 1.0 or 1.1.
 
-* [Point-in-Time Recovery configuration](../usage/point-in-time-recovery.md) is available starting with version 1.3.0.
+* [Point-in-time recovery configuration](../features/point-in-time-recovery.md) is available starting with version 1.3.0.
 
 * [Restore options](configuration-options.md#restore-options) are available as starting with version 1.3.2.
 
@@ -33,7 +33,7 @@ Use the following command to upload the config file. For example, config file na
 pbm config --file pbm_config.yaml
 ```
 
-Execute the command whilst connecting to config server replica set if it is a
+Execute the command while connecting to config server replica set if it is a
 cluster. Otherwise just connect to the non-sharded replica set as normal. (See
 [MongoDB connection strings - A Reminder (or Primer)](../details/authentication.md) if you are not familiar with MongoDB connection strings yet.)
 

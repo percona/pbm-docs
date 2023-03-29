@@ -14,7 +14,7 @@ Atomicity means that database operations are applied following an "all or nothin
 
 ## Blob
     
-A blob stands for Binary Large Object, which includes objects such as images and multimedia files. In other words these are various data files that you store in Microsoftâ€™s data storage platform. Blobs are organized in :term:`containers <Container>` which are kept in Azure Blob storage under your storage account.
+A blob stands for Binary Large Object, which includes objects such as images and multimedia files. In other words these are various data files that you store in Microsoft's data storage platform. Blobs are organized in [containers](#container) which are kept in Azure Blob storage under your storage account.
 
 ## Bucket
 
@@ -26,23 +26,29 @@ A collection is the way data is organized in MongoDB. It is analogous to a table
 
 ## Completion time
 
+Starting with version 2.0.0, the completion time is renamed "restore_to_time"
+
 The completion time is the time to which the sharded cluster / non-shared replica set will be returned to after the restore.  It is reflected in the "complete" section of the ``pbm list`` / ``pbm status`` command outputs.
 
-In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, |PBM| waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
+In `logical` backups, the completion time almost coincides with the backup finish time. To define the completion time, Percona Backup for MongoDB waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. 
 
-In `physical` backups, the completion time is only a few seconds after the backup start time. By holding the ``$backupCursor`` open guarantees that the checkpoint data wonâ€™t change during the backup, and |PBM| can define the completion time ahead.
+In `physical` backups, the completion time is only a few seconds after the backup start time. By holding the ``$backupCursor`` open, Percona Backup for MongoDB guarantees that the checkpoint data won't change during the backup. In such a way Percona Backup for MongoDB can define the completion time ahead.
 
 ## Consistency
 
-In the context of backup and restore, consistency means that the data restored will be consistent in a given point in time. Partial or incomplete writes to disk of atomic operations (for example, to table and index data structures separately) won't be served to the client after the restore. The same applies to multi-document transactions, that started but didn't complete by the time the backup was finished.
+In the context of backup and restore, consistency means that the data restored will be consistent in a given point in time. Partial or incomplete writes to disk of atomic operations (for example, to table and index data structures separately) won't be served to the client after the restore. The same applies to multi-document transactions that started but didn't complete by the time the backup was finished.
 
 ## Container 
    
-A container is like a directory in Azure Blob storage that contains a set of :term:`blobs <Blob>`.
+A container is like a directory in Azure Blob storage that contains a set of [blobs](#blob).
 
 ## Durability
    
 Once a transaction is committed, it will remain so.
+
+## EBS-snapshot
+
+An EBS (Amazon Elastic Block Storage) snapshot is the point-in-time copy of your data, and can be used to enable disaster recovery, migrate data across regions and accounts, and improve backup compliance.
 
 ## GCP
    
@@ -50,20 +56,19 @@ GCP (Google Cloud Platform) is the set of services, including storage service, t
 
 ## Isolation
 
-The Isolation requirement means that no transaction can interfere
-     with another.
+The Isolation requirement means that no transaction can interfere with another.
 
 ## Jenkins
      
-`Jenkins <http://www.jenkins-ci.org>`_ is a continuous integration system that we use to help ensure the continued quality of the software we produce. It helps us achieve the aims of:
+[Jenkins](http://www.jenkins-ci.org) is a continuous integration system that we use to help ensure the continued quality of the software we produce. It helps us achieve the aims of:
 
-* no failed tests in trunk on any platform,
-* aid developers in ensuring merge requests build and test on all platforms,
-* no known performance regressions (without a damn good explanation).
+* No failed tests in trunk on any platform
+* Aid developers in ensuring merge requests build and test on all platforms,
+* No known performance regressions (without a damn good explanation).
 
 ## MinIO
 
-MinIO is a cloud storage server compatible with :term:`Amazon S3`, released under Apache License v2.
+MinIO is a cloud storage server compatible with [Amazon S3](#amazon-s3), released under Apache License v2.
 
 ## Oplog
   
@@ -71,7 +76,7 @@ Oplog (operations log) is a fixed-size collection that keeps a rolling record of
 
 ## Oplog slice
 
-A compressed bundle of :term:`oplog <Oplog>` entries stored in the Oplog Store database in MongoDB. The oplog size captures an approximately 10-minute frame. For a snapshot, the oplog size is defined by the time that the slowest replica set member requires to perform mongodump.    
+A compressed bundle of [oplog](#oplog) entries stored in the Oplog Store database in MongoDB. The oplog size captures an approximately 10-minute frame. For a snapshot, the oplog size is defined by the time that the slowest replica set member requires to perform mongodump.    
 
 ## OpID
 
@@ -79,7 +84,7 @@ A unique identifier of an operation such as backup, restore, resync. When a pbm-
 
 ## `pbm-agent`
 
-A `pbm-agent` is a :term:`PBM <Percona Backup for MongoDB>` process running on the mongod node for backup and restore operations. A pbm-agent instance is required for every mongod node (including replica set secondary members and config server replica set nodes).   
+A `pbm-agent` is a PBM process running on the mongod node for backup and restore operations. A pbm-agent instance is required for every mongod node (including replica set secondary members and config server replica set nodes).   
 
 ## pbm CLI
      
@@ -87,11 +92,11 @@ Command-line interface for controlling the backup system. PBM CLI can connect to
 
 ## PBM Control collections
    
-PBM Control collections are :term:`collections <Collection>` with config, authentication data and backup states. They are stored in the admin db  in the cluster or non-sharded replica set and serve as the communication channel between :term:`pbm-agent` and :term:`pbm CLI`. :term:`pbm CLI` creates a new pbmCmd document for a new operation. :term:`pbm-agents <pbm-agent>` monitor it and update as they process the operation.
+PBM Control collections are [collections](#collection) with config, authentication data and backup states. They are stored in the admin db  in the cluster or non-sharded replica set and serve as the communication channel between [`pbm-agent`](#pbm-agent) and [`pbm CLI`](#pbm-cli). `pbm CLI` creates a new `pbmCmd` document for a new operation. `pbm-agents` monitor it and update as they process the operation.
 
 ## Percona Backup for MongoDB
 
-Percona Backup for MongoDB (PBM) is a low-impact backup solution for MongoDB non-sharded replica sets and clusters. It supports both :term:`Percona Server for MongoDB` and MongoDB Community Edition. 
+Percona Backup for MongoDB (PBM) is a low-impact backup solution for MongoDB non-sharded replica sets and clusters. It supports both [Percona Server for MongoDB](#percona-server-for-mongodb) and MongoDB Community Edition. 
 
 ## Percona Server for MongoDB 
 
@@ -103,11 +108,11 @@ Point-in-Time Recovery is restoring the database up to a specific moment in time
 
 ## Replica set
    
-A replica set is a group of mongod nodes that host the same data set.
+A replica set is a group of `mongod` nodes that host the same data set.
 
 ## S3 compatible storage 
 
-This is the storage that is built on the :term:`S3 <Amazon S3>` API.
+This is the storage that is built on the [S3](#amazon-s3) API.
  
 ## Server-side encryption
    

@@ -1,19 +1,19 @@
 # View restore progress
 
-!!! admonition "Version added: 2.0.0"
+!!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
 You can track the status of both physical and logical restores. This gives you a clear understanding of the restore progress so that you can react accordingly. 
 
 To view the restore status, run the `pbm describe-restore` command and specify the restore name. To track the progress of a physical restore, also specify the path to the Percona Backup for MongoDB configuration file. Since `mongod` nodes are shut down during a physical restore, Percona Backup for MongoDB uses the configuration file to read the restore status on storage.
 
-```sh
-pbm describe-restore 2022-08-15T11:14:55.683148162Z -c pbm_config.yaml
+```{.bash data-prompt="$"}
+$ pbm describe-restore 2022-08-15T11:14:55.683148162Z -c pbm_config.yaml
 ```
 
 The output provides the following information:
 
 -  Restore name
--  The name of the backup that the database was restored from
+-  The name of the backup from which the database was restored
 -  Type
 -  Status
 -  opID
