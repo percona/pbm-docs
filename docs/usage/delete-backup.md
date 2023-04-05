@@ -1,6 +1,48 @@
 # Delete backups
 
-Use [`pbm delete-backup`](../reference/pbm-commands.md#pbm-delete-backup) to delete backup snapshots and [`pbm delete-pitr`](../reference/pbm-commands.md#pbm-delete-pitr) to delete point-in-time recovery oplog slices.
+Use [`pbm delete-backup`](../reference/pbm-commands.md#pbm-delete-backup) to delete backup snapshots and [`pbm delete-pitr`](../reference/pbm-commands.md#pbm-delete-pitr) to delete point-in-time recovery oplog slices. Use the `pbm cleanup --older-than` command to [automate backup storage cleanup](schedule-backup.md#backup-storage-cleanup).
+
+## Delete outdated data
+
+!!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
+
+Starting with version 2.1.0, you can use the `pbm cleanup --older-than` command to delete both outdated backup snapshots and point-in-time recovery oplog slices. This is useful when automating the backup rotation.
+
+The timestamp you specify for the `--older-than` flag must be in the following format:
+
+* `%Y-%M-%DT%H:%M:%S` (for example, 2023-04-20T13:13:20Z) or
+* `%Y-%M-%D` (2023-04-20)
+* XXd (1d or 30d). Only days are supported.
+
+## Considerations
+
+1. The timestamp you specify for the `--older-than` flag is considered to be the timestamp that you would wish to restore to. When PBM deletes outdated backups, it does not delete the data that could be used to restore to the `--older-than` value. To illustrate this behavior, consider the following example:
+
+    Suppose you have the following backups:
+
+    ```{.text .no-copy}
+    Backup snapshots:
+      2023-03-25T14:13:50Z <logical> [restore_to_time: 2023-03-25T14:13:55Z]
+      2023-03-31:52:42Z <logical> [restore_to_time: 2023-03-31T14:52:47Z]
+      2023-04-10T14:57:17Z <logical> [restore_to_time: 2023-04-10T14:57:22Z]
+
+    PITR <off>:
+      2023-03-25T14:13:56Z - 2023-04-10T18:52:21Z
+    ```
+
+    You want to delete backups older than 2023-04-01.
+
+    The most recent base backup snapshot for the restore to 2023-04-01 is `2023-03-31:52:42Z [restore_to_time: 2023-03-31T14:52:47Z]`. Thus, PBM deletes the `2023-03-25T14:13:50Z` backup and all point-in-time oplog slices up to `2023-03-25T14:13:55Z` timestamp. PBM keeps the backup `2023-04-10T14:57:17Z` and its respective point-in-time oplog slices.
+
+    The backup history after the cleanup looks like this:
+
+    ```
+
+    ```
+
+    The similar logic applies to incremental physical backups: PBM keeps the most recent base backup and its subsequent incremental backups that could be used to restore to the time you specified for the `--older-than` flag.
+
+2. If point-in-time is enabled, the most recent backup snapshot is not deleted since it serves as the base for point-in-time oplog slices deriving from it.
 
 ## Delete backup snapshots
 

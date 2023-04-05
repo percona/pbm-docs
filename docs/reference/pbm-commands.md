@@ -463,6 +463,23 @@ The command accepts the following flags:
 | `--force`                | Forcibly deletes oplog slices without asking a user’s confirmation  |
 | `-o`, `--out=json`       | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.   |
 
+## pbm cleanup
+
+Deletes outdated backup snapshots and point-in-time recovery oplog slices.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+pbm delete-pitr [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                     | Description               |
+| ------------------------ | ------------------------- |
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20), <br> - `%Y-%M-%D` (e.g. 2020-04-20), <br> - `XXd` (e.g. 30d). Only days are supported|
+| `-w`, `--wait`           | Wait for the cleanup to finish. The flag blocks the shell session|
+| `-y`, `--yes`            | Cleans up the data storage without asking for a user's confirmation|
 
 ## pbm version
 

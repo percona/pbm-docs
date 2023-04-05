@@ -82,10 +82,23 @@ When it is time for another backup snapshot, Percona Backup for MongoDB automati
 
 Previous backups are not automatically removed from the backup storage. You need to remove the oldest ones periodically to limit the amount of space used in the backup storage.
 
-We recommend using the [`pbm delete backup --older-than <timestamp>`](../reference/pbm-commands.md#pbm-delete-backup) command. You can configure a `cron` task to automate backup deletion by specifying the following command in the `crontab` file:
+!!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
+
+Starting with version 2.1.0, you can use the `pbm cleanup --older-than` command to delete outdated backup snapshots and point-in-time recovery oplog slices. You can configure a `cron` task to automate storage cleanup by specifying the following command in the `crontab` file:
 
 ```{.bash data-prompt="$"}
-$ /usr/bin/pbm delete-backup -f --older-than $(date -d '-1 month' +\%Y-\%m-\%d)
-```
+$ $ /usr/bin/pbm cleanup -y --older-than 30d --wait
+``` 
 
-This command deletes backups that are older than 30 days. You can change the period by specifying a desired interval for the `date` function.
+This command deletes backups and oplog slices that are older than 30 days. You can change the period by specifying a desired interval for the `--older-than` flag. 
+
+
+!!! admonition ""
+
+    For PBM version 2.0.5 and earlier, use the [`pbm delete backup --older-than <timestamp>`](../reference/pbm-commands.md#pbm-delete-backup) command. You can configure a `cron` task to automate backup deletion by specifying the following command in the `crontab` file:
+
+    ```{.bash data-prompt="$"}
+    $ /usr/bin/pbm delete-backup -f --older-than $(date -d '-1 month' +\%Y-\%m-\%d) 
+    ```
+
+    This command deletes backups that are older than 30 days. You can change the period by specifying a desired interval for the `date` function.
