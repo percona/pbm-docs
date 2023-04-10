@@ -24,6 +24,7 @@ storage:
     credentials:
       access-key-id: <your-access-key-id-here>
       secret-access-key: <your-secret-key-here>
+      session-token: <string>
     uploadPartSize: <int>
     maxUploadParts: <int>
     storageClass: <string>
@@ -83,14 +84,21 @@ The URL to access the bucket. The default value for GCS is `https://storage.goog
 *Type*: string <br>
 *Required*: YES
 
-Your access key to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to Automate access to S3 buckets for Percona Backup for MongoDB
+Your access key to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to [Automate access to S3 buckets for Percona Backup for MongoDB](../manage/automate-s3-access.md)
 
 ### storage.s3.credentials.secret-access-key
 
 *Type*: string <br>
 *Required*: YES
 
-The key to sign your programmatic requests to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to Automate access to S3 buckets for Percona Backup for MongoDB
+The key to sign your programmatic requests to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to [Automate access to S3 buckets for Percona Backup for MongoDB](../manage/automate-s3-access.md)
+
+### storage.s3.credentials.session-token
+
+*Type*: string <br>
+*Required*: NO
+
+The AWS session token used to validate the [temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html) for accessing the S3 storage. 
 
 ### storage.s3.uploadPartSize
 
