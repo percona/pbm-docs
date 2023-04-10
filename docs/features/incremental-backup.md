@@ -4,7 +4,9 @@
 
 ## Considerations
 
-* This is a [tech preview feature](../reference/glossary.md#technical-preview-feature). We recommend using it only for testing purposes. 
+* :warning: Incremental backups made with Percona Backup for MongoDB prior to [2.1.0](../release-notes/2.1.0.md) are incompatible for restore with Percona Backup for MongoDB 2.1.0. This is because of the changed set of metadata files that are now stored in backups. These files are absent in backups made with previous PBM versions but are required for the restore with PBM 2.1.0.
+
+    We recommend to make a new incremental base backup and start the incremental backup chain from it after the upgrade to Percona Backup for MongoDB 2.1.0 
 
 * Incremental backup implementation is based on the [`$backupCursor`](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) aggregation stage that is available in only Percona Server for MongoDB. Therefore, you must be running Percona Server for MongoDB in your deployment to use incremental physical backups.
 

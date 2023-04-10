@@ -25,9 +25,8 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === "Incremental"
 
-    1. This is a [tech preview feature](../reference/glossary.md#technical-preview-feature). We recommend using it only for testing purposes. 
-
-    2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+    1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+    2. Backups made with PBM before PBM 2.1.0 are incompatible for restore with PBM 2.1.0 and onwards.
     3. Physical restores are not supported for deployments with arbiter nodes.
 
 ## Before you start
