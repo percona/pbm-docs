@@ -147,6 +147,30 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
            "node03:27017": /another/path/to/mongod
     ```
 
+    ### Parallel data download
+
+    !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
+
+    Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the [Speeding up MongoDB restores in PBM]() blog post by *Andrew Pogrebnoi*.
+
+    Here's how it works:
+
+    During the physical restore, Percona Backup for MongoDB starts the workers. The number of workers equals to the number of CPU cores by default. Each worker has a memory buffer allocated for it. The buffer is split into spans for the size of the data chunk. The worker acquires the span to download a data chunk and stores it into the buffer. When the buffer is full, the worker waits for the free span to continue the download.   
+
+    You can fine-tune the parallel download depending on your hardware resources and database load. Edit the PBM configuration file and specify the following settings:
+
+    ```yaml
+    restore:
+       numDownloadWorkers: <int>
+       maxDownloadBufferMb: <int>
+       downloadChunkMb: 32
+    ```
+
+    * `numDownloadWorkers` - the number of workers to download data from the storage. By default, it equals to the number of CPU cores
+    * `maxDownloadBufferMb` - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as `numDownloadWorkers * downloadChunkMb * 16`
+    * `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
+
+
 === "Selective"
 
     1. List the backups 
