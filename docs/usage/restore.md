@@ -107,7 +107,9 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
         $ pbm restore <backup_name>
         ```
 
-    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node.
+    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
+
+    You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
     **Post-restore steps**
 
