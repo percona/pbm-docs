@@ -480,6 +480,7 @@ The command accepts the following flags:
 | `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20), <br> - `%Y-%M-%D` (e.g. 2020-04-20), <br> - `XXd` (e.g. 30d). Only days are supported|
 | `-w`, `--wait`           | Wait for the cleanup to finish. The flag blocks the shell session|
 | `-y`, `--yes`            | Cleans up the data storage without asking for a user's confirmation|
+| `--dry-run`              | Checks for the old data to be deleted without deleting it. Allows to verify what data to delete| 
 
 ## pbm version
 
