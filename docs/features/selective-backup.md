@@ -21,7 +21,7 @@ With the selective backup and restore functionality, you have the following opti
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-You can back up and restore sharded collections. During backup, `pbm-agents` on each shard save the documents for the specified databases/collections and the oplog for the whole data set. A `pbm-agent` on the config server replica set saves the metadata documents from the `config` database that refer to the specified namespaces.
+You can back up and restore sharded collections. During backup, `pbm-agents` on each shard save the documents for the specified databases/collections and the full oplog for the period of the backup process. A `pbm-agent` on the config server replica set saves router config documents from the `config` database required for restoring the selected namespaces.
 
 During the restore, the reverse process occurs:
 
