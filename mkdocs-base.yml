@@ -152,7 +152,7 @@ nav:
          - Method 4. Deploy on Kubernetes: install/cloud.md
       - Set up and configure: 'install/initial-setup.md'       
       - Make a backup : "usage/start-backup.md"
-      - Make a restore: usage/restore.md
+      - Restore a backup: usage/restore.md
       - Make a point-in-time restore: usage/pitr-tutorial.md
   - Manage backups:
       - List backups: usage/list-backup.md
