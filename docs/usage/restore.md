@@ -21,7 +21,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 === "Physical"
 
     1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
-    2. Physical restores are not supported for deployments with arbiter nodes.
+    2. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
 
 === "Incremental"
 
@@ -41,7 +41,8 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === "Physical"
 
-    Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
+    1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
+    2. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
 
 === "Selective"
     
