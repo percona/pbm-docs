@@ -76,7 +76,15 @@ To restore from any backup snapshot, Percona Backup for MongoDB requires continu
 
 ## Restore selected databases and collections
 
-Before you start, read [known limitations for selective backups and restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)
+!!! important
+
+    Supported only for replica sets
+
+### Before you start
+
+1. Read [known limitations for selective backups and restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
+2. Check that you [have made a full backup](start-backup.md#make-a-backup) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
+
 
 To restore the desired database or a collection to a point in time, run the ``pbm restore`` command as follows:
 
