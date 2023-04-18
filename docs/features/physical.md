@@ -37,23 +37,34 @@ During physical backups and restores, ``pbm-agents`` don’t export / import dat
 
 !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-    You can back up and restore the encrypted data at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
+You can back up and restore the encrypted data at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
 
 This is how it works: 
 
-During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. This allows you to verify them using the `pbm describe-backup` command. Note that the encryption key is not stored nor shown.
+During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. This allows you to verify them using the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup) command. Note that the encryption key is not stored nor shown.
 
 !!! important
 
-    Make sure that you know what encryption key was used and store it, as this key is required for the restore.
+    Make sure that you know what master encryption key was used and store it, as this key is required for the restore.
 
-To restore the encrypted data from the backup, do the following:
+Starting with [Percona Server for MongoDB version 4.4.19-19](https://docs.percona.com/percona-server-for-mongodb/4.4/release_notes/4.4.19-19.html), [5.0.15-13](https://docs.percona.com/percona-server-for-mongodb/5.0/release_notes/5.0.15-13.html), [6.0.5-4](https://docs.percona.com/percona-server-for-mongodb/6.0/release_notes/6.0.5-4.html) and higher, the master key rotation for data-at-rest encrypted with HashiCorp Vault has been improved to use the same secret key path on every server in your entire deployment. For the restore with earlier versions of Percona Server for MongoDB and PBM 2.0.5 and earlier, see the [Restore for Percona Server for MongoDB **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 using HashiCorpVault](#restore-for-percona-server-for-mongodb-before-4419-19-5015-13-605-4-using-hashicorpvault) section.
 
-1. Put the encryption key / specify the path to the key on at least one node of every replica set. 
+To restore the encrypted data from the backup, configure data-at-rest encryption settings on all nodes of your destination cluster or replica set to match the settings of the target cluster where you made the backup
 
-2. Configure data-at-rest encryption in your destination cluster or replica set. 
+During the restore, Percona Backup for MongoDB restores the data all nodes using the same master key. To meet the security policy requirements in your organization, we recommend to rotate the master encryption keys afterwards. 
 
-During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node. 
+To learn more about master key rotation, refer to the following documentation:
 
-Alternatively, you can place the encryption key to all nodes of the replica set. Then the restore is successful and complete on all nodes. This approach is faster and may suit for large data sets (terabytes of data). However, we recommend to rotate the encryption keys afterwards. Note, that key rotation is not available after the restore [for data-at-rest encryption with HashiCorp Vault key server](https://docs.percona.com/percona-server-for-mongodb/6.0/vault.html#vault). In this case, consider using the scenario with partially done restore.
+* [Master key rotation in HashiCorp Vault server](https://docs.percona.com/percona-server-for-mongodb/6.0/vault.html#key-rotation)
+* [KMIP master key rotation](https://www.mongodb.com/docs/manual/tutorial/rotate-encryption-key/#kmip-master-key-rotation)
+
+### Restore for Percona Server for MongoDB **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 using HashiCorpVault
+
+In Percona Server for MongoDB version **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 with the Vault server used for data-at-rest encryption, the master key rotation with the same key used for 2+ nodes is not supported. If you run these versions of Percona Server for MongoDB and PBM before 2.1.0, consider using the scenario where PBM restores the data on one node of every replica set. The remaining nodes receive the data during the initial sync. 
+
+Here's how it works:
+
+Configure data-at-rest encryption on one node of every shard in your destination cluster or a replica set.
+
+During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node.  
 
