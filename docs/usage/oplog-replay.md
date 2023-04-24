@@ -44,7 +44,7 @@ Storage-level snapshots are saved with point-in-time recovery enabled. Thus, aft
 
 1. Disable point-in-time recovery.
 2. Delete the oplog slices that might have been created.
-3. Resync the data from the storage.
+3. Re-sync the data from the storage.
 4. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps.
 
     ```{.bash data-prompt="$"}

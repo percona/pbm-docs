@@ -1,3 +1,4 @@
+# Ignore
 *~
 *.pyc
 build
@@ -6,5 +7,9 @@ source/ext/__pycache__
 # Local Netlify folder
 .netlify
 site
-.vale.ini
+
 styles/
+
+# Allow
+
+!styles/Vocab/Percona/**
