@@ -197,7 +197,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-    Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the [Speeding up MongoDB restores in PBM]() blog post by *Andrew Pogrebnoi*.
+    Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the [Speeding up MongoDB restores in PBM](https://www.percona.com/blog/speeding-up-database-restores-in-pbm) blog post by *Andrew Pogrebnoi*.
 
     Here's how it works:
 
