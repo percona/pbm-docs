@@ -9,6 +9,7 @@
     We recommend to make a new incremental base backup and start the incremental backup chain from it after the upgrade to Percona Backup for MongoDB 2.1.0 
 
 * Incremental backup implementation is based on the [`$backupCursor`](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) aggregation stage that is available in only Percona Server for MongoDB. Therefore, you must be running Percona Server for MongoDB in your deployment to use incremental physical backups.
+* Incremental backups are supported for Percona Server for MongoDB starting with the following versions: [4.2.24-24](https://docs.percona.com/percona-server-for-mongodb/4.2/release_notes/4.2.24-24.html), [4.4.18](https://docs.percona.com/percona-server-for-mongodb/4.4/release_notes/4.4.18-18.html), [5.0.2-1](https://docs.percona.com/percona-server-for-mongodb/5.0/release_notes/5.0.2-1.html), [6.0.2-1](https://docs.percona.com/percona-server-for-mongodb/6.0/release_notes/6.0.2-1.html) and higher.
 
 Owners of large datasets may need to back up data frequently. Making full physical backups every time is costly in terms of storage space. Incremental physical backups come in handy in this scenario, enabling you to optimize backup strategy and reduce storage costs.
 
