@@ -1,9 +1,9 @@
 name: Check docs with Vale
 on: 
-  push:
+  pull_request:
     branches:
       - main
-      - Vale-linter-new
+
 
 jobs:
   vale:
