@@ -540,7 +540,7 @@ The command accepts the following flags:
 
 | Flag                | Description                           |
 | ------------------- | ------------------------------------- |
-| `--external`        | Indicates the backup as the one made outside PBM (e.g. snapshot-based)       |
+| `--external`        | Indicates the backup as the one made outside PBM (for example, snapshot-based)       |
 | `--time=TIME`       | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](../features/point-in-time-recovery.md) is enabled. |
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |

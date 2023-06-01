@@ -35,7 +35,10 @@ jobs:
         continue-on-error: true
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
-          globs: ${{ steps.changed-files.outputs.all_changed_files }}
+          command: config
+          globs: |
+            .markdownlint-cli2.yaml
+            ${{ steps.changed-files.outputs.all_changed_files }}
 #        separator: ","
 
       #Run check

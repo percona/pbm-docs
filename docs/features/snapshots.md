@@ -12,11 +12,11 @@ While a physical backup is a physical copy of your data directory, a snapshot is
 
 This is where Percona Backup for MongoDB steps in. It provides the API to make snapshot-based physical backups and restores and ensures data consistency. As a result, database owners benefit from increased performance and reduced downtime, and are sure that their data remains consistent.
 
-The snapshot-based physical backup / restore flow is divided into three distinct stages:
+The snapshot-based physical backup / restore flow consists of three distinct stages:
 
-- Preparing the database – done by PBM
-- Copying files – done by the user / client application
-- Completing the backup / restore – done by PBM. 
+* Preparing the database — done by PBM
+* Copying files — done by the user / client app
+* Completing the backup / restore — done by PBM. 
 
 This is the first stage of the snapshot-based backups where you can make them manually using the API. Automated snapshot-based backups are planned for future releases.
 
