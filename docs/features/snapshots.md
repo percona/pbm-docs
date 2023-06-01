@@ -5,7 +5,7 @@
 ## Considerations 
 
 1. This is a [technical preview feature](../reference/glossary.md#technical-preview-feature).
-2. Supported only for full physical backups
+2. Supported only for physical backups
 3. Available only for Percona Backup for MongoDB running with Percona Server for MongoDB as PBM uses the [`$backupCursor and $backupCursorExtended aggregation stages`](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html). 
 
 While a physical backup is a physical copy of your data directory, a snapshot is a point in time copy of your disk or a volume where the data files are stored. Restoring from snapshots is much faster and allows almost immediate access to data, while the database is unavailable during physical restore. Snapshot-based backups are especially useful for owners of large data sets with terabytes of data. Yet the snapshots don’t guarantee data consistency in sharded clusters.
@@ -33,7 +33,7 @@ To make a snapshot-based backup, specify its type as external for [`pbm backup`]
 $ pbm backup -t external --list-files
 ```
 
-PBM opens the `$backupCursor`, stores the backup metadata, prepares the database for file copy and prints the prompt similar to the following:
+PBM opens the `$backupCursor`, prepares the database for file copy, stores the backup metadata both on the storage and adds it to the files to copy, and prints the prompt similar to the following:
 
 ```{.text .no-copy}
 Ready to copy data from:
@@ -54,13 +54,20 @@ $ pbm backup-finish <backup_name>
 
 ## Restore a backup
 
+Before you start:
+
+1. Shut down all `mongos` nodes.
+2. Stop the arbiter nodes manually since there’s no `pbm-agent` on these nodes to do that automatically.
+
+The following procedure describes the restore from backups [made through PBM](#make-a-backup). See []
+
 To make a restore, run the following command:
 
 ```{.bash data-prompt="$"}
 $ pbm restore [backup_name] --external 
 ```
 
-Percona Backup for MongoDB prepares the database, provides the restore name and prompts you to copy the data:
+Percona Backup for MongoDB reads the metadata from the backup, prepares the database, provides the restore name and prompts you to copy the data:
 
 ```{.text .no-copy}
 <example goes here>
@@ -74,5 +81,5 @@ After you copied the files to the nodes, complete the restore with the following
 $ pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
 ```
 
-At this stage PBM maintains data consistency and starts the cluster / replica set.
+At this stage, Percona Backup for MongoDB maintains data consistency and starts the cluster / replica set. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
 
