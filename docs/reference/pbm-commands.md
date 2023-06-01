@@ -20,13 +20,15 @@ The command accepts the following flags:
 
 | Flag           | Description                                           |
 | -------------- | ----------------------------------------------------- |
-| `-t`, `--type` | The type of backup. Supported values: physical, logical (default), incremental. When not specified, Percona Backup for MongoDB makes a logical backup. <br> **NOTE**: Incremental physical backups is the [technical preview feature](glossary.md#technical-preview-feature).|
+| `-t`, `--type` | The type of backup. Supported values: physical, logical (default), incremental, [external](../features/snapshots.md). When not specified, Percona Backup for MongoDB makes a logical backup. |
 | `--base`       | For incremental backups only. Set the backup as the base and start tracking the incremental backup history to calculate and save the difference in data blocks for subsequent incremental backups. |  
 | `--compression`| Create a backup with compression. <br> Supported compression methods: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2` <br> The `none` value means no compression is done during backup. |
 | `--compression-level` | Configure the compression level from 0 to 10. The default value depends on the compression method used.  |
 | `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
 | `--ns="database.collection"`| Backs up the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. In version 2.0.0, only a single namespace is supported for the backup.|
+| `-l`, `--list-files` | For external backups only. Shows the list of fines per node to copy.|
+
 
 ??? "JSON output"
 
@@ -36,6 +38,16 @@ The command accepts the following flags:
       "storage": "<my-backup-dir>"
     }
     ```
+
+## pbm backup-finish
+
+Closes the `backupCursor` and finishes the external backup. Must be run after running `pbm backup -t external`. To learn more, refer to [API for snapshot-based physical backups](../features/snapshots.md).
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm backup-finish [backup-name] 
+```
 
 ## pbm cancel-backup
 
@@ -187,6 +199,7 @@ Provides the detailed information about a backup:
 - last transition time - the timestamp when a backup changed its status
 - cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
 - replica set info: name, backup status, last write timestamp and last transition time, `mongod` security options, if encryption is configured.
+- for snapshot-based backups, provides the list of files being copied
 
 The command has the following syntax:
 
@@ -197,6 +210,7 @@ $ pbm describe-backup [<backup-name>] [<flags>]
 | Flag                  | Description                           |
 | --------------------- | ------------------------------------- |
 | `-o`, `--out=text`    | Shows the status as either plain text or a JSON object. Supported values: `text`, `json`|
+| `-l`, `--list-files`  | Shows the list of files being copied for snapshot-based backups |
 
 ??? admonition "JSON output"
 
@@ -512,7 +526,7 @@ The command accepts the following flags:
 
 ## pbm restore
 
-Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical or physical restore.
+Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical, physical or a snapshot-based restore.
 
 The command has the following syntax:
 
@@ -526,12 +540,14 @@ The command accepts the following flags:
 
 | Flag                | Description                           |
 | ------------------- | ------------------------------------- |
+| `--external`        | Indicates the backup as the one made outside PBM (e.g. snapshot-based)       |
 | `--time=TIME`       | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](../features/point-in-time-recovery.md) is enabled. |
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
 | `--ns="database.collection"`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns="database.*"`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, ns="db1.*,db2.coll2,db3.coll1,db3.collX"|
+| `-c`                | The path to the `mongod.conf` file 
 
 ??? "Restore output"
 
@@ -550,6 +566,22 @@ The command accepts the following flags:
       "point-in-time":"<backup_name>"
     }
     ```
+## pbm restore-finish
+
+Instructs PBM to complete the snapshot-based physical restore. Must be run after running `pbm restore --external`. To learn more, refer to [API for snapshot-based physical backups](../features/snapshots.md).
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm restore-finish <restore_name> [flags]
+```
+
+The command accepts the following flags:
+
+| Flag                | Description                           |
+| ------------------- | ------------------------------------- |
+| `-c`                | The path to the PBM configuration file. Required to complete the restore.|
+
 
 ## pbm status
 
@@ -659,5 +691,3 @@ The command accepts the following flags:
     }
     ```
 
-
-[^1]: Tech Preview Features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA.

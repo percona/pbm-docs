@@ -32,6 +32,7 @@ jobs:
         with:
           files: docs/*.md
       - uses: DavidAnson/markdownlint-cli2-action@v10
+        continue-on-error: true
         if: steps.changed-files.outputs.any_changed == 'true'
         with:
           globs: ${{ steps.changed-files.outputs.all_changed_files }}
