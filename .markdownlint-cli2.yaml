@@ -1,0 +1,10 @@
+# A Markdown linter configuration file
+
+# Disable some built-in rules
+config:
+  no-trailing-spaces: false
+  no-multiple-blanks: false
+  line-length: false
+
+# Fix any fixable errors
+fix: true
