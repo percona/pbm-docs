@@ -159,7 +159,17 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     After the restore is complete, do the following:
 
-    1. Restart all `mongod` nodes
+    1. Restart all `mongod` nodes. 
+
+        !!! note
+
+            You may see the following message in the `mongod` logs after the cluster restart:
+
+            ```{.text .no-copy}
+            "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
+            ```
+
+            This is expected behavior of periodic checks of the database's ability to start. Ding the restore, the `config.system.sessions` collection is dropped but then Percona Server for MongoDB recreates it upon a cluster start. No action is required from your end.
 
     2. Restart all `pbm-agents`
 
@@ -245,6 +255,16 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     After the restore is complete, do the following:
 
     1. Restart all `mongod` nodes and `pbm-agents`. 
+
+        !!! note
+
+            You may see the following message in the `mongod` logs after the cluster restart:
+
+            ```{.text .no-copy}
+            "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
+            ```
+
+            This is expected behavior of periodic checks of the database's ability to start. Ding the restore, the `config.system.sessions` collection is dropped but then Percona Server for MongoDB recreates it upon a cluster start. No action is required from your end.
     2. Resync the backup list from the storage. 
     3. Start the balancer and the `mongos` node.
     4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
