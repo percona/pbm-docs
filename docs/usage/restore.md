@@ -251,17 +251,17 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 ## Restoring a backup into a new environment
 
-To restore a backup from one environment to another, consider the following key points about the destination environment:
+To restore a backup from one environment to another, ensure the following:
 
-* For physical restore, replica set names (both the config servers and the shards) in your new destination cluster and in the cluster that was backed up must be exactly the same.
+1. Percona Backup for MongoDB configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run [`pbm list`](../reference/pbm-commands.md#pbm-list) and see the backups made from the original environment, then you can run the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command.
 
-* Percona Backup for MongoDB configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run **pbm list** and see the backups made from the original environment, then you can run the **pbm restore** command.
-
-Of course, make sure not to run **pbm backup** from the new environment whilst the Percona Backup for MongoDB config is pointing to the remote storage location of the original environment.
+2. Don't run [`pbm backup`](../reference/pbm-commands.md#pbm-backup) from the new environment while Percona Backup for MongoDB configuration is pointing to the remote storage location of the original environment.
 
 ## Restoring into a cluster / replica set with a different name
 
-Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names.
+Starting with version 1.8.0, you can restore *logical backups* into a new environment that has the same or more number of shards and these shards have different replica set names.
+
+Starting with version 2.2.0, you can restore *physical/incremental* backups into a new environment with a different replica set names. Note that **the number of shards must be the same** as in the environment where the you made the backup.
 
 To restore data to the environment with different replica set names, configure the name mapping between the source and target environments. You can either set the `PBM_REPLSET_REMAPPING` environment variable for `pbm` CLI or use the `--replset-remapping` flag for PBM commands. The mapping format is `<rsTarget>=<rsSource>`.
 
@@ -288,7 +288,7 @@ Configure the replica set name mapping:
 
 !!! note 
 
-    Don’t forget to make a fresh backup on the new environment after the restore is complete.
+    Follow the post-restore steps on the new environment after the restore is complete.
 
 This ability to restore data to clusters with different replica set names and the number of shards extends the set of environments compatible for the restore.
 
