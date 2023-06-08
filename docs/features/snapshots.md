@@ -1,4 +1,4 @@
-# API for snapshot-based physical backups
+# Snapshot-based physical backups
 
 !!! admonition "Version added: [2.2.0](../release-notes/2.2.0.md)"
 
@@ -10,7 +10,7 @@
 
 While a physical backup is a physical copy of your data directory, a snapshot is a point in time copy of your disk or a volume where the data files are stored. Restoring from snapshots is much faster and allows almost immediate access to data, while the database is unavailable during physical restore. Snapshot-based backups are especially useful for owners of large data sets with terabytes of data. Yet the snapshots don’t guarantee data consistency in sharded clusters.
 
-This is where Percona Backup for MongoDB steps in. It provides the API to make snapshot-based physical backups and restores and ensures data consistency. As a result, database owners benefit from increased performance and reduced downtime, and are sure that their data remains consistent.
+This is where Percona Backup for MongoDB steps in. It provides the interface to make snapshot-based physical backups and restores and ensures data consistency. As a result, database owners benefit from increased performance and reduced downtime, and are sure that their data remains consistent.
 
 The snapshot-based physical backup / restore flow consists of three distinct stages:
 
@@ -18,11 +18,11 @@ The snapshot-based physical backup / restore flow consists of three distinct sta
 * Copying files — done by the user / client app
 * Completing the backup / restore — done by PBM. 
 
-This is the first stage of the snapshot-based backups where you can make them manually using the API. Automated snapshot-based backups are planned for future releases.
+This is the first stage of the snapshot-based backups where you can make them manually. Automated snapshot-based backups are planned for future releases.
 
 ## Make a backup
 
-1. Refer for the [Before you start](../usage/start-backup.md#before-you-start) section and check that you have made all the preparation steps for the backup. 
+1. Refer to the [Before you start](../usage/start-backup.md#before-you-start) section and make sure that you have made all the preparation steps for the backup. 
 
 2. To make a snapshot-based backup, run the [`pbm backup`](../reference/pbm-commands.md#pbm-backup) command with the type `external`:
 
