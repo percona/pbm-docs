@@ -44,9 +44,9 @@ This is the first stage of the snapshot-based backups where you can make them ma
 
     You also see the backup name. 
 
-3. At this stage, you can copy the `dataDir` contents to the storage / make a snapshot using the technology of your choice. 
+3. (Optional) You can check the backup progress with the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup). The command output provides the backup state and what nodes are running backup.
 
-4. (Optional) To check the backup progress, run the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup). The command output provides the backup state and what nodes are running backup.
+4. At this stage, you can copy the `dataDir` contents to the storage / make a snapshot using the technology of your choice. 
 
 5. After the file copy, run the following command to close the `$backupCursor` and complete the backup: 
 
@@ -88,7 +88,7 @@ This is the first stage of the snapshot-based backups where you can make them ma
 
     At this stage, Percona Backup for MongoDB reads the metadata from the backup, maintains data consistency and starts the cluster / replica set. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
 
-4. Optional. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-descrbe-restore) command.
+4. Optioal. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-descrbe-restore) command.
 
 ### Post-restore steps 
 
