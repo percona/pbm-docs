@@ -58,7 +58,7 @@ This is the first stage of the snapshot-based backups where you can make them ma
 
 ### Before you start:
 
-1. Shut down all `mongos` nodes.
+1. Shut down all `mongos` nodes. If you have set up the automatic restart of the database, disable it.
 2. Stop the arbiter nodes manually since there’s no `pbm-agent` on these nodes to do that automatically.
 
 ### Procedure
@@ -69,7 +69,7 @@ This is the first stage of the snapshot-based backups where you can make them ma
     $ pbm restore --external 
     ```    
 
-    Percona Backup for MongoDB prepares the database, provides the restore name and prompts you to copy the data:    
+    Percona Backup for MongoDB stops the database, cleans up data directories on all nodes, provides the restore name and prompts you to copy the data:    
 
     ```{.text .no-copy}
     <example goes here>
