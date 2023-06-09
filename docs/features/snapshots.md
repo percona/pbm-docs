@@ -79,7 +79,7 @@ This is the first stage of the snapshot-based backups where you can make them ma
 
     !!! important 
 
-        You must **copy the data on every node of a corresponding replica set in a cluster**. For example, copy files from `node1` of `rs1` in a backup onto all nodes in `rs1` in the target cluster and so on.
+        While a backup is made from a single node of a replica set, for the restore you must **copy the data on every node of a corresponding replica set in a cluster**. For example, copy files from a backup for a replica set `rs1` to all nodes in `rs1` in the target cluster and so on.
 
 3. After you copied the files to the nodes, complete the restore with the following command:    
 
