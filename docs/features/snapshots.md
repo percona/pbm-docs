@@ -5,7 +5,7 @@
 ## Considerations 
 
 1. This is a [technical preview feature](../reference/glossary.md#technical-preview-feature).
-2. Supported only for physical backups
+2. Supported only for full physical backups
 3. Available only if you run Percona Server for MongoDB in your environment  as PBM uses the [`$backupCursor and $backupCursorExtended aggregation stages`](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html). 
 
 While a physical backup is a physical copy of your data directory, a snapshot is a point in time copy of your disk or a volume where the data files are stored. Restoring from snapshots is much faster and allows almost immediate access to data, while the database is unavailable during physical restore. Snapshot-based backups are especially useful for owners of large data sets with terabytes of data. Yet the snapshots don’t guarantee data consistency in sharded clusters.
@@ -27,7 +27,7 @@ This is the first stage of the snapshot-based backups where you can make them ma
 2. To make a snapshot-based backup, run the [`pbm backup`](../reference/pbm-commands.md#pbm-backup) command with the type `external`:
 
     ```{.bash data-prompt="$"}
-    $ pbm backup -t external --list-files
+    $ pbm backup -t external 
     ```    
 
     When executing the command, PBM does the following:    
@@ -42,9 +42,9 @@ This is the first stage of the snapshot-based backups where you can make them ma
        <node-list>
        ```    
 
-    You also see the backup name and the list of files to copy from each node. 
+    You also see the backup name. 
 
-3. At this stage, you can copy files to the storage / make a snapshot using the technology of your choice.
+3. At this stage, you can copy the `dataDir` contents to the storage / make a snapshot using the technology of your choice. 
 
 4. (Optional) To check the backup progress, run the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup). The command output provides the backup state and what nodes are running backup.
 
@@ -72,14 +72,13 @@ This is the first stage of the snapshot-based backups where you can make them ma
     Percona Backup for MongoDB stops the database, cleans up data directories on all nodes, provides the restore name and prompts you to copy the data:    
 
     ```{.text .no-copy}
-    <example goes here>
+    Starting restore <restore_name> from '[external]'.................................................................................................................................Ready to copy data to the nodes data directory.
+        After the copy is done, run: pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
+        Check restore status with: pbm describe-restore <restore_name> -c </path/to/pbm.conf.yaml>
+        No other pbm command is available while the restore is running!
     ``` 
 
-2. Copy the data. To check what files to copy, run [`pbm describe-restore`](../reference/pbm-commands.md#pbm-descrbe-restore) command.
-
-    !!! important 
-
-        While a backup is made from a single node of a replica set, for the restore you must **copy the data on every node of a corresponding replica set in a cluster**. For example, copy files from a backup for a replica set `rs1` to all nodes in `rs1` in the target cluster and so on.
+2. Copy the data. While a backup is made from a single node of a replica set, for the restore you must **copy the data on every node of a corresponding replica set in a cluster**. For example, copy files from a backup for a replica set `rs1` to all nodes in `rs1` in the target cluster and so on.
 
 3. After you copied the files to the nodes, complete the restore with the following command:    
 
@@ -88,6 +87,8 @@ This is the first stage of the snapshot-based backups where you can make them ma
     ```    
 
     At this stage, Percona Backup for MongoDB reads the metadata from the backup, maintains data consistency and starts the cluster / replica set. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
+
+4. Optional. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-descrbe-restore) command.
 
 ### Post-restore steps 
 
