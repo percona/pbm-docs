@@ -56,20 +56,20 @@ This is the first stage of the snapshot-based backups where you can make them ma
 
 ## Restore a backup
 
-Before you start:
+### Before you start:
 
 1. Shut down all `mongos` nodes.
 2. Stop the arbiter nodes manually since there’s no `pbm-agent` on these nodes to do that automatically.
 
-The following procedure describes the restore from backups [made through PBM](#make-a-backup). See [Restore form a backup made outside PBM](#restore-form-a-backup-made-outside-pbm) for how to restore from a backup made outside of PBM.
+### Procedure
 
 1. To make a restore, run the following command:
 
     ```{.bash data-prompt="$"}
-    $ pbm restore [backup_name] --external 
+    $ pbm restore --external 
     ```    
 
-    Percona Backup for MongoDB reads the metadata from the backup, prepares the database, provides the restore name and prompts you to copy the data:    
+    Percona Backup for MongoDB prepares the database, provides the restore name and prompts you to copy the data:    
 
     ```{.text .no-copy}
     <example goes here>
@@ -79,39 +79,31 @@ The following procedure describes the restore from backups [made through PBM](#m
 
     !!! important 
 
-        You must **copy the data on every node of the replica set / sharded cluster**. 
+        You must **copy the data on every node of a corresponding replica set in a cluster**. For example, copy files from `node1` of `rs1` in a backup onto `node1` of `rs1` in the target cluster and so on.
 
 3. After you copied the files to the nodes, complete the restore with the following command:    
 
     ```{.bash data-prompt="$"}
-    $ pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
+    $ pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml>
     ```    
 
-    At this stage, Percona Backup for MongoDB maintains data consistency and starts the cluster / replica set. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
+    At this stage, Percona Backup for MongoDB reads the metadata from the backup, maintains data consistency and starts the cluster / replica set. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
 
-### Restore form a backup made outside PBM
+### Post-restore steps 
 
-To restore an external backup made outside PBM, you need to specify the following for the `pbm restore` command:
+After the restore is complete, do the following:
 
-* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made
-* a timestamp to restore to
+1. Start all `mongod` nodes
 
-```{.bash data-prompt="$"}
-$ pbm restore --external -c </path/to/mongod.conf> --ts 
-```
+2. Start all `pbm-agents`
 
-If the path to the source cluster `mongod.conf` is undefined, PBM tries to retrieve the required configuration options from the `mongod.conf` of the target cluster.
+3. Run the following command to resync the backup list with the storage:
 
-If the timestamp to restore to is undefined, PBM defines this time based on the `lastCommittedOpTime` or `lastStableRecoveryTimestamp` values from `rs.status()` and restores the database up to this time.
+    ```{.bash data-prompt="$"}
+    $ pbm config --force-resync
+    ``` 
 
-Next, copy the data files. Note that you must copy the data **on every data-bearing node of your cluster / replica set**.
+4. Start the balancer and start `mongos` nodes.
 
-Complete the restore by running:
-
-```{.bash data-prompt="$"}
-$ pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
-```    
-
-At this stage, Percona Backup for MongoDB maintains data consistency and starts the cluster / replica set. 
-
+5. Make a fresh backup to serve as the new base for future restores. 
 
