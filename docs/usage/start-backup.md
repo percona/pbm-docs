@@ -70,7 +70,7 @@
     The `pbm-agent` starts tracking the incremental backup history to be able to calculate and save the difference in data blocks. After that you can run regular incremental backups:
 
     ```{.bash data-prompt="$"}
-    $ pbm backup -type incremental
+    $ pbm backup --type incremental
     ```
 
     The incremental backup history looks like this:
