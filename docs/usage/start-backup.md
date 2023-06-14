@@ -37,7 +37,7 @@
 
     !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-    Before you start, read about [selective backups known limitations](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)  
+    Before you start, read about [selective backups known limitations](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
 
     To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
 
@@ -59,7 +59,7 @@
     
     !!! admonition "Version added: [2.0.3](../release-notes/2.0.3.md)"
 
-    Before you start, read more about [incremental backup](../features/incremental-backup.md#considerations)
+    Before you start, read more about [incremental backup](../features/incremental-backup.md#considerations).
 
     To start incremental backups, first make a full incremental backup. It will serve as the base for subsequent incremental backups:
 
