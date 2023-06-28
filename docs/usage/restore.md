@@ -265,6 +265,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
             ```
 
             This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
+    
     2. Resync the backup list from the storage. 
     3. Start the balancer and the `mongos` node.
     4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
@@ -281,7 +282,9 @@ Of course, make sure not to run **pbm backup** from the new environment whilst t
 
 ## Restoring into a cluster / replica set with a different name
 
-Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names.
+Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names. 
+
+Starting with version 2.2.0, you can restore environments that have [custom shard names](https://www.mongodb.com/docs/manual/reference/command/addShard/#mongodb-dbcommand-dbcmd.addShard). 
 
 To restore data to the environment with different replica set names, configure the name mapping between the source and target environments. You can either set the `PBM_REPLSET_REMAPPING` environment variable for `pbm` CLI or use the `--replset-remapping` flag for PBM commands. The mapping format is `<rsTarget>=<rsSource>`.
 
