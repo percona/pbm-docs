@@ -57,4 +57,6 @@ Note that the greater value you specify, the more time and computing resources i
 *Default*: False <br>
 *Required*: NO
 
-Controls whether the base backup is required to start Point-in-Time Recovery recovery oplog slicing. When set to true, Percona Backup for MongoDB saves oplog chunks without the base backup snapshot. Available in Percona Backup for MongoDB starting with version 1.8.0. To learn more about the usage, see Point-in-Time Recovery oplog replay.
+Controls whether the base backup is required to start [Point-in-Time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing). When set to true, Percona Backup for MongoDB saves oplog chunks without the base backup snapshot.
+
+Available in Percona Backup for MongoDB starting with version 1.8.0. To learn more about the usage, see [Point-in-Time Recovery oplog replay](../usage/oplog-replay.md).

@@ -31,7 +31,7 @@
      $ pbm backup --type=physical
      ```
 
-     During a *physical* backup, Percona Backup for MongoDB copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
+     During a *physical* backup, Percona Backup for MongoDB stops [point-in-time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing) if it's enabled, copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
 
 === "Selective"
 
