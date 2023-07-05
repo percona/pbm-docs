@@ -529,7 +529,7 @@ The command accepts the following flags:
 | `--time=TIME`       | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](../features/point-in-time-recovery.md) is enabled. |
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
-| `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.|
+| `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.<br><br> Starting with version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-tutorial.md#from-physical-backups). Without it, PBM looks for a logical backup to restore from.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
 | `--ns="database.collection"`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns="database.*"`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, ns="db1.*,db2.coll2,db3.coll1,db3.collX"|
 
