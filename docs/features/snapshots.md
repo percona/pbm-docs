@@ -18,7 +18,7 @@ The snapshot-based physical backup / restore flow consists of three distinct sta
 * Copying files — done by the user / client app
 * Completing the backup / restore — done by PBM. 
 
-This is the first stage of the snapshot-based backups where you can make them manually. Automated snapshot-based backups are planned for future releases.
+This is the first stage of the snapshot-based backups where you can make them manually. Automated snapshot-based backups are planned for the future.
 
 ## Make a backup
 

@@ -526,7 +526,7 @@ The command accepts the following flags:
 
 ## pbm restore
 
-Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical, physical or a snapshot-based restore.
+Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical, physical, or a snapshot-based restore.
 
 The command has the following syntax:
 
@@ -547,7 +547,7 @@ The command accepts the following flags:
 | `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
 | `--ns="database.collection"`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns="database.*"`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, ns="db1.*,db2.coll2,db3.coll1,db3.collX"|
-| `-c`                | The path to the `mongod.conf` file 
+| `-c`, `--config`     | The path to the `mongod.conf` file 
 
 ??? "Restore output"
 
