@@ -106,7 +106,7 @@ Starting with version [2.2.0](../release-notes-2.2.0.md), you can recover your d
 To restore a database from a physical backup, specify the time and the base backup for the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command:
 
 ```{.bash data-prompt="$"}
-$ pbm restore <backup_name> --time <timestamp> -w
+$ pbm restore --base-backup=<backup_name> --time <timestamp> -w
 ```
 
 Percona Backup for MongoDB recognizes if it is a full or an incremental backup and restores the database from it up to the specified time. 
