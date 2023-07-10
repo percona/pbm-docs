@@ -84,7 +84,7 @@ The URL to access the bucket. The default value for GCS is `https://storage.goog
 *Type*: boolean <br>
 *Required*: NO
 
-When enabled, PBM uses the [path-style URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access) for accessing the S3 bucket. Otherwise, it sends virtual-hosted–style requests (default).
+By default, PBM uses the [path-style URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access) for accessing the S3 bucket. Setting this option to `false` instructs PBM to send virtual-hosted–style requests instead.
 
 ### storage.s3.credentials.access-key-id
 
