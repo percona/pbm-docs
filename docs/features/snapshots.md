@@ -68,7 +68,7 @@ The following procedure describes the restore from backups [made through PBM](#m
 1. To make a restore, run the following command:
 
     ```{.bash data-prompt="$"}
-    $ pbm restore --external [backup_name]
+    $ pbm restore --external 
     ```    
 
     Percona Backup for MongoDB stops the database, cleans up data directories on all nodes, provides the restore name and prompts you to copy the data:    
@@ -114,11 +114,11 @@ After the restore is complete, do the following:
 
 !!! important
 
-    For external backups made through PBM, PBM performs compatibility checks for the backup and the target cluster. If you restore the backup made outside PBM, its compatibility is your responsibility.
+    For external backups made through PBM, PBM performs compatibility checks for the backup and the target cluster. If you restore the backup made outside PBM, it cannot ensure that the backup was made properly and in a consistent manner. Therefore, the backup compatibility is your responsibility.
 
 To restore an external backup made outside PBM, you need to specify the following for the `pbm restore` command:
 
-* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. The configuration file should contain the storage options per replica set name, for example:
+* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM uses during the restore. It should contain the [storage options](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options ) per replica set name, for example:
 
    ```yaml
    rs1:
@@ -128,6 +128,8 @@ To restore an external backup made outside PBM, you need to specify the followin
        storage:
            directoryPerDB: true
    ```
+
+   To restore the data encrypted at rest, make sure data-at-rest encryption settings on the source and target clusters are the same. 
 
 * a timestamp to restore to
 
