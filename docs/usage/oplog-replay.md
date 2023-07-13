@@ -3,7 +3,7 @@
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)"
 
-You can replay the [oplog](../reference/glossary.md#oplog) for a specific period on top of any backup: logical, physical, storage level snapshot (like [EBS-snapshot](../reference/glossary.md#ebs-snapshot)). Starting with version [1.8.0](../release-notes/1.8.0.md), you can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the `pitr.oplogOnly` configuration parameter:
+You can replay the [oplog](../reference/glossary.md#oplog) for a specific period on top of any backup: logical, physical, storage level snapshot (like [EBS-snapshot](../reference/glossary.md#ebs-snapshot)). Starting with version [1.8.0](../release-notes/1.8.0.md), you can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the [`pitr.oplogOnly`](../reference/pitr-options.md) configuration parameter:
 
 ```yaml
 pitr:
