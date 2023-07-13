@@ -14,7 +14,7 @@ Percona XtraDB Cluster
 Percona XtraBackup
 Percona Toolkit
 Sysbench
-Ooplog
+[Oo]plog
 PITR
 pitr
 namespace

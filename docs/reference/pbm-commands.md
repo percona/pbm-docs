@@ -26,9 +26,8 @@ The command accepts the following flags:
 | `--compression-level` | Configure the compression level from 0 to 10. The default value depends on the compression method used.  |
 | `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
-| `--ns="database.collection"`| Backs up the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. In version 2.0.0, only a single namespace is supported for the backup.|
 | `-l`, `--list-files` | For external backups only. Shows the list of fines per node to copy.|
-
+| `--ns="database.collection"`| Makes a logical backup of the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. In version 2.0.0, only a single namespace is supported for the backup.|
 
 ??? "JSON output"
 
