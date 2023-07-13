@@ -12,16 +12,18 @@ With Percona Backup for MongoDB, you can make backups on a running server and re
 
 ## What you can do
 
-![image](_images/backups-infographic.png#only-light)
-![image](_images/backups-infographic-dark.png#only-dark)
+![image](_images/backups-infographic.png)
+
 
 * [Logical backups](features/logical.md) to back up and / or migrate data to different platforms and database versions
 * [Physical backups](features/physical.md) to speed up performance for large (multi-terabyte) data sets
 * [Selective backups](features/selective-backup.md) to work with the desired data set
 * [Incremental physical backups](features/incremental-backup.md) to ensure that critical data is regularly backed up and to save on costs for storage and transfer
+* [Snapshot-based physical backups](features/snapshots.md) using the technology of your choice.
 * [Restore the full database or specific data set](usage/restore.md) from a backup
 * [Restore the database to a specific point in time](features/point-in-time-recovery.md)
 * [Replay oplog](usage/oplog-replay.md) on top of [EBS-snapshots](reference/glossary.md#ebs-snapshot)
+
 
 [Explore features](features/backup-types.md){ .md-button .md-button }
 

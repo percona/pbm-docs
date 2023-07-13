@@ -52,6 +52,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     Before you start, shut down all `mongos` nodes as the database won’t be available while the restore is in progress.
 
+
 ## Restore a database
 
 === "Logical"
@@ -269,6 +270,11 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     2. Resync the backup list from the storage. 
     3. Start the balancer and the `mongos` node.
     4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
+
+=== "Snapshot-based"
+
+     See [snapshot-based backups](../features/snapshots.md#restore-a-backup).
+
 
 ## Restoring a backup into a new environment
 

@@ -83,6 +83,12 @@
         2022-11-24T14:45:53Z 220.13GB <incremental, base> [restore_to_time: 2022-11-24T14:45:55Z]
     ```
 
+=== "Snapshot-based"
+
+    See [snapshot-based backups](../features/snapshots.md#make-a-backup).
+
+
+
 ### Compressed backups
 
 By default, Percona Backup for MongoDB uses the `s2` compression method when making a backup.

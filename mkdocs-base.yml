@@ -134,6 +134,7 @@ nav:
           - features/selective-backup.md
           - features/incremental-backup.md
           - features/point-in-time-recovery.md 
+          - features/snapshots.md
       - Comparison with MongoDB: 'features/comparison.md' 
   - Discover PBM:
       - How PBM works: 'intro.md'

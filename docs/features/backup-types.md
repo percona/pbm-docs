@@ -9,5 +9,6 @@ You can use several types of database backups and restores to develop your backu
 | [Selective](selective-backup.md) | [Tech preview](../reference/glossary.md#technical-preview-feature)| 2.0.0         | Sharded clusters (starting with version 2.0.3) and non-sharded replica sets. Sharded collections are not yet supported. | Yes | Yes | 
 | [Incremental](incremental-backup.md) | GA | 2.1.0 (Supported for PSMDB versions 4.2.24-24, 4.4.18-18, 5.0.2-1, 6.0.2-1 and higher) | Sharded clusters and non-sharded replica sets | Yes  | No |  
 | [Point-in-time recovery](point-in-time-recovery.md) | GA (automatic for logical backups, manual for physical backups) | 1.3.0   | Sharded clusters and non-sharded replica sets | Yes | Yes | 
+| [Snapshot-based](snapshots.md) | Tech preview](../reference/glossary.md#technical-preview-feature) | 2.2.0 | Sharded clusters and non-sharded replica sets | Yes | No | 
 
 
