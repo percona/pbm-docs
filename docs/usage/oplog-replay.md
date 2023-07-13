@@ -18,11 +18,15 @@ By replaying these oplog slices on top of the backup snapshot with the [`pbm opl
 
 ## Oplog replay for physical backups
 
-To replay the oplog on top of physical backups made with Percona Backup for MongoDB, do the following:
+!!! note ""
 
+    Starting with version 2.2.0, oplog replay on top of a physical backups made with Percona Backup for MongoDB is done automatically as part of [point-in-time recovery](pitr-tutorial.md#from-physical-backups). 
+
+This section describes how to manually replay oplog on top of physical backups with Percona Backup for MongoDB version 2.1.0 and earlier.
+
+After you [restored a physical backup](restore.md), do the following:
 
 1. Stop point-in-time recovery, if enabled, to release the lock.
-
 
 2. Run `pbm status` or `pbm list` commands to find oplog chunks available for replay.
 
