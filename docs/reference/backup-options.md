@@ -60,3 +60,5 @@ Note that the greater value you specify, the more time and computing resources i
 *Default*: 33
 
 The wait time (in seconds) for PBM to start physical backups on all shards. Increasing this value is useful when it takes longer than usual to open the `$backupCursor`.
+
+The 0 (zero) value resets the timeout to the default 33 seconds. 
