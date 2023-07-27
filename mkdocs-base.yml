@@ -128,6 +128,7 @@ nav:
   - Home: index.md
   - Release notes:
       - "Release notes index": "release-notes.md"
+      - release-notes/2.2.1.md
       - release-notes/2.2.0.md
       - release-notes/2.1.0.md
       - release-notes/2.0.5.md
