@@ -101,7 +101,7 @@ When point-in-time recovery is started, Percona Backup for MongoDB uses the prov
 
 ## From physical backups
 
-Starting with version [2.2.0](../release-notes-2.2.0.md), you can recover your database from a full or an incremental physical backup in the same automated fashion as from a logical one. Percona Backup for MongoDB restores the backup snapshot and automatically replays the oplog events on top of it up to the specified time, guaranteeing data consistency. This helps you prevent data loss during a disaster and gives you the same user experience when managing backups and restores.
+Starting with version [2.2.0](../release-notes/2.2.0.md), you can recover your database from a full or an incremental physical backup in the same automated fashion as from a logical one. Percona Backup for MongoDB restores the backup snapshot and automatically replays the oplog events on top of it up to the specified time, guaranteeing data consistency. This helps you prevent data loss during a disaster and gives you the same user experience when managing backups and restores.
 
 To restore a database from a physical backup, specify the time and the base backup for the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command:
 
@@ -131,7 +131,7 @@ After the point-in-time recovery is complete, perform these post-restore steps:
 
 5. Make a fresh backup to serve as the new base for future restores.
 
-6. [Enable point-in-time routine](point-in-time-recovery.md#enable-point-in-time-recovery) to resume saving oplog slices.
+6. [Enable point-in-time routine](../features/point-in-time-recovery.md#enable-point-in-time-recovery) to resume saving oplog slices.
 
 For Percona Backup for MongoDB version 2.1.0 and earlier, point-in-time recovery consists of the following steps:
 
