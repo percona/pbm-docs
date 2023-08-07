@@ -20,7 +20,9 @@ theme:
     - content.action.view
     - content.code.copy      
 
-
+plugins:
+  section-index: {}
+  
 #Google Analytics configuration 
 extra:
   analytics:
