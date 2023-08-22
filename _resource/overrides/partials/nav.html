@@ -1,6 +1,7 @@
 {#-
   This file was automatically generated - do not edit
 -#}
+{% import "partials/nav-item.html" as item with context %}
 {% set class = "md-nav md-nav--primary" %}
 {% if "navigation.tabs" in features %}
   {% set class = class ~ " md-nav--lifted" %}
@@ -23,12 +24,11 @@
   <ul class="md-nav__list" data-md-scrollfix>
     {% for nav_item in nav %}
       {% set path = "__nav_" ~ loop.index %}
-      {% set level = 1 %}
-      {% include "partials/nav-item.html" %}
+      {{ item.render(nav_item, path, 1) }}
     {% endfor %}
     <br>
    <label class="md-nav__title" for="__drawer">
-    <a href="https://learn.percona.com/download-percona-backup-for-mongodb-1.5-manual" onclick="_gaq.push(['b._trackEvent', 'Percona Backup for MongoDB', 'Download', 'Download Manual Backup for MongoDB']);" class="md-nav__link md-nav__link--active">
+    <a href="https://learn.percona.com/download-percona-backup-for-mongodb-manual-2" onclick="_gaq.push(['b._trackEvent', 'Percona Backup for MongoDB', 'Download', 'Download Manual Backup for MongoDB']);" class="md-nav__link md-nav__link--active">
       Download PDF
     </a>
   </label> 
