@@ -25,7 +25,7 @@ Run [`pbm status`](../reference/pbm-commands.md#pbm-status) or [`pbm list`](../r
     $ pbm restore --time="2022-12-14T14:27:04"
     ```    
 
-    The timestamp you specify for the restore must be within the time ranges in the PITR section of `pbm list` output. Percona Backup for MongoDB automatically selects the most recent backup in relation to the specified timestamp and uses that as the base for the restore.    
+    The timestamp you specify for the restore must be within the time ranges in the PITR section of `pbm list` output. Percona Backup for MongoDB automatically selects the most recent backup among logical, physical and incremental in relation to the specified timestamp and uses that as the base for the restore.    
 
     To illustrate this behavior, let’s use the following `pbm list` output as the example.     
 
