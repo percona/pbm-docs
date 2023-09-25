@@ -33,11 +33,28 @@ During physical backups and restores, ``pbm-agents`` don’t export / import dat
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }
 [Restore a backup](../usage/restore.md){ .md-button .md-button }
 
+## Physical backups in mixed deployments
+
+!!! admonition "Version added: [2.3.0](../release-notes/2.3.0.md)"
+
+You may run both MongoDB Community / Enterprise Edition nodes and Percona Server for MongoDB (PSMDB) nodes in your environment, for example, when migrating to or evaluating PSMDB. 
+
+You can make a physical, incremental or a snapshot-based backup in such a mixed deployment using PBM. This saves you from having to reconfigure your deployment for a backup, and keeps both your migration and backup strategies intact.
+
+Physical, incremental and snapshot-based backups are only possible from PSMDB nodes since their implementation is based on the [`$backupCursorExtend`](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality. When it’s time to make a backup, PBM searches the PSMDB node and makes a backup from it. The PSMDB node must not be an arbiter nor a delayed node. 
+
+If more than 2 nodes are suitable for a backup, PBM selects the one with a higher [priority](../usage/start-backup.md#adjust-node-priority-for-backups). Note that if you override a priority for at least one node, PBM assigns priority `1.0` for the remaining nodes and uses the new priority list . 
+
+Consider the following flow for [incremental backups](incremental-backup.md):
+By default, PBM picks the node from where it made the incremental base backup when it makes subsequent backups. PBM assigns priority `3.0` to this node ensuring that it is the first in the list. If you change the node priority, make a new incremental base backup to ensure data continuity.
+
+The physical restore in mixed deployments has no restrictions except the versions in backup and in the source cluster must match.
+
 ## Physical restores with data-at-rest encryption
 
 !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-You can back up and restore the encrypted data at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
+You can back up and restore the data encrypted at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
 
 This is how it works: 
 
