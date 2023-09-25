@@ -1,5 +1,6 @@
 # Percona Backup for MongoDB release notes
 
+* [Percona Backup for MongoDB 2.3.0](release-notes/2.3.0.md)
 * [Percona Backup for MongoDB 2.2.1](release-notes/2.2.1.md)
 * [Percona Backup for MongoDB 2.2.0](release-notes/2.2.0.md)
 * [Percona Backup for MongoDB 2.1.0](release-notes/2.1.0.md)
