@@ -199,6 +199,7 @@ Provides the detailed information about a backup:
 - cluster information: the replica set name, the backup status on this replica set, whether it is used as a config server replica set, last write timestamp
 - replica set info: name, backup status, last write timestamp and last transition time, `mongod` security options, if encryption is configured.
 - for snapshot-based backups, provides the list of files being copied
+- for logical and selective backups, provides the list of collections included in the backup. Available with version 2.3.0.
 
 The command has the following syntax:
 
@@ -210,6 +211,7 @@ $ pbm describe-backup [<backup-name>] [<flags>]
 | --------------------- | ------------------------------------- |
 | `-o`, `--out=text`    | Shows the status as either plain text or a JSON object. Supported values: `text`, `json`|
 | `-l`, `--list-files`  | Shows the list of files being copied for snapshot-based backups |
+| `--with-collections`  | Shows the collections included in the backup. For logical and selective backups only. Available with version 2.3.0.
 
 ??? admonition "JSON output"
 
