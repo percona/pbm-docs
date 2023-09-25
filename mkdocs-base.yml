@@ -186,7 +186,8 @@ nav:
          - Method 1. From repositories: install/repos.md
          - Method 2. Build from source: install/source.md
          - Method 3. Download tarballs: install/tarball.md
-         - Method 4. Deploy on Kubernetes: install/cloud.md
+         - Method 4. Run in Docker: install/docker.md
+         - Method 5. Deploy on Kubernetes: install/cloud.md
       - Set up and configure: 'install/initial-setup.md'       
       - Make a backup : "usage/start-backup.md"
       - Restore a backup: usage/restore.md
