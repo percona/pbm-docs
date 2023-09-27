@@ -32,37 +32,38 @@ by adding marketing-requested elements
                 <body>
                 </body>
               </html>
-
-              <script>
-              (function (w, d, s, l, i) {
-                  w[l] = w[l] || []; w[l].push({
-                    'gtm.start': new Date().getTime(), 
-                    event: 'gtm.js'
-                  });
-                  var f = d.getElementsByTagName(s)[0],
-                  j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-                  j.async = true; 
-                  j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-                  f.parentNode.insertBefore(j, f);
-                })(window, document, 'script', 'dataLayer', 'GTM-K48FGP2');
-              </script>
               {% endblock %}
 
 
-              {% block scripts %}
-              {{ super() }}
-
-              <img src="https://tracking.g2crowd.com/attribution_tracking/conversions/1007137.gif?e=" width="1" height="1" />
-
-              <noscript>
-                <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K48FGP2" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-              </noscript>
-              {% endblock %}
-
-             {% block content %}
-
-              {{ super() }}
-
-              {{ relbar2()}}
-
-             {% endblock %}
+             {% block site_nav %}
+            {% if nav %}
+              {% if page.meta and page.meta.hide %}
+                {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+              {% endif %}
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" {{ hidden }}>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    {% include "partials/nav.html" %}
+                    <br>
+                    <label class="md-nav__title" for="__drawer">
+    <a href="https://learn.percona.com/download-percona-backup-for-mongodb-manual-2" onclick="_gaq.push(['b._trackEvent', 'Percona Backup for MongoDB', 'Download', 'Download Manual Backup for MongoDB']);" class="md-nav__link md-nav__link--active" style="font-size: .7rem;">
+      Download PDF
+    </a>
+  </label> 
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            {% if "toc.integrate" not in features %}
+              {% if page.meta and page.meta.hide %}
+                {% set hidden = "hidden" if "toc" in page.meta.hide %}
+              {% endif %}
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" {{ hidden }}>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    {% include "partials/toc.html" %}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endblock %}
