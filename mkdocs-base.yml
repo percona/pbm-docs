@@ -46,6 +46,7 @@ extra_css:
 
 extra_javascript:
   - js/promptremover.js
+  - js/feedback.js
 
 markdown_extensions:
   abbr: {}
@@ -75,10 +76,16 @@ markdown_extensions:
   pymdownx.highlight:
       linenums: false
   pymdownx.inlinehilite: {}
-  pymdownx.snippets: {}
+  pymdownx.snippets:  
+    base_path: ["snippets"]
+    auto_append:
+      - services-banner.md
   pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+      options:
+        custom_icons:
+          - _resource/.icons
 
 #Mkdocs plugins   
 plugins:
@@ -126,6 +133,7 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our documentation better. Read more about <a class="reference external" href="https://www.percona.com/20180524-cookie-policy" target="_blank">Percona Cookie Policy</a>.
+
 
 nav:
   - Home: index.md
