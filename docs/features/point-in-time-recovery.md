@@ -34,8 +34,21 @@ The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) 
 
 To start saving [oplog slices](../reference/glossary.md#oplog), the following preconditions must be met:
 
-* A full backup snapshot is required. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
-* Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
+=== "Logical backups"
+
+    * A full logical backup snapshot is required. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
+    * Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
+
+=== "Physical backups"
+
+    Enable point-in-time recovery routine and configure it to save oplog slices without the base backup.
+
+    ```yaml
+    pitr:
+       enabled: true
+       oplogOnly: true
+    ```
+    
 
 If you just enabled point-in-time recovery, it requires 10 minutes for the first chunk to appear in the [`pbm list`](../reference/pbm-commands.md#pbm-list) output.
 
@@ -99,7 +112,7 @@ Note that the higher value you specify, the more time and computing resources it
 
     You can use different compression methods for backup snapshots and point-in-time recovery slices. However, backup snapshot-related oplog is compressed with the same compression method as the backup itself.
 
-## View oplog slices
+### View oplog slices
 
 The oplog slices are stored in the `pbmPitr` subdirectory in the [remote storage defined in the config](../details/storage-configuration.md#storage-config). A slice name reflects the start and end time this slice covers.
 
@@ -123,4 +136,5 @@ The [`pbm list`](../reference/pbm-commands.md#pbm-list) output includes the foll
      2021-08-06T08:03:10 - 2021-08-06T08:18:29
      2021-08-06T08:18:42 - 2021-08-06T08:33:09
    ```
+
 

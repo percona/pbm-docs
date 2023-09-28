@@ -2,7 +2,7 @@
 
 INHERIT: mkdocs-base.yml
 
-site_url: "https://docs.percona.com/percona-backup-mongodb/"
+site_url: "https://docs.percona.com/percona-backup-mongodb"
 
 
 theme:
@@ -21,7 +21,9 @@ theme:
     - content.action.view
     - content.code.copy      
 
-
+plugins:
+  section-index: {}
+  
 #Google Analytics configuration 
 extra: 
   analytics: 

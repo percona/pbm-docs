@@ -28,16 +28,16 @@
     !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
 
      ```{.bash data-prompt="$"}
-     $ pbm backup --type-physical
+     $ pbm backup --type=physical
      ```
 
-     During a *physical* backup, Percona Backup for MongoDB copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
+     During a *physical* backup, Percona Backup for MongoDB stops [point-in-time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing) if it's enabled, copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
 
 === "Selective"
 
     !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-    Before you start, read about [selective backups known limitations](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores)  
+    Before you start, read about [selective backups known limitations](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
 
     To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
 
@@ -59,7 +59,7 @@
     
     !!! admonition "Version added: [2.0.3](../release-notes/2.0.3.md)"
 
-    Before you start, read more about [incremental backup](../features/incremental-backup.md#considerations)
+    Before you start, read more about [incremental backup](../features/incremental-backup.md#considerations).
 
     To start incremental backups, first make a full incremental backup. It will serve as the base for subsequent incremental backups:
 
@@ -70,7 +70,7 @@
     The `pbm-agent` starts tracking the incremental backup history to be able to calculate and save the difference in data blocks. After that you can run regular incremental backups:
 
     ```{.bash data-prompt="$"}
-    $ pbm backup -type incremental
+    $ pbm backup --type incremental
     ```
 
     The incremental backup history looks like this:
@@ -80,8 +80,14 @@
         2022-11-25T14:13:43Z 139.82MB <incremental> [restore_to_time: 2022-11-25T14:13:45Z]
         2022-11-25T14:02:07Z 255.20MB <incremental> [restore_to_time: 2022-11-25T14:02:09Z]
         2022-11-25T14:00:22Z 228.30GB <incremental> [restore_to_time: 2022-11-25T14:00:24Z]
-        2022-11-24T14:45:53Z 220.13GB <physical> [restore_to_time: 2022-11-24T14:45:55Z]
+        2022-11-24T14:45:53Z 220.13GB <incremental, base> [restore_to_time: 2022-11-24T14:45:55Z]
     ```
+
+=== "Snapshot-based"
+
+    See [snapshot-based backups](../features/snapshots.md#make-a-backup).
+
+
 
 ### Compressed backups
 

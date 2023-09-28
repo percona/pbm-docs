@@ -14,26 +14,29 @@ by adding marketing-requested elements
        <p>For free technical help, visit the Percona <a class="reference external" href="https://forums.percona.com/c/mongodb/percona-backup-for-mongodb/22?utm_campaign=Doc%20pages" target="_blank">Community Forum</a>.<br>
         <p>To report bugs or submit feature requests, open a <a class="reference external" href="https://jira.percona.com/projects/PBM/issues/" target="_blank">JIRA</a> ticket.<br>
          <p>For paid <a class="reference external" href="https://www.percona.com/services/support"> support </a> and <a class="reference external" href="https://www.percona.com/services/managed-services"> managed </a> or <a class="reference external" href="https://www.percona.com/services/consulting">consulting services </a>, contact <a class="reference external" href="https://www.percona.com/about-percona/contact" target="_blank">Percona Sales</a>.</p>
- </article>
+ <img referrerpolicy="no-referrer-when-downgrade" src="https://static.scarf.sh/a.png?x-pxid=0eb11091-81cd-456f-ba7e-d48f006d5875" />
+</article>
 </div>
 </div>
 {%- endmacro %}
               
-              {% block extrahead %}
-              {{ super() }}
-
-              <html data-lt-installed="true">
-                <head>
-                    <meta property="og:title" content="Percona Backup for MongoDB">
-                    <meta property="og:description" content="Documentation">
-                    <meta property="og:image" content="https://docs.percona.com/percona-backup-for-mongodb/_images/mongodb.png"
-                    <meta property="og:url" content="https://docs.percona.com/percona-backup-for-mongodb/">
+               {% block extrahead %}
+               {{ super() }}
+                 {% set title = config.site_name %}
+                 {% if page and page.meta and page.meta.title %}
+                 {% set title = title ~ " - " ~ page.meta.title %}
+                 {% elif page and page.title and not page.is_homepage %}
+                 {% set title = title ~ " - " ~ page.title %}
+                 {% endif %}
+                 <meta property="og:type" content="website" />
+                 <meta property="og:title" content="{{ title }}" />
+                 <meta property="og:image" content="https://docs.percona.com/percona-backup-mongodb/_images/mongodb.png">
+                 <meta property="og:url" content="https://docs.percona.com/percona-backup-mongodb/">
                 </head>
                 <body>
                 </body>
               </html>
-              {% endblock %}
-
+  {% endblock %}
 
              {% block site_nav %}
             {% if nav %}

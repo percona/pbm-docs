@@ -3,7 +3,7 @@
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)"
 
-You can replay the [oplog](../reference/glossary.md#oplog) for a specific period on top of any backup: logical, physical, storage level snapshot (like [EBS-snapshot](../reference/glossary.md#ebs-snapshot)). Starting with version [1.8.0](../release-notes/1.8.0.md), you can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the `pitr.oplogOnly` configuration parameter:
+You can replay the [oplog](../reference/glossary.md#oplog) for a specific period on top of any backup: logical, physical, storage level snapshot (like [EBS-snapshot](../reference/glossary.md#ebs-snapshot)). Starting with version [1.8.0](../release-notes/1.8.0.md), you can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the [`pitr.oplogOnly`](../reference/pitr-options.md) configuration parameter:
 
 ```yaml
 pitr:
@@ -18,11 +18,15 @@ By replaying these oplog slices on top of the backup snapshot with the [`pbm opl
 
 ## Oplog replay for physical backups
 
-To replay the oplog on top of physical backups made with Percona Backup for MongoDB, do the following:
+!!! note ""
 
+    Starting with version 2.2.0, oplog replay on top of a physical backups made with Percona Backup for MongoDB is done automatically as part of [point-in-time recovery](pitr-tutorial.md#from-physical-backups). 
+
+This section describes how to manually replay oplog on top of physical backups with Percona Backup for MongoDB version 2.1.0 and earlier.
+
+After you [restored a physical backup](restore.md), do the following:
 
 1. Stop point-in-time recovery, if enabled, to release the lock.
-
 
 2. Run `pbm status` or `pbm list` commands to find oplog chunks available for replay.
 
@@ -44,7 +48,7 @@ Storage-level snapshots are saved with point-in-time recovery enabled. Thus, aft
 
 1. Disable point-in-time recovery.
 2. Delete the oplog slices that might have been created.
-3. Resync the data from the storage.
+3. Re-sync the data from the storage.
 4. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps.
 
     ```{.bash data-prompt="$"}

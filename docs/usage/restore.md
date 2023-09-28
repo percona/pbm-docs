@@ -1,33 +1,32 @@
 # Restore a backup
 
-!!! warning 
-
-    Backups made with Percona Backup for MongoDB prior to v1.5.0 are incompatible for restore with Percona Backup for MongoDB v1.5.0 and later. This is because processing of system collections `Users` and `Roles` has changed: in v1.5.0, `Users` and `Roles` are copied to temporary collection during backup and must be present in the backup during restore. In earlier versions of Percona Backup for MongoDB, `Users` and `Roles` are copied to a temporary collection during restore. Therefore, restoring from these backups with Percona Backup for MongoDB v1.5.0 isn’t possible.
-
-    The recommended approach is to make a fresh backup after upgrading Percona Backup for MongoDB to version 1.5.0.
-
 To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](../features/incremental-backup.md)) and restores the database up to the [restore_to_time](../reference/glossary.md#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
 
 ## Considerations
 
 === "Logical"
 
-    1. Percona Backup for MongoDB is designed to be a full-database restore tool. As of version <=1.x, it performs a full all-databases, all collections restore and does not offer an option to restore only a subset of collections in the backup, as MongoDB’s `mongodump` tool does. But to avoid surprising `mongodump` users, as of versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
+    1. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
-    2. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
+    2. If you enabled [Point-in-time recovery](../features/point-in-time-recovery.md), disable it before running `pbm restore`. This is because Point-in-Time Recovery oplog slicing and restore are incompatible operations and cannot be run together.
 
-    3. If you enabled [Point-in-time recovery](../features/point-in-time-recovery.md), disable it before running `pbm restore`. This is because Point-in-Time Recovery oplog slicing and restore are incompatible operations and cannot be run together.
+    3. Backups made with Percona Backup for MongoDB prior to v1.5.0 are incompatible for restore with Percona Backup for MongoDB v1.5.0 and later. This is because processing of system collections `Users` and `Roles` has changed: in v1.5.0, `Users` and `Roles` are copied to temporary collection during backup and must be present in the backup during restore. In earlier versions of Percona Backup for MongoDB, `Users` and `Roles` are copied to a temporary collection during restore. Therefore, restoring from these backups with Percona Backup for MongoDB v1.5.0 isn’t possible.
+
+        The recommended approach is to make a fresh backup after upgrading Percona Backup for MongoDB to version 1.5.0.
+
+    4. For versions earlier than 1.x, Percona Backup for MongoDB performs a full all-databases, all collections restore and does not offer an option to restore only a subset of collections in the backup, as MongoDB’s `mongodump` tool does. 
+
+    5. Starting with versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
 
 === "Physical"
 
     1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
-    2. Physical restores are not supported for deployments with arbiter nodes.
+    2. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
 
 === "Incremental"
 
-    1. This is a [tech preview feature](../reference/glossary.md#technical-preview-feature). We recommend using it only for testing purposes. 
-
-    2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+    1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+    2. Incremental backups made with PBM before PBM 2.1.0 are incompatible for restore with PBM 2.1.0 and onwards.
     3. Physical restores are not supported for deployments with arbiter nodes.
 
 ## Before you start
@@ -42,7 +41,8 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === "Physical"
 
-    Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
+    1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
+    2. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
 
 === "Selective"
     
@@ -52,7 +52,8 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     Before you start, shut down all `mongos` nodes as the database won’t be available while the restore is in progress.
 
-## Make a restore
+
+## Restore a database
 
 === "Logical"
 
@@ -93,6 +94,50 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
         The lower the values, the less memory is allocated for the restore. However, the performance decreases too.
 
+    ### Restore from a logical backup made on previous major version of Percona Server for MongoDB
+
+    In some cases you may need to restore from a backup made on previous major version of Percona Server for MongoDB. To make this happen, [Feature Compatibility Version (FCV)](https://www.mongodb.com/docs/manual/reference/command/setFeatureCompatibilityVersion/) values in both backup and the destination environment must match. 
+
+    Starting with version 2.1.0, Percona Backup for MongoDB stores the FCV value in the backup metadata. If it doesn't match the FCV value on the destination environment, you see the warning in the [`pbm status`](../reference/pbm-commands.md#pbm-status) output so that you can manually adjust it before the restore.
+
+    ```{.bash .no-copy}
+    2023-04-10T10:48:54Z 302.80KB <logical> [ERROR: backup FCV "6.0" is incompatible with the running mongo FCV "5.0"] [2023-04-10T10:49:14Z]
+    2023-04-10T08:40:10Z 172.25KB <logical> [ERROR: backup mongo version "6.0.5-4" is incompatible with the running mongo version "5.0.15-13"] [2023-04-10T08:40:28Z]
+    ```
+
+    The following example illustrates the restore from a backup made on Percona Server for MongoDB 4.4 on Percona Server for MongoDB 5.0.
+
+    1. Check the FCV value for the backup
+
+        ```{.bash data-prompt="$"}
+        $ pbm status
+        ```
+
+        Sample output: 
+
+        ```{.bash .no-copy}
+        Snapshots:
+        2023-04-10T10:51:28Z 530.73KB <logical> [ERROR: backup FCV "4.4" is incompatible with the running mongo FCV "5.0"] [2023-04-10T10:51:44Z]
+        ```
+
+    2. Set the Feature Compatibility Version value to 4.4
+
+        ```{.javascript data-prompt=">"}
+        > db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
+        ```
+
+    3. Restore the database
+
+        ```{.bash data-prompt="$"}
+        $ pbm restore 2023-04-10T10:51:28Z
+        ```
+
+    4. Set the Feature Compatibility Version value to 5.0
+
+        ```{.javascript data-prompt=">"}
+        > db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
+        ```
+    
 === "Physical"
 
     1. List the backups 
@@ -107,13 +152,25 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
         $ pbm restore <backup_name>
         ```
 
-    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node.
+    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
+
+    You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
     **Post-restore steps**
 
     After the restore is complete, do the following:
 
-    1. Restart all `mongod` nodes
+    1. Restart all `mongod` nodes. 
+
+        !!! note
+
+            You may see the following message in the `mongod` logs after the cluster restart:
+
+            ```{.text .no-copy}
+            "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
+            ```
+
+            This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
 
     2. Restart all `pbm-agents`
 
@@ -147,6 +204,30 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
            "node03:27017": /another/path/to/mongod
     ```
 
+    ### Parallel data download
+
+    !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
+
+    Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the [Speeding up MongoDB restores in PBM](https://www.percona.com/blog/speeding-up-database-restores-in-pbm) blog post by *Andrew Pogrebnoi*.
+
+    Here's how it works:
+
+    During the physical restore, Percona Backup for MongoDB starts the workers. The number of workers equals to the number of CPU cores by default. Each worker has a memory buffer allocated for it. The buffer is split into spans for the size of the data chunk. The worker acquires the span to download a data chunk and stores it into the buffer. When the buffer is full, the worker waits for the free span to continue the download.   
+
+    You can fine-tune the parallel download depending on your hardware resources and database load. Edit the PBM configuration file and specify the following settings:
+
+    ```yaml
+    restore:
+       numDownloadWorkers: <int>
+       maxDownloadBufferMb: <int>
+       downloadChunkMb: 32
+    ```
+
+    * `numDownloadWorkers` - the number of workers to download data from the storage. By default, it equals to the number of CPU cores
+    * `maxDownloadBufferMb` - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as `numDownloadWorkers * downloadChunkMb * 16`
+    * `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
+
+
 === "Selective"
 
     1. List the backups 
@@ -175,23 +256,40 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     After the restore is complete, do the following:
 
     1. Restart all `mongod` nodes and `pbm-agents`. 
+
+        !!! note
+
+            You may see the following message in the `mongod` logs after the cluster restart:
+
+            ```{.text .no-copy}
+            "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
+            ```
+
+            This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
+    
     2. Resync the backup list from the storage. 
     3. Start the balancer and the `mongos` node.
     4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
 
+=== "Snapshot-based"
+
+     See [snapshot-based backups](../features/snapshots.md#restore-a-backup).
+
+
 ## Restoring a backup into a new environment
 
-To restore a backup from one environment to another, consider the following key points about the destination environment:
+To restore a backup from one environment to another, ensure the following:
 
-* For physical restore, replica set names (both the config servers and the shards) in your new destination cluster and in the cluster that was backed up must be exactly the same.
+1. Percona Backup for MongoDB configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run [`pbm list`](../reference/pbm-commands.md#pbm-list) and see the backups made from the original environment, then you can run the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command.
 
-* Percona Backup for MongoDB configuration in the new environment must point to the same remote storage that is defined for the original environment, including the authentication credentials if it is an object store. Once you run **pbm list** and see the backups made from the original environment, then you can run the **pbm restore** command.
-
-Of course, make sure not to run **pbm backup** from the new environment whilst the Percona Backup for MongoDB config is pointing to the remote storage location of the original environment.
+2. Don't run [`pbm backup`](../reference/pbm-commands.md#pbm-backup) from the new environment while Percona Backup for MongoDB configuration is pointing to the remote storage location of the original environment.
 
 ## Restoring into a cluster / replica set with a different name
 
-Starting with version 1.8.0, you can restore **logical backups** into a new environment that has the same or more number of shards and these shards have different replica set names.
+Starting with version [1.8.0](../release-notes/1.8.0.md), you can restore [logical backups](../features/logical.md) into a new environment that has the same or more number of shards and these shards have different replica set names. 
+Starting with version [2.2.0](../release-notes/2.2.0.md), you can restore environments that have [custom shard names](https://www.mongodb.com/docs/manual/reference/command/addShard/#mongodb-dbcommand-dbcmd.addShard). 
+
+Starting with version [2.2.0](../release-notes/2.2.0.md), you can restore [physical](../features/physical.md) and [incremental physical](../features/incremental-backup.md) backups into a new environment with a different replica set names. Note that **the number of shards must be the same** as in the environment where the you made the backup.
 
 To restore data to the environment with different replica set names, configure the name mapping between the source and target environments. You can either set the `PBM_REPLSET_REMAPPING` environment variable for `pbm` CLI or use the `--replset-remapping` flag for PBM commands. The mapping format is `<rsTarget>=<rsSource>`.
 
@@ -218,7 +316,7 @@ Configure the replica set name mapping:
 
 !!! note 
 
-    Don’t forget to make a fresh backup on the new environment after the restore is complete.
+    Follow the post-restore steps on the new environment after the restore is complete.
 
 This ability to restore data to clusters with different replica set names and the number of shards extends the set of environments compatible for the restore.
 

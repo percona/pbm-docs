@@ -22,6 +22,10 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem  
 
 ### Create the `pbm` user
 
+!!! note ""
+
+     This step needs to be executed on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
+    
 1. Create the role that allows any action on any resource.
 
      ```javascript
@@ -52,9 +56,6 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem  
 
 You can specify the `username` and `password` values and other options of the `createUser` command as you require so long as the roles shown above are granted.
 
-#### Where to create
-
-Create the `pbm` user on every replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
 
 !!! tip
 
@@ -67,6 +68,11 @@ Create the `pbm` user on every replica set. In a sharded cluster, this means on 
     The replica set name at the *front* of these “host” strings will have to be placed as a “/?replicaSet=xxxx” argument in the parameters part of the connection URI (see below).
 
 ### Set the MongoDB connection URI for `pbm-agent`
+
+!!! note ""
+
+     This step needs to be executed on each node where `pbm-agent` is installed.
+
 
 A **pbm-agent** process connects to its localhost `mongod` node with a standalone type of connection. 
 
@@ -121,9 +127,6 @@ The `pbm-agent.service` systemd unit file includes the environment file. You set
     PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
 
-!!! note ""
-
-    Configure the service init script for every **pbm-agent**.
 
 #### Passwords with special characters
 
@@ -134,6 +137,10 @@ PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admi
 ```
 
 ### Set the MongoDB connection URI for `pbm CLI`
+
+!!! note ""
+
+     This step needs to be executed only on a host that you will use `pbm` CLI at.
 
 Set the MongoDB URI connection string for `pbm` CLI in your shell. This allows you to call `pbm` commands without the `--mongodb-uri` flag.
 
@@ -252,8 +259,6 @@ The storage configuration itself is out of scope of the present document. We ass
 ```{.bash data-prompt="$"}
 $ pbm config --file pbm_config.yaml
 ```
-
-For a sharded cluster, run this command while connecting to the config server replica set. Otherwise connect to the non-sharded replica set as normal.
 
 To learn more about Percona Backup for MongoDB configuration, see [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).
 

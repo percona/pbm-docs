@@ -3,7 +3,9 @@
 site_name: Percona Backup for MongoDB
 site_description: Documentation
 site_author: Percona LLC
-copyright: Percona LLC, &#169; 2023
+copyright: >
+  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2023 — <a href="#__consent">Cookie Consent</a>
+
 
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
@@ -40,6 +42,7 @@ extra_css:
   - https://unicons.iconscout.com/release/v3.0.3/css/line.css
   - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css
   - css/percona.css
+  - css/extra.css
 
 extra_javascript:
   - js/promptremover.js
@@ -92,6 +95,12 @@ plugins:
   git-revision-date-localized: 
     enable_creation_date: true
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
+  meta-descriptions:
+    export_csv: false
+    quiet: false
+    enable_checks: false
+    min_length: 50
+    max_length: 160
   macros:
       include_yaml:
         - 'variables.yml' # Use in markdown as '{{ VAR }}'
@@ -101,7 +110,7 @@ plugins:
   with-pdf: # https://github.com/orzih/mkdocs-with-pdf
           output_path: '_pdf/PerconaBackupforMongoDB.pdf'
           cover_title: 'Backup for MongoDB Documentation'
-          cover_subtitle: 2.0.5 (March 23, 2023)
+          cover_subtitle: 2.3.0 (September 25, 2023)
           author: 'Percona Technical Documentation Team'
           cover_logo: docs/_images/Percona_Logo_Color.png
           debug_html: false
@@ -123,20 +132,51 @@ extra:
       We use cookies to recognize your repeated visits and preferences, as well
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
-      make our documentation better.
-  
-  
+      make our documentation better. Read more about <a class="reference external" href="https://www.percona.com/20180524-cookie-policy" target="_blank">Percona Cookie Policy</a>.
+
 
 nav:
   - Home: index.md
+  - Release notes:
+      - "Release notes index": "release-notes.md"
+      - release-notes/2.3.0.md
+      - release-notes/2.2.1.md
+      - release-notes/2.2.0.md
+      - release-notes/2.1.0.md
+      - release-notes/2.0.5.md
+      - release-notes/2.0.4.md
+      - release-notes/2.0.3.md
+      - release-notes/2.0.2.md
+      - release-notes/2.0.1.md
+      - release-notes/2.0.0.md
+      - release-notes/1.8.1.md
+      - release-notes/1.8.0.md
+      - 'Percona Backup for MongoDB 1.7.0 (2022-04-18)': 'release-notes/1.7.0.md'
+      - 'Percona Backup for MongoDB 1.6.1 (2021-11-04)': 'release-notes/1.6.1.md'
+      - 'Percona Backup for MongoDB 1.6.0 (2021-08-16)': 'release-notes/1.6.0.md'
+      - 'Percona Backup for MongoDB 1.5.0 (2021-05-10)': 'release-notes/1.5.0.md'
+      - 'Percona Backup for MongoDB 1.4.1 (2021-01-28)': 'release-notes/1.4.1.md'
+      - 'Percona Backup for MongoDB 1.4.0 (2020-12-24)': 'release-notes/1.4.0.md'
+      - 'Percona Backup for MongoDB 1.3.4 (2020-11-19)': 'release-notes/1.3.4.md'
+      - 'Percona Backup for MongoDB 1.3.3 (2020-11-04)': 'release-notes/1.3.3.md'
+      - 'Percona Backup for MongoDB 1.3.2 (2020-10-14)': 'release-notes/1.3.2.md'
+      - 'Percona Backup for MongoDB 1.3.1 (2020-09-03)': 'release-notes/1.3.1.md'
+      - 'Percona Backup for MongoDB 1.3.0 (2020-08-26)': 'release-notes/1.3.0.md'
+      - 'Percona Backup for MongoDB 1.2.1 (2020-07-27)': 'release-notes/1.2.1.md'
+      - 'Percona Backup for MongoDB 1.2.0 (2020-05-13)': 'release-notes/1.2.0.md'
+      - 'Percona Backup for MongoDB 1.1.3 (2020-04-14)': 'release-notes/1.1.3.md'
+      - 'Percona Backup for MongoDB 1.1.1 (2020-01-31)': 'release-notes/1.1.1.md'
+      - 'Percona Backup for MongoDB 1.1.0 (2020-01-16)': 'release-notes/1.1.0.md'
+      - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
+      - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Features: 
-      - Backup and restore types: 
-          - Overview: 'features/backup-types.md'
-          - features/logical.md
-          - features/physical.md
-          - features/selective-backup.md
-          - features/incremental-backup.md
-          - features/point-in-time-recovery.md 
+      - Backup and restore types: features/backup-types.md
+      - features/logical.md
+      - features/physical.md
+      - features/selective-backup.md
+      - features/incremental-backup.md
+      - features/point-in-time-recovery.md 
+      - features/snapshots.md
       - Comparison with MongoDB: 'features/comparison.md' 
   - Discover PBM:
       - How PBM works: 'intro.md'
@@ -157,10 +197,11 @@ nav:
          - Method 1. From repositories: install/repos.md
          - Method 2. Build from source: install/source.md
          - Method 3. Download tarballs: install/tarball.md
-         - Method 4. Deploy on Kubernetes: install/cloud.md
+         - Method 4. Run in Docker: install/docker.md
+         - Method 5. Deploy on Kubernetes: install/cloud.md
       - Set up and configure: 'install/initial-setup.md'       
       - Make a backup : "usage/start-backup.md"
-      - Make a restore: usage/restore.md
+      - Restore a backup: usage/restore.md
       - Make a point-in-time restore: usage/pitr-tutorial.md
   - Manage backups:
       - List backups: usage/list-backup.md
@@ -191,34 +232,6 @@ nav:
           - reference/backup-options.md
           - reference/restore-options.md
       - reference/glossary.md  
-  - Release notes:
-      - "Release notes index": "release-notes.md"
-      - release-notes/2.0.5.md
-      - release-notes/2.0.4.md
-      - release-notes/2.0.3.md
-      - release-notes/2.0.2.md
-      - release-notes/2.0.1.md
-      - release-notes/2.0.0.md
-      - release-notes/1.8.1.md
-      - release-notes/1.8.0.md
-      - 'Percona Backup for MongoDB 1.7.0 (2022-04-18)': 'release-notes/1.7.0.md'
-      - 'Percona Backup for MongoDB 1.6.1 (2021-11-04)': 'release-notes/1.6.1.md'
-      - 'Percona Backup for MongoDB 1.6.0 (2021-08-16)': 'release-notes/1.6.0.md'
-      - 'Percona Backup for MongoDB 1.5.0 (2021-05-10)': 'release-notes/1.5.0.md'
-      - 'Percona Backup for MongoDB 1.4.1 (2021-01-28)': 'release-notes/1.4.1.md'
-      - 'Percona Backup for MongoDB 1.4.0 (2020-12-24)': 'release-notes/1.4.0.md'
-      - 'Percona Backup for MongoDB 1.3.4 (2020-11-19)': 'release-notes/1.3.4.md'
-      - 'Percona Backup for MongoDB 1.3.3 (2020-11-04)': 'release-notes/1.3.3.md'
-      - 'Percona Backup for MongoDB 1.3.2 (2020-10-14)': 'release-notes/1.3.2.md'
-      - 'Percona Backup for MongoDB 1.3.1 (2020-09-03)': 'release-notes/1.3.1.md'
-      - 'Percona Backup for MongoDB 1.3.0 (2020-08-26)': 'release-notes/1.3.0.md'
-      - 'Percona Backup for MongoDB 1.2.1 (2020-07-27)': 'release-notes/1.2.1.md'
-      - 'Percona Backup for MongoDB 1.2.0 (2020-05-13)': 'release-notes/1.2.0.md'
-      - 'Percona Backup for MongoDB 1.1.3 (2020-04-14)': 'release-notes/1.1.3.md'
-      - 'Percona Backup for MongoDB 1.1.1 (2020-01-31)': 'release-notes/1.1.1.md'
-      - 'Percona Backup for MongoDB 1.1.0 (2020-01-16)': 'release-notes/1.1.0.md'
-      - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
-      - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - reference/contributing.md
   - Copyright and licensing: copyright.md
   - Trademark policy: trademark-policy.md 

@@ -1,0 +1,34 @@
+Percona
+Percona Backup for MongoDB
+PBM
+pbm
+Percona Server for MongoDB
+MongoDB
+MySQL
+percona-release
+Percona Distribution for MongoDB
+Percona Distribution for MySQL
+Percona Distribution for PostgreSQL
+Percona Monitoring and Management
+Percona XtraDB Cluster
+Percona XtraBackup
+Percona Toolkit
+Sysbench
+[Oo]plog
+PITR
+pitr
+namespace
+shard
+Ssharded
+Uunsharded
+API
+downloader
+Rresync
+CLI
+restore_to_time
+config
+bona fide
+Kerberos
+parallelization
+mongodump
+mongorestore
