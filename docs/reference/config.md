@@ -29,8 +29,8 @@ Find the config file examples for the remote backup storage (required) in the [E
 
 Use the following command to upload the config file. For example, config file name is `pbm_config.yaml`:
 
-```sh
-pbm config --file pbm_config.yaml
+```{.bash data-prompt="$"}
+$ pbm config --file pbm_config.yaml
 ```
 
 Execute the command while connecting to config server replica set if it is a
