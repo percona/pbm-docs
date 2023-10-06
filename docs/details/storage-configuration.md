@@ -40,7 +40,17 @@ Percona Backup for MongoDB should work with other S3-compatible storages, but wa
 
 Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with customer-provided keys stored in AWS KMS (SSE-KMS).
 
-Starting with version 2.0.1, Percona Backup for MongoDB also supports server-side encryption with customer-provided keys that stored on the client side (SSE-C). Percona Backup for MongoDB provides the encryption keys as part of the requests to the S3 storage. The S3 storage uses them to encrypt/decrypt the data using the AES-256 encryption algorithm. In such a way you save on subscribing to AWS KMS services and can use the server-side encryption with the S3-compatible storage of your choice.
+To use the SSE-KMS encryption, specify the following parameters in the Percona Backup for MongoDB configuration file: 
+
+```yaml
+serverSideEncryption:
+   kmsKeyID: <kms_key_ID>
+   sseAlgorithm: aws:kms
+```  
+
+!!! admonition "Version added: [2.0.1](../release-notes/2.0.1.md)" 
+
+Percona Backup for MongoDB also supports server-side encryption with customer-provided keys that are stored on the client side (SSE-C). Percona Backup for MongoDB provides the encryption keys as part of the requests to the S3 storage. The S3 storage uses them to encrypt/decrypt the data using the `AES-256` encryption algorithm. In such a way you save on subscribing to AWS KMS services and can use the server-side encryption with the S3-compatible storage of your choice.
 
 !!! admonition ""
 
@@ -51,14 +61,13 @@ Starting with version 2.0.1, Percona Backup for MongoDB also supports server-sid
     1. Enable/disable the server-side encryption only for the empty bucket. Otherwise, Percona Backup for MongoDB fails to save/retrieve objects to/from the storage properly.
     2. S3 storage doesn't manage or store the encryption key. It is your responsibility to track what key was used to encrypt what object in the bucket. If you lose the key, any request for an object without the encryption key fails and you lose the object. 
 
-To use the SSE-C encryption, specify the following parameters in the Percona Backup for MongoDB configuration file:
+To use the SSE-C encryption, specify the following parameters in the Percona Backup for MongoDB configuration file:    
 
 ```yaml
 serverSideEncryption:
   sseCustomerAlgorithm: AES256
   sseCustomerKey: <your_encryption_key>
 ``` 
-
 
 !!! admonition "See also"
 
@@ -113,8 +122,8 @@ This upload retry increases the chances of data upload completion in cases of un
 
 Percona Backup for MongoDB supports data upload to S3-like storage that supports self-issued TLS certificates. To make this happen, disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
 
-```sh
-pbm config --set storage.s3.insecureSkipTLSVerify=True
+```{.bash data-prompt="$"}
+$ pbm config --set storage.s3.insecureSkipTLSVerify=True
 ```
 
 !!! warning 
