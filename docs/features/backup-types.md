@@ -1,6 +1,11 @@
 # Backup and restore types
 
-You can use several types of database backups and restores to develop your backup strategy. The following table provides an overview of each type
+You can use several types of database backups and restores to develop your backup strategy. 
+
+![image](../_images/backups-infographic.png)
+
+
+The following table provides an overview of each type
 
 | Type           | Status  | Version added | Supported deployments | Percona Server for MongoDB | MongoDB Community /Enterprise Edition | 
 | ---------------| -------- | ------------ | ----------------------| ------------------ | ---------------------------------------|
