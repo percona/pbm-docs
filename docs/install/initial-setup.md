@@ -269,7 +269,7 @@ The storage configuration itself is out of scope of the present document. We ass
     See more examples in [Configuration file examples](../details/storage-config-example.md).
 
 
-4. Insert the config file
+3. Insert the config file
 
 ```{.bash data-prompt="$"}
 $ pbm config --file pbm_config.yaml
