@@ -229,6 +229,21 @@ The storage configuration itself is out of scope of the present document. We ass
           kmsKeyID: <your-kms-key-here>
     ```
 
+    !!! tip
+
+        If you are using AWS PrivateLink, the s3 endpoint needs to be specified explicitly. You can use the option `endpointUrl` for this scope, like in the following example:
+
+        ```yaml
+        ...
+        s3:
+          region: us-west-2
+          bucket: pbm-test-bucket
+          prefix: data/pbm/backup
+          endpointUrl: https://your-endpoint-url-here
+          ...
+        ```
+
+
     This is the sample configuration for Microsoft Azure Blob storage:
 
     ```yaml
