@@ -1,46 +1,53 @@
-# Install Percona Backup for MongoDB
+# Quickstart Guides
 
-## Supported platforms
+Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md). [Read more :material-arrow-top-right:](index.md).
 
-Percona Backup for MongoDB is available for the most 64-bit Linux distributions. Find the list of supported platforms on the [Percona Software and Platform Lifecycle](https://www.percona.com/services/policies/percona-software-platform-lifecycle#mongodb) page.
+Find the list of supported platforms for Percona Backup for MongoDB on the [Percona Software and Platform Lifecycle](https://www.percona.com/services/policies/percona-software-platform-lifecycle#mongodb) page.
 
-## What nodes to install on
+You can use any of the easy-install guides but **we recommend using the package manager of your operating system** for a convenient and quick way to try the software first.
 
-### `pbm-agent`
+=== ":simple-windowsterminal: Package manager"
+    
+    Use the package manager of your operating system to install Percona Backup for MongoDB:
 
-Install [`pbm-agent`](details/pbm-agent.md) on all servers that have `mongod` nodes in the
-MongoDB cluster (or non-sharded replica set). You don't need to start it on the `arbiter` node, since it doesn’t have the data set.
+    * `apt` - for Debian and Ubuntu Linux
+    * `yum` - for Red Hat Enterprise Linux and compatible Linux derivatives
 
-### `pbm` CLI
+    [Install from repositories :material-arrow-right:](install/repos.md){.md-button}
 
-You can install [`pbm` CLI](details/cli.md) on any or all servers or desktop computers you wish to use it from. Those computers must not be network-blocked from accessing the MongoDB cluster.
+=== ":simple-docker: Docker"
 
-## Installation tutorials
+     Get our Docker image and spin up PBM for a quick evaluation. 
 
-Install Percona Backup for MongoDB in one of the following ways:
+     Check the Docker guide for step-by-step guidelines.
 
-* [from Percona repositories](install/repos.md) using the package manager of your operating system. This is the recommended way
+     [Run in Docker :material-arrow-right:](install/docker.md){.md-button}
 
-* [build from source code](install/source.md) if you want full control over the installation
+=== ":simple-kubernetes: Kubernetes"
 
-* [download tarballs from Percona website](install/tarball.md) 
+    **Percona Operator for Kubernetes** is a controller introduced to simplify complex deployments that require meticulous and secure database expertise. 
 
-* [run Percona Backup for MongoDB in a Docker container](https://hub.docker.com/r/percona/percona-backup-mongodb)
+    Check the Quickstart guides how to deploy and run PBM on Kubernetes with Percona Operator for MongoDB.
 
-* [deploy Percona Backup for MongoDB on Kubernetes](install/cloud.md)
+    [Deploy in Kubernetes Quickstart :material-arrow-right:](https://docs.percona.com/percona-operator-for-mongodb/quickstart.html){.md-button}
 
-After the installation completes, you have the following tools:
+=== ":octicons-file-code-16: Build from source"
 
-| Tool            | Purpose                                                  |
-| --------------- | ---------------------------------------------------------|
-| `pbm`           | Command-line interface for controlling the backup system |
-| `pbm-agent`     | An agent for running backup/restore actions on a database host |
-| `pbm-speed-test`| An interface for field-testing compression and backup upload speed|
-| `pbm-agent-entrypoint` | An entry point application that allows starting `pbm-agent` and also restarts it in case of any faults| 
+    Have a full control over the installation by building PBM from source code.
+
+    Check the guide below for step-by-step instructions.
+
+    [Build from source :material-arrow-right:](install/source.md){.md-button}
+
+=== ":octicons-download-16: Manual download"
+
+    If you need to install PBM offline or prefer a specific version of it, check out the link below for a step-by-step guide and get access to the downloads directory.
+
+    [Install from tarballs :material-arrow-right:](install/tarball.md){.md-button}
 
 
 ## Next steps
 
-[Install from Percona repositories](install/repos.md)
+[Initial setup :material-arrow-right:](install/initial-setup.md){.md-button}
 
 
