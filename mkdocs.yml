@@ -20,6 +20,7 @@ theme:
     - navigation.instant
     - navigation.instant.progress
     - navigation.tabs
+    - navigation.tabs.sticky
     - content.tabs.link
     - content.action.edit
     - content.action.view
