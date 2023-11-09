@@ -1,4 +1,4 @@
-# Initial setup
+# Initial setup overview
 
 The following diagram outlines the installation and setup steps:
 

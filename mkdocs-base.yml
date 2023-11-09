@@ -9,7 +9,7 @@ copyright: >
 
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
-edit_uri: blob/main/docs/
+edit_uri: edit/main/docs/
 
 use_directory_urls: false
 
@@ -22,6 +22,9 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
+  icon:
+    edit: material/file-edit-outline
+    view: material/file-eye-outline
   palette:
 
     # Light mode

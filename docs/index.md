@@ -21,7 +21,7 @@ You can make backups on a running server and restore your database to a specific
 
 Ready to try out PBM? Get started quickly with the step-by-step installation instructions.
 
-[Quickstart Guides :material-arrow-right:](installation.md){ .md-button }
+[Quickstart guides :material-arrow-right:](installation.md){ .md-button }
 
 </div><div data-banner markdown>
 
@@ -29,7 +29,7 @@ Ready to try out PBM? Get started quickly with the step-by-step installation ins
 
 Learn what you can do to maintain your backup strategy.
 
-[Backup Management :material-arrow-right:](usage/start-backup.md){ .md-button }
+[Backup management :material-arrow-right:](usage/start-backup.md){ .md-button }
 
 </div><div data-banner markdown>
 
