@@ -105,6 +105,7 @@ plugins:
     enable_creation_date: true
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   tags: {}
+  glightbox: {}
   meta-descriptions:
     export_csv: false
     quiet: false
