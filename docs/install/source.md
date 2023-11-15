@@ -4,7 +4,7 @@
 
 To build Percona Backup for MongoDB from source, you need the following:
 
-* Go 1.19 or above. [Install and set up Go tools :material-arrow-top-right:](https://golang.org/doc/install)
+* Go 1.19 or above. [Install and set up Go tools](https://golang.org/doc/install)
 * make
 * git
 * `krb5-devel` for Red Hat Enterprise Linux / CentOS or `libkrb5-dev` for Debian / Ubuntu. This package is required for Kerberos authentication in Percona Server for MongoDB.
