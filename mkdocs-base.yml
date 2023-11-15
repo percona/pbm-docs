@@ -199,7 +199,11 @@ nav:
          - Method 3. Download tarballs: install/tarball.md
          - Method 4. Run in Docker: install/docker.md
          - Method 5. Deploy on Kubernetes: install/cloud.md
-      - Set up and configure: 'install/initial-setup.md'       
+      - Set up and configure: 
+        - Overview: 'install/initial-setup.md'
+        - install/configure-authentication.md
+        - install/backup-storage.md
+        - install/start-pbm-agent.md       
       - Make a backup : "usage/start-backup.md"
       - Restore a backup: usage/restore.md
       - Make a point-in-time restore: usage/pitr-tutorial.md
