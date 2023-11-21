@@ -5,7 +5,7 @@ Percona Backup for MongoDB has no authentication and authorization subsystem of 
 For the S3-compatible remote storage authentication config, see
 [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).
 
-## MongoDB connection strings - A Reminder (or Primer)
+## MongoDB connection strings
 
 Percona Backup for MongoDB uses [MongoDB Connection URI](https://docs.mongodb.com/manual/reference/connection-string/) strings to open
 MongoDB connections. Neither `pbm` CLI nor `pbm-agent` accept legacy-style

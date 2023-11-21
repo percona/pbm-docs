@@ -1,4 +1,4 @@
-# Quickstart Guide
+# Quickstart guide
 
 Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md). [Read more](index.md).
 

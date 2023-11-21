@@ -1,4 +1,4 @@
-# Trademark Policy
+# Trademark policy
 
 This [Trademark Policy](https://www.percona.com/trademark-policy) is to ensure that users of Percona-branded products or
 services know that what they receive has really been developed, approved,

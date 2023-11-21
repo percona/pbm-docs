@@ -1,7 +1,7 @@
 # MkDocs configuration for builds with material theme
 
 site_name: Percona Backup for MongoDB
-site_description: Documentation
+site_description: documentation
 site_author: Percona LLC
 copyright: >
   <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2023 — <a href="#__consent">Cookie Consent</a>
@@ -201,7 +201,7 @@ nav:
           - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
           - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Get started:
-      - Quickstart Guide: installation.md 
+      - Quickstart guide: installation.md 
       - Install:
          - From repositories: install/repos.md       
          - Download tarballs: install/tarball.md
