@@ -250,6 +250,7 @@ storage:
   azure:
     account: <string>
     container: <string>
+    endpointUrl: <string>
     prefix: <string>
     credentials:
       key: <your-access-key>
@@ -268,6 +269,13 @@ The name of your storage account.
 *Required*: YES
 
 The name of the storage container. See the  [Container names](https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names) for naming conventions.
+
+### storage.azure.endpointUrl
+
+*Type*: string <br>
+*Required*: NO
+
+The URL to access the data in Microsoft Azure. The endpoint URL format is `https://<storage-account>.blob.core.windows.net`.
 
 ### storage.azure.prefix
 
