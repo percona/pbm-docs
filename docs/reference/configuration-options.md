@@ -275,7 +275,7 @@ The name of the storage container. See the  [Container names](https://docs.micro
 *Type*: string <br>
 *Required*: NO
 
-The URL to access the data in Microsoft Azure. The endpoint URL format is `https://<storage-account>.blob.core.windows.net`.
+The URL to access the data in Microsoft Azure Blob Storage. The default value is `https://<storage-account>.blob.core.windows.net`.
 
 ### storage.azure.prefix
 
