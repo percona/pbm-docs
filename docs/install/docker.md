@@ -39,22 +39,16 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 1. Start a Bash session:
 	
     ```{.bash data-prompt="$"}
-    $ docker exec -it -u root --name <container-name> bash
+    $ docker exec -it --name <container-name> bash
     ```
 
-2. Download the editor of your choice. In this example, let's use Vim 
-
-    ```{.bash data-prompt="$"}
-	$ microdnf install vim
-	```
-
-3. Create a YAML configuration file:
+2. Create a YAML configuration file:
 
 	```{.bash data-prompt="$"}
-	$ vim /tmp/pbm_config.yaml
+	$ vi /tmp/pbm_config.yaml
 	```
 	
-4. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md) and [examples of storage configurations](../details/storage-config-example.md):
+3. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md) and [examples of storage configurations](../details/storage-config-example.md):
 
 	```yaml
 	storage:
@@ -67,7 +61,7 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 		secret-access-key: <your-secret-key-here>
 	```
 
-5. Upload the config file: 
+4. Upload the config file: 
 	
 	```{.bash data-prompt="$"}
 	$ pbm config --file /tmp/pbm_config.yaml
