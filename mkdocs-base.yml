@@ -211,6 +211,7 @@ nav:
       - troubleshoot/faq.md
   - Release notes:
       - "Release notes index": "release-notes.md"
+      - release-notes/2.3.1.md
       - release-notes/2.3.0.md
       - release-notes/2.2.1.md
       - release-notes/2.2.0.md

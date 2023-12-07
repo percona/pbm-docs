@@ -23,7 +23,7 @@ Where:
 
 * `container-name` is the name you want to assign to your container.
 * `PBM_MONGODB-URI` is a [MongoDB Connection URI](https://docs.mongodb.com/manual/reference/connection-string/) string used to connect to MongoDB nodes. See the [Initial setup](initial-setup.md) how to create the PBM user. 
-* `tag-multi` is the tag specifying the version you need. For example, `2.3.0-multi`. The `multi` part of the tag serves to identify the architecture (x86_64 or ARM64) and pull the respective image. See the [full list of tags](https://hub.docker.com/r/perconalab/percona-backup-mongodb/tags).
+* `tag-multi` is the tag specifying the version you need. For example, `{{release}}-multi`. The `multi` part of the tag serves to identify the architecture (x86_64 or ARM64) and pull the respective image. See the [full list of tags](https://hub.docker.com/r/perconalab/percona-backup-mongodb/tags).
 
 Note that every MongoDB node (including replica set secondary members and config server replica set nodes) requires a separate instance of Percona Backup for MongoDB. Thus, a typical, 3-node MongoDB replica set requires three instances of Percona Backup for MongoDB.
 
@@ -34,16 +34,16 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 1. Start a Bash session:
 	
     ```{.bash data-prompt="$"}
-    $ docker run --name <container-name> bash
+    $ docker exec -it --name <container-name> bash
     ```
 
 2. Create a YAML configuration file:
 
 	```{.bash data-prompt="$"}
-	$ touch /tmp/pbm_config.yaml
+	$ vi /tmp/pbm_config.yaml
 	```
 	
-3. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md):
+3. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md) and [examples of storage configurations](../details/storage-config-example.md):
 
 	```yaml
 	storage:
@@ -62,6 +62,8 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 	$ pbm config --file /tmp/pbm_config.yaml
 	```
 
+	The command output displays your uploaded configuration.
+
 ## Run Percona Backup for MongoDB
 
 Percona Backup for MongoDB command line utility (`pbm`) provides the set of commands to control backups: create, restore, cancel backups, etc. 
@@ -69,7 +71,7 @@ Percona Backup for MongoDB command line utility (`pbm`) provides the set of comm
 For example, to start a backup, use the following command:
 
 ```{.bash data-prompt="$"}
-$ docker run --name <container-name> pbm backup
+$ docker exec -it --name <container-name> pbm backup
 ```
 
 where `<container-name>` is the name you assigned to the container and `pbm backup` is the command to start a backup.
@@ -78,4 +80,4 @@ In the same way you can run other pbm commands. Find the full list of available 
 
 ## Next steps
 
-[List backups :material-arrow-right:](../usage/list-backup.md){.md-button}
+[List backups](../usage/list-backup.md){.md-button}
