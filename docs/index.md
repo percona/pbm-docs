@@ -1,44 +1,55 @@
-# Percona Backup for MongoDB Documentation
+# Percona Backup for MongoDB documentation
 
+Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md). Read more [how PBM works](intro.md).
 
-Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restore of [MongoDB sharded clusters and replica sets](details/deployments.md). There is no notable performance nor operating degradation associated with PBM.
-
-With Percona Backup for MongoDB, you can make backups on a running server and restore your database to a specific point in time using the command line. To do these tasks from a user interface, [use PBM with Percona Monitoring and Management](https://docs.percona.com/percona-monitoring-and-management/get-started/backup/index.html).
+Make backups on a running server and restore your database to a specific point in time using the PBM command line interface. Alternatively, manage backups from a web interface [with PBM and Percona Monitoring and Management](https://docs.percona.com/percona-monitoring-and-management/get-started/backup/index.html). 
 
 
 !!! note ""
 
     This is the documentation for the latest release, **PBM {{release}}** ([Release Notes](release-notes/{{release}}.md)).
 
-## What you can do
-
-![image](_images/backups-infographic.png)
-
-* [Logical backups](features/logical.md) to back up and / or migrate data to different platforms and database versions
-* [Physical backups](features/physical.md) to speed up performance for large (multi-terabyte) data sets
-* [Selective backups](features/selective-backup.md) to work with the desired data set
-* [Incremental physical backups](features/incremental-backup.md) to ensure that critical data is regularly backed up and to save on costs for storage and transfer
-* [Snapshot-based physical backups](features/snapshots.md) using the technology of your choice.
-* [Restore the full database or specific data set](usage/restore.md) from a backup
-* [Restore the database to a specific point in time](features/point-in-time-recovery.md)
-* [Replay oplog](usage/oplog-replay.md) on top of [EBS-snapshots](reference/glossary.md#ebs-snapshot)
-
-
-[Explore features](features/backup-types.md){ .md-button .md-button }
-
 ## What's in it for you?
 
-* Data consistency across clusters and replica sets
+* Data consistency across clusters and replica sets with [every supported backup type](features/backup-types.md)
+* No notable performance nor operating degradation associated with PBM. 
 * A variety of [supported storage types](details/storage-configuration.md) means no vendor lock-in
 * Open source solution with [enterprise-grade features](features/comparison.md) 
 
-[Install and get started](installation.md){ .md-button .md-button }
+<div data-grid markdown><div data-banner markdown>
 
-## Go further with Percona Backup for MongoDB
+## :material-progress-download: Installation guides { .title }
 
-* Learn [how Percona Backup for MongoDB works](intro.md)
-* [Manage PBM](manage/upgrading.md) 
-* [Contribute to PBM](reference/contributing.md) 
+Ready to try out PBM? Get started quickly with the step-by-step installation instructions.
+
+[Quickstart guides :material-arrow-right:](installation.md){ .md-button }
+
+</div><div data-banner markdown>
+
+### :material-backup-restore: Backup management { .title }
+
+Learn what you can do to maintain your backup strategy.
+
+[Backup management :material-arrow-right:](usage/start-backup.md){ .md-button }
+
+</div><div data-banner markdown>
+
+### :fontawesome-solid-gears: Administration { .title }
+
+Tweak PBM to effectively perform your day-to-day operations.
+
+[Administration :material-arrow-right:](manage/overview.md){.md-button}
+</div><div data-banner markdown>
+
+### :material-frequently-asked-questions: Diagnostics and FAQ { .title }
+
+Our comprehensive resources will help you overcome challenges, from everyday issues to specific doubts.
+
+[Run diagnostics :material-arrow-right:](troubleshoot/index.md){.md-button}
+
+</div>
+</div>
+
 
 
 

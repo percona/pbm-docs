@@ -2,70 +2,64 @@
 
 ## Prerequisites 
 
-Building the project requires:
+To build Percona Backup for MongoDB from source, you need the following:
 
-* Go 1.19 or above
+* Go 1.19 or above. [Install and set up Go tools](https://golang.org/doc/install)
 * make
 * git
 * `krb5-devel` for Red Hat Enterprise Linux / CentOS or `libkrb5-dev` for Debian / Ubuntu. This package is required for Kerberos authentication in Percona Server for MongoDB.
 
-!!! admonition "See also"
-
-    [Install and set up Go tools](https://golang.org/doc/install)
-
-    
-
 ## Procedure
 
-### 1. Clone the repository
+Here's how to build Percona Backup for MongoDB:
+{.power-number}
 
-```{.bash data-prompt="$"}
-$ git clone https://github.com/percona/percona-backup-mongodb
-```
-
-### 2. Go to the project directory and build it
-
-```{.bash data-prompt="$"}
-$ cd percona-backup-mongodb
-$ make build
-```
-
-After **make** completes, you can find `pbm` and `pbm-agent` binaries
-in the `./bin` directory:
-
-```{.bash data-prompt="$"}
-$ cd bin
-$ ./pbm version
-```
-
-To verify if Percona Backup for MongoDB has been built correctly and is ready for use, run
-
-```{.bash data-prompt="$"}
-$ pbm version
-```
-
-Output
-
-```{.text .no-copy}
-Version:   [pbm version number]
-Platform:  linux/amd64
-GitCommit: [commit hash]
-GitBranch: main
-BuildTime: [time when this version was produced in UTC format]
-GoVersion: [Go version number]
-```
-
-!!! tip
-
-    Instead of specifying the path to pbm binaries, you can add it to the PATH environment variable:
+1. Clone the repository
 
     ```{.bash data-prompt="$"}
-    $ export PATH=/percona-backup-mongodb/bin:$PATH
+    $ git clone https://github.com/percona/percona-backup-mongodb
     ```
+
+2. Go to the project directory and build it
+
+    ```{.bash data-prompt="$"}
+    $ cd percona-backup-mongodb
+    $ make build
+    ```
+
+After **make** completes, you can find `pbm` and `pbm-agent` binaries
+in the `./bin` directory. 
+
+3. Check that Percona Backup for MongoDB has been built correctly and is ready for use. 
+
+    ```{.bash data-prompt="$"}
+    $ cd bin
+    $ ./pbm version
+    ```
+
+    ??? example "Output"    
+
+    ```{.text .no-copy}
+    Version:   [pbm version number]
+    Platform:  linux/amd64
+    GitCommit: [commit hash]
+    GitBranch: main
+    BuildTime: [time when this version was produced in UTC format]
+    GoVersion: [Go version number]
+    ```
+
+    !!! tip    
+
+        Instead of specifying the path to pbm binaries, you can add it to the PATH environment variable:    
+
+        ```{.bash data-prompt="$"}
+        $ export PATH=/percona-backup-mongodb/bin:$PATH
+        ```
 
 ## Post-install steps
 
 === "On Debian and Ubuntu"
+    {.power-number}
 
      1. Create the environment file:
 
@@ -153,4 +147,4 @@ GoVersion: [Go version number]
 
 ## Next steps
 
-[Set up PBM](initial-setup.md)
+[Initial setup :material-arrow-right:](initial-setup.md){.md-button}

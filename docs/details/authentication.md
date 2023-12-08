@@ -5,7 +5,7 @@ Percona Backup for MongoDB has no authentication and authorization subsystem of 
 For the S3-compatible remote storage authentication config, see
 [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).
 
-## MongoDB connection strings - A Reminder (or Primer)
+## MongoDB connection strings
 
 Percona Backup for MongoDB uses [MongoDB Connection URI](https://docs.mongodb.com/manual/reference/connection-string/) strings to open
 MongoDB connections. Neither `pbm` CLI nor `pbm-agent` accept legacy-style
@@ -17,13 +17,13 @@ etc. as the `mongo` shell or `mongodump` command does.
 
      The `pbm-agent` processes should connect to their localhost `mongod` with a standalone type of connection.
 
-     ```sh
+     ```{.bash data-prompt="$"}
      pbm-agent --mongodb-uri "mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
      ```
 
      Alternatively:
 
-     ```sh 
+     ```{.bash data-prompt="$"} 
      export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
      pbm-agent
      ```
@@ -32,13 +32,13 @@ etc. as the `mongo` shell or `mongodump` command does.
 
 === "The `pbm` CLI connection string"
 
-     ```sh
+     ```{.bash data-prompt="$"}
      pbm list --mongodb-uri "mongodb://pbmuser:secretpwd@mongocsvr1:27017,mongocsvr2:27017,mongocsvr3:27017/?replicaSet=configrs&authSource=admin"
      ```
 
      Alternatively:
 
-     ```sh
+     ```{.bash data-prompt="$"}
      export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@mongocsvr1:27017,mongocsvr2:27017,mongocsvr3:27017/?replicaSet=configrs&authSource=admin"
      $ pbm list
      ```

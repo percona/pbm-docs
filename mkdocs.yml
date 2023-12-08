@@ -14,15 +14,21 @@ theme:
   features:
     - search.highlight
     - search.share
+    - search.suggest
     - navigation.top
     - navigation.tracking 
+    - navigation.instant
+    - navigation.instant.progress
+#    - navigation.tabs
+#    - navigation.tabs.sticky
     - content.tabs.link
     - content.action.edit
     - content.action.view
-    - content.code.copy      
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow      
 
-plugins:
-  section-index: {}
+
   
 #Google Analytics configuration 
 extra: 
@@ -45,24 +51,4 @@ extra:
             <a href="https://docs.google.com/forms/d/1bkWACehjqlwA0AKf-qTJcXvYbOSYgze8iTPXjntqmNo/edit" target="_blank" rel="noopener">
             feedback form</a>.
             
-#          note: >- 
-#            Thanks for your feedback! Help us improve this page by
-#            using our <a href="https://github.com/percona/pbm-docs/issues/new/?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">feedback form</a>.
-
-
-#Feedback form widget
-#    feedback:
-#         title: Was this page helpful?
-#         ratings:
-#           - icon: material/heart
-#             name: This page was helpful
-#             data: 1
-#             note: >-
-#               Thanks for your feedback!
-#           - icon: material/heart-broken
-#             name: This page could be improved
-#             data: 0
-#             note: >- 
-#               Thanks for your feedback! Help us improve this page by
-#               using our <a href="https://forms.gle/B5ura1rZEF6P8tdv9" target=_blank>feedback form</a>.
 

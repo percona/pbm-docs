@@ -1,10 +1,10 @@
-# PBM Control Collections
+# PBM control collections
 
 The config and state (current and historical) for backups is stored in
 collections in the MongoDB cluster or non-sharded replica set itself. These are
 put in the system `admin` db to keep them cleanly separated from user db namespaces.
 
-In sharded clusters, this is the `admin` db of the config server replica set. In a non-sharded replica set, the PBM Control Collections are stored in
+In sharded clusters, this is the `admin` db of the config server replica set. In a non-sharded replica set, the PBM control collections are stored in
 `admin` db of the replica set itself.
 
 * *admin.pbmBackups* - Log / status of each backup.
@@ -15,8 +15,8 @@ In sharded clusters, this is the `admin` db of the config server replica set. In
 * *admin.pbmLockOp* - Is used to coordinate operations that are not mutually exclusive such as make backup and delete backup.
 * *admin.pbmLog* - Stores log information from all `pbm-agents` in the MongoDB environment. Available in Percona Backup for MongoDB as of version 1.4.0.
 * *admin.pbmOpLog* - Stores [operation IDs](../reference/glossary.md#opids).
-* *admin.pbmPITRChunks* - Stores [Point-in-Time Recovery](../reference/glossary.md#point-in-time-recovery) oplog slices.
-* *admin.pbmPITRState* - Contains current state of Point-in-Time Recovery incremental backups.
+* *admin.pbmPITRChunks* - Stores [Point-in-time recovery](../reference/glossary.md#point-in-time-recovery) oplog slices.
+* *admin.pbmPITRState* - Contains current state of Point-in-time recovery incremental backups.
 * *admin.pbmRestores* - Contains restore history and the restore state for all replica sets.
 * *admin.pbmStatus* - Stores Percona Backup for MongoDB status records.
 
