@@ -10,6 +10,11 @@ For more information about using Docker, see the [Docker Docs](https://docs.dock
 
     By default, Docker will pull the image from Docker Hub if it is not available locally.
 
+## Prerequisites
+
+* You need to deploy MongoDB or Percona Server for MongoDB. See [what MongoDB deployments are supported](../details/deployments.md).
+* [Create the pbm user](initial-setup.md#create-the-pbm-user) in your deployment. You will need this user credentials to start Percona Backup for MongoDB container. 
+
 ## Start Percona Backup for MongoDB 
 
 Start Percona Backup for MongoDB container with the following command:
