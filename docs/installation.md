@@ -4,6 +4,16 @@ Percona Backup for MongoDB (PBM) is an open source and distributed solution for 
 
 Find the list of supported platforms for Percona Backup for MongoDB on the [Percona Software and Platform Lifecycle](https://www.percona.com/services/policies/percona-software-platform-lifecycle#mongodb) page.
 
+## System requirements
+
+* At least 1GB RAM is required on every node for `pbm-agents` to operate successfully.
+* All `pbm-agents` in the cluster must be able to connect to all config server replica set nodes that could become a new primary. In non-sharded replica set deployments, this means to connect to all the nodes that could become a new primary node.
+* All `pbm-agents` in your deployment must be able to connect to the same [remote backup storage](details/storage-configuration.md) using the same credentials.
+
+Note that networking issues like connection to the remote backup storage can also affect PBM performance. 
+
+## Tutorials
+
 You can use any of the easy-install guides but **we recommend using the package manager of your operating system** for a convenient and quick way to try the software first.
 
 === ":simple-windowsterminal: Package manager"
