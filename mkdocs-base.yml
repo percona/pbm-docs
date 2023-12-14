@@ -90,8 +90,8 @@ markdown_extensions:
     auto_append:
       - services-banner.md
   pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
       options:
         custom_icons:
           - _resource/.icons
@@ -175,17 +175,20 @@ nav:
         - install/backup-storage.md
         - install/start-pbm-agent.md
   - Backup and restore:
-      - Make a backup : "usage/start-backup.md"
-      - Restore a backup: usage/restore.md
-      - Make a point-in-time restore: usage/pitr-tutorial.md
-      - List backups: usage/list-backup.md
-      - usage/describe-backup.md
-      - usage/schedule-backup.md 
-      - usage/cancel-backup.md
-      - usage/delete-backup.md
-      - usage/restore-progress.md
-      - usage/oplog-replay.md 
-      - usage/logs.md     
+      - Via the command line:
+        - Make a backup : "usage/start-backup.md"
+        - Restore a backup: usage/restore.md
+        - Make a point-in-time restore: usage/pitr-tutorial.md
+        - List backups: usage/list-backup.md
+        - usage/describe-backup.md
+        - usage/schedule-backup.md 
+        - usage/cancel-backup.md
+        - usage/delete-backup.md
+        - usage/restore-progress.md
+        - usage/oplog-replay.md 
+        - usage/logs.md 
+      - Via web interface:
+        - Backup management via PMM: pmm.md 
   - Administer PBM:
       - 'Overview': manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
