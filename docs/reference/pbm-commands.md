@@ -73,7 +73,7 @@ Deletes outdated backup snapshots and point-in-time recovery oplog slices.
 The command has the following syntax:
 
 ```{.bash data-prompt="$"}
-pbm delete-pitr [<flags>]
+pbm cleanup [<flags>]
 ```
 
 The command accepts the following flags:
