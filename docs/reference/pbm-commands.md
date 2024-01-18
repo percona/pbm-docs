@@ -105,6 +105,7 @@ The command accepts the following flags:
 | `--file=FILE`      | Upload the config information from a YAML file   |
 | `--set=SET`        | Set a new config option value. Specify the option in the `<key.name=value>` format.                                    |
 | `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: text, json                      |
+| `-w`, `--wait`     | Wait for resync of the backup list with the storage to finish. You can only use this flag together with the `--force-resync` flag.|
 
 ??? "PBM configuration output"
 
