@@ -1,12 +1,16 @@
 # Delete backups
 
-Use [`pbm delete-backup`](../reference/pbm-commands.md#pbm-delete-backup) to delete backup snapshots and [`pbm delete-pitr`](../reference/pbm-commands.md#pbm-delete-pitr) to delete point-in-time recovery oplog slices. Use the `pbm cleanup --older-than` command to [automate backup storage cleanup](schedule-backup.md#backup-storage-cleanup).
+To limit the amount of space for old backups on the backup storage, you need to delete these backups periodically. You can do this in the following ways:
 
-## Delete outdated data
+- [delete backup snapshots and point-in-time recovery oplog slices simultaneously](#clean-up-outdated-data). This way you can [automate storage cleanup](schedule-backup.md#backup-storage-cleanup). 
+- [delete backup snapshots](#delete-backup-snapshots) and [point-in-time oplog slices](#delete-oplog-slices) separately. This gives you more control over the deletion flow. However, these are manual operations.  
+
+
+## Clean up outdated data
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-You can use the `pbm cleanup --older-than` command to delete both outdated backup snapshots and point-in-time recovery oplog slices. This simplifies the [automation of the backup rotation](schedule-backup.md#backup-storage-cleanup).
+To delete both outdated backup snapshots and point-in-time recovery oplog slices, use the [`pbm cleanup --older-than`](../reference/pbm-commands.md#pbm-cleanup) command. This simplifies the [automation of the backup rotation](schedule-backup.md#backup-storage-cleanup).
 
 The timestamp you specify for the `--older-than` flag must be in the following format:
 
@@ -118,7 +122,7 @@ Here's how the cleanup works:
 
 ### Behavior
 
-You can delete either a specified backup snapshot or all backup snapshots older than the specified time. Starting with version 2.0.0, you can also delete [selective backups](../features/selective-backup.md). 
+You can delete either a specified backup snapshot or backup snapshots created before the specified time. Starting with version 2.0.0, you can delete [selective backups](../features/selective-backup.md). Starting with version [2.4.0](../release-notes/2.4.0.md), you can delete backups by type; for example, delete all physical backups that are older than the specified time.
 
 === "A specific backup"
 
@@ -166,6 +170,20 @@ You can delete either a specified backup snapshot or all backup snapshots older 
       2021-04-21T02:16:33Z
     ```
 
+=== "Specific types of backups"
+
+    To delete backups of a specific type that were created before the specified time, run the `pbm delete backup` with the `--type` and the `--older-than` flags. Note that you must specify both flags to delete backups of the desired type.
+
+    You can delete several types of backups, for example, logical and selective, by passing comma-separated values for the `--type` flag.
+
+    PBM deletes all backups that don't serve as the base for restore to the specified timestamp.
+
+    #### Example
+
+    You have the following list of backups:
+
+
+
 By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-f` or
  `--force` flag.
 
@@ -211,3 +229,6 @@ To view oplog slices, run the [`pbm list`](../reference/pbm-commands.md#pbm-list
     ```
 
 To enable [point-in-time recovery](pitr-tutorial.md) from the most recent backup snapshot, Percona Backup for MongoDB does not delete slices that were made after that snapshot. For example, if the most recent snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:44`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.
+
+To verify what oplog slices will be deleted without yet deleting them, run the ``pbm delete-pitr`` command with the `--dry-run` flag.  
+

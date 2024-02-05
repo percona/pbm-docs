@@ -147,7 +147,7 @@ The command accepts the following flags:
 
 ## pbm delete-backup
 
-Deletes the specified backup snapshot or all backup snapshots that are older than the specified time. The command deletes backups that are not running regardless of the remote backup storage being used.
+Deletes the specified backup snapshot or backup snapshots of one or several types that are older than the specified time. The command deletes backups that are not running regardless of the remote backup storage being used.
 
 The following is the command syntax:
 
@@ -159,7 +159,8 @@ The command accepts the following flags:
 
 | Flag                     | Description             |
 | ------------------------ | ----------------------- |
-| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2020-04-20)|
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2023-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2023-04-20)|
+| `--type=TYPE`           | Deletes backups of the specified type. Multiple values are accepted as comma-separated list. Must be used together with the `-older-than` flag. Available starting with version 2.4.0|
 | `--force`                | Forcibly deletes backups without asking for user's confirmation  |
 | `--yes`                  | Deletes backups without asking for user's confirmation |
 
@@ -182,6 +183,7 @@ The command accepts the following flags:
 | `--force`                | Forcibly deletes oplog slices without asking a user’s confirmation  |
 | `-o`, `--out=json`       | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.   |
 | `--yes`                  | Deletes backups without asking for user's confirmation |
+| `--dry-run`              | Prints the list of oplog slices to be deleted without deleting them. You can use the flag to check what exactly will be deleted. Available starting with version 2.4.0. | 
 
 ## pbm describe-backup
 

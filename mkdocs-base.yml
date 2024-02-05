@@ -175,7 +175,7 @@ nav:
         - install/backup-storage.md
         - install/start-pbm-agent.md
   - Backup and restore:
-      - Via the command line:
+#      - Via the command line:
         - Make a backup : "usage/start-backup.md"
         - Restore a backup: usage/restore.md
         - Make a point-in-time restore: usage/pitr-tutorial.md
@@ -187,7 +187,7 @@ nav:
         - usage/restore-progress.md
         - usage/oplog-replay.md 
         - usage/logs.md 
-      - Via web interface:
+#      - Via web interface:
         - Backup management via PMM: pmm.md 
   - Administer PBM:
       - 'Overview': manage/overview.md
