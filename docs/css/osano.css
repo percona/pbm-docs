@@ -1,3 +1,8 @@
+.osano-cm-dialog--type_bar {
+color: #000;
+background: #fff;
+box-shadow: 0 0 0 100vmax rgba(0,0,0,0.66)
+}
 
 
 .osano-cm-dialog {

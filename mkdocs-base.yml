@@ -54,9 +54,7 @@ extra_css:
 
 extra_javascript:
   - js/promptremover.js
-#  - js/osano.js
   - js/consent.js
-#  - js/feedback.js
 
 markdown_extensions:
   abbr: {}
