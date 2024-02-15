@@ -10,7 +10,7 @@ color: var(--md-typeset-color);
 }
 
 .osano-cm-button {
-background-color:var(--md-default-bg-color);
+background-color: unset;
 border-color: var(--md-accent-fg-color);
 color: var(--md-accent-fg-color);
 border-radius: 10rem;
