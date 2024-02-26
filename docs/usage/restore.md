@@ -77,7 +77,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. Start the balancer and all `mongos` nodes to reload the sharding metadata. 
     2. We recommend to make a fresh backup to serve as the new base for future restores. 
-    3. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery)
+    3. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if required.
 
 
     ### Adjust memory consumption
@@ -184,7 +184,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     4. Start the balancer and start `mongos` nodes.
 
-    5. Make a fresh backup to serve as the new base for future restores.
+    5. We recommend to make a fresh backup to serve as the new base for future restores.
     6. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if needed.
      
 
