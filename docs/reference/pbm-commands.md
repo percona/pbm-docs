@@ -160,9 +160,9 @@ The command accepts the following flags:
 | Flag                     | Description             |
 | ------------------------ | ----------------------- |
 | `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2023-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2023-04-20)|
-| `--type=TYPE`           | Deletes backups of the specified type. Multiple values are accepted as comma-separated list. Must be used together with the `-older-than` flag. Available starting with version 2.4.0|
-| `--force`                | Forcibly deletes backups without asking for user's confirmation  |
-| `--yes`                  | Deletes backups without asking for user's confirmation |
+| `--type=TYPE`           | Deletes backups of the specified type. Must be used together with the `-older-than` flag. Available starting with version 2.4.0|
+| `--force`                | Forcibly deletes backups without asking for user's confirmation. Deprecated. Use the `--yes` flag instead. |
+| `-y`, `--yes`            | Deletes backups without asking for user's confirmation |
 
 ## pbm delete-pitr
 
