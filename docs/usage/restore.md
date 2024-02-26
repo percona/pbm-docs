@@ -185,7 +185,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     4. Start the balancer and start `mongos` nodes.
 
     5. We recommend to make a fresh backup to serve as the new base for future restores.
-    6. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if needed.
+    6. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if required.
      
 
     ### Define a `mongod` binary location

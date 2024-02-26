@@ -36,7 +36,7 @@ To start saving [oplog slices](../reference/glossary.md#oplog), the following pr
 
 === "Logical backups"
 
-    * A full backup snapshot is required. Starting with version [2.4.0](../release-notes/2.4.0.md), it can be a logical, a physical or an incremental backup. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
+    * A full backup snapshot is required. Starting with version [2.3.0](../release-notes/2.3.0.md), it can be a logical, a physical or an incremental backup. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
     * Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
 
 === "Physical backups"
