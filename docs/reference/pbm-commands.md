@@ -147,7 +147,7 @@ The command accepts the following flags:
 
 ## pbm delete-backup
 
-Deletes the specified backup snapshot or backup snapshots of one or several types that are older than the specified time. The command deletes backups that are not running regardless of the remote backup storage being used.
+Deletes the specified backup snapshot or all backup snapshots that are older than the specified time with the option to filter by specific type. The command deletes backups that are not running regardless of the remote backup storage being used.
 
 The following is the command syntax:
 

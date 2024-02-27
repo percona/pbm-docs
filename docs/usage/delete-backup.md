@@ -178,11 +178,64 @@ You can delete either a specified backup snapshot or all backup snapshots older 
       2021-04-21T02:16:33Z
     ```
 
-By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-f` or
- `--force` flag.
+
+=== "Specific types of backups"
+
+    To delete backups of a specific type that were created before the specified time, run the `pbm delete backup` with the `--type` and the `--older-than` flags. PBM deletes all backups that don't serve as the base for restore to the specified timestamp.
+
+    Note that you must specify both flags to delete backups of the desired type.
+    
+
+    #### Example
+
+    You have the following list of backups:
+
+    ```{.text .no-copy}
+    Backups:
+      Snapshots:
+        2024-02-26T10:11:05Z 905.92MB <physical> [restore_to_time: 2024-02-26T10:11:07Z]
+        2024-02-26T10:06:57Z 86.99MB <logical> [restore_to_time: 2024-02-26T10:07:00Z]
+        2024-02-26T10:03:24Z 234.12MB <incremental> [restore_to_time: 2024-02-26T10:03:26Z]
+        2024-02-26T10:00:16Z 910.27MB <incremental, base> [restore_to_time: 2024-02-26T10:00:18Z]
+        2024-02-26T09:56:18Z 961.68MB <physical> [restore_to_time: 2024-02-26T09:56:20Z]
+        2024-02-26T08:43:44Z 86.83MB <logical> [restore_to_time: 2024-02-26T08:43:47Z]
+      PITR chunks [8.25MB]:
+        2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
+    ```
+
+    You wish to delete all physical backups that are older than 10:00 a.m.
+
+    ```
+    $ pbm delete-backup --older-than="2024-02-26T10:00:00" -t physical -y
+    ```
+
+    There are two physical backup snapshots, but only `2024-02-26T09:56:18Z 961.68MB <physical> [restore_to_time: 2024-02-26T09:56:20Z]` snapshot passes in the specified timestamp. Therefore, PBM deletes this one only:
+
+    ```{.text .no-copy}
+    Snapshots:
+     - "2024-02-26T09:56:18Z" [size: 961.68MB type: <physical>, restore time: 2024-02-26T09:56:20Z]
+    Waiting for delete to be done .[done]
+    ```
+
+    The resulting list of backups looks like this:
+
+    ```{.text .no-copy}
+    Backups:
+      Snapshots:
+        2024-02-26T10:11:05Z 905.92MB <physical> [restore_to_time: 2024-02-26T10:11:07Z]
+        2024-02-26T10:06:57Z 86.99MB <logical> [restore_to_time: 2024-02-26T10:07:00Z]
+        2024-02-26T10:03:24Z 234.12MB <incremental> [restore_to_time: 2024-02-26T10:03:26Z]
+        2024-02-26T10:00:16Z 910.27MB <incremental, base> [restore_to_time: 2024-02-26T10:00:18Z]
+        2024-02-26T08:43:44Z 86.83MB <logical> [restore_to_time: 2024-02-26T08:43:47Z]
+      PITR chunks [8.73MB]:
+        2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
+    ```
+
+By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-y` or
+ `--yes` flag.
 
  ```{.bash data-prompt="$"}
- $ pbm delete-backup --force 2021-04-20T13:45:59Z
+ $ pbm delete-backup --yes 2023-04-20T13:45:59Z
  ```
 
 !!! admonition ""
