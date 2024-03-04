@@ -13,4 +13,4 @@ configuration-like step that should be done for practical ease though. (Without
 `PBM_MONGODB_URI`, the `--mongodb-uri` command line argument will need to
 be specified each time.)
 
-To learn how to set the `PBM_MONGODB_URI` environment variable, see [Set the MongoDB connection URI for `pbm` CLI](../install/configure-authentication.html#set-the-mongodb-connection-uri-for-pbm-cli). For more information about MongoDB URI connection strings, see [Authentication](authentication.md).
+To learn how to set the `PBM_MONGODB_URI` environment variable, see [Set the MongoDB connection URI for `pbm` CLI](../install/configure-authentication.md#set-the-mongodb-connection-uri-for-pbm-cli). For more information about MongoDB URI connection strings, see [Authentication](authentication.md).
