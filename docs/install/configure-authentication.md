@@ -129,7 +129,7 @@ Use the following command:
 export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin&replSetName=xxxx"
 ```
 
-For more information about what connection string to specify, refer to the [pbm connection string](../details/authentication.html#mongodb-connection-strings) section.
+For more information about what connection string to specify, refer to the [pbm connection string](../details/authentication.md#mongodb-connection-strings) section.
 
 ## External authentication support in Percona Backup for MongoDB
 
