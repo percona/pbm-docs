@@ -26,7 +26,7 @@ The command accepts the following flags:
 | `--compression-level` | Configure the compression level from 0 to 10. The default value depends on the compression method used.  |
 | `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
-| `-l`, `--list-files` | For external backups only. Shows the list of fines per node to copy.|
+| `-l`, `--list-files` | For external backups only. Shows the list of files per node to copy.|
 | `--ns="database.collection"`| Makes a logical backup of the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. In version 2.0.0, only a single namespace is supported for the backup.|
 
 ??? "JSON output"
@@ -105,6 +105,7 @@ The command accepts the following flags:
 | `--file=FILE`      | Upload the config information from a YAML file   |
 | `--set=SET`        | Set a new config option value. Specify the option in the `<key.name=value>` format.                                    |
 | `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: text, json                      |
+| `-w`, `--wait`     | Wait for resync of the backup list with the storage to finish. You can only use this flag together with the `--force-resync` flag.|
 
 ??? "PBM configuration output"
 
@@ -147,7 +148,7 @@ The command accepts the following flags:
 
 ## pbm delete-backup
 
-Deletes the specified backup snapshot or all backup snapshots that are older than the specified time. The command deletes backups that are not running regardless of the remote backup storage being used.
+Deletes the specified backup snapshot or all backup snapshots that are older than the specified time with the option to filter by specific type. The command deletes backups that are not running regardless of the remote backup storage being used.
 
 The following is the command syntax:
 
@@ -159,9 +160,11 @@ The command accepts the following flags:
 
 | Flag                     | Description             |
 | ------------------------ | ----------------------- |
-| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2020-04-20)|
-| `--force`                | Forcibly deletes backups without asking for user's confirmation  |
-| `--yes`                  | Deletes backups without asking for user's confirmation |
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2023-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2023-04-20)|
+| `--type=TYPE`           | Deletes backups of the specified type. Must be used together with the `-older-than` flag. Available starting with version 2.4.0|
+| `--force`                | Forcibly deletes backups without asking for user's confirmation. Deprecated. Use the `--yes` flag instead. |
+| `-y`, `--yes`            | Deletes backups without asking for user's confirmation |
+| `--dry-run`              | Prints the list of backup snapshots to be deleted without deleting them. You can use the flag to check what exactly will be deleted. Available starting with version 2.4.0. | 
 
 ## pbm delete-pitr
 
@@ -177,11 +180,13 @@ The command accepts the following flags:
 
 | Flag                     | Description               |
 | ------------------------ | ------------------------- |
-| `-a`, `--all`            | Deletes all oplog         |
+| `-a`, `--all`            | Deletes all oplog slices. Deprecated. Use the `--older-than flag instead`  |
 | `--older-than=TIMESTAMP` | Deletes oplog slices older than date / time specified in the format: <br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2020-04-20) <br><br> When you specify a timestamp, Percona Backup for MongoDB rounds it down to align with the completion time of the closest backup snapshot and deletes oplog slices that precede this time. Thus, extra slices remain. This is done to ensure oplog continuity. To illustrate, the PITR time range is `2021-08-11T11:16:21 - 2021-08-12T08:55:25` and backup snapshots are: <br><br> `2021-08-12T08:49:46Z 13.49MB [restore_to_time: 2021-08-12T08:50:06]` <br> `2021-08-11T11:36:17Z 7.37MB [restore_to_time: 2021-08-11T11:36:38]`<br> <br> Say you specify the timestamp `2021-08-11T19:16:21`. The closest backup is `2021-08-11T11:36:17Z 7.37KB [restore_to_time: 2021-08-11T11:36:38]`. PBM rounds down the timestamp to `2021-08-11T11:36:38` and deletes all slices that precede this time. As a result, your PITR time range is `2021-08-11T11:36:38 - 2021-08-12T09:00:25`. <br><br> **NOTE**: Percona Backup for MongoDB doesn’t delete the oplog slices that follow the most recent backup. This is done to ensure point in time recovery from that backup snapshot. For example, if the snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:45`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.|
-| `--force`                | Forcibly deletes oplog slices without asking a user’s confirmation  |
+| `--force`                | Forcibly deletes oplog slices without asking a user’s confirmation. Deprecated. Use the `-y`/`--yes` flag instead.  |
 | `-o`, `--out=json`       | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.   |
 | `--yes`                  | Deletes backups without asking for user's confirmation |
+| `--dry-run`              | Prints the list of oplog slices to be deleted without deleting them. You can use the flag to check what exactly will be deleted. Available starting with version 2.4.0. | 
+| `-w`, `--wait`          | Wait for the deletion operation to complete. |
 
 ## pbm describe-backup
 

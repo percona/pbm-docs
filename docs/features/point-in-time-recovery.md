@@ -36,27 +36,23 @@ To start saving [oplog slices](../reference/glossary.md#oplog), the following pr
 
 === "Logical backups"
 
-    * A full logical backup snapshot is required. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
+    * A full backup snapshot is required. Starting with version [2.3.0](../release-notes/2.3.0.md), it can be a logical, a physical or an incremental backup. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
     * Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
 
 === "Physical backups"
 
-    Enable point-in-time recovery routine and configure it to save oplog slices without the base backup.
-
-    ```yaml
-    pitr:
-       enabled: true
-       oplogOnly: true
-    ```
+    Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
     
 
-If you just enabled point-in-time recovery, it requires 10 minutes for the first chunk to appear in the [`pbm list`](../reference/pbm-commands.md#pbm-list) output.
+If you just enabled point-in-time recovery, it requires 10 minutes for the first slice to appear in the [`pbm list`](../reference/pbm-commands.md#pbm-list) output.
 
 !!! important
 
     **For in MongoDB 5.0 and higher versions**
 
     If you [reshard](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
+
+Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs in parallel with a backup snapshot operation. Thereby if a backup snapshot is large and takes hours to make, all oplog events are saved for it ensuring point-in-time recovery to any timestamp.
 
 ### Oplog duration
 

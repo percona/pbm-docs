@@ -8,7 +8,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
-    2. If you enabled [Point-in-time recovery](../features/point-in-time-recovery.md), disable it before running `pbm restore`. This is because Point-in-Time Recovery oplog slicing and restore are incompatible operations and cannot be run together.
+    2. For versions 2.3.1 and earlier, disable [Point-in-time recovery](../features/point-in-time-recovery.md) before running `pbm restore`. This is because Point-in-Time recovery oplog slicing and restore are incompatible operations and cannot be run together.
 
     3. Backups made with Percona Backup for MongoDB prior to v1.5.0 are incompatible for restore with Percona Backup for MongoDB v1.5.0 and later. This is because processing of system collections `Users` and `Roles` has changed: in v1.5.0, `Users` and `Roles` are copied to temporary collection during backup and must be present in the backup during restore. In earlier versions of Percona Backup for MongoDB, `Users` and `Roles` are copied to a temporary collection during restore. Therefore, restoring from these backups with Percona Backup for MongoDB v1.5.0 isn’t possible.
 
@@ -37,7 +37,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     2. Shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
 
-    3. Disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
+    3. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
 === "Physical"
 
@@ -77,6 +77,8 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. Start the balancer and all `mongos` nodes to reload the sharding metadata. 
     2. We recommend to make a fresh backup to serve as the new base for future restores. 
+    3. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if required.
+
 
     ### Adjust memory consumption
 
@@ -182,7 +184,9 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     4. Start the balancer and start `mongos` nodes.
 
-    5. Make a fresh backup to serve as the new base for future restores. 
+    5. We recommend to make a fresh backup to serve as the new base for future restores.
+    6. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if required.
+     
 
     ### Define a `mongod` binary location
 

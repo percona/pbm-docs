@@ -93,28 +93,40 @@ Here's how the cleanup works:
 
 1. You can only delete a backup that is not running (has the “done” or the “error” state). To check the backup state, run the [`pbm status`](../reference/pbm-commands.md#pbm-status) command.
 
-2. To ensure oplog continuity for [point-in-time restore](pitr-tutorial.md), the `pbm delete-backup` command deletes any backup(s) except the following:
+2. You can only delete the whole incremental backup chain, not a single increment. When you specify the increment name of the timestamp for a single increment, the backup deletion fails. 
 
-    * A backup snapshot that can serve as the base for any point-in-time recovery and has point-in-time recovery time ranges deriving from it. To delete such a backup, first [delete the oplog slices](#delete-oplog-slices) that are created  after the `restore-to time` value for this backup.
+3. To ensure oplog continuity for [point-in-time restore](pitr-tutorial.md), the `pbm delete-backup` command deletes any backup(s) except the following:
 
-    * The most recent backup if point-in-time recovery is enabled and there are no oplog slices following this backup yet.
+    === "Version 2.4.0 and higher"
 
-    To illustrate this, let’s take the following `pbm list` output:
+        The most recent backup snapshot (logical, physical, base incremental) that can serve as the base for point-in-time recovery, if it is enabled. 
 
-    ```{.bash .no-copy}
-    Backup snapshots:
-      2022-10-05T14:13:50Z <logical> [restore_to_time: 2022-10-05T14:13:55Z]
-      2022-10-06T14:52:42Z <logical> [restore_to_time: 2022-10-06T14:52:47Z]
-      2022-10-07T14:57:17Z <logical> [restore_to_time: 2022-10-07T14:57:22Z]
 
-    PITR <on>:
-      2022-10-05T14:13:56Z - 2022-10-05T18:52:21Z
-    ```
+    === "Version 2.3.1 and earlier"
 
-    You can delete a backup `2022-10-06T14:52:42Z` since it has no point-in-time oplog slices. You cannot delete the following backups:
+        * A backup snapshot that can serve as the base for any point-in-time recovery and has point-in-time recovery time ranges deriving from it. To delete such a backup, first [delete the oplog slices](#delete-oplog-slices) that are created  after the `restore-to time` value for this backup.    
 
-    - `2022-10-05T14:13:50Z` because it is the base for recovery to any point in time from the PITR time range `2022-10-05T14:13:56Z - 2022-10-05T18:52:21Z`
-    - `2022-10-07T14:57:17Z` because PITR is enabled and there are no oplog slices following it yet.
+        * The most recent backup if point-in-time recovery is enabled and there are no oplog slices following this backup yet.    
+
+        To illustrate this, let’s take the following `pbm list` output:    
+
+        ```{.bash .no-copy}
+        Backup snapshots:
+          2022-10-05T14:13:50Z <logical> [restore_to_time: 2022-10-05T14:13:55Z]
+          2022-10-06T14:52:42Z <logical> [restore_to_time: 2022-10-06T14:52:47Z]
+          2022-10-07T14:57:17Z <logical> [restore_to_time: 2022-10-07T14:57:22Z]    
+
+        PITR <on>:
+          2022-10-05T14:13:56Z - 2022-10-05T18:52:21Z
+        ```    
+
+        You can delete a backup `2022-10-06T14:52:42Z` since it has no point-in-time oplog slices. You cannot delete the following backups:    
+
+        - `2022-10-05T14:13:50Z` because it is the base for recovery to any point in time from the PITR time range `2022-10-05T14:13:56Z - 2022-10-05T18:52:21Z`
+        - `2022-10-07T14:57:17Z` because PITR is enabled and there are no oplog slices following it yet.
+
+4. Starting with version 2.0.4, you can delete any backup snapshot (except the most recent one with point-in-time recovery enabled) regardless the point-in-time recovery slices deriving from it. Such slices are then marked as "no base backup" in the `pbm status` output. 
+
 
 ### Behavior
 
@@ -166,11 +178,64 @@ You can delete either a specified backup snapshot or all backup snapshots older 
       2021-04-21T02:16:33Z
     ```
 
-By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-f` or
- `--force` flag.
+
+=== "Specific types of backups"
+
+    To delete backups of a specific type that were created before the specified time, run the `pbm delete backup` with the `--type` and the `--older-than` flags. PBM deletes all backups that don't serve as the base for restore to the specified timestamp.
+
+    Note that you must specify both flags to delete backups of the desired type.
+    
+
+    #### Example
+
+    You have the following list of backups:
+
+    ```{.text .no-copy}
+    Backups:
+      Snapshots:
+        2024-02-26T10:11:05Z 905.92MB <physical> [restore_to_time: 2024-02-26T10:11:07Z]
+        2024-02-26T10:06:57Z 86.99MB <logical> [restore_to_time: 2024-02-26T10:07:00Z]
+        2024-02-26T10:03:24Z 234.12MB <incremental> [restore_to_time: 2024-02-26T10:03:26Z]
+        2024-02-26T10:00:16Z 910.27MB <incremental, base> [restore_to_time: 2024-02-26T10:00:18Z]
+        2024-02-26T09:56:18Z 961.68MB <physical> [restore_to_time: 2024-02-26T09:56:20Z]
+        2024-02-26T08:43:44Z 86.83MB <logical> [restore_to_time: 2024-02-26T08:43:47Z]
+      PITR chunks [8.25MB]:
+        2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
+    ```
+
+    You wish to delete all physical backups that are older than 10:00 a.m.
+
+    ```
+    $ pbm delete-backup --older-than="2024-02-26T10:00:00" -t physical -y
+    ```
+
+    There are two physical backup snapshots, but only `2024-02-26T09:56:18Z 961.68MB <physical> [restore_to_time: 2024-02-26T09:56:20Z]` snapshot passes in the specified timestamp. Therefore, PBM deletes this one only:
+
+    ```{.text .no-copy}
+    Snapshots:
+     - "2024-02-26T09:56:18Z" [size: 961.68MB type: <physical>, restore time: 2024-02-26T09:56:20Z]
+    Waiting for delete to be done .[done]
+    ```
+
+    The resulting list of backups looks like this:
+
+    ```{.text .no-copy}
+    Backups:
+      Snapshots:
+        2024-02-26T10:11:05Z 905.92MB <physical> [restore_to_time: 2024-02-26T10:11:07Z]
+        2024-02-26T10:06:57Z 86.99MB <logical> [restore_to_time: 2024-02-26T10:07:00Z]
+        2024-02-26T10:03:24Z 234.12MB <incremental> [restore_to_time: 2024-02-26T10:03:26Z]
+        2024-02-26T10:00:16Z 910.27MB <incremental, base> [restore_to_time: 2024-02-26T10:00:18Z]
+        2024-02-26T08:43:44Z 86.83MB <logical> [restore_to_time: 2024-02-26T08:43:47Z]
+      PITR chunks [8.73MB]:
+        2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
+    ```
+
+By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-y` or
+ `--yes` flag.
 
  ```{.bash data-prompt="$"}
- $ pbm delete-backup --force 2021-04-20T13:45:59Z
+ $ pbm delete-backup --yes 2023-04-20T13:45:59Z
  ```
 
 !!! admonition ""

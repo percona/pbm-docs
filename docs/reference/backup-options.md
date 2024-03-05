@@ -11,6 +11,7 @@ backup:
   compressionLevel: <int>
   timeouts:
     startingStatus: 60
+  oplogSpanMin: <float64>
 ```
 
 ### priority
@@ -62,3 +63,9 @@ Note that the greater value you specify, the more time and computing resources i
 The wait time (in seconds) for PBM to start physical backups on all shards. Increasing this value is useful when it takes longer than usual to open the `$backupCursor`.
 
 The 0 (zero) value resets the timeout to the default 33 seconds. 
+
+### backup.oplogSpanMin
+
+*Type*: float64 <br>
+
+The duration (in minutes) of oplog slices saved with the logical backup snapshot. By default, the duration of backup oplog slices equals to the value defined for the [`pitr.oplogSpanMin`](pitr-options.md#pitroplogspanmin) option (default - 10 minutes). You can reduce the duration in heavy-loaded environments. Note that setting the duration to shorter periods may increase the overall backup execution time. 

@@ -84,7 +84,9 @@ Previous backups are not automatically removed from the backup storage. You need
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-Starting with version 2.1.0, you can use the `pbm cleanup --older-than` command to delete outdated backup snapshots and point-in-time recovery oplog slices. You can configure a `cron` task to automate storage cleanup by specifying the following command in the `crontab` file:
+Starting with version 2.1.0, you can use the [`pbm cleanup --older-than`](../reference/pbm-commands.md#pbm-cleanup) command to delete outdated backup snapshots and point-in-time recovery oplog slices. Learn more about how PBM deletes outdated data in the [Clean up outdated data](delete-backup.md#clean-up-outdated-data) section.
+
+You can configure a `cron` task to automate storage cleanup by specifying the following command in the `crontab` file:
 
 ```{.bash data-prompt="$"}
 $ $ /usr/bin/pbm cleanup -y --older-than 30d --wait

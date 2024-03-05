@@ -39,7 +39,7 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 1. Start a Bash session:
 	
     ```{.bash data-prompt="$"}
-    $ docker exec -it --name <container-name> bash
+    $ docker exec -it <container-name> bash
     ```
 
 2. Create a YAML configuration file:
@@ -76,7 +76,7 @@ Percona Backup for MongoDB command line utility (`pbm`) provides the set of comm
 For example, to start a backup, use the following command:
 
 ```{.bash data-prompt="$"}
-$ docker exec -it --name <container-name> pbm backup
+$ docker exec -it <container-name> pbm backup
 ```
 
 where `<container-name>` is the name you assigned to the container and `pbm backup` is the command to start a backup.
