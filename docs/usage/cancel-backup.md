@@ -10,7 +10,7 @@ $ pbm cancel-backup
 Backup cancellation has started
 ```
 
-After the command execution, the backup is marked as canceled in the [pbm status](../manage/status.md) output:
+After the command execution, the backup is marked as canceled in the [pbm status](../troubleshoot/status.md) output:
 
 ```{.bash data-prompt="$"}
 $ pbm status
