@@ -31,7 +31,9 @@
      $ pbm backup --type=physical
      ```
 
-     During a *physical* backup, Percona Backup for MongoDB stops [point-in-time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing) if it's enabled, copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage.
+     During a *physical* backup, Percona Backup for MongoDB  copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage. 
+
+     Starting with [2.4.0](../release-notes/2.4.0.md), PBM doesn't stop [point-in-time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing), if it's enabled, but runs it in parallel. This ensures [point-in-time recovery](pitr-tutorial.md) to any timestamp if it takes too long (e.g. hours) to make a backup snapshot.
 
 === "Selective"
 
