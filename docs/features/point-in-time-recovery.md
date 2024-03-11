@@ -12,13 +12,13 @@ Point-in-time recovery is restoring a database up to a specific timestamp. This 
 
 Set the `pitr.enabled` configuration option to `true`.
 
-=== "Command line"
+=== ":octicons-file-code-24: Command line"
 
      ```{.bash data-prompt="$"}
      $ pbm config --set pitr.enabled=true
      ```
 
-=== "Configuration file"
+=== ":material-console: Configuration file"
 
      ```yaml
      pitr:
@@ -34,12 +34,12 @@ The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) 
 
 To start saving [oplog slices](../reference/glossary.md#oplog), the following preconditions must be met:
 
-=== "Logical backups"
+=== ":material-data-matrix: Logical backups"
 
     * A full backup snapshot is required. Starting with version [2.3.0](../release-notes/2.3.0.md), it can be a logical, a physical or an incremental backup. Make sure that a [backup exists](../usage/list-backup.md). See the [Make a backup](../usage/start-backup.md) guide to make a backup snapshot.
     * Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
 
-=== "Physical backups"
+=== ":material-database-refresh-outline: Physical backups"
 
     Point-in-time recovery routine is [enabled](#enable-point-in-time-recovery). 
     
@@ -50,7 +50,7 @@ If you just enabled point-in-time recovery, it requires 10 minutes for the first
 
     **For in MongoDB 5.0 and higher versions**
 
-    If you [reshard](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
+    If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
 Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs in parallel with a backup snapshot operation. Thereby if a backup snapshot is large and takes hours to make, all oplog events are saved for it ensuring point-in-time recovery to any timestamp.
 
@@ -62,13 +62,13 @@ By default, a slice covers a 10-minute span of oplog events. It can be shorter i
 
 You can change the duration of an oplog span via the configuration file. Specify the new value (in minutes) for the `pitr.oplogSpanMin` option.
 
-=== "Command line"
+=== ":octicons-file-code-24: Command line"
 
      ```{.bash data-prompt="$"}
      $ pbm config --set pitr.oplogSpanMin=5
      ```
 
-=== "Configuration file"
+=== ":material-console: Configuration file"
 
      ```yaml
      pitr:
@@ -85,13 +85,13 @@ If the new duration is shorter, this triggers the `pbm-agent` to make a new slic
 
 The oplog slices are saved with the `s2` compression method by default. You can specify a different compression method via the configuration file. Specify the new value for the [`pitr.compression`](../reference/pitr-options.md#pitrcompression) option.
 
-=== "Command line"
+=== ":octicons-file-code-24: Command line"
 
      ```{.bash data-prompt="$"}
      $ pbm config --set pitr.compression=gzip
      ```
 
-=== "Configuration file"
+=== ":material-console: Configuration file"
 
      ```yaml
      pitr:

@@ -89,7 +89,7 @@ The `pbm-agent.service` systemd unit file includes the environment file. You set
     WantedBy=multi-user.target
     ```
 
-=== "On Debian and Ubuntu Linux"
+=== ":material-debian: On Debian and Ubuntu"    
 
     Edit the environment file `/etc/default/pbm-agent` and specify the MongoDB connection URI string for the `pbm` user to the local `mongod` node.
 
@@ -99,7 +99,7 @@ The `pbm-agent.service` systemd unit file includes the environment file. You set
     PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
 
-=== "On Red Hat Enterprise Linux and derivatives"
+=== ":material-redhat: On Red Hat Enterprise Linux and derivatives"
 
     Edit the environment file `/etc/sysconfig/pbm-agent` and specify the MongoDB connection URI string for the `pbm` user to the local `mongod` node. 
 
@@ -133,11 +133,11 @@ For more information about what connection string to specify, refer to the [pbm 
 
 ## External authentication support in Percona Backup for MongoDB
 
-In addition to SCRAM, Percona Backup for MongoDB supports other [authentication methods](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html) that you use in MongoDB or Percona Server for MongoDB.
+In addition to SCRAM, Percona Backup for MongoDB supports other [authentication methods :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html) that you use in MongoDB or Percona Server for MongoDB.
 
 For external authentication, you create the `pbm` user in the format used by the authentication system and set the MongoDB connection URI string to include both the authentication method and authentication source.
 
-For example, for [Kerberos authentication](https://docs.percona.com/percona-server-for-mongodb/6.0/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
+For example, for [Kerberos authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
 
 Specify the following string for MongoDB connection URI:
 
@@ -153,22 +153,22 @@ $ sudo -u {USER} kinit pbm
 
 Note that the `{USER}` is the user that you will run the `pbm-agent` process.
 
-For [authentication and authorization via Native LDAP](https://docs.percona.com/percona-server-for-mongodb/6.0/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
+For [authentication and authorization via Native LDAP :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
 
 ```
 PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27017/?authMechanism=PLAIN&authSource=%24external&replSetName=xxxx"
 ```
 
-When using [AWS IAM authentication](), create the `pbm` user in the `$external` database with the username that contains the ARN of the IAM user/role.
+When using [AWS IAM authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/aws-iam.html), create the `pbm` user in the `$external` database with the username that contains the ARN of the IAM user/role.
 
 
-=== "User authentication"
+=== ":fontawesome-regular-user: User authentication"
 
      ```
      arn:aws:iam::<ARN>:user/<user_name>
      ```
 
-=== "Role authentication"
+=== ":material-cloud-key-outline: Role authentication"
 
      ```
      arn:aws:iam::<ARN>:role/<role_name>

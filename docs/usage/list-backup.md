@@ -20,18 +20,18 @@ The output provides the following information:
 * The time to which the sharded cluster / non-shared replica set will be returned to after the restore. Available starting with version 1.4.0.
 * If [point-in-time recovery](../features/point-in-time-recovery.md) is enabled, its status and the valid time ranges for the restore
 
-**Sample output**
+??? example "Sample output"
 
-```{.text .no-copy}
-Backup snapshots:
-  2023-03-10T10:44:52Z <logical> [restore_to_time: 2023-03-10T10:44:56Z]
-  2023-03-10T10:49:20Z <physical> [restore_to_time: 2023-03-10T10:49:23Z]
-  2023-03-10T10:50:22Z <incremental> [restore_to_time: 2023-03-10T10:50:25Z]
-  2023-03-10T10:51:02Z <incremental> [restore_to_time: 2023-03-10T10:51:04Z]
-  2023-03-10T10:57:47Z <incremental> [restore_to_time: 2023-03-10T10:57:49Z]
-  2023-03-10T11:04:25Z <incremental> [restore_to_time: 2023-03-10T11:04:27Z]
-  2023-03-10T11:05:03Z <logical, selective> [restore_to_time: 2023-03-10T11:05:07Z]
-```
+    ```{.text .no-copy}
+    Backup snapshots:
+      2023-03-10T10:44:52Z <logical> [restore_to_time: 2023-03-10T10:44:56Z]
+      2023-03-10T10:49:20Z <physical> [restore_to_time: 2023-03-10T10:49:23Z]
+      2023-03-10T10:50:22Z <incremental> [restore_to_time: 2023-03-10T10:50:25Z]
+      2023-03-10T10:51:02Z <incremental> [restore_to_time: 2023-03-10T10:51:04Z]
+      2023-03-10T10:57:47Z <incremental> [restore_to_time: 2023-03-10T10:57:49Z]
+      2023-03-10T11:04:25Z <incremental> [restore_to_time: 2023-03-10T11:04:27Z]
+      2023-03-10T11:05:03Z <logical, selective> [restore_to_time: 2023-03-10T11:05:07Z]
+    ```
 
 ## Restore to time
 

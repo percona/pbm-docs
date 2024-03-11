@@ -48,14 +48,14 @@ Here's how the cleanup works:
 
     This timestamp falls inside the backup chain that starts with the `2023-04-14T08:12:50Z` backup. That’s why PBM keeps this backup and the incremental backup chain deriving from it and deletes all data that is older than this backup.
 
-    Output:
+    ??? example "Sample output"    
 
-    ```{.bash .no-copy} 
-    S3 us-east-1 s3://http://192.168.56.1:9000/bcp/pbme2etest
-      Snapshots:
-        2023-04-14T19:34:52Z 520.86MB <incremental> [restore_to_time: 2023-04-14T19:34:54Z]
-        2023-04-14T08:12:50Z 576.63MB <incremental, base> [restore_to_time: 2023-04-14T08:12:52Z]
-    ```
+        ```{.bash .no-copy} 
+        S3 us-east-1 s3://http://192.168.56.1:9000/bcp/pbme2etest
+          Snapshots:
+            2023-04-14T19:34:52Z 520.86MB <incremental> [restore_to_time: 2023-04-14T19:34:54Z]
+            2023-04-14T08:12:50Z 576.63MB <incremental, base> [restore_to_time: 2023-04-14T08:12:52Z]
+        ```
    
 * **Logical backup** cleanup also depends on the point-in-time recovery settings. 
 
@@ -75,6 +75,8 @@ Here's how the cleanup works:
        You wish to delete all data up to 2023-04-13T12:00:00.
 
        The most recent backup in relation to this timestamp is `2023-04-13T10:12:08Z 147.29MB`. So PBM deletes all backups that are older than this backup. It also deletes all oplog slices up to the backup’s `restore_to_time: 2023-04-13T10:12:27Z`. The output after the cleanup looks like this:
+
+       Sample output:
 
        ```{.bash .no-copy}
        Snapshots:
@@ -132,7 +134,7 @@ Here's how the cleanup works:
 
 You can delete either a specified backup snapshot or all backup snapshots older than the specified time. Starting with version 2.0.0, you can also delete [selective backups](../features/selective-backup.md). 
 
-=== "A specific backup"
+=== "Specified backup"
 
      To delete a backup, specify the `<backup_name>` as an argument.
 
@@ -155,15 +157,15 @@ You can delete either a specified backup snapshot or all backup snapshots older 
     $ pbm list
     ```
 
-    **Output**:
+    ??? example "Sample output"
 
-    ```{.text .no-copy}
-    Backup snapshots:
-      2021-04-20T20:55:42Z
-      2021-04-20T23:47:34Z
-      2021-04-20T23:53:20Z
-      2021-04-21T02:16:33Z
-    ```
+        ```{.text .no-copy}
+        Backup snapshots:
+          2021-04-20T20:55:42Z
+          2021-04-20T23:47:34Z
+          2021-04-20T23:53:20Z
+          2021-04-21T02:16:33Z
+        ```
 
     Delete backups created before the specified timestamp
 
@@ -171,12 +173,12 @@ You can delete either a specified backup snapshot or all backup snapshots older 
     pbm delete-backup -f --older-than 2021-04-21
     ```
 
-    **Output**:
+    ??? example "Sample output"
 
-    ```{.text .no-copy}
-    Backup snapshots:
-      2021-04-21T02:16:33Z
-    ```
+        ```{.text .no-copy}
+        Backup snapshots:
+          2021-04-21T02:16:33Z
+        ```
 
 
 === "Specific types of backups"
@@ -219,17 +221,19 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 
     The resulting list of backups looks like this:
 
-    ```{.text .no-copy}
-    Backups:
-      Snapshots:
-        2024-02-26T10:11:05Z 905.92MB <physical> [restore_to_time: 2024-02-26T10:11:07Z]
-        2024-02-26T10:06:57Z 86.99MB <logical> [restore_to_time: 2024-02-26T10:07:00Z]
-        2024-02-26T10:03:24Z 234.12MB <incremental> [restore_to_time: 2024-02-26T10:03:26Z]
-        2024-02-26T10:00:16Z 910.27MB <incremental, base> [restore_to_time: 2024-02-26T10:00:18Z]
-        2024-02-26T08:43:44Z 86.83MB <logical> [restore_to_time: 2024-02-26T08:43:47Z]
-      PITR chunks [8.73MB]:
-        2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
-    ```
+    ??? example "Sample output"
+        
+        ```{.text .no-copy}
+        Backups:
+          Snapshots:
+            2024-02-26T10:11:05Z 905.92MB <physical> [restore_to_time: 2024-02-26T10:11:07Z]
+            2024-02-26T10:06:57Z 86.99MB <logical> [restore_to_time: 2024-02-26T10:07:00Z]
+            2024-02-26T10:03:24Z 234.12MB <incremental> [restore_to_time: 2024-02-26T10:03:26Z]
+            2024-02-26T10:00:16Z 910.27MB <incremental, base> [restore_to_time: 2024-02-26T10:00:18Z]
+            2024-02-26T08:43:44Z 86.83MB <logical> [restore_to_time: 2024-02-26T08:43:47Z]
+          PITR chunks [8.73MB]:
+            2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
+        ```
 
 By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-y` or
  `--yes` flag.

@@ -1,6 +1,6 @@
 # Install from Percona repositories
 
-To install the software from Percona repositories means to subscribe to them. Percona provides the [`percona-release`](https://www.percona.com/doc/percona-repo-config/index.html) repository management tool. It automatically enables the required repository so that you can install and update both Percona Backup for MongoDB packages and required dependencies smoothly.
+To install the software from Percona repositories means to subscribe to them. Percona provides the [`percona-release` :octicons-link-external-16:](https://www.percona.com/doc/percona-repo-config/index.html) repository management tool. It automatically enables the required repository so that you can install and update both Percona Backup for MongoDB packages and required dependencies smoothly.
 
 --8<-- "pbm-install-nodes.md"
 
@@ -13,9 +13,9 @@ To install the software from Percona repositories means to subscribe to them. Pe
 
 === "x86_64"
 
-    Percona provides the [`percona-release`](https://docs.percona.com/percona-software-repositories/index.html) configuration tool that simplifies operating repositories and enables to install and update both Percona Backup for MongoDB packages and required dependencies smoothly. 
+    Percona provides the [`percona-release` :material-arrow-top-right: ](https://docs.percona.com/percona-software-repositories/index.html) configuration tool that simplifies operating repositories and enables to install and update both Percona Backup for MongoDB packages and required dependencies smoothly. 
 
-    1. [Install `percona-release`](https://www.percona.com/doc/percona-repo-config/installing.html). If you have installed it before, [update](https://www.percona.com/doc/percona-repo-config/updating.html) it to the latest version.    
+    1. [Install `percona-release` :octicons-link-external-16:](https://www.percona.com/doc/percona-repo-config/installing.html).    
 
     2. Enable the repository    
 
@@ -25,7 +25,7 @@ To install the software from Percona repositories means to subscribe to them. Pe
 
 === "ARM64"
 
-    === "On Debian and Ubuntu"
+    === ":material-debian: On Debian and Ubuntu"
 
         Create the `/etc/apt/sources.list.d/percona-pbm-release.list ` configuration file with the following contents:
 
@@ -33,7 +33,7 @@ To install the software from Percona repositories means to subscribe to them. Pe
         deb http://repo.percona.com/pbm/apt OPERATING_SYSTEM main
         ```
     
-    === "On Red Hat Enterprise Linux and derivatives"
+    === ":material-redhat: On Red Hat Enterprise Linux and derivatives"
 
         Create the `/etc/yum.repos.d/percona-pbm-release.repo` configuration file with the following contents:
 
@@ -48,7 +48,7 @@ To install the software from Percona repositories means to subscribe to them. Pe
 
 ### Install Percona Backup for MongoDB packages
 
-=== "On Debian and Ubuntu"    
+=== ":material-debian: On Debian and Ubuntu"    
 
     1. Reload the local package database:    
 
@@ -62,7 +62,7 @@ To install the software from Percona repositories means to subscribe to them. Pe
         $ sudo apt install percona-backup-mongodb
         ```    
 
-=== "On Red Hat Enterprise Linux and derivatives" 
+=== ":material-redhat: On Red Hat Enterprise Linux and derivatives" 
 
     ```{.bash data-prompt="$"}
     $ sudo yum install percona-backup-mongodb

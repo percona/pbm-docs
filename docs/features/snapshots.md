@@ -6,7 +6,7 @@
 
 1. This is a [technical preview feature](../reference/glossary.md#technical-preview-feature).
 2. Supported only for full physical backups
-3. Available only if you run Percona Server for MongoDB in your environment  as PBM uses the [`$backupCursor and $backupCursorExtended aggregation stages`](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html). 
+3. Available only if you run Percona Server for MongoDB in your environment  as PBM uses the [`$backupCursor and $backupCursorExtended aggregation stages` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html). 
 
 While a physical backup is a physical copy of your data directory, a snapshot is a point in time copy of your disk or a volume where the data files are stored. Restoring from snapshots is much faster and allows almost immediate access to data, while the database is unavailable during physical restore. Snapshot-based backups are especially useful for owners of large data sets with terabytes of data. Yet the snapshots don’t guarantee data consistency in sharded clusters.
 
@@ -118,7 +118,7 @@ After the restore is complete, do the following:
 
 5. Make a fresh backup to serve as the new base for future restores. 
 
-### Restore form a backup made outside PBM
+### Restore from a backup made outside PBM
 
 !!! important
 
@@ -126,7 +126,7 @@ After the restore is complete, do the following:
 
 To restore an external backup made outside PBM, you need to specify the following for the `pbm restore` command:
 
-* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM uses during the restore. It should contain the [storage options](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options ) per replica set name, for example:
+* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM uses during the restore. It should contain the [storage options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options ) per replica set name, for example:
 
    ```yaml
    rs1:
@@ -171,6 +171,6 @@ To restore from a backup, do the following:
         $ sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
         ```
 
-4. Don't forget to complete the [post-restore steps](#post-restore-steps)
+4. Don't forget to complete the [post-restore steps](#post-restore-steps).
 
 

@@ -7,7 +7,7 @@
 
 ## Make a backup 
 
-=== "Logical"
+=== ":material-data-matrix: Logical"
 
      To make a backup, run the following command:
 
@@ -23,7 +23,7 @@
 
      Multi-format is now the default data format since it allows [selective restore](restore.md). Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB.
 
-=== "Physical"
+=== ":material-database-refresh-outline: Physical"
      
     !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
 
@@ -35,7 +35,7 @@
 
      Starting with [2.4.0](../release-notes/2.4.0.md), PBM doesn't stop [point-in-time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing), if it's enabled, but runs it in parallel. This ensures [point-in-time recovery](pitr-tutorial.md) to any timestamp if it takes too long (e.g. hours) to make a backup snapshot.
 
-=== "Selective"
+=== ":material-select-multiple: Selective"
 
     !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
@@ -57,7 +57,7 @@
 
      Multi-format is now the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
 
-=== "Incremental"
+=== ":simple-databricks: Incremental"
     
     !!! admonition "Version added: [2.0.3](../release-notes/2.0.3.md)"
 
@@ -77,15 +77,17 @@
 
     The incremental backup history looks like this:
 
-    ```{.bash .no-copy} 
-    Snapshots:
-        2022-11-25T14:13:43Z 139.82MB <incremental> [restore_to_time: 2022-11-25T14:13:45Z]
-        2022-11-25T14:02:07Z 255.20MB <incremental> [restore_to_time: 2022-11-25T14:02:09Z]
-        2022-11-25T14:00:22Z 228.30GB <incremental> [restore_to_time: 2022-11-25T14:00:24Z]
-        2022-11-24T14:45:53Z 220.13GB <incremental, base> [restore_to_time: 2022-11-24T14:45:55Z]
-    ```
+    ??? example "Sample output"
 
-=== "Snapshot-based"
+        ```{.bash .no-copy} 
+        Snapshots:
+            2022-11-25T14:13:43Z 139.82MB <incremental> [restore_to_time: 2022-11-25T14:13:45Z]
+            2022-11-25T14:02:07Z 255.20MB <incremental> [restore_to_time: 2022-11-25T14:02:09Z]
+            2022-11-25T14:00:22Z 228.30GB <incremental> [restore_to_time: 2022-11-25T14:00:24Z]
+            2022-11-24T14:45:53Z 220.13GB <incremental, base> [restore_to_time: 2022-11-24T14:45:55Z]
+        ```
+
+=== ":material-database-export: Snapshot-based"
 
     See [snapshot-based backups](../features/snapshots.md#make-a-backup).
 
@@ -185,8 +187,8 @@ This ability to adjust node priority helps you manage your backup strategy by se
 
 ## Next steps
 
-* [List backups](../usage/list-backup.md)
-* [Make a restore](restore.md)
+[List backups](../usage/list-backup.md){.md-button}
+[Make a restore](restore.md){.md-button}
 
 ## Useful links
 
