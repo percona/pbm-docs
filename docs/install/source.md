@@ -59,6 +59,8 @@ in the `./bin` directory.
 ## Post-install steps
 
 === "On Debian and Ubuntu"
+    
+    After the installation, do the following:
     {.power-number}
 
      1. Create the environment file:
@@ -103,6 +105,9 @@ in the `./bin` directory.
          ```
 
 === "On Red Hat Enterprise Linux and derivatives"
+    
+    After the installation, do the following:
+    {.power-number}
 
     1. Create the environment file:
    
