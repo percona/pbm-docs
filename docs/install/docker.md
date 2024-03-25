@@ -1,8 +1,8 @@
 # Run Percona Backup for MongoDB in a Docker container
 
-Docker images of Percona Backup for MongoDB are hosted publicly on [Docker Hub](https://hub.docker.com/repository/docker/percona/percona-backup-mongodb).
+Docker images of Percona Backup for MongoDB are hosted publicly on [Docker Hub :octicons-link-external-16:](https://hub.docker.com/repository/docker/percona/percona-backup-mongodb).
 
-For more information about using Docker, see the [Docker Docs](https://docs.docker.com/).
+For more information about using Docker, see the [Docker Docs :octicons-link-external-16:](https://docs.docker.com/).
 
 !!! note
 
@@ -27,7 +27,7 @@ $ docker run --name <container-name> -e PBM_MONGODB_URI="mongodb://<PBM_USER>:<P
 Where:
 
 * `container-name` is the name you want to assign to your container.
-* `PBM_MONGODB-URI` is a [MongoDB Connection URI](https://docs.mongodb.com/manual/reference/connection-string/) string used to connect to MongoDB nodes. See the [Initial setup](initial-setup.md) how to create the PBM user. 
+* `PBM_MONGODB-URI` is a [MongoDB Connection URI :octicons-link-external-16:](https://docs.mongodb.com/manual/reference/connection-string/) string used to connect to MongoDB nodes. See the [Initial setup](initial-setup.md) how to create the PBM user. 
 * `tag-multi` is the tag specifying the version you need. For example, `{{release}}-multi`. The `multi` part of the tag serves to identify the architecture (x86_64 or ARM64) and pull the respective image. See the [full list of tags](https://hub.docker.com/r/perconalab/percona-backup-mongodb/tags).
 
 Note that every MongoDB node (including replica set secondary members and config server replica set nodes) requires a separate instance of Percona Backup for MongoDB. Thus, a typical, 3-node MongoDB replica set requires three instances of Percona Backup for MongoDB.
@@ -85,4 +85,4 @@ In the same way you can run other pbm commands. Find the full list of available 
 
 ## Next steps
 
-[List backups](../usage/list-backup.md){.md-button}
+[List backups :material-arrow-right:](../usage/list-backup.md){.md-button}

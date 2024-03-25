@@ -4,7 +4,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 ## Considerations
 
-=== "Logical"
+=== ":material-data-matrix: Logical"
 
     1. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
@@ -18,12 +18,12 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     5. Starting with versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
 
-=== "Physical"
+=== ":material-database-refresh-outline: Physical"
 
     1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
     2. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
 
-=== "Incremental"
+=== ":simple-databricks: Incremental"
 
     1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
     2. Incremental backups made with PBM before PBM 2.1.0 are incompatible for restore with PBM 2.1.0 and onwards.
@@ -31,7 +31,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 ## Before you start
 
-=== "Logical"
+=== ":material-data-matrix: Logical"
 
     1. Stop the balancer.
 
@@ -39,23 +39,23 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     3. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
-=== "Physical"
+=== ":material-database-refresh-outline: Physical"
 
     1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
     2. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
 
-=== "Selective"
+=== ":material-select-multiple: Selective"
     
     You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
 
-=== "Incremental"
+=== ":simple-databricks: Incremental"
 
     Before you start, shut down all `mongos` nodes as the database won’t be available while the restore is in progress.
 
 
 ## Restore a database
 
-=== "Logical"
+=== ":material-data-matrix: Logical"
 
     1. List the backups to restore from
 
@@ -140,7 +140,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
         > db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
         ```
     
-=== "Physical"
+=== ":material-database-refresh-outline: Physical"
 
     1. List the backups 
 
@@ -232,7 +232,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     * `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
 
 
-=== "Selective"
+=== ":material-select-multiple: Selective"
 
     1. List the backups 
 
@@ -247,7 +247,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
 
-=== "Incremental"
+=== ":simple-databricks: Incremental"
 
     Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:
 
@@ -275,7 +275,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     3. Start the balancer and the `mongos` node.
     4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
 
-=== "Snapshot-based"
+=== ":material-database-export: Snapshot-based"
 
      See [snapshot-based backups](../features/snapshots.md#restore-a-backup).
 
@@ -304,13 +304,13 @@ To restore data to the environment with different replica set names, configure t
 Configure the replica set name mapping:
 
 
-=== "Using the environment variable for `pbm` CLI in your shell"
+=== ":material-application-variable-outline: Using the environment variable for `pbm` CLI in your shell"
 
     ```{.bash data-prompt="$"}
     $ export PBM_REPLSET_REMAPPING="rsX=rsA,rsY=rsB"
     ``` 
 
-=== "Using the command line"
+=== ":material-console: Using the command line"
 
     ```{.bash data-prompt="$"}
     $ pbm restore <timestamp> --replset-remapping="rsX=rsA,rsY=rsB"

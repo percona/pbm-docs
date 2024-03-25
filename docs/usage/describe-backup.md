@@ -8,7 +8,7 @@ $ pbm describe-backup <backup-name>
 
 The output provides the backup name, type, status, size and the information about the cluster topology it was taken in. For [selective backups](../features/selective-backup.md), it also shows the namespaces that were backed up. 
 
-??? example "Output"
+??? example "Sample output"
 
     ```{.text .no-copy}
     name: "2022-08-17T10:49:03Z"
@@ -41,7 +41,7 @@ To view the backup contents, use the `--with-collections` flag:
 $ pbm describe-backup <backup-name> --with-collections
 ```
 
-??? example "Output"
+??? example "Sample output"
 
     ```{.text .no-copy}
     name: "2023-09-14T14:44:33Z"

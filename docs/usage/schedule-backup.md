@@ -21,13 +21,13 @@ The steps are the following:
 1. Create an environment file. Let’s name it `pbm-cron`.
 
 
-    === "Debian and Ubuntu"
+    === ":material-debian: Debian and Ubuntu"
 
         ```{.bash data-prompt="$"}
         $ vim /etc/default/pbm-cron
         ``` 
 
-    === "Red Hat Enterprise Linux and derivatives"
+    === ":material-redhat: Red Hat Enterprise Linux and derivatives"
 
         ```{.bash data-prompt="$"}
         $ vim /etc/sysconfig/pbm-cron
@@ -89,7 +89,7 @@ Starting with version 2.1.0, you can use the [`pbm cleanup --older-than`](../ref
 You can configure a `cron` task to automate storage cleanup by specifying the following command in the `crontab` file:
 
 ```{.bash data-prompt="$"}
-$ $ /usr/bin/pbm cleanup -y --older-than 30d --wait
+$ /usr/bin/pbm cleanup -y --older-than 30d --wait
 ``` 
 
 This command deletes backups and oplog slices that are older than 30 days. You can change the period by specifying a desired interval for the `--older-than` flag. 

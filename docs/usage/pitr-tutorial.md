@@ -17,7 +17,7 @@ Run [`pbm status`](../reference/pbm-commands.md#pbm-status) or [`pbm list`](../r
 
 ## Procedure
 
-=== "From logical backups" 
+=== ":material-data-matrix: From logical backups" 
 
     Run [`pbm restore`](../reference/pbm-commands.md#pbm-restore) and specify the timestamp from the valid range:    
 
@@ -68,7 +68,7 @@ Run [`pbm status`](../reference/pbm-commands.md#pbm-status) or [`pbm list`](../r
         $ pbm config --set pitr.enabled=true
         ```
 
-=== "From physical backups"
+=== ":material-database-refresh-outline: From physical backups"
 
     Starting with version [2.2.0](../release-notes/2.2.0.md), you can recover your database from a full or an incremental physical backup in the same automated fashion as from a logical one. Percona Backup for MongoDB restores the backup snapshot and automatically replays the oplog events on top of it up to the specified time, guaranteeing data consistency. This helps you prevent data loss during a disaster and gives you the same user experience when managing backups and restores.    
 

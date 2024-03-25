@@ -26,13 +26,13 @@ Percona Backup for MongoDB supports the following storage types:
 Percona Backup for MongoDB should work with other S3-compatible storages, but was only tested with the following ones:
 
 
-* [Amazon Simple Storage Service](https://docs.aws.amazon.com/s3/index.html)
+* [Amazon Simple Storage Service :octicons-link-external-16:](https://docs.aws.amazon.com/s3/index.html)
 
 
-* [Google Cloud Storage](https://cloud.google.com/storage)
+* [Google Cloud Storage :octicons-link-external-16:](https://cloud.google.com/storage)
 
 
-* [MinIO](https://min.io/)
+* [MinIO :octicons-link-external-16:](https://min.io/)
 
 #### Server-side encryption
 
@@ -73,8 +73,8 @@ serverSideEncryption:
 
     AWS Documentation:
     
-    * [Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS)](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
-    * [Protecting data using server-side encryption with customer-provided encryption keys (SSE-C)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
+    * [Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+    * [Protecting data using server-side encryption with customer-provided encryption keys (SSE-C) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
 
 #### Debug logging
 
@@ -88,7 +88,7 @@ To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
 
-Percona Backup for MongoDB supports [Amazon S3 storage classes](https://aws.amazon.com/s3/storage-classes/). Knowing your data access patterns, you can set the S3 storage class in Percona Backup for MongoDB configuration. When Percona Backup for MongoDB uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.
+Percona Backup for MongoDB supports [Amazon S3 storage classes :octicons-link-external-16:](https://aws.amazon.com/s3/storage-classes/). Knowing your data access patterns, you can set the S3 storage class in Percona Backup for MongoDB configuration. When Percona Backup for MongoDB uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.
 
 To set the storage class, specify the `storage.s3.storageClass` option in Percona Backup for MongoDB configuration file
 
@@ -150,7 +150,7 @@ This cannot be used except if you have a single-node replica set. (See the warni
 
 !!! admonition "Version added: [1.5.0](../release-notes/1.5.0.md)"
 
-You can use [Microsoft Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) as the remote backup storage for Percona Backup for MongoDB.
+You can use [Microsoft Azure Blob Storage :octicons-link-external-16:](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction) as the remote backup storage for Percona Backup for MongoDB.
 
 This gives users a vendor choice. Companies with Microsoft-based infrastructure can set up Percona Backup for MongoDB with less administrative efforts.
 
@@ -190,9 +190,9 @@ Please refer to the documentation of your selected storage for the data access m
 
 !!! admonition "See also"
 
-    * AWS documentation: [Controlling access to a bucket with user policies](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)
-    * Google Cloud Storage documentation: [Overview of access control](https://cloud.google.com/storage/docs/access-control)
-    * Microsoft Azure documentation: [Assign an Azure role for access to blob data](https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal)
-    * MinIO documentation: [Policy Management](https://docs.min.io/minio/baremetal/security/minio-identity-management/policy-based-access-control.html)
+    * AWS documentation: [Controlling access to a bucket with user policies :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/userguide/walkthrough1.html)
+    * Google Cloud Storage documentation: [Overview of access control :octicons-link-external-16:](https://cloud.google.com/storage/docs/access-control)
+    * Microsoft Azure documentation: [Assign an Azure role for access to blob data :octicons-link-external-16:](https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal)
+    * MinIO documentation: [Policy Management :octicons-link-external-16:](https://docs.min.io/minio/baremetal/security/minio-identity-management/policy-based-access-control.html)
 
 *[AWS KMS]: Amazon Web Services Key Management Service
