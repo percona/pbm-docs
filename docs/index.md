@@ -11,7 +11,7 @@ Make backups on a running server and restore your database to a specific point i
 ## What's in it for you?
 
 * Data consistency across clusters and replica sets with [every supported backup type](features/backup-types.md)
-* No notable performance nor operating degradation associated with PBM. 
+* No notable performance nor operating degradation associated with PBM
 * A variety of [supported storage types](details/storage-configuration.md) means no vendor lock-in
 * Open source solution with [enterprise-grade features](features/comparison.md) 
 
