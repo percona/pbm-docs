@@ -4,7 +4,7 @@ Even in a highly-available architecture, such as with MongoDB replication, backu
 
 Percona Backup for MongoDB is a command line interface tool. It provides [the set of commands](reference/pbm-commands.md) to manage backup and restore operations in your database.
 
-[What backup to choose?](){.md-button}
+[What backup to choose?](features/backup-types.md){.md-button}
 
 ## Usage example
 
