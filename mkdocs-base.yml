@@ -165,18 +165,18 @@ nav:
     - Comparison with MongoDB: 'features/comparison.md'
   - Get started:
       - Quickstart guide: installation.md 
-      - Install:
+      - 1. Install:
+         - System requirements: system-requirements.md
          - From repositories: install/repos.md       
          - Download tarballs: install/tarball.md
          - Build from source: install/source.md
          - Run in Docker: install/docker.md
-      - Set up and configure: 
+      - 2. Set up and configure: 
         - Overview: install/initial-setup.md       
         - install/configure-authentication.md
         - install/backup-storage.md
         - install/start-pbm-agent.md
   - Backup and restore:
-#      - Via the command line:
         - Make a backup : "usage/start-backup.md"
         - Restore a backup: usage/restore.md
         - Make a point-in-time restore: usage/pitr-tutorial.md
@@ -188,7 +188,6 @@ nav:
         - usage/restore-progress.md
         - usage/oplog-replay.md 
         - usage/logs.md 
-#      - Via web interface:
         - Backup management via PMM: pmm.md 
   - Administer PBM:
       - 'Overview': manage/overview.md

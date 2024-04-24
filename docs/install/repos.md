@@ -4,6 +4,10 @@ To install the software from Percona repositories means to subscribe to them. Pe
 
 --8<-- "pbm-install-nodes.md"
 
+## Before you start
+
+Check the [system requirements](../system-requirements.md).
+
 ## Procedure
 
 <i warning>:material-alert: Warning:</i> Run the following commands as root or via the `sudo` command.
