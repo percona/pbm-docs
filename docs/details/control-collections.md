@@ -14,7 +14,7 @@ In sharded clusters, this is the `admin` db of the config server replica set. In
 * *admin.pbmLock* - **pbm-agent** synchronization-lock structure.
 * *admin.pbmLockOp* - Is used to coordinate operations that are not mutually exclusive such as make backup and delete backup.
 * *admin.pbmLog* - Stores log information from all `pbm-agents` in the MongoDB environment. Available in Percona Backup for MongoDB as of version 1.4.0.
-* *admin.pbmOpLog* - Stores [operation IDs](../reference/glossary.md#opids).
+* *admin.pbmOpLog* - Stores [operation IDs](../reference/glossary.md#opid).
 * *admin.pbmPITRChunks* - Stores [Point-in-time recovery](../reference/glossary.md#point-in-time-recovery) oplog slices.
 * *admin.pbmPITRState* - Contains current state of Point-in-time recovery incremental backups.
 * *admin.pbmRestores* - Contains restore history and the restore state for all replica sets.
