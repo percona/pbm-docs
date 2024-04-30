@@ -10,7 +10,7 @@ consistent backups of MongoDB sharded clusters and replica sets. Percona Backup 
 
 The Percona Backup for MongoDB code is [here](https://github.com/percona/percona-backup-mongodb).
 
-This repository contains the source files for [Percona Backup for MongoDB documentation](https://www.percona.com/doc/percona-backup-mongodb). The documentation is written in [reStructured text markup language](https://docutils.sourceforge.io/rst.html) and is created using [Sphinx Python Documentation Generator](https://www.sphinx-doc.org/en/master/). 
+This repository contains the source files for [Percona Backup for MongoDB documentation](https://www.percona.com/doc/percona-backup-mongodb). The documentation is written in [Markdown markup language](https://daringfireball.net/projects/markdown/) and is created using [MkDocs Documentation Generator](https://www.mkdocs.org/). 
 
 ## Contributing
 
