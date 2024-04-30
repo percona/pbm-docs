@@ -251,10 +251,10 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     ### Restore with users and roles
 
-    To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles), add the `--with-users-and-roles` flag to the `pbm restore` command:
+    To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles) from a full backup, add the `--with-users-and-roles` flag to the `pbm restore` command:
 
     ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name> --ns <database.collection> --with-users-and-roles
+    $ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
     ```
 
 === ":simple-databricks: Incremental"

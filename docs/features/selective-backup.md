@@ -44,7 +44,8 @@ You can restore the specified databases with users and roles that were created a
 
 Consider these specifics of selective restore with users and roles:
 
-* Users and roles must be created in custom databases. For security considerations, users created in `admin` database are not restored.
+* You can restore custom databases from a full backup. 
+* Users and roles must be created in custom databases. For security considerations, users created in `admin`, `config` and `local` databases cannot be a part of a selective restore.
 * If users and roles exist in a database during the restore, they will be overwritten from the backup.
 
 [Restore data with users and roles](../usage/restore.md#__tabbed_2_3){.md-button}
