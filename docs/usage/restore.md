@@ -244,8 +244,18 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
         ```{.bash data-prompt="$"}
         $ pbm restore <backup_name> --ns <database.collection>
         ```
+    
+    You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>, <db2.*>`. 
 
     During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
+
+    ### Restore with users and roles
+
+    To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles), add the `--with-users-and-roles` flag to the `pbm restore` command:
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name> --ns <database.collection> --with-users-and-roles
+    ```
 
 === ":simple-databricks: Incremental"
 
