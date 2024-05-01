@@ -4,16 +4,18 @@
 
 Logical restore is the reverse process: The ``pbm-agent`` retrieves the backup data from the storage and inserts it on every primary node in the cluster. The remaining nodes receive the data during the replication process.
 
+!!! note
+
+    Sharded time series collections are not supported.
+
 The following diagram shows the restore flow.
 
 ![image](../_images/pbm-restore-shard.png)
-
-
-Logical backups allow for point-in-time recovery. 
+ 
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
-| - Easy to operate with, using a single command <br> - Support for point-in-time recovery <br> - The backup size is smaller as it includes only the data | - Much slower than physical backup / restore <br> - Adds database overhead on reading and inserting the data| Sharded clusters and non-sharded replica sets | 
+| - Easy to operate with, using a single command <br> - Support for point-in-time recovery <br> - The backup size is smaller as it includes only the data | - Much slower than physical backup / restore <br> - Adds database overhead on reading and inserting the data | 
 
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }
 [Restore a backup](../usage/restore.md){ .md-button .md-button }
