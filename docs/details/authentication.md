@@ -78,7 +78,9 @@ network encryption enabled are “tls=true” plus “tlsCAFile” and/or
 
 By default, PBM requires the majority level of acknowledgement among replica set members for read and write operations in MongoDB. This level is controlled by `readConcern` and `writeConcern` settings. 
 
-If your cluster loses majority or is configured to operate without it, you can decrease the level for `readConcern` and `writeConcern` so that PBM remains operational.
+If your cluster loses majority or is configured to operate without it, you can decrease the level for `readConcern` and `writeConcern` so that PBM remains operational and can make backups.
+
+
 
 Specify new values in MongoDB connection URI string as follows:
 
@@ -113,7 +115,9 @@ Supported values are:
 * For `readConcern` – `local`
 * For `writeConcern` – the number of nodes to acknowledge writes. A zero value is not supported.
 
-For correct functioning of PBM, we recommend to change values for both options. 
+For correct functioning of PBM, we recommend to change values for both options.
+
+To restore from a backup, first configure your cluster to have the majority. Then [make a restore](../usage/restore.md).  
 
 
 
