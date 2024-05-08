@@ -123,7 +123,7 @@ plugins:
   with-pdf: # https://github.com/orzih/mkdocs-with-pdf
           output_path: '_pdf/PerconaBackupforMongoDB.pdf'
           cover_title: 'Backup for MongoDB Documentation'
-          cover_subtitle: 2.4.1 (March 25, 2024)
+          cover_subtitle: 2.5.0 (May 14, 2024)
           author: 'Percona Technical Documentation Team'
           cover_logo: docs/_images/Percona_Logo_Color.png
           debug_html: false
@@ -203,6 +203,7 @@ nav:
       - troubleshoot/faq.md
   - Release notes:
       - "Release notes index": "release-notes.md"
+      - release-notes/2.5.0.md
       - release-notes/2.4.1.md
       - release-notes/2.4.0.md
       - 2023 (versions 2.0.4 to 2.3.1):
