@@ -9,5 +9,6 @@
     * is not delayed 
 
 * All `pbm-agents` in your deployment must be able to connect to the same [remote backup storage](details/storage-configuration.md) using the same credentials.
+* All `pbm-agents` and PBM CLI must be of the same version for backups to success. Otherwise we cannot guarantee successful backups and data consistency in them.
 
 Note that networking issues like connection to the remote backup storage can also affect PBM performance. 
