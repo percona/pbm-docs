@@ -37,3 +37,8 @@ Yes. The preconditions for both Point-in-Time Recovery restore and regular resto
 
 
 3. Disable Point-in-Time Recovery if it is enabled. This is because oplog slicing and restore are exclusive operations and cannot be run together. Note that oplog slices made after the restore and before the next backup snapshot become invalid. Make a fresh backup and re-enable Point-in-Time Recovery.
+
+## Can I install PBM on MacBook?
+
+You cannot install PBM on MacBook using the package manager. PBM packages are available and tested for Linux distributions only. However, you can run PBM on MacBook as a Docker container. See the [Run in Docker](../install/docker.md) guide for guidelines. 
+
