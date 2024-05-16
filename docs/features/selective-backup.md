@@ -11,7 +11,7 @@ With the selective backup and restore functionality, you have the following opti
 1.	Backup a single database or a specific collection and restore all data from it. 
 2.	Restore a specific collection from a single database backup
 3.	Restore certain databases and / or collections from a full backup
-4.	Make a point-in time recovery for the specified databases / collections.
+4.	Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
 
 ## Sharded collections
 
@@ -32,6 +32,19 @@ Note that selective backups and restores operate only with data and router confi
 
 During the selective restore, the primary shard for a database is set to the state it had during the backup. For example, the primary shard for the database "Staff" during backup was A. After you restore the  "Staff" database, the primary shard will be set to A even if you moved the primary from A to B before the restore. All non-sharded collections will be restored on A; however, they will not be deleted from B. You must take needed actions (cleanup or move the primary back to B) to maintain them. 
 
+## Restore a database with users and roles
+
+!!! admonition "Version added: [2.5.0](../release-notes/2.5.0.md)"
+
+You can restore the specified databases with users and roles that were created against them. This feature is useful for deployments where each user has an individual database and authenticates against it. In such a way, you can recover desired datasets to their state prior to data corruption or loss.
+
+Consider these specifics of selective restore with users and roles:
+
+* You can restore custom databases from a full backup. 
+* Users and roles must be created in custom databases. For security considerations, users created in `admin`, `config` and `local` databases cannot be a part of a selective restore.
+* If users and roles exist in a database during the restore, they will be overwritten from the backup.
+
+[Restore data with users and roles](../usage/restore.md#__tabbed_2_3){.md-button}
 
 ## Known limitations of selective backups and restores
 
