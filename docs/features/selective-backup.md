@@ -2,10 +2,6 @@
 
 !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-!!! important
-
-    Selective backup and restore is the [technical preview feature](../reference/glossary.md#technical-preview-feature).
-
 You can back up and restore certain namespaces - databases or collections. For example, if your "Payments" collection in the "Staff" database was corrupted, you can restore only this collection from your full backup up to a specific point in time. Or, if your "Invoices" database contains sensitive data and must be backed up frequently, you can configure the backup of only this database. This way you work only with the desired subset of data without disrupting the operations of your whole cluster. 
 
 You also drastically reduce time on backup / restore operations of the whole data set and save on storage consumption.
