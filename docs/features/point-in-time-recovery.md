@@ -110,7 +110,7 @@ Note that the higher value you specify, the more time and computing resources it
 
 ### View oplog slices
 
-The oplog slices are stored in the `pbmPitr` subdirectory in the [remote storage defined in the config](../details/storage-configuration.md#storage-config). A slice name reflects the start and end time this slice covers.
+The oplog slices are stored in the `pbmPitr` subdirectory in the [remote storage defined in the config](../details/storage-configuration.md#supported-storage-types). A slice name reflects the start and end time this slice covers.
 
 The [`pbm list`](../reference/pbm-commands.md#pbm-list) output includes the following information:
 

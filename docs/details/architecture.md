@@ -9,7 +9,7 @@ Percona Backup for MongoDB consists of the following components:
 * [PBM Control collections](../reference/glossary.md#pbm-control-collections) are special collections in MongoDB that store the configuration data and backup states. Both `pbm` CLI and `pbm-agent` use PBM Control collections to check backup status in MongoDB and communicate with each other.
 
 
-* Remote backup storage is where Percona Backup for MongoDB saves backups. It can be either [an S3 compatible storage](../reference/glossary.md#S3-compatible-storage) or a filesystem-type storage.
+* Remote backup storage is where Percona Backup for MongoDB saves backups. It can be either [an S3 compatible storage](../reference/glossary.md#s3-compatible-storage) or a filesystem-type storage.
 
 The following diagram illustrates how Percona Backup for MongoDB components communicate with MongoDB.
 

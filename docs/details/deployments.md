@@ -6,7 +6,7 @@ For testing purposes, you can deploy Percona Backup for MongoDB on a single-node
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-[Physical restores](../features/physical.md) are available for deployments with arbiter nodes. However, since these nodes don't have [the `pbm-agent` installed](../installation.md#what-nodes-to-install-on), you must [manually stop them before the restore](../usage/restore.md#before-you-start).
+[Physical restores](../features/physical.md) are available for deployments with arbiter nodes. However, since these nodes don't have [the `pbm-agent` installed](../install/repos.md#what-nodes-to-install-on), you must [manually stop them before the restore](../usage/restore.md#before-you-start).
 
 !!! admonition "See also"
 
