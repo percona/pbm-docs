@@ -6,6 +6,7 @@ pitr:
   oplogSpanMin: <float64>
   compression: <string>
   compressionLevel: <int>
+  oplogOnly: <boolean>
 ```
 
 ### pitr.enabled
