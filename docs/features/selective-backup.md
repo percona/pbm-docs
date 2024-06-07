@@ -13,6 +13,11 @@ With the selective backup and restore functionality, you have the following opti
 3.	Restore certain databases and / or collections from a full backup
 4.	Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
 
+!!! warning
+
+    Multi-collection transactions and time series collections are not supported. However, if you use them and try to make a selective restore, it may break ACID because not all operations with this transaction are restored. Thus, from the transaction's point of you, the data consistency may be broken.
+
+
 ## Sharded collections
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
