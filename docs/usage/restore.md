@@ -22,6 +22,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
     2. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
+    3. Make sure all nodes in the cluster are healthy (i.e. either PRIMARY or SECONDARY). Each pbm-agent needs to be able to connect to its local node and run queries in order to perform the restore.
 
 === ":simple-databricks: Incremental"
 
