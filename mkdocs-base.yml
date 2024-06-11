@@ -200,6 +200,7 @@ nav:
       - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'
       - 'Check status': 'troubleshoot/status.md'
+      - 'Troubleshoot backup management via PMM': 'troubleshoot/pbm-pmm.md'
       - troubleshoot/faq.md
   - Release notes:
       - "Release notes index": "release-notes.md"

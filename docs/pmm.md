@@ -7,5 +7,8 @@ Check PMM documentation for the following guides:
 * [How to configure PMM to monitor MongoDB :octicons-link-external-16:](https://docs.percona.com/percona-monitoring-and-management/setting-up/client/mongodb.html)
 * [Backup management for MongoDB in PMM :octicons-link-external-16:](https://docs.percona.com/percona-monitoring-and-management/get-started/backup/backup_mongo.html). 
 
+Having issues with backups? Check the [Troubleshoot backup management via Percona Monitoring and Management](troubleshoot/pbm-pmm.md) for help.
+
+
 
 
