@@ -15,7 +15,9 @@ With the selective backup and restore functionality, you have the following opti
 
 !!! warning
 
-    Multi-collection transactions and time series collections are not supported. However, if you use them and try to make a selective restore, it may break ACID because not all operations with this transaction are restored. Thus, from the transaction's point of you, the data consistency may be broken.
+    Multi-collection transactions are not supported. However, if you use them and attempt a selective restore, it may break [ACID](../reference/glossary.md#acid) because not all operations with this transaction are restored. PBM applies oplog events that relate only to the specified namespaces(s). Thus, from the transaction's point of view, the data consistency may be broken.
+
+    For example, you have a transaction that involves collections A and B. When you restore collection A, PBM replays oplog events only for collection A and ignores those related to collection B. As a result, the state of collection B remains unchanged and is no longer consistent with collection A. 
 
 
 ## Sharded collections
