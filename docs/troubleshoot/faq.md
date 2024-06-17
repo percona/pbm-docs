@@ -42,3 +42,10 @@ Yes. The preconditions for both Point-in-Time Recovery restore and regular resto
 
 You cannot install PBM on MacBook using the package manager. PBM packages are available and tested for Linux distributions only. However, you can run PBM on MacBook as a Docker container. See the [Run in Docker](../install/docker.md) guide for guidelines. 
 
+## Can I connect PBM to MongoDB with disabled authorization?
+
+While we **don’t recommend** disabling authorization for MongoDB due to security considerations, there might be scenarios (such as testing environments) where you need to connect PBM (Percona Backup Manager) to a MongoDB instance without authentication. Follow these steps to ensure a successful setup:
+
+1. If you’ve set the [`bindIP` :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.bindIp) configuration parameter for your `mongod` or `mongos` processes, ensure that the `localhost` value is included in the list of allowed IP addresses. The `pbm-agent` process connects to its local MongoDB node using a standalone type of connection. 
+2. Make sure the MongoDB connection URI string for pbm-agents includes `localhost` as part of the host information. 
+3. In the MongoDB connection URI string for the PBM CLI, exclude the `authSource` parameter as it otherwise enforces authorization.

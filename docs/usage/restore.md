@@ -38,12 +38,15 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     2. Shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
 
-    3. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
+    3. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
+
+    4. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
 === ":material-database-refresh-outline: Physical"
 
     1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
-    2. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
+    2. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
+    3. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
 
 === ":material-select-multiple: Selective"
     
@@ -51,7 +54,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === ":simple-databricks: Incremental"
 
-    Before you start, shut down all `mongos` nodes as the database won’t be available while the restore is in progress.
+    Before you start, shut down all `mongos` nodes, `pmm-agent` processes and clients that can do writes to the database as it won’t be available while the restore is in progress.
 
 
 ## Restore a database
