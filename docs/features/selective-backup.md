@@ -13,6 +13,13 @@ With the selective backup and restore functionality, you have the following opti
 3.	Restore certain databases and / or collections from a full backup
 4.	Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
 
+!!! warning
+
+    Multi-collection transactions are not supported. However, if you use them and attempt a selective restore, it may break [ACID](../reference/glossary.md#acid) because not all operations with this transaction are restored. PBM applies oplog events that relate only to the specified namespaces(s). Thus, from the transaction's point of view, the data consistency may be broken.
+
+    For example, you have a transaction that involves collections A and B. When you restore collection A, PBM replays oplog events only for collection A and ignores those related to collection B. As a result, the state of collection B remains unchanged and is no longer consistent with collection A. 
+
+
 ## Sharded collections
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
