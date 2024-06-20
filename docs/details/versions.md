@@ -1,10 +1,27 @@
 # Supported MongoDB versions
 
-Percona Backup for MongoDB is compatible with the following MongoDB versions:
+Percona Backup for MongoDB is compatible with:
 
-| PBM version | MongoDB Community / Enterprise | Percona Server for MongoDB|
-| ----------- |------------------------------- | ------------------------- |
-| [2.3.0](../release-notes/2.3.0.md)              | Logical backups - version 4.4 and higher with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled| - Logical backups - version 4.4 and higher <br> - Physical backups -  version 4.4.6-8, 5.0 and higher with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled and WiredTiger configured as the storage engine.|
-| [1.7.0](../release-notes/1.7.0.md)              | Logical backups - version 4.2 and higher with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled| - Logical backups - version 4.2 and higher <br> - Physical backups (tech preview) -  version 4.2.15-16, 4.4.6-8, 5.0 and higher with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled and WiredTiger configured as the storage engine.
-| [1.6.1](../release-notes/1.6.1.md)              | Logical backups - version 3.6 and higher with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled| Logical backups - version 3.6 and higher|
+* MongoDB Community / Enterprise Edition  with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled for logical backups.
+* Percona Server for MongoDB with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) for logical backups. For physical backups, also configure WiredTiger as the storage engine.
+
+The following table provides information about the supported MongoDB versions for each PBM release. 
+
+!!! note ""
+
+    End-of-life MongoDB versions may work with PBM, but they are not tested for compatibility. Consider using an previous PBM version in this case.
+
+
+| PBM version | MongoDB Community / Enterprise | Percona Server for MongoDB|Compatibility with previous PBM versions|
+| ----------- |------------------------------- | ------------------------- |----------------------------------------|
+| [2.5.0](../release-notes/2.5.0.md) | Logical backups - version 5.0 and higher| - Logical backups - version 5.0 and higher <br> - Physical backups - version  5.0.x, 6.0.x, 7.0.x <br> - Incremental backups - version 5.0.14-12, 6.0.3-2 and higher, 7.0.x| Yes |
+| [2.4.0](../release-notes/2.4.0.md) | Logical backups - version 4.4 and higher| - Logical backups - version 4.4 and higher <br> - Physical backups - version 4.4.6-8 and higher, 5.0.x, 6.0.x, 7.0.x <br> - Incremental backups - version 4.4.18, 5.0.14-12, 6.0.3-2 and higher, 7.0.x| Yes |
+| [2.3.0](../release-notes/2.3.0.md) | Logical backups - version 4.4 and higher| - Logical backups - version 4.4 and higher <br> - Physical backups - version 4.4.6-8 and higher, 5.0.x, 6.0.x <br> - Incremental backups - versions 4.4.18, 5.0.14-12, 6.0.3-2 and higher| Yes | 
+| [2.2.0](../release-notes/2.2.0.md) | Logical backups - version 4.4 and higher| - Logical backups - version 4.4 and higher <br> - Physical backups - version 4.4.6-8 and higher, 5.0.x, 6.0.x <br> - Incremental backups - versions 4.4.18, 5.0.14-12, 6.0.3-2 and higher| Yes | 
+| [2.1.0](../release-notes/2.1.0.md) | Logical backups - version 4.4 and higher| - Logical backups - version 4.4 and higher <br> - Physical backups - version 4.4.6-8, 5.0.x, 6.0.x <br> - Incremental backups - version 4.2.24-24, 4.4.18, 5.0.14-12, 6.0.3-2 and higher| No. A fresh backup is required|
+| [1.7.0](../release-notes/1.7.0.md)              | Logical backups - version 4.2 and higher | - Logical backups - version 4.2 and higher <br> - Physical backups (tech preview) -  version 4.2.15-16, 4.4.6-8, 5.0 and higher | Yes
+| [1.6.1](../release-notes/1.6.1.md)              | Logical backups - version 3.6 and higher with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled| Logical backups - version 3.6 and higher|Yes
+
+
+
 
