@@ -1,5 +1,11 @@
 # Build from source code
 
+--8<-- "pbm-install-nodes.md"
+
+## Before you start
+
+Check the [system requirements](../system-requirements.md) and [supported MongoDB versions](../details/versions.md).
+
 ## Prerequisites 
 
 To build Percona Backup for MongoDB from source, you need the following:

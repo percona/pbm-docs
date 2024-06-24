@@ -6,7 +6,7 @@ To install the software from Percona repositories means to subscribe to them. Pe
 
 ## Before you start
 
-Check the [system requirements](../system-requirements.md).
+Check the [system requirements](../system-requirements.md) and [supported MongoDB versions](../details/versions.md).
 
 ## Procedure
 

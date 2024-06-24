@@ -7,7 +7,11 @@ You can download Percona Backup for MongoDB from [Percona website :octicons-link
 
 --8<-- "pbm-install-nodes.md"
 
-## Install from binary tarball
+## Before you start
+
+Check the [system requirements](../system-requirements.md) and [supported MongoDB versions](../details/versions.md).
+
+## Install from binary tarballs
 
 Find the link to the binary tarballs under the **Generic Linux** menu item on [Percona website :octicons-link-external-16:](https://www.percona.com/downloads/percona-backup-mongodb/).
 {.power-number}
