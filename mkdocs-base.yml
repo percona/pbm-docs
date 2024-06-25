@@ -151,6 +151,7 @@ nav:
     - features/incremental-backup.md
     - features/point-in-time-recovery.md 
     - features/snapshots.md
+    - features/multi-storage.md
     - Comparison with MongoDB: 'features/comparison.md'
   - Get started:
       - Quickstart guide: installation.md 

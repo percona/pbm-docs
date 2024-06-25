@@ -371,12 +371,23 @@ The command accepts the following flags:
     ```json
     {
       "snapshots": [
-        {
-          "name": "<backup_name>",
-          "status": "done",
-          "completeTS": Timestamp,
-          "pbmVersion": "1.6.0"
-        }
+          {
+            "name": "<backup-name>",
+            "status": "done",
+            "restoreTo": Timestamp,
+            "pbmVersion": "<version>",
+            "type": "logical",
+            "src": ""
+          },
+          {
+            "name": "<backup-name>",
+            "status": "done",
+            "restoreTo": Timestamp,
+            "pbmVersion": "<version>",
+            "type": "logical",
+            "src": "",
+            "storage": "<storage-name>"
+          }
       ],
       "pitr": {
         "on": false,
@@ -529,6 +540,144 @@ The command accepts the following flags:
 | `end=timestamp`         | The end time for the oplog replay.   |
 | `--replset-remapping`   | Maps the replica set names for the oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`. |
 
+## pbm profile add
+
+Saves an external storage configuration to PBM. This information is defined via configuration profiles. 
+
+To learn more about configuration profiles, see [Multiple storages for backups](../features/multi-storage.md).
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile add [<flags>] <profile-name> <path/to/profile.yaml>
+``` 
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| --sync                  | Add a profile and sync the backup list from this storage|
+|--wait                   | Wait for the profile to be added. The flag blocks the shell session.|
+|-o, --out=text           | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`|
+
+??? admonition "Add profile"
+
+    ```json
+    {
+      "msg": "OK"
+    }
+    ```
+
+## pbm profile list
+
+Provides information about [configuration profiles](../features/multi-storage.md#configuration-profiles) added to PBM. 
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile list [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+??? admonition "List profiles"
+
+    ```json
+    {
+      "profiles": [
+        {
+          "name": "test1",
+          "profile": true,
+          "storage": {
+            "type": "filesystem",
+            "filesystem": {
+              "path": "/tmp/local_backups"
+            }
+          }
+        }
+      ]
+    }
+    ```
+
+## pbm profile remove
+
+Removes the specified configuration profile from PBM.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile remove <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `--wait`                | Wait for the profile to be removed. The flag blocks the shell session.|
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+??? admonition "Delete profile"
+
+    ```json
+    {
+      "msg": "OK"
+    }
+    ```
+
+## pbm profile show
+
+Shows the external storage configuration according to the specified configuration profile.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile show <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+??? admonition "Show profile"
+
+    ```json
+    {
+      "name": "test1",
+      "profile": true,
+      "storage": {
+        "type": "filesystem",
+        "filesystem": {
+          "path": "/tmp/local_backups"
+        }
+      }
+    }
+    ```
+
+## pbm profile sync
+
+Syncs the backup list from the external storage according to the specified configuration profile.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile sync <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `--all`                 | Syncs backup lists from all the storages.|
+| `--clear`               | Clears the backup list from the storage. To clear the backup list from a specific storage, pass the profile name. When used with `--all`, clears backup lists from all storages. |
+| `--wait`                | Wait for the profile to be synced. The flag blocks the shell session.|
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
 
 ## pbm restore
 
@@ -621,8 +770,12 @@ The command accepts the following flags:
             "name": "<backup_name>",
             "size": 3143396168,
             "status": "done",
-            "completeTS": Timestamp,
-            "pbmVersion": "1.6.0"
+            "restoreTo": Timestamp,
+            "pbmVersion": "2.5.0",
+            "type": "logical",
+            "src": "",
+            "storage": "<storage-name>"
+      },
           },
         ],
         "pitrChunks": {
