@@ -20,9 +20,15 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === ":material-database-refresh-outline: Physical"
 
-    1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
-    2. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
+    1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously. 
+
+    ```{.bash data-prompt="$"}
+    $ pbm config --set pitr.enabled=false
+    ```
+
+    2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
     3. Make sure all nodes in the cluster are healthy (i.e. either PRIMARY or SECONDARY). Each pbm-agent needs to be able to connect to its local node and run queries in order to perform the restore.
+    4. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
 
 === ":simple-databricks: Incremental"
 
