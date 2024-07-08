@@ -218,6 +218,10 @@ $ pbm describe-backup [<backup-name>] [<flags>]
 | `-l`, `--list-files`  | Shows the list of files being copied for snapshot-based backups |
 | `--with-collections`  | Shows the collections included in the backup. For logical and selective backups only. Available with version 2.3.0.
 
+### Output
+
+The output document contains the following fields: 
+
 ??? admonition "JSON output"
 
     ```json
@@ -233,6 +237,7 @@ $ pbm describe-backup [<backup-name>] [<flags>]
         "flight.booking"
       ],
       "mongodb_version": "<version>",
+      "fcv": "<version>",
       "pbm_version": "<version>",
       "status": "done",
       "size": 470805945,
@@ -241,18 +246,57 @@ $ pbm describe-backup [<backup-name>] [<flags>]
         {
           "name": "<name>",
           "status": "done",
+          "node": "example.mongodb.com:27017",
           "last_write_ts": Timestamp,
           "last_transition_ts": Timestamp,
           "last_write_time": "2022-09-30T14:02:49Z",
-          "last_transition_time": "2022-09-30T14:02:53Z"
-        }
+          "last_transition_time": "2022-09-30T14:02:53Z",
+          "configsvr": true,
+          "security": {}
+        },
+        {...},
+        {...}
       ]
     }
     ```
 
+| Field       | Description |
+| ----------- | ----------- |
+| `name`      | The backup name |
+| `opid`      | A unique identifier of an operation |
+| `type`      | The backup type. Supported values: logical, physical, incremental, external |
+| `last_write_ts` | The timestamp of the last write |
+| `last_transition_ts` | The timestamp when a backup changed its status |
+| `last_write_time` | The human-readable indication of the last write |
+| `last_transition_time` | The human-readable indication of the time when a backup changed its status|
+| `namespaces` | The list of namespaces included in the backup. Available for selective backup |
+| `mongodb_version` | The MongoDB version |
+| `fcv` | The feature compatibility version |
+| `pbm_version` | The Percona Backup for MongoDB version |
+| `status` | The backup status. Supported values: running, dumpDone, done, copyReady, error, canceled |
+| `size` | The backup size in bytes |
+| `size_h` | The backup size in human-readable format |
+| `error`  | The error message for a failed backup |
+| `replsets` | The list of replica sets included in the backup. Each replica set has the following fields: <br> - `name` - the replica set name <br> - `status` - the backup status on this replica set <br> - `node` - the node name and port <br> - `last_write_ts` - the timestamp of the last write <br> - `last_transition_ts` - the timestamp when a backup changed its status <br> - `last_write_time` - the human-readable indication of the last write <br> - `last_transition_time` - the human-readable indication of the time when a backup changed its status <br> - `security` - the security options of the `mongod` process <br> - `configsvr` - indicates that this is a config server replica set |
+
+
 ## pbm describe-restore
 
-Shows the detailed information about the restore.
+Shows the detailed information about the restore:
+
+* Restore name
+* opID
+* The name of the backup from which the database was restored
+* Type
+* Status
+* Last transition time – the time when the restore process changed its status
+* The name of every replica set, its restore status and the last transition time
+
+For **physical backups only**, the following additional information is provided:
+
+* The node name
+* Restore status on the node
+* Last transition time
 
 The command has the following syntax:
 
@@ -267,6 +311,10 @@ The command accepts the following flags:
 | `-c`, `--config=CONFIG`  | Only for **physical restores**. Points Percona Backup for MongoDB to a configuration file so it can read the restore status from the remote storage. For example, `pbm describe-restore -c /etc/pbm/conf.yaml <restore-name>`.|
 | `-o`, `--out=TEXT`       | Shows the output as either the plain text (default) or a JSON object. Supported values: ``text``, ``json``.|
 
+### Output
+
+The output document contains the following fields:
+
 ??? admonition "Selective restore status"
 
     ```json
@@ -276,27 +324,24 @@ The command accepts the following flags:
      "backup": "<backup_name>",
      "type": "logical",
      "status": "done",
-     "ts_to_restore": Timestamp,
-     "time_to_restore": "Time",
      "namespaces": [
         "<database.*>"
+     "last_transition_time": "Time"
      ]
      "replsets": [
        {
          "name": "rs1",
          "status": "done",
-         "last_transition_ts": Timestamp,
          "last_transition_time": "Time"
        },
        {
         "name": "rs0",
-         "last_transition_ts": Timestamp,
-         "last_transition_time": "Time"
+        "status": "done",
+        "last_transition_time": "Time"
        },
        {
          "name": "cfg",
          "status": "done",
-         "last_transition_ts": Timestamp,
          "last_transition_time": "Time"
        }
      ],
@@ -312,19 +357,16 @@ The command accepts the following flags:
      "backup": "<backup_name>",
      "type": "physical",
      "status": "done",
-     "last_transition_ts": Timestamp,
      "last_transition_time": "Time",
      "replsets": [
        {
          "name": "rs1",
          "status": "done",
-         "last_transition_ts": Timestamp,
          "last_transition_time": "Timestamp",
          "nodes": [
            {
              "name": "IP:port",
              "status": "done",
-             "last_transition_ts": Timestamp,
              "last_transition_time": "Timestamp"
            }
          ]
@@ -332,6 +374,21 @@ The command accepts the following flags:
      ],
     }
     ```
+
+| Field       | Description |
+| ----------- | ----------- |
+| `name`      | The restore name |
+| `opid`      | A unique identifier of an operation |
+| `backup`    | The name of the backup from which the database was restored |
+| `type`      | The restore type. Supported values: logical, physical|
+| `status`    | The restore status. Supported values: running, copyReady, done, error |
+| `error`     | The error message for a failed restore |
+| `last_transition_time` | The human-readable indication of the time when the restore process changed its status |
+| `namespaces` | The list of namespaces included in the restore. Available for selective restore |
+| `replsets`  | The list of replica sets included in the restore. Each replica set has the following fields: <br> - `name` - the replica set name <br> - `status` - the restore status on this replica set <br> - `error` - the error message for failed restore <br> - `last_transition_time` - the human-readable indication of the time when the restore process changed its status <br> - `nodes` - the list of nodes included in the restore. |
+| `replsets.nodes`     | The list of nodes included in the restore. Each node has the following fields: <br> - `name` - the node name and port <br> - `status` - the restore status on the node <br> - `error` - the error message for failed restore <br> - `last_transition_time` - the human-readable indication of the time when the restore process changed its status |
+
+
 
 ## pbm help
 
