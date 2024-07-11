@@ -12,19 +12,22 @@ $ pbm describe-restore 2022-08-15T11:14:55.683148162Z -c pbm_config.yaml
 
 The output provides the following information:
 
-* Restore name
-* opID
-* The name of the backup from which the database was restored
-* Type
-* Status
-* Last transition time – the time when the restore process changed its status
-* The name of every replica set, its restore status and the last transition time
+-  Restore name
+-  The name of the backup from which the database was restored
+-  Type
+-  Status
+-  opID
+-  The time of the restore start
+-  Last transition time – the time when the restore process changed its status
+-  The name of every replica set, its restore status and the last transition time 
 
 For physical backups only, the following additional information is provided:
 
 - The node name
 - Restore status on the node
 - Last transition time
+
+Refer to the [pbm describe-restore](../reference/pbm-commands.md#output_1) for the full list of fields and their description.
 
 For version 1.8.1 and earlier, tracking restore progress during physical restores is not available. To check the restore status, the options are:
 
