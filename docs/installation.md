@@ -8,7 +8,7 @@ Find the list of supported platforms for Percona Backup for MongoDB on the [Perc
 
 You can use any of the easy-install guides but **we recommend using the package manager of your operating system** for a convenient and quick way to try the software first.
 
-=== ":simple-windowsterminal: Package manager"
+=== ":octicons-terminal-16: Package manager"
     
     Use the package manager of your operating system to install Percona Backup for MongoDB:
 

@@ -105,9 +105,9 @@ To redefine it, specify the new priority for the [`pitr.priority`](../reference/
 pitr:
   enabled: true
   priority:
-    - "rs1:27017": 1
-    - "rs2:27018": 2
-    - "rs3:27019": 1
+    "rs1:27017": 1
+    "rs2:27018": 2
+    "rs3:27019": 1
 ```
 
 The format of the priority array is `<hostname:port>:<priority>`.
@@ -121,7 +121,8 @@ To define priority in a sharded cluster, you can either list all nodes or specif
 Note that if you listed only specific nodes, the remaining nodes will be automatically assigned priority `1.0`. For example, you assigned priority `2.5` to only one secondary node in every shard and config server replica set of the sharded cluster.
 
 ```yaml
-backup:
+pitr:
+  enabled: true
   priority:
     "localhost:27027": 2.5  # config server replica set
     "localhost:27018": 2.5  # shard 1
@@ -130,7 +131,24 @@ backup:
 
 The remaining secondaries and the primary nodes in the cluster receive priority `1.0`.
 
-PBM save oplog slices from the node with the highest priority. If this node is not responding, it selects the next priority node. If there are several nodes with the same priority, one of them is randomly elected for saving oplog slices.
+To check the priorities, run the `pbm status` command with the  `--priority` flag.
+
+```{.bash data-prompt="$"}
+$ pbm status --priority
+```
+
+??? example "Sample output"
+
+    ```{.text .no-copy}
+    Cluster:
+    ========
+    rs1:
+      - rs1/rs101:27017 [S], Bkp Prio: [1.0], PITR Prio: [2.5]: pbm-agent [v{{release}}] OK
+      - rs1/rs102:27017 [P], Bkp Prio: [0.5], PITR Prio: [2.0]: pbm-agent [v{{release}}] OK
+      - rs1/rs103:27017 [S], Bkp Prio: [1.0], PITR Prio: [1.0]: pbm-agent [v{{release}}] OK
+    ```
+
+PBM saves oplog slices from the node with the highest priority. If this node is not responding, it selects the next priority node. If there are several nodes with the same priority, one of them is randomly elected for saving oplog slices.
 
 
 ### Compressed oplog slices 
