@@ -7,6 +7,10 @@
 *  Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
 * WiredTiger is used as the storage engine in Percona Server for MongoDB, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) functionality.
 
+!!! warning 
+
+    During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant file growth.
+    
 !!! admonition "See also"
 
     Percona Blog
