@@ -652,6 +652,9 @@ The command accepts the following flags:
             {
               "host": "<replSet_name>/example.mongodb:27017",
               "agent": "<version>",
+              "role": "",
+              "prio_pitr": "1.0",
+              "prio_backup": "1.0",
               "ok": true
             }
           ]
