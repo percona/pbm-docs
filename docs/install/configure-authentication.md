@@ -8,7 +8,7 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem  
 
 ## Create the `pbm` user
 
-<i info>:material-information: Info:</i> Execute this step on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
+<i info>:material-information: Info: Execute this step on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set. </i>
 {.power-number}
     
 1. Create the role that allows any action on any resource.
@@ -54,7 +54,7 @@ You can specify the `username` and `password` values and other options of the `c
 
 ## Set the MongoDB connection URI for `pbm-agent`
 
-<i info>:material-information: Info:</i> Execute this step needs on each node where `pbm-agent` is installed.
+<i info>:material-information: Info: Execute this step needs on each node where `pbm-agent` is installed. </i>
 
 A **pbm-agent** process connects to its localhost `mongod` node with a standalone type of connection. 
 
@@ -119,7 +119,7 @@ PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admi
 
 ## Set the MongoDB connection URI for `pbm CLI`
 
-<i info>:material-information: Info:</i> Execute this step only on a host at which you will use `pbm` CLI.
+<i info>:material-information: Info: Execute this step only on a host at which you will use `pbm` CLI. </i>
 
 Set the MongoDB URI connection string for `pbm` CLI in your shell. This allows you to call `pbm` commands without the `--mongodb-uri` flag.
 
