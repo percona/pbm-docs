@@ -25,6 +25,7 @@ The storage configuration itself is out of scope of the present document. We ass
     ```
 
 === "Google Cloud Storage"
+
     ```yaml
     storage:
      type: s3
