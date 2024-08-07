@@ -2,60 +2,72 @@
 
 The easiest way to provide remote backup storage configuration is to specify it in a YAML config file and upload this file to Percona Backup for MongoDB using `pbm` CLI.
 
-The storage configuration itself is out of scope of the present document. We assume that you have configured one of the supported remote backup storages.
+The storage configuration itself is out of scope of the present document. We assume that you have configured one of the supported remote backup storages and provisioned access keys with the proper permissions for PBM. See [Remote Backup Storage](../details/storage-configuration.md) for more details.
 {.power-number}
 
 1. Create a config file (e.g. `pbm_config.yaml`).
 
-2. Specify the storage information within.
+    === ":material-aws: Amazon AWS"    
 
-    The following is the sample configuration for Amazon AWS:
+        ```yaml
+        storage:
+          type: s3
+          s3:
+            region: us-west-2
+            bucket: pbm-test-bucket
+            prefix: data/pbm/backup
+            credentials:
+              access-key-id: <your-access-key-id-here>
+              secret-access-key: <your-secret-key-here>
+            serverSideEncryption:
+              sseAlgorithm: aws:kms
+              kmsKeyID: <your-kms-key-here>
+        ```    
 
-    ```yaml
-    storage:
-      type: s3
-      s3:
-        region: us-west-2
-        bucket: pbm-test-bucket
-        prefix: data/pbm/backup
-        credentials:
-          access-key-id: <your-access-key-id-here>
-          secret-access-key: <your-secret-key-here>
-        serverSideEncryption:
-          sseAlgorithm: aws:kms
-          kmsKeyID: <your-kms-key-here>
+    === ":material-google-cloud: Google Cloud Storage"    
+
+        ```yaml
+        storage:
+         type: s3
+             s3:
+             region: northamerica-northeast1
+             bucket: pbm-testing
+             prefix: pbm/test
+             endpointUrl: https://storage.googleapis.com
+             credentials:
+               access-key-id: <your-access-key-id-here>
+               secret-access-key: <your-secret-key-here>
+        ```    
+
+    === ":material-microsoft-azure: Microsoft Azure Blob Storage"    
+
+        ```yaml
+        storage:
+          type: azure
+          azure:
+            account: <your-account>
+            container: <your-container>
+            prefix: pbm
+            credentials:
+              key: <your-access-key>
+        ```    
+
+    === ":material-file-tree: Local Filesystem"    
+
+        ```yaml
+        storage:
+          type: filesystem
+          filesystem:
+            path: /data/local_backups
+        ```    
+
+        See more examples in [Configuration file examples](../details/storage-config-example.md).
+
+2. Apply the config file to PBM
+
+    ```{.bash data-prompt="$"}
+    $ pbm config --file pbm_config.yaml
     ```
-
-    This is the sample configuration for Microsoft Azure Blob storage:
-
-    ```yaml
-    storage:
-      type: azure
-      azure:
-        account: <your-account>
-        container: <your-container>
-        prefix: pbm
-        credentials:
-          key: <your-access-key>
-    ```
-
-    This is the sample configuration for filesystem storage:
-
-    ```yaml
-    storage:
-      type: filesystem
-      filesystem:
-        path: /data/local_backups
-    ```
-
-    See more examples in [Configuration file examples](../details/storage-config-example.md).
-
-
-3. Insert the config file
-
-```{.bash data-prompt="$"}
-$ pbm config --file pbm_config.yaml
-```
 
 To learn more about Percona Backup for MongoDB configuration, see [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).
 
