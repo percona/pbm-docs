@@ -7,9 +7,7 @@ The storage configuration itself is out of scope of the present document. We ass
 
 1. Create a config file (e.g. `pbm_config.yaml`).
 
-2. Specify the storage information within.
-
-    The following is the sample configuration for Amazon AWS:
+=== "Amazon AWS"
 
     ```yaml
     storage:
@@ -26,7 +24,21 @@ The storage configuration itself is out of scope of the present document. We ass
           kmsKeyID: <your-kms-key-here>
     ```
 
-    This is the sample configuration for Microsoft Azure Blob storage:
+=== "Google Cloud Storage"
+    ```yaml
+    storage:
+     type: s3
+         s3:
+         region: northamerica-northeast1
+         bucket: pbm-testing
+         prefix: pbm/test
+         endpointUrl: https://storage.googleapis.com
+         credentials:
+           access-key-id: <your-access-key-id-here>
+           secret-access-key: <your-secret-key-here>
+    ```
+
+=== "Microsoft Azure Blob Storage"
 
     ```yaml
     storage:
@@ -39,7 +51,7 @@ The storage configuration itself is out of scope of the present document. We ass
           key: <your-access-key>
     ```
 
-    This is the sample configuration for filesystem storage:
+=== "Local Filesystem"
 
     ```yaml
     storage:
@@ -50,8 +62,7 @@ The storage configuration itself is out of scope of the present document. We ass
 
     See more examples in [Configuration file examples](../details/storage-config-example.md).
 
-
-3. Insert the config file
+2. Apply the config file to PBM
 
 ```{.bash data-prompt="$"}
 $ pbm config --file pbm_config.yaml
