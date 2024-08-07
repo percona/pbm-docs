@@ -2,7 +2,7 @@
 
 The easiest way to provide remote backup storage configuration is to specify it in a YAML config file and upload this file to Percona Backup for MongoDB using `pbm` CLI.
 
-The storage configuration itself is out of scope of the present document. We assume that you have configured one of the supported remote backup storages.
+The storage configuration itself is out of scope of the present document. We assume that you have configured one of the supported remote backup storages and provisioned access keys with the proper permissions for PBM. See [Remote Backup Storage](../details/storage-configuration.md) for more details.
 {.power-number}
 
 1. Create a config file (e.g. `pbm_config.yaml`).
