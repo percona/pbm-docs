@@ -61,7 +61,7 @@ The storage configuration itself is out of scope of the present document. We ass
             path: /data/local_backups
         ```    
 
-        See more examples in [Configuration file examples](../details/storage-config-example.md).
+    See more examples in [Configuration file examples](../details/storage-config-example.md).
 
 2. Apply the config file to PBM
 
