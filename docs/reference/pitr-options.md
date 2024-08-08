@@ -7,6 +7,10 @@ pitr:
   compression: <string>
   compressionLevel: <int>
   oplogOnly: <boolean>
+  priority: 
+    - "rs1:27017": 1
+    - "rs2:27018": 2
+    - "rs3:27019": 1
 ```
 
 ### pitr.enabled
@@ -61,3 +65,15 @@ Note that the greater value you specify, the more time and computing resources i
 Controls whether the base backup is required to start [Point-in-Time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing). When set to true, Percona Backup for MongoDB saves oplog chunks without the base backup snapshot.
 
 Available in Percona Backup for MongoDB starting with version 1.8.0. To learn more about the usage, see [Point-in-Time Recovery oplog replay](../usage/oplog-replay.md).
+
+### pitr.priority
+
+*Type*: array of strings
+
+The list of `mongod` nodes and their priority for saving oplog slices. The node with the highest priority is elected for saving oplog slices. If several nodes have the same priority, the one among them is randomly elected.
+
+If not set, the replica set nodes have the default priority as follows:
+
+* hidden nodes - 2.0
+* secondary nodes - 1.0
+* primary node - 0.5
