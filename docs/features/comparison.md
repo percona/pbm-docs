@@ -11,6 +11,7 @@ Percona Backup for MongoDB is a fully supported community backup solution that c
 | Incremental backup (physical) | Yes |	No |Yes | Yes
 | Backup management interfaces	| Percona Backup for MongoDB (CLI) <br> PMM <br> mongodump / mongorestore (CLI) | - <br> - <br> mongodump / mongorestore (CLI) | Ops Manager <br> Cloud Manager <br> mongodump / mongorestore (CLI) | Atlas backups <br> mongodump / mongorestore (CLI)
 | Sharded cluster restores supported | Yes | No | Yes |	Yes
+| Multiple storages for backups| Yes | No | No | No
 
 ## What you get with Percona Backup for MongoDB
 
