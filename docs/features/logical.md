@@ -4,9 +4,9 @@
 
 Logical restore is the reverse process: The ``pbm-agent`` retrieves the backup data from the storage and inserts it on every primary node in the cluster. The remaining nodes receive the data during the replication process.
 
-!!! note
+!!! warning
 
-    Sharded time series collections are not supported.
+    Sharded time series collections are not supported. 
 
 The following diagram shows the restore flow.
 

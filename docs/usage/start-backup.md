@@ -15,6 +15,11 @@
 
 === ":material-data-matrix: Logical"
 
+    !!! warning
+
+        Sharded time series collections are not supported. 
+ 
+
      To make a backup, run the following command:
 
      ```{.bash data-prompt="$"}
