@@ -17,7 +17,7 @@
 
     !!! warning
 
-        Sharded time series collections are not supported. 
+        Sharded time series collections are not supported. If you use them in your deployment, you won't be able to make a backup. 
  
 
      To make a backup, run the following command:
