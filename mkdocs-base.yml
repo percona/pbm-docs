@@ -204,6 +204,7 @@ nav:
       - troubleshoot/faq.md
   - Release notes:
       - "Release notes index": "release-notes.md"
+      - release-notes/2.6.0.md
       - release-notes/2.5.0.md
       - release-notes/2.4.1.md
       - release-notes/2.4.0.md
