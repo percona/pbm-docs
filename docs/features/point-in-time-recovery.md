@@ -85,7 +85,7 @@ If the new duration is shorter, this triggers the `pbm-agent` to make a new slic
 
 !!! admonition "Version added: [2.6.0](../release-notes/2.6.0.md)"
 
-By default, the `pbm-agent` to save oplog slices is selected randomly across secondary replica set members. The primary node is selected last, if none of the secondaries is responding. 
+Before version 2.6.0, the `pbm-agent` to save oplog slices is selected randomly across replica set members. 
 
 Starting with version 2.6.0, you can control from what node to save oplog slices by assigning the priority to the desired nodes via the configuration file. For example, you can ensure that both backups and oplog slices are taken from the nodes in a specific data center as defined in the organization's regulations. Or, you can reduce network latency by making backups and / or oplog slices from nodes in geographically closest locations.  
 
