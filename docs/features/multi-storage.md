@@ -116,7 +116,7 @@ $ pbm delete-backup 2024-06-25T10:54:55Z
 
 1. You can make backups of any type except snapshot-based ones on the external storage.
 2. To start point-in-time recovery oplog slicing, you must make a backup on the main storage. A backup from an external storage is not considered a valid base backup for oplog slicing.
-3. PBM saves point-int-time recovery oplog ranges only on the main storage. Backups are saved on the storage that you define when starting a backup. 
+3. PBM saves point-in-time recovery oplog ranges only on the main storage. Backups are saved on the storage that you define when starting a backup. 
 4. Backup process on the external storage doesn’t stop point-in-time recovery oplog slicing on the main storage. Thus, PBM saves oplog chunks related to such backups on both the main and the external storages
 5.	The whole incremental chain must be stored on the same storage. To change the storage for incremental backups, you must start a new backup chain with the incremental base backup on the new storage.
 6.	To restore from a backup on external storage, pbm-agents must have read permissions on it.
