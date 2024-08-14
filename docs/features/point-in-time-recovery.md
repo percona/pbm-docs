@@ -25,7 +25,7 @@ Set the `pitr.enabled` configuration option to `true`.
        enabled: true
      ```
 
-The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) periodically. A method similar to the way replica set nodes elect a new primary is used to select the `pbm-agent` that saves the oplog slices. (Find more information in [pbm-agent](../details/pbm-agent.md).) 
+The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) periodically. The `pbm-agent` to save oplog slices is randomly selected among the nodes according to their priority, whether it is the default or [user-defined one](#adjust-node-priority-for-oplog-slices). 
 
 You can, however, influence the pbm-agent election by assigning a priority to the `mongod` nodes. See the [Adjust node priority for oplog slices](#adjust-node-priority-for-oplog-slices) for details.
 
