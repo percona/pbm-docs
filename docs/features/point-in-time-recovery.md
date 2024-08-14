@@ -95,7 +95,7 @@ PBM then handles both processes according to their priority.
 
 The default node priority for oplog slices is the same as for making backups:
 
-* arbiter or hidden node - priority 2
+* hidden node - priority 2
 * secondary nodes - priority 1
 * primary node - priority 0.5
 
