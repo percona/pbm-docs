@@ -89,7 +89,7 @@ serverSideEncryption:
 
 Percona Backup for MongoDB supports server-side encryption with Amazon S3 managed keys (SSE-S3), the default encryption method in Amazon AWS. All new objects added to an S3 bucket are automatically encrypted without impacting performance.
 
-To use SSE-S3 encryption, specify the following following parameters in the Percona Backup for MongoDB configuration file:   
+To use SSE-S3 encryption, specify the following parameters in the Percona Backup for the MongoDB configuration file:
 
 ```yaml
 serverSideEncryption:
