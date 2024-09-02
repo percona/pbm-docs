@@ -36,9 +36,21 @@ Percona Backup for MongoDB should work with other S3-compatible storages, but wa
 
 #### Server-side encryption
 
-!!! admonition "Version added: [1.3.2](../release-notes/1.3.2.md)" 
+Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with the following encryption types:
 
-Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with customer-provided keys stored in AWS KMS (SSE-KMS).
+* customer-provided keys stored in AWS KMS (SSE-KMS)
+* customer-provided keys stored on the client side (SSE-C)
+* Amazon S3 managed encryption keys (SSE-S3)
+
+To learn more about each encryption type, refer to the following sections of Amazon AWS documentation:
+
+* [Using server-side encryption with Amazon S3 managed keys (SSE-S3)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html)
+* [Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
+* [Protecting data using server-side encryption with customer-provided encryption keys (SSE-C) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
+
+##### SSE-KMS encryption
+
+!!! admonition "Version added: [1.3.2](../release-notes/1.3.2.md)" 
 
 To use the SSE-KMS encryption, specify the following parameters in the Percona Backup for MongoDB configuration file: 
 
@@ -47,6 +59,8 @@ serverSideEncryption:
    kmsKeyID: <kms_key_ID>
    sseAlgorithm: aws:kms
 ```  
+
+##### SSE-C encryption
 
 !!! admonition "Version added: [2.0.1](../release-notes/2.0.1.md)" 
 
@@ -69,12 +83,19 @@ serverSideEncryption:
   sseCustomerKey: <your_encryption_key>
 ``` 
 
-!!! admonition "See also"
+##### SSE-S3 encryption
 
-    AWS Documentation:
-    
-    * [Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
-    * [Protecting data using server-side encryption with customer-provided encryption keys (SSE-C) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
+!!! admonition "Version added: [2.6.0](../release-notes/2.6.0.md)" 
+
+Percona Backup for MongoDB supports server-side encryption with Amazon S3 managed keys (SSE-S3), the default encryption method in Amazon AWS. All new objects added to an S3 bucket are automatically encrypted without impacting performance.
+
+To use SSE-S3 encryption, specify the following parameters in the Percona Backup for the MongoDB configuration file:
+
+```yaml
+serverSideEncryption:
+   sseAlgorithm: AES256
+```  
+
 
 #### Debug logging
 
