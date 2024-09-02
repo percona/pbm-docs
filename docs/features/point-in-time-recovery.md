@@ -25,7 +25,9 @@ Set the `pitr.enabled` configuration option to `true`.
        enabled: true
      ```
 
-The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) periodically. A method similar to the way replica set nodes elect a new primary is used to select the `pbm-agent` that saves the oplog slices. (Find more information in [pbm-agent](../details/pbm-agent.md).)
+The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) periodically. The `pbm-agent` to save oplog slices is randomly selected among the nodes according to their priority, whether it is the default or [user-defined one](#adjust-node-priority-for-oplog-slices). 
+
+You can, however, influence the pbm-agent election by assigning a priority to the `mongod` nodes. See the [Adjust node priority for oplog slices](#adjust-node-priority-for-oplog-slices) for details.
 
 
 [Restore to a point-in-time](../usage/pitr-tutorial.md){ .md-button .md-button }
@@ -78,6 +80,76 @@ You can change the duration of an oplog span via the configuration file. Specify
 If you set the new duration when the `pbm-agent` is making an oplog slice, the slice’s span is updated right away.
 
 If the new duration is shorter, this triggers the `pbm-agent` to make a new slice with the updated span immediately. If the new duration is larger,  the `pbm-agent` makes the next slice with the updated span in its scheduled time.
+
+### Adjust node priority for oplog slices
+
+!!! admonition "Version added: [2.6.0](../release-notes/2.6.0.md)"
+
+Before version 2.6.0, the `pbm-agent` to save oplog slices is selected randomly across replica set members. 
+
+Starting with version 2.6.0, you can control from what node to save oplog slices by assigning the priority to the desired nodes via the configuration file. For example, you can ensure that both backups and oplog slices are taken from the nodes in a specific data center as defined in the organization's regulations. Or, you can reduce network latency by making backups and / or oplog slices from nodes in geographically closest locations.  
+
+Node priority for oplog slices is handled similarly to the [node priority for making backups](../usage/start-backup.md#adjust-node-priority-for-backups), yet it is independent from it. Thus, you can assign a different priority for backups and oplog slices for the same node. Or, adjust only the priority for oplog slices, leaving the default one for backups. 
+
+PBM then handles both processes according to their priority.
+
+The default node priority for oplog slices is the same as for making backups:
+
+* hidden node - priority 2
+* secondary nodes - priority 1
+* primary node - priority 0.5
+
+To redefine it, specify the new priority for the [`pitr.priority`](../reference/pitr-options.md#pitrnodepriority) option in the configuration file:
+
+```yaml
+pitr:
+  enabled: true
+  priority:
+    "rs1:27017": 1
+    "rs2:27018": 2
+    "rs3:27019": 1
+```
+
+The format of the priority array is `<hostname:port>:<priority>`.
+
+!!! important
+
+    As soon as you adjust node priorities in the configuration file, it is assumed that you take manual control over them. The default rule to prefer secondary nodes over primary stops working.
+
+To define priority in a sharded cluster, you can either list all nodes or specify priority for one node in each shard and config server replica set. The `hostname` and `port` uniquely identifies a node so that Percona Backup for MongoDB recognizes where it belongs to and grants the priority accordingly.
+
+Note that if you listed only specific nodes, the remaining nodes will be automatically assigned priority `1.0`. For example, you assigned priority `2.5` to only one secondary node in every shard and config server replica set of the sharded cluster.
+
+```yaml
+pitr:
+  enabled: true
+  priority:
+    "localhost:27027": 2.5  # config server replica set
+    "localhost:27018": 2.5  # shard 1
+    "localhost:28018": 2.5  # shard 2
+```
+
+The remaining secondaries and the primary nodes in the cluster receive priority `1.0`.
+
+To check the priorities, run the `pbm status` command with the  `--priority` flag.
+
+```{.bash data-prompt="$"}
+$ pbm status --priority
+```
+
+??? example "Sample output"
+
+    ```{.text .no-copy}
+    Cluster:
+    ========
+    rs1:
+      - rs1/rs101:27017 [S], Bkp Prio: [1.0], PITR Prio: [2.5]: pbm-agent [v{{release}}] OK
+      - rs1/rs102:27017 [P], Bkp Prio: [0.5], PITR Prio: [2.0]: pbm-agent [v{{release}}] OK
+      - rs1/rs103:27017 [S], Bkp Prio: [1.0], PITR Prio: [1.0]: pbm-agent [v{{release}}] OK
+    ```
+
+PBM saves oplog slices from the node with the highest priority. If this node is not responding, it selects the next priority node. If there are several nodes with the same priority, one of them is randomly elected for saving oplog slices.
+
 
 ### Compressed oplog slices 
 

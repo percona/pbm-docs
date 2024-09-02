@@ -662,8 +662,9 @@ The command accepts the following flags:
 | Flag                   | Description                             |
 | ---------------------- | --------------------------------------- |
 | `-o`, `--out=text`     | Shows the status as either plain text or a JSON object. Supported values: `text`, `json` |
-| `-s`, `--sections=SECTIONS` | Shows the status for the specified section. You can pass several flags to view the status for multiple sections. Supported values: cluster, pitr, running, backups. |
+| `-p`, `--priority`     | Shows the node priorities for the backup and point-in-time recovery oplog slicing. Available starting with version 2.6.0. |
 | `--replset-remapping`  | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
+| `-s`, `--sections=SECTIONS` | Shows the status for the specified section. You can pass several flags to view the status for multiple sections. Supported values: cluster, pitr, running, backups. |
 
 ??? admonition "Status information"
 
@@ -708,6 +709,9 @@ The command accepts the following flags:
             {
               "host": "<replSet_name>/example.mongodb:27017",
               "agent": "<version>",
+              "role": "",
+              "prio_pitr": "1.0",
+              "prio_backup": "1.0",
               "ok": true
             }
           ]
