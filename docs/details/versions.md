@@ -14,6 +14,7 @@ The following table provides information about the supported MongoDB versions fo
 
 | PBM version | MongoDB Community / Enterprise | Percona Server for MongoDB|Compatibility with previous PBM versions|
 | ----------- |------------------------------- | ------------------------- |----------------------------------------|
+| [2.6.0](../release-notes/2.6.0.md) | <ul><li>Logical backups: version 5.0.x and higher</li></ul> | <ul><li>Logical backups: version 5.0.x and higher</li><li>Physical backups: version 5.0.x, 6.0.x, 7.0.x</li><li>Incremental backups: version 5.0.14-12, 6.0.3-2 and higher, 7.0.x</li></ul> | Yes |
 | [2.5.0](../release-notes/2.5.0.md) | <ul><li>Logical backups: version 5.0.x and higher</li></ul> | <ul><li>Logical backups: version 5.0.x and higher</li><li>Physical backups: version 5.0.x, 6.0.x, 7.0.x</li><li>Incremental backups: version 5.0.14-12, 6.0.3-2 and higher, 7.0.x</li></ul> | Yes |
 | [2.4.0](../release-notes/2.4.0.md) | <ul><li>Logical backups: version 5.0.x and higher</li></ul> | <ul><li>Logical backups: version 5.0.x and higher</li><li>Physical backups: version 5.0.x, 6.0.x, 7.0.x</li><li>Incremental backups: version 5.0.14-12, 6.0.3-2 and higher, 7.0.x</li></ul>| Yes |
 | [2.3.0](../release-notes/2.3.0.md) | <ul><li>Logical backups: version 4.4 and higher</li></ul> | <ul><li>Logical backups: version 4.4 and higher</li><li>Physical backups - version 4.4.6-8 and higher, 5.0.x, 6.0.x</li><li>Incremental backups: versions 4.4.18, 5.0.14-12, 6.0.3-2 and higher</li></ul>| Yes |
