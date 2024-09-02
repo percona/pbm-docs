@@ -434,12 +434,23 @@ The command accepts the following flags:
     ```json
     {
       "snapshots": [
-        {
-          "name": "<backup_name>",
-          "status": "done",
-          "completeTS": Timestamp,
-          "pbmVersion": "1.6.0"
-        }
+          {
+            "name": "<backup-name>",
+            "status": "done",
+            "restoreTo": Timestamp,
+            "pbmVersion": "<version>",
+            "type": "logical",
+            "src": ""
+          },
+          {
+            "name": "<backup-name>",
+            "status": "done",
+            "restoreTo": Timestamp,
+            "pbmVersion": "<version>",
+            "type": "logical",
+            "src": "",
+            "storage": "<storage-name>"
+          }
       ],
       "pitr": {
         "on": false,
@@ -595,6 +606,147 @@ The command accepts the following flags:
 | `--wait-time`  | The time to wait for PBM to report the status of the oplog replay execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 
 
+## pbm profile add
+
+Saves an external storage configuration to PBM. This information is defined via configuration profiles. 
+
+To learn more about configuration profiles, see [Multiple storages for backups](../features/multi-storage.md).
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile add [<flags>] <profile-name> <path/to/profile.yaml>
+``` 
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| --sync                  | Add a profile defining an external storage and sync the backup list from this storage|
+|--wait                   | Wait for the profile to be added. The flag blocks the shell session.|
+| `--wait-time`  | The time to wait for PBM to report the status of adding the profile and backup sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+|-o, --out=text           | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`|
+
+??? admonition "Add profile"
+
+    ```json
+    {
+      "msg": "OK"
+    }
+    ```
+
+## pbm profile list
+
+Provides information about [configuration profiles](../features/multi-storage.md#configuration-profiles) added to PBM. 
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile list [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+??? admonition "List profiles"
+
+    ```json
+    {
+      "profiles": [
+        {
+          "name": "test1",
+          "profile": true,
+          "storage": {
+            "type": "filesystem",
+            "filesystem": {
+              "path": "/tmp/local_backups"
+            }
+          }
+        }
+      ]
+    }
+    ```
+
+## pbm profile remove
+
+Removes the specified configuration profile from PBM.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile remove <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `--wait`                | Wait for the profile to be removed. The flag blocks the shell session.|
+| `--wait-time`  | The time to wait for PBM to report the status of the profile removal. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+??? admonition "Delete profile"
+
+    ```json
+    {
+      "msg": "OK"
+    }
+    ```
+
+## pbm profile show
+
+Shows the external storage configuration according to the specified configuration profile.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile show <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+??? admonition "Show profile"
+
+    ```json
+    {
+      "name": "test1",
+      "profile": true,
+      "storage": {
+        "type": "filesystem",
+        "filesystem": {
+          "path": "/tmp/local_backups"
+        }
+      }
+    }
+    ```
+
+## pbm profile sync
+
+Syncs the backup list from the external storage according to the specified configuration profile.
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm profile sync <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                          |
+| ----------------------- | ------------------------------------ |
+| `--all`                 | Syncs backup lists from all the storages.|
+| `--clear`               | Clears the backup list from the storage. To clear the backup list from a specific storage, pass the profile name. When used with `--all`, clears backup lists from all storages. |
+| `--wait`                | Wait for the profile to be synced. The flag blocks the shell session.|
+| `--wait-time`  | The time to wait for PBM to report the status of the profile sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+| `-o`, `--out=text`      | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
 
 ## pbm restore
 
@@ -689,8 +841,12 @@ The command accepts the following flags:
             "name": "<backup_name>",
             "size": 3143396168,
             "status": "done",
-            "completeTS": Timestamp,
-            "pbmVersion": "1.6.0"
+            "restoreTo": Timestamp,
+            "pbmVersion": "2.5.0",
+            "type": "logical",
+            "src": "",
+            "storage": "<storage-name>"
+      },
           },
         ],
         "pitrChunks": {
