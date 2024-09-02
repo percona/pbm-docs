@@ -1,6 +1,6 @@
 # Multiple storages for backups
 
-!!! admonition "Version added: [](../release-notes/.md)"
+!!! admonition "Version added: [2.6.0](../release-notes/2.6.0.md)"
 
 A good practice in a backup policy is to follow the 3-to-1 rule: have 3 copies of data stored on 2 different storages and have 1 copy kept offsite. Instead of transferring data to multiple storages, you can configure those storages and have PBM make backups to them directly, at different schedules. 
 
