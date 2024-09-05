@@ -40,7 +40,21 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
 === ":material-data-matrix: Logical"
 
-    1. Stop the balancer.
+    1. Stop the balancer and disable chunks autosplit. To verify that both are disabled, run the following command:
+
+        ```{.javascript data-prompt=">"}
+        > sh.status() 
+        ```
+
+        You should see the following output
+
+        ```{text .no-copy}
+        autosplit:
+                Currently enabled: no
+          balancer:
+                Currently enabled: no
+                Currently running: no
+        ```        
 
     2. Shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
 
