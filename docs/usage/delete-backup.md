@@ -103,7 +103,7 @@ Here's how the cleanup works:
 
         The most recent backup snapshot (logical, physical, base incremental) that can serve as the base for point-in-time recovery. Such a backup is a valid base if:
 
-        * point-in-time recovery if it is enabled
+        * point-in-time recovery is enabled
         * there are continuous oplog slices deriving from this backup for the desired restore to a specific timestamp. 
 
 
