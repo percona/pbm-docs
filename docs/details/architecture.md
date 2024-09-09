@@ -11,7 +11,7 @@ Percona Backup for MongoDB consists of the following components:
 * Remote backup storage is where Percona Backup for MongoDB saves backups. It can be either [an S3 compatible storage](../reference/glossary.md#s3-compatible-storage) or a filesystem-type storage.
 
 ??? info "Nomination and election process within PBM"
-     If the `pbm-agent` running on the primary node of the replica set or in the primary node of the config replica set fails, the backup will not start as these agents are responsible for internal nomination process. It is therefore required to ensure all the `pbm-agent` are up and running.
+     If the `pbm-agent` running on the primary node of the replica set or in the primary node of the config replica set fails, the backup will not start as these agents are responsible for internal nomination process. It is therefore required ensuring that all the `pbm-agent` processes are up and running.
 
 The following diagram illustrates how Percona Backup for MongoDB components communicate with MongoDB.
 
