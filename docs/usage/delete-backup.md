@@ -101,7 +101,7 @@ Here's how the cleanup works:
 
     === "Version 2.4.0 and higher"
 
-        The most recent backup snapshot (logical, physical, base incremental) that can serve as the base for point-in-time recovery, if it is enabled. 
+        The backup snapshot (logical, physical, base incremental) that can serve as the base for point-in-time recovery if point-in-time recovery is enabled. Such a backup is a valid base if there are continuous oplog slices deriving from it up to the `now` timestamp. 
 
 
     === "Version 2.3.1 and earlier"
@@ -127,7 +127,12 @@ Here's how the cleanup works:
         - `2022-10-05T14:13:50Z` because it is the base for recovery to any point in time from the PITR time range `2022-10-05T14:13:56Z - 2022-10-05T18:52:21Z`
         - `2022-10-07T14:57:17Z` because PITR is enabled and there are no oplog slices following it yet.
 
-4. Starting with version [2.4.0](../release-notes/2.4.0.md), you can delete any backup snapshot (except the most recent one with point-in-time recovery enabled) regardless the point-in-time recovery slices deriving from it. Such slices are then marked as "no base backup" in the `pbm status` output. 
+4. Starting with version [2.4.0](../release-notes/2.4.0.md), you can delete any backup snapshot regardless the point-in-time recovery slices deriving from it. Such slices are then marked as "no base backup" in the `pbm status` output. However, at least one valid base backup must remain to ensure point-in-time recovery. 
+
+   Such a backup is the valid base for point-in-time recovery if:
+
+   * The backup is one of the following types: logical, physical, base incremental
+   * There are continuous oplog slices derived from this backup for the desired restore to a specific timestamp. 
 
 
 ### Behavior
