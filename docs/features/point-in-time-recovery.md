@@ -27,7 +27,7 @@ Set the `pitr.enabled` configuration option to `true`.
 
 The `pbm-agent` starts [saving consecutive slices of the oplog](#oplog-slicing) periodically. The `pbm-agent` to save oplog slices is randomly selected among the nodes according to their priority, whether it is the default or [user-defined one](#adjust-node-priority-for-oplog-slices). 
 
-You can, however, influence the pbm-agent election by assigning a priority to the `mongod` nodes. See the [Adjust node priority for oplog slices](#adjust-node-priority-for-oplog-slices) for details.
+You can, however, influence the `pbm-agent` election by assigning a priority to the `mongod` nodes. See the [Adjust node priority for oplog slices](#adjust-node-priority-for-oplog-slices) for details.
 
 
 [Restore to a point-in-time](../usage/pitr-tutorial.md){ .md-button .md-button }
@@ -54,7 +54,17 @@ If you just enabled point-in-time recovery, it requires 10 minutes for the first
 
     If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
-Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs in parallel with a backup snapshot operation. Thereby if a backup snapshot is large and takes hours to make, all oplog events are saved for it ensuring point-in-time recovery to any timestamp.
+Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as follows:
+
+* **Logical backups** 
+
+    Before backup start, point-in-time recovery routine is automatically disabled. Oplog slices are created by a backup routine during the backup creation. After the backup is complete, point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp. 
+
+* **Physical backups** 
+
+    During a physical backup, point-in-time recovery routine is not disabled and continues to save oplog slices in parallel with a backup snapshot operation. 
+
+Thereby if a backup snapshot is large and takes hours to make, all oplog events are saved for it ensuring point-in-time recovery to any timestamp.
 
 ### Oplog duration
 
