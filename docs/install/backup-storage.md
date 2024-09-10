@@ -19,9 +19,6 @@ The storage configuration itself is out of scope of the present document. We ass
             credentials:
               access-key-id: <your-access-key-id-here>
               secret-access-key: <your-secret-key-here>
-            serverSideEncryption:
-              sseAlgorithm: aws:kms
-              kmsKeyID: <your-kms-key-here>
         ```    
 
     === ":material-google-cloud: Google Cloud Storage"    
