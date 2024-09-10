@@ -2,7 +2,7 @@
 
 A `pbm-agent` is a process that runs backup, restore, delete, and other operations available with Percona Backup for MongoDB.
 
-A `pbm-agent` instance must run for each `mongod` instance that is not an arbiter node. This includes replica set nodes that are currently secondaries and config server replica set nodes in a sharded cluster.
+A `pbm-agent` instance must run for **every** `mongod` instance that is not an arbiter node. This includes replica set nodes that are currently secondaries and config server replica set nodes in a sharded cluster.
 
 An operation is triggered when the [`pbm` CLI](../reference/glossary.md#pbm-cli) makes an update to the [PBM Control collection](../reference/glossary.md#pbm-control-collections). All `pbm-agents` monitor changes to the PBM control collections, but only one `pbm-agent` in each replica set will be elected to execute an operation. The elections are done by a random choice among secondary nodes. If no secondary nodes respond, then the `pbm-agent` on the primary node is elected for an operation.
 
