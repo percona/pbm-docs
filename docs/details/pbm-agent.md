@@ -8,6 +8,9 @@ An operation is triggered when the [`pbm` CLI](../reference/glossary.md#pbm-cli)
 
 The elected `pbm-agent` acquires a lock for an operation. This prevents mutually exclusive operations like backup and restore to be executed simultaneously.
 
+??? info "Nomination and election process within PBM"
+     If the `pbm-agent` running on the primary node of the replica set or on the primary node of the config replica set fails, the backup will not start as these agents are responsible for internal nomination process. You must therefore ensure that all the `pbm-agent` processes are up and running.
+
 When the operation is complete, the `pbm-agent` releases the lock and updates the PBM control collections.
 
 A single `pbm-agent` is involved with only one cluster (or non-sharded replica set). The `pbm` CLI utility can connect to any cluster to which it has network access, so it is possible for one user to list and launch backups or restores on many clusters.
