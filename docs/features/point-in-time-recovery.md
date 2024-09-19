@@ -58,7 +58,7 @@ Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as 
 
 * **Logical backups** 
 
-    Before backup starts, point-in-time recovery routine is automatically disabled. Oplog slices are created by a backup routine during the backup creation. After the backup is complete, point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp. 
+        Before backup starts, the point-in-time recovery routine is automatically disabled. A backup routine creates oplog slices during the backup creation. After the backup is complete, the point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp. 
 
 * **Physical backups** 
 
