@@ -65,7 +65,7 @@ Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as 
     During a physical backup, the point-in-time recovery routine is not disabled and continues to save oplog slices in parallel with a backup snapshot operation. 
 
 
-Thereby if a backup snapshot is large and takes hours to make, all oplog events are saved for it ensuring point-in-time recovery to any timestamp.
+Thus, if a backup snapshot is large and takes hours to make, all oplog events are saved for it, ensuring point-in-time recovery to any timestamp.
 
 ### Oplog duration
 
