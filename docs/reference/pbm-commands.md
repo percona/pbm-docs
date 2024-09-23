@@ -24,7 +24,7 @@ The command accepts the following flags:
 | `--base`       | For incremental backups only. Set the backup as the base and start tracking the incremental backup history to calculate and save the difference in data blocks for subsequent incremental backups. |  
 | `--compression`| Create a backup with compression. <br> Supported compression methods: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2` <br> The `none` value means no compression is done during backup. |
 | `--compression-level` | Configure the compression level from 0 to 10. The default value depends on the compression method used.  |
-| `--num-parallel-collections`| Sets the number of collections to process in parallel during a backup. When undefined, `pbm-agent` allocates the number of parallel collections that equal to the half of the number of logical CPUs. Available starting with version 2.7.0.|
+| `--num-parallel-collections`| Sets the number of collections to process in parallel during a backup. When undefined, `pbm-agent` allocates the number of parallel collections that equals to the half of the number of logical CPUs. Available starting with version 2.7.0.|
 | `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
 | `--wait-time`  | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
@@ -775,7 +775,7 @@ The command accepts the following flags:
 | `--ns="database.collection"`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns="database.*"`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, ns="db1.*,db2.coll2,db3.coll1,db3.collX"|
 | `--with-users-and-roles` | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.| 
 | `-c`, `--config`     | The path to the `mongod.conf` file |
-| `--num-parallel-collections`| Sets the number of collections to process in parallel during a restore. When undefined, `pbm-agent` allocates the number of parallel collections that equal to the half of the number of logical CPUs. Available starting with version 2.7.0.|
+| `--num-parallel-collections`| Sets the number of collections to process in parallel during a restore. When undefined, `pbm-agent` allocates the number of parallel collections that equals to that defined for the backup operation (by default, the half of the number of logical CPUs). Available starting with version 2.7.0.|
 
 ??? "Restore output"
 
