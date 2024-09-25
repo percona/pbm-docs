@@ -295,6 +295,7 @@ Shows the detailed information about the restore:
 * The name of the backup from which the database was restored
 * Type
 * Status
+* Start and finish time of the restore
 * Last transition time – the time when the restore process changed its status
 * The name of every replica set, its restore status and the last transition time
 
@@ -330,6 +331,8 @@ The output document contains the following fields:
      "backup": "<backup_name>",
      "type": "logical",
      "status": "done",
+     "start": "Time"
+     "finish": "Time"
      "namespaces": [
         "<database.*>"
      "last_transition_time": "Time"
@@ -363,6 +366,8 @@ The output document contains the following fields:
      "backup": "<backup_name>",
      "type": "physical",
      "status": "done",
+     "start": "Time"
+     "finish": "Time"
      "last_transition_time": "Time",
      "replsets": [
        {
@@ -388,6 +393,8 @@ The output document contains the following fields:
 | `backup`    | The name of the backup from which the database was restored |
 | `type`      | The restore type. Supported values: logical, physical|
 | `status`    | The restore status. Supported values: running, copyReady, done, error |
+| `start`     | The time when the restore started |
+| `finish`    | The time when the restore finished. Available only for successful restores (with the status `done`) | 
 | `error`     | The error message for a failed restore |
 | `last_transition_time` | The human-readable indication of the time when the restore process changed its status |
 | `namespaces` | The list of namespaces included in the restore. Available for selective restore |

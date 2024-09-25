@@ -18,6 +18,7 @@ The output provides the following information:
 -  Status
 -  opID
 -  The time of the restore start
+-  The time of the restore finish (for successful restores)
 -  Last transition time – the time when the restore process changed its status
 -  The name of every replica set, its restore status and the last transition time 
 
