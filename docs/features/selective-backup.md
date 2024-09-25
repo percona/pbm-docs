@@ -25,6 +25,7 @@ With the selective backup and restore functionality, you have the following opti
     
 6. System collections in ``admin``, ``config``, and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
 7. Selective point-in-time recovery is not supported for sharded clusters.
+8. Selective backups are not supported for deployments with [config shards :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/sharded-cluster-config-servers/#std-label-sharded-cluster-config-server-config-shards) - config server replica sets that also store application data.
 
 
 ## Sharded collections

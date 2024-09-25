@@ -155,6 +155,8 @@ The following diagram illustrates the backup flow.
 
     If you reshard a collection in MongoDB 5.0 and higher versions, make a fresh backup to prevent data inconsistency and restore failure.
 
+    Note that oplog slices are not saved when you unshard a collection. 
+
 ### Adjust node priority for backups
 
 In Percona Backup for MongoDB prior to version 1.5.0, the `pbm-agent` to do a backup is elected randomly among secondary nodes in a replica set. In sharded cluster deployments, the `pbm-agent` is elected among the secondary nodes in every shard and the config server replica sets. If no secondary node responds in a defined period, then the `pbm-agent` on the primary node is elected to do a backup.
