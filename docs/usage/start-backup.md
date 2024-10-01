@@ -153,9 +153,8 @@ The following diagram illustrates the backup flow.
 
 !!! important
 
-    If you reshard a collection in MongoDB 5.0 and higher versions, make a fresh backup to prevent data inconsistency and restore failure.
-
-    Note that oplog slices are not saved when you unshard a collection. 
+    If you reshard a collection in MongoDB 5.0 and higher versions or unshard a collection in MongoDB 8.0 and higher versions, make a fresh backup to prevent data inconsistency and restore failure.
+ 
 
 ### Adjust node priority for backups
 

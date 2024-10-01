@@ -54,9 +54,9 @@ If you just enabled point-in-time recovery, it requires 10 minutes for the first
 
     If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
-    **For MongoDB 8.0**
+    **For MongoDB 8.0 and higher versions**
 
-    Oplog slicing is not supported during the [unshardCollection :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/command/unshardCollection/) operation.
+    If you [unshard a collection :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/command/unshardCollection/), make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
 Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as follows:
 
