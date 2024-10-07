@@ -79,7 +79,7 @@ The following procedure describes the restore process from backups [made through
         No other pbm command is available while the restore is running!
     ``` 
 
-2. Copy back the data. While a backup is made from a single node of a replica set, for the restore you must **copy the data to every node of the corresponding replica set in the cluster**. For example, given a backup of a 3-node replica set `rs1` where backup was taken from `node3`, copy back the data to all 3 nodes in `rs1`.
+2. Copy the data back. While a backup is made from a single node of a replica set, for the restore you must **copy the data to every node of the corresponding replica set in the cluster**. For example, given a backup of a 3-node replica set `rs1` where backup was taken from `node3`, copy back the data to all 3 nodes in `rs1`.
 
 3. After you copied the files to the nodes, complete the restore with the following command:    
 
