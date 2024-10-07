@@ -36,6 +36,11 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     2. Incremental backups made with PBM before PBM 2.1.0 are incompatible for restore with PBM 2.1.0 and onwards.
     3. Physical restores are not supported for deployments with arbiter nodes.
 
+=== ":material-database-export: Snapshot-based"
+
+    1. Supported only for full physical backups
+    2. Available only if you run Percona Server for MongoDB in your environment as PBM uses the [`$backupCursor and $backupCursorExtended aggregation stages` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html).
+    
 ## Before you start
 
 === ":material-data-matrix: Logical"
@@ -76,7 +81,11 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     Before you start, shut down all `mongos` nodes, `pmm-agent` processes and clients that can do writes to the database as it won’t be available while the restore is in progress.
 
+=== ":material-database-export: Snapshot-based"
 
+    1. Shut down all `mongos` nodes. If you have set up the automatic restart of the database, disable it.
+    2. Stop the arbiter nodes manually since there’s no `pbm-agent` on these nodes to do that automatically.
+   
 ## Restore a database
 
 === ":material-data-matrix: Logical"
