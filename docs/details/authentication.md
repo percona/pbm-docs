@@ -119,6 +119,72 @@ For correct functioning of PBM, we recommend to change values for both options.
 
 To restore from a backup, first configure your cluster to have the majority. Then [make a restore](../usage/restore.md).  
 
+## External authentication support in Percona Backup for MongoDB
+
+In addition to SCRAM, Percona Backup for MongoDB supports other [authentication methods :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html) that you use in MongoDB or Percona Server for MongoDB.
+
+For external authentication, you create the `pbm` user in the format used by the authentication system and set the MongoDB connection URI string to include both the authentication method and authentication source.
+
+### Kerberos
+
+For [Kerberos authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
+
+Specify the following string for MongoDB connection URI:
+
+```
+PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+```
+
+Note that you must first obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
+
+```{.bash data-prompt="$"}
+$ sudo -u {USER} kinit pbm
+```
+
+Note that the `{USER}` is the user that you will run the `pbm-agent` process.
+
+### LDAP binding
+
+For [authentication and authorization via Native LDAP :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
+
+```
+PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27017/?authMechanism=PLAIN&authSource=%24external&replSetName=xxxx"
+```
+
+### AWS IAM
+
+When using [AWS IAM authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/aws-iam.html), create the `pbm` user in the `$external` database with the username that contains the ARN of the IAM user/role.
+
+
+=== ":fontawesome-regular-user: User authentication"
+
+     ```
+     arn:aws:iam::<ARN>:user/<user_name>
+     ```
+
+=== ":material-cloud-key-outline: Role authentication"
+
+     ```
+     arn:aws:iam::<ARN>:role/<role_name>
+     ```
+
+The MongoDB connection URI string then looks like the following:
+
+```
+PBM_MONGODB_URI="mongodb://<aws_access_key_id>:<aws_secret_access_key>@<hostname>:27017/?authMechanism=MONGODB-AWS&authSource=%24external&replSetName=xxxx"
+```
+
+### AWS EKS
+
+If Percona Backup for MongoDB runs in Amazon Elastic Kubernetes Service (EKS) (e.g. as Percona Operator for MongoDB), it accesses the AWS S3 storage and other services using the credentials stored in the IAM role associated with the service account in EKS and assigned to the Pod where Percona Backup for MongoDB is deployed.  
+
+This saves you from creating and passing the AWS credentials to Pods explicitly thus increasing the overall security of your deployment.
+
+To learn more about managing access to EKS, see [Learn how EKS Pod Identity grants pods access to AWS services :octicons-link-external-16:](https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html).
+
+For how to configure Percona Operator for MongoDB to use AWS S3 storage, refer to the [Configure storage for backups :octicons-link-external-16:](https://docs.percona.com/percona-operator-for-mongodb/backups-storage.html#amazon-s3-or-s3-compatible-storage) documentation.
+
+
 
 
 

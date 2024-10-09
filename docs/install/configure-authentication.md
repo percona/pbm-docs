@@ -131,54 +131,8 @@ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=
 
 For more information about what connection string to specify, refer to the [pbm connection string](../details/authentication.md#mongodb-connection-strings) section.
 
-## External authentication support in Percona Backup for MongoDB
+If you are using external authentication methods in MongoDB, see [External authentication support in Percona Backup for MongoDB](../details/authentication.md#external-authentication-support-in-percona-backup-for-mongodb) section for configuration guidelines.
 
-In addition to SCRAM, Percona Backup for MongoDB supports other [authentication methods :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html) that you use in MongoDB or Percona Server for MongoDB.
-
-For external authentication, you create the `pbm` user in the format used by the authentication system and set the MongoDB connection URI string to include both the authentication method and authentication source.
-
-For example, for [Kerberos authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
-
-Specify the following string for MongoDB connection URI:
-
-```
-PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
-```
-
-Note that you must first obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
-
-```{.bash data-prompt="$"}
-$ sudo -u {USER} kinit pbm
-```
-
-Note that the `{USER}` is the user that you will run the `pbm-agent` process.
-
-For [authentication and authorization via Native LDAP :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
-
-```
-PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27017/?authMechanism=PLAIN&authSource=%24external&replSetName=xxxx"
-```
-
-When using [AWS IAM authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/aws-iam.html), create the `pbm` user in the `$external` database with the username that contains the ARN of the IAM user/role.
-
-
-=== ":fontawesome-regular-user: User authentication"
-
-     ```
-     arn:aws:iam::<ARN>:user/<user_name>
-     ```
-
-=== ":material-cloud-key-outline: Role authentication"
-
-     ```
-     arn:aws:iam::<ARN>:role/<role_name>
-     ```
-
-The MongoDB connection URI string then looks like the following:
-
-```
-PBM_MONGODB_URI="mongodb://<aws_access_key_id>:<aws_secret_access_key>@<hostname>:27017/?authMechanism=MONGODB-AWS&authSource=%24external&replSetName=xxxx"
-```
 
 ## Next steps
 
