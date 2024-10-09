@@ -54,11 +54,15 @@ If you just enabled point-in-time recovery, it requires 10 minutes for the first
 
     If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
+    **For MongoDB 8.0 and higher versions**
+
+    If you [unshard a collection :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/command/unshardCollection/), make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
+
 Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as follows:
 
 * **Logical backups** 
 
-        Before backup starts, the point-in-time recovery routine is automatically disabled. A backup routine creates oplog slices during the backup creation. After the backup is complete, the point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp. 
+    Before backup starts, the point-in-time recovery routine is automatically disabled. A backup routine creates oplog slices during the backup creation. After the backup is complete, the point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp. 
 
 * **Physical backups** 
 
