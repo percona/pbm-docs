@@ -8,7 +8,7 @@ If you need assistance, visit the community forum for comprehensive and free dat
 
 <div class="actions" markdown>
 
-[:material-forum-outline: Community Forum](https://forums.percona.com/c/mongodb/percona-backup-for-mongodb/22?utm_campaign=Doc%20pages) [:percona-logo: Get a Percona Expert](https://www.percona.com/about/contact)
+[:material-forum-outline: Community Forum](https://forums.percona.com/c/mongodb/percona-backup-for-mongodb/22?utm_campaign=Doc%20pages) [:percona-logo: Get a Percona Expert](https://www.percona.com/about/contact) [:percona-logo-mongodb: Join Percona Squad](https://squad.percona.com/mongodb)
 
 </div>
 </div>
