@@ -12,6 +12,7 @@ backup:
   timeouts:
     startingStatus: 60
   oplogSpanMin: <float64>
+  numParallelCollections: <int>
 ```
 
 ### priority
@@ -69,3 +70,12 @@ The 0 (zero) value resets the timeout to the default 33 seconds.
 *Type*: float64 <br>
 
 The duration (in minutes) of oplog slices saved with the logical backup snapshot. By default, the duration of backup oplog slices equals to the value defined for the [`pitr.oplogSpanMin`](pitr-options.md#pitroplogspanmin) option (default - 10 minutes). You can reduce the duration in heavy-loaded environments. Note that setting the duration to shorter periods may increase the overall backup execution time. 
+
+### backup.numParallelCollections
+
+*Type*: int <br>
+*Default*: number of CPU cores / 2
+
+The number of parallel collections to process during a logical backup. By default, the number of parallel collections is half of the number of CPU cores. By setting the value for this option you define the new default.
+Available starting with version 2.7.0.
+
