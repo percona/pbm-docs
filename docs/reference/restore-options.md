@@ -26,7 +26,7 @@ The number of documents to buffer.
 *Type*: int <br>
 *Default*: 10
 
-The number of workers that add the documents to buffer.
+Specifies the number of insertion workers to run concurrently per collection.
 
 ### restore.numParallelCollections
 
