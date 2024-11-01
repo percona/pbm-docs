@@ -175,7 +175,7 @@ You can use [Microsoft Azure Blob Storage :octicons-link-external-16:](https://d
 
 This gives users a vendor choice. Companies with Microsoft-based infrastructure can set up Percona Backup for MongoDB with less administrative efforts.
 
-### Permissions setup
+## Permissions setup
 
 Regardless of the remote backup storage you use, grant the `List/Get/Put/Delete` permissions to this storage for the user identified by the access credentials.
 

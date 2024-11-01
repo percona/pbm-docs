@@ -1,24 +1,27 @@
 # Percona Backup for MongoDB documentation
 
+!!! note ""
+
+    This is the documentation for the latest release, **PBM {{release}}** ([Release Notes](release-notes/{{release}}.md)).
+
 Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restores of [MongoDB sharded clusters and replica sets](details/deployments.md) to a specific point in time. Check [supported MongoDB versions](details/versions.md).
 
 Here's how you can make backups on a running server and/or restore your database to a specific point in time:
 
 * using the [PBM command line interface](reference/pbm-commands.md). 
-* from a web interface [with PBM and Percona Monitoring and Management :octicons-link-external-16:](https://docs.percona.com/percona-monitoring-and-management/get-started/backup/index.html). 
+* from a web interface [with PBM and Percona Monitoring and Management](pmm.md). 
 
 Read [how PBM works](intro.md).
 
-!!! note ""
 
-    This is the documentation for the latest release, **PBM {{release}}** ([Release Notes](release-notes/{{release}}.md)).
-
-## What's in it for you?
+## Why PBM?
 
 * Data consistency across clusters and replica sets with [every supported backup type](features/backup-types.md)
 * No notable performance nor operating degradation associated with PBM
 * A variety of [supported storage types](details/storage-configuration.md) means no vendor lock-in
 * Open source solution with [enterprise-grade features](features/comparison.md) 
+
+## In this documentation
 
 <div data-grid markdown><div data-banner markdown>
 

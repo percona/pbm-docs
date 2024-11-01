@@ -143,95 +143,121 @@ plugins:
 
 nav:
   - Home: index.md
-  - Features: 
-    - Backup and restore types: features/backup-types.md
-    - features/logical.md
-    - features/physical.md
-    - features/selective-backup.md
-    - features/incremental-backup.md
-    - features/point-in-time-recovery.md 
-    - features/snapshots.md
-    - features/multi-storage.md
-    - Comparison with MongoDB: 'features/comparison.md'
   - Get started:
-      - Quickstart guide: installation.md 
+      - installation.md 
       - 1. Install:
-         - System requirements: system-requirements.md
+         - system-requirements.md
          - From repositories: install/repos.md       
          - Download tarballs: install/tarball.md
          - Build from source: install/source.md
          - Run in Docker: install/docker.md
       - 2. Set up and configure: 
-        - Overview: install/initial-setup.md       
+        - install/initial-setup.md       
         - install/configure-authentication.md
         - install/backup-storage.md
         - install/start-pbm-agent.md
   - Backup and restore:
-        - Make a backup : "usage/start-backup.md"
-        - Restore a backup: usage/restore.md
-        - Make a point-in-time restore: usage/pitr-tutorial.md
+        - features/backup-types.md
+        - Logical:
+          - features/logical.md
+          - Make a logical backup : "usage/start-backup.md"
+          - Restore from a logical backup: usage/restore.md
+          - Make a point-in-time restore: usage/pitr-tutorial.md
+        - Physical:
+          - features/physical.md
+          - Make a physical backup: usage/backup-physical.md
+          - Restore from a physical backup: usage/restore-physical.md
+          - Point-in-time recovery: usage/pitr-physical.md
+        - Incremental:
+          - features/incremental-backup.md
+          - Make an incremental backup: usage/backup-incremental.md
+          - Restore from an incremental backup: usage/restore-incremental.md
+        - Selective:
+          - features/selective-backup.md
+          - Make a selective backup: usage/backup-selective.md
+          - Restore from a selective backup: usage/restore-selective.md
+          - usage/pitr-selective.md
+        - Snapshot-based:
+          - features/snapshots.md
+          - Make a snapshot-based backup: usage/backup-snapshot.md
+          - Restore from a snapshot-based backup: usage/restore-snapshot.md
+        - Backups in sharded clusters: features/backup-sharding.md
+        - features/restore-new-env.md
+        - features/restore-remapping.md
+  - Manage backups:
         - List backups: usage/list-backup.md
         - usage/describe-backup.md
         - usage/schedule-backup.md 
         - usage/cancel-backup.md
         - usage/delete-backup.md
         - usage/restore-progress.md
+        - usage/backup-priority.md
+        - usage/compression.md
         - usage/oplog-replay.md 
         - usage/logs.md 
         - Backup management via PMM: pmm.md 
+  - Remote backup storage:
+      - details/storage-configuration.md
+      - details/storage-config-example.md
+      - features/multi-storage.md
+  - PBM commands:
+      - reference/pbm-commands.md
+  - Configuration file: 
+      - reference/config.md
+      - reference/configuration-options.md
+      - reference/pitr-options.md
+      - reference/backup-options.md
+      - reference/restore-options.md
   - Administer PBM:
-      - 'Overview': manage/overview.md
+      - manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
-  - Architecture:
-      - How PBM works: 'intro.md'
-      - PBM architecture: 'details/architecture.md'
-      - details/pbm-agent.md
-      - PBM CLI: details/cli.md
-      - PBM control collections: details/control-collections.md
-      - Remote backup storage:
-          - Overview: details/storage-configuration.md
-          - details/storage-config-example.md
-      - details/authentication.md
-      - details/deployments.md
-      - details/versions.md
+  - Compatibility with MongoDB:
+    - Comparison with MongoDB: 'features/comparison.md'
+    - details/deployments.md
+    - details/versions.md
   - Troubleshooting & FAQ:
       - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'
       - 'Check status': 'troubleshoot/status.md'
       - 'Troubleshoot backup management via PMM': 'troubleshoot/pbm-pmm.md'
       - troubleshoot/faq.md
+  - PBM internals:
+      - details/architecture.md
+      - details/pbm-agent.md
+      - PBM CLI: details/cli.md
+      - PBM control collections: details/control-collections.md
+      - How PBM works: 'intro.md'
+      - details/authentication.md
   - Release notes:
-      - "Release notes index": "release-notes.md"
-      - release-notes/2.7.0.md
-      - release-notes/2.6.0.md
-      - release-notes/2.5.0.md
-      - release-notes/2.4.1.md
-      - release-notes/2.4.0.md
-      - 2023 (versions 2.0.4 to 2.3.1):
-        - Percona Backup for MongoDB 2.3.1 (2023-12-04): release-notes/2.3.1.md
+      - release-notes.md
+      - PBM 2.x:
+        - "Percona Backup for MongoDB 2.7.0 {{date.2_7_0}}": release-notes/2.7.0.md
+        - release-notes/2.6.0.md
+        - release-notes/2.5.0.md
+        - release-notes/2.4.1.md
+        - release-notes/2.4.0.md
+        - release-notes/2.3.1.md
         - release-notes/2.3.0.md
         - release-notes/2.2.1.md
         - release-notes/2.2.0.md
         - release-notes/2.1.0.md
         - release-notes/2.0.5.md
         - release-notes/2.0.4.md
-      - '2022 (versions 1.8.0 to 2.0.3)':
         - release-notes/2.0.3.md
         - release-notes/2.0.2.md
         - release-notes/2.0.1.md
         - release-notes/2.0.0.md
-        - release-notes/1.8.1.md
+      - PBM 1.x:
+        - 'Percona Backup for MongoDB 1.8.1 (2022-07-12)': release-notes/1.8.1.md
         - release-notes/1.8.0.md
-        - 'Percona Backup for MongoDB 1.7.0 (2022-04-18)': 'release-notes/1.7.0.md'
-      - '2021 (versions 1.4.1 to 1.6.1)':
+        - release-notes/1.7.0.md
         - 'Percona Backup for MongoDB 1.6.1 (2021-11-04)': 'release-notes/1.6.1.md'
         - 'Percona Backup for MongoDB 1.6.0 (2021-08-16)': 'release-notes/1.6.0.md'
         - 'Percona Backup for MongoDB 1.5.0 (2021-05-10)': 'release-notes/1.5.0.md'
         - 'Percona Backup for MongoDB 1.4.1 (2021-01-28)': 'release-notes/1.4.1.md'
-      - '2020 (versions 1.1.0 to 1.4.0)':
         - 'Percona Backup for MongoDB 1.4.0 (2020-12-24)': 'release-notes/1.4.0.md'
         - 'Percona Backup for MongoDB 1.3.4 (2020-11-19)': 'release-notes/1.3.4.md'
         - 'Percona Backup for MongoDB 1.3.3 (2020-11-04)': 'release-notes/1.3.3.md'
@@ -243,19 +269,9 @@ nav:
         - 'Percona Backup for MongoDB 1.1.3 (2020-04-14)': 'release-notes/1.1.3.md'
         - 'Percona Backup for MongoDB 1.1.1 (2020-01-31)': 'release-notes/1.1.1.md'
         - 'Percona Backup for MongoDB 1.1.0 (2020-01-16)': 'release-notes/1.1.0.md'
-      - '2019 (versions 0.5.0 to 1.0.0)':
         - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
-      - PBM commands:
-          - reference/pbm-commands.md
-      - Configuration file options:
-          - Configuration file:
-              - reference/config.md
-          - reference/configuration-options.md
-          - reference/pitr-options.md
-          - reference/backup-options.md
-          - reference/restore-options.md
       - reference/glossary.md  
       - reference/contributing.md
       - Copyright and licensing: copyright.md
