@@ -21,6 +21,9 @@ storage:
     bucket: <string>
     prefix: <string>
     endpointUrl: <string>
+    endpointUrlMap: 
+      "node01:2017": <string>
+      "node02:2017": <string>
     credentials:
       access-key-id: <your-access-key-id-here>
       secret-access-key: <your-secret-key-here>
@@ -78,6 +81,13 @@ The path to the data directory on the bucket. If undefined, backups are stored i
 *Required*: YES (for MinIO and GCS)
 
 The URL to access the bucket. The default value for GCS is `https://storage.googleapis.com`
+
+### storage.s3.endpointUrlMap
+
+*Type*: array of strings <br>
+*Required*: NO
+
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support of multiple endpoints to the same S3 storage](../details/storage-configuration.md#support-of-multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
 
