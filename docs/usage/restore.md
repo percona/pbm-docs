@@ -275,10 +275,10 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     2. Run the ``pbm restore`` command in the format:
 
         ```{.bash data-prompt="$"}
-        $ pbm restore <backup_name> --ns <database.collection>
+        $ pbm restore <backup_name> --ns=<database.collection>
         ```
     
-    You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>, <db2.*>`. 
+    You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
     During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
 
