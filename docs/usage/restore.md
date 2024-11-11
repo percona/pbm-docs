@@ -290,6 +290,21 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     $ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
     ```
 
+    ### Restore a collection under a different name
+
+    You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
+
+    Note that in version 2.8.0 you can restore a single collection and this collection must be unsharded. 
+
+    To restore a collection, pass the collection name from the backup for the `--ns-from` flag and the new name for the `--ns-to` flag:
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name> --ns-from <database.collection> --ns-to <database.collection_new>
+    ```
+
+    The new collection has the same data and indexes as the source collection. You must provide a unique name for the collection you restore, otherwise the restore fails.
+
+
 === ":simple-databricks: Incremental"
 
     Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:

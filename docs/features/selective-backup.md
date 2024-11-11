@@ -59,6 +59,30 @@ Consider these specifics of selective restore with users and roles:
 * Users and roles must be created in custom databases. For security considerations, users created in `admin`, `config` and `local` databases cannot be a part of a selective restore.
 * If users and roles exist in a database during the restore, they will be overwritten from the backup.
 
+## Restore a collection under a different name
+
+!!! admonition "Version added: [2.8.0](../release-notes/2.8.0.md)"
+
+You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify what caused the database to misbehave. When you can see and edit the changes explicitly, you gain insight into your data and have confident control over it. As a result,  your troubleshooting efforts significantly reduce.
+
+To see how it works, imagine the following use case:
+
+You have noticed that your e-commerce app returns incorrect or incomplete results on orders. You remember that everything was working fine yesterday, so it’s likely that recent changes to the database caused the issue. 
+
+To find out, you can now restore the `orders` collection under a different name alongside the current `orders` collection and compare them. 
+
+```{.bash data-prompt="$"}
+$ pbm restore <backup-name> --ns-from=goods.orders --ns-to=goods.orders_prev
+```
+
+The `orders_prev` collection will have the same data and indexes as the `orders` collection, allowing you to see exactly what has changed.
+
+Let’s say you discover that the `status` field now includes an extra `date` field. These changes went unnoticed, and the app’s code was not updated to handle them, leading to incorrect results. Now that you’ve identified the issue you can take necessary actions to fix it.
+
+!!! note
+
+    In version 2.8.0 only non-sharded collections are supported. The support for sharded and timeseries collections is planned for the future releases.
+
 
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }
 [Restore a backup](../usage/restore.md){ .md-button .md-button }
