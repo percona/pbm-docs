@@ -115,19 +115,29 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     ### Adjust memory consumption
 
-    Starting with version 1.3.2, Percona Backup for MongoDB config includes the restore options to adjust the memory consumption by the `pbm-agent` in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.
+    Percona Backup for MongoDB config includes the restore options to adjust the memory consumption by the `pbm-agent` in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.
 
     ```yaml
     restore:
       batchSize: 500
-      numInsertionWorkers: 10
+      numInsertionWorkers: 1
     ```
 
     The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
 
-    !!! note 
 
-        The lower the values, the less memory is allocated for the restore. However, the performance decreases too.
+    !!! important 
+
+        In version 2.8.0, the default number for the `numInsertionWorkers` parameter has changed. Verify your applications and adjust the configuration if needed.
+
+    Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name> --numInsertionWorkers 5
+    ```
+
+    Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.
+
 
     ### Restore from a logical backup made on previous major version of Percona Server for MongoDB
 
