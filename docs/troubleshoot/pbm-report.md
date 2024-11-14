@@ -4,11 +4,14 @@
 
 When troubleshooting issues with backups and restores, viewing logs and PBM status may sometimes not be enough to identify the root of the issue. 
 
-Starting with version 2.8.0 you can generate a diagnostics report about a specific *logical* backup or a restore. The report includes the following information:
+Starting with version 2.8.0 you can generate a diagnostics report about a specific backup, restore, or other commands. The report includes the following information:
 
-* The information about the environment where a backup or a restore is running. 
+* The information about the environment: pbm-agents statuses, cluster members, etc. 
 * Logs collected between the start and end time of the command execution
-* Metadata file of a specified backup or a restore. For a restore, includes metadata of this restore and the backup it was taken from. 
+* If it is a backup command, the backup metadata file.
+* If it is a restore command, the restore metadata file and the backup metadata file. 
+
+   <i warning>:material-alert: Warning:</i> Physical restore is not supported at the moment.
 
 This data is stored in separate files in JSON format.
 
@@ -27,8 +30,8 @@ $ pbm diagnostic --path=path --opid=<OPID>
 where:
 
 * `path` is the path where to save the report. If the directory doesn’t exist, PBM creates it during the report generation. Make sure that the user that runs PBM CLI has write access to the specified path.
-* `name` is the name of the required backup or a restore.
-* `OPID` is the unique Operation ID of the specified command. You can retrieve it from the `pbm describe-backup` / `pbm describe-restore` output. 
+* `OPID` is the unique Operation ID of the specified command. You can retrieve it from the `pbm logs`, `pbm describe-backup` / `pbm describe-restore` output. 
+* `name` is the name of the required backup or a restore. You can use it instead of OPID for backups and restores.
 
 You can use the OPID to generate a diagnostics report about other operations like cleanup, cancellation, etc. In this case the report contains only the information about your environment and logs collected during the operation execution.
 

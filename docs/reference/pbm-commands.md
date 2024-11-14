@@ -422,8 +422,8 @@ The command accepts the following flags:
 | ------------------- | -------------------------------- |
 | `--path`            | The path where to save the report. If the directory doesn’t exist, PBM creates it during the report generation. Make sure that the user that runs PBM CLI has write access to the specified path |
 | `--name`            | The name of the required backup or a restore |
-| `--opid`            | The unique Operation ID of the specified backup or a restore. You can retrieve it from the `pbm describe-backup` / `pbm describe-restore` output. |
-| `--archive`         | Creates teh .zip archive of the report on the specified path.|
+| `--opid`            | The unique Operation ID of the specified command. You can retrieve it from the `pbm logs`, `pbm describe-backup` / `pbm describe-restore` output. |
+| `--archive`         | Creates teh .zip archive of the report in the specified path.|
 
 
 ## pbm help
