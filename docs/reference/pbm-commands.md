@@ -404,7 +404,7 @@ The output document contains the following fields:
 
 ## pbm diagnose
 
-Generates the report with the detailed information about a specified backup or a restore. The report includes the following information:
+Generates the report with the detailed information about a specified logical backup or a restore. The report includes the following information:
 
 * The information about the environment where a backup or a restore is running. 
 * Logs collected between the start and end time of the command execution

@@ -4,7 +4,7 @@
 
 When troubleshooting issues with backups and restores, viewing logs and PBM status may sometimes not be enough to identify the root of the issue. 
 
-Starting with version 2.8.0 you can generate a diagnostics report about a specific backup or a restore. The report includes the following information:
+Starting with version 2.8.0 you can generate a diagnostics report about a specific *logical* backup or a restore. The report includes the following information:
 
 * The information about the environment where a backup or a restore is running. 
 * Logs collected between the start and end time of the command execution
