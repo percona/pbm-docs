@@ -404,11 +404,16 @@ The output document contains the following fields:
 
 ## pbm diagnostic
 
-Generates the report with the detailed information about a specified logical backup or a restore. The report includes the following information:
+Generates the report with the detailed information about a a specific backup, restore, or other commands. The report includes the following information:
 
-* The information about the environment where a backup or a restore is running. 
+* The information about the environment: pbm-agents statuses, cluster members, etc. 
 * Logs collected between the start and end time of the command execution
-* Metadata file of a specified backup or a restore
+* If it is a backup command, the backup metadata file.
+* If it is a restore command, the restore metadata file and the backup metadata file. 
+
+   <i warning>:material-alert: Warning:</i> Physical restore is not supported in version 2.8.0.
+
+To learn more, refer to the [Diagnostics report](../troubleshoot/pbm-report.md).
 
 The command has the following syntax:
 
