@@ -402,7 +402,7 @@ The output document contains the following fields:
 | `replsets`  | The list of replica sets included in the restore. Each replica set has the following fields: <br> - `name` - the replica set name <br> - `status` - the restore status on this replica set <br> - `error` - the error message for failed restore <br> - `last_transition_time` - the human-readable indication of the time when the restore process changed its status <br> - `nodes` - the list of nodes included in the restore. |
 | `replsets.nodes`     | The list of nodes included in the restore. Each node has the following fields: <br> - `name` - the node name and port <br> - `status` - the restore status on the node <br> - `error` - the error message for failed restore <br> - `last_transition_time` - the human-readable indication of the time when the restore process changed its status |
 
-## pbm diagnose
+## pbm diagnostic
 
 Generates the report with the detailed information about a specified logical backup or a restore. The report includes the following information:
 
@@ -423,6 +423,7 @@ The command accepts the following flags:
 | `--path`            | The path where to save the report. If the directory doesn’t exist, PBM creates it during the report generation. Make sure that the user that runs PBM CLI has write access to the specified path |
 | `--name`            | The name of the required backup or a restore |
 | `--opid`            | The unique Operation ID of the specified backup or a restore. You can retrieve it from the `pbm describe-backup` / `pbm describe-restore` output. |
+| `--archive`         | Creates teh .zip archive of the report on the specified path.|
 
 
 ## pbm help
