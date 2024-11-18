@@ -404,16 +404,7 @@ The output document contains the following fields:
 
 ## pbm diagnostic
 
-Generates the report with the detailed information about a a specific backup, restore, or other commands. The report includes the following information:
-
-* The information about the environment: pbm-agents statuses, cluster members, etc. 
-* Logs collected between the start and end time of the command execution
-* If it is a backup command, the backup metadata file.
-* If it is a restore command, the restore metadata file and the backup metadata file. 
-
-   <i warning>:material-alert: Warning:</i> Physical restore is not supported in version 2.8.0.
-
-To learn more, refer to the [Diagnostics report](../troubleshoot/pbm-report.md).
+Generates the report with the detailed information about a specific backup or a restore. You can also use it for other commands. To learn more, refer to the [Diagnostics report](../troubleshoot/pbm-report.md).
 
 The command has the following syntax:
 
@@ -428,7 +419,7 @@ The command accepts the following flags:
 | `--path`            | The path where to save the report. If the directory doesn’t exist, PBM creates it during the report generation. Make sure that the user that runs PBM CLI has write access to the specified path |
 | `--name`            | The name of the required backup or a restore |
 | `--opid`            | The unique Operation ID of the specified command. You can retrieve it from the `pbm logs`, `pbm describe-backup` / `pbm describe-restore` output. |
-| `--archive`         | Creates teh .zip archive of the report in the specified path.|
+| `--archive`         | Creates a .zip archive of the report in the specified path.|
 
 
 ## pbm help
