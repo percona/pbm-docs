@@ -4,3 +4,17 @@ config
 mongod
 mongos
 mongosh
+[Oo]plog
+[Ss]hard
+PBM
+PMM
+Percona Monitoring and Management
+Percona Backup for MongoDB
+Percona Server for MongoDB
+PSMDB
+LDAP
+tlsCAFile
+(?i)TLS
+AWS
+SSE
+UTC
