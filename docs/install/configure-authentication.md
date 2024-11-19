@@ -8,8 +8,9 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem  
 
 ## Create the `pbm` user
 
-<i info>:material-information: Info:</i> Execute this step on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
-{.power-number}
+!!! info
+
+    Execute this step on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
     
 1. Create the role that allows any action on any resource.
 
@@ -54,17 +55,18 @@ You can specify the `username` and `password` values and other options of the `c
 
 ## Set the MongoDB connection URI for `pbm-agent`
 
-<i info>:material-information: Info:</i> Execute this step needs on each node where `pbm-agent` is installed.
+!!! Info
+    
+    Execute this step needs on each node where `pbm-agent` is installed.
 
-A **pbm-agent** process connects to its localhost `mongod` node with a standalone type of connection. 
+!!! Important
 
-To set the MongoDB URI connection string means to configure a service init script (`pbm-agent.service` systemd unit file) that runs a **pbm-agent**.
+    Each **pbm-agent** process needs to connect to its localhost `mongod` node with a standalone type of connection. Avoid using the replica set URI with **pbm-agent** as it can lead to unexpected behaviour. 
+    Note that this is different from the connection string required by pbm CLI.
 
-The `pbm-agent.service` systemd unit file includes the environment file. You set the MongoDB URI connection string for the  `PBM_MONGODB_URI` variable within the environment file for every **pbm-agent**.
+The `pbm-agent.service` systemd unit file includes the location of the environment file. You set the MongoDB URI connection string for the  `PBM_MONGODB_URI` variable within the environment file for every **pbm-agent**.
 
 ??? tip "How to find the environment file"
-
-    The path to the environment file is specified in the `pbm-agent.service` systemd unit file.
 
     In Ubuntu and Debian, the pbm-agent.service systemd unit file is at the path `/lib/systemd/system/pbm-agent.service`.
 
@@ -119,7 +121,14 @@ PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admi
 
 ## Set the MongoDB connection URI for `pbm CLI`
 
-<i info>:material-information: Info:</i> Execute this step only on a host at which you will use `pbm` CLI.
+!!! Info 
+    
+    Execute this step only on a host at which you will use `pbm` CLI.
+
+!!! Important 
+   
+    The pbm CLI needs to connect to the replica set that stores PBM Control Collections. Note that this is different from the connection required by pbm-agent.
+    In a non-sharded replica set it is simply that replica set. In a sharded cluster it is the config server replica set.
 
 Set the MongoDB URI connection string for `pbm` CLI in your shell. This allows you to call `pbm` commands without the `--mongodb-uri` flag.
 
