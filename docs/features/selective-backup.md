@@ -63,25 +63,27 @@ Consider these specifics of selective restore with users and roles:
 
 !!! admonition "Version added: [2.8.0](../release-notes/2.8.0.md)"
 
-You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify what caused the database to misbehave. When you can see and edit the changes explicitly, you gain insight into your data and have confident control over it. As a result,  your troubleshooting efforts significantly reduce.
+You can restore a specific collection under a different name alongside the current collection up to a certain point in time. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify what caused the database to misbehave. When you can see and edit the changes explicitly, you gain insight into your data and have confident control over it. As a result, your troubleshooting efforts significantly reduce.
 
 To see how it works, imagine the following use case:
 
-You have noticed that your e-commerce app returns incorrect or incomplete results on orders. You remember that everything was working fine yesterday, so it’s likely that recent changes to the database caused the issue. 
+You have noticed that your e-commerce app returns incorrect or incomplete results on orders. You remember that everything was working fine yesterday, so it's likely that recent changes to the database caused the issue. 
 
-To find out, you can now restore the `orders` collection under a different name alongside the current `orders` collection and compare them. 
+You have a backup and the oplog ranges that fully cover the previous day, 2024-11-15.
+
+To find out the issue, you can restore the `orders` collection under a different name up to the specified time alongside the current `orders` collection and compare them. You decide to restore to 14:00.
 
 ```{.bash data-prompt="$"}
-$ pbm restore <backup-name> --ns-from=goods.orders --ns-to=goods.orders_prev
+$ pbm restore --time=2024-11-15T14:00:00 --ns-from=goods.orders --ns-to=goods.orders_prev
 ```
 
-The `orders_prev` collection will have the same data and indexes as the `orders` collection, allowing you to see exactly what has changed.
+The `orders_prev` collection has the same data and indexes as the `orders` collection. It also has the same oplog operations as the `orders` collection allowing you to see exactly what has changed.
 
-Let’s say you discover that the `status` field now includes an extra `date` field. These changes went unnoticed, and the app’s code was not updated to handle them, leading to incorrect results. Now that you’ve identified the issue you can take necessary actions to fix it.
+Let's say you discover that the `status` field now includes an extra `date` field. These changes went unnoticed, and the app's code was not updated to handle them, leading to incorrect results. Now that you've identified the issue you can take necessary actions to fix it.
 
-!!! note
+!!! note 
 
-    In version 2.8.0 only non-sharded collections are supported. The support for sharded and timeseries collections is planned for the future releases.
+    In version 2.8.0, you can restore a single non-sharded collection in a replica set under a different name. The support for sharded and time series collections is planned for the future releases.
 
 
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }

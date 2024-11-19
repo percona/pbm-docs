@@ -304,6 +304,12 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     The new collection has the same data and indexes as the source collection. You must provide a unique name for the collection you restore, otherwise the restore fails.
 
+    You can restore a collection under a new name up to the specified time. Instead of the backup name, specify the timestamp, the source collection name and the new name as follows:
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database.collection_new>
+    ```
+
 
 === ":simple-databricks: Incremental"
 
