@@ -43,7 +43,8 @@
 
 After the restore is complete, do the following:
 
-1. Restart all `mongod` nodes. 
+1. Remove the contents of the datadir on any arbiter nodes
+2. Restart all `mongod` nodes
 
     !!! note
 
@@ -55,18 +56,18 @@ After the restore is complete, do the following:
 
         This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
 
-2. Restart all `pbm-agents`
+3. Restart all `pbm-agents`
 
-3. Run the following command to resync the backup list with the storage:
+4. Run the following command to resync the backup list with the storage:
 
     ```{.bash data-prompt="$"}
     $ pbm config --force-resync
     ``` 
 
-4. Start the balancer and start `mongos` nodes.
+5. Start the balancer and start `mongos` nodes.
 
-5. We recommend to make a fresh backup to serve as the new base for future restores.
-6. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if required.
+6. We recommend to make a fresh backup to serve as the new base for future restores.
+7. [Enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) if required.
      
 
 ## Define a `mongod` binary location
@@ -88,6 +89,8 @@ restore:
        "node01:27017": /path/to/mongod
        "node03:27017": /another/path/to/mongod
 ```
+
+When running in Docker, include Percona Backup for MongoDB files together with your MongoDB binaries. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
 
 ### Parallel data download
 

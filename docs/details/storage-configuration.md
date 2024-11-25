@@ -34,6 +34,66 @@ Percona Backup for MongoDB should work with other S3-compatible storages, but wa
 
 * [MinIO :octicons-link-external-16:](https://min.io/)
 
+#### Storage bucket creation
+
+Here are some examples of the steps required to create a bucket.
+
+=== ":material-aws: Amazon S3"
+
+    1. Install and configure [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+    2. Create an S3 bucket
+
+       ```{.bash data-prompt="$"}
+       $ aws s3api create-bucket --bucket my-s3-bucket --region us-east-1
+       ```
+      
+    3. Verify the bucket creation
+
+        ```{.bash data-prompt="$"}
+        $ aws s3 ls
+        ```
+
+=== ":material-google-cloud: Google Cloud Storage"
+
+    1. Install and configure the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
+
+    2. Create a bucket
+
+       ```{.bash data-prompt="$"}
+       $ gcloud storage buckets create my-gcs-bucket --location=US
+       ```
+      
+    3. Verify the bucket creation
+
+        ```{.bash data-prompt="$"}
+        gcloud storage buckets list
+        ```
+        
+=== ":simple-minio: MinIo"
+
+    1. Install a [MinIO client :octicons-link-external-16:](https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc). After the installation, the `mc` is available for you.
+
+    2. Configure the `mc` command line tool with a MinIO Server
+
+        ```{.bash data-prompt="$"}
+        $ mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
+        ```
+
+    3. Create a bucket
+
+        ```{.bash data-prompt="$"}
+        $ mc mb myminio/my-minio-bucket
+        ```
+      
+    4. Verify the bucket creation
+
+        ```{.bash data-prompt="$"}
+        $ mc ls myminio
+        ```
+
+After the bucket is created, apply the proper [permissions for PBM to use the bucket](#permissions-setup).
+
 #### Server-side encryption
 
 Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with the following encryption types:

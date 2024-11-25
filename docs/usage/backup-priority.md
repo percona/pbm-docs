@@ -1,6 +1,6 @@
 # Adjust node priority for backups
 
-In Percona Backup for MongoDB prior to version 1.5.0, the `pbm-agent` to do a backup is elected randomly among secondary nodes in a replica set. In sharded cluster deployments, the `pbm-agent` is elected among the secondary nodes in every shard and the config server replica sets. If no secondary node responds in a defined period, then the `pbm-agent` on the primary node is elected to do a backup.
+By default, the `pbm-agent` to do a backup is elected randomly among secondary nodes in a replica set. In sharded cluster deployments, the `pbm-agent` is elected among the secondary nodes in every shard and the config server replica sets. If no secondary node responds in a defined period, then the `pbm-agent` on the primary node is elected to do a backup.
 
 As of version 1.5.0, you can influence the `pbm-agent` election by assigning a priority to `mongod` nodes in the Percona Backup for MongoDB [configuration file](../reference/config.md).
 
@@ -40,5 +40,9 @@ If you haven’t listed any nodes for the `priority` option in the config, the n
 !!! important
 
     As soon as you adjust node priorities in the configuration file, it is assumed that you take manual control over them. The default rule to prefer secondary nodes over primary stops working.
+
+    Adjusting node priority interferes the default flow for incremental backups, where PBM tries to schedule the incremental backup on happen on the same node that made the base backup. If you list only a subset of nodes in the priority list, the remaining nodes receive the default priority 1.0. This may result in the incremental backup being taken from a node that didn't make the base backup. 
+
+    To workaround it, list either all nodes or at least a single node from every replica set in the priorities list.
 
 This ability to adjust node priority helps you manage your backup strategy by selecting specific nodes or nodes from preferred data centers. In geographically distributed infrastructures, you can reduce network latency by making backups from nodes in geographically closest locations.

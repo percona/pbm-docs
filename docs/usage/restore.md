@@ -62,7 +62,7 @@ After a cluster’s restore is complete, do the following:
 
 1. Start the balancer and all `mongos` nodes to reload the sharding metadata. 
 2. We recommend to make a fresh backup to serve as the new base for future restores. 
-3. Point-in-time recovery is re-enabled automatically upon backup completion. otherwise, [enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) to be able to restore to a specific time.
+3. Point-in-time recovery is re-enabled automatically upon backup completion. Otherwise, [enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) to be able to restore to a specific time.
 
 
 ## Adjust memory consumption
