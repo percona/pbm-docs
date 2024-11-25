@@ -55,14 +55,15 @@ You can specify the `username` and `password` values and other options of the `c
 
 ## Set the MongoDB connection URI for `pbm-agent`
 
-!!! Info
+!!! info
     
-    Execute this step needs on each node where `pbm-agent` is installed.
+    Execute this step on each node where `pbm-agent` is installed.
 
-!!! Important
+!!! important
 
-    Each **pbm-agent** process needs to connect to its localhost `mongod` node with a standalone type of connection. Avoid using the replica set URI with **pbm-agent** as it can lead to unexpected behaviour. 
-    Note that this is different from the connection string required by pbm CLI.
+    Each **pbm-agent** process needs to connect to its localhost `mongod` node with a standalone type of connection. Avoid using the replica set URI with **pbm-agent** as it can lead to unexpected behaviour.
+
+    Note that the MongoDB connection URI for `pbm-agent` is different from the connection string required by pbm CLI.
 
 The `pbm-agent.service` systemd unit file includes the location of the environment file. You set the MongoDB URI connection string for the  `PBM_MONGODB_URI` variable within the environment file for every **pbm-agent**.
 
@@ -121,13 +122,14 @@ PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admi
 
 ## Set the MongoDB connection URI for `pbm CLI`
 
-!!! Info 
+!!! info 
     
     Execute this step only on a host at which you will use `pbm` CLI.
 
-!!! Important 
+!!! important 
    
-    The pbm CLI needs to connect to the replica set that stores PBM Control Collections. Note that this is different from the connection required by pbm-agent.
+    The pbm CLI needs to connect to the replica set that stores PBM Control Collections. The MongoDB connection URI format is different from the one required by `pbm-agent`.
+
     In a non-sharded replica set it is simply that replica set. In a sharded cluster it is the config server replica set.
 
 Set the MongoDB URI connection string for `pbm` CLI in your shell. This allows you to call `pbm` commands without the `--mongodb-uri` flag.
