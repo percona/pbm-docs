@@ -1,6 +1,6 @@
 # Output pbm-agent logs to a file
 
-!!! admonition "Version added: [2.0.0](../release-notes/2.8.0.md)"
+!!! admonition "Version added: [2.8.0](../release-notes/2.8.0.md)"
 
 
 By default, each `pbm-agent` writes its logs to the following paths:
