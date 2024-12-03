@@ -6,7 +6,7 @@
 By default, each `pbm-agent` writes its logs to the following paths:
 
 * the `admin.pbmLogs` PBM Control collection which serves as the centralized logging storage
-* the `stderr` file on the host where the agent is running.
+* `STDERR` stream on the each host where the agent is running
 
 Starting with version 2.8.0, you can configure every `pbm-agent` to output logging information to a file at a custom path. This enhancement enables you to achieve the following:
 
