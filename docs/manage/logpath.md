@@ -46,6 +46,6 @@ Start the `pbm-agent` on every node with the following command:
 
     Command line flags take precedence over environment variables.
 
-If PBM cannot write to the specified file due to some error, it falls back to the `stderr` file. And you can always retrieve the logging information using the `pbm logs` command.
+If PBM cannot write to the specified file due to some error, it falls back to `STDERR` stream. And you can always retrieve the logging information using the `pbm logs` command.
 
 This ability to output logs to a file at a custom path enhances log management, making it easier to monitor and audit PBM operations effectively, and facilitates regulatory compliance.
