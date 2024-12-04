@@ -4,16 +4,29 @@ Docker images of Percona Backup for MongoDB are hosted publicly on [Docker Hub :
 
 For more information about using Docker, see the [Docker Docs :octicons-link-external-16:](https://docs.docker.com/).
 
-!!! note
+Make sure that you are using the latest version of Docker. The ones provided via apt and yum may be outdated and cause errors.
 
-    Make sure that you are using the latest version of Docker. The ones provided via apt and yum may be outdated and cause errors.
-
-    By default, Docker will pull the image from Docker Hub if it is not available locally.
+By default, Docker will pull the image from Docker Hub if it is not available locally.
 
 ## Prerequisites
 
 * You need to deploy MongoDB or Percona Server for MongoDB. See [what MongoDB deployments are supported](../details/deployments.md).
-* [Create the pbm user](initial-setup.md#create-the-pbm-user) in your deployment. You will need this user credentials to start Percona Backup for MongoDB container. 
+* [Create the pbm user](initial-setup.md#create-the-pbm-user) in your deployment. You will need this user credentials to start Percona Backup for MongoDB container.
+* For physical backups, make sure to use a container that includes both the `mongod` binary as well as the PBM files. Here is an example Dockerfile:
+  
+   ```{.bash data-prompt="$"}
+   FROM percona/percona-server-mongodb:latest AS mdb
+   FROM percona/percona-backup-mongodb:latest AS pbm 
+
+   FROM oraclelinux:8 
+
+   RUN mkdir -p /data/db /data/configdb 
+
+   COPY --from=mdb /usr/bin/mongod /usr/bin/
+   COPY --from=pbm /usr/bin/pbm* /usr/bin/
+   ```
+
+* If you are using a dedicated container for PBM, it should also have read-write access to MongoDB data volume and you should run it under the same user ID as the MongoDB container. 
 
 ## Start Percona Backup for MongoDB 
 
