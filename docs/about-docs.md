@@ -4,9 +4,9 @@ This documentation provides comprehensive information about the features and ope
 
 ## Versions
 
-We encourage our users to run the latest version of PBM so that they receive all bug fixes and can enjoy all new features and improvements available with the latest version. For this reason, the documentation always reflects the latest PBM version. 
+We recommend you to run the latest version of PBM to receive all bug fixes and benefit from the new features. For this reason, the documentation always reflects the latest PBM version. 
 
-To track the changes in features, we indicate the version where a feature appeared or a change was introduced. Check the release notes for detailed information.
+To track feature changes, an additional version indication is added where a feature appeared or a change was introduced. Please also take a look at the release notes for detailed information.
 
 ## Report an issue or request a change
 
