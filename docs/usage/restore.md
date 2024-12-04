@@ -120,20 +120,15 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     ```yaml
     restore:
       batchSize: 500
-      numInsertionWorkers: 1
+      numInsertionWorkers: 10
     ```
 
     The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
 
-
-    !!! important 
-
-        In version 2.8.0, the default number for the `numInsertionWorkers` parameter has changed. Verify your applications and adjust the configuration if needed.
-
     Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
 
     ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name> --numInsertionWorkers 5
+    $ pbm restore <backup_name> --numInsertionWorkers 15
     ```
 
     Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.

@@ -24,7 +24,7 @@ The number of documents to buffer.
 ### restore.numInsertionWorkers
 
 *Type*: int <br>
-*Default*: 1
+*Default*: 10
 
 Specifies the number of insertion workers to run concurrently per collection. 
 
