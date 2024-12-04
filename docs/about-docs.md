@@ -1,6 +1,6 @@
 # About Percona Backup for MongoDB documentation
 
-In this documentation you will find comprehensive information about the features, operations, and functionality of Percona Backup for MongoDB (PBM). Also reference materials on PBM commands and configuration file options are available for you here.
+This documentation provides comprehensive information about the features and operation guide for Percona Backup for MongoDB (PBM). Reference materials on PBM commands and configuration file options are also available here.
 
 ## Versions
 
