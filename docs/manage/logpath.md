@@ -21,7 +21,7 @@ You can define a logging configuration either via the command line flags or via 
 |----------------------|-------------------|-------------|
 | `LOG_PATH` | `--log-path` | The path to the log file. The file is created if it doesn't exist. The default value is `/dev/stderr` which means that the logs are written to the standard error output. |
 | `LOG_LEVEL` | `--log-level` | The log severity level. Supported levels are (from low to high): D - Debug (default), I - Info, W - Warning, E - Error, F - Fatal.<br><br> The output includes both the specified severity level and all higher ones |
-| `LOG_OUTPUT`| `--log-output` | The output format of the log messages. Supported values are `text` (default) and `json`. |
+| `LOG_JSON`| `--log-json` | Output log messages in JSON format. If undefined, logs are written in the default text format. |
 
 ## Example
 
@@ -32,14 +32,14 @@ Start the `pbm-agent` on every node with the following command:
 	```{.bash data-prompt="$"}
 	$ export LOG_PATH=/var/log/pbm-agent.log
 	$ export LOG_LEVEL=W
-	$ export LOG_OUTPUT=json
+	$ export LOG_json
 	$ pbm-agent
 	```
 
 === ":material-console: Command line"
 
 	```{.bash data-prompt="$"}
-	$ pbm-agent --log-path=/var/log/pbm-agent.log --log-level=W --log-output=json
+	$ pbm-agent --log-path=/var/log/pbm-agent.log --log-level=W --log-json
 	```
 
 !!! note
