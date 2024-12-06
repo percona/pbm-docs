@@ -783,6 +783,8 @@ The command accepts the following flags:
 | `--with-users-and-roles` | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.| 
 | `-c`, `--config`     | The path to the `mongod.conf` file |
 | `--num-parallel-collections`| Sets the number of collections to process in parallel during a specific logical restore. When undefined, `pbm-agent` processes the number of parallel collections defined for the `restore.numParallelCollections` configuration parameter. If that is undefined,  the default number of collections is the half of the number of logical CPUs. Available starting with version 2.7.0.|
+| `--ns-from`="database.collection" |Specifies the name of the collection you want to restore under a new name. It indicates the collection present in the backup that you are targeting for restoration. Available starting with version 2.8.0.|
+| `--ns-to`="database.collection" | Specifies the new name for the collection you are restoring from the original one. Available starting with version 2.8.0.|
 
 ??? "Restore output"
 
