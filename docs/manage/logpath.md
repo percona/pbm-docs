@@ -32,7 +32,7 @@ Start the `pbm-agent` on every node with the following command:
 	```{.bash data-prompt="$"}
 	$ export LOG_PATH=/var/log/pbm-agent.log
 	$ export LOG_LEVEL=W
-	$ export LOG_json
+	$ export LOG_JSON=1
 	$ pbm-agent
 	```
 
