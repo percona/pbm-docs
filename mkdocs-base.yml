@@ -236,8 +236,7 @@ nav:
   - Release notes:
       - release-notes.md
       - PBM 2.x:
-        - "Percona Backup for MongoDB 2.7.0 {{date.2_7_0}}": release-notes/2.7.0.md
-        - release-notes/2.8.0.md
+        - "Percona Backup for MongoDB 2.8.0 {{date.2_8_0}}": release-notes/2.8.0.md
         - release-notes/2.7.0.md
         - release-notes/2.6.0.md
         - release-notes/2.5.0.md
@@ -276,8 +275,10 @@ nav:
         - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
-      - reference/glossary.md  
+      - reference/glossary.md 
+      - reference/about-docs.md 
       - reference/contributing.md
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md 
+
 
