@@ -34,6 +34,59 @@ Percona Backup for MongoDB should work with other S3-compatible storages, but wa
 
 * [MinIO :octicons-link-external-16:](https://min.io/)
 
+#### Storage bucket creation
+
+Here are some examples of the steps required to create a bucket.
+
+=== "Amazon S3"
+
+    1. Install and configure [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+    2. Create an S3 bucket
+       ```   
+       aws s3api create-bucket --bucket my-s3-bucket --region us-east-1
+       ```
+      
+    3. Verify bucket creation
+        ```   
+        aws s3 ls
+        ```
+   
+=== "Google Cloud Storage"
+
+    1. Install and configure the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
+
+    2. Create a bucket
+       ```   
+       gcloud storage buckets create my-gcs-bucket --location=US
+       ```
+      
+    3. Verify bucket creation
+        ```   
+        gcloud storage buckets list
+        ```
+        
+=== "Minio"
+
+    1. Install [MinIO client](https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc)
+
+    2. Configure mc with a MinIO Server
+      ```
+      mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
+      ```
+    
+    3. Create a bucket
+       ```   
+       mc mb myminio/my-minio-bucket
+       ```
+      
+    4. Verify bucket creation
+        ```   
+        mc ls myminio
+        ```
+
+After the bucket is created, apply the proper [permissions for PBM to use the bucket](https://docs.percona.com/percona-backup-mongodb/details/storage-configuration.html#permissions-setup).
+        
 #### Server-side encryption
 
 Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with the following encryption types:
