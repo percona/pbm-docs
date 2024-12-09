@@ -35,8 +35,8 @@ storage:
       sseCustomerKey: <your_encryption_key>
     retryer:
       numMaxRetries: 3
-      minRetryDelay: 30
-      maxRetryDelay: 5
+      minRetryDelay: 30ms
+      maxRetryDelay: 5m
 ```
 
 ### storage.s3.provider
@@ -214,17 +214,17 @@ The maximum number of retries to upload data to S3 storage. A zero value means n
 
 *Type*: time.Duration <br>
 *Required*: NO <br>
-*Default*: 30
+*Default*: 30ms
 
-The minimum time (in ms) to wait till the next retry. Available in Percona Backup for MongoDB as of 1.7.0.
+The minimum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
 
 ### retryer.maxRetryDelay
 
 *Type*: time.Duration <br>
 *Required*: NO <br>
-*Default*: 5
+*Default*: 5m
 
-The maximum time (in minutes) to wait till the next retry. Available in Percona Backup for MongoDB as of 1.7.0.
+The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
 
 ## Filesystem storage options
 

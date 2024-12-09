@@ -12,4 +12,4 @@ styles/
 
 # Allow
 
-!styles/Vocab/Percona/**
+!styles/config/vocabularies/Percona/**
