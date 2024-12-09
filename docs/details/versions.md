@@ -2,14 +2,14 @@
 
 Percona Backup for MongoDB is compatible with:
 
-* MongoDB Community / Enterprise Edition enabled with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/). Percona Backup for MongoDB supports only *logical backups*.
-* Percona Server for MongoDB for all [supported backup types](../features/backup-types.md). Make sure [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) is enabled for logical backups. Physical and incremental backup works only with the WiredTiger storage engine.
+* MongoDB Community / Enterprise Edition with [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) enabled. Percona Backup for MongoDB supports only *logical backups*.
+* Percona Server for MongoDB for all [supported backup types](../features/backup-types.md). Ensure [MongoDB Replication :octicons-link-external-16:](https://docs.mongodb.com/manual/replication/) is enabled for logical backups. Physical and incremental backup works only with the WiredTiger storage engine.
 
-Please take a look at the compatibility matrices below to check which MongoDB versions your current PBM release supports for backups and restores. 
+Please review the compatibility matrices below to determine which MongoDB versions your current PBM release supports for backups and restores. 
 
 !!! note ""
 
-    End-of-life MongoDB versions may work with PBM but are not tested for compatibility. Consider upgrading to the newer MongoDB or Percona Server for the MongoDB version. 
+    End-of-life MongoDB versions may work with PBM but have not been tested for compatibility. Consider upgrading to the newer MongoDB or Percona Server for the MongoDB version. 
 
 ## Percona Server for MongoDB compatibility matrix
 
