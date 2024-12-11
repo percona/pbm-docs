@@ -181,6 +181,7 @@ nav:
           - features/snapshots.md
           - Make a snapshot-based backup: usage/backup-snapshot.md
           - Restore from a snapshot-based backup: usage/restore-snapshot.md
+        - Point-in-time recovery: features/point-in-time-recovery.md
         - Backups in sharded clusters: features/backup-sharding.md
         - features/restore-new-env.md
         - features/restore-remapping.md
