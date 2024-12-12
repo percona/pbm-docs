@@ -48,6 +48,7 @@
     $ pbm list
     ```
 
+
 2. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
 
        ```{.bash data-prompt="$"}
@@ -79,7 +80,13 @@ The default values were adjusted to fit the setups with the memory allocation of
 
 !!! note 
 
-    The lower the values, the less memory is allocated for the restore. However, the performance decreases too.
+    Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name> --numInsertionWorkers 15
+    ```
+
+    Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.
 
 ## Restore from a logical backup made on previous major version of Percona Server for MongoDB
 
