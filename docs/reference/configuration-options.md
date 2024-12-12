@@ -21,6 +21,9 @@ storage:
     bucket: <string>
     prefix: <string>
     endpointUrl: <string>
+    endpointUrlMap: 
+      "node01:2017": <string>
+      "node02:2017": <string>
     credentials:
       access-key-id: <your-access-key-id-here>
       secret-access-key: <your-secret-key-here>
@@ -35,8 +38,8 @@ storage:
       sseCustomerKey: <your_encryption_key>
     retryer:
       numMaxRetries: 3
-      minRetryDelay: 30
-      maxRetryDelay: 5
+      minRetryDelay: 30ms
+      maxRetryDelay: 5m
 ```
 
 ### storage.s3.provider
@@ -78,6 +81,13 @@ The path to the data directory on the bucket. If undefined, backups are stored i
 *Required*: YES (for MinIO and GCS)
 
 The URL to access the bucket. The default value for GCS is `https://storage.googleapis.com`
+
+### storage.s3.endpointUrlMap
+
+*Type*: array of strings <br>
+*Required*: NO
+
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support of multiple endpoints to the same S3 storage](../details/storage-configuration.md#support-of-multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
 
@@ -214,17 +224,17 @@ The maximum number of retries to upload data to S3 storage. A zero value means n
 
 *Type*: time.Duration <br>
 *Required*: NO <br>
-*Default*: 30
+*Default*: 30ms
 
-The minimum time (in ms) to wait till the next retry. Available in Percona Backup for MongoDB as of 1.7.0.
+The minimum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
 
 ### retryer.maxRetryDelay
 
 *Type*: time.Duration <br>
 *Required*: NO <br>
-*Default*: 5
+*Default*: 5m
 
-The maximum time (in minutes) to wait till the next retry. Available in Percona Backup for MongoDB as of 1.7.0.
+The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
 
 ## Filesystem storage options
 

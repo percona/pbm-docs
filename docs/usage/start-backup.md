@@ -58,19 +58,21 @@
 
     To make a selective backup,  run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
 
-     ```{.bash data-prompt="$"}
-     $ pbm backup --ns=staff.Payments
-     ```
+    ```{.bash data-prompt="$"}
+    $ pbm backup --ns=customers.payments
+    ```
 
-     To back up the "Invoices" database and all collections that it includes, run the ``pbm backup`` command as follows:
+    To back up the "Invoices" database and all collections that it includes, run the ``pbm backup`` command as follows:
 
-     ```{.bash data-prompt="$"}
-     $ pbm backup --ns=Invoices.*
-     ```
+    ```{.bash data-prompt="$"}
+    $ pbm backup --ns=invoices.*
+    ```
 
-     During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
+    To back up multiple namespaces, specify them as a comma-separated list for the `--ns` flag: `<db1.col1>`,`<db2.*>`,`<db3.collX>`. The number of namespaces to specify is unlimited.
 
-     Multi-format is now the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
+    During the backup process, Percona Backup for MongoDB stores data in the  multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or a selective backup.
+
+    Multi-format is the default data format for both full and selective backups starting with PBM 2.0.0 since it allows selective restore. Note, however, that you can make only full restores from backups made with Percona Backup for MongoDB version 1.x. 
 
 === ":simple-databricks: Incremental"
     
@@ -198,6 +200,11 @@ If you haven’t listed any nodes for the `priority` option in the config, the n
 !!! important
 
     As soon as you adjust node priorities in the configuration file, it is assumed that you take manual control over them. The default rule to prefer secondary nodes over primary stops working.
+
+    Adjusting node priority interferes the default flow for incremental backups, where PBM tries to schedule the incremental backup on happen on the same node that made the base backup. If you list only a subset of nodes in the priority list, the remaining nodes receive the default priority 1.0. This may result in the incremental backup being taken from a node that didn't make the base backup. 
+
+    To workaround it, list either all nodes or at least a single node from every replica set in the priorities list.
+
 
 This ability to adjust node priority helps you manage your backup strategy by selecting specific nodes or nodes from preferred data centers. In geographically distributed infrastructures, you can reduce network latency by making backups from nodes in geographically closest locations.
 

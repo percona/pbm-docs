@@ -8,27 +8,19 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     1. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
-    2. For versions 2.3.1 and earlier, disable [Point-in-time recovery](../features/point-in-time-recovery.md) before running `pbm restore`. This is because Point-in-Time recovery oplog slicing and restore are incompatible operations and cannot be run together.
-
-    3. Backups made with Percona Backup for MongoDB prior to v1.5.0 are incompatible for restore with Percona Backup for MongoDB v1.5.0 and later. This is because processing of system collections `Users` and `Roles` has changed: in v1.5.0, `Users` and `Roles` are copied to temporary collection during backup and must be present in the backup during restore. In earlier versions of Percona Backup for MongoDB, `Users` and `Roles` are copied to a temporary collection during restore. Therefore, restoring from these backups with Percona Backup for MongoDB v1.5.0 isn’t possible.
+    2. Backups made with Percona Backup for MongoDB prior to v1.5.0 are incompatible for restore with Percona Backup for MongoDB v1.5.0 and later. This is because processing of system collections `Users` and `Roles` has changed: in v1.5.0, `Users` and `Roles` are copied to temporary collection during backup and must be present in the backup during restore. In earlier versions of Percona Backup for MongoDB, `Users` and `Roles` are copied to a temporary collection during restore. Therefore, restoring from these backups with Percona Backup for MongoDB v1.5.0 isn’t possible.
 
         The recommended approach is to make a fresh backup after upgrading Percona Backup for MongoDB to version 1.5.0.
 
-    4. For versions earlier than 1.x, Percona Backup for MongoDB performs a full all-databases, all collections restore and does not offer an option to restore only a subset of collections in the backup, as MongoDB’s `mongodump` tool does.
+    3. For versions earlier than 1.x, Percona Backup for MongoDB performs a full all-databases, all collections restore and does not offer an option to restore only a subset of collections in the backup, as MongoDB’s `mongodump` tool does.
 
-    5. Starting with versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
+    4. Starting with versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
 
 === ":material-database-refresh-outline: Physical"
 
-    1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously.
-
-        ```{.bash data-prompt="$"}
-        $ pbm config --set pitr.enabled=false
-        ```
-
-    2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
-    3. Make sure all nodes in the cluster are healthy (i.e. either PRIMARY or SECONDARY). Each pbm-agent needs to be able to connect to its local node and run queries in order to perform the restore.
-    4. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
+    1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+    2. Make sure all nodes in the cluster are healthy (i.e. either PRIMARY or SECONDARY). Each pbm-agent needs to be able to connect to its local node and run queries in order to perform the restore.
+    3. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
 
 === ":simple-databricks: Incremental"
 
@@ -65,13 +57,26 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     3. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
 
-    4. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
+    4. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. 
+
+        ```{.bash data-prompt="$"}
+        $ pbm config --set pitr.enabled=false
+        ```
+
+        To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
 === ":material-database-refresh-outline: Physical"
 
     1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress.
     2. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
     3. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
+    4. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. 
+
+        ```{.bash data-prompt="$"}
+        $ pbm config --set pitr.enabled=false
+        ```
+
+        To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
 === ":material-select-multiple: Selective"
 
@@ -115,7 +120,7 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     ### Adjust memory consumption
 
-    Starting with version 1.3.2, Percona Backup for MongoDB config includes the restore options to adjust the memory consumption by the `pbm-agent` in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.
+    Percona Backup for MongoDB config includes the restore options to adjust the memory consumption by the `pbm-agent` in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.
 
     ```yaml
     restore:
@@ -125,9 +130,14 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
 
     The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
 
-    !!! note
+    Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
 
-        The lower the values, the less memory is allocated for the restore. However, the performance decreases too.
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name> --numInsertionWorkers 15
+    ```
+
+    Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.
+
 
     ### Restore from a logical backup made on previous major version of Percona Server for MongoDB
 
@@ -277,10 +287,10 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     2. Run the ``pbm restore`` command in the format:
 
         ```{.bash data-prompt="$"}
-        $ pbm restore <backup_name> --ns <database.collection>
+        $ pbm restore <backup_name> --ns=<database.collection>
         ```
 
-    You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>, <db2.*>`.
+    You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
     During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
 
@@ -291,6 +301,27 @@ To restore a backup, use the [`pbm restore`](../reference/pbm-commands.md#pbm-re
     ```{.bash data-prompt="$"}
     $ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
     ```
+
+    ### Restore a collection under a different name
+
+    You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
+
+    Note that in version 2.8.0 you can restore a single collection and this collection must be unsharded. 
+
+    To restore a collection, pass the collection name from the backup for the `--ns-from` flag and the new name for the `--ns-to` flag:
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name> --ns-from <database.collection> --ns-to <database.collection_new>
+    ```
+
+    The new collection has the same data and indexes as the source collection. You must provide a unique name for the collection you restore, otherwise the restore fails.
+
+    You can restore a collection under a new name up to the specified time. Instead of the backup name, specify the timestamp, the source collection name and the new name as follows:
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database.collection_new>
+    ```
+
 
 === ":simple-databricks: Incremental"
 

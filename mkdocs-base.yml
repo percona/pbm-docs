@@ -183,6 +183,7 @@ nav:
       - 'Overview': manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
+      - logpath.md
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
   - Architecture:
@@ -201,6 +202,7 @@ nav:
       - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'
       - 'Check status': 'troubleshoot/status.md'
+      - 'Diagnostics report': 'troubleshoot/pbm-report.md'
       - 'Troubleshoot backup management via PMM': 'troubleshoot/pbm-pmm.md'
       - troubleshoot/faq.md
   - Release notes:
@@ -257,7 +259,8 @@ nav:
           - reference/pitr-options.md
           - reference/backup-options.md
           - reference/restore-options.md
-      - reference/glossary.md  
+      - reference/glossary.md
+      - about-docs.md  
       - reference/contributing.md
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md 
