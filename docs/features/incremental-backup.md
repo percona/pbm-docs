@@ -25,9 +25,15 @@ graph LR
 
 ## Implementation specifics
 
-Percona Backup for MongoDB tracks the backup history only on the node where the base incremental backup was taken. This means that subsequent incremental backups must always be run on that very node. To make this happen, Percona Backup for MongoDB tries to schedule backups on that same node.
+1. Percona Backup for MongoDB tracks the backup history only on the node where the base incremental backup was taken. This means that subsequent incremental backups must always be run on that very node. To make this happen, Percona Backup for MongoDB tries to schedule backups on that same node.
 
-If the node with the base incremental backup is down or unavailable, you must start the incremental backup chain anew on another node.
+    If the node with the base incremental backup is down or unavailable, you must start the incremental backup chain anew on another node.
+
+2. Adjusting node priorities for backup interferes with the default behaviour described above. If you listed only a subset of nodes for the priority, the remaining nodes receive the default priority 1 and it may happen that the incremental backup is taken not from the node where the base backup was taken. 
+
+    To avoid this, set the highest priority for the node where you wish to incremental backups from. This instructs Percona Backup for MongoDB to start the backup from the same node and will preserve the backup chain. 
+
+    For sharded cluster, define the highest priority node for every replica set. 
 
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }
 [Restore a backup](../usage/restore.md){ .md-button .md-button }
