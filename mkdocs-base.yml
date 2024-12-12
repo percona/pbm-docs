@@ -224,6 +224,7 @@ nav:
       - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'
       - 'Check status': 'troubleshoot/status.md'
+      - 'Diagnostics report': 'troubleshoot/pbm-report.md'
       - 'Troubleshoot backup management via PMM': 'troubleshoot/pbm-pmm.md'
       - troubleshoot/faq.md
   - PBM internals:
