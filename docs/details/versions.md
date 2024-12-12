@@ -21,6 +21,7 @@ The Restore compatibility column indicates if you can restore from the backup ma
 
 | PBM version | Logical | Physical |Incremental physical | Restore backward compatibility|
 | ----------- |---------|----------|---------------------|---------------------|
+| **2.8.0**  | [6.0.x], [7.0.x], [8.0.x] | [6.0.x], [7.0.x], [8.0.x] | [6.0.x], [7.0.x], [8.0.x] | Yes |
 | **2.6.0 - 2.7.0** | [5.0.x], [6.0.x], [7.0.x] | [5.0.x], [6.0.x], [7.0.x] | [5.0.14-12], [6.0.3-2] and higher, [7.0.x] | Yes |
 | **2.2.0 - 2.5.0** | [4.4.x] and higher| [4.4.6-8] and higher, 5.0.x, 6.0.x| [4.4.18-18], [5.0.14-12], [6.0.3-2] and higher| Yes |
 | **2.1.0** | 4.4.x and higher | [4.4.6-8], [5.0.x], [6.0.x]| [4.2.24-24], [4.4.18-18], [5.0.14-12], [6.0.3-2] and higher| No. A fresh backup is required|
@@ -36,6 +37,7 @@ The Restore compatibility column indicates if you can restore from the backup ma
 
 | PBM version | Logical backups | Restore backward compatibility|
 | ----------- |-----------------| ----------------------------- |
+| **2.8.0**  | 6.0.x and higher | Yes |
 | **2.6.0 - 2.7.0** | 5.0.x and higher | Yes |
 | **2.2.0 - 2.5.0** | 4.4.x and higher | Yes |
 | **2.1.0** | 4.4.x and higher| No. A fresh backup is required|
