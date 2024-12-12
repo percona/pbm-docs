@@ -213,6 +213,7 @@ nav:
       - manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
+      - logpath.md
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
   - Compatibility with MongoDB:
