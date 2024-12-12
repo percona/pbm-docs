@@ -29,7 +29,7 @@ The command accepts the following flags:
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
 | `--wait-time`  | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 | `-l`, `--list-files` | For external backups only. Shows the list of files per node to copy.|
-| `--ns="database.collection"`| Makes a logical backup of the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. In version 2.0.0, only a single namespace is supported for the backup.|
+| `--ns="database.collection"`| Makes a logical backup of the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. Starting with version 2.8.0, you can pass multiple namespaces as a comma-separated list for the backup. The format is `ns=db1.*,db2.coll2,db3.coll1,db3.collX` .|
 
 ??? "JSON output"
 
@@ -402,6 +402,24 @@ The output document contains the following fields:
 | `replsets`  | The list of replica sets included in the restore. Each replica set has the following fields: <br> - `name` - the replica set name <br> - `status` - the restore status on this replica set <br> - `error` - the error message for failed restore <br> - `last_transition_time` - the human-readable indication of the time when the restore process changed its status <br> - `nodes` - the list of nodes included in the restore. |
 | `replsets.nodes`     | The list of nodes included in the restore. Each node has the following fields: <br> - `name` - the node name and port <br> - `status` - the restore status on the node <br> - `error` - the error message for failed restore <br> - `last_transition_time` - the human-readable indication of the time when the restore process changed its status |
 
+## pbm diagnostic
+
+Generates the report with the detailed information about a specific backup or a restore. You can also use it for other commands. To learn more, refer to the [Diagnostics report](../troubleshoot/pbm-report.md).
+
+The command has the following syntax:
+
+```{.bash data-prompt="$"}
+$ pbm diagnose --path path --name <backup-name> --opid <OPID>
+```
+
+The command accepts the following flags:
+
+| Flag                | Description                      |
+| ------------------- | -------------------------------- |
+| `--path`            | The path where to save the report. If the directory doesn’t exist, PBM creates it during the report generation. Make sure that the user that runs PBM CLI has write access to the specified path |
+| `--name`            | The name of the required backup or a restore |
+| `--opid`            | The unique Operation ID of the specified command. You can retrieve it from the `pbm logs`, `pbm describe-backup` / `pbm describe-restore` output. |
+| `--archive`         | Creates a .zip archive of the report in the specified path.|
 
 
 ## pbm help
@@ -779,11 +797,13 @@ The command accepts the following flags:
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.<br><br> In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](../usage/pitr-tutorial.md#from-physical-backups). <br><br> In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-tutorial.md#from-physical-backups). Without it, PBM looks for a logical backup to restore from.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
-| `--ns="database.collection"`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns="database.*"`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, ns="db1.*,db2.coll2,db3.coll1,db3.collX"|
+| `--ns=<database.collection>`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns=<database.*>`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, `--ns=db1.*,db2.coll2,db3.coll1,db3.collX`|
 | `--with-users-and-roles` | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.| 
 | `-c`, `--config`     | The path to the `mongod.conf` file |
 | `--num-parallel-collections`| Sets the number of collections to process in parallel during a specific logical restore. When undefined, `pbm-agent` processes the number of parallel collections defined for the `restore.numParallelCollections` configuration parameter. If that is undefined,  the default number of collections is the half of the number of logical CPUs. Available starting with version 2.7.0.|
 | `--num-insertion-workers-per-collection`| Specifies the number of insertion workers to run concurrently per collection. Increasing the number for large import may increase the speed of the import. Available starting with version 2.8.0.|
+| `--ns-from`="database.collection" |Specifies the name of the collection you want to restore under a new name. It indicates the collection present in the backup that you are targeting for restoration. Available starting with version 2.8.0.|
+| `--ns-to`="database.collection" | Specifies the new name for the collection you are restoring from the original one. Available starting with version 2.8.0.|
 
 ??? "Restore output"
 
