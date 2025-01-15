@@ -165,7 +165,7 @@ nav:
         - Overview: install/initial-setup.md       
         - install/configure-authentication.md
         - install/backup-storage.md
-        - install/start-pbm-agent.md
+        - Start the pbm-agent process: install/start-pbm-agent.md
   - Backup and restore:
         - Make a backup : "usage/start-backup.md"
         - Restore a backup: usage/restore.md

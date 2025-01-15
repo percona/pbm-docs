@@ -38,54 +38,61 @@ Percona Backup for MongoDB should work with other S3-compatible storages, but wa
 
 Here are some examples of the steps required to create a bucket.
 
-=== "Amazon S3"
+=== ":material-aws: Amazon S3"
 
     1. Install and configure [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
     2. Create an S3 bucket
-       ```   
-       aws s3api create-bucket --bucket my-s3-bucket --region us-east-1
+
+       ```{.bash data-prompt="$"}
+       $ aws s3api create-bucket --bucket my-s3-bucket --region us-east-1
        ```
       
-    3. Verify bucket creation
-        ```   
-        aws s3 ls
+    3. Verify the bucket creation
+
+        ```{.bash data-prompt="$"}
+        $ aws s3 ls
         ```
    
-=== "Google Cloud Storage"
+=== ":material-google-cloud: Google Cloud Storage"
 
     1. Install and configure the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
 
     2. Create a bucket
-       ```   
-       gcloud storage buckets create my-gcs-bucket --location=US
+
+       ```{.bash data-prompt="$"}
+       $ gcloud storage buckets create my-gcs-bucket --location=US
        ```
       
-    3. Verify bucket creation
-        ```   
+    3. Verify the bucket creation
+
+        ```{.bash data-prompt="$"}
         gcloud storage buckets list
         ```
         
-=== "Minio"
+=== ":simple-minio: MinIo"
 
-    1. Install [MinIO client](https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc)
+    1. Install a [MinIO client :octicons-link-external-16:](https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc). After the installation, the `mc` is available for you.
 
-    2. Configure mc with a MinIO Server
-      ```
-      mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
-      ```
+    2. Configure the `mc` command line tool with a MinIO Server
+
+        ```{.bash data-prompt="$"}
+        $ mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
+        ```
     
     3. Create a bucket
-       ```   
-       mc mb myminio/my-minio-bucket
-       ```
+
+        ```{.bash data-prompt="$"}
+        $ mc mb myminio/my-minio-bucket
+        ```
       
-    4. Verify bucket creation
-        ```   
-        mc ls myminio
+    4. Verify the bucket creation
+
+        ```{.bash data-prompt="$"}
+        $ mc ls myminio
         ```
 
-After the bucket is created, apply the proper [permissions for PBM to use the bucket](https://docs.percona.com/percona-backup-mongodb/details/storage-configuration.html#permissions-setup).
+After the bucket is created, apply the proper [permissions for PBM to use the bucket](#permissions-setup).
         
 #### Server-side encryption
 
