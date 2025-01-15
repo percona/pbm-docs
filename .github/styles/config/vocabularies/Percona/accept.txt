@@ -18,3 +18,4 @@ tlsCAFile
 AWS
 SSE
 UTC
+MinIO

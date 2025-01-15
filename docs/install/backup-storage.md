@@ -4,8 +4,11 @@ The easiest way to provide remote backup storage configuration is to specify it 
 
 The storage configuration itself is out of scope of the present document. We assume that you have configured one of the supported remote backup storages and provisioned access keys with the proper permissions for PBM. See [Remote Backup Storage](../details/storage-configuration.md) for more details.
 
-<i info>:material-information: Info:</i> Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this bucket is created and managed solely by PBM.
-{.power-number}
+## Considerations
+
+Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this bucket is created and managed solely by PBM.
+    
+## Procedure {.power-number}
 
 1. Create a config file (e.g. `pbm_config.yaml`).
 
@@ -51,7 +54,7 @@ The storage configuration itself is out of scope of the present document. We ass
               key: <your-access-key>
         ```    
 
-    === ":material-file-tree: Local Filesystem"    
+    === ":material-file-tree: Shared Local Filesystem"    
 
         ```yaml
         storage:
