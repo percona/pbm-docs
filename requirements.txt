@@ -15,4 +15,6 @@ mkdocs-htmlproofer-plugin
 mkdocs-meta-descriptions-plugin
 mkdocs-glightbox
 mike
+mkdocs-open-in-new-tab
+Pillow > 10.1.0
 

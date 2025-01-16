@@ -104,6 +104,7 @@ plugins:
   section-index: {}
   search: 
     separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  open-in-new-tab: {}
   git-revision-date-localized: 
     enable_creation_date: true
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
@@ -184,7 +185,8 @@ nav:
       - 'Overview': manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
-      - logpath.md
+      - manage/logpath.md
+      - manage/start-agent-with-config.md
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
   - Architecture:
@@ -260,6 +262,7 @@ nav:
           - reference/pitr-options.md
           - reference/backup-options.md
           - reference/restore-options.md
+          - reference/loggig-options.md
       - reference/glossary.md
       - about-docs.md  
       - reference/contributing.md
