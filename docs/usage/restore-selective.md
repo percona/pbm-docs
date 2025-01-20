@@ -19,7 +19,7 @@ You can restore a specific database or a collection either from a full or a sele
     $ pbm restore <backup_name> --ns <database.collection>
     ```
     
-You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>, <db2.*>`. 
+ You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
 During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
 
