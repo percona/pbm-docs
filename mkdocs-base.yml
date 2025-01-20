@@ -144,6 +144,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - get-help.md
   - Features: 
     - Backup and restore types: features/backup-types.md
     - features/logical.md
