@@ -108,6 +108,7 @@ plugins:
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   tags: {}
   glightbox: {}
+  open-in-new-tab: {}
   meta-descriptions:
     export_csv: false
     quiet: false
@@ -143,6 +144,7 @@ plugins:
 
 nav:
   - Home: index.md
+  - get-help.md
   - Get started:
       - installation.md 
       - 1. Install:
@@ -162,12 +164,10 @@ nav:
           - features/logical.md
           - Make a logical backup : "usage/start-backup.md"
           - Restore from a logical backup: usage/restore.md
-          - Make a point-in-time restore: usage/pitr-tutorial.md
         - Physical:
           - features/physical.md
           - Make a physical backup: usage/backup-physical.md
           - Restore from a physical backup: usage/restore-physical.md
-          - Point-in-time recovery: usage/pitr-physical.md
         - Incremental:
           - features/incremental-backup.md
           - Make an incremental backup: usage/backup-incremental.md
@@ -176,12 +176,15 @@ nav:
           - features/selective-backup.md
           - Make a selective backup: usage/backup-selective.md
           - Restore from a selective backup: usage/restore-selective.md
-          - usage/pitr-selective.md
         - Snapshot-based:
           - features/snapshots.md
-          - Make a snapshot-based backup: usage/backup-snapshot.md
-          - Restore from a snapshot-based backup: usage/restore-snapshot.md
-        - Point-in-time recovery: features/point-in-time-recovery.md
+          - Make a snapshot-based backup: usage/backup-external.md
+          - Restore from a snapshot-based backup: usage/restore-external.md
+        - Point-in-time recovery: 
+          - features/point-in-time-recovery.md
+          - From logical backup: usage/pitr-tutorial.md
+          - From physical backup: usage/pitr-physical.md
+          - From selective backup: usage/pitr-selective.md
         - Backups in sharded clusters: features/backup-sharding.md
         - features/restore-new-env.md
         - features/restore-remapping.md
@@ -213,7 +216,7 @@ nav:
       - manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
-      - logpath.md
+      - manage/logpath.md
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
   - Compatibility with MongoDB:
@@ -277,7 +280,7 @@ nav:
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
       - reference/glossary.md 
-      - reference/about-docs.md 
+      - about-docs.md 
       - reference/contributing.md
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md 

@@ -26,11 +26,7 @@ The number of documents to buffer.
 *Type*: int <br>
 *Default*: 10
 
-<<<<<<< HEAD
-The number of workers that add the documents to buffer.
-=======
 Specifies the number of insertion workers to run concurrently per collection. 
->>>>>>> d36aea0... PBM-1414 Documented changes in NumInsertionWorkers (#227)
 
 ### restore.numParallelCollections
 

@@ -1,4 +1,4 @@
-# Restore selected databases and collections
+# Point-in-time recovery from selected databases and collections
 
 !!! important
 

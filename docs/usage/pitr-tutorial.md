@@ -1,4 +1,4 @@
-# Make a point-in-time restore
+# Point-in-time restore from logical backups
 
 --8<-- "pitr-preparation.md"
 

@@ -34,8 +34,6 @@
     $ pbm backup-finish <backup_name>
     ```
 
-
-
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
