@@ -1,6 +1,6 @@
 # Configure authentication in MongoDB
 
-Percona Backup for MongoDB uses the authentication and authorization subsystem  of MongoDB. This means that to authenticate Percona Backup for MongoDB, you need to:
+Percona Backup for MongoDB uses the authentication and authorization subsystem of MongoDB. This means that to authenticate Percona Backup for MongoDB, you need to:
 
 * [Create a corresponding `pbm` user](#create-the-pbm-user) in the `admin` database 
 * [Set a valid MongoDB connection URI string for **pbm-agent**](#set-the-mongodb-connection-uri-for-pbm-agent) 
@@ -62,6 +62,8 @@ You can specify the `username` and `password` values and other options of the `c
 !!! important
 
     Each **pbm-agent** process needs to connect to its localhost `mongod` node with a standalone type of connection. Avoid using the replica set URI with **pbm-agent** as it can lead to unexpected behaviour.
+    
+    For sharded clusters, **pbm-agent** on each shard member also need to be able to connect to the config server replica set. The agents auto-discover the config server URI by querying the db.system.version collection. 
 
     Note that the MongoDB connection URI for `pbm-agent` is different from the connection string required by pbm CLI.
 
