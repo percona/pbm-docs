@@ -2,6 +2,15 @@
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
 
+??? admonition "Implementation history"
+
+    The following table lists the changes in the implementation of physical backups and the versions that introduced those changes:
+
+    |Version | Description |
+    |--------|-------------|
+    | [2.0.0](../release-notes/2.0.0.md)   | Physical backups and restores, physical restore with data-at-rest encryption |
+    | [2.3.0](../release-notes/2.3.0.md)   | Physical backups in mixed deployments |
+
 ## Availability and system requirements
 
 *  Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 

@@ -200,7 +200,7 @@ nav:
         - usage/oplog-replay.md 
         - usage/logs.md 
         - Backup management via PMM: pmm.md 
-  - Remote backup storage:
+  - Storage:
       - details/storage-configuration.md
       - details/storage-config-example.md
       - features/multi-storage.md
@@ -222,7 +222,7 @@ nav:
   - Compatibility with MongoDB:
     - Comparison with MongoDB: 'features/comparison.md'
     - details/deployments.md
-    - details/versions.md
+    - Version compatibility matrix: 'details/versions.md'
   - Troubleshooting & FAQ:
       - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'

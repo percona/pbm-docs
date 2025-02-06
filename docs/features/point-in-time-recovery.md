@@ -2,6 +2,19 @@
 
 !!! admonition "Version added: [1.3.0](../release-notes/1.3.0.md)"
 
+??? admonition "Implementation history"
+
+    The following table lists the changes in the implementation of point-in-time recovery and the versions that introduced those changes:
+
+    |Version | Description |
+    |--------|-------------|
+    | [1.3.0](../release-notes/1.3.0.md)   | Initial implementation of point-in-time recovery|
+    | [1.6.0](../release-notes/1.6.0.md)   | Ability to change duration of an oplog span|
+    | [1.7.0](../release-notes/1.7.0.md)   | Added compression to oplog slices|
+    | [2.3.0](../release-notes/2.3.0.md)   | Support of any type of base backup|
+    | [2.4.0](../release-notes/2.4.0.md)   | Oplog slicing in parallel with backups|
+    |[2.6.0](../release-notes/2.6.0.md))   | Adjust node priority for oplog slices|
+
 Point-in-time recovery is restoring a database up to a specific timestamp. This includes restoring the data from a backup snapshot and replaying all events that occurred to this data up to a specified time from [oplog slices](#oplog-slicing). 
 
 | Advantages                     | Disadvantages                   |
