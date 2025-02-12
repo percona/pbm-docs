@@ -113,6 +113,7 @@ The `pbm-agent.service` systemd unit file includes the location of the environme
     ```
     PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
+To improve the security of the file, you can change its owner to the user that is configured in systemd, and set the file permission so that only the owner and root can read from it. 
 
 ### Passwords with special characters
 
