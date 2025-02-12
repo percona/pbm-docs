@@ -56,7 +56,7 @@ You can make a physical, incremental or a snapshot-based backup in such a mixed 
 
 Physical, incremental and snapshot-based backups are only possible from PSMDB nodes since their implementation is based on the [`$backupCursorExtend` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality. When it’s time to make a backup, PBM searches the PSMDB node and makes a backup from it. The PSMDB node must not be an arbiter nor a delayed node. 
 
-If more than 2 nodes are suitable for a backup, PBM selects the one with a higher [priority](../usage/start-backup.md#adjust-node-priority-for-backups). Note that if you override a priority for at least one node, PBM assigns priority `1.0` for the remaining nodes and uses the new priority list . 
+If more than 2 nodes are suitable for a backup, PBM selects the one with a higher [priority](../usage/backup-priority.md). Note that if you override a priority for at least one node, PBM assigns priority `1.0` for the remaining nodes and uses the new priority list . 
 
 Consider the following flow for [incremental backups](incremental-backup.md):
 By default, PBM picks the node from where it made the incremental base backup when it makes subsequent backups. PBM assigns priority `3.0` to this node ensuring that it is the first in the list. If you change the node priority, make a new incremental base backup to ensure data continuity.

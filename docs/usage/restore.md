@@ -56,7 +56,7 @@
         $ pbm restore <backup_name>
         ```
 
-    Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](#restoring-a-backup-into-a-new-environment).
+    Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
 
 ### Post-restore steps
 

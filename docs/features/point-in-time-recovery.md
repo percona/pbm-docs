@@ -117,7 +117,7 @@ Before version 2.6.0, the `pbm-agent` to save oplog slices is selected randomly 
 
 Starting with version 2.6.0, you can control from what node to save oplog slices by assigning the priority to the desired nodes via the configuration file. For example, you can ensure that both backups and oplog slices are taken from the nodes in a specific data center as defined in the organization's regulations. Or, you can reduce network latency by making backups and / or oplog slices from nodes in geographically closest locations.  
 
-Node priority for oplog slices is handled similarly to the [node priority for making backups](../usage/start-backup.md#adjust-node-priority-for-backups), yet it is independent from it. Thus, you can assign a different priority for backups and oplog slices for the same node. Or, adjust only the priority for oplog slices, leaving the default one for backups. 
+Node priority for oplog slices is handled similarly to the [node priority for making backups](../usage/backup-priority.md), yet it is independent from it. Thus, you can assign a different priority for backups and oplog slices for the same node. Or, adjust only the priority for oplog slices, leaving the default one for backups. 
 
 PBM then handles both processes according to their priority.
 
@@ -127,7 +127,7 @@ The default node priority for oplog slices is the same as for making backups:
 * secondary nodes - priority 1
 * primary node - priority 0.5
 
-To redefine it, specify the new priority for the [`pitr.priority`](../reference/pitr-options.md#pitrnodepriority) option in the configuration file:
+To redefine it, specify the new priority for the [`pitr.priority`](../reference/pitr-options.md#pitrpriority) option in the configuration file:
 
 ```yaml
 pitr:

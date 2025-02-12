@@ -116,59 +116,6 @@ restore:
 * `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
 
 
-=== ":material-select-multiple: Selective"
-
-    1. List the backups 
-
-        ```{.bash data-prompt="$"}
-        $ pbm list
-        ```
-    2. Run the ``pbm restore`` command in the format:
-
-        ```{.bash data-prompt="$"}
-        $ pbm restore <backup_name> --ns <database.collection>
-        ```
-    
-    You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>, <db2.*>`. 
-
-    During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
-
-    ### Restore with users and roles
-
-    To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles) from a full backup, add the `--with-users-and-roles` flag to the `pbm restore` command:
-
-    ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
-    ```
-
-=== ":simple-databricks: Incremental"
-
-    Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:
-
-    ```{.bash data-prompt="$"}
-    $ pbm restore 2022-11-25T14:13:43Z
-    ```
-
-    Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.
-
-    After the restore is complete, do the following:
-
-    1. Restart all `mongod` nodes and `pbm-agents`. 
-
-        !!! note
-
-            You may see the following message in the `mongod` logs after the cluster restart:
-
-            ```{.text .no-copy}
-            "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
-            ```
-
-            This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
-    
-    2. Resync the backup list from the storage. 
-    3. Start the balancer and the `mongos` node.
-    4. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
-
 ## Next steps
 
 [Point-in-time recovery](../usage/pitr-physical.md)

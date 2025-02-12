@@ -31,7 +31,7 @@ PITR <off>:
 
 For timestamp `2021-08-06T08:10:10`, the backup snapshot `2021-08-06T08:02:44Z [restore_to_time: 2021-08-06T08:03:09]` is used as the base for the restore as it is the most recent one.    
 
-If you [select a backup snapshot for the restore with the `–-base-snapshot` option](../features/point-in-time-recovery.md#select-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.    
+If you [select a backup snapshot for the restore with the `–-base-snapshot` option](#select-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.    
 
 !!! admonition "See also"    
 

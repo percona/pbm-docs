@@ -11,7 +11,7 @@
 
 ### Restore from a backup made through PBM
 
-The following procedure describes the restore process from backups [made through PBM](#make-a-backup). It is also possible to attempt restoring from snapshots made without PBM (this feature is experimental). See [Restore from a backup made outside PBM](#restore-from-a-backup-made-outside-pbm).
+The following procedure describes the restore process from backups [made through PBM](backup-external.md). It is also possible to attempt restoring from snapshots made without PBM (this feature is experimental). See [Restore from a backup made outside PBM](#restore-from-a-backup-made-outside-pbm).
 
 1. To perform a restore, run the following command:
 
@@ -46,7 +46,7 @@ The following procedure describes the restore process from backups [made through
         $ sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
         ```
 
-4. Optional. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-descrbe-restore) command.
+4. Optional. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-describe-restore) command.
 
 #### Post-restore steps 
 
