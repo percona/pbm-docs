@@ -114,6 +114,8 @@ The `pbm-agent.service` systemd unit file includes the location of the environme
     PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
 
+To improve the security of the file, you can change its owner to the user that is configured in systemd, and set the file permission so that only the owner and root can read from it. 
+
 ### Passwords with special characters
 
 If the password includes special characters like `#`, `@`, `/` and so on, you must convert these characters using the [percent-encoding mechanism](https://datatracker.ietf.org/doc/html/rfc3986#section-2.1) when passing them to Percona Backup for MongoDB. For example, the password `secret#pwd` should be passed as follows in `PBM_MONGODB_URI`:
