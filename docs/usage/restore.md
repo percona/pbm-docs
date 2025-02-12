@@ -16,6 +16,7 @@
 
 5. Starting with versions 1.x, Percona Backup for MongoDB replicates `mongodump’s` behavior to only drop collections in the backup. It does not drop collections that are created new after the time of the backup and before the restore. Run a `db.dropDatabase()` manually in all non-system databases (these are all databases except “local”, “config” and “admin”) before running `pbm restore` if you want to guarantee that the post-restore database only includes collections that are in the backup.
     
+
 ## Before you start
 
 1. Stop the balancer and disable chunks autosplit. To verify that both are disabled, run the following command:
@@ -51,9 +52,9 @@
 
 2. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
 
-       ```{.bash data-prompt="$"}
-       $ pbm restore <backup_name>
-       ```
+        ```{.bash data-prompt="$"}
+        $ pbm restore <backup_name>
+        ```
 
     Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](#restoring-a-backup-into-a-new-environment).
 
@@ -64,7 +65,6 @@ After a cluster’s restore is complete, do the following:
 1. Start the balancer and all `mongos` nodes to reload the sharding metadata. 
 2. We recommend to make a fresh backup to serve as the new base for future restores. 
 3. Point-in-time recovery is re-enabled automatically upon backup completion. Otherwise, [enable point-in-time recovery](../features/point-in-time-recovery.md#enable-point-in-time-recovery) to be able to restore to a specific time.
-
 
 ## Adjust memory consumption
 
@@ -78,15 +78,14 @@ restore:
 
 The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
 
-!!! note 
 
-    Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
+Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name> --numInsertionWorkers 15
-    ```
+```{.bash data-prompt="$"}
+$ pbm restore <backup_name> --numInsertionWorkers 15
+```
 
-    Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.
+Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.
 
 ## Restore from a logical backup made on previous major version of Percona Server for MongoDB
 
@@ -107,12 +106,12 @@ The following example illustrates the restore from a backup made on Percona Serv
     $ pbm status
     ```
 
-    Sample output: 
+    ??? admonition "Sample output"
 
-    ```{.bash .no-copy}
-    Snapshots:
-    2023-04-10T10:51:28Z 530.73KB <logical> [ERROR: backup FCV "4.4" is incompatible with the running mongo FCV "5.0"] [2023-04-10T10:51:44Z]
-    ```
+        ```{.bash .no-copy}
+        Snapshots:
+        2023-04-10T10:51:28Z 530.73KB <logical> [ERROR: backup FCV "4.4" is incompatible with the running mongo FCV "5.0"]     [2023-04-10T10:51:44Z]
+        ```
 
 2. Set the Feature Compatibility Version value to 4.4
 
@@ -126,34 +125,7 @@ The following example illustrates the restore from a backup made on Percona Serv
     $ pbm restore 2023-04-10T10:51:28Z
     ```
 
-<<<<<<< HEAD
 4. Set the Feature Compatibility Version value to 5.0
-=======
-    ### Restore a collection under a different name
-
-    You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
-
-    Note that in version 2.8.0 you can restore a single collection and this collection must be unsharded. 
-
-    To restore a collection, pass the collection name from the backup for the `--ns-from` flag and the new name for the `--ns-to` flag:
-
-    ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name> --ns-from <database.collection> --ns-to <database.collection_new>
-    ```
-
-    The new collection has the same data and indexes as the source collection. You must provide a unique name for the collection you restore, otherwise the restore fails.
-
-    You can restore a collection under a new name up to the specified time. Instead of the backup name, specify the timestamp, the source collection name and the new name as follows:
-
-    ```{.bash data-prompt="$"}
-    $ pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database.collection_new>
-    ```
-
-
-=== ":simple-databricks: Incremental"
-
-    Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:
->>>>>>> 3d406df... PBM-1427 Documented how to clone collections (#225)
 
     ```{.javascript data-prompt=">"}
     > db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
@@ -163,14 +135,6 @@ The following example illustrates the restore from a backup made on Percona Serv
 
 [Point-in-time recovery](../usage/pitr-tutorial.md)
 
-## Useful links 
+## Useful links
 
 * [View restore progress](../usage/restore-progress.md)
-
-
-
-
-  
-
-
-

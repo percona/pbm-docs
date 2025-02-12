@@ -22,6 +22,7 @@ theme:
     - navigation.indexes
 #    - navigation.tabs
 #    - navigation.tabs.sticky
+    - content.tooltips
     - content.tabs.link
     - content.action.edit
     - content.action.view

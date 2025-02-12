@@ -29,11 +29,11 @@ graph LR
 
     If the node with the base incremental backup is down or unavailable, you must start the incremental backup chain anew on another node.
 
-2. Adjusting node priorities for backup interferes with the default behaviour described above. If you listed only a subset of nodes for the priority, the remaining nodes receive the default priority 1 and it may happen that the incremental backup is taken not from the node where the base backup was taken.
+2. Adjusting node priorities for backup interferes with the default behaviour described above. If you listed only a subset of nodes for the priority, the remaining nodes receive the default priority 1 and it may happen that the incremental backup is taken not from the node where the base backup was taken. 
 
-   To avoid this, set the highest priority for the node where you wish to incremental backups from. This instructs Percona Backup for MongoDB to start the backup from the same node and will preserve the backup chain. 
+    To avoid this, set the highest priority for the node where you wish to incremental backups from. This instructs Percona Backup for MongoDB to start the backup from the same node and will preserve the backup chain. 
 
-   For a sharded cluster, define the highest priority node for every replica set.  
+    For sharded cluster, define the highest priority node for every replica set. 
 
 [Make a backup](../usage/start-backup.md){ .md-button .md-button }
 [Restore a backup](../usage/restore.md){ .md-button .md-button }

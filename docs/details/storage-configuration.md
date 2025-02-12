@@ -53,7 +53,7 @@ Here are some examples of the steps required to create a bucket.
         ```{.bash data-prompt="$"}
         $ aws s3 ls
         ```
-
+   
 === ":material-google-cloud: Google Cloud Storage"
 
     1. Install and configure the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
@@ -79,7 +79,7 @@ Here are some examples of the steps required to create a bucket.
         ```{.bash data-prompt="$"}
         $ mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
         ```
-
+    
     3. Create a bucket
 
         ```{.bash data-prompt="$"}
@@ -93,7 +93,7 @@ Here are some examples of the steps required to create a bucket.
         ```
 
 After the bucket is created, apply the proper [permissions for PBM to use the bucket](#permissions-setup).
-
+        
 #### Server-side encryption
 
 Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with the following encryption types:

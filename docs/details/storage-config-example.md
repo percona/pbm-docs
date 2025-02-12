@@ -4,6 +4,10 @@ Provide the remote backup storage configuration as a YAML config file. The follo
 
 ## S3-compatible remote storage
 
+!!! important
+    
+    Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this bucket is created and managed solely by PBM.
+
 ### Amazon Simple Storage Service
 
 ```yaml

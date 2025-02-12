@@ -23,11 +23,11 @@ You also drastically reduce time on backup / restore operations of the whole dat
 
 With the selective backup and restore functionality, you have the following options:
 
-1.  Back up a single database or a specific collection and restore all data from it. 
+1.	Back up a single database or a specific collection and restore all data from it. 
 2.  Back up certain databases and / or collections and restore either full data or specific databases / collections from it.
-2.  Restore a specific collection from a single database backup
-3.  Restore certain databases and / or collections from a full backup
-4.  Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
+2.	Restore a specific collection from a single database backup
+3.	Restore certain databases and / or collections from a full backup
+4.	Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
 
 ## Known limitations of selective backups and restores
 

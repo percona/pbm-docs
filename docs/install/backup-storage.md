@@ -54,7 +54,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
               key: <your-access-key>
         ```    
 
-    === ":material-file-tree: Local Filesystem"    
+    === ":material-file-tree: Shared Local Filesystem"    
 
         ```yaml
         storage:

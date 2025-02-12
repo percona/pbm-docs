@@ -28,7 +28,6 @@ By default, Docker will pull the image from Docker Hub if it is not available lo
 
 * If you are using a dedicated container for PBM, it should also have read-write access to MongoDB data volume and you should run it under the same user ID as the MongoDB container. 
 
-
 ## Start Percona Backup for MongoDB 
 
 Start Percona Backup for MongoDB container with the following command:

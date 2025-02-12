@@ -24,11 +24,10 @@ Starting with version 2.0.0, Percona Backup for MongoDB stores data in the new m
 Multi-format is now the default data format since it allows [selective restore](restore.md). Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB.
 
 
-
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
-[Make a restore](restore.md){.md-button}
+[Make a restore from a logical backup](restore.md){.md-button}
 
 ## Useful links
 
