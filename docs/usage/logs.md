@@ -52,7 +52,7 @@ The output includes log messages of the specified severity type and all higher l
 
 ## Implementation details
 
-`pbm-agents` write log information into the `pbmLog` collection in the [PBM Control collections](../reference/glossary.md#pbm-control-collections). Every `pbm-agent` also writes log information to `stderr` so that you can retrieve it when there is no healthy `mongod` node in your cluster or replica set. For how to view an individual `pbm-agent` log, see [How to see the pbm-agent log](../install/initial-setup.md#how-to-see-the-pbm-agent-log).
+`pbm-agents` write log information into the `pbmLog` collection in the [PBM Control collections](../reference/glossary.md#pbm-control-collections). Every `pbm-agent` also writes log information to `stderr` so that you can retrieve it when there is no healthy `mongod` node in your cluster or replica set. For how to view an individual `pbm-agent` log, see [How to see the pbm-agent log](../install/start-pbm-agent.md#how-to-see-the-pbm-agent-log).
 
 !!! note
 

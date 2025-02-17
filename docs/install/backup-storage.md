@@ -7,7 +7,7 @@ The storage configuration itself is out of scope of the present document. We ass
 ## Considerations
 
 Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this bucket is created and managed solely by PBM.
-    
+
 ## Procedure {.power-number}
 
 1. Create a config file (e.g. `pbm_config.yaml`).

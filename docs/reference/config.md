@@ -12,11 +12,11 @@ But you don’t have to use the `mongo` shell; the `pbm` CLI has a “config” 
 
 Percona Backup for MongoDB config contains the following settings:
 
-* [Remote backup storage configuration](../details/storage-configuration.md) is available starting with version 1.0 or 1.1.
+* [Remote backup storage configuration](configuration-options.md) is available starting with version 1.0 or 1.1.
 
-* [Point-in-time recovery configuration](../features/point-in-time-recovery.md) is available starting with version 1.3.0.
+* [Point-in-time recovery configuration](pitr-options.md) is available starting with version 1.3.0.
 
-* [Restore options](configuration-options.md#restore-options) are available as starting with version 1.3.2.
+* [Restore options](restore-options.md) are available as starting with version 1.3.2.
 
 Run [`pbm config --list`](../reference/pbm-commands.md#pbm-config) to see the whole config. (Sensitive fields such as keys will be redacted.)
 
@@ -25,7 +25,7 @@ Run [`pbm config --list`](../reference/pbm-commands.md#pbm-config) to see the wh
 If you are initializing a cluster or a non-sharded replica set for the first time, it is simplest to write the whole config as YAML file and use the
 `pbm config --file` command to upload all the values in one command.
 
-Find the config file examples for the remote backup storage (required) in the [Example config files](../details/storage-config-example.md) section. For more information about available config file options, see [Configuration file options](configuration-options.md#remote-backup=storage-options).
+Find the config file examples for the remote backup storage (required) in the [Example config files](../details/storage-config-example.md) section. For more information about available config file options, see [Configuration file options](configuration-options.md).
 
 Use the following command to upload the config file. For example, config file name is `pbm_config.yaml`:
 
