@@ -42,7 +42,17 @@ Percona provides the [`percona-release` :material-arrow-top-right: ](https://doc
         $ sudo apt install percona-backup-mongodb
         ```    
 
-=== ":material-redhat: On Red Hat Enterprise Linux and derivatives" 
+=== ":material-redhat: On RHEL and derivatives" 
+
+    Run the following command to install the packages:
+
+    ```{.bash data-prompt="$"}
+    $ sudo yum install percona-backup-mongodb
+    ```
+
+=== ":simple-amazon: On Amazon Linux 2023"
+
+    Run the following command to install the packages:
 
     ```{.bash data-prompt="$"}
     $ sudo yum install percona-backup-mongodb
