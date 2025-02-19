@@ -264,7 +264,7 @@ nav:
           - reference/pitr-options.md
           - reference/backup-options.md
           - reference/restore-options.md
-          - reference/loggig-options.md
+          - reference/logging-options.md
       - reference/glossary.md
       - about-docs.md  
       - reference/contributing.md
