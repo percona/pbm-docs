@@ -73,7 +73,7 @@ Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.ht
 *Type*: string <br>
 *Required*: NO
 
-The path to the data directory on the bucket. If undefined, backups are stored in the bucket root directory
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
 
 ### storage.s3.endpointUrl
 
@@ -292,7 +292,7 @@ The URL to access the data in Microsoft Azure Blob Storage. The default value is
 *Type*: string <br>
 *Required*: NO
 
-The path (sub-folder) to the backups inside the container. If undefined, backups are stored in the container root directory.
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
 
 ### storage.azure.credentials.key
 
