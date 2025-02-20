@@ -39,7 +39,7 @@ Ready to try out PBM? Get started quickly with the step-by-step installation ins
 
 Learn what you can do to maintain your backup strategy.
 
-[Backup management :material-arrow-right:](usage/start-backup.md){ .md-button }
+[Backup management :material-arrow-right:](usage/backup-physical.md){ .md-button }
 
 </div><div data-banner markdown>
 

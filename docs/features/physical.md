@@ -43,8 +43,8 @@ During physical backups and restores, ``pbm-agents`` don’t export / import dat
 | ------------------------------ | ------------------------------- |
 |- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point-in-time recovery requires manual operations | Sharded clusters and non-sharded replica sets |
 
-[Make a backup](../usage/start-backup.md){ .md-button .md-button }
-[Restore a backup](../usage/restore.md){ .md-button .md-button }
+[Make a backup](../usage/backup-physical.md){ .md-button .md-button }
+[Restore a backup](../usage/restore-physical.md){ .md-button .md-button }
 
 ## Physical backups in mixed deployments
 

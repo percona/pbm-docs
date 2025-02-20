@@ -125,12 +125,6 @@ To restore from a backup, do the following:
 
 4. Don't forget to complete the [post-restore steps](#post-restore-steps).
 
-
-
-## Next steps
-
-[Point-in-time recovery](../usage/pitr-tutorial.md)
-
 ## Useful links 
 
 * [View restore progress](../usage/restore-progress.md)

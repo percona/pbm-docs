@@ -138,5 +138,5 @@ The following example illustrates the restore from a backup made on Percona Serv
 ## Useful links
 
 * [View restore progress](../usage/restore-progress.md)
-* [Restore into a new environment](../features/resrore-new-env.md)
+* [Restore into a new environment](../features/restore-new-env.md)
 * [Restore into a cluster under a different name](../features/restore-remapping.md)

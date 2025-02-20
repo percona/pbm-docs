@@ -37,7 +37,7 @@ The steps are the following:
 2. Specify the environment variable in `pbm-cron`:
     
      ```{.bash data-prompt="$"}
-     $ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017?/replSetName=xxxx"
+     $ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?replSetName=xxxx"
      ```
 
 3. Grant access to the `pbm-cron` file for the user that will execute the `cron` task.
