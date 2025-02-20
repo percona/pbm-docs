@@ -16,7 +16,7 @@ With [Percona Backup for MongoDB up and running](installation.md) in your enviro
 $ pbm backup --type=logical
 ```
 
-To save all events that occurred to the data between backups, enable saving oplog slices:
+To save all events that occurred to the data between backups, enable the point-in-time recovery routine that saves oplog slices:
 
 ```{.bash data-prompt="$"}
 $ pbm config --set pitr.enabled=true
@@ -51,11 +51,7 @@ To be on the safe side, it is a good practice to make a fresh backup after the r
 $ pbm backup
 ```
 
-This backup refreshes the timeline and serves as the base for saving oplog slices. To re-enable this process, run:
-
-```{.bash data-prompt="$"}
-$ pbm config --set pitr.enabled=true
-```
+This backup refreshes the timeline and serves as the base for saving oplog slices. The point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp to ensure oplog continuity.
 
 ## Next steps
 

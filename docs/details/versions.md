@@ -57,4 +57,3 @@ The Restore compatibility column indicates if you can restore from the backup ma
 [4.4.6-8]: https://docs.percona.com/percona-server-for-mongodb/4.4/release_notes/4.4.6-8.html
 [4.2.24-24]: https://docs.percona.com/percona-server-for-mongodb/4.2/release_notes/4.2.24-24.html
 [4.2.15-16]: https://docs.percona.com/percona-server-for-mongodb/4.2/release_notes/4.2.15-16.html
-

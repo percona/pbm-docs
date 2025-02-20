@@ -101,5 +101,5 @@ Let's say you discover that the `status` field now includes an extra `date` fiel
     In version 2.8.0, you can restore a single non-sharded collection in a replica set under a different name. The support for sharded and time series collections is planned for the future releases.
 
 
-[Make a backup](../usage/start-backup.md){ .md-button .md-button }
-[Restore a backup](../usage/restore.md){ .md-button .md-button }
+[Make a backup](../usage/backup-selective.md){ .md-button .md-button }
+[Restore a backup](../usage/restore-selective.md){ .md-button .md-button }

@@ -35,6 +35,6 @@ graph LR
 
     For sharded cluster, define the highest priority node for every replica set. 
 
-[Make a backup](../usage/start-backup.md){ .md-button .md-button }
-[Restore a backup](../usage/restore.md){ .md-button .md-button }
+[Make a backup](../usage/backup-incremental.md){ .md-button .md-button }
+[Restore a backup](../usage/restore-incremental.md){ .md-button .md-button }
 
