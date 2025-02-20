@@ -1,4 +1,4 @@
-# Make a logical backup
+# Make an snapshot-based backup
 
 --8<-- "prepare-backup.md"
 
@@ -37,7 +37,7 @@
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
-[Make a restore](restore.md){.md-button}
+[Make a restore](restore-external.md){.md-button}
 
 ## Useful links
 

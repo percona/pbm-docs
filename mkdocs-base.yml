@@ -221,9 +221,9 @@ nav:
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
   - Compatibility with MongoDB:
+    - details/versions.md
     - Comparison with MongoDB: 'features/comparison.md'
     - details/deployments.md
-    - Version compatibility matrix: 'details/versions.md'
   - Troubleshooting & FAQ:
       - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'
@@ -280,8 +280,8 @@ nav:
         - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
+      - "About Percona Backup for MongoDB documentation": about-docs.md 
       - reference/glossary.md 
-      - about-docs.md 
       - reference/contributing.md
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md 

@@ -1,4 +1,4 @@
-# Restore from a logical backup
+# Restore from a snapshot-based backup
 
 --8<-- "restore-intro.md"
 

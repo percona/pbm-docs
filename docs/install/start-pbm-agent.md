@@ -46,4 +46,5 @@ When a message `pbm agent is listening for the commands` is printed to the
 
 ## Next steps 
 
-[Make a backup :material-arrow-right:](../usage/start-backup.md){.md-button}
+[Make a backup :material-arrow-right:](../usage/backup-physical.md){.md-button}
+

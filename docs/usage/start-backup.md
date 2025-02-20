@@ -21,16 +21,17 @@ During *logical* backups, Percona Backup for MongoDB copies the actual data to t
 
 Starting with version 2.0.0, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
 
-Multi-format is now the default data format since it allows [selective restore](restore.md). Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB.
+Multi-format is now the default data format since it allows [selective restore](restore-selective.md). Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB.
 
 
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
 [Make a restore from a logical backup](restore.md){.md-button}
+[Make a point-in-time recovery](pitr-tutorial.md){.md-button}
 
 ## Useful links
 
-* [Backup and restore types](../features/backup-types.md)
+* [Track backup progress](../troubleshoot/status.md#backup-progress-tracking)
 * [Schedule backups](../usage/schedule-backup.md)
 

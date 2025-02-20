@@ -23,7 +23,8 @@ Starting with [2.4.0](../release-notes/2.4.0.md), PBM doesn't stop [point-in-tim
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
-[Make a restore](restore.md){.md-button}
+[Make a restore](restore-physical.md){.md-button}
+[Make a point-in-time recovery](pitr-physical.md){.md-button}
 
 ## Useful links
 

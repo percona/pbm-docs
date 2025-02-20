@@ -1,4 +1,4 @@
-# Make a logical backup
+# Make a selective logical backup
 
 --8<-- "prepare-backup.md"
 
@@ -30,7 +30,7 @@ Multi-format is the default data format for both full and selective backups sinc
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
-[Make a restore](restore.md){.md-button}
+[Make a restore](restore-selective.md){.md-button}
 
 ## Useful links
 

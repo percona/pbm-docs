@@ -34,7 +34,7 @@ The incremental backup history looks like this:
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
-[Make a restore](restore.md){.md-button}
+[Make a restore](restore-incremental.md){.md-button}
 
 ## Useful links
 

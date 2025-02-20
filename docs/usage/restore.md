@@ -133,8 +133,10 @@ The following example illustrates the restore from a backup made on Percona Serv
 
 ## Next steps
 
-[Point-in-time recovery](../usage/pitr-tutorial.md)
+[Point-in-time recovery](../usage/pitr-tutorial.md){.md-button}
 
 ## Useful links
 
 * [View restore progress](../usage/restore-progress.md)
+* [Restore into a new environment](../features/resrore-new-env.md)
+* [Restore into a cluster under a different name](../features/restore-remapping.md)

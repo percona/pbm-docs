@@ -34,3 +34,4 @@ For version 1.8.1 and earlier, tracking restore progress during physical restore
 
 - Check the `stderr` logs of the leader `pbm-agent`. The leader ID is printed once the restore has started.
 - Check the status in the metadata file created on the remote storage for the restore. This file is in the root of the storage path and has the format `.pbm.restore/<restore_timestamp>.json`.
+	
