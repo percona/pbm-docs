@@ -13,7 +13,7 @@
     | [1.7.0](../release-notes/1.7.0.md)   | Added compression to oplog slices|
     | [2.3.0](../release-notes/2.3.0.md)   | Support of any type of base backup|
     | [2.4.0](../release-notes/2.4.0.md)   | Oplog slicing in parallel with backups|
-    |[2.6.0](../release-notes/2.6.0.md))   | Adjust node priority for oplog slices|
+    |[2.6.0](../release-notes/2.6.0.md)    | Adjust node priority for oplog slices|
 
 Point-in-time recovery is restoring a database up to a specific timestamp. This includes restoring the data from a backup snapshot and replaying all events that occurred to this data up to a specified time from [oplog slices](#oplog-slicing). 
 
@@ -61,16 +61,6 @@ To start saving [oplog slices](../reference/glossary.md#oplog), the following pr
 
 If you just enabled point-in-time recovery, it requires 10 minutes for the first slice to appear in the [`pbm list`](../reference/pbm-commands.md#pbm-list) output.
 
-!!! important
-
-    **For in MongoDB 5.0 and higher versions**
-
-    If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
-
-    **For MongoDB 8.0 and higher versions**
-
-    If you [unshard a collection :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/command/unshardCollection/), make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
-
 Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as follows:
 
 * **Logical backups** 
@@ -83,6 +73,9 @@ Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as 
 
 
 Thus, if a backup snapshot is large and takes hours to make, all oplog events are saved for it, ensuring point-in-time recovery to any timestamp.
+
+[Known limitations](known-limitations.md#oplog-slicing-for-point-in-time recovery){.md-button}
+
 
 ### Oplog duration
 

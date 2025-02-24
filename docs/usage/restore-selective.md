@@ -4,7 +4,7 @@
 
 ## Before you start
 
-You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
+You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/known-limitations.md#selective-backups-and-restores).
 
 ## Restore a database
 
