@@ -158,9 +158,21 @@ The [storage class](https://aws.amazon.com/s3/storage-classes/) assigned to obje
 
 Enables S3 debug logging for different types of S3 requests. S3 log messages are printed in the `pbm logs` output.
 
-Supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
+Starting with version 2.9.0, PBM uses AWS SDK v2. The AWS SDK v1 values are deprecated. They are kept for backward compatibility.
 
-To specify several event types, separate them by comma. To lean more about the event types, see [the documentation](https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType)
+Please find the mapping table below:
+
+| AWS SDK v1 value | AWS SDK v2 value |
+|------------------|------------------|
+| `LogDebug`       | `LogRequest` <br> `LogResponse`|
+| `Signing`        | `LogSigning`|
+| `HTTPBody`       | `LogRequestWithBody` <br> LogResponseWithBody|
+| `RequestRetries` | `LogDebugWithRequestRetries`|
+| `RequestErrors`  | `LogDebugWithRequestErrors`|
+| `EventStreamBody`| `LogRequestWithBody` <br> `LogResponseWithBody`|
+
+
+To specify several event types, separate them by comma. To learn more about the event types, see [the documentation :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType)
 
 When undefined, no S3 debug logging is performed.
 
