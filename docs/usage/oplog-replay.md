@@ -57,7 +57,6 @@ Storage-level snapshots are saved with point-in-time recovery enabled. Thus, aft
 
 5. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
 
-### Known limitations
+[Known limitations](../features/known-limitations.md#oplog-replay-from-arbitrary-start-time){.md-button}
 
-The oplog replay fails if you rename the entire database or a collection.
 

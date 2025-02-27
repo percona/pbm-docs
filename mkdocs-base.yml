@@ -190,6 +190,7 @@ nav:
         - Backups in sharded clusters: features/backup-sharding.md
         - features/restore-new-env.md
         - features/restore-remapping.md
+        - Known limitations for backups and restores: features/known-limitations.md
   - Manage backups:
         - List backups: usage/list-backup.md
         - usage/describe-backup.md
