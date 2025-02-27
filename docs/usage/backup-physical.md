@@ -1,4 +1,4 @@
-# Make a logical backup
+# Make a physical backup
 
 --8<-- "prepare-backup.md"
 
