@@ -1,4 +1,4 @@
-# Make a logical backup
+# Make incremental backups
 
 --8<-- "prepare-backup.md"
 
