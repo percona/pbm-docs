@@ -29,15 +29,15 @@ storage:
 
 ```yaml
 storage:
- type: s3
- s3:
-     region: northamerica-northeast1
+ type: gcs
+ gcs:
      bucket: pbm-testing
+     chunkSize: 16777216
      prefix: pbm/test
      endpointUrl: https://storage.googleapis.com
      credentials:
-       access-key-id: <your-access-key-id-here>
-       secret-access-key: <your-secret-key-here>
+       projectId: <your-google-cloud-project-id-here>
+       privateKey: <your-private-key-here>
 ```
 
 ### MinIO
