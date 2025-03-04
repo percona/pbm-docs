@@ -74,7 +74,7 @@ Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as 
 
 Thus, if a backup snapshot is large and takes hours to make, all oplog events are saved for it, ensuring point-in-time recovery to any timestamp.
 
-[Known limitations](known-limitations.md#oplog-slicing-for-point-in-time recovery){.md-button}
+[Known limitations](known-limitations.md#oplog-slicing-for-point-in-time-recovery){.md-button}
 
 
 ### Oplog duration

@@ -17,19 +17,19 @@ To illustrate this behavior, let’s use the following `pbm list` output as the 
 ```{.bash .no-copy}
 $ pbm list    
 
-  2021-08-04T13:00:58Z [restore_to_time: 2021-08-04T13:01:23Z]
-  2021-08-05T13:00:47Z [restore_to_time: 2021-08-05T13:01:11Z]
-  2021-08-06T08:02:44Z [restore_to_time: 2021-08-06T08:03:09Z]
-  2021-08-06T08:03:43Z [restore_to_time: 2021-08-06T08:04:08Z]
-  2021-08-06T08:18:17Z [restore_to_time: 2021-08-06T08:18:41Z] 
+  2025-03-04T13:00:58Z [restore_to_time: 2025-03-04T13:01:23]
+  2025-03-05T13:00:47Z [restore_to_time: 2025-03-05T13:01:11]
+  2025-03-06T08:02:44Z [restore_to_time: 2025-03-06T08:03:09]
+  2025-03-06T08:03:43Z [restore_to_time: 2025-03-06T08:04:08]
+  2025-03-06T08:18:17Z [restore_to_time: 2025-03-06T08:18:41] 
 
 PITR <off>:
-  2021-08-04T13:01:24 - 2021-08-05T13:00:11
-  2021-08-06T08:03:10 - 2021-08-06T08:18:29
-  2021-08-06T08:18:42 - 2021-08-06T08:33:09
+  2025-03-04T13:01:24 - 2025-03-05T13:00:11
+  2025-03-06T08:03:10 - 2025-03-06T08:18:29
+  2025-03-06T08:18:42 - 2025-03-06T08:33:09
 ```    
 
-For timestamp `2021-08-06T08:10:10`, the backup snapshot `2021-08-06T08:02:44Z [restore_to_time: 2021-08-06T08:03:09]` is used as the base for the restore as it is the most recent one.    
+For timestamp `2025-03-06T08:10:10`, the backup snapshot `2025-03-06T08:02:44Z [restore_to_time: 2025-03-06T08:03:09]` is used as the base for the restore as it is the most recent one.    
 
 If you [select a backup snapshot for the restore with the `–-base-snapshot` option](#select-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.    
 
