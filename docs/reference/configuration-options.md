@@ -205,12 +205,12 @@ The path to the data directory in the bucket. If undefined, backups are stored i
 
 The URL to access the bucket. The default value is `https://storage.googleapis.com`. 
 
-### gcs.credentials.projectId
+### gcs.credentials.clientEmail
 
 *Type*: string <br>
 *Required*: YES
 
-Project resource ID - a unique identifier for the project resource. Read more about projects in Google Cloud storage in the [Resource hierarchy :octicons-link-external-16:](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#projects) documentation.
+The clientEmail represents the email address associated with the service account. It is used to identify the service account when making API requests to Google Cloud services.
 
 ### gcs.credentials.privateKey
 
