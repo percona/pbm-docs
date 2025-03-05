@@ -34,9 +34,8 @@ storage:
      bucket: pbm-testing
      chunkSize: 16777216
      prefix: pbm/test
-     endpointUrl: https://storage.googleapis.com
      credentials:
-       projectId: <your-google-cloud-project-id-here>
+       clientEmail: <your-google-cloud-project-id-here>
        privateKey: <your-private-key-here>
 ```
 
