@@ -15,6 +15,10 @@ backup:
 
 The format of the priority array is `<hostname:port>`:`<priority>`.
 
+!!! note
+
+    Using configuration file is the only way to define backup priority. 
+
 To define priority in a sharded cluster, you can either list all nodes or specify priority for one node in each shard and config server replica set. The `hostname` and `port` uniquely identifies a node so that Percona Backup for MongoDB recognizes where it belongs to and grants the priority accordingly.
 
 Note that if you listed only specific nodes, the remaining nodes will be automatically assigned priority `1.0`. For example, you assigned priority `2.5` to only one secondary node in every shard and config server replica set of the sharded cluster.
