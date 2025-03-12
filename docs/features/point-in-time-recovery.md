@@ -131,7 +131,7 @@ pitr:
     "rs3:27019": 1
 ```
 
-Using configuration file is the only way to define backup priority. 
+Using configuration file is the only way to define PITR priority. 
 
 
 The format of the priority array is `<hostname:port>:<priority>`.
