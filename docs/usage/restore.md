@@ -52,9 +52,9 @@
 
 2. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
 
-        ```{.bash data-prompt="$"}
-        $ pbm restore <backup_name>
-        ```
+    ```{.bash data-prompt="$"}
+    $ pbm restore <backup_name>
+    ```
 
     Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
 
@@ -79,19 +79,19 @@ restore:
 The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
 
 
-Starting with version 2.8.0, you can override the number of insertion workers for a specific restore operation. 
+Starting with version 2.8.0, you can override the number of insertion workers per collection and the number of collections to process in parallel during a logical restore. For example:
 
 ```{.bash data-prompt="$"}
-$ pbm restore <backup_name> --numInsertionWorkers 15
+$ pbm restore <backup_name>  --num-insertion-workers-per-collection 4 --num-parallel-collections 8
 ```
 
-Increasing the number may increase the restore speed. However, increase the number of workers with caution, not to run into higher than expected disk and CPU usage.
+Increasing the number may increase the restore speed. However, use caution not to run into higher than expected disk and CPU usage.
 
 ## Restore from a logical backup made on previous major version of Percona Server for MongoDB
 
 In some cases you may need to restore from a backup made on previous major version of Percona Server for MongoDB. To make this happen, [Feature Compatibility Version (FCV) :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/command/setFeatureCompatibilityVersion/) values in both backup and the destination environment must match. 
 
-Starting with version 2.1.0, Percona Backup for MongoDB stores the FCV value in the backup metadata. If it doesn't match the FCV value on the destination environment, you see the warning in the [`pbm status`](../reference/pbm-commands.md#pbm-status) output so that you can manually adjust it before the restore.
+Starting with version 2.1.0, Percona Backup for MongoDB stores the FCV value in the backup metadata. If it doesn't match the FCV value on the destination environment, you will see the error in the [`pbm status`](../reference/pbm-commands.md#pbm-status) output.
 
 ```{.bash .no-copy}
 2023-04-10T10:48:54Z 302.80KB <logical> [ERROR: backup FCV "6.0" is incompatible with the running mongo FCV "5.0"] [2023-04-10T10:49:14Z]
