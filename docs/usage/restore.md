@@ -85,7 +85,7 @@ Starting with version 2.8.0, you can override the number of insertion workers pe
 $ pbm restore <backup_name>  --num-insertion-workers-per-collection 4 --num-parallel-collections 8
 ```
 
-Increasing the number may increase the restore speed. However, use caution not to run into higher than expected disk and CPU usage.
+Increasing the number may increase the restore speed. However, it may also lead to unexpectedly high disk and CPU usage. Consider the trade-offs carefully before making adjustments to ensure optimal performance without overloading resources.
 
 ## Restore from a logical backup made on previous major version of Percona Server for MongoDB
 
