@@ -1,11 +1,14 @@
 # PBM Variables set for HTML output
 # See also mkdocs.yml plugins.with-pdf.cover_subtitle and output_path
 
-release: '2.9.0'
+release: '2.9.1'
 version: '2.9'
 year: '2025'
 
+pbm:
+  full_name: 'Percona Backup for MongoDB'
 date:
+  2_9_1: 2025-03-27
   2_9_0: 2025-02-19
   2_8_0: 2024-12-12
   2_7_0: 2024-10-09
