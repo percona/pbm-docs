@@ -81,6 +81,12 @@ restore:
     mongodLocation: /path/to/mongod
 ```
 
+or from the command line:
+
+```
+pbm config --set restore.mongodLocation=/path/to/mongod/
+```
+
 If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.
 
 ```yaml
