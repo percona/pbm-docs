@@ -138,11 +138,12 @@ PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admi
 
 Set the MongoDB URI connection string for `pbm` CLI in your shell. This allows you to call `pbm` commands without the `--mongodb-uri` flag.
 
-Use the following command:
+The following command is the example how to define the MongoDB URI connection string for a replica set with the replica set members `mongors1:27017`, `mongors2:27017` and `mongors3:27017`:
 
 ```
-export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin&replSetName=xxxx"
+export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@mongors1:27017,mongors2:27017,mongors3:27017/?authSource=admin&replSetName=xxxx"
 ```
+
 
 For more information about what connection string to specify, refer to the [pbm connection string](../details/authentication.md#mongodb-connection-strings) section.
 
