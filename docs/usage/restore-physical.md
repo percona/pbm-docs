@@ -74,18 +74,20 @@ After the restore is complete, do the following:
 
 !!! admonition "Version added: 2.0.4"
 
-During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it by specifying this path in the configuration file: 
+During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it: 
 
-```yaml
-restore:
-    mongodLocation: /path/to/mongod
-```
+=== ":octicons-file-code-24: Configuration file"
 
-or from the command line:
+    ```yaml
+    restore:
+        mongodLocation: /path/to/mongod
+    ```
 
-```
-pbm config --set restore.mongodLocation=/path/to/mongod/
-```
+=== ":material-console: Command line"
+
+    ```{.bash data-prompt="$"}
+    $ pbm config --set restore.mongodLocation=/path/to/mongod/
+    ```
 
 If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.
 
