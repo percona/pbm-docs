@@ -4,28 +4,28 @@ Start `pbm-agent` on every server with the `mongod` node installed.
 
 === Using systemd
 
-It is best to use the packaged service scripts to run `pbm-agent`.
-
-```{.bash data-prompt="$"}
-$ sudo systemctl start pbm-agent
-$ sudo systemctl status pbm-agent
-```
+    It is best to use the packaged service scripts to run `pbm-agent`.
+    
+    ```{.bash data-prompt="$"}
+    $ sudo systemctl start pbm-agent
+    $ sudo systemctl status pbm-agent
+    ```
 
 === Manually
 
-The following is an example of starting `pbm-agent` manually. The output is redirected to a file and the process is put in the background.
-
-!!! important
-
-    Start the `pbm-agent` as the `mongod` user. The `pbm-agent` requires write access to the MongoDB data directory to make physical restores.
-
-```{.bash data-prompt="$"}
-$ su mongod nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
-```
-
-Replace `username` and `password` with those of your `pbm` user. `/data/mdb_node_xyz/` is the path where **pbm-agent** log files will be written. Make sure you have created this directory and granted write permissions to it for the `mongod` user.
-
-Alternatively, you can run `pbm-agent` on a shell terminal temporarily if you want to observe and/or debug the startup from the log messages.
+    The following is an example of starting `pbm-agent` manually. The output is redirected to a file and the process is put in the background.
+    
+    !!! important
+    
+        Start the `pbm-agent` as the `mongod` user. The `pbm-agent` requires write access to the MongoDB data directory to make physical restores.
+    
+    ```{.bash data-prompt="$"}
+    $ su mongod nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
+    ```
+    
+    Replace `username` and `password` with those of your `pbm` user. `/data/mdb_node_xyz/` is the path where **pbm-agent** log files will be written. Make sure you have created this directory and granted write permissions to it for the `mongod` user.
+    
+    Alternatively, you can run `pbm-agent` on a shell terminal temporarily if you want to observe and/or debug the startup from the log messages.
 
 ## Multiple agents on the same host
 
