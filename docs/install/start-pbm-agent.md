@@ -2,92 +2,100 @@
 
 Start `pbm-agent` on every server with the `mongod` node installed. 
 
-=== Using systemd
+=== ":material-console: Using `systemd`"
 
-    It is best to use the packaged service scripts to run `pbm-agent`.
+    We recommend to use the packaged service scripts to run `pbm-agent`.
     
     ```{.bash data-prompt="$"}
     $ sudo systemctl start pbm-agent
     $ sudo systemctl status pbm-agent
     ```
 
-=== Manually
+=== ":fontawesome-solid-user-gear: Manually"
 
-    The following is an example of starting `pbm-agent` manually. The output is redirected to a file and the process is put in the background.
-    
-    !!! important
-    
-        Start the `pbm-agent` as the `mongod` user. The `pbm-agent` requires write access to the MongoDB data directory to make physical restores.
+    You can start a `pbm-agent` manually. You must start a `pbm-agent` as the `mongod` user because the `pbm-agent` requires write access to the MongoDB data directory to make physical restores. 
+
+    The following command starts the `pbm-agent`, redirects the output to a file and puts the process in the background:
     
     ```{.bash data-prompt="$"}
     $ su mongod nohup pbm-agent --mongodb-uri "mongodb://username:password@localhost:27018/" > /data/mdb_node_xyz/pbm-agent.$(hostname -s).27018.log 2>&1 &
     ```
     
-    Replace `username` and `password` with those of your `pbm` user. `/data/mdb_node_xyz/` is the path where **pbm-agent** log files will be written. Make sure you have created this directory and granted write permissions to it for the `mongod` user.
+    Replace `username` and `password` with those of your `pbm` user. `/data/mdb_node_xyz/` is the path where `pbm-agent` log files will be written. Make sure you have created this directory and granted write permissions to it for the `mongod` user.
     
     Alternatively, you can run `pbm-agent` on a shell terminal temporarily if you want to observe and/or debug the startup from the log messages.
 
 ## Multiple agents on the same host
 
-For example, if you put a config server (listen port `27019`) co-located on the same host as other `mongod` process (listen port `27018`). 
-In this case there should be two `pbm-agent` processes, one connected to mongod process (e.g. `“mongodb://username:password@localhost:27018/”`) and one to the configsvr node (e.g. `“mongodb://username:password@localhost:27019/”`).
+Let's say you run a config server (listen port `27019`) on the same host as another `mongod` process (listen port `27018`). 
 
-1. Prepare the URI for each agent
-```
-tee /etc/sysconfig/pbm-agent1 <<EOF
-PBM_MONGODB_URI="mongodb://backupUser:backupPassword@localhost:27017/?authSource=admin"
-EOF
-```
-```
-tee /etc/sysconfig/pbm-agent2 <<EOF
-PBM_MONGODB_URI="mongodb://backupUser:backupPassword@localhost:27018/?authSource=admin"
-EOF
-```
+In this case there should be two `pbm-agent` processes:
 
-2. Prepare service files for each agent
-```
-tee /usr/lib/systemd/system/pbm-agent1.service <<EOF
-[Unit]
-Description=pbm-agent for mongod1
-After=time-sync.target network.target
+* one process is connected to the `mongod` process (e.g. `“mongodb://username:password@localhost:27018/”`) 
+* another one - to the configsvr node (e.g. `“mongodb://username:password@localhost:27019/”`).
 
-[Service]
-EnvironmentFile=-/etc/sysconfig/pbm-agent1
-Type=simple
-User=mongod
-Group=mongod
-PermissionsStartOnly=true
-ExecStart=/usr/bin/pbm-agent
+The steps below show how to achieve this:
 
-[Install]
-WantedBy=multi-user.target
-EOF
-```
-```
-tee /usr/lib/systemd/system/pbm-agent2.service <<EOF
-[Unit]
-Description=pbm-agent for mongod2
-After=time-sync.target network.target
+1. Set the MongoDB connection string URI for each agent:
 
-[Service]
-EnvironmentFile=-/etc/sysconfig/pbm-agent2
-Type=simple
-User=mongod
-Group=mongod
-PermissionsStartOnly=true
-ExecStart=/usr/bin/pbm-agent
+    ```{.bash data-prompt="$"}
+    $ tee /etc/sysconfig/pbm-agent1 <<EOF
+    PBM_MONGODB_URI="mongodb://backupUser:backupPassword@localhost:27018/?authSource=admin"
+    EOF
+    ```
 
-[Install]
-WantedBy=multi-user.target
-EOF
-```
+    ```{.bash data-prompt="$"}
+    $ tee /etc/sysconfig/pbm-agent2 <<EOF
+    PBM_MONGODB_URI="mongodb://backupUser:backupPassword@localhost:27019/?authSource=admin"
+    EOF
+    ```
 
-3. Reload system units and start services
-```
-systemctl daemon-reload
-systemctl start pbm-agent1
-systemctl start pbm-agent2
-```
+2. Prepare service files for each agent:
+
+    ```{.bash data-prompt="$"}
+    $ tee /usr/lib/systemd/system/pbm-agent1.service <<EOF
+    [Unit]
+    Description=pbm-agent for mongod1
+    After=time-sync.target network.target    
+
+    [Service]
+    EnvironmentFile=-/etc/sysconfig/pbm-agent1
+    Type=simple
+    User=mongod
+    Group=mongod
+    PermissionsStartOnly=true
+    ExecStart=/usr/bin/pbm-agent    
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+    ```
+    ```{.bash data-prompt="$"}
+    $ tee /usr/lib/systemd/system/pbm-agent2.service <<EOF
+    [Unit]
+    Description=pbm-agent for mongod2
+    After=time-sync.target network.target    
+
+    [Service]
+    EnvironmentFile=-/etc/sysconfig/pbm-agent2
+    Type=simple
+    User=mongod
+    Group=mongod
+    PermissionsStartOnly=true
+    ExecStart=/usr/bin/pbm-agent    
+
+    [Install]
+    WantedBy=multi-user.target
+    EOF
+    ```
+
+3. Reload system units and start `pbm-agent` processes: 
+
+    ```{.bash data-prompt="$"}
+    $ sudo systemctl daemon-reload
+    $ sudo systemctl start pbm-agent1
+    $ sudo systemctl start pbm-agent2
+    ```
 
 ## How to see the `pbm-agent` log
 
@@ -97,14 +105,14 @@ command below. See `man journalctl` for useful options such as `--lines`, `--fol
 
 ```{.bash data-prompt="$"}
 $ journalctl -u pbm-agent.service
--- Logs begin at Tue 2019-10-22 09:31:34 JST. --
+-- Logs begin at Tue {{year}}-01-22 09:31:34 JST. --
 Jan 22 15:59:14 : Started pbm-agent.
 Jan 22 15:59:14 pbm-agent[3579]: pbm agent is listening for the commands
 ...
 ...
 ```
 
-If you started `pbm-agent` manually, see the file you redirected stdout and stderr to.
+If you started `pbm-agent` manually, see the file you redirected `stdout` and `stderr` to.
 
 When a message `pbm agent is listening for the commands` is printed to the
 `pbm-agent` log file, `pbm-agent` confirms that it has connected to its `mongod` node successfully.

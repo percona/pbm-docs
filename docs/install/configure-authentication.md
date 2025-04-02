@@ -10,7 +10,7 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem o
 
 !!! info
 
-    Execute this step on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
+    Do this step on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set.
     
 1. Create the role that allows any action on any resource.
 
