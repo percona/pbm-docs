@@ -4,7 +4,7 @@ site_name: Percona Backup for MongoDB
 site_description: documentation
 site_author: Percona LLC
 copyright: >
-  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2024 
+  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2025 
   — <a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
@@ -43,7 +43,26 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Color theme set to Dark Mode. Click to change
-  
+
+# Theme features
+
+  features:
+    - search.highlight
+    - search.share
+    - search.suggest
+    - navigation.top
+    - navigation.tracking 
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.indexes
+    - content.tooltips
+    - content.tabs.link
+    - content.action.edit
+    - content.action.view
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow      
+
 
 extra_css:
   - https://unicons.iconscout.com/release/v3.0.3/css/line.css
@@ -148,27 +167,6 @@ plugins:
       include_css: true
       enabled: true
 
-extra:
-  # Google Analytics configuration
-  analytics:
-    provider: google
-    property: G-J4J70BNH0G
-    feedback:
-      title: Was this page helpful?
-      ratings:
-        - icon: material/emoticon-happy-outline
-          name: This page was helpful
-          data: 1
-          note: >-
-            Thanks for your feedback!
-        - icon: material/emoticon-sad-outline
-          name: This page could be improved
-          data: 0
-          note: >- 
-            Thank you for your feedback! Help us improve by using our 
-            <a href="https://docs.google.com/forms/d/1bkWACehjqlwA0AKf-qTJcXvYbOSYgze8iTPXjntqmNo/edit" target="_blank" rel="noopener">
-            feedback form</a>.
-
 nav:
   - Home: index.md
   - get-help.md
@@ -181,13 +179,13 @@ nav:
          - Build from source: install/source.md
          - Run in Docker: install/docker.md
       - 2. Set up and configure: 
-        - install/initial-setup.md       
+        - Initial setup: install/initial-setup.md       
         - install/configure-authentication.md
         - install/backup-storage.md
         - Start the pbm-agent process: install/start-pbm-agent.md
   - Backup and restore:
         - features/backup-types.md
-        - Logical:
+        - Logical: 
           - features/logical.md
           - Make a logical backup : "usage/start-backup.md"
           - Restore from a logical backup: usage/restore.md

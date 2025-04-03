@@ -7,7 +7,7 @@
 
 1. Before you start:
 
-    1. Read [known limitations for selective backups and restores](../features/selective-backup.md#known-limitations-of-selective-backups-and-restores).
+    1. Read [known limitations for selective backups and restores](../features/known-limitations.md#selective-backups-and-restores).
     2. Check that you [have made a full backup](backup-selective.md) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
 
 2. To restore the desired database or a collection to a point in time, run the ``pbm restore`` command as follows:

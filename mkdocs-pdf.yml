@@ -28,42 +28,42 @@ nav:
   - index.md
   - get-help.md
   - Get started:
-      - installation.md 
+      - Quickstart: installation.md 
       - 1. Install:
-         - system-requirements.md
+         - System-requirements: system-requirements.md
          - install/repos.md       
          - install/tarball.md
          - install/source.md
          - install/docker.md
       - 2. Set up and configure: 
-        - install/initial-setup.md       
+        - Initial setup: install/initial-setup.md       
         - install/configure-authentication.md
         - install/backup-storage.md
         - install/start-pbm-agent.md
   - Backup and restore:
-        - features/backup-types.md
+        - Backup and restore types: features/backup-types.md
         - Logical:
-          - features/logical.md
+          - Logical backups and restores: features/logical.md
           - usage/start-backup.md
           - usage/restore.md
         - Physical:
-          - features/physical.md
+          - Physical backups and restores: features/physical.md
           - usage/backup-physical.md
           - usage/restore-physical.md
         - Incremental:
-          - features/incremental-backup.md
+          - Incremental physical backups: features/incremental-backup.md
           - usage/backup-incremental.md
           - usage/restore-incremental.md
         - Selective:
-          - features/selective-backup.md
+          - Selective backup and restore: features/selective-backup.md
           - usage/backup-selective.md
           - usage/restore-selective.md
         - Snapshot-based:
-          - features/snapshots.md
+          - Snapshot-based physical backups: features/snapshots.md
           - usage/backup-external.md
           - usage/restore-external.md
         - Point-in-time recovery: 
-          - features/point-in-time-recovery.md
+          - Point-in-time recovery: features/point-in-time-recovery.md
           - usage/pitr-tutorial.md
           - usage/pitr-physical.md
           - usage/pitr-selective.md
@@ -72,7 +72,7 @@ nav:
         - features/restore-remapping.md
         - features/known-limitations.md
   - Manage backups:
-        - usage/list-backup.md
+        - List backups: usage/list-backup.md
         - usage/describe-backup.md
         - usage/schedule-backup.md 
         - usage/cancel-backup.md
@@ -84,20 +84,19 @@ nav:
         - usage/logs.md 
         - pmm.md 
   - Storage:
-      - details/storage-configuration.md
+      - Remote backup storage: details/storage-configuration.md
       - details/storage-config-example.md
       - features/multi-storage.md
-  - PBM commands:
-      - reference/pbm-commands.md
+  - PBM commands: reference/pbm-commands.md
   - Configuration file: 
-      - reference/config.md
+      - Percona Backup for MongoDB configuration in a cluster: reference/config.md
       - reference/configuration-options.md
       - reference/pitr-options.md
       - reference/backup-options.md
       - reference/restore-options.md
       - reference/logging-options.md
   - Administer PBM:
-      - manage/overview.md
+      - Overview: manage/overview.md
       - manage/configure-remotely.md
       - manage/automate-s3-access.md
       - manage/logpath.md
@@ -105,25 +104,25 @@ nav:
       - manage/upgrading.md
       - manage/uninstalling.md
   - Compatibility with MongoDB:
-    - details/versions.md
+    - Supported MongoDB versions: details/versions.md
     - features/comparison.md
     - details/deployments.md
   - Troubleshooting & FAQ:
-      - troubleshoot/index.md
+      - Overview: troubleshoot/index.md
       - troubleshoot/troubleshooting.md
       - troubleshoot/status.md
       - troubleshoot/pbm-report.md
       - troubleshoot/pbm-pmm.md
       - troubleshoot/faq.md
   - PBM internals:
-      - details/architecture.md
+      - Architecture: details/architecture.md
       - details/pbm-agent.md
       - details/cli.md
       - details/control-collections.md
       - intro.md
       - details/authentication.md
   - Release notes:
-      - release-notes.md
+      - Release notes index: release-notes.md
       - release-notes/2.9.1.md
       - release-notes/2.9.0.md
       - release-notes/2.8.0.md
