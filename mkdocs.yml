@@ -7,36 +7,14 @@ site_url: "https://docs.percona.com/percona-backup-mongodb"
 
 theme:
   name: material
-  custom_dir: _resource/overrides
-
-# Theme features
-
-  features:
-    - search.highlight
-    - search.share
-    - search.suggest
-    - navigation.top
-    - navigation.tracking 
-    - navigation.instant
-    - navigation.instant.progress
-    - navigation.indexes
-#    - navigation.tabs
-#    - navigation.tabs.sticky
-    - content.tooltips
-    - content.tabs.link
-    - content.action.edit
-    - content.action.view
-    - content.code.copy
-    - content.code.annotate
-    - toc.follow      
+  custom_dir: _resourcepdf/overrides
 
 
-  
-#Google Analytics configuration 
-extra: 
-  analytics: 
+extra:
+  # Google Analytics configuration
+  analytics:
     provider: google
-    property: !ENV GOOGLE_ANALYTICS_KEY
+    property: G-J4J70BNH0G
     feedback:
       title: Was this page helpful?
       ratings:
@@ -52,5 +30,7 @@ extra:
             Thank you for your feedback! Help us improve by using our 
             <a href="https://docs.google.com/forms/d/1bkWACehjqlwA0AKf-qTJcXvYbOSYgze8iTPXjntqmNo/edit" target="_blank" rel="noopener">
             feedback form</a>.
-            
+
+
+  
 
