@@ -40,7 +40,7 @@ $ docker run --name <container-name> -e PBM_MONGODB_URI="mongodb://<PBM_USER>:<P
 Where:
 
 * `container-name` is the name you want to assign to your container.
-* `PBM_MONGODB-URI` is a [MongoDB Connection URI :octicons-link-external-16:](https://docs.mongodb.com/manual/reference/connection-string/) string used to connect to MongoDB nodes. See the [Initial setup](initial-setup.md) how to create the PBM user. 
+* `PBM_MONGODB_URI` is a [MongoDB Connection URI :octicons-link-external-16:](https://docs.mongodb.com/manual/reference/connection-string/) string used to connect to MongoDB nodes. See the [Initial setup](initial-setup.md) how to create the PBM user. 
 * `tag` is the tag specifying the version you need. For example, `{{release}}`. Docker identifies the architecture (x86_64 or ARM64) and pulls the respective image. See the [full list of tags](https://hub.docker.com/r/perconalab/percona-backup-mongodb/tags).
 
 Note that every MongoDB node (including replica set secondary members and config server replica set nodes) requires a separate instance of Percona Backup for MongoDB. Thus, a typical, 3-node MongoDB replica set requires three instances of Percona Backup for MongoDB.
