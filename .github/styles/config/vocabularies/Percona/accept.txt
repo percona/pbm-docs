@@ -19,3 +19,4 @@ AWS
 SSE
 UTC
 MinIO
+[Rr]esync
