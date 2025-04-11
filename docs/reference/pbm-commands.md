@@ -103,7 +103,7 @@ The command accepts the following flags:
 
 | Flag               | Description                           |
 | ------------------ | ------------------------------------- | 
-| `--force-resync`   | Resync backup list with the current storage|            
+| `--force-resync`   | Resync PBM's metadata (backup, point-in-time recovery chunks, restore) stored within PBM control collections with the data from the current storage|            
 | `--list`           | List current settings                  |
 | `--file=FILE`      | Upload the config information from a YAML file   |
 | `--set=SET`        | Set a new config option value. Specify the option in the `<key.name=value>` format.                                    |

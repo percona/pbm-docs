@@ -18,7 +18,10 @@ Percona Backup for MongoDB config contains the following settings:
 
 * [Restore options](restore-options.md) are available as starting with version 1.3.2.
 
-Run [`pbm config --list`](../reference/pbm-commands.md#pbm-config) to see the whole config. (Sensitive fields such as keys will be redacted.)
+* [Logging options](logging-options.md) are available starting with version 2.9.0.
+
+
+Run [`pbm config --list`](../reference/pbm-commands.md#pbm-config) to see the whole config. Sensitive fields such as keys will be redacted.
 
 ## Insert the whole Percona Backup for MongoDB config from a YAML file
 
@@ -27,7 +30,7 @@ If you are initializing a cluster or a non-sharded replica set for the first tim
 
 Find the config file examples for the remote backup storage (required) in the [Example config files](../details/storage-config-example.md) section. For more information about available config file options, see [Configuration file options](configuration-options.md).
 
-Use the following command to upload the config file. For example, config file name is `pbm_config.yaml`:
+Use the following command to upload the config file. For example, the config file name is `pbm_config.yaml`:
 
 ```{.bash data-prompt="$"}
 $ pbm config --file pbm_config.yaml
@@ -60,3 +63,20 @@ To list a single value, you can specify just the key name by itself.  If set, th
     pbm config storage.s3.INVALID-KEY
     Error: unable to get config key: invalid config key
     ``` 
+
+## Syncronize configuration
+
+When you upload a configuration file to PBM either during the initial setup or after you made changes, PBM automatically detects whether it needs to update the local metadata about backups, restores and point-in-time recovery chunks  in PBM Control collections. 
+
+For example, if you changed the storage configuration, the metadata has changed too and PBM imports it from the storage. But if you only enabled/disabled point-in-time recovery, metadata remains unchanged.
+
+Though PBM synchronizes metadata automatically, there are cases when you need to run a manual synchronization:
+
+* When you made changes to the storage manually. For example, you added a  backup there manually or changed the path to backups.
+* As a post-restore step after a physical restore. After the data is copied back to the `mongod` nodes, you need to manually trigger metadata synchronization from the backup storage.  
+
+To sync the metadata, run the following command one in the cluster / replica set:
+
+```{.bash data-prompt="$"}
+$ pbm config --force-resync
+```
