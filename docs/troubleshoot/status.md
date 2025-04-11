@@ -54,17 +54,17 @@ This simplifies troubleshooting since the whole information is provided in one p
     ========
     S3 us-east-1 https://storage.googleapis.com/backup-test
        Snapshots:
-         2020-12-16T10:36:52Z 491.98KB [restore_to_time: 2020-12-16T10:37:13Z]
-         2020-12-15T12:59:47Z 284.06KB [restore_to_time: 2020-12-15T13:00:08Z]
-         2020-12-15T11:40:46Z 0.00B [canceled: 2020-12-15T11:41:07Z]
-         2020-12-11T16:23:55Z 284.82KB [restore_to_time: 2020-12-11T16:24:16Z]
-         2020-12-11T16:22:35Z 284.04KB [restore_to_time: 2020-12-11T16:22:56Z]
-         2020-12-11T16:21:15Z 283.36KB [restore_to_time: 2020-12-11T16:21:36Z]
-         2020-12-11T16:19:54Z 281.73KB [restore_to_time: 2020-12-11T16:20:15Z]
-         2020-12-11T16:19:00Z 281.73KB [restore_to_time: 2020-12-11T16:19:21Z]
-         2020-12-11T15:30:38Z 287.07KB [restore_to_time: 2020-12-11T15:30:59Z]
+         2025-03-16T10:36:52Z 491.98KB [restore_to_time: 2025-03-16T10:37:13]
+         2025-03-15T12:59:47Z 284.06KB [restore_to_time: 2025-03-15T13:00:08]
+         2025-03-15T11:40:46Z 0.00B [canceled: 2025-03-15T11540307]
+         2025-03-11T16:23:55Z 284.82KB [restore_to_time: 2025-03-11T16:24:16]
+         2025-03-11T16:22:35Z 284.04KB [restore_to_time: 2025-03-11T16:22:56]
+         2025-03-11T16:21:15Z 283.36KB [restore_to_time: 2025-03-11T16:21:36]
+         2025-03-11T16:19:54Z 281.73KB [restore_to_time: 2025-03-11T16:20:15]
+         2025-03-11T16:19:00Z 281.73KB [restore_to_time: 2025-03-11T16:19:21]
+         2025-03-11T15:30:38Z 287.07KB [restore_to_time: 2025-03-11T15:30:59]
     PITR chunks:
-         2020-12-16T10:37:13 - 2020-12-16T10:43:26 44.17KB
+         2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
     ```
 
 ## `pbm-agent` logs
