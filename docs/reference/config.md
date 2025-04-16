@@ -36,7 +36,7 @@ Use the following command to upload the config file. For example, the config fil
 $ pbm config --file pbm_config.yaml
 ```
 
-Please go ahead and execute the command while connecting to the config server replica set if it is a
+Execute the command while connecting to the config server replica set if it is a
 cluster. Otherwise, connect to the non-sharded replica set as normal. (See
 [MongoDB connection strings - A Reminder (or Primer)](../details/authentication.md) if you are not familiar with MongoDB connection strings yet.)
 
