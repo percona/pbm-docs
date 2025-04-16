@@ -108,6 +108,56 @@ To learn more about each encryption type, refer to the following sections of Ama
 * [Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
 * [Protecting data using server-side encryption with customer-provided encryption keys (SSE-C) :octicons-link-external-16:](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html)
 
+#### Using Self-Signed Certificates with S3-Compatible Storage
+
+!!! warning
+
+    Currently, pbm-agent relies only on the OS-trusted certificate authorities. PBM does not manage custom CA chains internally.
+
+Follow these steps to configure a custom CA certificate:
+
+1. Prepare the Certificate File
+Ensure your self-signed certificate (or full chain) is stored in a PEM-encoded file. For example:
+
+```
+/etc/ssl/certs/my-custom-ca.pem
+```
+
+2. Set the Environment Variable
+Set the `SSL_CERT_FILE` variable to point to your custom CA file. This must be done on:
+
+* All hosts running pbm-agent
+* Any host using the pbm CLI for physical restore
+
+For manual CLI usage (e.g., physical restore):
+
+```
+export SSL_CERT_FILE=/etc/ssl/certs/my-custom-ca.pem
+```
+
+and when you run pbm-agent as a systemd service:
+
+```
+sudo systemctl edit pbm-agent
+```
+
+and add to the configuration:
+
+```
+[Service]
+Environment="SSL_CERT_FILE=/etc/ssl/certs/my-custom-ca.pem"
+```
+
+at the end restart the service:
+```
+sudo systemctl daemon-reexec
+sudo systemctl restart pbm-agent
+```
+
+3. Verify the Setup
+To verify that your custom certificate is recognized, check PBM logs for successful S3 access.
+
+
 ##### SSE-KMS encryption
 
 !!! admonition "Version added: [1.3.2](../release-notes/1.3.2.md)" 
