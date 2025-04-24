@@ -1,6 +1,6 @@
 # Run Percona Backup for MongoDB in a Docker container
 
-Docker images of Percona Backup for MongoDB are hosted publicly on [Docker Hub :octicons-link-external-16:](https://hub.docker.com/repository/docker/percona/percona-backup-mongodb).
+Docker images of Percona Backup for MongoDB are hosted publicly on [Docker Hub :octicons-link-external-16:](https://hub.docker.com/r/percona/percona-backup-mongodb).
 
 For more information about using Docker, see the [Docker Docs :octicons-link-external-16:](https://docs.docker.com/).
 
