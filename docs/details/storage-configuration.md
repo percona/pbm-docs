@@ -229,7 +229,36 @@ This upload retry increases the chances of data upload completion in cases of un
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)"
 
-Percona Backup for MongoDB supports data upload to S3-like storage that supports self-issued TLS certificates. To make this happen, disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
+Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or private CA certificate. This is especially important when using services like MinIO, Ceph, or internal S3 gateways that do not use certificates signed by public Certificate Authorities (CAs).
+
+We recommend providing a whole chain of certificates to ensure the connection is legit. The `SSL_CERT_FILE` environment variable specifies the path to a custom certificate chain file in PEM-format that PBM uses to validate TLS/SSL connection. 
+
+Example:
+Assume, your custom CA certificate is at `/etc/ssl/minio-ca.crt` and your S3 endpoint is `https://minio.internal.local:9000`.
+
+1. Ensure the cert file is in PEM format. Run:
+```bash
+    cat /etc/ssl/minio-ca.crt
+```
+It should look like:
+
+```
+    -----BEGIN CERTIFICATE-----
+    MIIC+TCCAeGgAwIBAgIJANH3WljB...
+    -----END CERTIFICATE-----
+```
+2. For each host where `pbm-agent` and PBM CLI, set `SSL_CERT_FILE` to that file's path. For example:
+```bash
+    export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+```
+3. Restart `pbm-agent`:
+```bash
+    sudo systemctl start pbm-agent
+```
+
+If this variable is not set, PBM uses the system root certificates.
+
+Alternatively, you can disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
 
 ```{.bash data-prompt="$"}
 $ pbm config --set storage.s3.insecureSkipTLSVerify=True
