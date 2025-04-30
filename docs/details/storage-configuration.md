@@ -238,22 +238,22 @@ Assume, your custom CA certificate is at `/etc/ssl/minio-ca.crt` and your S3 end
 
 1. Ensure the cert file is in PEM format. Run:
 ```bash
-    cat /etc/ssl/minio-ca.crt
+cat /etc/ssl/minio-ca.crt
 ```
 It should look like:
 
 ```
-    -----BEGIN CERTIFICATE-----
-    MIIC+TCCAeGgAwIBAgIJANH3WljB...
-    -----END CERTIFICATE-----
+-----BEGIN CERTIFICATE-----
+MIIC+TCCAeGgAwIBAgIJANH3WljB...
+-----END CERTIFICATE-----
 ```
 2. For each host where `pbm-agent` and PBM CLI, set `SSL_CERT_FILE` to that file's path. For example:
 ```bash
-    export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
 ```
 3. Restart `pbm-agent`:
 ```bash
-    sudo systemctl start pbm-agent
+sudo systemctl start pbm-agent
 ```
 
 If this variable isn't set, PBM uses the system root certificates.
