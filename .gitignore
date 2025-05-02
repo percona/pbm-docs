@@ -3,7 +3,7 @@
 *.pyc
 build
 source/ext/__pycache__
-.vscode
+.vscode/
 
 
 # Local Netlify folder

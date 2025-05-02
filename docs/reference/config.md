@@ -2,7 +2,7 @@
 
 The configuration information is stored in a single document of the `admin.pbmConfig` collection. That single copy is shared by all the `pbm-agent` processes in a cluster (or non-sharded replica set), and can be read or updated using the `pbm` CLI tool.
 
-You can see the whole config by running
+You can see the whole config by running:
 
 ```{.javascript  data-prompt=">"}
 > db.getSiblingDB(“admin”).pbmConfig.findOne()
@@ -36,8 +36,8 @@ Use the following command to upload the config file. For example, the config fil
 $ pbm config --file pbm_config.yaml
 ```
 
-Execute the command while connecting to config server replica set if it is a
-cluster. Otherwise just connect to the non-sharded replica set as normal. (See
+Execute the command while connecting to the config server replica set if it is a
+cluster. Otherwise, connect to the non-sharded replica set as normal. (See
 [MongoDB connection strings - A Reminder (or Primer)](../details/authentication.md) if you are not familiar with MongoDB connection strings yet.)
 
 ## Accessing or updating single config values
@@ -48,7 +48,7 @@ You can set a single value at a time. For nested values, use dot-concatenated ke
 pbm config --set storage.s3.bucket="operator-testing"
 ```
 
-To list a single value, you can specify just the key name by itself.  If set, the command returns the value.
+You can specify just the key name to list a single value.  If set, the command returns the value.
 
 === "Success"
 
@@ -64,18 +64,18 @@ To list a single value, you can specify just the key name by itself.  If set, th
     Error: unable to get config key: invalid config key
     ``` 
 
-## Syncronize configuration
+## Synchronize configuration
 
-When you upload a configuration file to PBM either during the initial setup or after you made changes, PBM automatically detects whether it needs to update the local metadata about backups, restores and point-in-time recovery chunks  in PBM Control collections. 
+When you upload a configuration file to PBM either during the initial setup or after you make changes, PBM automatically detects whether it needs to update the local metadata about backups, restores, and point-in-time recovery chunks  in PBM Control collections. 
 
-For example, if you changed the storage configuration, the metadata has changed too and PBM imports it from the storage. But if you only enabled/disabled point-in-time recovery, metadata remains unchanged.
+For example, if you change the storage configuration, the metadata also changes, and PBM imports it from the storage. But if you only enabled/disabled point-in-time recovery, the metadata remains unchanged.
 
 Though PBM synchronizes metadata automatically, there are cases when you need to run a manual synchronization:
 
-* When you made changes to the storage manually. For example, you added a  backup there manually or changed the path to backups.
-* As a post-restore step after a physical restore. After the data is copied back to the `mongod` nodes, you need to manually trigger metadata synchronization from the backup storage.  
+* When you made changes to the storage manually. For example, you manually added a backup or changed the path to backups.
+* As a post-restore step after a physical restore. After the data is copied back to the `mongod` nodes, you must manually trigger metadata synchronization from the backup storage.  
 
-To sync the metadata, run the following command one in the cluster / replica set:
+To sync the metadata, run the following command in the cluster/replica set:
 
 ```{.bash data-prompt="$"}
 $ pbm config --force-resync
