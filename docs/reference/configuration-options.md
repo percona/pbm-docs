@@ -175,50 +175,6 @@ Disables the TLS verification of the S3 storage. This allows Percona Backup for 
     
     Use this option with caution as it might leave a hole for man-in-the-middle attacks.
 
-## GCS type storage options
-
-### gcs.bucket
-
-*Type*: string <br>
-*Required*: YES
-
-The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
-
-### gcs.chunkSize
-
-*Type*: string <br>
-*Required*: NO
-
-The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 16MB.
-
-### gcs.prefix
-
-*Type*: string <br>
-*Required*: NO
-
-The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
-
-### gcs.endpointUrl
-
-*Type*: string <br>
-*Required*: NO
-
-The URL to access the bucket. The default value is `https://storage.googleapis.com`. 
-
-### gcs.credentials.clientEmail
-
-*Type*: string <br>
-*Required*: YES
-
-The clientEmail represents the email address associated with the service account. It is used to identify the service account when making API requests to Google Cloud services.
-
-### gcs.credentials.privateKey
-
-*Type*: string <br>
-*Required*: YES
-
-The private key of the service account used to authenticate the request.
-
 
 ## Server-side encryption options
 
@@ -279,6 +235,78 @@ The minimum time to wait before the next retry, specified as a *time.Duration*. 
 *Default*: 5m
 
 The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
+
+## GCS type storage options
+
+```yaml
+storage:
+ type: gcs
+ gcs:
+    bucket: pbm-testing
+    chunkSize: 16777216
+    prefix: pbm/test
+    credentials:
+      clientEmail: <your-client-email-here>
+      privateKey: <your-private-key-here>
+      HMACAccessKey: <your-HMAC-key-here>
+      HMACSecret: <your-HMAC-secret-here>
+```
+
+### gcs.bucket
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
+
+### gcs.chunkSize
+
+*Type*: string <br>
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 16MB.
+
+### gcs.prefix
+
+*Type*: string <br>
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
+
+### gcs.endpointUrl
+
+*Type*: string <br>
+*Required*: NO
+
+The URL to access the bucket. The default value is `https://storage.googleapis.com`. 
+
+### gcs.credentials.clientEmail
+
+*Type*: string <br>
+*Required*: YES
+
+The clientEmail represents the email address associated with the service account. It is used to identify the service account when making  API requests to Google Cloud services. These credentials are used to authenticate to Cloud Storage via JSON API.
+
+### gcs.credentials.privateKey
+
+*Type*: string <br>
+*Required*: YES
+
+The private key of the service account used to authenticate the request. These credentials are used to authenticate to Cloud Storage via JSON API.
+
+### gcs.credentials.HMACAccessKey
+
+*Type*: string <br>
+*Required*: YES
+
+An access key associated with a service account and used to create signatures using the HMAC-SHA256 signing algorithm. These signatures are then included in requests to the Cloud Storage XML API.
+
+### gcs.credentials.HMACSecret
+
+*Type*: string <br>
+*Required*: YES
+
+A 40-character Base-64 encoded string that is linked to a specific HMAC access key. This secret is used to create signatures to authenticate users in the Cloud Storage via XML API.
 
 ## Filesystem storage options
 
