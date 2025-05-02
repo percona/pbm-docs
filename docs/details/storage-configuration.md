@@ -229,7 +229,47 @@ This upload retry increases the chances of data upload completion in cases of un
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)"
 
-Percona Backup for MongoDB supports data upload to S3-like storage that supports self-issued TLS certificates. To make this happen, disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
+Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don't use certificates signed by public Certificate Authorities (CAs).
+
+Providing a whole chain of certificates is recommended to ensure the connection is legit. The `SSL_CERT_FILE` environment variable specifies the path to a custom certificate chain file in PEM-format that PBM uses to validate TLS/SSL connection. 
+
+**Usage example**
+
+Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path and your S3 endpoint is `https://minio.internal.local:9000`. To use self-issued TLS certificates, do the following:
+
+1. Ensure the cert file is in PEM format. Use the following command to check it:
+
+    ```bash
+    cat /etc/ssl/minio-ca.crt
+    ```
+
+    ??? example "Sample output"
+
+
+        ```{text .no-copy}
+        -----BEGIN CERTIFICATE-----
+        MIIC+TCCAeGgAwIBAgIJANH3WljB...
+        -----END CERTIFICATE-----
+        ```
+
+2. Set the `SSL_CERT_FILE` environment variable to that file's path on each host where `pbm-agent` and PBM CLI are running:
+
+    ```{.bash data-prompt="$"}
+    $ export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+    ```
+
+    If this variable isn't set, PBM uses the system root certificates.
+
+3. Restart `pbm-agent`:
+
+    ```{.bash data-prompt="$"}
+    $ sudo systemctl start pbm-agent
+    ```
+
+4. Verify that your custom certificate is recognized. Check PBM logs for successful S3 access. 
+
+
+Alternatively, you can disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
 
 ```{.bash data-prompt="$"}
 $ pbm config --set storage.s3.insecureSkipTLSVerify=True
