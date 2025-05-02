@@ -61,7 +61,7 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 	$ vi /tmp/pbm_config.yaml
 	```
 	
-3. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md) and [examples of storage configurations](../details/storage-config-example.md):
+3. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md):
 
 	```yaml
 	storage:
