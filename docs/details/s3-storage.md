@@ -1,6 +1,6 @@
 # S3-compatible storage
 
-Percona Backup for MongoDB should work with other S3-compatible storages, but was only tested with the following ones:
+Percona Backup for MongoDB (PBM) works with AWS S3 and other S3-compatible storage services. We test PBM with the following services:
 
 * [Amazon Simple Storage Service :octicons-link-external-16:](https://docs.aws.amazon.com/s3/index.html)
 * [Google Cloud Storage :octicons-link-external-16:](https://cloud.google.com/storage)
