@@ -1,4 +1,4 @@
-# S3-compatible storage
+# AWS or S3-compatible storage
 
 Percona Backup for MongoDB (PBM) works with AWS S3 and other S3-compatible storage services. We test PBM with the following services:
 
@@ -72,11 +72,11 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
 
 Percona Backup for MongoDB supports [server-side encryption](../reference/glossary.md#server-side-encryption) for [S3 buckets](../reference/glossary.md#bucket) with the following encryption types:
 
-* customer-provided keys stored in AWS KMS (SSE-KMS)
-* customer-provided keys stored on the client side (SSE-C)
-* Amazon S3 managed encryption keys (SSE-S3)
+* [customer-provided keys stored in AWS KMS (SSE-KMS)](#using-aws-kms-keys-sse-kms)
+* [customer-provided keys stored on the client side (SSE-C)](#using-customer-provided-keys-sse-c)
+* [Amazon S3 managed encryption keys (SSE-S3)](#using-amazon-s3-managed-keys-sse-s3)
 
-### SSE-KMS encryption
+###  Using AWS KMS keys (SSE-KMS)
 
 !!! admonition "Version added: [1.3.2](../release-notes/1.3.2.md)" 
 
@@ -88,7 +88,7 @@ serverSideEncryption:
    sseAlgorithm: aws:kms
 ```  
 
-### SSE-C encryption
+### Using customer-provided keys (SSE-C)
 
 !!! admonition "Version added: [2.0.1](../release-notes/2.0.1.md)" 
 
@@ -107,7 +107,7 @@ serverSideEncryption:
   sseCustomerKey: <your_encryption_key>
 ``` 
 
-### SSE-S3 encryption
+### Using Amazon S3 managed keys (SSE-S3)
 
 !!! admonition "Version added: [2.6.0](../release-notes/2.6.0.md)" 
 
@@ -120,7 +120,7 @@ serverSideEncryption:
    sseAlgorithm: AES256
 ```  
 
-## Support for multiple endpoints to the same S3 storage
+##  Multiple endpoints to the same S3 storage
 
 !!! admonition "Version added: [2.8.0](../release-notes/2.8.0.md)" 
 
@@ -157,6 +157,8 @@ You can enable debug logging for different types of S3 requests in Percona Backu
 
 To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
 
+
+
 ## Storage classes 
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
@@ -174,7 +176,7 @@ storage:
 
 When the option is undefined, the S3 Standard (`STANDARD`) storage type is used.
 
-## Configure upload retries 
+## Upload retries 
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
 
@@ -189,7 +191,7 @@ retryer:
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
-#### Data upload for storage with self-issued TLS certificates
+## Data upload to storage with self-signed TLS certificates
 
 !!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)"
 
@@ -197,7 +199,7 @@ Percona Backup for MongoDB supports data upload to S3-compatible storage service
 
 Providing a whole chain of certificates is recommended to ensure the connection is legit. The `SSL_CERT_FILE` environment variable specifies the path to a custom certificate chain file in PEM-format that PBM uses to validate TLS/SSL connection. 
 
-**Usage example**
+### Usage example
 
 Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path and your S3 endpoint is `https://minio.internal.local:9000`. To use self-issued TLS certificates, do the following:
 
