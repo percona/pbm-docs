@@ -14,7 +14,7 @@ Here are some examples of the steps required to create a bucket.
 
 === ":material-aws: Amazon S3"
 
-    1. Install and configure [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    1. Install and configure [AWS CLI :octicons-link-external-16:](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
     2. Create an S3 bucket
 
@@ -30,7 +30,7 @@ Here are some examples of the steps required to create a bucket.
    
 === ":material-google-cloud: Google Cloud Storage"
 
-    1. Install and configure the [gcloud CLI](https://cloud.google.com/sdk/docs/install)
+    1. Install and configure the [gcloud CLI :octicons-link-external-16:](https://cloud.google.com/sdk/docs/install)
 
     2. Create a bucket
 
