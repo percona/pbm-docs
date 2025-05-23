@@ -227,8 +227,10 @@ nav:
         - usage/logs.md 
         - Backup management via PMM: pmm.md 
   - Storage:
-      - Remote backup storage: details/storage-configuration.md
-      - details/storage-config-example.md
+      - Remote backup storage overview: details/storage-configuration.md
+      - AWS or s3-compatible storage: details/s3-storage.md
+      - details/filesystem-storage.md
+      - details/azure.md
       - features/multi-storage.md
   - PBM commands: reference/pbm-commands.md
   - Configuration file: 

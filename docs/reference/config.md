@@ -25,10 +25,10 @@ Run [`pbm config --list`](../reference/pbm-commands.md#pbm-config) to see the wh
 
 ## Insert the whole Percona Backup for MongoDB config from a YAML file
 
-If you are initializing a cluster or a non-sharded replica set for the first time, it is simplest to write the whole config as YAML file and use the
+If you are initializing a cluster or a non-sharded replica set for the first time, it is simplest to write the whole config as a YAML file and use the
 `pbm config --file` command to upload all the values in one command.
 
-Find the config file examples for the remote backup storage (required) in the [Example config files](../details/storage-config-example.md) section. For more information about available config file options, see [Configuration file options](configuration-options.md).
+A config file must have a remote backup storage configuration. Find the config file examples for every supported remote backup storage in the Storage section. For more information about available config file options, see [Configuration file options](configuration-options.md).
 
 Use the following command to upload the config file. For example, the config file name is `pbm_config.yaml`:
 
