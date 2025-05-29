@@ -3,7 +3,6 @@
 Percona Backup for MongoDB (PBM) works with AWS S3 and other S3-compatible storage services. We test PBM with the following services:
 
 * [Amazon Simple Storage Service :octicons-link-external-16:](https://docs.aws.amazon.com/s3/index.html)
-* [Google Cloud Storage :octicons-link-external-16:](https://cloud.google.com/storage)
 * [MinIO :octicons-link-external-16:](https://min.io/)
 
 [Configuration examples :material-arrow-down:](#configuration-examples){.md-button}
@@ -26,22 +25,6 @@ Here are some examples of the steps required to create a bucket.
 
         ```{.bash data-prompt="$"}
         $ aws s3 ls
-        ```
-   
-=== ":material-google-cloud: Google Cloud Storage"
-
-    1. Install and configure the [gcloud CLI :octicons-link-external-16:](https://cloud.google.com/sdk/docs/install)
-
-    2. Create a bucket
-
-        ```{.bash data-prompt="$"}
-        $ gcloud storage buckets create my-gcs-bucket --location=US
-        ```
-      
-    3. Verify the bucket creation
-
-        ```{.bash data-prompt="$"}
-        $ gcloud storage buckets list
         ```
         
 === ":simple-minio: MinIo"
@@ -67,6 +50,59 @@ Here are some examples of the steps required to create a bucket.
         ```
 
 After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
+
+## Configuration examples 
+
+!!! important
+    
+    Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this [bucket is created](#storage-bucket-creation) and managed solely by PBM.
+
+These are the examples for the basic configuration of S3-compatible storage in Percona Backup for MongoDB. 
+
+The following sections describe how you can fine-tune your storage configuration: 
+
+* [server-side encryption](#server-side-encryption), 
+* [multiple endpoints to the same S3 storage](#multiple-endpoints-to-the-same-s3-storage), 
+* [debug logging](#debug-logging), 
+* [storage classes](#storage-classes), 
+* [upload retries](#upload-retries), 
+* [data upload to storage with self-signed TLS certificates](#data-upload-to-storage-with-self-signed-tls-certificates).
+
+
+### Amazon Simple Storage Service
+
+```yaml
+storage:
+  type: s3
+  s3:
+    region: us-west-2
+    bucket: pbm-test-bucket
+    prefix: data/pbm/backup
+    credentials:
+      access-key-id: <your-access-key-id-here>
+      secret-access-key: <your-secret-key-here>
+    serverSideEncryption:
+      sseAlgorithm: aws:kms
+      kmsKeyID: <your-kms-key-here>
+```
+
+### MinIO
+
+```yaml
+storage:
+  type: s3
+  s3:
+    endpointUrl: "http://localhost:9000"
+    region: my-region
+    bucket: pbm-example
+    prefix: data/pbm/test
+    credentials:
+      access-key-id: <your-access-key-id-here>
+      secret-access-key: <your-secret-key-here>
+```
+
+For the description of configuration options, see [Configuration file options](../reference/configuration-options.md).
+
 
 ## Server-side encryption
 
@@ -245,57 +281,4 @@ $ pbm config --set storage.s3.insecureSkipTLSVerify=True
 
     Use this option with caution as it might leave a hole for man-in-the-middle attacks.
 
-## Configuration examples 
 
-!!! important
-    
-    Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this [bucket is created](#storage-bucket-creation) and managed solely by PBM.
-
-### Amazon Simple Storage Service
-
-```yaml
-storage:
-  type: s3
-  s3:
-    region: us-west-2
-    bucket: pbm-test-bucket
-    prefix: data/pbm/backup
-    credentials:
-      access-key-id: <your-access-key-id-here>
-      secret-access-key: <your-secret-key-here>
-    serverSideEncryption:
-      sseAlgorithm: aws:kms
-      kmsKeyID: <your-kms-key-here>
-```
-
-### GCS
-
-```yaml
-storage:
- type: s3
- s3:
-     region: northamerica-northeast1
-     bucket: pbm-testing
-     prefix: pbm/test
-     endpointUrl: https://storage.googleapis.com
-     credentials:
-       access-key-id: <your-access-key-id-here>
-       secret-access-key: <your-secret-key-here>
-```
-
-### MinIO
-
-```yaml
-storage:
-  type: s3
-  s3:
-    endpointUrl: "http://localhost:9000"
-    region: my-region
-    bucket: pbm-example
-    prefix: data/pbm/test
-    credentials:
-      access-key-id: <your-access-key-id-here>
-      secret-access-key: <your-secret-key-here>
-```
-
-For the description of configuration options, see [Configuration file options](../reference/configuration-options.md).
