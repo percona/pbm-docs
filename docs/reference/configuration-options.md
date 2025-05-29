@@ -175,6 +175,63 @@ Disables the TLS verification of the S3 storage. This allows Percona Backup for 
     
     Use this option with caution as it might leave a hole for man-in-the-middle attacks.
 
+## GCS type storage options
+
+### gcs.bucket
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
+
+### gcs.chunkSize
+
+*Type*: string <br>
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 16MB.
+
+### gcs.prefix
+
+*Type*: string <br>
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
+
+### gcs.endpointUrl
+
+*Type*: string <br>
+*Required*: NO
+
+The URL to access the bucket. The default value is `https://storage.googleapis.com`. 
+
+### gcs.credentials.projectId
+
+*Type*: string <br>
+*Required*: YES
+
+Project resource ID - a unique identifier for the project resource. Read more about projects in Google Cloud storage in the [Resource hierarchy :octicons-link-external-16:](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#projects) documentation.
+
+### gcs.credentials.privateKey
+
+*Type*: string <br>
+*Required*: YES
+
+The private key of the service account used to authenticate the request.
+
+### gcs.credentials.HMACAccessKey
+
+*Type*: string <br>
+*Required*: YES
+
+The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
+
+### gcs.credentials.HMACSecretKey
+
+*Type*: string <br>
+*Required*: YES
+
+A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
 
 ## Server-side encryption options
 
