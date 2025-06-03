@@ -46,7 +46,7 @@ storage:
 *Type*: string <br>
 *Required*: NO
 
-The storage provider’s name. 
+The storage provider’s name. This field is deprecated.
 
 Supported values: `aws`
 
@@ -329,13 +329,6 @@ The size of data chunks in bytes to be uploaded to the storage bucket in a singl
 *Required*: NO
 
 The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
-
-### gcs.endpointUrl
-
-*Type*: string <br>
-*Required*: NO
-
-The URL to access the bucket. The default value is `https://storage.googleapis.com`. 
 
 ### gcs.credentials.clientEmail
 

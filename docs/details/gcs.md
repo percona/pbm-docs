@@ -49,7 +49,6 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
          bucket: pbm-testing
          chunkSize: 16777216
          prefix: pbm/test
-         endpointUrl: https://storage.googleapis.com
          credentials:
            projectId: <your-google-cloud-project-id-here>
            privateKey: <your-private-key-here>
