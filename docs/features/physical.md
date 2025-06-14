@@ -10,6 +10,7 @@
     |--------|-------------|
     | [2.0.0](../release-notes/2.0.0.md)   | Physical backups and restores, physical restore with data-at-rest encryption |
     | [2.3.0](../release-notes/2.3.0.md)   | Physical backups in mixed deployments |
+    | [2.1.10](../release-notes/2.1.10.md) | Physical restore with a fallback directory | 
 
 ## Availability and system requirements
 
@@ -27,7 +28,7 @@
     * [Physical Backup Support in Percona Backup for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/physical-backup-support-in-percona-backup-for-mongodb/)
     * [$backupCursorExtend in Percona Server for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/2021/06/07/experimental-feature-backupcursorextend-in-percona-server-for-mongodb/)
 
-Physical backup is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0.0, Percona Backup for MongoDB also copies the WiredTiger storage options to the backup’s metadata. 
+Physical backup is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0.0, Percona Backup for MongoDB also copies the WiredTiger storage options to the backup's metadata. 
 
 Physical restore is the reverse process: `pbm-agents` shut down the `mongod` nodes, clean up the `dbPath` data directory and copy the physical files from the storage to it. 
 
@@ -35,16 +36,16 @@ The following diagram shows the physical restore flow:
 
 ![image](../_images/pbm-phys-restore-shard.png)
 
-During the restore, the ``pbm-agents`` temporarily start the ``mongod`` nodes using the the WiredTiger storage options retrieved from the backup’s metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore, this file is deleted. However, it remains for debugging if the restore were to fail. 
+During the restore, the ``pbm-agents`` temporarily start the ``mongod`` nodes using the WiredTiger storage options retrieved from the backup's metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore, this file is deleted. However, it remains for debugging if the restore were to fail. 
 
-During physical backups and restores, ``pbm-agents`` don’t export / import data from / to the database. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (multi-terabyte) databases.
+During physical backups and restores, ``pbm-agents`` don't export / import data from / to the database. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (multi-terabyte) databases.
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
 |- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point-in-time recovery requires manual operations | Sharded clusters and non-sharded replica sets |
 
-[Make a backup](../usage/backup-physical.md){ .md-button .md-button }
-[Restore a backup](../usage/restore-physical.md){ .md-button .md-button }
+[Make a backup](../usage/backup-physical.md){ .md-button }
+[Restore a backup](../usage/restore-physical.md){ .md-button }
 
 ## Physical backups in mixed deployments
 
@@ -54,7 +55,7 @@ You may run both MongoDB Community / Enterprise Edition nodes and Percona Server
 
 You can make a physical, incremental or a snapshot-based backup in such a mixed deployment using PBM. This saves you from having to reconfigure your deployment for a backup, and keeps both your migration and backup strategies intact.
 
-Physical, incremental and snapshot-based backups are only possible from PSMDB nodes since their implementation is based on the [`$backupCursorExtend` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality. When it’s time to make a backup, PBM searches the PSMDB node and makes a backup from it. The PSMDB node must not be an arbiter nor a delayed node. 
+Physical, incremental and snapshot-based backups are only possible from PSMDB nodes since their implementation is based on the [`$backupCursorExtend` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality. When it's time to make a backup, PBM searches the PSMDB node and makes a backup from it. The PSMDB node must not be an arbiter nor a delayed node. 
 
 If more than 2 nodes are suitable for a backup, PBM selects the one with a higher [priority](../usage/backup-priority.md). Note that if you override a priority for at least one node, PBM assigns priority `1.0` for the remaining nodes and uses the new priority list . 
 
@@ -98,3 +99,59 @@ Configure data-at-rest encryption on one node of every shard in your destination
 
 During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node.  
 
+## Physical restores with a fallback directory
+
+!!! admonition "Version added: [2.1.10](../release-notes/2.1.10.md)
+
+During physical restore, PBM stops `mongod` instances, cleans up `dataDir`, uploads backup files from the storage and restarts `mongod` several times to apply the oplog and finalize the restore. This process is error-prone and may result in an unhealthy cluster or a replica set due to issues such as corrupt backup files, network connectivity issues, failures to restart `mongod`, and the like. The cluster may then become not operational and `pbm-agents` cannot connect to their `mongod` instances. 
+
+To prevent this nasty situation, you can configure a fallback directory and revert the cluster to its original state if errors occur during a physical restore.  PBM copies the `dataDir` contents to the fallback directory at the restore start. Then the restore flows as usual.
+
+If the restore is successful, PBM deletes the fallback directory and its contents. 
+
+If PBM detects that the cluster is in error state, it automatically triggers the fallback procedure. PBM cleans up the uploaded backup files from the `dataDir` and moves the files from a fallback directory there. This way a cluster returns to the state before the restore and is operational. You can then retry the restore, try another backup or maintain it another way.
+
+Note that this functionality comes with a tradeoff: you must have disk space at least twice the size of the `dataDir` to copy its contents in the fallback directory. For this reason, fallback directory usage is disabled by default. 
+
+### Configuration
+
+To configure restores with a fallback directory, use either the PBM configuration file or the command line:
+
+=== "Configuration file"
+
+    Specify the following option in the PBM configuration file:
+
+    ```yaml
+    restore:
+      fallbackEnabled: true
+    ```
+    
+    A restore can succeed on most nodes, but it might fail on a few, resulting in a "partlyDone" status. You can configure PBM how to proceed with such partial restores:
+
+    ```yaml
+    restore:
+      allowPartialRestore: true
+    ``` 
+       
+    If you allow them (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync.
+
+    If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the `restore.fallbackEnabled` option set to `true`
+    
+=== "Command line"
+
+     You can start the restore with a fallback directory directly using the `--fallback` flag:
+
+     ```{.bash data-prompt="$"}
+     $ pbm restore --time <time> --fallback
+     ```
+
+     To allow partial restores, pass the `--allow-partial-restore` flag for the `pbm restore` command:
+
+     ```{.bash data-prompt="$"}
+     $ pbm restore --time <time> --allow-partial-restore
+     ```
+
+### Implementation specifics
+
+1. The use of fallback directory is supported for both replica set and sharded cluster deployments
+2. You must have the disk space at least twice the size of the `dataDir` to store its contents in the fallback directory during the restore.
