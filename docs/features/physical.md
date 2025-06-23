@@ -97,27 +97,53 @@ Here's how it works:
 
 Configure data-at-rest encryption on one node of every shard in your destination cluster or a replica set.
 
-During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partially done" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node.  
+During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partlyDone" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node.  
 
 ## Physical restores with a fallback directory
 
-!!! admonition "Version added: [2.1.10](../release-notes/2.1.10.md)
+!!! admonition "Version added: [2.10.0](../release-notes/2.10.0.md)"
 
-During physical restore, PBM stops `mongod` instances, cleans up `dataDir`, uploads backup files from the storage and restarts `mongod` several times to apply the oplog and finalize the restore. This process is error-prone and may result in an unhealthy cluster or a replica set due to issues such as corrupt backup files, network connectivity issues, failures to restart `mongod`, and the like. The cluster may then become not operational and `pbm-agents` cannot connect to their `mongod` instances. 
+An unexpected error may occur during the physical restore phase, such as corrupted backup data files, network issues accessing backup storage or unexpected PBM failures. When this happens, the files in the `dbPath` may be left in an inconsistent state and the affected `mongod` instance cannot be restarted. As a result, a replica set or shard in the cluster become non-operational. PBM becomes non-functional too, since it relies on MongoDB as both a communication channel and a metadata store. 
 
-To prevent this nasty situation, you can configure a fallback directory and revert the cluster to its original state if errors occur during a physical restore.  PBM copies the `dataDir` contents to the fallback directory at the restore start. Then the restore flows as usual.
+To prevent this nasty situation, you can configure a fallback directory and revert the cluster to its original state if errors occur during a physical restore. PBM copies the `dbPath` contents to the fallback directory at the restore start. Then the restore flows as usual.
 
 If the restore is successful, PBM deletes the fallback directory and its contents. 
 
-If PBM detects that the cluster is in error state, it automatically triggers the fallback procedure. PBM cleans up the uploaded backup files from the `dataDir` and moves the files from a fallback directory there. This way a cluster returns to the state before the restore and is operational. You can then retry the restore, try another backup or maintain it another way.
+If PBM detects that the cluster is in the error state, it automatically triggers the fallback procedure. PBM cleans up the uploaded backup files from the `dbPath` and moves the files from a fallback directory there. This way a cluster returns to the state before the restore and is operational. You can then retry the restore, try another backup or maintain it another way.
 
-Note that this functionality comes with a tradeoff: you must have disk space at least twice the size of the `dataDir` to copy its contents in the fallback directory. For this reason, fallback directory usage is disabled by default. 
+Note that this functionality comes with a tradeoff: you must have enough disk space on every `mongod` instance to copy the contents of the `dbPath` to the fallback directory. For this reason, fallback directory usage is disabled by default. Read more about disk space requirements in the [Disk space evaluation](#disk-space-evaluation) section.
+
+### Disk space evaluation
+
+Each `mongod` node must have enough free space for PBM to copy the contents of the `dbPath` into the fallback directory. In addition, at least 15% of total disk capacity must remain free after the files copy to ensure operational stability.
+
+Before initiating a restore, PBM performs a comprehensive disk space evaluation on every `mongod` instance. This includes:
+
+* Total disk size
+* Used and available disk space
+* Estimated size required for PBM operations. It is calculated as `85% of the total size - used space`
+* Backup size. The backup size must be less than the estimated size required for PBM operations. PBM uses the uncompressed backup size for evaluation. This information is stored in the backup metadata and is available in the `pbm describe-backup` command output.
+
+Note that point-in-time recovery oplog chunks are not evaluated. The remaining free space is considered sufficient for PBM to replay them successfully during the restore.
+
+To illustrate this evaluation, consider the following example:
+
+* Disk total: 10 GB
+* Used: 6 GB
+* Free space: 4 GB
+* Available for PBM usage: 10GB * 85% - 6GB = 2.5 GB
+
+The backup size must be less than 2.5 GB to proceed with the restore using the fallback directory.
+
+PBM logs this evaluation in detail. You can view it using the `pbm logs` command.
+
+If even one node in the cluster lacks sufficient disk space according to this calculation, PBM aborts the restore process.  
 
 ### Configuration
 
-To configure restores with a fallback directory, use either the PBM configuration file or the command line:
+To configure physical restores with a fallback directory, use either the PBM configuration file or the command line:
 
-=== "Configuration file"
+=== ":octicons-file-code-24: Configuration file"
 
     Specify the following option in the PBM configuration file:
 
@@ -126,32 +152,38 @@ To configure restores with a fallback directory, use either the PBM configuratio
       fallbackEnabled: true
     ```
     
-    A restore can succeed on most nodes, but it might fail on a few, resulting in a "partlyDone" status. You can configure PBM how to proceed with such partial restores:
+=== ":material-console: Command line"
+
+     You can start the restore with a fallback directory directly using the `--fallback-enabled` flag:
+
+     ```{.bash data-prompt="$"}
+     $ pbm restore --time <time> --fallback-enabled=true
+     ```
+
+
+A restore can succeed on most nodes, but it might fail on a few, resulting in a "partlyDone" status. You can configure PBM how to proceed with such partial restores:
+
+=== ":octicons-file-code-24: Configuration file"
 
     ```yaml
     restore:
-      allowPartialRestore: true
+      allowPartlyDone: true
     ``` 
+
+=== ":material-console: Command line"
+
+    ```{.bash data-prompt="$"}
+    $ pbm restore --time <time> --fallback-enabled=true --allow-partly-done=true
+    ```
        
-    If you allow them (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync.
+If you allow partial restores (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync. 
 
-    If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the `restore.fallbackEnabled` option set to `true`
-    
-=== "Command line"
-
-     You can start the restore with a fallback directory directly using the `--fallback` flag:
-
-     ```{.bash data-prompt="$"}
-     $ pbm restore --time <time> --fallback
-     ```
-
-     To allow partial restores, pass the `--allow-partial-restore` flag for the `pbm restore` command:
-
-     ```{.bash data-prompt="$"}
-     $ pbm restore --time <time> --allow-partial-restore
-     ```
+If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the `restore.fallbackEnabled` option set to `true` or run the `pbm restore` command with the `--fallback-enabled` flag. Otherwise, PBM reports a restore as a failed one.
 
 ### Implementation specifics
 
-1. The use of fallback directory is supported for both replica set and sharded cluster deployments
-2. You must have the disk space at least twice the size of the `dataDir` to store its contents in the fallback directory during the restore.
+1. The use of fallback directory is supported for both replica set and sharded cluster deployments. 
+2. The use of fallback directory is supported for both full physical and physical incremental backups
+3. You must have enough free space on every `mongod` node for PBM to copy the `dbPath` contents to a fallback directory. After the file copy, at least 15% of the total disk size must remain free to ensure operational stability. This free space is also considered enough to replay oplog during point-in-time recovery.
+4. In case of incremental backups, all increments are included in backup size calculation.
+5. You can only restore backups made with PBM version 2.10.0 using the fallback directory. For backups made with earlier PBM versions, PBM doesn't have the uncompressed backup size and cannot evaluate the disk space for fallback directory. Therefore, PBM automatically disables the `fallbackEnabled` setting and logs this action. 

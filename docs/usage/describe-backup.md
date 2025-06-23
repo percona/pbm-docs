@@ -31,6 +31,28 @@ The output provides the backup name, type, status, size and the information abou
       error: ""
     ```
 
+Starting with version 2.0.10, the command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing [physical restores with a fallback directory](../features/physical.md#physical-restores-with-a-fallback-directory).
+
+??? example "Sample output"
+
+    ```{.text .no-copy}
+    pbm describe-backup 2025-06-05T16:57:35Z
+    name: "2025-06-05T16:57:35Z"
+    opid: 6841cc7f1f576b79efb26752
+    type: physical
+    ...
+    status: done
+    size_h: 3.3 GiB
+    size_uncompressed_h: 4.0 GiB
+    ....
+    replsets:
+
+    - name: rs2
+      status: done
+      node: rs202:30202
+      size_h: 3.3 GiB
+      size_uncompressed_h: 3.6 GiB
+
 !!! admonition "Version added: [2.3.0](../release-notes/2.3.0.md)"
 
 You can view the list of collections included in the *logical* or *selective* backup. This simplifies troubleshooting as it helps identify the backup contents for environments where databases are frequently created or dropped.
