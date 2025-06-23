@@ -246,6 +246,7 @@ nav:
       - 'Automate access to S3 buckets for PBM': 'manage/automate-s3-access.md'
       - manage/logpath.md
       - manage/start-agent-with-config.md
+      - manage/change-nodes.md
       - 'Upgrade PBM': 'manage/upgrading.md'
       - 'Remove PBM': 'manage/uninstalling.md'
   - Compatibility with MongoDB:
