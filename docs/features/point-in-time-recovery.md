@@ -28,8 +28,10 @@ Set the `pitr.enabled` configuration option to `true`.
 === ":octicons-file-code-24: Command line"
 
      ```{.bash data-prompt="$"}
-     $ pbm config --set pitr.enabled=true
+     $ pbm config --set pitr.enabled=true --wait
      ```
+
+     We recommend to use the `--wait` flag with the `pbm config --set` command to ensure that the storage sync is fully done before you proceed with further actions. 
 
 === ":material-console: Configuration file"
 

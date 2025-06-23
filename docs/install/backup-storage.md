@@ -68,8 +68,10 @@ Navigate to every storage page for a detailed example configuration file.
 2. Apply the config file to PBM
 
     ```{.bash data-prompt="$"}
-    $ pbm config --file pbm_config.yaml
+    $ pbm config --file pbm_config.yaml --wait
     ```
+
+    We recommend to use the `--wait` flag with the `pbm config --file` command to ensure that the storage sync is fully done before you proceed with further actions. 
 
 To learn more about Percona Backup for MongoDB configuration, see [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).
 

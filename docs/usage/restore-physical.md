@@ -7,8 +7,10 @@
 1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously. 
 
     ```{.bash data-prompt="$"}
-    $ pbm config --set pitr.enabled=false
+    $ pbm config --set pitr.enabled=false --wait
     ```
+
+    We recommend to use the `--wait` flag with the `pbm config --set` command to ensure that the storage sync is fully done before you proceed with further actions. 
 
 2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
 3. Make sure all nodes in the cluster are healthy (i.e. either PRIMARY or SECONDARY). Each pbm-agent needs to be able to connect to its local node and run queries in order to perform the restore.
