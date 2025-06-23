@@ -158,7 +158,7 @@ The [storage class](https://aws.amazon.com/s3/storage-classes/) assigned to obje
 
 Enables S3 debug logging for different types of S3 requests. S3 log messages are printed in the `pbm logs` output.
 
-Starting with version 2.9.0, PBM uses AWS SDK v2. The AWS SDK v1 values are deprecated. They are kept for backward compatibility.
+Starting with version 2.10.0, PBM uses AWS SDK v2. The AWS SDK v1 values are deprecated. They are kept for backward compatibility.
 
 Please find the mapping table below:
 
