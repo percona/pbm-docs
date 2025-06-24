@@ -10,7 +10,7 @@ $ pbm status
 
 The output provides the information about:
 
-* Your MongoDB deployment and `pbm-agents` running in it: to what `mongod` node each agent is connected, the Percona Backup for MongoDB version it runs and the agent’s state
+* Your MongoDB deployment and `pbm-agents` running in it: to what `mongod` node each agent is connected, the Percona Backup for MongoDB version it runs and the agent's state
 
 * The currently running backups / restores, if any
 
@@ -30,17 +30,17 @@ This simplifies troubleshooting since the whole information is provided in one p
     Cluster:
     ========
     config:
-      - config/localhost:27027 [P]: pbm-agent [v2.9.1] OK
-      - config/localhost:27028 [S]: pbm-agent [v2.9.1] OK
-      - config/localhost:27029 [S]: pbm-agent [v2.9.1] OK
+      - config/localhost:27027 [P]: pbm-agent [v2.10.0] OK
+      - config/localhost:27028 [S]: pbm-agent [v2.10.0] OK
+      - config/localhost:27029 [S]: pbm-agent [v2.10.0] OK
     rs1:
-      - rs1/localhost:27018 [P]: pbm-agent [v2.9.1] OK
-      - rs1/localhost:27019 [S]: pbm-agent [v2.9.1] OK
-      - rs1/localhost:27020 [S]: pbm-agent [v2.9.1] OK
+      - rs1/localhost:27018 [P]: pbm-agent [v2.10.0] OK
+      - rs1/localhost:27019 [S]: pbm-agent [v2.10.0] OK
+      - rs1/localhost:27020 [S]: pbm-agent [v2.10.0] OK
     rs2:
-      - rs2/localhost:28018 [P]: pbm-agent [v2.9.1] OK
-      - rs2/localhost:28019 [S]: pbm-agent [v2.9.1] OK
-      - rs2/localhost:28020 [S]: pbm-agent [v2.9.1] OK    
+      - rs2/localhost:28018 [P]: pbm-agent [v2.10.0] OK
+      - rs2/localhost:28019 [S]: pbm-agent [v2.10.0] OK
+      - rs2/localhost:28020 [S]: pbm-agent [v2.10.0] OK    
 
     PITR incremental backup:
     ========================
@@ -54,15 +54,17 @@ This simplifies troubleshooting since the whole information is provided in one p
     ========
     S3 us-east-1 https://storage.googleapis.com/backup-test
        Snapshots:
-        2025-05-30T08:05:33Z 321.33KB <incremental> success [restore_to_time: 2025-05-30T08:05:35Z]
-        2025-05-30T08:02:13Z 513.85KB <incremental> success [restore_to_time: 2025-05-30T08:02:16Z]
-        2025-05-30T07:31:19Z 251.44KB <incremental> success [restore_to_time: 2025-05-30T07:31:21Z]
-        2025-05-30T07:30:54Z 308.60KB <incremental, base> success [restore_to_time: 2025-05-30T07:30:56Z]
-        2025-05-30T07:30:24Z 0.00B <incremental, base> failed [ERROR: define source backup: not found] [2025-05-30T07:30:27Z]
-        2025-05-30T07:27:33Z 332.20KB <physical> success [restore_to_time: 2025-05-30T07:27:35Z]
-        2025-05-30T07:26:13Z 238.54KB <physical> success [restore_to_time: 2025-05-30T07:26:15Z]
+        2025-03-16T10:36:52Z 491.98KB [restore_to_time: 2025-03-16T10:37:13]
+        2025-03-15T12:59:47Z 284.06KB [restore_to_time: 2025-03-15T13:00:08]
+        2025-03-15T11:40:46Z 0.00B [canceled: 2025-03-15T11540307]
+        2025-03-11T16:23:55Z 284.82KB [restore_to_time: 2025-03-11T16:24:16]
+        2025-03-11T16:22:35Z 284.04KB [restore_to_time: 2025-03-11T16:22:56]
+        2025-03-11T16:21:15Z 283.36KB [restore_to_time: 2025-03-11T16:21:36]
+        2025-03-11T16:19:54Z 281.73KB [restore_to_time: 2025-03-11T16:20:15]
+        2025-03-11T16:19:00Z 281.73KB [restore_to_time: 2025-03-11T16:19:21]
+        2025-03-11T15:30:38Z 287.07KB [restore_to_time: 2025-03-11T15:30:59]
       PITR chunks [1.10MB]:
-        2025-05-30T07:26:16Z - 2025-05-30T07:56:34Z
+        2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
     ```
 
 ## `pbm-agent` logs
