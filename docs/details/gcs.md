@@ -52,6 +52,10 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
          credentials:
            projectId: <your-google-cloud-project-id-here>
            privateKey: <your-private-key-here>
+        retryer:
+           backoffInitial: 1
+           backoffMax: 30
+           backoffMultiplier: 2
     ```
 
 === "using HMAC keys"
@@ -67,6 +71,10 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
 		 credentials:
 		   HMACAccessKey: <your-access-key-id-here>
 		   HMACSecret: <your-secret-key-here>
+        retryer:
+           backoffInitial: 1
+           backoffMax: 30
+           backoffMultiplier: 2
 	```
 
 ## Adjust PBM configuration to use GCS

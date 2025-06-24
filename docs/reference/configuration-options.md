@@ -189,7 +189,7 @@ The name of the storage bucket. See the [GCS bucket naming guidelines](https://c
 *Type*: string <br>
 *Required*: NO
 
-The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 16MB.
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.
 
 ### gcs.prefix
 
@@ -232,6 +232,27 @@ The HMAC access key associated with your service account. The access key is used
 *Required*: YES
 
 A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
+
+### gcs.retryer.backoffInitial
+
+*Type*: int <br>
+*Required*: NO
+
+The time to wait to make an initial retry, in seconds. Default value is 1 sec.
+
+### gcs.retryer.backoffMax
+
+*Type*: int <br>
+*Required*: NO
+
+The maximum amount of time between retries, in seconds. Defaults to 30 sec.
+
+### gcs.retryer.backoffMultiplier
+
+*Type*: int <br>
+*Required*: NO
+
+Each time PBM fails and tries again, it increases the wait time by multiplying it by this number (usually 2). For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.
 
 ## Server-side encryption options
 
