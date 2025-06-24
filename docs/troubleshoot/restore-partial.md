@@ -2,32 +2,30 @@
 glightbox-manual: true
 ---
 
-# Handling partial physical restores
+# Partially done physical restores
 
 When you restore a physical backup, the operation can result in the following statuses:
 
 - **Done**: The restore completed successfully on all nodes.
 - **Error**: The restore failed and could not be completed.
-- **Partly-Done**: The restore was successful on at least one node in each replica set, but failed on some nodes. This status is only possible if the `allowPartlyDone` option is enabled (default).
-
-PBM gives you configuration options to control how partial restores are handled:
-
-- `allowPartlyDone` (default: `true`): When enabled, PBM lets the restore finish with the `partlyDone` status if at least one node in each replica set is restored successfully. The failed nodes will receive data via initial sync.
-- `fallbackEnabled` (default: `false`): When enabled, PBM creates a fallback copy of the data directory at the restore start. If the restore fails, PBM reverts your cluster to its pre-restore state ensuring that it remains operational. Read more about [restores with fallback directory](../features/physical.md/#physical-restores-with-a-fallback-directory)
+- **Partly-Done**: The restore was successful on at least one node in each replica set, but failed on some nodes. 
 
 ## Restore status decision flow
 
 ```mermaid
 flowchart TD
-    A[Check restore status] --> B{Restore successful on all nodes?}
-    B -- Yes --> C[Status: **Done**. Do post-restore steps]
-    B -- No --> D{At least 1 node in each replica set restored?}
-    D -- No --> E[Status: Error\nIs fallback enabled?]
-    E -- Yes --> F[Fallback to pre-restore state]
-    E -- No --> G[Manual intervention required]
-    D -- Yes --> H{Is allow-partly-done enabled?}
-    H -- No --> E
-    H -- Yes --> I[Status: PartlyDone\nApply post-restore steps for partlyDone]
+    A[Check status] --> B{Restore successful on all nodes?}
+    B -- Yes --> C["Status <b>Done</b>. Do post-restore steps"]
+    B -- No --> D{Is min 1 node in each replica set restored?}
+    D -- Yes --> E{Is fallback enabled?}
+    D -- No --> F["Status <b>Error</b>. Is fallback enabled?"]
+    F -- No --> G[Manual intervention required]
+    F -- Yes --> H[Revert to pre-restore state]
+    E -- Yes --> I{Is allowPartlyDone enabled?}
+    E -- No --> J{Is allowPartlyDone enabled?}
+    I -- Yes --> K["Status <b>partlyDone</b>. Do post-restore steps"]
+    J -- Yes --> K
+    J -- No --> H
 ```
 
 The decision flow is explained below:
@@ -37,12 +35,13 @@ The decision flow is explained below:
     - **Yes**: The status is **Done**. Continue with [post-restore steps](#post-restore-steps).
     - **No**: Go to the next step.
 3. **Did at least one node in each replica set restore successfully?**
-    - **Yes**: Is `allowPartlyDone` enabled?
-        - **Yes**: The status is **PartlyDone**. See [Handling partlyDone restores](#handling-partlydone-restores).
-        - **No**: If `fallbackEnabled` is enabled, PBM triggers a fallback procedure and restores your cluster to its pre-restore state. If `fallbackEnabled` is disabled, the restore status is **Error**.
-    - **No**: The status is **Error**. If `fallbackEnabled` is enabled, PBM triggers a fallback procedure. If not, you'll need to intervene manually.
+    - **Yes**: Is `fallbackEnabled` set to `true`?
+        - **Yes**: Is `allowPartlyDone` enabled?
+            - **Yes**: The status is **PartlyDone**. See [Post-restore steps for `partlyDone` restores](#post-restore-steps-for-partlydone-restores).
+            - **No**: PBM triggers a fallback procedure and restores your cluster to its pre-restore state. If `fallbackEnabled` is disabled, the restore status is **Error**.
+    - **No**: The status is **Error**. You'll need to intervene manually.
 
-## Handling `partlyDone` restores
+## Post-restore steps for `partlyDone` restores
 
 If your restore finishes with the **partlyDone** status, you can still start the cluster and wait for the failed node to receive the data via the initial sync. Here's what you need to do:
 

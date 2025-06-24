@@ -105,7 +105,7 @@ During the restore, Percona Backup for MongoDB restores the data on the node whe
 
 An unexpected error may occur during the physical restore phase, such as corrupted backup data files, network issues accessing backup storage or unexpected PBM failures. When this happens, the files in the `dbPath` may be left in an inconsistent state and the affected `mongod` instance cannot be restarted. As a result, a replica set or shard in the cluster become non-operational. PBM becomes non-functional too, since it relies on MongoDB as both a communication channel and a metadata store. 
 
-To prevent this nasty situation, you can configure a fallback directory and revert the cluster to its original state if errors occur during a physical restore. PBM copies the `dbPath` contents to the fallback directory at the restore start. Then the restore flows as usual.
+To prevent this nasty situation, you can configure PBM to use a fallback directory and revert the cluster to its original state if errors occur during a physical restore. PBM copies the `dbPath` contents to the fallback directory at the restore start. Then the restore flows as usual.
 
 If the restore is successful, PBM deletes the fallback directory and its contents. 
 
@@ -121,8 +121,8 @@ Before initiating a restore, PBM performs a comprehensive disk space evaluation 
 
 * Total disk size
 * Used and available disk space
-* Estimated size required for PBM operations. It is calculated as `85% of the total size - used space`
-* Backup size. The backup size must be less than the estimated size required for PBM operations. PBM uses the uncompressed backup size for evaluation. This information is stored in the backup metadata and is available in the `pbm describe-backup` command output.
+* Estimated size available for PBM operations. It is calculated as `85% of the total size - used space`
+* Backup size. The backup size must be less than the estimated size available for PBM operations. PBM uses the uncompressed backup size for evaluation. This information is stored in the backup metadata and is available in the `pbm describe-backup` command output.
 
 Note that point-in-time recovery oplog chunks are not evaluated. The remaining free space is considered sufficient for PBM to replay them successfully during the restore.
 
@@ -178,7 +178,7 @@ A restore can succeed on most nodes, but it might fail on a few, resulting in a 
        
 If you allow partial restores (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync. 
 
-If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the `restore.fallbackEnabled` option set to `true` or run the `pbm restore` command with the `--fallback-enabled` flag. Otherwise, PBM reports a restore as a failed one.
+If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the `restore.fallbackEnabled` option set to `true` or run the `pbm restore` command with the `--fallback-enabled` flag. Otherwise, a restore won't start.
 
 ### Implementation specifics
 

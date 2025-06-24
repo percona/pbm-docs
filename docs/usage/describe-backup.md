@@ -31,7 +31,7 @@ The output provides the backup name, type, status, size and the information abou
       error: ""
     ```
 
-Starting with version 2.0.10, the command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing [physical restores with a fallback directory](../features/physical.md#physical-restores-with-a-fallback-directory).
+Starting with version 2.10.0, the command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing [physical restores with a fallback directory](../features/physical.md#physical-restores-with-a-fallback-directory).
 
 ??? example "Sample output"
 
