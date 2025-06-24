@@ -39,6 +39,8 @@
 
     You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
+    If the restore has the Done status, proceed with the [post-restore steps](#post-restore-steps). If the restore failed on some nodes, see the [Handling partial physical restores](../troubleshoot/restore-partial.md) page for guidelines. 
+
 ### Post-restore steps
 
 After the restore is complete, do the following:
@@ -61,7 +63,7 @@ After the restore is complete, do the following:
 4. Run the following command to resync the backup list with the storage:
 
     ```{.bash data-prompt="$"}
-    $ pbm config --force-resync
+    $ pbm config --force-resync -w
     ``` 
 
 5. Start the balancer and start `mongos` nodes.
@@ -72,7 +74,7 @@ After the restore is complete, do the following:
 
 ## Define a `mongod` binary location
 
-!!! admonition "Version added: 2.0.4"
+!!! admonition "Version added: [2.0.4](../release-notes/2.0.4.md)"
 
 During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it: 
 
