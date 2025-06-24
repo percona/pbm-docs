@@ -36,7 +36,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
              chunkSize: 16777216
              prefix: pbm/test
              credentials:
-               projectId: <your-google-cloud-project-id-here>
+               clientEmail: <your-google-cloud-project-id-here>
                privateKey: <your-private-key-here>
         ```    
 
