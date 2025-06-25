@@ -47,7 +47,6 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
      type: gcs
      gcs:
          bucket: pbm-testing
-         chunkSize: 16777216
          prefix: pbm/test
          credentials:
            clientEmail: <your-service-account-email-here>
@@ -61,9 +60,7 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
 	 type: gcs
 	 gcs:
 		 bucket: pbm-testing
-		 chunkSize: 16777216
 		 prefix: pbm/test
-		 endpointUrl: https://storage.googleapis.com
 		 credentials:
 		   HMACAccessKey: <your-access-key-id-here>
 		   HMACSecret: <your-secret-key-here>
