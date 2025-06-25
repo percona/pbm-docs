@@ -68,7 +68,7 @@ The wait time (in seconds) for PBM to start backups. This timeout controls how l
 
   Increasing this value is useful when:
   
-  - Physical backups take longer than usual to open the $backupCursor
+  - Physical backups take longer than usual to open the `$backupCursor`
   - Large databases with many collections require extended time for metadata collection
   - Slow storage systems delay backup initialization
 
