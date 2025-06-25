@@ -1,0 +1,8 @@
+dirs:
+  - docs
+
+excludedFiles:
+  - docs/release-notes/0.5.0.md
+
+ignorePatterns:
+  - pattern: "#__tabbed_$"
