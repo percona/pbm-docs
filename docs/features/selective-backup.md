@@ -12,6 +12,7 @@
     | [2.1.0](../release-notes/2.1.0.md) | Added support for sharded collections |
     | [2.5.0](../release-notes/2.5.0.md) | Ability to restore databases with users and roles |
     | [2.8.0](../release-notes/2.8.0.md) | Ability to define multiple namespaces for backup |
+    | [2.8.0](../release-notes/2.8.0.md) | Ability to restore a single non-sharded collection under a different name |
 
 You can back up and restore certain namespaces - databases or collections. For example, if your "Payments" collection in the "Customers" database was corrupted, you can restore only this collection from your full backup. Or, if your "Invoices" database contains sensitive data and must be backed up frequently, you can configure the backup of only this database. 
 
@@ -28,19 +29,6 @@ With the selective backup and restore functionality, you have the following opti
 2.	Restore a specific collection from a single database backup
 3.	Restore certain databases and / or collections from a full backup
 4.	Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
-
-## Known limitations of selective backups and restores
-
-1. Only **logical** backups and restores are supported.
-2. Selective backups and restores are supported in sharded clusters for non-sharded collections starting with version 2.0.3. Sharded collections are supported starting with version 2.1.0. 
-3. Sharded time series collections are not supported.
-4. Multi-collection transactions are not yet supported for selective restore. However, if you use them and attempt a selective restore, it may break [ACID](../reference/glossary.md#acid) because not all operations with this transaction are restored. PBM applies oplog events that relate only to the specified namespaces(s). Thus, from the transaction's point of view, the data consistency may be broken.
-
-    For example, you have a transaction that involves collections A and B. When you restore collection A, PBM replays oplog events only for collection A and ignores those related to collection B. As a result, the state of collection B remains unchanged and is no longer consistent with collection A. 
-    
-5. System collections in ``admin``, ``config``, and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
-6. Selective point-in-time recovery is not supported for sharded clusters.
-7. Selective backups are not supported for deployments with [config shards :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/sharded-cluster-config-servers/#std-label-sharded-cluster-config-server-config-shards) - config server replica sets that also store application data.
 
 
 ## Sharded collections
@@ -80,6 +68,8 @@ Consider these specifics of selective restore with users and roles:
 
 You can restore a specific collection under a different name alongside the current collection up to a certain point in time. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify what caused the database to misbehave. When you can see and edit the changes explicitly, you gain insight into your data and have confident control over it. As a result, your troubleshooting efforts significantly reduce.
 
+In version 2.8.0, you can restore a single non-sharded collection in a replica set under a different name. The support for sharded and time series collections is planned for the future releases.
+
 To see how it works, imagine the following use case:
 
 You have noticed that your e-commerce app returns incorrect or incomplete results on orders. You remember that everything was working fine yesterday, so it's likely that recent changes to the database caused the issue. 
@@ -96,10 +86,6 @@ The `orders_prev` collection has the same data and indexes as the `orders` colle
 
 Let's say you discover that the `status` field now includes an extra `date` field. These changes went unnoticed, and the app's code was not updated to handle them, leading to incorrect results. Now that you've identified the issue you can take necessary actions to fix it.
 
-!!! note 
-
-    In version 2.8.0, you can restore a single non-sharded collection in a replica set under a different name. The support for sharded and time series collections is planned for the future releases.
-
-
-[Make a backup](../usage/start-backup.md){ .md-button .md-button }
-[Restore a backup](../usage/restore.md){ .md-button .md-button }
+[Known limitations](../features/known-limitations.md#selective-backups-and-restores){.md-button}
+[Make a backup](../usage/backup-selective.md){ .md-button .md-button }
+[Restore a backup](../usage/restore-selective.md){ .md-button .md-button }

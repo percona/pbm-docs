@@ -4,10 +4,8 @@
 
 ### storage.type
 
-
 *Type*: string <br>
 *Required*:     YES   
-
 
 Remote backup storage type. Supported values: `s3`, `filesystem`, `azure`.
 
@@ -30,7 +28,7 @@ storage:
       session-token: <string>
     uploadPartSize: <int>
     maxUploadParts: <int>
-    storageClass: <string>
+    storageClass: STANDARD
     serverSideEncryption:
       sseAlgorithm: aws:kms
       kmsKeyID: <your-kms-key-here>
@@ -73,7 +71,7 @@ Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.ht
 *Type*: string <br>
 *Required*: NO
 
-The path to the data directory on the bucket. If undefined, backups are stored in the bucket root directory
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
 
 ### storage.s3.endpointUrl
 
@@ -87,7 +85,7 @@ The URL to access the bucket. The default value for GCS is `https://storage.goog
 *Type*: array of strings <br>
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support of multiple endpoints to the same S3 storage](../details/storage-configuration.md#support-of-multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/s3-storage.md#support-for-multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
 
@@ -148,8 +146,9 @@ The `maxUploadParts` value is printed in the pbm-agent log.
 
 *Type*: string <br>
 *Required*: NO
+*Example*: STANDARD
 
-The [storage class](https://aws.amazon.com/s3/storage-classes/) assigned to objects stored in the S3 bucket. If not provided, the `STANDARD` storage class will be used. This option is available in Percona Backup for MongoDB as of v1.7.0.
+The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storage-classes/) assigned to objects stored in the S3 bucket. If not provided, the `STANDARD` storage class will be used. This option is available in Percona Backup for MongoDB as of v1.7.0.
 
 ### storage.s3.debugLogLevels
 
@@ -172,7 +171,7 @@ Please find the mapping table below:
 | `EventStreamBody`| `RequestWithBody` <br> `ResponseWithBody`|
 
 
-To specify several event types, separate them by comma. To learn more about the event types, see [the documentation :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType)
+To specify several event types, separate them by comma. To lean more about the event types, see [the documentation :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType)
 
 When undefined, no S3 debug logging is performed.
 
@@ -211,7 +210,7 @@ Your customer-managed key stored in the AWS KMS.
 *Type*: string <br>
 *Required*: NO 
 
-The key management mode for [server-side encryption with customer-provided keys (SSE-C)](../details/storage-configuration.md#server-side-encryption).
+The key management mode for [server-side encryption with customer-provided keys (SSE-C)](../details/s3-storage.md#server-side-encryption).
 
 Supported value: `AES256`
 
@@ -304,7 +303,7 @@ The URL to access the data in Microsoft Azure Blob Storage. The default value is
 *Type*: string <br>
 *Required*: NO
 
-The path (sub-folder) to the backups inside the container. If undefined, backups are stored in the container root directory.
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
 
 ### storage.azure.credentials.key
 

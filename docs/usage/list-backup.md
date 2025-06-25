@@ -42,4 +42,5 @@ In physical backups, the completion time is only a few seconds after the backup 
 
 ## Useful links
 
-[View detailed information about a backup](describe-backup.md)
+* [View detailed information about a backup](describe-backup.md)
+* [Restore to a point-in-time](pitr-physical.md)

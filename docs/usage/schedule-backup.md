@@ -37,7 +37,7 @@ The steps are the following:
 2. Specify the environment variable in `pbm-cron`:
     
      ```{.bash data-prompt="$"}
-     $ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017?/replSetName=xxxx"
+     $ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?replSetName=xxxx"
      ```
 
 3. Grant access to the `pbm-cron` file for the user that will execute the `cron` task.
@@ -84,7 +84,7 @@ Previous backups are not automatically removed from the backup storage. You need
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-Starting with version 2.1.0, you can use the [`pbm cleanup --older-than`](../reference/pbm-commands.md#pbm-cleanup) command to delete outdated backup snapshots and point-in-time recovery oplog slices. Learn more about how PBM deletes outdated data in the [Clean up outdated data](delete-backup.md#clean-up-outdated-data) section.
+Starting with version 2.1.0, you can use the [`pbm cleanup --older-than`](../reference/pbm-commands.md#pbm-cleanup) command to delete outdated backup snapshots and point-in-time recovery oplog slices. Learn more about how PBM deletes outdated data in the [Clean up outdated data](delete-backup.md#delete-outdated-data) section.
 
 You can configure a `cron` task to automate storage cleanup by specifying the following command in the `crontab` file:
 

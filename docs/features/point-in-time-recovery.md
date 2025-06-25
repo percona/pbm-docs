@@ -2,6 +2,19 @@
 
 !!! admonition "Version added: [1.3.0](../release-notes/1.3.0.md)"
 
+??? admonition "Implementation history"
+
+    The following table lists the changes in the implementation of point-in-time recovery and the versions that introduced those changes:
+
+    |Version | Description |
+    |--------|-------------|
+    | [1.3.0](../release-notes/1.3.0.md)   | Initial implementation of point-in-time recovery|
+    | [1.6.0](../release-notes/1.6.0.md)   | Ability to change duration of an oplog span|
+    | [1.7.0](../release-notes/1.7.0.md)   | Added compression to oplog slices|
+    | [2.3.0](../release-notes/2.3.0.md)   | Support of any type of base backup|
+    | [2.4.0](../release-notes/2.4.0.md)   | Oplog slicing in parallel with backups|
+    |[2.6.0](../release-notes/2.6.0.md)    | Adjust node priority for oplog slices|
+
 Point-in-time recovery is restoring a database up to a specific timestamp. This includes restoring the data from a backup snapshot and replaying all events that occurred to this data up to a specified time from [oplog slices](#oplog-slicing). 
 
 | Advantages                     | Disadvantages                   |
@@ -48,16 +61,6 @@ To start saving [oplog slices](../reference/glossary.md#oplog), the following pr
 
 If you just enabled point-in-time recovery, it requires 10 minutes for the first slice to appear in the [`pbm list`](../reference/pbm-commands.md#pbm-list) output.
 
-!!! important
-
-    **For in MongoDB 5.0 and higher versions**
-
-    If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
-
-    **For MongoDB 8.0 and higher versions**
-
-    If you [unshard a collection :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/command/unshardCollection/), make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
-
 Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as follows:
 
 * **Logical backups** 
@@ -70,6 +73,9 @@ Starting with version [2.4.0](../release-notes/2.4.0.md), oplog slicing runs as 
 
 
 Thus, if a backup snapshot is large and takes hours to make, all oplog events are saved for it, ensuring point-in-time recovery to any timestamp.
+
+[Known limitations](known-limitations.md#oplog-slicing-for-point-in-time-recovery){.md-button}
+
 
 ### Oplog duration
 
@@ -104,7 +110,7 @@ Before version 2.6.0, the `pbm-agent` to save oplog slices is selected randomly 
 
 Starting with version 2.6.0, you can control from what node to save oplog slices by assigning the priority to the desired nodes via the configuration file. For example, you can ensure that both backups and oplog slices are taken from the nodes in a specific data center as defined in the organization's regulations. Or, you can reduce network latency by making backups and / or oplog slices from nodes in geographically closest locations.  
 
-Node priority for oplog slices is handled similarly to the [node priority for making backups](../usage/start-backup.md#adjust-node-priority-for-backups), yet it is independent from it. Thus, you can assign a different priority for backups and oplog slices for the same node. Or, adjust only the priority for oplog slices, leaving the default one for backups. 
+Node priority for oplog slices is handled similarly to the [node priority for making backups](../usage/backup-priority.md), yet it is independent from it. Thus, you can assign a different priority for backups and oplog slices for the same node. Or, adjust only the priority for oplog slices, leaving the default one for backups. 
 
 PBM then handles both processes according to their priority.
 
@@ -114,7 +120,7 @@ The default node priority for oplog slices is the same as for making backups:
 * secondary nodes - priority 1
 * primary node - priority 0.5
 
-To redefine it, specify the new priority for the [`pitr.priority`](../reference/pitr-options.md#pitrnodepriority) option in the configuration file:
+To redefine it, specify the new priority for the [`pitr.priority`](../reference/pitr-options.md#pitrpriority) option in the configuration file:
 
 ```yaml
 pitr:
@@ -124,6 +130,9 @@ pitr:
     "rs2:27018": 2
     "rs3:27019": 1
 ```
+
+Using configuration file is the only way to define priority for oplog slices. 
+
 
 The format of the priority array is `<hostname:port>:<priority>`.
 

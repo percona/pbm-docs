@@ -103,7 +103,7 @@ The command accepts the following flags:
 
 | Flag               | Description                           |
 | ------------------ | ------------------------------------- | 
-| `--force-resync`   | Resync backup list with the current storage|            
+| `--force-resync`   | Resync PBM's metadata (backup, point-in-time recovery chunks, restore) stored within PBM control collections with the data from the current storage|            
 | `--list`           | List current settings                  |
 | `--file=FILE`      | Upload the config information from a YAML file   |
 | `--set=SET`        | Set a new config option value. Specify the option in the `<key.name=value>` format.                                    |
@@ -795,7 +795,7 @@ The command accepts the following flags:
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
 | `--wait-time`  | The time to wait for PBM to report the status of the restore execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
-| `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.<br><br> In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](../usage/pitr-tutorial.md#from-physical-backups). <br><br> In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-tutorial.md#from-physical-backups). Without it, PBM looks for a logical backup to restore from.|
+| `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.<br><br> In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](../usage/pitr-physical.md). <br><br> In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-physical.md). Without it, PBM looks for a logical backup to restore from.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
 | `--ns=<database.collection>`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns=<database.*>`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, `--ns=db1.*,db2.coll2,db3.coll1,db3.collX`|
 | `--with-users-and-roles` | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.| 
