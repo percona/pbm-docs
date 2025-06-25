@@ -64,7 +64,7 @@ Note that the greater value you specify, the more time and computing resources i
 The wait time (in seconds) for PBM to start backups. This timeout controls how long PBM waits for the backup to transition from initial state to running status.
 
   For physical backups in sharded clusters, this includes the time needed to open the `$backupCursor` on all shards. For logical backups, this includes gathering collection statistics
-   gathering (collStats operations) and backup metadata creation.
+   (collStats operations) and creation of backup metadata.
 
   Increasing this value is useful when:
   - Physical backups take longer than usual to open the $backupCursor
