@@ -251,7 +251,7 @@ nav:
     - Comparison with MongoDB: 'features/comparison.md'
     - details/deployments.md
   - Troubleshooting & FAQ:
-      - Overview:troubleshoot/index.md
+      - Overview: troubleshoot/index.md
       - 'Diagnose PBM': 'troubleshoot/troubleshooting.md'
       - 'Check status': 'troubleshoot/status.md'
       - 'Diagnostics report': 'troubleshoot/pbm-report.md'

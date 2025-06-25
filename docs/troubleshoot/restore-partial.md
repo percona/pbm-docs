@@ -12,21 +12,7 @@ When you restore a physical backup, the operation can result in the following st
 
 ## Restore status decision flow
 
-```mermaid
-flowchart TD
-    A[Check status] --> B{Restore successful on all nodes?}
-    B -- Yes --> C["Status <b>Done</b>. Do post-restore steps"]
-    B -- No --> D{Is min 1 node in each replica set restored?}
-    D -- Yes --> E{Is fallback enabled?}
-    D -- No --> F["Status <b>Error</b>. Is fallback enabled?"]
-    F -- No --> G[Manual intervention required]
-    F -- Yes --> H[Revert to pre-restore state]
-    E -- Yes --> I{Is allowPartlyDone enabled?}
-    E -- No --> J{Is allowPartlyDone enabled?}
-    I -- Yes --> K["Status <b>partlyDone</b>. Do post-restore steps"]
-    J -- Yes --> K
-    J -- No --> H
-```
+![image](../_images/restore-status.png)
 
 The decision flow is explained below:
 
@@ -47,8 +33,8 @@ If your restore finishes with the **partlyDone** status, you can still start the
 
 1. Check the restore status with `pbm status` or `pbm describe-restore <restore_name>`.
 2. Start all `mongod` nodes. The failed nodes will perform initial sync from the healthy nodes.
-3. Wait for the nodes to complete initial sync and report the `ready` status.
-4. Start `pbm-agents` on every node.
-5. Start the balancer and all `mongos` nodes.
+3. Start `pbm-agents` on every node.
+4. Start the balancer and all `mongos` nodes.
+5. Monitor for the nodes to complete initial sync and report the `ready` status.
 6. Make a fresh backup to serve as the new base for future restores.
 7. [Enable point-in-time recovery](../features/point-in-time-recovery.md/#enable-point-in-time-recovery) if you need it.
