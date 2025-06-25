@@ -1,6 +1,6 @@
 # {{pbm.full_name}} release notes
 
-* [{{pbm.full_name}} 2.10.1](release-notes/2.10.1.md)
+* [{{pbm.full_name}} 2.10.0](release-notes/2.10.0.md)
 * [{{pbm.full_name}} 2.9.1](release-notes/2.9.1.md)
 * [{{pbm.full_name}} 2.9.0](release-notes/2.9.0.md)
 * [{{pbm.full_name}} 2.8.0](release-notes/2.8.0.md)
