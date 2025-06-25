@@ -10,7 +10,7 @@
     |--------|-------------|
     | [2.0.0](../release-notes/2.0.0.md)   | Physical backups and restores, physical restore with data-at-rest encryption |
     | [2.3.0](../release-notes/2.3.0.md)   | Physical backups in mixed deployments |
-    | [2.1.10](../release-notes/2.1.10.md) | Physical restore with a fallback directory | 
+    | [2.10.0](../release-notes/2.10.0.md) | Physical restore with a fallback directory | 
 
 ## Availability and system requirements
 
