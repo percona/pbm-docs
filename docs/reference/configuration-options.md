@@ -46,7 +46,7 @@ storage:
 *Type*: string <br>
 *Required*: NO
 
-The storage provider’s name. 
+The storage provider's name. 
 
 Supported values: `aws`, `gcs`
 
@@ -157,7 +157,19 @@ The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storag
 
 Enables S3 debug logging for different types of S3 requests. S3 log messages are printed in the `pbm logs` output.
 
-Supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
+Starting with version 2.10.0, PBM uses AWS SDK v2. The AWS SDK v1 values are deprecated. They are kept for backward compatibility.
+
+Please find the mapping table below:
+
+| AWS SDK v1 value | AWS SDK v2 value |
+|------------------|------------------|
+| `LogDebug`       | `Request` <br> `Response`|
+| `Signing`        | `Signing`|
+| `HTTPBody`       | `RequestWithBody` <br> `ResponseWithBody`|
+| `RequestRetries` | `DebugWithRequestRetries`|
+| `RequestErrors`  | `DebugWithRequestErrors`|
+| `EventStreamBody`| `RequestWithBody` <br> `ResponseWithBody`|
+
 
 To specify several event types, separate them by comma. To lean more about the event types, see [the documentation :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType)
 
@@ -177,7 +189,7 @@ Disables the TLS verification of the S3 storage. This allows Percona Backup for 
 
 ## Server-side encryption options
 
-### serverSideEncryption.sseAlgorithm
+### storage.s3.serverSideEncryption.sseAlgorithm
 
 *Type*: string <br>
 *Required*: NO 
@@ -186,14 +198,14 @@ The key management mode used for server-side encryption with the encryption keys
 
 Supported value: `aws:kms`
 
-### serverSideEncryption.kmsKeyID
+### storage.s3.serverSideEncryption.kmsKeyID
 
 *Type*: string <br>
 *Required*: NO
 
 Your customer-managed key stored in the AWS KMS.
 
-### serverSideEncryption.sseCustomerAlgorithm
+### storage.s3.serverSideEncryption.sseCustomerAlgorithm
 
 *Type*: string <br>
 *Required*: NO 
@@ -202,7 +214,7 @@ The key management mode for [server-side encryption with customer-provided keys 
 
 Supported value: `AES256`
 
-### serverSideEncryption.sseCustomerKey
+### storage.s3.serverSideEncryption.sseCustomerKey
 
 *Type*: string <br>
 *Required*: NO
@@ -211,7 +223,7 @@ Your custom encryption key. This key is not stored on the S3 storage side. Thus,
 
 ## Upload retry options
 
-### retryer.numMaxRetries
+### storage.s3.retryer.numMaxRetries
 
 *Type*: int <br>
 *Required*: NO <br>
@@ -219,7 +231,7 @@ Your custom encryption key. This key is not stored on the S3 storage side. Thus,
 
 The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed. Available in Percona Backup for MongoDB as of 1.7.0.
 
-### retryer.minRetryDelay
+### storage.s3.retryer.minRetryDelay
 
 *Type*: time.Duration <br>
 *Required*: NO <br>
@@ -227,7 +239,7 @@ The maximum number of retries to upload data to S3 storage. A zero value means n
 
 The minimum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
 
-### retryer.maxRetryDelay
+### storage.s3.retryer.maxRetryDelay
 
 *Type*: time.Duration <br>
 *Required*: NO <br>
