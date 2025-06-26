@@ -61,9 +61,20 @@ Note that the greater value you specify, the more time and computing resources i
 *Type*: unit32 <br>
 *Default*: 33
 
-The wait time (in seconds) for PBM to start physical backups on all shards. Increasing this value is useful when it takes longer than usual to open the `$backupCursor`.
+The wait time (in seconds) for PBM to start backups. This timeout controls how long PBM waits for the backup to transition from initial state to running status.
 
-The 0 (zero) value resets the timeout to the default 33 seconds. 
+  For physical backups in sharded clusters, this includes the time needed to open the `$backupCursor` on all shards. For logical backups, this includes gathering collection statistics
+   (collStats operations) and creation of backup metadata.
+
+  Increasing this value is useful when:
+  
+  - Physical backups take longer than usual to open the `$backupCursor`
+  - Large databases with many collections require extended time for metadata collection
+  - Slow storage systems delay backup initialization
+
+  Applies to all backup types (logical, physical, incremental, external) on both single replica sets and sharded clusters.
+
+  The 0 (zero) value resets the timeout to the default 33 seconds.
 
 ### backup.oplogSpanMin
 
