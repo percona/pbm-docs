@@ -24,20 +24,20 @@ The output provides the following information:
 
     ```{.text .no-copy}
     Backup snapshots:
-      2023-03-10T10:44:52Z <logical> [restore_to_time: 2023-03-10T10:44:56Z]
-      2023-03-10T10:49:20Z <physical> [restore_to_time: 2023-03-10T10:49:23Z]
-      2023-03-10T10:50:22Z <incremental> [restore_to_time: 2023-03-10T10:50:25Z]
-      2023-03-10T10:51:02Z <incremental> [restore_to_time: 2023-03-10T10:51:04Z]
-      2023-03-10T10:57:47Z <incremental> [restore_to_time: 2023-03-10T10:57:49Z]
-      2023-03-10T11:04:25Z <incremental> [restore_to_time: 2023-03-10T11:04:27Z]
-      2023-03-10T11:05:03Z <logical, selective> [restore_to_time: 2023-03-10T11:05:07Z]
+      2025-03-10T10:44:52Z <logical> [restore_to_time: 2025-03-10T10:44:56]
+      2025-03-10T10:49:20Z <physical> [restore_to_time: 2025-03-10T10:49:23]
+      2025-03-10T10:50:22Z <incremental> [restore_to_time: 2025-03-10T10:50:25]
+      2025-03-10T10:51:02Z <incremental> [restore_to_time: 2025-03-10T10:51:04]
+      2025-03-10T10:57:47Z <incremental> [restore_to_time: 2025-03-10T10:57:49]
+      2025-03-10T11:04:25Z <incremental> [restore_to_time: 2025-03-10T11:04:27]
+      2025-03-10T11:05:03Z <logical, selective> [restore_to_time: 2025-03-10T11:05:07]
     ```
 
 ## Restore to time
 
 In logical backups, the completion time almost coincides with the backup finish time. To define the completion time, Percona Backup for MongoDB waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time.
 
-In physical backups, the completion time is only a few seconds after the backup start time. By holding the `$backupCursor` open guarantees that the checkpoint data won’t change during the backup, and Percona Backup for MongoDB can define the completion time ahead.
+In physical backups, the completion time is only a few seconds after the backup start time. By holding the `$backupCursor` open guarantees that the checkpoint data won't change during the backup, and Percona Backup for MongoDB can define the completion time ahead.
 
 
 ## Useful links
