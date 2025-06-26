@@ -843,9 +843,9 @@ The command accepts the following flags:
 
 Shows the status of Percona Backup for MongoDB. The output provides the following information:
 
-* `pbm-agent` processes version and state
+* `pbm-agent` processes version, state and node type it is running on (primary or secondary)
 * Currently running backups or restores
-* Backups stored in the remote storage
+* Backups stored in the remote storage and their status
 * Point-in-Time Recovery status
 * Valid time ranges for point-in-time recovery and the data size
 
@@ -871,11 +871,11 @@ The command accepts the following flags:
             "name": "<backup_name>",
             "size": 3143396168,
             "status": "done",
+            "printStatus": "success",
             "restoreTo": Timestamp,
-            "pbmVersion": "2.5.0",
+            "pbmVersion": "2.10.0",
             "type": "logical",
-            "src": "",
-            "storage": "<storage-name>"
+            "src": ""
       },
           },
         ],

@@ -10,11 +10,11 @@ $ pbm status
 
 The output provides the information about:
 
-* Your MongoDB deployment and `pbm-agents` running in it: to what `mongod` node each agent is connected, the Percona Backup for MongoDB version it runs and the agent’s state
+* Your MongoDB deployment and `pbm-agents` running in it: to what `mongod` node each agent is connected, the Percona Backup for MongoDB version it runs and the agent's state
 
 * The currently running backups / restores, if any
 
-* Backups stored in the remote backup storage: backup name, completion time, size and status (complete, canceled, failed)
+* Backups stored in the remote backup storage: backup name, type, completion time, size and status (success, ongoing, failed)
 
 * [Point-in-time recovery](../features/point-in-time-recovery.md) status (enabled or disabled)
 
@@ -30,17 +30,17 @@ This simplifies troubleshooting since the whole information is provided in one p
     Cluster:
     ========
     config:
-      - config/localhost:27027: pbm-agent v1.3.2 OK
-      - config/localhost:27028: pbm-agent v1.3.2 OK
-      - config/localhost:27029: pbm-agent v1.3.2 OK
+      - config/localhost:27027 [P]: pbm-agent [v2.10.0] OK
+      - config/localhost:27028 [S]: pbm-agent [v2.10.0] OK
+      - config/localhost:27029 [S]: pbm-agent [v2.10.0] OK
     rs1:
-      - rs1/localhost:27018: pbm-agent v1.3.2 OK
-      - rs1/localhost:27019: pbm-agent v1.3.2 OK
-      - rs1/localhost:27020: pbm-agent v1.3.2 OK
+      - rs1/localhost:27018 [P]: pbm-agent [v2.10.0] OK
+      - rs1/localhost:27019 [S]: pbm-agent [v2.10.0] OK
+      - rs1/localhost:27020 [S]: pbm-agent [v2.10.0] OK
     rs2:
-      - rs2/localhost:28018: pbm-agent v1.3.2 OK
-      - rs2/localhost:28019: pbm-agent v1.3.2 OK
-      - rs2/localhost:28020: pbm-agent v1.3.2 OK    
+      - rs2/localhost:28018 [P]: pbm-agent [v2.10.0] OK
+      - rs2/localhost:28019 [S]: pbm-agent [v2.10.0] OK
+      - rs2/localhost:28020 [S]: pbm-agent [v2.10.0] OK    
 
     PITR incremental backup:
     ========================
@@ -54,6 +54,19 @@ This simplifies troubleshooting since the whole information is provided in one p
     ========
     S3 us-east-1 https://storage.googleapis.com/backup-test
        Snapshots:
+<<<<<<< PBM-1544-Add-backup-status-to-output
+        2025-06-03T09:55:47Z 0.00B <physical> ongoing [running: running / 2025-06-03T09:55:50]
+        2025-03-16T10:36:52Z 491.98KB <physical> success [restore_to_time: 2025-03-16T10:37:13]
+        2025-03-15T12:59:47Z 284.06KB <physical> success [restore_to_time: 2025-03-15T13:00:08]
+        2025-03-11T16:23:55Z 284.82KB <physical> success [restore_to_time: 2025-03-11T16:24:16]
+        2025-03-11T16:22:35Z 284.04KB <physical> success [restore_to_time: 2025-03-11T16:22:56]
+        2025-03-11T16:21:15Z 283.36KB <physical> success [restore_to_time: 2025-03-11T16:21:36]
+        2025-03-11T16:19:54Z 281.73KB <physical> success [restore_to_time: 2025-03-11T16:20:15]
+        2025-03-11T16:19:00Z 281.73KB <physical> success [restore_to_time: 2025-03-11T16:19:21]
+        2025-03-11T15:30:38Z 287.07KB <physical> success [restore_to_time: 2025-03-11T15:30:59]
+      PITR chunks [1.10MB]:
+        2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
+=======
          2025-03-16T10:36:52Z 491.98KB [restore_to_time: 2025-03-16T10:37:13]
          2025-03-15T12:59:47Z 284.06KB [restore_to_time: 2025-03-15T13:00:08]
          2025-03-15T11:40:46Z 0.00B [canceled: 2025-03-15T11:41:07]
@@ -65,6 +78,7 @@ This simplifies troubleshooting since the whole information is provided in one p
          2025-03-11T15:30:38Z 287.07KB [restore_to_time: 2025-03-11T15:30:59]
     PITR chunks:
          2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
+>>>>>>> main
     ```
 
 ## `pbm-agent` logs
