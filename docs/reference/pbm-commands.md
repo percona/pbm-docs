@@ -103,13 +103,14 @@ The command accepts the following flags:
 
 | Flag               | Description                           |
 | ------------------ | ------------------------------------- | 
-| `--force-resync`   | Resync PBM's metadata (backup, point-in-time recovery chunks, restore) stored within PBM control collections with the data from the current storage|            
+| `--force-resync`   | Resync PBM's metadata (backup, point-in-time recovery chunks, restore) stored within PBM control collections with the data from the current storage. <br> Starting with version 2.10.0, PBM retrieves restore metadata from the storage only for the latest restore to improve resync performance. To retrieve the full restore history, also add the `--include-restores` flag. Resync for backup and point-in-time recovery chunks remains unchanged.|            
 | `--list`           | List current settings                  |
 | `--file=FILE`      | Upload the config information from a YAML file   |
 | `--set=SET`        | Set a new config option value. Specify the option in the `<key.name=value>` format.                                    |
 | `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: text, json                      |
 | `-w`, `--wait`     | Wait for resync of the backup list with the storage to finish. You can only use this flag together with the `--force-resync` flag.|
 | `--wait-time`  | The time to wait for PBM to report the status of the resync execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
+| `--include-restores`| Resync the full restore metadata history from the storage. Use this flag together with the `--force-resync` flag. Note that retrieving the full restore history may affect resync performance. Available starting with version 2.10.0. |
 
 
 ??? "PBM configuration output"
