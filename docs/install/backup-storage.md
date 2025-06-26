@@ -30,15 +30,14 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
 
         ```yaml
         storage:
-         type: s3
-             s3:
-             region: northamerica-northeast1
+          type: gcs
+          gcs:
              bucket: pbm-testing
+             chunkSize: 16777216
              prefix: pbm/test
-             endpointUrl: https://storage.googleapis.com
              credentials:
-               access-key-id: <your-access-key-id-here>
-               secret-access-key: <your-secret-key-here>
+               clientEmail: <your-google-cloud-project-id-here>
+               privateKey: <your-private-key-here>
         ```    
 
     === ":material-microsoft-azure: Microsoft Azure Blob Storage"    

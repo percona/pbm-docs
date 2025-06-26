@@ -46,9 +46,8 @@ storage:
 *Type*: string <br>
 *Required*: NO
 
-The storage provider's name. 
+The storage provider's name. This field is deprecated.
 
-Supported values: `aws`, `gcs`
 
 ### storage.s3.bucket
 
@@ -56,12 +55,12 @@ Supported values: `aws`, `gcs`
 *Type*: string <br>
 *Required*: YES
 
-The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) and [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
+The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) for bucket name requirements.
 
 ### storage.s3.region
 
 *Type*: string <br>
-*Required*: YES (for AWS and GCS)
+*Required*: YES (for AWS)
 
 The location of the storage bucket.
 Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) and [GCS region list](https://cloud.google.com/storage/docs/locations) to define the bucket region
@@ -76,9 +75,9 @@ The path to the data directory in the bucket. If undefined, backups are stored i
 ### storage.s3.endpointUrl
 
 *Type*: string <br>
-*Required*: YES (for MinIO and GCS)
+*Required*: YES (for MinIO)
 
-The URL to access the bucket. The default value for GCS is `https://storage.googleapis.com`
+The URL to access the bucket. 
 
 ### storage.s3.endpointUrlMap
 
@@ -246,6 +245,92 @@ The minimum time to wait before the next retry, specified as a *time.Duration*. 
 *Default*: 5m
 
 The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
+
+## GCS type storage options
+
+```yaml
+storage:
+ type: gcs
+ gcs:
+    bucket: pbm-testing
+    chunkSize: <int>
+    prefix: pbm/test
+    credentials:
+      clientEmail: <your-client-email-here>
+      privateKey: <your-private-key-here>
+      HMACAccessKey: <your-HMAC-key-here>
+      HMACSecret: <your-HMAC-secret-here>
+```
+
+### storage.gcs.bucket
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
+
+### storage.gcs.chunkSize
+
+*Type*: string <br>
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.
+
+### storage.gcs.prefix
+
+*Type*: string <br>
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
+
+### storage.gcs.credentials.clientEmail
+
+*Type*: string <br>
+*Required*: YES
+
+The email address that uniquely identifies your service account in GCS.
+
+### storage.gcs.credentials.privateKey
+
+*Type*: string <br>
+*Required*: YES
+
+The private key of the service account used to authenticate the request.
+
+### storage.gcs.credentials.HMACAccessKey
+
+*Type*: string <br>
+*Required*: YES
+
+The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
+
+### storage.gcs.credentials.HMACSecretKey
+
+*Type*: string <br>
+*Required*: YES
+
+A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
+
+### storage.gcs.retryer.backoffInitial
+
+*Type*: int <br>
+*Required*: NO
+
+The time to wait to make an initial retry, in seconds. Default value is 1 sec.
+
+### storage.gcs.retryer.backoffMax
+
+*Type*: int <br>
+*Required*: NO
+
+The maximum amount of time between retries, in seconds. Defaults to 30 sec.
+
+### storage.gcs.retryer.backoffMultiplier
+
+*Type*: int <br>
+*Required*: NO
+
+Each time PBM fails and tries again, it increases the wait time by multiplying it by this number (usually 2). For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.
 
 ## Filesystem storage options
 
