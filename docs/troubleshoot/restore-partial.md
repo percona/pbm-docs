@@ -18,7 +18,7 @@ The decision flow is explained below:
 
 1. **Check the restore status** with `pbm describe-restore <restore_name>` or `pbm status`.
 2. **Did the restore succeed on all nodes?**
-    - **Yes**: The status is **Done**. Continue with [post-restore steps](#post-restore-steps).
+    - **Yes**: The status is **Done**. Continue with [post-restore steps](../usage/restore-physical.md#post-restore-steps).
     - **No**: Go to the next step.
 3. **Did at least one node in each replica set restore successfully?**
     - **Yes**: Is `fallbackEnabled` set to `true`?

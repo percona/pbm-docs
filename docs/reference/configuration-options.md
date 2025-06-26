@@ -84,7 +84,7 @@ The URL to access the bucket.
 *Type*: array of strings <br>
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/s3-storage.md#support-for-multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/s3-storage.md#multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
 
