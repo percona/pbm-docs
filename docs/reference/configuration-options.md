@@ -304,7 +304,7 @@ The private key of the service account used to authenticate the request.
 
 The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
 
-### storage.gcs.credentials.hmacSecretKey
+### storage.gcs.credentials.hmacSecret
 
 *Type*: string <br>
 *Required*: YES
