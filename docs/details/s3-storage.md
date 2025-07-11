@@ -57,7 +57,7 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
     
     Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this [bucket is created](#storage-bucket-creation) and managed solely by PBM.
 
-These are the examples for the basic configuration of S3-compatible storage in Percona Backup for MongoDB. 
+These are the examples for the basic configuration of S3-compatible storage in Percona Backup for MongoDB. You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
 
 The following sections describe how you can fine-tune your storage configuration: 
 

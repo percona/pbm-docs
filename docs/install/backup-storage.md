@@ -10,7 +10,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
 
 ## Procedure {.power-number}
 
-1. Create a config file (e.g. `pbm_config.yaml`).
+1. Create a config file (e.g. `pbm_config.yaml`). You can use the [template configuration file :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and modify it as needed.
 
     === ":material-aws: Amazon AWS"    
 
@@ -62,7 +62,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
             path: /data/local_backups
         ```    
 
-Navigate to every storage page for a detailed example configuration file.
+    Navigate to every storage page for a detailed example configuration file.
 
 2. Apply the config file to PBM
 
