@@ -258,8 +258,8 @@ storage:
     credentials:
       clientEmail: <your-client-email-here>
       privateKey: <your-private-key-here>
-      HMACAccessKey: <your-HMAC-key-here>
-      HMACSecret: <your-HMAC-secret-here>
+      hmacAccessKey: <your-HMAC-key-here>
+      hmacSecret: <your-HMAC-secret-here>
 ```
 
 ### storage.gcs.bucket
@@ -297,14 +297,14 @@ The email address that uniquely identifies your service account in GCS.
 
 The private key of the service account used to authenticate the request.
 
-### storage.gcs.credentials.HMACAccessKey
+### storage.gcs.credentials.hmacAccessKey
 
 *Type*: string <br>
 *Required*: YES
 
 The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
 
-### storage.gcs.credentials.HMACSecretKey
+### storage.gcs.credentials.hmacSecret
 
 *Type*: string <br>
 *Required*: YES
