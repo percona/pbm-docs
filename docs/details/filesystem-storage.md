@@ -12,6 +12,9 @@ A remote filesystem server storage is a file server mounted to a local directory
 
 ### Configuration example
 
+You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
+
+
 ```yaml
 storage:
   type: filesystem

@@ -40,6 +40,8 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
 
 ## Configuration example
 
+You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
+
 === "using JSON keys"
 
     ```yaml

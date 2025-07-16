@@ -12,8 +12,9 @@ Percona Backup for MongoDB (PBM) saves backup data to a designated directory on 
 
 * A metadata file containing backup information
 * For each replica set:
-  - A compressed mongodump archive of all collections
-  - A compressed BSON file containing the oplog entries for the backup period
+
+   - A compressed mongodump archive of all collections
+   - A compressed BSON file containing the oplog entries for the backup period
 
 The oplog entries ensure backup consistency, and the end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.
 
