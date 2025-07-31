@@ -34,7 +34,7 @@ If the new duration is smaller than the previous one, the `pbm-agent` is trigger
 *Type*: string <br>
 *Default*: s2
 
-The compression method for Point-in-Time Recovery oplog slices. Available in Percona Backup for MongoDB as of version 1.7.0.
+The compression method for Point-in-Time Recovery oplog slices. 
 
 Supported values: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2`.
 
@@ -64,7 +64,7 @@ Note that the greater value you specify, the more time and computing resources i
 
 Controls whether the base backup is required to start [Point-in-Time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing). When set to true, Percona Backup for MongoDB saves oplog chunks without the base backup snapshot.
 
-Available in Percona Backup for MongoDB starting with version 1.8.0. To learn more about the usage, see [Point-in-Time Recovery oplog replay](../usage/oplog-replay.md).
+To learn more about the usage, see [Point-in-Time Recovery oplog replay](../usage/oplog-replay.md).
 
 ### pitr.priority
 

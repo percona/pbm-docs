@@ -2,7 +2,7 @@
 
 By default, the `pbm-agent` to do a backup is elected randomly among secondary nodes in a replica set. In sharded cluster deployments, the `pbm-agent` is elected among the secondary nodes in every shard and the config server replica sets. If no secondary node responds in a defined period, then the `pbm-agent` on the primary node is elected to do a backup.
 
-As of version 1.5.0, you can influence the `pbm-agent` election by assigning a priority to `mongod` nodes in the Percona Backup for MongoDB [configuration file](../reference/config.md).
+You can influence the `pbm-agent` election by assigning a priority to `mongod` nodes in the Percona Backup for MongoDB [configuration file](../reference/config.md).
 
 ```yaml
 backup:

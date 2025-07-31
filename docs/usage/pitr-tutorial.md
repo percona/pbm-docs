@@ -55,8 +55,6 @@ A restore operation changes the time line of oplog events. Therefore, all oplog 
 
 ## Select a backup snapshot for the restore
 
-!!! admonition "Version added: [1.6.0](../release-notes/1.6.0.md)"
-
 You can recover your database to the specific point in time using any backup snapshot, and not only the most recent one. Run the `pbm restore` command with the `--base-snapshot=<backup_name>` flag where you specify the desired backup snapshot.
 
 To restore from any backup snapshot, Percona Backup for MongoDB requires continuous oplog. After the backup snapshot is made and point-in-time recovery is re-enabled, it copies the oplog saved with the backup snapshot and creates oplog slices from the end time of the latest slice to the new starting point thus making the oplog continuous.

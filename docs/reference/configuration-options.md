@@ -147,7 +147,7 @@ The `maxUploadParts` value is printed in the pbm-agent log.
 *Required*: NO
 *Example*: STANDARD
 
-The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storage-classes/) assigned to objects stored in the S3 bucket. If not provided, the `STANDARD` storage class will be used. This option is available in Percona Backup for MongoDB as of v1.7.0.
+The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storage-classes/) assigned to objects stored in the S3 bucket. If not provided, the `STANDARD` storage class will be used. 
 
 ### storage.s3.debugLogLevels
 
@@ -180,7 +180,7 @@ When undefined, no S3 debug logging is performed.
 *Required*: NO <br>
 *Default*: False
 
-Disables the TLS verification of the S3 storage. This allows Percona Backup for MongoDB to upload data to S3-like storages that use self-issued TLS certificates. Available in Percona Backup for MongoDB as of version 1.7.0.
+Disables the TLS verification of the S3 storage. This allows Percona Backup for MongoDB to upload data to S3-like storages that use self-issued TLS certificates.
 
 !!! warning 
     
@@ -228,7 +228,7 @@ Your custom encryption key. This key is not stored on the S3 storage side. Thus,
 *Required*: NO <br>
 *Default*: 3
 
-The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed. Available in Percona Backup for MongoDB as of 1.7.0.
+The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed. 
 
 ### storage.s3.retryer.minRetryDelay
 
@@ -236,7 +236,7 @@ The maximum number of retries to upload data to S3 storage. A zero value means n
 *Required*: NO <br>
 *Default*: 30ms
 
-The minimum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
+The minimum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. 
 
 ### storage.s3.retryer.maxRetryDelay
 
@@ -244,7 +244,7 @@ The minimum time to wait before the next retry, specified as a *time.Duration*. 
 *Required*: NO <br>
 *Default*: 5m
 
-The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. Available in Percona Backup for MongoDB as of 1.7.0.
+The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. 
 
 ## GCS type storage options
 

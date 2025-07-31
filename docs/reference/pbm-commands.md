@@ -429,14 +429,14 @@ Returns the help information about `pbm` commands.
 
 ## pbm list
 
-Provides the list of backups. In versions 1.3.4 and earlier, the command lists all backups and their states. Backup states are the following:
+Provides the list of backups and their states. Backup states are the following:
 
 * In progress - A backup is running
 * Canceled - A backup was canceled
 * Error - A backup was finished with an error
 * No status means a backup is complete
 
-As of version 1.4.0, only successfully completed backups are listed. To view currently information about a running or a failed backup, run [`pbm status`](#pbm-status).
+Only successfully completed backups are listed. To view information about a running or a failed backup, run [`pbm status`](#pbm-status).
 
 When Point-in-Time Recovery is enabled, the `pbm list` also provides the list of valid time ranges for recovery and point-in-time recovery status.
 
@@ -796,7 +796,7 @@ The command accepts the following flags:
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
 | `--wait-time`  | The time to wait for PBM to report the status of the restore execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
-| `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. Available in Percona Backup for MongoDB starting from version 1.6.0.<br><br> In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](../usage/pitr-physical.md). <br><br> In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-physical.md). Without it, PBM looks for a logical backup to restore from.|
+| `--base-snapshot`   | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. <br><br> In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](../usage/pitr-physical.md). <br><br> In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-physical.md). Without it, PBM looks for a logical backup to restore from.|
 | `--replset-remapping`| Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
 | `--ns=<database.collection>`| Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns=<database.*>`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, `--ns=db1.*,db2.coll2,db3.coll1,db3.collX`|
 | `--with-users-and-roles` | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.| 
@@ -950,11 +950,11 @@ The command accepts the following flags:
 
     ```json
     {
-      "Version": "1.6.0",
+      "Version": "2.6.0",
       "Platform": "linux/amd64",
       "GitCommit": "f9b9948bb8201ba1a6400f6558496934a0685efd",
       "GitBranch": "main",
-      "BuildTime": "2021-07-28_15:24_UTC",
+      "BuildTime": "{{year}}-07-28_15:24_UTC",
       "GoVersion": "go1.16.6"
     }
     ```

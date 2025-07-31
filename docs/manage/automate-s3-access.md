@@ -4,8 +4,6 @@ When you run MongoDB and Percona Backup for MongoDB using AWS resources (on EC2 
 
 ## IAM instance profile 
 
-!!! admonition "Version added: 1.6.0"
-
 IAM (Identity Access Management) is the AWS service that allows you to securely control access to AWS resources.
 
 Using the IAM instance profile, you can automate access to S3 buckets for Percona Backup for MongoDB running on EC2 instance. The steps are the following:

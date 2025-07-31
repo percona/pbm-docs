@@ -32,7 +32,7 @@ If not set, the replica set nodes have the default priority as follows:
 *Type*: string <br>
 *Default*: s2
 
-The compression method for backup snapshots. Available in Percona Backup for MongoDB as of version 1.8.0.
+The compression method for backup snapshots. 
 
 When `none` is specified, backups are made without compression.
 

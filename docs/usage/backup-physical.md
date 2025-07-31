@@ -4,8 +4,6 @@
 
 ## Procedure
 
-!!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
-
 During a *physical* backup, Percona Backup for MongoDB  copies the contents of the `dbpath` directory (data and metadata files, indexes, journal and logs) from every shard and config server replica set to the backup storage. 
 
 To start a backup, run the following command:

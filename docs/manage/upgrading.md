@@ -4,19 +4,9 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
 ## Important notes
 
-1. Backward compatibility between data backup and restore is supported for upgrades within one major version only (for example, from 1.1.x to 1.2.y). When you upgrade Percona Backup for MongoDB over several major versions (for example, from 1.0.x to 1.2.y), we recommend to make a backup right after the upgrade.
+1. Backward compatibility between data backup and restore is supported for upgrades within one major version only (for example, from 2.1.x to 2.2.y). When you upgrade Percona Backup for MongoDB over several major versions (for example, from 2.0.x to 2.2.y), we recommend to make a backup right after the upgrade.
 
-2. Percona Backup for MongoDB v1.5.0 and later is incompatible with Percona Backup for MongoDB v1.4.1 and earlier due to different processing of system collections `Users` and `Roles` during backup / restore operations. After the upgrade to Percona Backup for MongoDB v1.5.0 and later, make sure to make a fresh backup.
-
-3. Starting from v1.7.0, the user running the `pbm-agent` process is changed from `pbm` to `mongod`. This is done for the following reasons:
-
-    * To make physical backups and restores, the user running the `pbm-agent` process must have the read / write permissions to the MongoDB `dataDir`.
-
-    * To use the filesystem-based backup storage, the user running the `pbm-agent` process must also have the read / write permissions to the backup directory.
-
-4. Starting from version 1.3.0, Percona Backup for MongoDB packages are stored in the `pbm` repository and the `tools` repository for backward compatibility.
-
-5. Upgrade Percona Backup for MongoDB on all nodes where it is installed.
+2. Upgrade Percona Backup for MongoDB on all nodes where it is installed.
 
 ## Prerequisites 
 
@@ -50,8 +40,6 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
         ```  
 
     3. Reload the `systemd` process
-
-        Starting from v1.7.0, reload the `systemd` process to update the unit file with the following command:
 
         ```{.bash data-prompt="$"}
         $ sudo systemctl daemon-reload
@@ -119,12 +107,10 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
         ??? example "Sample output"
 
             ```{.text .no-copy}
-            percona-backup-mongodb | 1.8.1-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
-            percona-backup-mongodb | 1.8.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
-            percona-backup-mongodb | 1.7.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
-            percona-backup-mongodb | 1.6.1-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
-            percona-backup-mongodb | 1.6.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
-            percona-backup-mongodb | 1.5.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
+            percona-backup-mongodb | 2.8.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
+            percona-backup-mongodb | 2.7.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
+            percona-backup-mongodb | 2.6.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
+            percona-backup-mongodb | 2.5.0-1.stretch | http://repo.percona.com/tools/apt stretch/main amd64 Packages
             ```
 
     2. Stop `pbm-agent`
