@@ -50,7 +50,7 @@ Percona provides the [`percona-release` :material-arrow-top-right: ](https://doc
     $ sudo yum install percona-backup-mongodb
     ```
 
-=== ":simple-amazon: On Amazon Linux 2023"
+=== ":fontawesome-brands-amazon: On Amazon Linux 2023"
 
     Run the following command to install the packages:
 
