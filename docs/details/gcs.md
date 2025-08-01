@@ -64,8 +64,8 @@ You can find [the configuration file template :octicons-link-external-16:](https
 		 bucket: pbm-testing
 		 prefix: pbm/test
 		 credentials:
-		   HMACAccessKey: <your-access-key-id-here>
-		   HMACSecret: <your-secret-key-here>
+		   hmacAccessKey: <your-access-key-id-here>
+		   hmacSecret: <your-secret-key-here>
 	```
 
 ## Adjust PBM configuration to use GCS
