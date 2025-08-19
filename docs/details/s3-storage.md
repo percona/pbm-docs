@@ -114,8 +114,6 @@ Percona Backup for MongoDB supports [server-side encryption](../reference/glossa
 
 ###  Using AWS KMS keys (SSE-KMS)
 
-!!! admonition "Version added: [1.3.2](../release-notes/1.3.2.md)" 
-
 To use the SSE-KMS encryption, specify the following parameters in the Percona Backup for MongoDB configuration file: 
 
 ```yaml
@@ -187,17 +185,11 @@ With this ability to control the endpoints for `pbm-agents` to reach the same st
 
 ## Debug logging
 
-!!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
-
 You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the `pbm logs` output so that you can debug and diagnose S3 request issues or failures.
 
 To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
 
-
-
 ## Storage classes 
-
-!!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
 
 Percona Backup for MongoDB supports [Amazon S3 storage classes :octicons-link-external-16:](https://aws.amazon.com/s3/storage-classes/). Knowing your data access patterns, you can set the S3 storage class in Percona Backup for MongoDB configuration. When Percona Backup for MongoDB uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.
 
@@ -214,8 +206,6 @@ When the option is undefined, the S3 Standard (`STANDARD`) storage type is used.
 
 ## Upload retries 
 
-!!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)" 
-
 You can set up the number of attempts for Percona Backup for MongoDB to upload data to S3 storage as well as the min and max time to wait for the next retry. Set the options `storage.s3.retryer.numMaxRetries`, `storage.s3.retryer.minRetryDelay` and `storage.s3.retryer.maxRetryDelay` in Percona Backup for MongoDB configuration.
 
 ```yaml
@@ -228,8 +218,6 @@ retryer:
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
 ## Data upload to storage with self-signed TLS certificates
-
-!!! admonition "Version added: [1.7.0](../release-notes/1.7.0.md)"
 
 Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don't use certificates signed by public Certificate Authorities (CAs).
 

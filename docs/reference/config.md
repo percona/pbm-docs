@@ -12,11 +12,11 @@ But you don’t have to use the `mongo` shell; the `pbm` CLI has a “config” 
 
 Percona Backup for MongoDB config contains the following settings:
 
-* [Remote backup storage configuration](configuration-options.md) is available starting with version 1.0 or 1.1.
+* [Remote backup storage configuration](configuration-options.md) 
 
-* [Point-in-time recovery configuration](pitr-options.md) is available starting with version 1.3.0.
+* [Point-in-time recovery configuration](pitr-options.md) 
 
-* [Restore options](restore-options.md) are available as starting with version 1.3.2.
+* [Restore options](restore-options.md) 
 
 * [Logging options](logging-options.md) are available starting with version 2.9.0.
 
