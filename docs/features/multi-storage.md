@@ -60,8 +60,9 @@ $ pbm backup -t physical --profile=minio --wait
 
 ??? example "Sample output"
 
-    {.text .no-copy}
+    ```{.text .no-copy}
     Starting backup '2024-06-25T11:25:30Z'....Backup '2024-06-25T11:25:30Z' to remote store 's3://http://minio:9000/backup' has started
+	```
 
 You can make any type of backups except snapshot-based ones on an external storage.
 
