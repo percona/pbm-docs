@@ -4,7 +4,7 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
 ## Important notes
 
-1. Backward compatibility between data backup and restore is supported for upgrades within one major version only (for example, from 2.1.x to 2.2.y). When you upgrade Percona Backup for MongoDB over several major versions (for example, from 2.0.x to 2.2.y), we recommend to make a backup right after the upgrade.
+1. Backward compatibility between data backup and restore is supported for upgrades within one major version only (for example, from 2.1.x to 2.2.y). When you upgrade Percona Backup for MongoDB across major versions (for example, from 2.0.x to 2.2.y), we recommend to make a backup right after the upgrade.
 
 2. Upgrade Percona Backup for MongoDB on all nodes where it is installed.
 
