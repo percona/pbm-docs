@@ -27,6 +27,7 @@ Percona Backup for MongoDB supports the following storage types:
 * [S3-compatible storage](s3-storage.md)
 * [Filesystem server storage](filesystem-storage.md)
 * [Microsoft Azure Blob storage](azure.md)
+* [Alicloud OSS storage](oss.md)
 
 
 ## Permissions setup
