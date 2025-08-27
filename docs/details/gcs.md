@@ -14,7 +14,7 @@ To use GCS, you need the following:
 * [create a service account :octicons-link-external-16:](https://cloud.google.com/iam/docs/service-accounts-create#iam-service-accounts-create-console) 
 * add keys for the service account:
 
-    * [add JSNON keys :octicons-link-external-16:](https://cloud.google.com/iam/docs/keys-create-delete#creating) or
+    * [add JSON keys :octicons-link-external-16:](https://cloud.google.com/iam/docs/keys-create-delete#creating) or
     * [add HMAC keys :octicons-link-external-16:](https://cloud.google.com/storage/docs/authentication/managing-hmackeys)
 
 * [create a bucket](#create-a-bucket)
