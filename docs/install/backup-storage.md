@@ -26,7 +26,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
               secret-access-key: <your-secret-key-here>
         ```    
 
-    === ":material-google-cloud: Google Cloud Storage"    
+    === ":material-google-cloud: Google Cloud Storage (SA)"    
 
         ```yaml
         storage:
@@ -40,7 +40,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
                privateKey: <your-service-account-private-key-here>
         ```
 
-    === ":material-google-cloud: Google Cloud Storage"    
+    === ":material-google-cloud: Google Cloud Storage (HMAC)"    
    
        ```yaml
        storage:
