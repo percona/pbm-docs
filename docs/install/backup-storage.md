@@ -26,7 +26,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
               secret-access-key: <your-secret-key-here>
         ```    
 
-    === ":material-google-cloud: Google Cloud Storage"    
+    === ":material-google-cloud: GCS (SA)"    
 
         ```yaml
         storage:
@@ -36,9 +36,22 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
              chunkSize: 16777216
              prefix: pbm/test
              credentials:
-               clientEmail: <your-google-cloud-project-id-here>
-               privateKey: <your-private-key-here>
-        ```    
+               clientEmail: <your-service-account-email>
+               privateKey: <your-service-account-private-key-here>
+        ```
+
+    === ":material-google-cloud: GCS (HMAC)"    
+   
+        ```yaml
+        storage:
+          type: gcs
+          gcs:
+             bucket: pbm-testing
+             prefix: pbm/test
+             credentials:
+               hmacAccessKey: <your-access-key-id-here>
+               hmacSecret: <your-secret-key-here>
+        ```
 
     === ":material-microsoft-azure: Microsoft Azure Blob Storage"    
 
@@ -64,7 +77,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
 
     Navigate to every storage page for a detailed example configuration file.
 
-2. Apply the config file to PBM
+3. Apply the config file to PBM
 
     ```{.bash data-prompt="$"}
     $ pbm config --file pbm_config.yaml
