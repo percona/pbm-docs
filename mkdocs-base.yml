@@ -4,7 +4,7 @@ site_name: Percona Backup for MongoDB
 site_description: documentation
 site_author: Percona LLC
 copyright: >
-  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2025 
+  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2025
   — <a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
@@ -51,7 +51,7 @@ theme:
     - search.share
     - search.suggest
     - navigation.top
-    - navigation.tracking 
+    - navigation.tracking
     - navigation.instant
     - navigation.instant.progress
     - navigation.indexes
@@ -61,7 +61,7 @@ theme:
     - content.action.view
     - content.code.copy
     - content.code.annotate
-    - toc.follow      
+    - toc.follow
 
 
 extra_css:
@@ -96,10 +96,10 @@ markdown_extensions:
   pymdownx.details: {}
   pymdownx.mark: {}
   pymdownx.smartsymbols: {}
-  pymdownx.tabbed: 
+  pymdownx.tabbed:
       {alternate_style: true}
   pymdownx.tilde: {}
-  pymdownx.superfences: 
+  pymdownx.superfences:
     custom_fences:
       - name: mermaid
         class: mermaid
@@ -107,7 +107,7 @@ markdown_extensions:
   pymdownx.highlight:
       use_pygments: true
   pymdownx.inlinehilite: {}
-  pymdownx.snippets:  
+  pymdownx.snippets:
     base_path: ["snippets"]
 #    auto_append:
 #      - services-banner.md
@@ -118,13 +118,13 @@ markdown_extensions:
         custom_icons:
           - _resource/.icons
 
-#Mkdocs plugins   
+#Mkdocs plugins
 plugins:
   section-index: {}
-  search: 
+  search:
     separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   open-in-new-tab: {}
-  git-revision-date-localized: 
+  git-revision-date-localized:
     enable_creation_date: true
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   tags: {}
@@ -147,7 +147,7 @@ plugins:
       css_dir: css
       javascript_dir: js
       canonical_version: null
-  
+
   print-site:
       add_to_navigation: false
       print_page_title: 'Percona Backup for MongoDB documentation'
@@ -171,21 +171,21 @@ nav:
   - Home: index.md
   - get-help.md
   - Get started:
-      - Quickstart: installation.md 
+      - Quickstart: installation.md
       - 1. Install:
          - System-requirements: system-requirements.md
-         - From repositories: install/repos.md       
+         - From repositories: install/repos.md
          - Download tarballs: install/tarball.md
          - Build from source: install/source.md
          - Run in Docker: install/docker.md
-      - 2. Set up and configure: 
-        - Initial setup: install/initial-setup.md       
+      - 2. Set up and configure:
+        - Initial setup: install/initial-setup.md
         - install/configure-authentication.md
         - install/backup-storage.md
         - Start the pbm-agent process: install/start-pbm-agent.md
   - Backup and restore:
         - Backup and restore types: features/backup-types.md
-        - Logical: 
+        - Logical:
           - Overview: features/logical.md
           - Make a logical backup : "usage/start-backup.md"
           - Restore from a logical backup: usage/restore.md
@@ -200,12 +200,12 @@ nav:
         - Selective:
           - Overview: features/selective-backup.md
           - Make a selective backup: usage/backup-selective.md
-          - Restore from a selective backup: usage/restore-selective.md
+          - Make a selective restore: usage/restore-selective.md
         - Snapshot-based:
           - Overview: features/snapshots.md
           - Make a snapshot-based backup: usage/backup-external.md
           - Restore from a snapshot-based backup: usage/restore-external.md
-        - Point-in-time recovery: 
+        - Point-in-time recovery:
           - Overview: features/point-in-time-recovery.md
           - From logical backup: usage/pitr-tutorial.md
           - From physical backup: usage/pitr-physical.md
@@ -217,15 +217,15 @@ nav:
   - Manage backups:
         - List backups: usage/list-backup.md
         - usage/describe-backup.md
-        - usage/schedule-backup.md 
+        - usage/schedule-backup.md
         - usage/cancel-backup.md
         - usage/delete-backup.md
         - usage/restore-progress.md
         - usage/backup-priority.md
         - usage/compression.md
-        - usage/oplog-replay.md 
-        - usage/logs.md 
-        - Backup management via PMM: pmm.md 
+        - usage/oplog-replay.md
+        - usage/logs.md
+        - Backup management via PMM: pmm.md
   - Storage:
       - Remote backup storage overview: details/storage-configuration.md
       - AWS or s3-compatible storage: details/s3-storage.md
@@ -234,7 +234,7 @@ nav:
       - details/azure.md
       - features/multi-storage.md
   - PBM commands: reference/pbm-commands.md
-  - Configuration file: 
+  - Configuration file:
       - Percona Backup for MongoDB configuration in a cluster: reference/config.md
       - reference/configuration-options.md
       - reference/pitr-options.md
@@ -314,11 +314,8 @@ nav:
         - 'Percona Backup for MongoDB 1.0.0 (2019-09-19)': 'release-notes/1.0.0.md'
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
-      - "About Percona Backup for MongoDB documentation": about-docs.md 
-      - reference/glossary.md 
+      - "About Percona Backup for MongoDB documentation": about-docs.md
+      - reference/glossary.md
       - reference/contributing.md
       - Copyright and licensing: copyright.md
-      - Trademark policy: trademark-policy.md 
-
-
-
+      - Trademark policy: trademark-policy.md
