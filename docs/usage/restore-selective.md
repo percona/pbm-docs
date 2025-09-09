@@ -1,4 +1,4 @@
-# Make a selective restore
+# Make a selective restore from a logical backup
 
 --8<-- "restore-intro.md"
 
