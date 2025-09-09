@@ -1,4 +1,4 @@
-# Restore from a selective logical backup
+# Make a selective restore
 
 --8<-- "restore-intro.md"
 
@@ -8,7 +8,7 @@ You can restore a specific database or a collection either from a full or a sele
 
 ## Restore a database
 
-1. List the backups 
+1. List the backups
 
     ```{.bash data-prompt="$"}
     $ pbm list
@@ -18,7 +18,7 @@ You can restore a specific database or a collection either from a full or a sele
     ```{.bash data-prompt="$"}
     $ pbm restore <backup_name> --ns <database.collection>
     ```
-    
+
  You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
 During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
@@ -35,7 +35,7 @@ $ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
 
 You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
 
-Note that in version 2.8.0 you can restore a single collection and this collection must be unsharded. 
+Note that in version 2.8.0 you can restore a single collection and this collection must be unsharded.
 
 To restore a collection, pass the collection name from the backup for the `--ns-from` flag and the new name for the `--ns-to` flag:
 
@@ -62,14 +62,6 @@ After the restore is complete, do the following:
 
 [Point-in-time recovery](../usage/pitr-selective.md){.md-button}
 
-## Useful links 
+## Useful links
 
 * [View restore progress](../usage/restore-progress.md)
-
-
-
-
-  
-
-
-
