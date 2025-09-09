@@ -18,7 +18,7 @@ Percona Backup for MongoDB (PBM) saves backup data to a designated directory on 
 
 The oplog entries ensure backup consistency, and the end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.
 
-Using the [`pbm list`](../reference/pbm-commands.md#pbm-list) or [`pbm status`](../reference/pbm-commands.md#pbm-status) commands, you can scan the backup directory to find existing backups, even if never used PBM on your computer before.
+Using the [`pbm list`](../reference/pbm-commands.md#pbm-list) or [`pbm status`](../reference/pbm-commands.md#pbm-status) commands, you can scan the backup directory to find existing backups, even if you never used PBM on your computer before.
 
 ## Supported storage types
 

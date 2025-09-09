@@ -38,6 +38,7 @@ storage:
       numMaxRetries: 3
       minRetryDelay: 30ms
       maxRetryDelay: 5m
+    maxObjSizeGB: 5018
 ```
 
 ### storage.s3.provider
@@ -246,6 +247,14 @@ The minimum time to wait before the next retry, specified as a *time.Duration*. 
 
 The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. 
 
+### storage.s3.maxObjSizeGB
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
+
 ## GCS type storage options
 
 ```yaml
@@ -260,6 +269,7 @@ storage:
       privateKey: <your-private-key-here>
       hmacAccessKey: <your-HMAC-key-here>
       hmacSecret: <your-HMAC-secret-here>
+    maxObjSizeGB: 5018
 ```
 
 ### storage.gcs.bucket
@@ -332,6 +342,14 @@ The maximum amount of time between retries, in seconds. Defaults to 30 sec.
 
 Each time PBM fails and tries again, it increases the wait time by multiplying it by this number (usually 2). For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.
 
+### storage.gcs.maxObjSizeGB
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
+
 ## Filesystem storage options
 
 ```yaml
@@ -339,6 +357,7 @@ storage:
   type: filesystem
   filesystem:
     path: <string>
+  maxObjSizeGB: 5018
 ```
 
 ### storage.filesystem.path
@@ -347,6 +366,14 @@ storage:
 *Required*: YES
 
 The path to the backup directory
+
+### storage.filesystem.maxObjSizeGB
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ## Microsoft Azure Blob storage options
 
@@ -360,6 +387,7 @@ storage:
     prefix: <string>
     credentials:
       key: <your-access-key>
+    maxObjSizeGB: 194560
 ```
 
 ### storage.azure.account
@@ -397,3 +425,10 @@ The path to the data directory in the bucket. If undefined, backups are stored i
 
 Your access key to authorize access to data in your storage account.
 
+### storage.azure.maxObjSizeGB
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 194560
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
