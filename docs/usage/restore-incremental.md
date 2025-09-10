@@ -10,7 +10,21 @@
    
 ## Before you start
 
-Before you start, shut down all `mongos` nodes, `pmm-agent` processes and clients that can do writes to the database as it won’t be available while the restore is in progress.
+1. Shut down all `mongos` nodes, `pmm-agent` processes and clients that can do writes to the database as it won’t be available while the restore is in progress.
+2. Check that the `systemctl` restart policy for the `pbm-agent.service` is not set to `always` or `on-success`:
+
+    ```{.bash data-prompt="$"}
+    sudo systemctl show pbm-agent.service | grep Restart
+    ```
+
+    ??? example "Sample output"
+
+        ```{.text .no-copy}
+        Restart=no
+        RestartUSec=100ms
+        ```
+    
+    During physical restores, the database must not be automatically restarted as this is controlled by the `pbm-agent`.
    
 ## Restore a database
 
