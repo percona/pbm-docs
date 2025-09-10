@@ -11,15 +11,28 @@
     ```
 
 2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
-3. Make sure all nodes in the cluster are healthy (i.e. either PRIMARY or SECONDARY). Each pbm-agent needs to be able to connect to its local node and run queries in order to perform the restore.
+3. Make sure all nodes in the cluster are healthy (i.e. report either PRIMARY or SECONDARY). Each `pbm-agent` needs to be able to connect to its local node and run queries in order to perform the restore.
 4. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
-
 
 ## Before you start
 
 1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
 2. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
 3. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
+4. Check that the `systemctl` restart policy for the `pbm-agent.service` is not set to `always` or `on-success`:
+
+    ```{.bash data-prompt="$"}
+    $ sudo systemctl show pbm-agent.service | grep Restart
+    ```
+
+    ??? example "Sample output"
+
+        ```{.text .no-copy}
+        Restart=no
+        RestartUSec=100ms
+        ```
+    
+    During physical restores, the database must not be automatically restarted as this is controlled by the `pbm-agent`.
    
 ## Restore a database
 
