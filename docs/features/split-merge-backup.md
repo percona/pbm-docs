@@ -2,7 +2,7 @@
 
 !!! admonition "Version added: [2.11.0](../release-notes/2.11.0.md)
 
-As your database grows, so do your backups. Eventually, a backup file may become so large that it exceeds the maximum object size limit of your cloud or local storage. When this happens, Percona Backup for MongoDB (PBM) can't upload the file, which can disrupt your backup strategy.
+As your database grows, so do your backups. Eventually, a collection or index  may become so large that its backup file exceeds the maximum object size limit of your cloud or local storage. When this happens, Percona Backup for MongoDB (PBM) can't upload the file, which can disrupt your backup strategy.
 
 The following table provides default size limits for the supported backup storages:
 
@@ -13,7 +13,9 @@ The following table provides default size limits for the supported backup storag
 | **Azure Blob Storage** | 190 TB |
 | **Filesystem storage** | 4.9 TB |
 
-To ensure that PBM successfully uploads backups, you can configure the maximum size for backup files for the storage you use. Define the file size in GB for the `maxObjSizeGB` configuration parameter.
+These defaults are sufficient to satisfy the majority of use cases. However, you can fine-tune the limits and configure a new maximum size for backup files for the storage you use.  
+
+To ensure that PBM successfully uploads backups, you can configure the . Define the file size in GB for the `maxObjSizeGB` configuration parameter.
 
 This is the configuration example for the AWS S3 storage:
 
@@ -27,7 +29,7 @@ storage:
     credentials:
       access-key-id: <your-access-key-id-here>
       secret-access-key: <your-secret-key-here>
-  maxObjSizeGB: 100
+  maxObjSizeGB: 5018
 ```
 
 ## How it works

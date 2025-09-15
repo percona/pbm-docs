@@ -249,7 +249,7 @@ The maximum time to wait before the next retry, specified as a *time.Duration*. 
 
 ### storage.s3.maxObjSizeGB
 
-*Type*: int <br>
+*Type*: float64 <br>
 *Required*: NO <br>
 *Default*: 5018
 
@@ -344,7 +344,7 @@ Each time PBM fails and tries again, it increases the wait time by multiplying i
 
 ### storage.gcs.maxObjSizeGB
 
-*Type*: int <br>
+*Type*: float64 <br>
 *Required*: NO <br>
 *Default*: 5018
 
@@ -369,7 +369,7 @@ The path to the backup directory
 
 ### storage.filesystem.maxObjSizeGB
 
-*Type*: int <br>
+*Type*: float64 <br>
 *Required*: NO <br>
 *Default*: 5018
 
@@ -427,7 +427,7 @@ Your access key to authorize access to data in your storage account.
 
 ### storage.azure.maxObjSizeGB
 
-*Type*: int <br>
+*Type*: float64 <br>
 *Required*: NO <br>
 *Default*: 194560
 
