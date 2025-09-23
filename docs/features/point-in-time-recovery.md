@@ -19,7 +19,7 @@ Point-in-time recovery is restoring a database up to a specific timestamp. This 
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
-| Helps you prevent data loss during a disaster such as a crashed database, accidental data deletion or drop of tables, and unwanted update of multiple fields instead of a single one. | Restore takes longer since it requires you to restore the backup and then replay oplog events on top of it.|
+| Helps you prevent data loss during a disaster such as a crashed database, accidental data deletion or drop of collections, and unwanted update of multiple fields instead of a single one. | Restore takes longer since it requires you to restore the backup and then replay oplog events on top of it.|
 
 ## Enable point-in-time recovery
 
