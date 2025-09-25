@@ -7,6 +7,7 @@ mongosh
 [Oo]plog
 [Ss]hard
 PBM
+PLM
 PMM
 Percona Monitoring and Management
 Percona Backup for MongoDB
@@ -20,3 +21,5 @@ SSE
 UTC
 MinIO
 [Rr]esync
+(?i)HMAC
+retryer

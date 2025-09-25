@@ -233,6 +233,7 @@ nav:
       - details/filesystem-storage.md
       - details/azure.md
       - features/multi-storage.md
+      - features/split-merge-backup.md
   - PBM commands: reference/pbm-commands.md
   - Configuration file:
       - Percona Backup for MongoDB configuration in a cluster: reference/config.md
