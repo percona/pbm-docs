@@ -19,9 +19,10 @@
 1. Shut down all `mongos` nodes as the database won't be available while the restore is in progress. 
 2. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
 3. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
-4. Check that the `systemctl` restart policy for the `pbm-agent.service` is not set to `always` or `on-success`:
+4. Check that the `systemctl` restart policy for the `pbm-agent.service` and `mongod.service` processes is not set to `always` or `on-success`:
 
     ```{.bash data-prompt="$"}
+    $ sudo systemctl show mongod.service | grep Restart
     $ sudo systemctl show pbm-agent.service | grep Restart
     ```
 
