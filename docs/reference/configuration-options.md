@@ -386,7 +386,7 @@ The size of data chunks in bytes to be uploaded to the storage bucket. Default: 
 
 *Type*: int
 *Required*: NO
-*Deafult*: 10
+*Default*: 10
 
 The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed.
 
