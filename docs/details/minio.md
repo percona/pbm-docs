@@ -123,7 +123,7 @@ Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path 
 Alternatively, you can disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
 
 ```{.bash data-prompt="$"}
-$ pbm config --set storage.s3.insecureSkipTLSVerify=True
+$ pbm config --set storage.minio.insecureSkipTLSVerify=True
 ```
 
 !!! warning 
