@@ -8,7 +8,9 @@
 *Required*:     YES   
 
 Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
+Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
 
+## AWS S3 storage options
 ## AWS S3 storage options
 
 ```yaml
@@ -65,6 +67,7 @@ The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.a
 
 The location of the storage bucket.
 Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)  to define the bucket region
+Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)  to define the bucket region
 
 ### storage.s3.prefix
 
@@ -85,6 +88,7 @@ The URL to access the bucket.
 *Type*: array of strings <br>
 *Required*: NO
 
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
