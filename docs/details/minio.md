@@ -36,18 +36,19 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
     
     Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this [bucket is created](#storage-bucket-creation) and managed solely by PBM.
 
-This is the examples for the basic configuration of MinIO and other S3-compatible storages in Percona Backup for MongoDB. You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
+This is the example for the basic configuration of MinIO and other S3-compatible storages in Percona Backup for MongoDB. You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
 
 ```yaml
 storage:
   type: minio
   minio:
-   endpoint: localhost:9100
-   bucket: pbm-example
-   prefix: data/pbm/test
-   credentials:
-     access-key-id: <your-access-key-id-here>
-     secret-access-key: <your-secret-key-here>
+    endpoint: localhost:9100
+    region: us-east-1
+    bucket: pbm-example
+    prefix: data/pbm/test
+    credentials:
+      access-key-id: <your-access-key-id-here>
+      secret-access-key: <your-secret-key-here>
 ```
 
 For the description of configuration options, see [Configuration file options](../reference/configuration-options.md).

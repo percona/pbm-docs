@@ -8,9 +8,9 @@ To address these challenges, you can configure custom endpoint URLs for specific
 
 The supported storage types are: 
 
-* AWS S3, 
+* AWS S3 
 * MinIO and S3-compatible storage services 
-* Microsoft Azure Blob storage. 
+* Microsoft Azure Blob storage 
 
 Here's the example of the configuration file with the endpoint map:
 

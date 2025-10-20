@@ -8,9 +8,7 @@
 *Required*:     YES   
 
 Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
-Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
 
-## AWS S3 storage options
 ## AWS S3 storage options
 
 ```yaml
@@ -67,7 +65,6 @@ The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.a
 
 The location of the storage bucket.
 Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)  to define the bucket region
-Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)  to define the bucket region
 
 ### storage.s3.prefix
 
@@ -88,7 +85,6 @@ The URL to access the bucket.
 *Type*: array of strings <br>
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
@@ -294,7 +290,7 @@ storage:
 *Type*: string <br>
 *Required*: YES
 
-The location of the storage bucket. Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) to define the bucket region. If undefined, the default `us-east-1` region is used.
+The location of the storage bucket. Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) to define the bucket region. If not specified, the default `us-east-1` region is used.
 
 ### storage.minio.bucket
 
@@ -324,7 +320,7 @@ The network address (URL or IP) where your MinIO server is accessible.
 *Type*: array of strings
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
+A mapping of custom endpoints for `pbm-agents` on different servers to the same MinIO storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3, MinIO, and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.minio.secure
 
@@ -340,7 +336,7 @@ Defines whether to use HTTP or HTTPS protocol for communication between PBM and 
 *Required*: NO
 *Default*: false
 
-Disables the TLS verification of the S3 storage. This allows Percona Backup for MongoDB to upload data to S3-like storages that use self-issued TLS certificates. Use it with caution as it might leave a hole for man-in-the-middle attacks.
+Disables the TLS verification of the MinIO / S3-compatible storage. This allows Percona Backup for MongoDB to upload data to MinIO / S3-compatible storages that use self-issued TLS certificates. Use it with caution as it might leave a hole for man-in-the-middle attacks.
 
 ### storage.minio.forcePathStyle
 
@@ -377,7 +373,9 @@ The MinIO session token used to validate the temporary security credentials for 
 *Required*: NO
 *Default*: V4
 
-Allows using the deprecated AWS Signature version 2. May be used for backward compatibility with the storages that don't support Signature version 4. Default: `V4`.
+Specifies the AWS Signature version to use for authentication. Accepted values: `V2`, `V4`. 
+
+Allows using the deprecated AWS Signature version 2 for backward compatibility with storages that don't support Signature version 4. Default: `V4`.
 
 ### storage.minio.partSize
 
@@ -390,9 +388,9 @@ The size of data chunks in bytes to be uploaded to the storage bucket. Default: 
 
 *Type*: int
 *Required*: NO
-*Deafult*: 10
+*Default*: 10
 
-The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed.
+The maximum number of retries to upload data to MinIO / S3-compatible storage. A zero value means no retries will be performed.
 
 ### storage.minio.maxObjSizeGB
 
@@ -567,10 +565,10 @@ The URL to access the data in Microsoft Azure Blob Storage. The default value is
 
 ### storage.azure.endpointUrlMap
 
-*Type*: array of strings <br>
+*Type*: object (host:port -> endpoint URL) <br>
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Available with version 2.8.0.
+A mapping of custom endpoint URLs for `pbm-agents` on different servers to the same remote storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same remote storage](../details/endpoint-map.md) section. Available with version 2.8.0.
 
 
 ### storage.azure.prefix
