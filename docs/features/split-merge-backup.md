@@ -9,7 +9,7 @@ The following table provides default maximum size limits for the supported backu
 | Storage | Default size limit|
 | :--- | :--- |
 | **AWS S3** | 4.9 TB |
-| **MinIO and S3 compatible storage** | 4.9 TB |
+| **MinIO and S3-compatible storage** | 4.9 TB |
 | **GCS** | 4.9 TB |
 | **Azure Blob Storage** | 190 TB |
 | **Filesystem storage** | 4.9 TB |
