@@ -2,7 +2,7 @@
 
 Percona Backup for MongoDB (PBM) works with both AWS S3 and other S3-compatible storage services. We test S3-compatible storages with PBM using [MinIO :octicons-link-external-16:](https://min.io/)
 
-This document provides overview for MinIO as the closest S3-compatible storage. To use a native AWS S3 services, see [AWS S3 storage](s3-storage.md).
+This document provides an overview of MinIO as the closest S3-compatible storage. To use the native AWS S3 service, see [AWS S3 storage](s3-storage.md).
 
 [Configuration example :material-arrow-down:](#configuration-example){.md-button}
 
