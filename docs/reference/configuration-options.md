@@ -317,10 +317,10 @@ The network address (URL or IP) where your MinIO server is accessible.
 
 ### storage.minio.endpointMap
 
-*Type*: array of strings
+*Type*: map[string]string
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
+A mapping of node names to custom endpoint URLs for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3, MinIO, and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.minio.secure
 
