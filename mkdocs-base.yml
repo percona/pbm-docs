@@ -232,6 +232,7 @@ nav:
       - details/gcs.md
       - details/filesystem-storage.md
       - details/azure.md
+      - Alicloud OSS storage: details/oss.md
       - features/multi-storage.md
       - features/split-merge-backup.md
   - PBM commands: reference/pbm-commands.md
