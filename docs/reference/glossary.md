@@ -86,7 +86,7 @@ A compressed bundle of [oplog](#oplog) entries stored in the Oplog Store databas
 
 A unique identifier of an operation such as backup, restore, resync. When a pbm-agent starts processing an operation, it acquires a lock and an opID. This prevents processing the same operation twice (for example, if there are network issues in distributed systems). Using opID as a log filter allows viewing logs for an operation in progress.
 
-## Path style access to the storage
+## Path-style access to the storage
 
 A method of constructing S3 URLs where the bucket name appears in the path portion of the URL. The URL format is `<https://s3.example.com/bucket-name/object-key>`. Preferred for S3-compatible storage systems like MinIO, especially in environments without wildcard DNS or custom SSL certificates.
 
