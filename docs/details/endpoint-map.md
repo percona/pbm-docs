@@ -1,4 +1,4 @@
-#  Multiple endpoints to the same storage
+# Multiple endpoints to the same storage
 
 !!! admonition "Version added: [2.8.0](../release-notes/2.8.0.md)" 
 
