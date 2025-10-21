@@ -388,6 +388,10 @@ storage:
     credentials:
       key: <your-access-key>
     maxObjSizeGB: 194560
+    retryer:
+      numMaxRetries: 3
+      minRetryDelay: 800
+      maxRetryDelay: 60
 ```
 
 ### storage.azure.account
@@ -432,3 +436,28 @@ Your access key to authorize access to data in your storage account.
 *Default*: 194560
 
 The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
+
+### storage.azure.retryer.numMaxRetries
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 3
+
+The maximum number of retries to upload data to Microsoft Azure storage. A zero value means no retries will be performed.
+
+### storage.azure.retryer.minRetryDelay
+
+*Type*: time.Duration <br>
+*Required*: NO <br>
+*Default*: 800ms
+
+The minimum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+
+### storage.azure.retryer.maxRetryDelay
+
+*Type*: time.Duration <br>
+*Required*: NO <br>
+*Default*: 60s
+
+The maximum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to seconds if no unit is provided.
