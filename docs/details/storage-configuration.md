@@ -13,6 +13,7 @@ The backup storage serves several purposes:
 Percona Backup for MongoDB supports the following storage types:
 
 * [Amazon S3](s3-storage.md)
+* [Google Cloud storage](gcs.md)
 * [MinIO and S3-compatible storage](minio.md)
 * [Filesystem server storage](filesystem-storage.md)
 * [Microsoft Azure Blob storage](azure.md)
