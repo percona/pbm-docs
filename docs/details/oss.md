@@ -68,35 +68,35 @@ Alibaba Cloud OSS supports the following access modes:
 
 Here is an example of a Alibaba Cloud OSS configuration in Percona Backup for MongoDB:
 
-== "using AccessKey pair"
+=== "using AccessKey pair"
 
-   ```yaml
-   storage:
-	 type: oss
-	 oss:
-	   region: eu-central-1
-	   bucket: your-bucket-name
-	   endpointUrl: https://oss-eu-central-1.aliyuncs.com
-	   credentials:
-	     accessKeyID: "STS.****************"
-	     accessKeySecret:  "3dZn*******************************************"
-   ```
+    ```yaml
+    storage:
+    type: oss
+    oss:
+      region: eu-central-1
+      bucket: your-bucket-name
+      endpointUrl: https://oss-eu-central-1.aliyuncs.com
+      credentials:
+        accessKeyID: "STS.****************"
+        accessKeySecret:  "3dZn*******************************************"
+    ```
 
-== "using a RAM role"
+=== "using a RAM role"
 
-   ```yaml
-   storage:
-	 type: oss
-	 oss:
-	   region: eu-central-1
-	   bucket: your-bucket-name
-	   endpointUrl: https://oss-eu-central-1.aliyuncs.com
-	   credentials:
-	     accessKeyID: "STS.****************" # Temporary access key ID
-	     accessKeySecret:  "3dZn*******************************************" # Temporary access key secret
-	     roleArn: acs:ram::1234567890123456:role/db-backup-role  
-	     sessionName: pbm-backup-session
-   ```
+    ```yaml
+    storage:
+    type: oss
+    oss:
+       region: eu-central-1
+       bucket: your-bucket-name
+       endpointUrl: https://oss-eu-central-1.aliyuncs.com
+       credentials:
+         accessKeyID: "STS.****************" # Temporary access key ID
+         accessKeySecret:  "3dZn*******************************************" # Temporary access key secret
+         roleArn: acs:ram::1234567890123456:role/db-backup-role  
+         sessionName: pbm-backup-session
+    ```
 
 See [Configuration file options](../reference/configuration-options.md) for the description of configuration options.
 
