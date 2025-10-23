@@ -432,3 +432,179 @@ Your access key to authorize access to data in your storage account.
 *Default*: 194560
 
 The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
+
+
+## Alibaba Cloud OSS storage options
+
+```yaml
+storage:
+  type: oss
+  oss:
+    region: <string>
+    endpointUrl: <string>
+    bucket: <string>
+    prefix: <string>
+    credentials:
+      accessKeyId: 'LTAI5t...EXAMPLE'
+      accessKeySecret: 'n4VpW...EXAMPLE'
+      securityToken: 'CAIS...EXAMPLE'
+      roleArn: acs:ram::1234567890123456:role/db-backup-role
+      sessionName: <string>
+    serverSideEncryption:
+      sseAlgorithm: <string>
+      KMSMasterKeyID: <string>
+      KMSDataEncryption: <string>
+    uploadPartSize: <int>
+    maxUploadParts: <int>
+    connectTimeout: 30
+    maxObjSizeGB: 48700
+    retryer:
+      maxAttempts: 5
+      maxBackoff: 30
+      baseDelay: 30
+```
+
+### storage.oss.region
+
+*Type*: string <br>
+*Required*: YES
+
+The region where your OSS bucket is located. Refer to the [OSS regions and endpoints](https://www.alibabacloud.com/help/en/oss/user-guide/regions-and-endpoints) for the list of available regions.
+
+### storage.oss.endpointUrl
+
+*Type*: string <br>
+*Required*: YES
+
+A domain name to access OSS over the Internet. The endpoint must correspond to the region that you selected when you created the bucket. 
+
+### storage.oss.bucket
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the storage bucket. See the [OSS bucket naming rules](https://www.alibabacloud.com/help/en/oss/user-guide/bucket-naming-conventions) for bucket name requirements.
+
+### storage.oss.prefix
+
+*Type*: string <br>
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket's root directory.
+
+### storage.oss.credentials.accessKeyId
+
+*Type*: string <br>
+*Required*: YES
+
+The Access Key ID associated with the RAM user used to access Alibaba Cloud OSS.
+
+### storage.oss.credentials.accessKeySecret
+
+*Type*: string <br>
+*Required*: YES
+
+The Access Key Secret associated with the RAM user used to access Alibaba Cloud OSS. The secret is used to encrypt and verify the signature string.
+
+### storage.oss.credentials.securityToken
+
+*Type*: string <br>
+*Required*: YES when using temporary credentials
+
+The security token that is used together with temporary access key ID and access key secret. You receive the token when you request temporary access credentials by using the [Security Token Service](https://www.alibabacloud.com/help/en/ram/product-overview/what-is-sts).
+
+### storage.oss.credentials.roleArn
+
+*Type*: string <br>
+*Required*: NO
+
+The Alibaba Cloud Resource Name (ARN) of the RAM role to assume. PBM uses this role to obtain required permissions for accessing OSS resources.
+
+### storage.oss.credentials.sessionName
+
+*Type*: string <br>
+*Required*: NO
+
+Identifier for the assumed role session
+
+### storage.oss.serverSideEncryption.sseAlgorithm
+
+*Type*: string <br>
+*Required*: NO 
+
+The encryption algorithm used to encrypt data before storing it in OSS. Supported values: `AES256`, `KMS`, `SM4`. Default: `AES256`
+
+### storage.oss.serverSideEncryption.kmsMasterKeyId 
+
+*Type*: string <br>
+*Required*: YES (when using a custom KMS key)
+
+The ID of the customer master key used for encryption.
+
+### storage.oss.serverSideEncryption.kmsDataEncryption
+
+*Type*: string <br>
+*Required*: NO
+
+The encryption algorithm for encrypting data when SSE-KMS is used. Can be set only when `storage.oss.serverSideEncryption.sseAlgorithm` is set to `KMS`.
+
+Supported values: `AES256`, `SM4`. Default: `AES256`
+
+### storage.oss.uploadPartSize
+
+*Type*: int <br>
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB
+
+Percona Backup for MongoDB automatically increases the `uploadPartSize` value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of `uploadPartSize` \* [`maxUploadParts`](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants) and is appr. 97,6 GB).
+
+The `uploadPartSize` value is printed in the `pbm-agent` log.
+
+By setting this option, you can manually adjust the size of data chunks if Percona Backup for MongoDB failed to do it for some reason. The defined `uploadPartSize` value overrides the default value and is used for calculating the max allowed file size
+
+### storage.oss.maxUploadParts
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 10,000
+
+The maximum number of data chunks to be uploaded to the storage bucket. Default: 10,000
+
+By setting this option, you can override the value defined in the [AWS SDK](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#MaxUploadParts).
+
+It can be useful when using an S3 provider that supports a smaller number of chunks for multipart uploads.
+
+The `maxUploadParts` value is printed in the pbm-agent log.
+
+
+### storage.oss.connectTimeout
+
+*Type*: int <br>
+*Required*: NO <br>
+
+The connection timeout in seconds when PBM connects to the OSS storage. Default value is 30 seconds.
+
+### storage.oss.retryer.maxAttempts
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 5
+
+The maximum number of retry attempts for failed requests to the OSS storage. Default value is 5.
+
+### storage.oss.retryer.maxBackoff
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 30
+
+The maximum time in seconds to wait between retry attempts for failed requests to the OSS storage. Default value is 30 seconds.
+
+### storage.oss.retryer.baseDelay
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: 30
+
+The initial delay before the first retry attempt. Default value is 30 seconds.
