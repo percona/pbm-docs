@@ -21,7 +21,7 @@ To use GCS, you need the following:
 * add keys for the service account:
 
     * [add JSON keys :octicons-link-external-16:](https://cloud.google.com/iam/docs/keys-create-delete#creating) or
-    * [add HMAC keys :octicons-link-external-16:](https://cloud.google.com/storage/docs/authentication/managing-hmackeys)
+    * [add HMAC keys :octicons-link-external-16:](https://cloud.google.com/storage/docs/authentication/managing-hmackeys). This method is deprecated and not recommended for use
 
 * [create a bucket](#create-a-bucket)
 * [add the GCS configuration to PBM](#configuration-example) 
@@ -61,7 +61,7 @@ You can find [the configuration file template :octicons-link-external-16:](https
            privateKey: <your-private-key-here>
     ```
 
-=== "using HMAC keys"
+=== "using HMAC keys (deprecated)"
 
 	```yaml
 	storage:
