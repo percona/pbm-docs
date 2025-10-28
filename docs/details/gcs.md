@@ -15,6 +15,10 @@ PBM supports communication with GCS via the JSON API and XML API. The preferred 
 
     Until the issue is resolved, we recommend using a native GCS connection type with JSON keys rather than HMAC keys to ensure backup integrity.
 
+!!! warning "HMAC keys support deprecation"
+
+    Starting with version 2.12.0, HMAC keys support is deprecated. We encourage you to use JSON keys as native GCS connection type.
+
 To use GCS, you need the following:
 
 * [create a service account :octicons-link-external-16:](https://cloud.google.com/iam/docs/service-accounts-create#iam-service-accounts-create-console) 
