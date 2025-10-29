@@ -54,7 +54,7 @@ Here's the example of the configuration file with the endpoint map:
     ```
 
 
-You can define specific nodes using the `endpointUrlMap` (for AWS S3 and Azure) or `endpointMap` (for MinIO and S3-compatible storage) parameters. Both parameters are maps of `'host:port'` to endpoint URL, as shown in the examples above. Nodes not listed in the map will use the endpoint defined by the `endpointUrl` or `endpoint` parameter, respectively. 
+You can define specific nodes using the `endpointUrlMap` (for AWS S3 and Azure) or `endpointMap` (for MinIO and S3-compatible storage) parameters. Both parameters are maps of `'host:port'` to endpoint URL, as shown in the earlier examples. Nodes not listed in the map use the endpoint defined by the `endpointUrl` or `endpoint` parameter, respectively. 
 
 For the solution to work, you should also have the mapping mechanism in place. This mechanism should be able to map the custom endpoints to the main endpoint URL of the storage, routing the requests from `pbm-agents` to the storage and back seamlessly.
 

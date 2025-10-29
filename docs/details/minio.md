@@ -1,6 +1,6 @@
 # MinIO and S3-compatible storage
 
-Percona Backup for MongoDB (PBM) works with both AWS S3 and other S3-compatible storage services. We test S3-compatible storages with PBM using [MinIO :octicons-link-external-16:](https://min.io/)
+Percona Backup for MongoDB (PBM) works with both AWS S3 and other S3-compatible storage services. We test S3-compatible storage services with PBM using [MinIO :octicons-link-external-16:](https://min.io/)
 
 This document provides an overview of MinIO as the closest S3-compatible storage. To use the native AWS S3 service, see [AWS S3 storage](s3-storage.md).
 
@@ -36,7 +36,7 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
     
     Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this [bucket is created](#bucket-creation) and managed solely by PBM.
 
-This is the example for the basic configuration of MinIO and other S3-compatible storages in Percona Backup for MongoDB. You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
+This is the example for the basic configuration of MinIO and other S3-compatible storage services in Percona Backup for MongoDB. You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
 
 ```yaml
 storage:
@@ -121,7 +121,7 @@ Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path 
 4. Verify that your custom certificate is recognized. Check PBM logs for successful S3 access. 
 
 
-Alternatively, you can disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
+Alternatively, you can turn off the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
 
 ```{.bash data-prompt="$"}
 $ pbm config --set storage.minio.insecureSkipTLSVerify=True
