@@ -64,13 +64,13 @@ The following sections describe how you can fine-tune your storage configuration
 
 ### Debug logging
 
-You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the `pbm logs` output so that you can debug and diagnose S3 request issues or failures.
+You can enable debug logging for different types of storage requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints log messages in the `pbm logs` output so that you can debug and diagnose storage request issues or failures.
 
-To enable debug logging, set the `storage.minio.debugTrace` option in Percona Backup for MongoDB configuration. This instructs PBM to also print HTTP trace from the S3 storage in the logs.
+To enable debug logging, set the `storage.minio.debugTrace` option in Percona Backup for MongoDB configuration. This instructs PBM to also print HTTP trace from the MinIO storage in the logs.
 
 ## Upload retries 
 
-You can set up the number of attempts for Percona Backup for MongoDB to upload data to S3 storage as well as the min and max time to wait for the next retry. Set the `storage.minio.retryer.numMaxRetries` option in Percona Backup for MongoDB configuration.
+You can set up the number of attempts for Percona Backup for MongoDB to upload data to S3 storage. Set the `storage.minio.retryer.numMaxRetries` option in Percona Backup for MongoDB configuration.
 
 ```yaml
 retryer:
@@ -118,7 +118,7 @@ Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path 
     $ sudo systemctl start pbm-agent
     ```
 
-4. Verify that your custom certificate is recognized. Check PBM logs for successful S3 access. 
+4. Verify that your custom certificate is recognized. Check PBM logs for successful storage access. 
 
 
 Alternatively, you can turn off the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:

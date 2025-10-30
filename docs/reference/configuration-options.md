@@ -313,7 +313,7 @@ The path to the data directory in the bucket. If undefined, backups are stored i
 *Type*: string <br>
 *Required*: YES
 
-The network address (URL or IP) where your MinIO server is accessible.
+The network address (URL or IP:port) where your MinIO server is accessible.
 
 ### storage.minio.endpointMap
 

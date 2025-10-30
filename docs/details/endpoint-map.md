@@ -49,7 +49,7 @@ Here's the example of the configuration file with the endpoint map:
           endpointUrl: https://myaccount.blob.core.windows.net
           endpointUrlMap:
             "node01:27017": "did.socf.blob.core.windows.net"
-            "node03:27017": "https://example.azure.blob.core.windows.net"
+            "node03:27017": "example.azure.blob.core.windows.net"
           ...
     ```
 

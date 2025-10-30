@@ -32,7 +32,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
         storage:
           type: minio
           minio:
-            endpoint: http://minio.example.com:9000
+            endpoint: minio.example.com:9000
             bucket: pbm-test-bucket
             prefix: data/pbm/backup
             credentials:
