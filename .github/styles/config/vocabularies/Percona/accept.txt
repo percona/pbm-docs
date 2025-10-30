@@ -23,3 +23,8 @@ MinIO
 [Rr]esync
 (?i)HMAC
 retryer
+MinIO
+S3-compatible
+uncomment
+CAs
+Ceph

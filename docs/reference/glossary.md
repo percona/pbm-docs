@@ -50,6 +50,10 @@ Once a transaction is committed, it will remain so.
 
 An EBS (Amazon Elastic Block Storage) snapshot is the point-in-time copy of your data, and can be used to enable disaster recovery, migrate data across regions and accounts, and improve backup compliance.
 
+## Endpoint
+
+The network address (URL or IP) where an S3-compatible storage service (like MinIO) is accessible.  
+
 ## GCP
    
 GCP (Google Cloud Platform) is the set of services, including storage service, that runs on Google Cloud infrastructure.
@@ -81,6 +85,10 @@ A compressed bundle of [oplog](#oplog) entries stored in the Oplog Store databas
 ## OpID
 
 A unique identifier of an operation such as backup, restore, resync. When a pbm-agent starts processing an operation, it acquires a lock and an opID. This prevents processing the same operation twice (for example, if there are network issues in distributed systems). Using opID as a log filter allows viewing logs for an operation in progress.
+
+## Path-style access to the storage
+
+A method of constructing S3 URLs where the bucket name appears in the path portion of the URL. The URL format is `<https://s3.example.com/bucket-name/object-key>`. Preferred for S3-compatible storage systems like MinIO, especially in environments without wildcard DNS or custom SSL certificates.
 
 ## `pbm-agent`
 
@@ -122,3 +130,6 @@ Server-side encryption is the encryption of data by the remote storage server as
 
 Technical preview features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA. 
 
+## Virtual-hosted-style access
+
+A method of constructing S3 URLs where the bucket name is part of the domain name. The URL format is `<https://bucket-name.s3.example.com/object-key>`. Required by AWS S3 in newer regions; enables better routing and performance in large-scale deployments.
