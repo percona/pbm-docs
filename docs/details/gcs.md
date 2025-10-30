@@ -74,6 +74,13 @@ You can find [the configuration file template :octicons-link-external-16:](https
 		   hmacSecret: <your-secret-key-here>
 	```
 
+## Debug logging
+
+You can enable debug logging for different types of requests to GCS in Percona Backup for MongoDB. Percona Backup for MongoDB prints log messages in the `pbm logs` output so that you can debug and diagnose GCS request issues or failures.
+
+To enable S3 debug logging, set the `storage.gcs.debugTrace` option in Percona Backup for MongoDB configuration. This instructs PBM to also print HTTP trace from the MinIO storage in the logs.
+
+
 ## Adjust PBM configuration to use GCS
 
 Starting with version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. If you are upgrading from an earlier version, you need to adjust your PBM configuration as follows:
