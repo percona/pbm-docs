@@ -17,7 +17,7 @@ PBM supports communication with GCS via the JSON API and XML API. The preferred 
 
 !!! warning "HMAC keys support deprecation"
 
-    Starting with version 2.12.0, HMAC keys support is deprecated. We encourage you to use JSON keys as native GCS connection type.
+    Starting with version 2.12.0, HMAC keys support is deprecated. We encourage you to use GCS connection type with native JSON keys.
 
 To use GCS, you need the following:
 
