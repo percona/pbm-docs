@@ -80,3 +80,17 @@ storage:
 ```
 
 For the description of configuration options, see [Configuration file options](../reference/configuration-options.md).
+
+
+## Upload retries 
+
+You can set up the number of attempts for Percona Backup for MongoDB to upload data to Microsoft Azure storage as well as the min and max time to wait for the next retry. Set the options `storage.azure.retryer.numMaxRetries`, `storage.azure.retryer.minRetryDelay` and `storage.azure.retryer.maxRetryDelay` in Percona Backup for MongoDB configuration.
+
+```yaml
+retryer:
+  numMaxRetries: 3
+  minRetryDelay: 800ms
+  maxRetryDelay: 60s
+```
+
+This upload retry increases the chances of data upload completion in cases of unstable connection.
