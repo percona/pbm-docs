@@ -390,8 +390,8 @@ storage:
     maxObjSizeGB: 194560
     retryer:
       numMaxRetries: 3
-      minRetryDelay: 800
-      maxRetryDelay: 60
+      minRetryDelay: 800ms
+      maxRetryDelay: 60s
 ```
 
 ### storage.azure.account
