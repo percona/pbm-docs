@@ -9,12 +9,6 @@ You can use Google Cloud Storage (GCS) as a remote backup storage for Percona Ba
 
 PBM supports communication with GCS via the JSON API and XML API. The preferred approach is to use the JSON API with a service account. HMAC keys are mainly useful for compatibility with S3-style APIs.
 
-!!! warning "Known limitation"
- 
-    When you run backups to GCS via HMAC keys, incomplete backups may be incorrectly marked as successful if network interruptions occur during the backup process. This results in corrupted or partially uploaded archives being stored and treated as valid backups, which can later fail during restore operations. This issue is addressed in [PBM-1605](https://perconadev.atlassian.net/browse/PBM-1605). 
-
-    Until the issue is resolved, we recommend using a native GCS connection type with JSON keys rather than HMAC keys to ensure backup integrity.
-
 !!! warning "HMAC keys support deprecation"
 
     Starting with version 2.12.0, HMAC keys support is deprecated. We encourage you to use GCS connection type with native JSON keys.
