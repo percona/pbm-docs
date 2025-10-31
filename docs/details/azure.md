@@ -89,8 +89,8 @@ You can set up the number of attempts for Percona Backup for MongoDB to upload d
 ```yaml
 retryer:
   numMaxRetries: 3
-  minRetryDelay: 800
-  maxRetryDelay: 60
+  minRetryDelay: 800ms
+  maxRetryDelay: 60s
 ```
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
