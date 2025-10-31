@@ -456,12 +456,12 @@ storage:
       KMSDataEncryption: <string>
     uploadPartSize: <int>
     maxUploadParts: <int>
-    connectTimeout: 30
+    connectTimeout: 5s
     maxObjSizeGB: 48700
     retryer:
       maxAttempts: 5
-      maxBackoff: 30
-      baseDelay: 30
+      maxBackoff: 300s
+      baseDelay: 30ms
 ```
 
 ### storage.oss.region
@@ -571,9 +571,9 @@ By setting this option, you can manually adjust the size of data chunks if Perco
 
 The maximum number of data chunks to be uploaded to the storage bucket. Default: 10,000
 
-By setting this option, you can override the value defined in the [AWS SDK](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#MaxUploadParts).
+By setting this option, you can override the value defined in the [Multipart upload](https://www.alibabacloud.com/help/en/oss/developer-reference/multipart-upload-3?spm=a3c0i.29367734.6737026690.4.43067d3faLVHMa) method.
 
-It can be useful when using an S3 provider that supports a smaller number of chunks for multipart uploads.
+It can be useful to specify a smaller number of chunks for multipart uploads.
 
 The `maxUploadParts` value is printed in the pbm-agent log.
 
@@ -582,14 +582,15 @@ The `maxUploadParts` value is printed in the pbm-agent log.
 
 *Type*: int <br>
 *Required*: NO <br>
+*Default*: 5s
 
-The connection timeout in seconds when PBM connects to the OSS storage. Default value is 30 seconds.
+The connection timeout in seconds when PBM connects to the OSS storage. Default value is 5 seconds.
 
 ### storage.oss.retryer.maxAttempts
 
 *Type*: int <br>
 *Required*: NO <br>
-*Default*: 5
+*Default*: 300
 
 The maximum number of retry attempts for failed requests to the OSS storage. Default value is 5.
 
@@ -597,14 +598,14 @@ The maximum number of retry attempts for failed requests to the OSS storage. Def
 
 *Type*: int <br>
 *Required*: NO <br>
-*Default*: 30
+*Default*: 300s
 
-The maximum time in seconds to wait between retry attempts for failed requests to the OSS storage. Default value is 30 seconds.
+The maximum time in seconds to wait between retry attempts for failed requests to the OSS storage. Default value is 5 minutes (300 seconds).
 
 ### storage.oss.retryer.baseDelay
 
 *Type*: int <br>
 *Required*: NO <br>
-*Default*: 30
+*Default*: 30ms
 
-The initial delay before the first retry attempt. Default value is 30 seconds.
+The initial delay before the first retry attempt. Default value is 30 ms.
