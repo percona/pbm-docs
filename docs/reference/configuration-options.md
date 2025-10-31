@@ -460,4 +460,4 @@ The minimum time to wait before the next retry, specified as a `time.Duration`. 
 *Required*: NO <br>
 *Default*: 60s
 
-The maximum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to seconds if no unit is provided.
+The maximum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
