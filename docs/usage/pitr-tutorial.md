@@ -6,15 +6,15 @@
 
 Run [`pbm restore`](../reference/pbm-commands.md#pbm-restore) and specify the timestamp from the valid range:    
 
-```{.bash data-prompt="$"}
-$ pbm restore --time="2022-12-14T14:27:04"
+```bash
+pbm restore --time="2022-12-14T14:27:04"
 ```    
 
 The timestamp you specify for the restore must be within the time ranges in the PITR section of `pbm list` output. Percona Backup for MongoDB automatically selects the most recent backup among logical, physical and incremental in relation to the specified timestamp and uses that as the base for the restore.    
 
 To illustrate this behavior, let’s use the following `pbm list` output as the example.     
 
-```{.bash .no-copy}
+```{.text .no-copy}
 $ pbm list    
 
   2025-03-04T13:00:58Z [restore_to_time: 2025-03-04T13:01:23]
@@ -43,14 +43,14 @@ A restore operation changes the time line of oplog events. Therefore, all oplog 
 
 1. Make a new backup to serve as the starting point for oplog updates:    
 
-    ```{.bash data-prompt="$"}
-    $ pbm backup
+    ```bash
+    pbm backup
     ```    
 
 2. Re-enable point-in-time recovery to resume saving oplog slices:    
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --set pitr.enabled=true
+    ```bash
+    pbm config --set pitr.enabled=true
     ```
 
 ## Select a backup snapshot for the restore

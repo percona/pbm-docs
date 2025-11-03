@@ -19,8 +19,8 @@ If you adjusted any of these configurations, here's what you need to do to ensur
 1. Edit the PBM configuration for [node priorities for backups](../usage/backup-priority.md), [oplog slices](../features/point-in-time-recovery.md#adjust-node-priority-for-oplog-slices) or [define custom paths to mongod binaries](../usage/restore-physical.md#define-a-mongod-binary-location) to exclude the node you plan to remove.
 2. Stop `pbm-agent` on the node you plan to remove:
 
-    ```{.bash data-prompt="$"}
-    $ sudo systemctl stop pbm-agent
+    ```bash
+    sudo systemctl stop pbm-agent
     ```
 
     You may see the error like the following in the `pbm status` output on the remaining nodes:

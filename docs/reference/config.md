@@ -4,8 +4,8 @@ The configuration information is stored in a single document of the `admin.pbmCo
 
 You can see the whole config by running:
 
-```{.javascript  data-prompt=">"}
-> db.getSiblingDB(“admin”).pbmConfig.findOne()
+```javascript
+db.getSiblingDB(“admin”).pbmConfig.findOne()
 ```
 
 But you don’t have to use the `mongo` shell; the `pbm` CLI has a “config” subcommand to read and update it.
@@ -34,8 +34,8 @@ A config file must have a remote backup storage configuration. Find the config f
 
 Use the following command to upload the config file. For example, the config file name is `pbm_config.yaml`:
 
-```{.bash data-prompt="$"}
-$ pbm config --file pbm_config.yaml
+```bash
+pbm config --file pbm_config.yaml
 ```
 
 Execute the command while connecting to the config server replica set if it is a
@@ -79,6 +79,6 @@ Though PBM synchronizes metadata automatically, there are cases when you need to
 
 To sync the metadata, run the following command in the cluster/replica set:
 
-```{.bash data-prompt="$"}
-$ pbm config --force-resync
+```bash
+pbm config --force-resync
 ```

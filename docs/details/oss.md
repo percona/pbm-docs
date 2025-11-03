@@ -25,24 +25,24 @@ You can create a bucket via the [Alibaba Cloud Management Console :octicons-link
     1. [Install](https://www.alibabacloud.com/help/en/oss/developer-reference/install-ossutil2#DAS) and configure the Alibaba Cloud OSS client. After the installation, the `ossutil` command line tool is available for you.
     2. Specify the region:
 
-        ```{.bash data-prompt="$"}
-        $ ossutil config
+        ```bash
+        ossutil config
         ```
 
         Press Enter until you see the prompt `Please enter Region [cn-hangzhou]:` and specify the desired region.
 
     3. Create a bucket:
 
-		```{.bash data-prompt="$"}
-		$ ossutil mb oss://your-bucket-name
+		```bash
+		ossutil mb oss://your-bucket-name
 		```
 
 		Replace `your-bucket-name` with the desired name for your bucket.
 
 	4. Verify that the bucket is created:
 
-	 	```{.bash data-prompt="$"}
-		$ ossutil ls
+	 	```bash
+		ossutil ls
 		```
 
 After you created a bucket, apply the [necessary permissions](storage-configuration.md#permissions-setup) for the user identified by the access credentials you plan to use with PBM.

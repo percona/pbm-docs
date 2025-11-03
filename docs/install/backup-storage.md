@@ -107,8 +107,8 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
 
 3. Apply the config file to PBM
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --file pbm_config.yaml
+    ```bash
+    pbm config --file pbm_config.yaml
     ```
 
 To learn more about Percona Backup for MongoDB configuration, see [Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)](../reference/config.md).

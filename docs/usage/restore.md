@@ -13,8 +13,8 @@
 
 1. Stop the balancer and disable chunks autosplit. To verify that both are disabled, run the following command:
 
-    ```{.javascript data-prompt=">"}
-    > sh.status() 
+    ```javascript
+     sh.status() 
     ```
 
     You should see the following output:
@@ -37,15 +37,15 @@
 
 1. List the backups to restore from
 
-    ```{.bash data-prompt="$"}
-    $ pbm list
+    ```bash
+    pbm list
     ```
 
 
 2. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name>
+    ```bash
+    pbm restore <backup_name>
     ```
 
     Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
@@ -73,8 +73,8 @@ The default values were adjusted to fit the setups with the memory allocation of
 
 Starting with version 2.8.0, you can override the number of insertion workers per collection and the number of collections to process in parallel during a logical restore. For example:
 
-```{.bash data-prompt="$"}
-$ pbm restore <backup_name>  --num-insertion-workers-per-collection 4 --num-parallel-collections 8
+```bash
+pbm restore <backup_name>  --num-insertion-workers-per-collection 4 --num-parallel-collections 8
 ```
 
 Increasing the number may increase the restore speed. However, it may also lead to unexpectedly high disk and CPU usage. Consider the trade-offs carefully before making adjustments to ensure optimal performance without overloading resources.
@@ -94,8 +94,8 @@ The following example illustrates the restore from a backup made on Percona Serv
 
 1. Check the FCV value for the backup
 
-    ```{.bash data-prompt="$"}
-    $ pbm status
+    ```bash
+    pbm status
     ```
 
     ??? admonition "Sample output"
@@ -107,20 +107,20 @@ The following example illustrates the restore from a backup made on Percona Serv
 
 2. Set the Feature Compatibility Version value to 4.4
 
-    ```{.javascript data-prompt=">"}
-    > db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
+    ```javascript
+    db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
     ```
 
 3. Restore the database
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore 2023-04-10T10:51:28Z
+    ```bash
+    pbm restore 2023-04-10T10:51:28Z
     ```
 
 4. Set the Feature Compatibility Version value to 5.0
 
-    ```{.javascript data-prompt=">"}
-    > db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
+    ```javascript
+    db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
     ```
 
 ## Next steps

@@ -78,8 +78,8 @@ You have a backup and the oplog ranges that fully cover the previous day, 2024-1
 
 To find out the issue, you can restore the `orders` collection under a different name up to the specified time alongside the current `orders` collection and compare them. You decide to restore to 14:00.
 
-```{.bash data-prompt="$"}
-$ pbm restore --time=2024-11-15T14:00:00 --ns-from=goods.orders --ns-to=goods.orders_prev
+```bash
+pbm restore --time=2024-11-15T14:00:00 --ns-from=goods.orders --ns-to=goods.orders_prev
 ```
 
 The `orders_prev` collection has the same data and indexes as the `orders` collection. It also has applied the same oplog operations as the `orders` collection allowing you to see exactly what has changed.

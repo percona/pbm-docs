@@ -12,8 +12,8 @@
 
 2. To restore the desired database or a collection to a point in time, run the ``pbm restore`` command as follows:
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore --base-snapshot <backup_name> --time <timestamp> \
+    ```bash
+    pbm restore --base-snapshot <backup_name> --time <timestamp> \
     --ns <db.collection>
     ```
 

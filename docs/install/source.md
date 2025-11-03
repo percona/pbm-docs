@@ -22,15 +22,15 @@ Here's how to build Percona Backup for MongoDB:
 
 1. Clone the repository
 
-    ```{.bash data-prompt="$"}
-    $ git clone https://github.com/percona/percona-backup-mongodb
+    ```bash
+    git clone https://github.com/percona/percona-backup-mongodb
     ```
 
 2. Go to the project directory and build it
 
-    ```{.bash data-prompt="$"}
-    $ cd percona-backup-mongodb
-    $ make build
+    ```bash
+    cd percona-backup-mongodb
+    make build
     ```
 
 After **make** completes, you can find `pbm` and `pbm-agent` binaries
@@ -38,9 +38,9 @@ in the `./bin` directory.
 
 3. Check that Percona Backup for MongoDB has been built correctly and is ready for use. 
 
-    ```{.bash data-prompt="$"}
-    $ cd bin
-    $ ./pbm version
+    ```bash
+    cd bin
+    ./pbm version
     ```
 
     ??? example "Output"    
@@ -58,8 +58,8 @@ in the `./bin` directory.
 
         Instead of specifying the path to pbm binaries, you can add it to the PATH environment variable:    
 
-        ```{.bash data-prompt="$"}
-        $ export PATH=/percona-backup-mongodb/bin:$PATH
+        ```bash
+        export PATH=/percona-backup-mongodb/bin:$PATH
         ```
 
 ## Post-install steps
@@ -71,14 +71,14 @@ in the `./bin` directory.
 
      1. Create the environment file:
 
-         ```{.bash data-prompt="$"}
-         $ touch /etc/default/pbm-agent
+         ```bash
+         touch /etc/default/pbm-agent
          ```
 
      2. Create the `pbm-agent.service` systemd unit file.
 
-         ```{.bash data-prompt="$"}
-         $ sudo vim /lib/systemd/system/pbm-agent.service
+         ```bash
+         sudo vim /lib/systemd/system/pbm-agent.service
          ```
 
      3. In the `pbm-agent.service` file, specify the following:
@@ -106,8 +106,8 @@ in the `./bin` directory.
 
      4. Make `systemd` aware of the new service:
 
-         ```{.bash data-prompt="$"}
-         $ sudo systemctl daemon-reload
+         ```bash
+         sudo systemctl daemon-reload
          ```
 
 === ":material-redhat: On Red Hat Enterprise Linux and derivatives"
@@ -117,14 +117,14 @@ in the `./bin` directory.
 
     1. Create the environment file:
    
-        ```{.bash data-prompt="$"}
-        $ touch /etc/sysconfig/pbm-agent
+        ```bash
+        touch /etc/sysconfig/pbm-agent
         ```
 
     2. Create the `pbm-agent.service` systemd unit file.
 
-        ```{.bash data-prompt="$"}
-        $ sudo vim /usr/lib/systemd/system/pbm-agent.service
+        ```bash
+        sudo vim /usr/lib/systemd/system/pbm-agent.service
         ```
 
     3. In the `pbm-agent.service` file, specify the following:
@@ -152,8 +152,8 @@ in the `./bin` directory.
 
      4. Make `systemd` aware of the new service:
 
-         ```{.bash data-prompt="$"}
-         $ sudo systemctl daemon-reload
+         ```bash
+         sudo systemctl daemon-reload
          ```
 
 ## Next steps

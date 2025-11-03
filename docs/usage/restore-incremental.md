@@ -13,7 +13,7 @@
 1. Shut down all `mongos` nodes, `pmm-agent` processes and clients that can do writes to the database as it won’t be available while the restore is in progress.
 2. Check that the `systemctl` restart policy for the `pbm-agent.service` is not set to `always` or `on-success`:
 
-    ```{.bash data-prompt="$"}
+    ```bash
     sudo systemctl show pbm-agent.service | grep Restart
     ```
 
@@ -30,8 +30,8 @@
 
 Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:
 
-```{.bash data-prompt="$"}
-$ pbm restore 2022-11-25T14:13:43Z
+```bash
+pbm restore 2022-11-25T14:13:43Z
 ```
 
 Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.

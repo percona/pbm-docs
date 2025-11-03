@@ -14,7 +14,7 @@ By default, Docker will pull the image from Docker Hub if it is not available lo
 * [Create the pbm user](configure-authentication.md#create-the-pbm-user) in your deployment. You will need this user credentials to start Percona Backup for MongoDB container. 
 * For physical backups, make sure to use a container that includes both the `mongod` binary as well as the PBM files. Here is an example Dockerfile:
 
-   ```{.bash data-prompt="$"}
+   ```bash
    FROM percona/percona-server-mongodb:latest AS mdb
    FROM percona/percona-backup-mongodb:latest AS pbm 
 
@@ -33,8 +33,8 @@ By default, Docker will pull the image from Docker Hub if it is not available lo
 Start Percona Backup for MongoDB container with the following command:
 
 
-```{.bash data-prompt="$"}
-$ docker run --name <container-name> -e PBM_MONGODB_URI="mongodb://<PBM_USER>:<PBM_USER_PASSWORD>@<HOST>:<PORT>" -d percona/percona-backup-mongodb:<tag>
+```bash
+docker run --name <container-name> -e PBM_MONGODB_URI="mongodb://<PBM_USER>:<PBM_USER_PASSWORD>@<HOST>:<PORT>" -d percona/percona-backup-mongodb:<tag>
 ```
 
 Where:
@@ -51,14 +51,14 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 
 1. Start a Bash session:
 	
-    ```{.bash data-prompt="$"}
-    $ docker exec -it <container-name> bash
+    ```bash
+    docker exec -it <container-name> bash
     ```
 
 2. Create a YAML configuration file:
 
-	```{.bash data-prompt="$"}
-	$ vi /tmp/pbm_config.yaml
+	```bash
+	vi /tmp/pbm_config.yaml
 	```
 	
 3. Specify remote storage parameters in the config file. The following example is for S3-compatible backup storage. Check what [other storages are supported](../details/storage-configuration.md):
@@ -76,8 +76,8 @@ Percona Backup for MongoDB requires the remote storage where to store data. Use 
 
 4. Upload the config file: 
 	
-	```{.bash data-prompt="$"}
-	$ pbm config --file /tmp/pbm_config.yaml
+	```bash
+	pbm config --file /tmp/pbm_config.yaml
 	```
 
 	The command output displays your uploaded configuration.
@@ -88,8 +88,8 @@ Percona Backup for MongoDB command line utility (`pbm`) provides the set of comm
 
 For example, to start a backup, use the following command:
 
-```{.bash data-prompt="$"}
-$ docker exec -it <container-name> pbm backup
+```bash
+docker exec -it <container-name> pbm backup
 ```
 
 where `<container-name>` is the name you assigned to the container and `pbm backup` is the command to start a backup.

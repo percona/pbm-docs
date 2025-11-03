@@ -30,14 +30,14 @@ To use GCS, you need the following:
 
 2. Create a bucket
 
-    ```{.bash data-prompt="$"}
-    $ gcloud storage buckets create my-gcs-bucket --location=US
+    ```bash
+    gcloud storage buckets create my-gcs-bucket --location=US
     ```
       
 3. Verify the bucket creation
 
-    ```{.bash data-prompt="$"}
-    $ gcloud storage buckets list
+    ```bash
+    gcloud storage buckets list
     ```
 
 After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).

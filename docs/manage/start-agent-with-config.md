@@ -36,8 +36,8 @@ The steps vary slightly based on your installation method. In the following exam
 
 3. Start the `pbm-agent`.
 
-    ```{.bash data-prompt="$"}
-    $ sudo systemctl start pbm-agent
+    ```bash
+    sudo systemctl start pbm-agent
     ```
 
 ## For installation from the source code and tarballs {.power-number}
@@ -59,6 +59,6 @@ For the initial `pbm-agent` start, you require the credentials of a `pbm` user. 
 2. Check that you have exported the location of the PBM binaries to the `$PATH` variable
 3. Start the `pbm-agent`:
 
-    ```{.bash data-prompt="$"}
-    $ pbm-agent -f /etc/pbm-agent.yaml
+    ```bash
+    pbm-agent -f /etc/pbm-agent.yaml
 	```

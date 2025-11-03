@@ -156,8 +156,8 @@ To configure physical restores with a fallback directory, use either the PBM con
 
      You can start the restore with a fallback directory directly using the `--fallback-enabled` flag:
 
-     ```{.bash data-prompt="$"}
-     $ pbm restore --time <time> --fallback-enabled=true
+     ```bash
+     pbm restore --time <time> --fallback-enabled=true
      ```
 
 
@@ -172,8 +172,8 @@ A restore can succeed on most nodes, but it might fail on a few, resulting in a 
 
 === ":material-console: Command line"
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore --time <time> --fallback-enabled=true --allow-partly-done=true
+    ```bash
+    pbm restore --time <time> --fallback-enabled=true --allow-partly-done=true
     ```
        
 If you allow partial restores (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync. 

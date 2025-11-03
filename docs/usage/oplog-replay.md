@@ -30,8 +30,8 @@ After you [restored a physical backup](restore.md), do the following:
 
 3. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps.
 
-    ```{.bash data-prompt="$"}
-    $ pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
+    ```bash
+    pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
     ```
 
 4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
@@ -48,8 +48,8 @@ Storage-level snapshots are saved with point-in-time recovery enabled. Thus, aft
 3. Re-sync the data from the storage.
 4. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps.
 
-    ```{.bash data-prompt="$"}
-    $ pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
+    ```bash
+    pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
     ```
 
 5. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.

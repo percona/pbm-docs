@@ -39,17 +39,17 @@ Start the `pbm-agent` on every node with the following command:
 
 === ":material-console: Command line"
 
-	```{.bash data-prompt="$"}
-	$ pbm-agent --log-path=/var/log/pbm-agent.log --log-level=W --log-json
+	```bash
+	pbm-agent --log-path=/var/log/pbm-agent.log --log-level=W --log-json
 	```
 
 === ":material-variable: Environment variables"
 
-	```{.bash data-prompt="$"}
-	$ export LOG_PATH=/var/log/pbm-agent.log
-	$ export LOG_LEVEL=W
-	$ export LOG_JSON=1
-	$ pbm-agent
+	```bash
+	export LOG_PATH=/var/log/pbm-agent.log
+	export LOG_LEVEL=W
+	export LOG_JSON=1
+	pbm-agent
 	```
 
 === ":octicons-file-code-24: Configuration file"
@@ -65,8 +65,8 @@ Start the `pbm-agent` on every node with the following command:
     
     2. Start the `pbm-agent`:
 
-        ```{.bash data-prompt="$"}
-		$ pbm-agent -f /etc/pbm-agent.yaml
+        ```bash
+		pbm-agent -f /etc/pbm-agent.yaml
 		```
 
 

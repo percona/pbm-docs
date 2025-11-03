@@ -6,8 +6,8 @@
 
 1. To make a snapshot-based backup, run the [`pbm backup`](../reference/pbm-commands.md#pbm-backup) command with the type `external`:
 
-    ```{.bash data-prompt="$"}
-    $ pbm backup -t external 
+    ```bash
+    pbm backup -t external 
     ```    
 
     When executing the command, PBM does the following:    
@@ -30,8 +30,8 @@
 
 4. After the copy/snapshot is complete, run the following command to close the `$backupCursor` and finish the backup: 
 
-    ```{.bash data-prompt="$"}
-    $ pbm backup-finish <backup_name>
+    ```bash
+    pbm backup-finish <backup_name>
     ```
 
 ## Next steps
