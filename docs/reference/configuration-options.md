@@ -288,7 +288,7 @@ storage:
 ### storage.minio.region
 
 *Type*: string <br>
-*Required*: YES
+*Required*: NO
 
 The location of the storage bucket. Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) to define the bucket region. If not specified, the default `us-east-1` region is used.
 
