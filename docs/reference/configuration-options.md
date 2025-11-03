@@ -351,14 +351,14 @@ Enforces the use of [path style access](../reference/glossary.md#path-style-acce
 *Type*: string
 *Required*: YES
 
-Your access key to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to [Automate access to S3 buckets for Percona Backup for MongoDB](../manage/automate-s3-access.md).
+Your access key to the storage bucket.
 
 ### storage.minio.credentials.secret-access-key
 
 *Type*: string
 *Required*: YES
 
-The key to sign your programmatic requests to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to [Automate access to S3 buckets for Percona Backup for MongoDB](../manage/automate-s3-access.md).
+The key to sign your programmatic requests to the storage bucket.
 
 ### storage.minio.credentials.session-token
 
