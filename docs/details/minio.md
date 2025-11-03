@@ -43,7 +43,6 @@ storage:
   type: minio
   minio:
     endpoint: localhost:9100
-    region: us-east-1
     bucket: pbm-example
     prefix: data/pbm/test
     credentials:
