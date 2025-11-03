@@ -59,7 +59,7 @@ Alibaba Cloud OSS supports the following access modes:
 
 * Rather than granting permissions directly to a RAM user, you can assign them through a RAM role. A RAM role is a virtual identity that can have one or more access policies attached, defining the necessary permissions. A RAM user gains these permissions by assuming the role.
 
-  The RAM role is used to grant a temporary access to OSS resources using [Secure Token Service :octicons-link-external-16:](https://www.alibabacloud.com/help/en/ram/product-overview/what-is-sts)
+  An authorized RAM user can use an AccessKey pair to call the [AssumeRole :octicons-link-external-16:](https://www.alibabacloud.com/help/en/ram/developer-reference/api-sts-2015-04-01-assumerole#main-107864) operation. Then the user receives an STS token together with the temporary credentials to access OSS resources.
 
   Refer to the [STS temporary access authorization :octicons-link-external-16:](https://www.alibabacloud.com/help/en/oss/sts-temporary-access-authorization#section-csx-hvf-vdb) chapter for configuration guidelines.
 
@@ -92,8 +92,8 @@ Here is an example of a Alibaba Cloud OSS configuration in Percona Backup for Mo
        bucket: your-bucket-name
        endpointUrl: https://oss-eu-central-1.aliyuncs.com
        credentials:
-         accessKeyID: "STS.****************" # Temporary access key ID
-         accessKeySecret:  "3dZn*******************************************" # Temporary access key secret
+         accessKeyID: "STS.****************" 
+         accessKeySecret:  "3dZn*******************************************" 
          roleArn: acs:ram::1234567890123456:role/db-backup-role  
          sessionName: pbm-backup-session
     ```
