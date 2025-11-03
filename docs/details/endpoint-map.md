@@ -36,7 +36,7 @@ Here's the example of the configuration file with the endpoint map:
           endpoint: localhost:9100
           endpointMap:
             "node01:27017": "did.socf.s3.com"
-            "node03:27017": "https://example.min.io"
+            "node03:27017": "example.min.io"
           ...
     ```
 
