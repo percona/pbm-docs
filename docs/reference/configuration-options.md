@@ -317,60 +317,60 @@ The network address (URL or IP:port) where your MinIO server is accessible.
 
 ### storage.minio.endpointMap
 
-*Type*: array of strings
+*Type*: array of strings <br>
 *Required*: NO
 
 A mapping of custom endpoints for `pbm-agents` on different servers to the same MinIO storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3, MinIO, and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.minio.secure
 
-*Type*: boolean
-*Required*: NO
+*Type*: boolean <br>
+*Required*: NO <br>
 *Default*: false
 
 Defines whether to use HTTP or HTTPS protocol for communication between PBM and S3 storage. Default: `false`.
 
 ### storage.minio.insecureSkipTLSVerify
 
-*Type*: boolean
-*Required*: NO
+*Type*: boolean <br>
+*Required*: NO <br>
 *Default*: false
 
 Disables the TLS verification of the MinIO / S3-compatible storage. This allows Percona Backup for MongoDB to upload data to MinIO / S3-compatible storages that use self-issued TLS certificates. Use it with caution as it might leave a hole for man-in-the-middle attacks.
 
 ### storage.minio.forcePathStyle
 
-*Type*: boolean
-*Required*: NO
+*Type*: boolean <br>
+*Required*: NO <br>
 *Default*: false
 
 Enforces the use of [path style access](../reference/glossary.md#path-style-access-to-the-storage) to the storage. Default is `false` which means PBM uses the [virtual-hosted-style](../reference/glossary.md#virtual-hosted-style-access) access to the storage
 
 ### storage.minio.credentials.access-key-id
 
-*Type*: string
+*Type*: string<br>
 *Required*: YES
 
 Your access key to the storage bucket.
 
 ### storage.minio.credentials.secret-access-key
 
-*Type*: string
+*Type*: string<br>
 *Required*: YES
 
 The key to sign your programmatic requests to the storage bucket.
 
 ### storage.minio.credentials.session-token
 
-*Type*: string
+*Type*: string<br>
 *Required*: NO
 
 The MinIO session token used to validate the temporary security credentials for accessing the storage.
 
 ### storage.minio.credentials.signature-ver
 
-*Type*: string
-*Required*: NO
+*Type*: string<br>
+*Required*: NO<br>
 *Default*: V4
 
 Specifies the AWS Signature version to use for authentication. Accepted values: `V2`, `V4`. 
@@ -379,30 +379,30 @@ Allows using the deprecated AWS Signature version 2 for backward compatibility w
 
 ### storage.minio.partSize
 
-*Type*: int
+*Type*: int<br>
 *Required*: NO
 
 The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB.
 
 ### storage.minio.retryer.numMaxRetries
 
-*Type*: int
-*Required*: NO
+*Type*: int<br>
+*Required*: NO<br>
 *Default*: 10
 
 The maximum number of retries to upload data to MinIO / S3-compatible storage. A zero value means no retries will be performed.
 
 ### storage.minio.maxObjSizeGB
 
-*Type*: float64
-*Required*: NO
+*Type*: float64<br>
+*Required*: NO<br>
 *Default*: 5018
 
 The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ### storage.minio.debugTrace
 
-*Type*: boolean
+*Type*: boolean<br>
 *Required*: NO
 
 If set to `true`, outputs all http communication trace in PBM log. Default: false.
