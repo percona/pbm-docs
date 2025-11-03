@@ -57,7 +57,7 @@ Alibaba Cloud OSS supports the following access modes:
 
    Refer to the [Use the AccessKey pair of a RAM user to access OSS resources :octicons-link-external-16:](https://www.alibabacloud.com/help/en/oss/developer-reference/use-the-accesskey-pair-of-a-ram-user-to-initiate-a-request) chapter for detailed instructions.
 
-* Instead of assigning permissions directly to a RAM user, they can obtain access permissions from a RAM role. A RAM role is a virtual identity to which you can attach different access policies with required permissions. To get these permissions, the RAM user assumes the role. 
+* Rather than granting permissions directly to a RAM user, you can assign them through a RAM role. A RAM role is a virtual identity that can have one or more access policies attached, defining the necessary permissions. A RAM user gains these permissions by assuming the role.
 
   The RAM role is used to grant a temporary access to OSS resources using [Secure Token Service :octicons-link-external-16:](https://www.alibabacloud.com/help/en/ram/product-overview/what-is-sts)
 
