@@ -479,24 +479,57 @@ The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storag
 
 ### storage.gcs.retryer.backoffInitial
 
-*Type*: int <br>
+*Type*: time.Duration <br>
 *Required*: NO
+*Default*: 1s
 
-The time to wait to make an initial retry, in seconds. Default value is 1 sec.
+The time to wait to make an initial retry, specified as a time.Duration. Units like ms, s, etc., are supported. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+
+Defaults to nanoseconds if no unit is provided.
 
 ### storage.gcs.retryer.backoffMax
 
-*Type*: int <br>
+*Type*: time.Duration <br>
 *Required*: NO
+*Default*: 30s
 
-The maximum amount of time between retries, in seconds. Defaults to 30 sec.
+The maximum amount of time between retries, in seconds. Units like ms, s, etc., are supported. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+
+Defaults to nanoseconds if no unit is provided.
 
 ### storage.gcs.retryer.backoffMultiplier
 
 *Type*: int <br>
 *Required*: NO
+*Default*: 2
 
-Each time PBM fails and tries again, it increases the wait time by multiplying it by this number (usually 2). For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.
+Each time PBM fails and tries again, it increases the wait time by multiplying it by this number. Default value is 2 sec.
+
+For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.
+
+### storage.gcs.retryer.maxAttempts
+
+*Type*: int <br>
+*Required*: NO
+*Default*: 5
+
+The maximum number of retries to upload data to GCS storage. A zero value means no retries will be performed. Available starting with version 2.12.0.
+
+### storage.gcs.retryer.chunkRetryDeadline
+
+*Type*: time.Duration <br>
+*Required*: NO
+*Default*: 32s
+
+When you upload large files to GCS using resumable uploads, the data is sent in chunks. If a chunk fails to upload due to a network issue, timeout or transient error, GCS will retry sending that chunk.
+
+The `chunkRetryDeadline` sets a time limit in seconds for how long GCS will keep retrying a failed chunk. Once this deadline is reached, GCS stops retrying and marks the upload as failed.
+
+Units like ms, s, etc., are supported. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+
+Defaults to nanoseconds if no unit is provided.
+
+Available starting with version 2.12.0.
 
 ### storage.gcs.maxObjSizeGB
 
