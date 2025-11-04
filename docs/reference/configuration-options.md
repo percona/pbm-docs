@@ -466,12 +466,16 @@ The private key of the service account used to authenticate the request.
 
 The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
 
+The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
+
 ### storage.gcs.credentials.hmacSecret
 
 *Type*: string <br>
 *Required*: YES
 
 A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
+
+The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
 
 ### storage.gcs.retryer.backoffInitial
 
