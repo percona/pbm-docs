@@ -38,14 +38,14 @@ storage:
 
 To upload the configuration profile to PBM, use the [`pbm profile add`](../reference/pbm-commands.md#pbm-profile-add) command and specify the path to the profile.
 
-```{.bash data-prompt="$"}
-$ pbm profile add <profile_name> /path/to/profile.yaml
+```bash
+pbm profile add <profile_name> /path/to/profile.yaml
 ```
 
 To show the information about the external backup storage, use the [`pbm profile show`](../reference/pbm-commands.md#pbm-profile-show) command:
 
-```{.bash data-prompt="$"}
-$ pbm profile show <profile_name>
+```bash
+pbm profile show <profile_name>
 ```
 
 See the full list of the configuration profile management commands in the [pbm commands](../reference/pbm-commands.md) reference.
@@ -54,8 +54,8 @@ See the full list of the configuration profile management commands in the [pbm c
 
 To make a backup to an external backup storage, pass the profile name with the `--profile` flag for the `pbm backup` command. For example, to run a physical backup and store it in the MinIO storage defined via the `minio` configuration profile, run the following command:
 
-```{.bash data-prompt="$"}
-$ pbm backup -t physical --profile=minio --wait 
+```bash
+pbm backup -t physical --profile=minio --wait 
 ```
 
 ??? example "Sample output"
@@ -76,8 +76,8 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
 
 1. List backups by running the `pbm list` or `pbm status` commands.
     
-    ```{.bash data-prompt="$"}
-	$ pbm list
+    ```bash
+	pbm list
 	```
 
 	The output shows the backup names and timestamps. External backups are marked with an asterisk:
@@ -96,8 +96,8 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
 
 2. To make a point-in-time restore, you must explicitly pass the backup name for the `pbm restore` command:
 
-    ```{.bash data-prompt="$"}
-    $ pbm-restore --time=<timestamp> --base-snapshot <backup-name>
+    ```bash
+    pbm-restore --time=<timestamp> --base-snapshot <backup-name>
     ```
 
 3. After the restore is complete, do the required post-restore steps depending on the restore type.
@@ -109,8 +109,8 @@ You can delete backups from an external storage only by name.
 
 Run the `pbm delete` command and pass the backup name:
 
-```{.bash data-prompt="$"}
-$ pbm delete-backup 2024-06-25T10:54:55Z
+```bash
+pbm delete-backup 2024-06-25T10:54:55Z
 ```
 
 ## Implementation specifics

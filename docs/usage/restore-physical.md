@@ -6,8 +6,8 @@
 
 1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously. 
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --set pitr.enabled=false
+    ```bash
+    pbm config --set pitr.enabled=false
     ```
 
 2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
@@ -21,9 +21,9 @@
 3. Stop the arbiter nodes manually since there's no `pbm-agent` on these nodes to do that automatically.
 4. Check that the `systemctl` restart policy for the `pbm-agent.service` and `mongod.service` processes is not set to `always` or `on-success`:
 
-    ```{.bash data-prompt="$"}
-    $ sudo systemctl show mongod.service | grep Restart
-    $ sudo systemctl show pbm-agent.service | grep Restart
+    ```bash
+    sudo systemctl show mongod.service | grep Restart
+    sudo systemctl show pbm-agent.service | grep Restart
     ```
 
     ??? example "Sample output"
@@ -39,14 +39,14 @@
 
 1. List the backups 
 
-    ```{.bash data-prompt="$"}
-    $ pbm list
+    ```bash
+    pbm list
     ```
 
 2. Make a restore
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name>
+    ```bash
+    pbm restore <backup_name>
     ```
 
     During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
@@ -76,8 +76,8 @@ After the restore is complete, do the following:
 
 4. Run the following command to resync the backup list with the storage:
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --force-resync -w
+    ```bash
+    pbm config --force-resync -w
     ``` 
 
 5. Start the balancer and start `mongos` nodes.
@@ -101,8 +101,8 @@ During physical restores, Percona Backup for MongoDB performs several restarts o
 
 === ":material-console: Command line"
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --set restore.mongodLocation=/path/to/mongod/
+    ```bash
+    pbm config --set restore.mongodLocation=/path/to/mongod/
     ```
 
 If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.

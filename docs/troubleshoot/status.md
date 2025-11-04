@@ -4,8 +4,8 @@
 
 You can check the status of Percona Backup for MongoDB running in your MongoDB environment using the [`pbm status`](../reference/pbm-commands.md#pbm-status) command.
 
-```{.bash data-prompt="$"}
-$ pbm status
+```bash
+pbm status
 ```
 
 The output provides the information about:
@@ -54,7 +54,6 @@ This simplifies troubleshooting since the whole information is provided in one p
     ========
     S3 us-east-1 https://storage.googleapis.com/backup-test
        Snapshots:
-<<<<<<< PBM-1544-Add-backup-status-to-output
         2025-06-03T09:55:47Z 0.00B <physical> ongoing [running: running / 2025-06-03T09:55:50]
         2025-03-16T10:36:52Z 491.98KB <physical> success [restore_to_time: 2025-03-16T10:37:13]
         2025-03-15T12:59:47Z 284.06KB <physical> success [restore_to_time: 2025-03-15T13:00:08]
@@ -66,19 +65,6 @@ This simplifies troubleshooting since the whole information is provided in one p
         2025-03-11T15:30:38Z 287.07KB <physical> success [restore_to_time: 2025-03-11T15:30:59]
       PITR chunks [1.10MB]:
         2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
-=======
-         2025-03-16T10:36:52Z 491.98KB [restore_to_time: 2025-03-16T10:37:13]
-         2025-03-15T12:59:47Z 284.06KB [restore_to_time: 2025-03-15T13:00:08]
-         2025-03-15T11:40:46Z 0.00B [canceled: 2025-03-15T11:41:07]
-         2025-03-11T16:23:55Z 284.82KB [restore_to_time: 2025-03-11T16:24:16]
-         2025-03-11T16:22:35Z 284.04KB [restore_to_time: 2025-03-11T16:22:56]
-         2025-03-11T16:21:15Z 283.36KB [restore_to_time: 2025-03-11T16:21:36]
-         2025-03-11T16:19:54Z 281.73KB [restore_to_time: 2025-03-11T16:20:15]
-         2025-03-11T16:19:00Z 281.73KB [restore_to_time: 2025-03-11T16:19:21]
-         2025-03-11T15:30:38Z 287.07KB [restore_to_time: 2025-03-11T15:30:59]
-    PITR chunks:
-         2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
->>>>>>> main
     ```
 
 ## `pbm-agent` logs
@@ -89,8 +75,8 @@ To troubleshoot issues with specific events or node(s), use the [`pbm logs`](../
 
 `pbm logs` has the set of filters to refine logs for specific events like `backup`, `restore`, `pitr` or for a specific node, and to manage log verbosity level. For example, to view logs about a specific backup with the Debug verbosity level, run the `pbm logs` command as follows:
 
-```{.bash data-prompt="$"}
-$ pbm logs --severity=D --event=backup/2020-10-15T17:42:54Z
+```bash
+pbm logs --severity=D --event=backup/2020-10-15T17:42:54Z
 ```
 
 To learn more about available filters and usage examples, refer to [Viewing backup logs](../usage/logs.md).
@@ -101,22 +87,22 @@ If you have a large logical backup, you can track the backup progress in the log
 
 Start a backup:
 
-```{.bash data-prompt="$"}
-$ pbm backup
+```bash
+pbm backup
 ```
 
 Check backup progress:
 
 1. Check what `pbm-agent` makes the backup:
 
-    ```{.bash data-prompt="$"}
+    ```bash
     pbm logs
     ```
 
 2. Connect to the `mongod` server where the `pbm-agent` is running and check its logs
 
-    ```{.bash data-prompt="$"}
-    $ journalctl -u pbm-agent.service
+    ```bash
+    journalctl -u pbm-agent.service
     ```
 
     ??? example "Sample output"

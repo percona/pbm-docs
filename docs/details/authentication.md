@@ -17,13 +17,13 @@ etc. as the `mongo` shell or `mongodump` command does.
 
      The `pbm-agent` processes should connect to their localhost `mongod` with a standalone type of connection.
 
-     ```{.bash data-prompt="$"}
+     ```bash
      pbm-agent --mongodb-uri "mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
      ```
 
      Alternatively:
 
-     ```{.bash data-prompt="$"} 
+     ```bash 
      export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
      pbm-agent
      ```
@@ -32,15 +32,15 @@ etc. as the `mongo` shell or `mongodump` command does.
 
 === "The `pbm` CLI connection string"
 
-     ```{.bash data-prompt="$"}
+     ```bash
      pbm status --mongodb-uri "mongodb://pbmuser:secretpwd@mongocsvr1:27017,mongocsvr2:27017,mongocsvr3:27017/?replicaSet=configrs&authSource=admin"
      ```
 
      Alternatively:
 
-     ```{.bash data-prompt="$"}
+     ```bash
      export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@mongocsvr1:27017,mongocsvr2:27017,mongocsvr3:27017/?replicaSet=configrs&authSource=admin"
-     $ pbm status
+     pbm status
      ```
      
      Replace the `pbmuser:secretpwd` with the credentials of [the user who owns the pbm process](../install/configure-authentication.md#create-the-pbm-user)
@@ -86,28 +86,28 @@ Specify new values in MongoDB connection URI string as follows:
 
 === "The pbm-agent connection string"    
 
-    ```
+    ```bash
     pbm-agent --mongodb-uri "mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin&readConcernLevel=local&w=1"
     ```  
 
     Alternatively:    
 
-    ```
+    ```bash
     export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin&readConcernLevel=local&w=1"
     pbm-agent
     ```    
 
 === "The `pbm` CLI connection string"    
 
-    ```{.bash data-prompt="$"}
+    ```bash
     pbm status --mongodb-uri "mongodb://pbmuser:secretpwd@mongocsvr1:27017,mongocsvr2:27017,mongocsvr3:27017/?replicaSet=configrs&authSource=admin&readConcernLevel=local&w=1"
     ```    
 
     Alternatively:    
 
-    ```{.bash data-prompt="$"}
+    ```bash
     export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@mongocsvr1:27017,mongocsvr2:27017,mongocsvr3:27017/?replicaSet=configrs&authSource=admin&readConcernLevel=local&w=1"
-    $ pbm status
+    pbm status
     ```
 
 Supported values are:
@@ -131,14 +131,14 @@ For [Kerberos authentication :octicons-link-external-16:](https://docs.percona.c
 
 Specify the following string for MongoDB connection URI:
 
-```
+```bash
 PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
 ```
 
 Note that you must first obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
 
-```{.bash data-prompt="$"}
-$ sudo -u {USER} kinit pbm
+```bash
+sudo -u {USER} kinit pbm
 ```
 
 Note that the `{USER}` is the user that you will run the `pbm-agent` process.
@@ -147,7 +147,7 @@ Note that the `{USER}` is the user that you will run the `pbm-agent` process.
 
 For [authentication and authorization via Native LDAP :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authorization.html#authentication-and-authorization-with-direct-binding-to-ldap), you only create roles for LDAP groups in MongoDB as the users are stored and managed on the LDAP server. However, you still define the `$external` database as your authentication source:
 
-```
+```bash
 PBM_MONGODB_URI="mongodb://<user>:<password>@<hostname>:27017/?authMechanism=PLAIN&authSource=%24external&replSetName=xxxx"
 ```
 
@@ -170,7 +170,7 @@ When using [AWS IAM authentication :octicons-link-external-16:](https://docs.per
 
 The MongoDB connection URI string then looks like the following:
 
-```
+```bash
 PBM_MONGODB_URI="mongodb://<aws_access_key_id>:<aws_secret_access_key>@<hostname>:27017/?authMechanism=MONGODB-AWS&authSource=%24external&replSetName=xxxx"
 ```
 

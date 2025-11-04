@@ -12,20 +12,20 @@ Let's have a look at how Percona Backup for MongoDB works.
 
 With [Percona Backup for MongoDB up and running](installation.md) in your environment, make a backup:
 
-```{.bash data-prompt="$"}
-$ pbm backup --type=logical
+```bash
+pbm backup --type=logical
 ```
 
 To save all events that occurred to the data between backups, enable the point-in-time recovery routine that saves oplog slices:
 
-```{.bash data-prompt="$"}
-$ pbm config --set pitr.enabled=true
+```bash
+pbm config --set pitr.enabled=true
 ```
 
 Now, imagine that your web application’s update was released on February 7 at 03:00 UTC. By 15:23 UTC, someone realizes that this update has a bug that is wiping the historical data of any user who logged in. To remediate this negative impact on data, it’s time to roll back up to the time of the application’s update - up to February 7, 03:00 UTC.
 
-```{.bash data-prompt="$"}
-$ pbm list
+```bash
+pbm list
 ```
 
 ??? admonition "Sample output"
@@ -41,14 +41,14 @@ $ pbm list
 
 The output lists the valid time ranges for the restore. The desired time (February 7, 03:00 UTC) falls within the `2024-02-03T08:08:36Z-2024-02-09T12:20:23Z` range, so let’s restore the database up to that time.
 
-```{.bash data-prompt="$"}
-$ pbm restore --time 2024-02-07T02:59:59
+```bash
+pbm restore --time 2024-02-07T02:59:59
 ```
 
 To be on the safe side, it is a good practice to make a fresh backup after the restore is complete.
 
-```{.bash data-prompt="$"}
-$ pbm backup
+```bash
+pbm backup
 ```
 
 This backup refreshes the timeline and serves as the base for saving oplog slices. The point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp to ensure oplog continuity.

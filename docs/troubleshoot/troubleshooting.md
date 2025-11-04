@@ -17,8 +17,8 @@ Run **pbm-speed-test** for the full set of available commands.
 
 ### Compression test
 
-```{.bash data-prompt="$"}
-$ pbm-speed-test compression --compression=s2 --size-gb 10
+```bash
+pbm-speed-test compression --compression=s2 --size-gb 10
 ```
 
 ??? example "Sample output"
@@ -38,30 +38,34 @@ To test compression on a real collection, pass the
 
 Run `pbm-speed-test compression --help` for the full set of supported flags:
 
-```{.bash data-prompt="$"}
-$ pbm-speed-test compression --help
-usage: pbm-speed-test compression
-
-Run compression test
-
-Flags:
-      --help                     Show context-sensitive help (also try
-                                 --help-long and --help-man).
-      --mongodb-uri=MONGODB-URI  MongoDB connection string
-  -c, --sample-collection=SAMPLE-COLLECTION
-                                 Set collection as the data source
-  -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
-      --compression=s2           Compression type
-                                 <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
-      --compression-level=COMPRESSION-LEVEL
-                                 Compression level (specific to the compression type)
-                                 <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
+```bash
+pbm-speed-test compression --help
 ```
+
+??? example "Sample output"
+
+    ```{.text .no-copy}
+    usage: pbm-speed-test compression
+
+    Run compression test
+
+    Flags:
+          --help                     Show context-sensitive help (also try
+                                     --help-long and --help-man).
+          --mongodb-uri=MONGODB-URI  MongoDB connection string
+      -c, --sample-collection=SAMPLE-COLLECTION
+                                     Set collection as the data source
+      -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
+          --compression=s2           Compression type
+                                     <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
+          --compression-level=COMPRESSION-LEVEL
+                                     Compression level (specific to the compression type)
+                                     <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
 
 ### Upload speed test
 
-```{.bash data-prompt="$"}
-$ pbm-speed-test storage --compression=s2
+```bash
+pbm-speed-test storage --compression=s2
 ```
 
 ??? example "Sample output"
@@ -81,21 +85,25 @@ pass the `--sample-collection` flag with the `<my_db.my_collection>` value.
 
 Run `pbm-speed-test storage --help` for the full set of available flags:
 
+```bash
+pbm-speed-test storage --help
 ```
-$ pbm-speed-test storage --help
-usage: pbm-speed-test storage
 
-Run storage test
+??? example "Sample output"
 
-Flags:
-      --help                     Show context-sensitive help (also try --help-long and --help-man).
-      --mongodb-uri=MONGODB-URI  MongoDB connection string
-  -c, --sample-collection=SAMPLE-COLLECTION
-                                 Set collection as the data source
-  -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
-      --compression=s2           Compression type <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
-      --compression-level=COMPRESSION-LEVEL
-                                Compression level (specific to the compression type)
-```
+    ```{.text .no-copy}
+    usage: pbm-speed-test storage
+
+    Run storage test
+
+    Flags:
+          --help                     Show context-sensitive help (also try --help-long and --help-man).
+          --mongodb-uri=MONGODB-URI  MongoDB connection string
+      -c, --sample-collection=SAMPLE-COLLECTION
+                                     Set collection as the data source
+      -s, --size-gb=SIZE-GB          Set data size in GB. Default 1
+          --compression=s2           Compression type <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
+          --compression-level=COMPRESSION-LEVEL
+                                    Compression level (specific to the compression type)
 
 

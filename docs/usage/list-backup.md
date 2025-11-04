@@ -2,8 +2,8 @@
 
 Use the `pbm list` command to view all completed backups. 
 
-```{.bash data-prompt="$"}
-$ pbm list
+```bash
+pbm list
 ```
 
 The output provides the following information:

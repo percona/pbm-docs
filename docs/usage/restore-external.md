@@ -15,8 +15,8 @@ The following procedure describes the restore process from backups [made through
 
 1. To perform a restore, run the following command:
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore --external 
+    ```bash
+    pbm restore --external 
     ```    
 
     Percona Backup for MongoDB stops the database, cleans up data directories on all nodes, provides the restore name and prompts you to copy the data:    
@@ -32,8 +32,8 @@ The following procedure describes the restore process from backups [made through
 
 3. After you copied the files to the nodes, complete the restore with the following command:    
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml>
+    ```bash
+    pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml>
     ```    
 
     At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
@@ -42,8 +42,8 @@ The following procedure describes the restore process from backups [made through
 
         If you use a filesystem as the remote backup storage, both `pbm-agent` and `pbm` CLI must have the same permissions to it. To achieve this, run the `pbm restore-finish` command as the `mongod` user:
 
-        ```{.bash data-prompt="$"}
-        $ sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
+        ```bash
+        sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
         ```
 
 4. Optional. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-describe-restore) command.
@@ -58,8 +58,8 @@ After the restore is complete, do the following:
 
 3. Run the following command to resync the backup list with the storage:
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --force-resync
+    ```bash
+    pbm config --force-resync
     ``` 
 
 4. Start the balancer and start `mongos` nodes.
@@ -97,8 +97,8 @@ To restore from a backup, do the following:
 
 1. Start a restore
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore --external -c </path/to/mongod.conf> --ts 
+    ```bash
+    pbm restore --external -c </path/to/mongod.conf> --ts 
     ```
 
     If the path to the source cluster `mongod.conf` is undefined, PBM tries to retrieve the required configuration options from the `mongod.conf` of the target cluster.    
@@ -109,8 +109,8 @@ To restore from a backup, do the following:
 
 3. Complete the restore by running:
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
+    ```bash
+    pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
     ```    
 
     At this stage, Percona Backup for MongoDB prepares the data for the cluster / replica set start and ensures its consistency. 
@@ -119,8 +119,8 @@ To restore from a backup, do the following:
 
         If you use a filesystem as the remote backup storage, both `pbm-agent` and `pbm` CLI must have the same permissions to it. To achieve this, run the `pbm restore-finish` command as the `mongod` user:
 
-        ```{.bash data-prompt="$"}
-        $ sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
+        ```bash
+        sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
         ```
 
 4. Don't forget to complete the [post-restore steps](#post-restore-steps).

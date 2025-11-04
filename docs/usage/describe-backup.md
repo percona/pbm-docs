@@ -2,8 +2,8 @@
 
 To view a detailed information about a backup, run the following command:
 
-```{.bash data-prompt="$"}
-$ pbm describe-backup <backup-name>
+```bash
+pbm describe-backup <backup-name>
 ```
 
 The output provides the backup name, type, status, size and the information about the cluster topology it was taken in. For [selective backups](../features/selective-backup.md), it also shows the namespaces that were backed up. 
@@ -59,8 +59,8 @@ You can view the list of collections included in the *logical* or *selective* ba
 
 To view the backup contents, use the `--with-collections` flag:
 
-```{.bash data-prompt="$"}
-$ pbm describe-backup <backup-name> --with-collections
+```bash
+pbm describe-backup <backup-name> --with-collections
 ```
 
 ??? example "Sample output"

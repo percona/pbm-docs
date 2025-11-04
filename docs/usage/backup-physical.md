@@ -8,8 +8,8 @@ During a *physical* backup, Percona Backup for MongoDB  copies the contents of t
 
 To start a backup, run the following command:
 
-```{.bash data-prompt="$"}
-$ pbm backup --type=physical
+```bash
+pbm backup --type=physical
 ```
      
 !!! warning 

@@ -10,8 +10,8 @@ Creates a backup snapshot and saves it in the remote backup storage.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm backup [<flags>]
+```bash
+pbm backup [<flags>]
 ```
 
 For more information about using `pbm backup`, see [Starting a backup](../usage/start-backup.md)
@@ -46,8 +46,8 @@ Closes the `backupCursor` and finishes the external backup. Must be run after ru
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm backup-finish [backup-name] 
+```bash
+pbm backup-finish [backup-name] 
 ```
 
 ## pbm cancel-backup
@@ -74,7 +74,7 @@ Deletes outdated backup snapshots and point-in-time recovery oplog slices.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
+```bash
 pbm cleanup [<flags>]
 ```
 
@@ -95,8 +95,8 @@ Sets, changes or lists Percona Backup for MongoDB configuration.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm config [<flags>] [<key>]
+```bash
+pbm config [<flags>] [<key>]
 ```
 
 The command accepts the following flags:
@@ -158,8 +158,8 @@ Deletes the specified backup snapshot or all backup snapshots that are older tha
 
 The following is the command syntax:
 
-```{.bash data-prompt="$"}
-$ pbm delete-backup [<flags>] [<name>]
+```bash
+pbm delete-backup [<flags>] [<name>]
 ```
 
 The command accepts the following flags:
@@ -178,7 +178,7 @@ Deletes oplog slices produced for Point-in-Time Recovery.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
+```bash
 pbm delete-pitr [<flags>]
 ```
 
@@ -216,8 +216,8 @@ Provides the detailed information about a backup:
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm describe-backup [<backup-name>] [<flags>] 
+```bash
+pbm describe-backup [<backup-name>] [<flags>] 
 ```
 
 | Flag                  | Description                           |
@@ -309,8 +309,8 @@ For **physical backups only**, the following additional information is provided:
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm describe-restore [<restore-timestamp>] [<flags>] 
+```bash
+pbm describe-restore [<restore-timestamp>] [<flags>] 
 ```
 
 The command accepts the following flags:
@@ -409,8 +409,8 @@ Generates the report with the detailed information about a specific backup or a 
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm diagnose --path path --name <backup-name> --opid <OPID>
+```bash
+pbm diagnose --path path --name <backup-name> --opid <OPID>
 ```
 
 The command accepts the following flags:
@@ -442,8 +442,8 @@ When Point-in-Time Recovery is enabled, the `pbm list` also provides the list of
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm list [<flags>]
+```bash
+pbm list [<flags>]
 ```
 
 The command accepts the following flags:
@@ -569,8 +569,8 @@ Shows log information from all `pbm-agent` processes.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm logs [<flags>]
+```bash
+pbm logs [<flags>]
 ```
 
 The command accepts the following flags:
@@ -618,8 +618,8 @@ To learn more about the usage, refer to Point-in-Time Recovery oplog replay.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm oplog-replay [<flags>]
+```bash
+pbm oplog-replay [<flags>]
 ```
 
 The command accepts the following flags:
@@ -641,8 +641,8 @@ To learn more about configuration profiles, see [Multiple storages for backups](
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm profile add [<flags>] <profile-name> <path/to/profile.yaml>
+```bash
+pbm profile add [<flags>] <profile-name> <path/to/profile.yaml>
 ``` 
 
 The command accepts the following flags:
@@ -668,8 +668,8 @@ Provides information about [configuration profiles](../features/multi-storage.md
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm profile list [<flags>]
+```bash
+pbm profile list [<flags>]
 ```
 
 The command accepts the following flags:
@@ -703,8 +703,8 @@ Removes the specified configuration profile from PBM.
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm profile remove <profile-name> [<flags>]
+```bash
+pbm profile remove <profile-name> [<flags>]
 ```
 
 The command accepts the following flags:
@@ -729,8 +729,8 @@ Shows the external storage configuration according to the specified configuratio
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm profile show <profile-name> [<flags>]
+```bash
+pbm profile show <profile-name> [<flags>]
 ```
 
 The command accepts the following flags:
@@ -760,8 +760,8 @@ Syncs the backup list from the external storage according to the specified confi
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm profile sync <profile-name> [<flags>]
+```bash
+pbm profile sync <profile-name> [<flags>]
 ```
 
 The command accepts the following flags:
@@ -781,8 +781,8 @@ Restores database from a specified backup / to a specified point in time. Depend
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm restore [<flags>] [<backup_name>]
+```bash
+pbm restore [<flags>] [<backup_name>]
 ```
 
 For more information about using `pbm restore`, see [Restoring a backup](../usage/restore.md).
@@ -832,8 +832,8 @@ Instructs PBM to complete the snapshot-based physical restore. Must be run after
 
 The command has the following syntax:
 
-```{.bash data-prompt="$"}
-$ pbm restore-finish <restore_name> [flags]
+```bash
+pbm restore-finish <restore_name> [flags]
 ```
 
 The command accepts the following flags:

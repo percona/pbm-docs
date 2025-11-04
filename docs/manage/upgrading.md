@@ -14,8 +14,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
 2. Enable the repository
 
-    ```{.bash data-prompt="$"}
-    $ sudo percona-release enable pbm release
+    ```bash
+    sudo percona-release enable pbm release
     ```
 
 <i info>:material-information: Note:</i> For `apt`-based systems, run `sudo apt update` to update the local cache.
@@ -29,20 +29,20 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     1. Stop `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl stop pbm-agent
+        ```bash
+        sudo systemctl stop pbm-agent
         ```
 
     2. Install new packages
 
-        ```{.bash data-prompt="$"}
-        $ sudo apt install percona-backup-mongodb
+        ```bash
+        sudo apt install percona-backup-mongodb
         ```  
 
     3. Reload the `systemd` process
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl daemon-reload
+        ```bash
+        sudo systemctl daemon-reload
         ```
 
     4. Update permissions
@@ -52,8 +52,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     5. Start `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl start pbm-agent
+        ```bash
+        sudo systemctl start pbm-agent
         ```
 
 === ":material-redhat: On Red Hat Enterprise Linux and derivatives"
@@ -63,22 +63,22 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     1. Stop `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl stop pbm-agent
+        ```bash
+        sudo systemctl stop pbm-agent
         ```
 
     2. Install new packages
 
-        ```{.bash data-prompt="$"}
-        $ sudo yum install percona-backup-mongodb
+        ```bash
+        sudo yum install percona-backup-mongodb
         ```
 
     3. Reload the `systemd` process
 
        Starting from v1.7.0, reload the `systemd` process to update the unit file with the following command:
 
-       ```{.bash data-prompt="$"}
-       $ sudo systemctl daemon-reload
+       ```bash
+       sudo systemctl daemon-reload
        ```
 
     4. Update permissions
@@ -87,8 +87,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     5. Start `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl start pbm-agent
+        ```bash
+        sudo systemctl start pbm-agent
         ``` 
 
 ## Upgrade to a specific version
@@ -100,8 +100,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     1. List available versions
  
-        ```{.bash data-prompt="$"}
-        $ sudo apt-cache madison percona-backup-mongodb
+        ```bash
+        sudo apt-cache madison percona-backup-mongodb
         ```
 
         ??? example "Sample output"
@@ -115,16 +115,16 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     2. Stop `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl stop pbm-agent
+        ```bash
+        sudo systemctl stop pbm-agent
         ```
 
     3. Install packages
 
         Install a specific version packages. For example, to upgrade to Percona Backup for MongoDB 1.7.0, run the following command:
 
-        ```{.bash data-prompt="$"}
-        $ sudo apt install percona-backup-mongodb=1.7.0-1.stretch
+        ```bash
+        sudo apt install percona-backup-mongodb=1.7.0-1.stretch
         ```
  
     4. Update permissions
@@ -134,8 +134,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     5. Start `pbm-agent`
  
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl start pbm-agent
+        ```bash
+        sudo systemctl start pbm-agent
         ``` 
 
 === ":material-redhat: On Red Hat Enterprise Linux and derivatives"
@@ -145,8 +145,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     1. List available versions
 
-        ```{.bash data-prompt="$"}
-        $ sudo yum list percona-backup-mongodb --showduplicates
+        ```bash
+        sudo yum list percona-backup-mongodb --showduplicates
         ```
 
         ??? example "Sample output"
@@ -163,16 +163,16 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     2. Stop `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl stop pbm-agent
+        ```bash
+        sudo systemctl stop pbm-agent
         ```
 
     3. Install packages
 
         Install a specific version packages. For example, to upgrade to Percona Backup for MongoDB 1.7.1, run the following command:
 
-        ```{.bash data-prompt="$"}
-        $ sudo yum install percona-backup-mongodb-1.7.1-1.el7
+        ```bash
+        sudo yum install percona-backup-mongodb-1.7.1-1.el7
         ```
     
     4. Update permissions
@@ -181,8 +181,8 @@ The recommended and most convenient way to upgrade PBM is from Percona repositor
 
     5. Start `pbm-agent`
 
-        ```{.bash data-prompt="$"}
-        $ sudo systemctl start pbm-agent
+        ```bash
+        sudo systemctl start pbm-agent
         ``` 
 
 <i info>:material-information: Note:</i> If MongoDB runs under a *different user than `mongod`* (the default configuration for Percona Server for MongoDB), use the same user to run the `pbm-agent`. For filesystem-based storage, grant the read / write permissions to the backup directory for this user.

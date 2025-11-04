@@ -10,13 +10,14 @@ You can restore a specific database or a collection either from a full or a sele
 
 1. List the backups
 
-    ```{.bash data-prompt="$"}
-    $ pbm list
+    ```bash
+    pbm list
     ```
+    
 2. Run the ``pbm restore`` command in the format:
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore <backup_name> --ns <database.collection>
+    ```bash
+    pbm restore <backup_name> --ns <database.collection>
     ```
 
  You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
@@ -27,8 +28,8 @@ During the restore, Percona Backup for MongoDB retrieves the file for the specif
 
 To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles) from a full backup, add the `--with-users-and-roles` flag to the `pbm restore` command:
 
-```{.bash data-prompt="$"}
-$ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
+```bash
+pbm restore <backup_name> --ns <database.*> --with-users-and-roles
 ```
 
 ### Restore a collection under a different name
@@ -39,16 +40,16 @@ Note that in version 2.8.0 you can restore a single collection and this collecti
 
 To restore a collection, pass the collection name from the backup for the `--ns-from` flag and the new name for the `--ns-to` flag:
 
-```{.bash data-prompt="$"}
-$ pbm restore <backup_name> --ns-from <database.collection> --ns-to <database.collection_new>
+```bash
+pbm restore <backup_name> --ns-from <database.collection> --ns-to <database.collection_new>
 ```
 
 The new collection has the same data and indexes as the source collection. You must provide a unique name for the collection you restore, otherwise the restore fails.
 
 You can restore a collection under a new name up to the specified time. Instead of the backup name, specify the timestamp, the source collection name and the new name as follows:
 
-```{.bash data-prompt="$"}
-$ pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database.collection_new>
+```bash
+pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database.collection_new>
 ```
 
 ## Post-restore steps

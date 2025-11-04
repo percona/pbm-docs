@@ -6,8 +6,8 @@ We recommend using `crond` or similar services to schedule backup snapshots.
 
     Before configuring `crond`, make sure that you have [installed](../installation.md) and [configured](../install/initial-setup.md) Percona Backup for MongoDB to make backups in your database. Start a backup manually to verify this: 
 
-    ```{.bash data-prompt="$"}
-    $ pbm backup
+    ```bash
+    pbm backup
     ```
 
 The recommended approach is to create a `crontab` file in the `/etc/cron.d` directory and specify the command in it. This simplifies server administration especially if multiple users have access to it.
@@ -23,21 +23,21 @@ The steps are the following:
 
     === ":material-debian: Debian and Ubuntu"
 
-        ```{.bash data-prompt="$"}
-        $ vim /etc/default/pbm-cron
+        ```bash
+        vim /etc/default/pbm-cron
         ``` 
 
     === ":material-redhat: Red Hat Enterprise Linux and derivatives"
 
-        ```{.bash data-prompt="$"}
-        $ vim /etc/sysconfig/pbm-cron
+        ```bash
+        vim /etc/sysconfig/pbm-cron
         ```
 
 
 2. Specify the environment variable in `pbm-cron`:
     
-     ```{.bash data-prompt="$"}
-     $ export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?replSetName=xxxx"
+     ```bash
+     export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?replSetName=xxxx"
      ```
 
 3. Grant access to the `pbm-cron` file for the user that will execute the `cron` task.
@@ -45,13 +45,13 @@ The steps are the following:
 
 4. Create a `crontab` file. Let’s name it `pbm-backup`.
 
-     ```{.bash data-prompt="$"}
-     $ touch pbm-backup
+     ```bash
+     touch pbm-backup
      ```
 
 5. Specify the command in the file:
 
-     ```{.bash data-prompt="$"}
+     ```bash
      30 23 * * sun <user-to-execute-cron-task> . /etc/default/pbm-cron; /usr/bin/pbm backup
      ```
 
@@ -62,8 +62,8 @@ The steps are the following:
 
 6. Verify that backups are running in `/var/log/cron` or `/var/log/syslog` logs:
 
-     ```{.bash data-prompt="$"}
-     $ grep CRON /var/log/syslog
+     ```bash
+     grep CRON /var/log/syslog
      ```
 
 ## Schedule backups with point-in-time recovery running
@@ -88,8 +88,8 @@ Starting with version 2.1.0, you can use the [`pbm cleanup --older-than`](../ref
 
 You can configure a `cron` task to automate storage cleanup by specifying the following command in the `crontab` file:
 
-```{.bash data-prompt="$"}
-$ /usr/bin/pbm cleanup -y --older-than 30d --wait
+```bash
+/usr/bin/pbm cleanup -y --older-than 30d --wait
 ``` 
 
 This command deletes backups and oplog slices that are older than 30 days. You can change the period by specifying a desired interval for the `--older-than` flag. 
@@ -99,8 +99,8 @@ This command deletes backups and oplog slices that are older than 30 days. You c
 
     For PBM version 2.0.5 and earlier, use the [`pbm delete backup --older-than <timestamp>`](../reference/pbm-commands.md#pbm-delete-backup) command. You can configure a `cron` task to automate backup deletion by specifying the following command in the `crontab` file:
 
-    ```{.bash data-prompt="$"}
-    $ /usr/bin/pbm delete-backup -f --older-than $(date -d '-1 month' +\%Y-\%m-\%d) 
+    ```bash
+    /usr/bin/pbm delete-backup -f --older-than $(date -d '-1 month' +\%Y-\%m-\%d) 
     ```
 
     This command deletes backups that are older than 30 days. You can change the period by specifying a desired interval for the `date` function.

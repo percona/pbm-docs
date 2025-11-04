@@ -11,8 +11,8 @@
 
 To make a backup, run the following command:
 
-```{.bash data-prompt="$"}
-$ pbm backup --type=logical
+```bash
+pbm backup --type=logical
 ```
      
 Logical backup is the default one so you can bypass the `--type` flag. 

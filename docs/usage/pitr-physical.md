@@ -10,8 +10,8 @@ You can recover your database from a full or an incremental physical backup in t
 
 To restore a database from a physical backup, specify the time for the [`pbm restore`](../reference/pbm-commands.md#pbm-restore) command:    
 
-```{.bash data-prompt="$"}
-$ pbm restore --time <timestamp> 
+```bash
+pbm restore --time <timestamp> 
 ```    
 
 Percona Backup for MongoDB recognizes if it is a full or an incremental backup and restores the database from it up to the specified time.     
@@ -23,8 +23,8 @@ You can [track the restore progress](restore-progress.md) using the `pbm describ
 
     For PBM versions earlier than 2.3.0, the command for the point-in-time recovery is the following:
         
-    ```{.bash data-prompt="$"}
-    $ pbm restore --base-snapshot=<backup_name> --time <timestamp>
+    ```bash
+    pbm restore --base-snapshot=<backup_name> --time <timestamp>
     ```
 
     The `--base-snapshot` flag is required. Otherwise, PBM will look for a logical backup even if there is none or there is a more recent physical backup.    
@@ -39,8 +39,8 @@ After the point-in-time recovery is complete, perform these post-restore steps:
 
 3. Resync the backup list with the storage:    
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --force-resync
+    ```bash
+    pbm config --force-resync
     ```    
 
 4. Start the balancer and start `mongos` nodes.    

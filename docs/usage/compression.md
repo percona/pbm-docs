@@ -6,8 +6,8 @@ You can start a backup with a different compression method by passing the `--com
 
 For example, to start a backup with `gzip` compression, use the following command:
 
-```{.bash data-prompt="$"}
-$ pbm backup --compression=gzip
+```bash
+pbm backup --compression=gzip
 ```
 
 Supported compression types are: `gzip`, `snappy`, `lz4`, `pgzip`, `zstd`.  The `none` value means no compression is done during backup.

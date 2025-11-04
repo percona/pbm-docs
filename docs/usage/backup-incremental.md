@@ -6,16 +6,16 @@
 
 1. To start incremental backups, first make a full incremental backup. It will serve as the base for subsequent incremental backups:
 
-    ```{.bash data-prompt="$"} 
-    $ pbm backup --type incremental --base
+    ```bash 
+    pbm backup --type incremental --base
     ```
 
     The `pbm-agent` starts tracking the incremental backup history to be able to calculate and save the difference in data blocks. 
 
 2. Run regular incremental backups:
 
-    ```{.bash data-prompt="$"}
-    $ pbm backup --type incremental
+    ```bash
+    pbm backup --type incremental
     ```
 
 The incremental backup history looks like this:

@@ -27,8 +27,8 @@ Set the `pitr.enabled` configuration option to `true`.
 
 === ":octicons-file-code-24: Command line"
 
-     ```{.bash data-prompt="$"}
-     $ pbm config --set pitr.enabled=true
+     ```bash
+     pbm config --set pitr.enabled=true
      ```
 
 === ":material-console: Configuration file"
@@ -87,8 +87,8 @@ You can change the duration of an oplog span via the configuration file. Specify
 
 === ":octicons-file-code-24: Command line"
 
-     ```{.bash data-prompt="$"}
-     $ pbm config --set pitr.oplogSpanMin=5
+     ```bash
+     pbm config --set pitr.oplogSpanMin=5
      ```
 
 === ":material-console: Configuration file"
@@ -157,8 +157,8 @@ The remaining secondaries and the primary nodes in the cluster receive priority 
 
 To check the priorities, run the `pbm status` command with the  `--priority` flag.
 
-```{.bash data-prompt="$"}
-$ pbm status --priority
+```bash
+pbm status --priority
 ```
 
 ??? example "Sample output"
@@ -183,8 +183,8 @@ The oplog slices are saved with the `s2` compression method by default. You can 
 
 === ":octicons-file-code-24: Command line"
 
-     ```{.bash data-prompt="$"}
-     $ pbm config --set pitr.compression=gzip
+     ```bash
+     pbm config --set pitr.compression=gzip
      ```
 
 === ":material-console: Configuration file"
@@ -214,8 +214,8 @@ The [`pbm list`](../reference/pbm-commands.md#pbm-list) output includes the foll
 * Valid time ranges for recovery
 * Point-in-time recovery status
 
-   ```{.bash data-prompt="$"}
-   $ pbm list
+   ```bash
+   pbm list
 
      2021-08-04T13:00:58Z [restore_to_time: 2021-08-04T13:01:23Z]
      2021-08-05T13:00:47Z [restore_to_time: 2021-08-05T13:01:11Z]

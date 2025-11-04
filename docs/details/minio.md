@@ -12,20 +12,20 @@ This document provides an overview of MinIO as the closest S3-compatible storage
 
 2. Configure the `mc` command line tool with a MinIO Server
 
-    ```{.bash data-prompt="$"}
-    $ mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
+    ```bash
+    mc alias set myminio http://127.0.0.1:9000 MINIO_ACCESS_KEY MINIO_SECRET_KEY
     ```
     
 3. Create a bucket
 
-    ```{.bash data-prompt="$"}
-    $ mc mb myminio/my-minio-bucket
+    ```bash
+    mc mb myminio/my-minio-bucket
     ```
       
 4. Verify the bucket creation
 
-   ```{.bash data-prompt="$"}
-   $ mc ls myminio
+   ```bash
+   mc ls myminio
    ```
 
 After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
@@ -105,16 +105,16 @@ Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path 
 
 2. Set the `SSL_CERT_FILE` environment variable to that file's path on each host where `pbm-agent` and PBM CLI are running:
 
-    ```{.bash data-prompt="$"}
-    $ export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+    ```bash
+    export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
     ```
 
     If this variable isn't set, PBM uses the system root certificates.
 
 3. Restart `pbm-agent`:
 
-    ```{.bash data-prompt="$"}
-    $ sudo systemctl start pbm-agent
+    ```bash
+    sudo systemctl start pbm-agent
     ```
 
 4. Verify that your custom certificate is recognized. Check PBM logs for successful storage access. 
@@ -122,8 +122,8 @@ Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path 
 
 Alternatively, you can turn off the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
 
-```{.bash data-prompt="$"}
-$ pbm config --set storage.minio.insecureSkipTLSVerify=True
+```bash
+pbm config --set storage.minio.insecureSkipTLSVerify=True
 ```
 
 !!! warning 

@@ -18,22 +18,22 @@ Find the link to the binary tarballs under the **Generic Linux** menu item on [P
 
 1. Fetch the binary tarball. Replace the version in the URL with your required version.
 
-    ```{.bash data-prompt="$"}
-    $ wget https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-{{release}}/binary/tarball/percona-backup-mongodb-{{release}}-x86_64.tar.gz
+    ```bash
+    wget https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-{{release}}/binary/tarball/percona-backup-mongodb-{{release}}-x86_64.tar.gz
     ```
 
 2. Extract the tarball
 
-    ```{.bash data-prompt="$"}
-    $ tar -xf percona-backup-mongodb-{{release}}-x86_64.tar.gz
+    ```bash
+    tar -xf percona-backup-mongodb-{{release}}-x86_64.tar.gz
     ```
 
 3. Export the location of the binaries to the `PATH` variable
 
     For example, if you’ve extracted the tarball to your `home` directory, the command would be the following:
 
-    ```{.bash data-prompt="$"}
-    $ export PATH=~/percona-backup-mongodb-{{release}}/:$PATH
+    ```bash
+    export PATH=~/percona-backup-mongodb-{{release}}/:$PATH
     ```
 
 --8<-- "install-result.md"

@@ -17,14 +17,14 @@ This data is stored in separate files in JSON format.
 
 To generate a report, run the `pbm diagnostics` command:
 
-```{.bash data-prompt="$"}
-$ pbm diagnostic --path=path --name=<backup-name> 
+```bash
+pbm diagnostic --path=path --name=<backup-name> 
 ```
 
 or you can use the OPID of the command:
 
-```{.bash data-prompt="$"}
-$ pbm diagnostic --path=path --opid=<OPID> 
+```bash
+pbm diagnostic --path=path --opid=<OPID> 
 ```
 
 where:
@@ -47,8 +47,8 @@ S3 us-east-1 http://minio:9000/mybackups
 
 To retrieve the OpID of the backup operation, run the `pbm describe-backup` command as follows:
 
-```{.bash data-prompt="$"}
-$ pbm describe-backup 2024-11-27T13:49:31Z | grep 'opid'
+```bash
+pbm describe-backup 2024-11-27T13:49:31Z | grep 'opid'
 ```
 
 The output returns the OpID:
@@ -59,14 +59,14 @@ opid: 6747236bfa98f6a85b9bd4e7
 
 Now you can generate the diagnostics report:
 
-```{.bash data-prompt="$"}
-$ pbm diagnostic --path=/tmp/backup_report --opid=6747236bfa98f6a85b9bd4e7
+```bash
+pbm diagnostic --path=/tmp/backup_report --opid=6747236bfa98f6a85b9bd4e7
 ```
 
 Check the generated files:
 
-```{.bash data-prompt="$"}
-$ ls /tmp/backup_report
+```bash
+ls /tmp/backup_report
 6747236bfa98f6a85b9bd4e7.backup.json  6747236bfa98f6a85b9bd4e7.log  6747236bfa98f6a85b9bd4e7.report.json
 ```
 
@@ -74,8 +74,8 @@ You can use the OPID to generate a diagnostics report about other operations lik
 
 You can also output the report into an archive file as follows:
 
-```{.bash data-prompt="$"}
-$ pbm diagnostic --path=path --opid=<OPID> --archive
+```bash
+pbm diagnostic --path=path --opid=<OPID> --archive
 ``` 
 
 The diagnostics report empowers you to collect every necessary aspect for deep analysis of issues with a specific operation, all in one go. If you can't perform the analysis yourself, `pbm diagnostic` offers a quick and convenient way to collect and submit all relevant information for filing a bug report. This significantly reduces the interaction time between you and our experts, accelerating issue resolution.

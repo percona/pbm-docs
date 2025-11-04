@@ -21,8 +21,8 @@ Percona provides the [`percona-release` :material-arrow-top-right: ](https://doc
 
 2. Enable the repository    
 
-    ```{.bash data-prompt="$"}
-    $ sudo percona-release enable pbm release
+    ```bash
+    sudo percona-release enable pbm release
     ```
 
 
@@ -32,30 +32,30 @@ Percona provides the [`percona-release` :material-arrow-top-right: ](https://doc
 
     1. Reload the local package database:    
 
-        ```{.bash data-prompt="$"}
-        $ sudo apt update
+        ```bash
+        sudo apt update
         ```    
 
     2. Install Percona Backup for MongoDB:    
 
-        ```{.bash data-prompt="$"}
-        $ sudo apt install percona-backup-mongodb
+        ```bash
+        sudo apt install percona-backup-mongodb
         ```    
 
 === ":material-redhat: On RHEL and derivatives" 
 
     Run the following command to install the packages:
 
-    ```{.bash data-prompt="$"}
-    $ sudo yum install percona-backup-mongodb
+    ```bash
+    sudo yum install percona-backup-mongodb
     ```
 
 === ":fontawesome-brands-amazon: On Amazon Linux 2023"
 
     Run the following command to install the packages:
 
-    ```{.bash data-prompt="$"}
-    $ sudo yum install percona-backup-mongodb
+    ```bash
+    sudo yum install percona-backup-mongodb
     ```
 
 --8<-- "install-result.md"

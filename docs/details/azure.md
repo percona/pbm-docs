@@ -26,32 +26,32 @@ For either method you need a storage account.
     1. Install the [Azure CLI :octicons-link-external-16:](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli). After the installation, the `az` is available for you.
     2. Sign in to Azure CLI:
 
-        ```{.bash data-prompt="$"}
-        $ az login
+        ```bash
+        az login
         ```
 
     3. Create a Resource group if it's not created for you:
 
-        ```{.bash data-prompt="$"}
-        $ az group create --name <your-resource-group> --location <your-location>
+        ```bash
+        az group create --name <your-resource-group> --location <your-location>
         ```
 
         For the list of available locations, run:
 
-        ```{.bash data-prompt="$"}
-        $ az account list-locations
+        ```bash
+        az account list-locations
         ```
 
     4. Create a storage account:
 
-        ```{.bash data-prompt="$"}
-        $ az storage account create --name <storage-account-name> --resource-group <your-resource-group> --location <your-location> --sku Standard_LRS
+        ```bash
+        az storage account create --name <storage-account-name> --resource-group <your-resource-group> --location <your-location> --sku Standard_LRS
         ```
 
     4. Create a blob container:
 
-        ```{.bash data-prompt="$"}
-        $ az storage container create --account-name <storage-account-name> --name <your-container>  --public-access off
+        ```bash
+        az storage container create --account-name <storage-account-name> --name <your-container>  --public-access off
         ```
 
         ??? example "Expected output"

@@ -5,19 +5,19 @@ another maintenance of a server and don’t want to wait for the large backup to
 
 To cancel the backup, use the [`pbm cancel-backup`](../reference/pbm-commands.md#pbm-cancel-backup) command.
 
-```{.bash data-prompt="$"}
-$ pbm cancel-backup
+```bash
+pbm cancel-backup
 Backup cancellation has started
 ```
 
 After the command execution, the backup is marked as canceled in the [pbm status](../troubleshoot/status.md) output:
 
-```{.bash data-prompt="$"}
-$ pbm status
+```bash
+pbm status
 ```
 
 **Output**:
 
-```{.bash .no-copy}
+```{.text .no-copy}
 2020-04-30T18:05:26Z  Canceled at 2020-04-30T18:05:37Z
 ```

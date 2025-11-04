@@ -16,26 +16,26 @@ Configure the replica set name mapping:
 
 === ":material-application-variable-outline: Using the environment variable for `pbm` CLI in your shell"
 
-    ```{.bash data-prompt="$"}
-    $ export PBM_REPLSET_REMAPPING="rsTarget1=rsSource1,rsTarget2=rsSource2"
+    ```bash
+    export PBM_REPLSET_REMAPPING="rsTarget1=rsSource1,rsTarget2=rsSource2"
     ``` 
 
     Let's say your source replica sets are `rsA` and `rsB` while the target ones are `rsX` and `rsY`. Then the command to export the environment variable is the following:
 
-    ```{.bash data-prompt="$"}
-    $ export PBM_REPLSET_REMAPPING="rsX=rsA,rsY=rsB"
+    ```bash
+    export PBM_REPLSET_REMAPPING="rsX=rsA,rsY=rsB"
     ``` 
 
 === ":material-console: Using the command line"
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore <timestamp> --replset-remapping="rsTarget1=rsSource1,rsTarget2=rsSource2"
+    ```bash
+    pbm restore <timestamp> --replset-remapping="rsTarget1=rsSource1,rsTarget2=rsSource2"
     ```
 
     Let's say your source replica sets are `rsA` and `rsB` while the target ones are `rsX` and `rsY`. Then the command to run a restore is the following:
 
-    ```{.bash data-prompt="$"}
-    $ pbm restore <timestamp> --replset-remapping="rsX=rsA,rsY=rsB"
+    ```bash
+    pbm restore <timestamp> --replset-remapping="rsX=rsA,rsY=rsB"
     ```
 
     The `--replset-remapping` flag is available for the following commands: `pbm restore`, `pbm list`, `pbm status`, `pbm oplog-replay`. 

@@ -9,6 +9,7 @@ This document provides overview for the native AWS S3 services. To use MinIO and
 
 [Configuration example :material-arrow-down:](#configuration-example){.md-button}
 
+
 ## Storage bucket creation
 
 To create a bucket, do the following.
@@ -17,14 +18,14 @@ To create a bucket, do the following.
 
 2. Create an S3 bucket
 
-    ```{.bash data-prompt="$"}
-    $ aws s3api create-bucket --bucket my-s3-bucket --region us-east-1
+    ```bash
+    aws s3api create-bucket --bucket my-s3-bucket --region us-east-1
     ```
   
 3. Verify the bucket creation
 
-    ```{.bash data-prompt="$"}
-    $ aws s3 ls
+    ```bash
+    aws s3 ls
     ```
 
 After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
@@ -149,5 +150,59 @@ retryer:
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
+<<<<<<< HEAD
+=======
+## Data upload to storage with self-signed TLS certificates
+
+Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don't use certificates signed by public Certificate Authorities (CAs).
+
+Providing a whole chain of certificates is recommended to ensure the connection is legit. The `SSL_CERT_FILE` environment variable specifies the path to a custom certificate chain file in PEM-format that PBM uses to validate TLS/SSL connection. 
+
+### Usage example
+
+Let's assume that your custom CA certificate is at `/etc/ssl/minio-ca.crt` path and your S3 endpoint is `https://minio.internal.local:9000`. To use self-issued TLS certificates, do the following:
+
+1. Ensure the cert file is in PEM format. Use the following command to check it:
+
+    ```bash
+    cat /etc/ssl/minio-ca.crt
+    ```
+
+    ??? example "Sample output"
+
+
+        ```{text .no-copy}
+        -----BEGIN CERTIFICATE-----
+        MIIC+TCCAeGgAwIBAgIJANH3WljB...
+        -----END CERTIFICATE-----
+        ```
+
+2. Set the `SSL_CERT_FILE` environment variable to that file's path on each host where `pbm-agent` and PBM CLI are running:
+
+    ```bash
+    export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+    ```
+
+    If this variable isn't set, PBM uses the system root certificates.
+
+3. Restart `pbm-agent`:
+
+    ```bash
+    sudo systemctl start pbm-agent
+    ```
+
+4. Verify that your custom certificate is recognized. Check PBM logs for successful S3 access. 
+
+
+Alternatively, you can disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:
+
+```bash
+pbm config --set storage.s3.insecureSkipTLSVerify=True
+```
+
+!!! warning 
+
+    Use this option with caution as it might leave a hole for man-in-the-middle attacks.
+>>>>>>> Removed prompt sign from code blocks
 
 

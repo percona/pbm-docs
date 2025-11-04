@@ -16,8 +16,8 @@ The timestamp you specify for the `--older-than` flag must be in the following f
 
 During the cleanup, you see the backups and oplog slices to be deleted and are asked to confirm the action. To bypass it, add the `--yes` flag:
 
-```{.bash data-prompt="$"}
-$ pbm cleanup --older-than=`%Y-%M-%D --yes
+```bash
+pbm cleanup --older-than=`%Y-%M-%D --yes
 ```
 
 ### Behavior
@@ -42,15 +42,15 @@ Here's how the cleanup works:
 
     You wish to delete all backups that are older than 2023-04-14T15:00:00
 
-    ```{.bash .no-copy}
-    $ pbm cleanup --older-than="2023-04-14T15:00:00"
+    ```bash
+    pbm cleanup --older-than="2023-04-14T15:00:00"
     ```
 
     This timestamp falls inside the backup chain that starts with the `2023-04-14T08:12:50Z` backup. That’s why PBM keeps this backup and the incremental backup chain deriving from it and deletes all data that is older than this backup.
 
     ??? example "Sample output"    
 
-        ```{.bash .no-copy} 
+        ```{.text .no-copy} 
         S3 us-east-1 s3://http://192.168.56.1:9000/bcp/pbme2etest
           Snapshots:
             2023-04-14T19:34:52Z 520.86MB <incremental> [restore_to_time: 2023-04-14T19:34:54Z]
@@ -63,7 +63,7 @@ Here's how the cleanup works:
 
        To illustrate, let's say you have the following backup list:
 
-       ```{.bash .no-copy}
+       ```{.text .no-copy}
        Snapshots:
            2023-04-13T13:26:58Z 147.29MB <logical> [restore_to_time: 2023-04-13T13:27:15Z]
            2023-04-13T10:12:08Z 147.29MB <logical> [restore_to_time: 2023-04-13T10:12:27Z]
@@ -78,7 +78,7 @@ Here's how the cleanup works:
 
        Sample output:
 
-       ```{.bash .no-copy}
+       ```{.text .no-copy}
        Snapshots:
            2023-04-13T13:26:58Z 147.29MB <logical> [restore_to_time: 2023-04-13T13:27:15Z]
            2023-04-13T10:12:08Z 147.29MB <logical> [restore_to_time: 2023-04-13T10:12:27Z]
@@ -143,8 +143,8 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 
      To delete a backup, specify the `<backup_name>` as an argument.
 
-     ```{.bash data-prompt="$"}
-     $ pbm delete-backup <backup_name>
+     ```bash
+     pbm delete-backup <backup_name>
      ```
 
 === "Backups older than the specified time"
@@ -158,8 +158,8 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 
     View backups:
 
-    ```{.bash data-prompt="$"}
-    $ pbm list
+    ```bash
+    pbm list
     ```
 
     ??? example "Sample output"
@@ -174,7 +174,7 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 
     Delete backups created before the specified timestamp
 
-    ```{.bash data-prompt="$"}
+    ```bash
     pbm delete-backup -f --older-than 2021-04-21
     ```
 
@@ -243,8 +243,8 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-y` or
  `--yes` flag.
 
- ```{.bash data-prompt="$"}
- $ pbm delete-backup --yes 2023-04-20T13:45:59Z
+ ```bash
+ pbm delete-backup --yes 2023-04-20T13:45:59Z
  ```
 
 !!! admonition ""
@@ -269,8 +269,8 @@ To view oplog slices, run the [`pbm list`](../reference/pbm-commands.md#pbm-list
 
     Run the `pbm delete-pitr` and pass the `--all` flag:
 
-    ```{.bash data-prompt="$"}
-    $ pbm delete-pitr --all
+    ```bash
+    pbm delete-pitr --all
     ```
 
 === "Earlier than the specified timestamp" 
@@ -280,8 +280,8 @@ To view oplog slices, run the [`pbm list`](../reference/pbm-commands.md#pbm-list
     * `%Y-%M-%DT%H:%M:%S` (for example, 2021-07-20T10:01:18) or
     * `%Y-%M-%D` (2021-07-20).
 
-    ```{.bash data-prompt="$"}
-    $ pbm delete-pitr --older-than 2021-07-20T10:01:18
+    ```bash
+    pbm delete-pitr --older-than 2021-07-20T10:01:18
     ```
 
 To enable [point-in-time recovery](pitr-tutorial.md) from the most recent backup snapshot, Percona Backup for MongoDB does not delete slices that were made after that snapshot. For example, if the most recent snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:44`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`.
