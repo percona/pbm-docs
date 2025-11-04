@@ -30,14 +30,14 @@ theme:
         icon: material/brightness-auto
         name: Color theme set to Automatic. Click to change
     - media: "(prefers-color-scheme: light)"
-      scheme: percona-light
+      scheme: default
       primary: custom
       accent: custom
       toggle:
         icon: material/brightness-7
         name: Color theme set to Light Mode. Click to change
     - media: "(prefers-color-scheme: dark)"
-      scheme: percona-dark
+      scheme: slate
       primary: custom
       accent: custom
       toggle:
@@ -228,10 +228,13 @@ nav:
         - Backup management via PMM: pmm.md
   - Storage:
       - Remote backup storage overview: details/storage-configuration.md
-      - AWS or s3-compatible storage: details/s3-storage.md
+      - AWS storage: details/s3-storage.md
+      - details/minio.md
       - details/gcs.md
-      - details/filesystem-storage.md
       - details/azure.md
+      - details/oss.md
+      - details/filesystem-storage.md
+      - details/endpoint-map.md
       - features/multi-storage.md
       - features/split-merge-backup.md
   - PBM commands: reference/pbm-commands.md

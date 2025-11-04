@@ -26,6 +26,20 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
               secret-access-key: <your-secret-key-here>
         ```    
 
+    === ":simple-minio: S3-compatible (MinIO)"    
+
+        ```yaml
+        storage:
+          type: minio
+          minio:
+            endpoint: minio.example.com:9000
+            bucket: pbm-test-bucket
+            prefix: data/pbm/backup
+            credentials:
+              access-key-id: <your-access-key-id-here>
+              secret-access-key: <your-secret-key-here>
+        ```    
+
     === ":material-google-cloud: GCS (SA)"    
 
         ```yaml
@@ -40,7 +54,7 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
                privateKey: <your-service-account-private-key-here>
         ```
 
-    === ":material-google-cloud: GCS (HMAC)"    
+    === ":material-google-cloud: GCS (HMAC) (deprecated)"    
    
         ```yaml
         storage:
@@ -65,6 +79,20 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
             credentials:
               key: <your-access-key>
         ```    
+
+    === "Alibaba Cloud Storage"
+
+        ```yaml
+        storage:
+        type: oss
+        oss:
+          region: eu-central-1
+          bucket: your-bucket-name
+          endpointUrl: https://oss-eu-central-1.aliyuncs.com
+          credentials:
+            accessKeyID: "STS.****************"
+            accessKeySecret:  "3dZn*******************************************"
+        ```
 
     === ":material-file-tree: Shared local filesystem"    
 
