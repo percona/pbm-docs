@@ -80,6 +80,20 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
               key: <your-access-key>
         ```    
 
+    === "Alibaba Cloud Storage"
+
+        ```yaml
+        storage:
+        type: oss
+        oss:
+          region: eu-central-1
+          bucket: your-bucket-name
+          endpointUrl: https://oss-eu-central-1.aliyuncs.com
+          credentials:
+            accessKeyID: "STS.****************"
+            accessKeySecret:  "3dZn*******************************************"
+        ```
+
     === ":material-file-tree: Shared local filesystem"    
 
         ```yaml

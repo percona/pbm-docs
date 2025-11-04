@@ -17,6 +17,7 @@ Percona Backup for MongoDB supports the following storage types:
 * [MinIO and S3-compatible storage](minio.md)
 * [Filesystem server storage](filesystem-storage.md)
 * [Microsoft Azure Blob storage](azure.md)
+* [Alibaba Cloud OSS storage](oss.md)
 
 ## How PBM organizes backups on the storage
 
@@ -76,5 +77,6 @@ Please refer to the documentation of your selected storage for the data access m
     * Google Cloud Storage documentation: [Overview of access control :octicons-link-external-16:](https://cloud.google.com/storage/docs/access-control)
     * Microsoft Azure documentation: [Assign an Azure role for access to blob data :octicons-link-external-16:](https://docs.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal)
     * MinIO documentation: [Policy Management :octicons-link-external-16:](https://docs.min.io/minio/baremetal/security/minio-identity-management/policy-based-access-control.html)
+    * Alibaba Cloud documentation: [Permissions and access control :octicons-link-external-16:](https://www.alibabacloud.com/help/en/oss/user-guide/permissions-and-access-control)
 
 *[AWS KMS]: Amazon Web Services Key Management Service
