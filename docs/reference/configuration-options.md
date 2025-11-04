@@ -7,9 +7,9 @@
 *Type*: string <br>
 *Required*:     YES   
 
-Remote backup storage type. Supported values: `s3`, `filesystem`, `azure`.
+Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
 
-## S3 type storage options
+## AWS S3 storage options
 
 ```yaml
 storage:
@@ -64,7 +64,7 @@ The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.a
 *Required*: YES (for AWS)
 
 The location of the storage bucket.
-Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) and [GCS region list](https://cloud.google.com/storage/docs/locations) to define the bucket region
+Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region)  to define the bucket region
 
 ### storage.s3.prefix
 
@@ -85,7 +85,7 @@ The URL to access the bucket.
 *Type*: array of strings <br>
 *Required*: NO
 
-The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/s3-storage.md#multiple-endpoints-to-the-same-s3-storage) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
 
 ### storage.s3.forcePathStyle
 
@@ -255,6 +255,158 @@ The maximum time to wait before the next retry, specified as a *time.Duration*. 
 
 The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
+## MinIO type storage options
+
+You can use this storage type for other S3-compatible storage services
+
+```yaml
+storage:
+  type: minio
+  minio:
+    region: <string>
+    bucket: <string>
+    prefix: <string>
+    endpoint: <string>
+    endpointMap: 
+      "node01:2017": <string>
+      "node02:2017": <string>
+    secure: false
+    insecureSkipTLSVerify: false
+    forcePathStyle: false
+    credentials:
+      access-key-id: <string>
+      secret-access-key: <string>
+      session-token: <string>
+      signature-ver: V4
+    partSize: 10485760 (10 MB)
+    retryer:
+      numMaxRetries: 10
+    maxObjSizeGB: 5018
+    debugTrace: false 
+```
+
+### storage.minio.region
+
+*Type*: string <br>
+*Required*: NO
+
+The location of the storage bucket. Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) to define the bucket region. If not specified, the default `us-east-1` region is used.
+
+### storage.minio.bucket
+
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) for bucket name requirements.
+
+### storage.minio.prefix
+
+
+*Type*: string <br>
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.
+
+### storage.minio.endpoint
+
+*Type*: string <br>
+*Required*: YES
+
+The network address (URL or IP:port) where your MinIO server is accessible.
+
+### storage.minio.endpointMap
+
+*Type*: array of strings <br>
+*Required*: NO
+
+A mapping of custom endpoints for `pbm-agents` on different servers to the same MinIO storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](../details/endpoint-map.md) section. Supported for Amazon S3, MinIO, and Microsoft Azure Blob storages. Available with version 2.8.0.
+
+### storage.minio.secure
+
+*Type*: boolean <br>
+*Required*: NO <br>
+*Default*: false
+
+Defines whether to use HTTP or HTTPS protocol for communication between PBM and S3 storage. Default: `false`.
+
+### storage.minio.insecureSkipTLSVerify
+
+*Type*: boolean <br>
+*Required*: NO <br>
+*Default*: false
+
+Disables the TLS verification of the MinIO / S3-compatible storage. This allows Percona Backup for MongoDB to upload data to MinIO / S3-compatible storages that use self-issued TLS certificates. Use it with caution as it might leave a hole for man-in-the-middle attacks.
+
+### storage.minio.forcePathStyle
+
+*Type*: boolean <br>
+*Required*: NO <br>
+*Default*: false
+
+Enforces the use of [path style access](../reference/glossary.md#path-style-access-to-the-storage) to the storage. Default is `false` which means PBM uses the [virtual-hosted-style](../reference/glossary.md#virtual-hosted-style-access) access to the storage
+
+### storage.minio.credentials.access-key-id
+
+*Type*: string<br>
+*Required*: YES
+
+Your access key to the storage bucket.
+
+### storage.minio.credentials.secret-access-key
+
+*Type*: string<br>
+*Required*: YES
+
+The key to sign your programmatic requests to the storage bucket.
+
+### storage.minio.credentials.session-token
+
+*Type*: string<br>
+*Required*: NO
+
+The MinIO session token used to validate the temporary security credentials for accessing the storage.
+
+### storage.minio.credentials.signature-ver
+
+*Type*: string<br>
+*Required*: NO<br>
+*Default*: V4
+
+Specifies the AWS Signature version to use for authentication. Accepted values: `V2`, `V4`. 
+
+Allows using the deprecated AWS Signature version 2 for backward compatibility with storages that don't support Signature version 4. Default: `V4`.
+
+### storage.minio.partSize
+
+*Type*: int<br>
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB.
+
+### storage.minio.retryer.numMaxRetries
+
+*Type*: int<br>
+*Required*: NO<br>
+*Default*: 10
+
+The maximum number of retries to upload data to MinIO / S3-compatible storage. A zero value means no retries will be performed.
+
+### storage.minio.maxObjSizeGB
+
+*Type*: float64<br>
+*Required*: NO<br>
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
+
+### storage.minio.debugTrace
+
+*Type*: boolean<br>
+*Required*: NO
+
+If set to `true`, outputs all http communication trace in PBM log. Default: false.
+
 ## GCS type storage options
 
 ```yaml
@@ -410,6 +562,14 @@ The name of the storage container. See the  [Container names](https://docs.micro
 *Required*: NO
 
 The URL to access the data in Microsoft Azure Blob Storage. The default value is `https://<storage-account>.blob.core.windows.net`.
+
+### storage.azure.endpointUrlMap
+
+*Type*: object (host:port -> endpoint URL) <br>
+*Required*: NO
+
+A mapping of custom endpoint URLs for `pbm-agents` on different servers to the same remote storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same remote storage](../details/endpoint-map.md) section. Available with version 2.8.0.
+
 
 ### storage.azure.prefix
 

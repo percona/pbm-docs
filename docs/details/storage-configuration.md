@@ -8,26 +8,31 @@ The backup storage serves several purposes:
 * Ensures data durability and availability
 * Allows for backup data portability across different environments
 
-Percona Backup for MongoDB (PBM) saves backup data to a designated directory on the backup storage. It can be a specific directory you define for the storage or the root folder. Each backup is prefixed with the UTC starting time for easy identification and consists of:
-
-* A metadata file containing backup information
-* For each replica set:
-
-   - A compressed mongodump archive of all collections
-   - A compressed BSON file containing the oplog entries for the backup period
-
-The oplog entries ensure backup consistency, and the end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.
-
-Using the [`pbm list`](../reference/pbm-commands.md#pbm-list) or [`pbm status`](../reference/pbm-commands.md#pbm-status) commands, you can scan the backup directory to find existing backups, even if you never used PBM on your computer before.
-
 ## Supported storage types
 
 Percona Backup for MongoDB supports the following storage types:
 
-* [S3-compatible storage](s3-storage.md)
+* [Amazon S3](s3-storage.md)
+* [Google Cloud storage](gcs.md)
+* [MinIO and S3-compatible storage](minio.md)
 * [Filesystem server storage](filesystem-storage.md)
 * [Microsoft Azure Blob storage](azure.md)
 
+## How PBM organizes backups on the storage
+
+Percona Backup for MongoDB (PBM) saves backup data to a designated directory on the backup storage. It can be a specific directory you define for the storage or the root folder. 
+
+Each backup is prefixed with the UTC starting time for easy identification and consists of:
+
+* A metadata file containing backup information
+* For each replica set:
+
+  * A compressed mongodump archive of all collections
+  * A compressed BSON file containing the oplog entries for the backup period
+
+The oplog entries ensure backup consistency, and the end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.
+
+Using the [`pbm list`](../reference/pbm-commands.md#pbm-list) or [`pbm status`](../reference/pbm-commands.md#pbm-status) commands, you can scan the backup directory to find existing backups, even if you never used PBM on your computer before.
 
 ## Permissions setup
 
@@ -60,6 +65,8 @@ The following example shows the permissions configuration to the `pbm-testing` b
     ]
 }
 ```
+
+### Storage-specific documentation
 
 Please refer to the documentation of your selected storage for the data access management.
 
