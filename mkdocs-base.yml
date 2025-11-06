@@ -129,7 +129,7 @@ plugins:
     enabled: !ENV [ENABLED_GIT_REVISION_DATE, True]
   git-committers:
     enabled: !ENV [CI, false]
-    repository: percona/psmdb-docs
+    repository: percona/pbm-docs
     branch: "main"
   tags: {}
   glightbox: {}
