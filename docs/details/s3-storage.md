@@ -150,8 +150,6 @@ retryer:
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
-<<<<<<< HEAD
-=======
 ## Data upload to storage with self-signed TLS certificates
 
 Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don't use certificates signed by public Certificate Authorities (CAs).
@@ -203,6 +201,4 @@ pbm config --set storage.s3.insecureSkipTLSVerify=True
 !!! warning 
 
     Use this option with caution as it might leave a hole for man-in-the-middle attacks.
->>>>>>> Removed prompt sign from code blocks
-
 
