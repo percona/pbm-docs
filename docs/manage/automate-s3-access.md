@@ -81,7 +81,7 @@ You can configure Percona Backup for MongoDB to assume an IAM role. To make this
     export AWS_SESSION_NAME=pbm-session-$(hostname)
     ```
 
-4.  In the [PBM in a config file](../install/backup-storage.md) provide remote storage information, but leave the `s3.credentials` section empty. PBM will use the assumed role's credentials.
+4.  In the [PBM configuration](../install/backup-storage.md) provide remote storage information, but leave the `s3.credentials` section empty. PBM will use the assumed role's credentials.
 
     ```yaml
     storage:
