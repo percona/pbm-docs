@@ -161,6 +161,9 @@ aws iam create-policy --policy-name pbm-s3-access-policy --policy-document file:
 This role will be assumed by the Kubernetes service account used by your PBM pods.
 
 First, create a trust policy JSON file (e.g., `pbm-trust-policy.json`). This policy allows your Kubernetes service account to assume the role. Replace `<account-id>`, `<region>`, and `<oidc-id>` with your AWS account ID, EKS cluster region, and the OIDC ID from step 1.
+
+> **Note:** The OIDC ID is the unique identifier at the end of the OIDC issuer URL returned in step 1. For example, if the issuer URL is `https://oidc.eks.us-west-2.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE`, then the OIDC ID is `EXAMPLED539D4633E53DE1B71EXAMPLE`.
+
 ```json
 {
   "Version": "2012-10-17",
