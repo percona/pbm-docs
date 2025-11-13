@@ -28,7 +28,7 @@ You can configure Percona Backup for MongoDB to assume an IAM role. To make this
 
     *   **Trust Policy**: The trust policy of the target role must allow the EC2 instance's role to assume it.
 
-        For example, if your EC2 instance role is `arn:aws:iam::EC2_ACCOUNT_ID:role/pbm-target-role`, use the following trust policy for your target role:
+        For example, if your EC2 instance role is `arn:aws:iam::EC2_ACCOUNT_ID:role/pbm-ec2-instance-role`, use the following trust policy for your target role:
 
         ```json
         {
@@ -37,14 +37,14 @@ You can configure Percona Backup for MongoDB to assume an IAM role. To make this
                 {
                     "Effect": "Allow",
                     "Principal": {
-                        "AWS": "arn:aws:iam::EC2_ACCOUNT_ID:role/pbm-target-role"
+                        "AWS": "arn:aws:iam::EC2_ACCOUNT_ID:role/pbm-ec2-instance-role"
                     },
                     "Action": "sts:AssumeRole"
                 }
             ]
         }
         ```
-        > Remember to replace `EC2_ACCOUNT_ID` and `pbm-target-role` with the account ID and role name of your EC2 instance.
+        > Remember to replace `EC2_ACCOUNT_ID` and `pbm-ec2-instance-role` with the account ID and role name of your EC2 instance.
 
     *   **Permissions Policy**: The target role must have a permissions policy attached that grants the necessary S3 access for PBM.
 
