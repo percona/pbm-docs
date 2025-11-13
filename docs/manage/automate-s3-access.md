@@ -223,7 +223,7 @@ Your storage configuration should look like this:
 storage:
   type: s3
   s3:
-   region: <your-S3-region>
+   region: <your-s3-region>
    bucket: <your-pbm-bucket>
 ```
 
