@@ -74,10 +74,12 @@ extra_css:
   - css/mongodb.css
   - css/landing.css
   - css/nocopy.css
+  - css/rating.css
 
 extra_javascript:
   - js/promptremover.js
   - js/consent.js
+  - js/rating.js
 
 markdown_extensions:
   abbr: {}
