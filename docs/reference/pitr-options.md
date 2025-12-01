@@ -8,9 +8,9 @@ pitr:
   compressionLevel: <int>
   oplogOnly: <boolean>
   priority: 
-    - "rs1:27017": 1
-    - "rs2:27018": 2
-    - "rs3:27019": 1
+    "rs1:27017": 1
+    "rs2:27018": 2
+    "rs3:27019": 1 
 ```
 
 ### pitr.enabled
