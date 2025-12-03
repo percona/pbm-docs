@@ -33,6 +33,11 @@ After you [restored a physical backup](restore.md), do the following:
     ```bash
     pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
     ```
+    
+   !!! note ""
+
+         Another possibility is using MongoDB’s (epoch, ordinal) values directly.
+         For example, it is possible to use `pbm oplog-replay --end “1764576382,0”` or `--end “1764576382,100”` so it’s possible to specify up to the exact operation you need to apply in the oplog.
 
 4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
 
