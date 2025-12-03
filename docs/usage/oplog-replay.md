@@ -20,10 +20,10 @@ PBM uses MongoDB's timestamp format for oplog replay, which provides operation-l
 You can define the oplog replay stop point in two ways:
 
 1. **By ISO timestamp**:  
-   Specify an end time as an ISO timestamp (for example, `2025-01-02T15:00:00`). PBM converts this to `(epoch, 0)` and includes that operation. Use this method for convenience when the first operation within a specific second is sufficient.
+   Specify an end time as an ISO timestamp (for example, `2025-01-02T15:00:00`). PBM converts this to `(epoch, 0)` and includes all oplog operations within that second. Use this method when you want to include all operations that occurred until the specified second.
 
 2. **By MongoDB timestamp tuple**:  
-   Specify the stop point as `epoch,ordinal` (e.g., `1764576382,20`). PBM includes all operations up to that exact operation. Use this method when you need precise control over which specific operations within a second to include. This is especially useful when multiple operations occurred at the same time.
+   Specify the stop point as `epoch,ordinal` (e.g., `1764576382,20`). PBM includes all operations up to that exact operation. Use this method when you need precise control over which specific operations within a second to include. 
 
 ## Oplog replay for physical backups
 
