@@ -13,13 +13,25 @@ By replaying these oplog slices on top of the backup snapshot with the [`pbm opl
 
     Use the oplog replay functionality with caution, only when you are sure about the starting time from which to replay oplog. The oplog replay does not guarantee data consistency when restoring from any backup. However, it is less error-prone for backups made with Percona Backup for MongoDB.
 
+## Ways to specify time for oplog replay
+
+PBM uses MongoDB's timestamp format for oplog replay, which provides operation-level resolution. Each oplog operation is identified by `(epoch, ordinal)`, where `epoch` is the Unix time in seconds and `ordinal` distinguishes multiple operations within the same second. The specified operation is always included in the replay.
+
+You can define the oplog replay stop point in two ways:
+
+1. **By ISO timestamp**:  
+   Specify an end time as an ISO timestamp (for example, `2025-01-02T15:00:00`). PBM converts this to `(epoch, 0)` and includes that operation. Use this method for convenience when the first operation within a specific second is sufficient.
+
+2. **By MongoDB timestamp tuple**:  
+   Specify the stop point as `epoch,ordinal` (e.g., `1764576382,20`). PBM includes all operations up to that exact operation. Use this method when you need precise control over which specific operations within a second to include. This is especially useful when multiple operations occurred at the same time.
+
 ## Oplog replay for physical backups
 
 !!! note ""
 
     Starting with version 2.2.0, oplog replay on top of a physical backups made with Percona Backup for MongoDB is done automatically as part of [point-in-time recovery](pitr-physical.md). 
 
-This section describes how to manually replay oplog on top of physical backups with Percona Backup for MongoDB version 2.1.0 and earlier.
+This section describes how to **manually** replay oplog on top of physical backups made with Percona Backup for MongoDB version 2.1.0 and earlier.
 
 After you [restored a physical backup](restore.md), do the following:
 
@@ -27,17 +39,21 @@ After you [restored a physical backup](restore.md), do the following:
 
 2. Run `pbm status` or `pbm list` commands to find oplog chunks available for replay.
 
+3. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags. See [how you can specify the time](#ways-to-specify-time-for-oplog-replay).
 
-3. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps.
+    === "Use timestamp"
 
-    ```bash
-    pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
-    ```
+        ```bash
+        pbm oplog-replay --start="{{year}}-01-02T15:00:00" --end="{{year}}-01-03T15:00:00"
+        ```
     
-   !!! note ""
+    === "Use `epoch,ordinal`"
 
-         Another possibility is to use MongoDB’s (epoch, ordinal) values directly. This enables you to replay oplog up to a specific operation. 
-         For example, it is possible to use `pbm oplog-replay --end “1764576382,0”` or `--end “1764576382,100”` so it’s possible to specify up to the exact operation you need to apply in the oplog.
+        For a fine-grained precision which exactly operations within a second to include, specify the values for the `--start` and `--end` flags as `epoch,ordinal` tuples.
+
+        ```bash
+        pbm oplog-replay --end “1764576382,100”
+        ``` 
 
 4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
 
