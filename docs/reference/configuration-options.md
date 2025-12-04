@@ -539,6 +539,13 @@ Available starting with version 2.12.0.
 
 The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
+### storage.gcs.debugTrace
+
+*Type*: boolean
+*Required*: NO
+
+When set to `true`, activates detailed logging of HTTP requests and responses between PBM and GCS. 
+
 ## Filesystem storage options
 
 ```yaml
