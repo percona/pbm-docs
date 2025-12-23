@@ -10,7 +10,10 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem o
 
 !!! info
 
-    Each PBM agent connects to its local node, so do these steps on a primary node of each replica set. In a sharded cluster, this means on every shard replica set and the config server replica set as well.
+    Each PBM agent connects to its local node. To configure authentication, create the required user and role **on the primary node** of each replica set. 
+
+    - For a standalone replica set, perform these steps on its primary node.
+    - For a sharded cluster, perform these steps on the primary node of every shard replica set, as well as on the config server replica set.
     
 1. Create the role that allows any action on any resource.
 
@@ -40,12 +43,12 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem o
          });
      ```
 
-You can specify the `username` and `password` values and other options of the `createUser` command as you require so long as the roles shown above are granted.
+You can change the `username` and `password` values and specify other options for the `createUser` command as you require. But you must grant this user the roles as shown above.
 
 
 !!! tip
 
-    To list all the host+port lists for the shard replica sets in a cluster, run the following command:
+    To view all the host+port lists for the shard replica sets in a cluster, run the following command:
 
     ```javascript
     db.getSiblingDB("config").shards.find({}, {host: true, _id: false})
@@ -54,10 +57,10 @@ You can specify the `username` and `password` values and other options of the `c
 ## Set the MongoDB connection URI for `pbm-agent`
 
 !!! info 
-
+    
     Execute this step on each node where `pbm-agent` is installed.
 
-The `pbm-agent.service` systemd unit file includes the location of the environment file. You set the MongoDB URI connection string for the `PBM_MONGODB_URI` variable within the environment file for every **pbm-agent**. 
+The `pbm-agent.service` systemd unit file includes the location of the environment file. You set the MongoDB URI connection string for the `PBM_MONGODB_URI` variable within the environment file for every `pbm-agent`. 
 
 ??? tip "How to find the environment file"
 
@@ -86,31 +89,35 @@ The `pbm-agent.service` systemd unit file includes the location of the environme
    
 === ":material-debian: On Debian and Ubuntu"    
 
-    Edit the environment file `/etc/default/pbm-agent` and specify the MongoDB connection URI string using the `pbm` user making sure to connect to the local `mongod` node only.
-
-    For example, if `mongod` process listens on port 27017, the MongoDB connection URI string for PBM agent will be the following:
+    Edit the environment file `/etc/default/pbm-agent`. Specify the MongoDB connection URI string using the credentials of the `pbm` user you created previously. Ensure that the pbm-agent connects only to its local mongod node by providing the URI in the following format:
 
     ```
     PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
+
+    * Replace <pbmuser:secretpwd> with the actual credentials you assigned to the pbm user.
+    * `localhost:27017` ensures the agent connects only to the local `mongod` instance.
+    * `authSource=admin` points authentication to the `admin` database, where the pbm user was created.
 
 === ":material-redhat: On Red Hat Enterprise Linux and derivatives"
 
-    Edit the environment file `/etc/sysconfig/pbm-agent` and specify the MongoDB connection URI string using the `pbm` user making sure to connect to the local `mongod` node only.
-
-    For example, if `mongod` process listens on port 27017, the MongoDB connection URI string for PBM agent will be the following:
+    Edit the environment file `/etc/sysconfig/pbm-agent` Specify the MongoDB connection URI string using the credentials of the `pbm` user you created previously. Ensure that the pbm-agent connects only to its local mongod node by providing the URI in the following format:
 
     ```
     PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin"
     ```
+
+    * Replace <pbmuser:secretpwd> with the actual credentials you assigned to the pbm user.
+    * `localhost:27017` ensures the agent connects only to the local `mongod` instance.
+    * `authSource=admin` points authentication to the `admin` database, where the pbm user was created.
 
 To improve the security of the file, you can change its owner to the user that is configured in systemd, and set the file permission so that only the owner and root can read from it. 
 
 !!! important
 
-    Each **pbm-agent** process needs to connect to its localhost `mongod` node with a standalone type of connection. Avoid using the replica set URI with **pbm-agent** as it can lead to unexpected behaviour.
+    Each **pbm-agent** process needs to connect to its localhost `mongod` node with a standalone type of connection. Avoid using the replica set URI with **pbm-agent** as it can lead to an unexpected behavior.
     
-    For sharded clusters, **pbm-agent** on each shard member also needs to be able to reach the config server replica set over the network. The agent auto-discovers the config servers URI by querying the `db.system.version` collection. 
+    For sharded clusters, **pbm-agent** on each shard member also needs to be able to reach the config server replica set over the network. The agent auto-discovers the config server's URI by querying the `db.system.version` collection. 
 
     Note that the MongoDB connection URI for `pbm-agent` is different from the connection string required by pbm CLI.
     
@@ -130,7 +137,7 @@ PBM_MONGODB_URI="mongodb://pbmuser:secret%23pwd@localhost:27017/?authSource=admi
 
 Set the MongoDB URI connection string for `pbm` CLI as an environment variable in your shell. This allows you to run `pbm` commands without specifying the `--mongodb-uri` flag each time.
 
-=== "Replica Sets"
+=== "Replica set"
    
     In a non-sharded replica set, point PBM CLI to the replica set. The following command is the example how to define the MongoDB URI connection string for a replica set with the replica set members `mongors1:27017`, `mongors2:27017` and `mongors3:27017`:
 
@@ -138,7 +145,7 @@ Set the MongoDB URI connection string for `pbm` CLI as an environment variable i
     export PBM_MONGODB_URI="mongodb://pbmuser:secretpwd@mongors1:27017,mongors2:27017,mongors3:27017/?authSource=admin&replSetName=xxxx"
     ```
     
-=== "Sharded Clusters"
+=== "Sharded clusters"
 
     In a sharded cluster, point PBM CLI to the config server replica set. The following command is the example how to define the MongoDB URI connection string for a sharded cluster with the config servers `mongocfg1:27017`, `mongocfg2:27017` and `mongocfg3:27017`:
     
