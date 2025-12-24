@@ -9,7 +9,6 @@ This document provides overview for the native AWS S3 services. To use MinIO and
 
 [Configuration example :material-arrow-down:](#configuration-example){.md-button}
 
-
 ## Storage bucket creation
 
 To create a bucket, do the following.
