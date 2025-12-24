@@ -234,7 +234,7 @@ nav:
         - Backup management via PMM: pmm.md
   - Storage:
       - Remote backup storage overview: details/storage-configuration.md
-      - AWS storage: details/s3-storage.md
+      - AWS S3 storage: details/s3-storage.md
       - details/minio.md
       - details/gcs.md
       - details/azure.md
