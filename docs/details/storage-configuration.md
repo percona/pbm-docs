@@ -23,8 +23,8 @@ Percona Backup for MongoDB supports the following storage types:
 
 When configuring Percona Backup for MongoDB, choose the storage type based on your storage service:
 
-* **AWS S3**: Use the `s3` storage type for native Amazon S3 storage. Also, use the `s3` storage type for s3-compatible storage services that support Signature Version 4 (SigV4) used in AWS SDK v2.
-* **S3-compatible storage**: Try the `s3` storage type first. If you encounter upload or download errors in the PBM logs, switch to the `minio` storage type.
+* **AWS S3**: Use the `s3` storage type for native Amazon S3 storage.
+* **S3-compatible storage**: For S3-compatible storage services that support Signature Version 4 (SigV4) used in AWS SDK v2, use the `s3` storage type. If you encounter upload or download errors in the PBM logs, switch to the `minio` storage type.
 * **Google Cloud Storage**: Always use the dedicated `gcs` storage type. See [Google Cloud Storage](gcs.md) for configuration details.
 
 ## How PBM organizes backups on the storage
