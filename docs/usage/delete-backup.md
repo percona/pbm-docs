@@ -20,6 +20,14 @@ During the cleanup, you see the backups and oplog slices to be deleted and are a
 pbm cleanup --older-than=`%Y-%M-%D --yes
 ```
 
+Starting with version 2.13.0, you can clean up backups from [external storages](../features/multi-storage.md) by specifying the `--profile` flag:
+
+```bash
+pbm cleanup --older-than 30d --profile=minio --yes
+```
+
+When you run cleanup on the main storage, PBM automatically updates the metadata without requiring a manual resync.
+
 ### Behavior
 
 The timestamp you specify is considered to be the time to which you would wish to restore. Therefore, PBM doesn’t delete all backup snapshots and oplog slices that could be used to restore to this time.
@@ -137,7 +145,7 @@ Here's how the cleanup works:
 
 ### Behavior
 
-You can delete either a specified backup snapshot or all backup snapshots older than the specified time. Starting with version 2.0.0, you can also delete [selective backups](../features/selective-backup.md). 
+You can delete either a specified backup snapshot or all backup snapshots older than the specified time. Starting with version 2.0.0, you can also delete [selective backups](../features/selective-backup.md). Starting with version 2.13.0, you can delete backup snapshots older than the specified time from external storages.
 
 === "Specified backup"
 
@@ -149,7 +157,9 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 
 === "Backups older than the specified time"
     
-    To delete backups that were created before the specified time, pass the `--older-than` flag to the `pbm delete-backup` command. Specify the timestamp as an argument for `pbm delete-backup` in the following format:
+    To delete backups that were created before the specified time, pass the `--older-than` flag to the `pbm delete-backup` command. Include the `--profile` flag to delete backups from an [external storage](../features/multi-storage.md). 
+    
+    Specify the timestamp as an argument for `pbm delete-backup` in the following format:
 
     * `%Y-%M-%DT%H:%M:%S` (for example, 2021-04-20T13:13:20Z) or
     * `%Y-%M-%D` (2021-04-20).
@@ -185,6 +195,14 @@ You can delete either a specified backup snapshot or all backup snapshots older 
           2021-04-21T02:16:33Z
         ```
 
+    To delete backups created before the specified time from external storages, use the `--older-than` and the `--profile` flags:
+
+    ```bash
+    pbm delete-backup --older-than 30d --profile=minio --yes
+    ```
+
+    Read more about deleting backups from external storages in the [Delete backups from external storages](../features/multi-storage.md#delete-backups) section.
+
 
 === "Specific types of backups"
 
@@ -212,8 +230,8 @@ You can delete either a specified backup snapshot or all backup snapshots older 
 
     You wish to delete all physical backups that are older than 10:00 a.m.
 
-    ```
-    $ pbm delete-backup --older-than="2024-02-26T10:00:00" -t physical -y
+    ```bash
+    pbm delete-backup --older-than="2024-02-26T10:00:00" -t physical -y
     ```
 
     There are two physical backup snapshots, but only `2024-02-26T09:56:18Z 961.68MB <physical> [restore_to_time: 2024-02-26T09:56:20Z]` snapshot passes in the specified timestamp. Therefore, PBM deletes this one only:
@@ -240,6 +258,13 @@ You can delete either a specified backup snapshot or all backup snapshots older 
             2024-02-26T08:43:48Z - 2024-02-26T10:17:21Z
         ```
 
+    To delete backups of the specified type from an external storage, add the `--profile` flag:
+    
+    ```bash
+    pbm delete-backup --older-than="2024-02-26T10:00:00" -t physical  --profile=minio -y
+    ```
+
+
 By default, the ``pbm delete-backup`` command asks for your confirmation to proceed with the deletion. To bypass it, add the `-y` or
  `--yes` flag.
 
@@ -247,13 +272,7 @@ By default, the ``pbm delete-backup`` command asks for your confirmation to proc
  pbm delete-backup --yes 2023-04-20T13:45:59Z
  ```
 
-!!! admonition ""
 
-    For Percona Backup for MongoDB 1.5.0 and earlier versions, when you delete a backup, all oplog slices that relate to this backup are deleted too. For example, you delete a backup snapshot `2020-07-24T18:13:09` while there is another snapshot `2020-08-05T04:27:55` created after it.  The **pbm-agent** deletes only oplog slices that relate to `2020-07-24T18:13:09`.
-
-    The same applies if you delete backups older than the specified time.
-
-    Note that when point-in-time recovery is enabled, the most recent backup snapshot and oplog slices that relate to it are not deleted.
 
 ## Delete oplog slices
 
