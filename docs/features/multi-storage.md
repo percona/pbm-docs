@@ -118,13 +118,13 @@ You can delete backups from an external storage by name or by specifying a time 
 === "Delete backups older than specified time"
 
     Starting with version [2.13.0](../release-notes/2.13.0.md), you can delete backups that are older than a specified time from external storages. Use the `--older-than` flag to set the retention period, and include the `--profile` flag to define the target storage. 
-	The `--profile` flag works only with the `--older-than` flag. If you pass it with the backup name, PBM fails the delete operation and reports an error.
+    The `--profile` flag works only with the `--older-than` flag. If you pass it with the backup name, PBM fails the delete operation and reports an error.
 
-	You can use either the `pbm delete-backup` command to include only backups, or `pbm cleanup` command to also include point-in-time recovery oplog slices:
+    You can use either the `pbm delete-backup` command to include only backups, or `pbm cleanup` command to also include point-in-time recovery oplog slices:
 
     Example of the `pbm delete-backup` command:
 	
-	```bash
+    ```bash
     pbm delete-backup --older-than 30d --profile=minio -y
     ```
 
