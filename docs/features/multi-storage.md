@@ -123,7 +123,7 @@ You can delete backups from an external storage by name or by specifying a time 
     You can use either the `pbm delete-backup` command to include only backups, or `pbm cleanup` command to also include point-in-time recovery oplog slices:
 
     Example of the `pbm delete-backup` command:
-	
+    
     ```bash
     pbm delete-backup --older-than 30d --profile=minio -y
     ```
