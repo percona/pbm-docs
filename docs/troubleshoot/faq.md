@@ -36,7 +36,13 @@ Yes. The preconditions for both Point-in-Time Recovery restore and regular resto
 2. Make sure no writes are made to the database during restore. This ensures data consistency.
 
 
-3. Disable Point-in-Time Recovery if it is enabled. This is because oplog slicing and restore are exclusive operations and cannot be run together. Note that oplog slices made after the restore and before the next backup snapshot become invalid. Make a fresh backup and re-enable Point-in-Time Recovery.
+## Why did my physical backup fail with Location50917 error?
+
+Starting with version 2.13.0, Percona Backup for MongoDB automatically retries physical backup operations when encountering the `Location50917` error. This error can occur during `$backupCursor` operations due to transient conditions such as concurrent operations or temporary resource conflicts.
+
+PBM automatically retries the backup operation up to 10 times with exponential backoff when this error occurs. In most cases, the backup will succeed on a subsequent retry attempt without requiring manual intervention.
+
+If your backup continues to fail after automatic retries, check the `pbm logs` output for additional error details and ensure that your MongoDB nodes have sufficient resources and are not experiencing ongoing conflicts.
 
 ## Can I install PBM on MacBook?
 

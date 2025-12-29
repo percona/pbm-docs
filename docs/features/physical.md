@@ -12,25 +12,9 @@
     | [2.3.0](../release-notes/2.3.0.md)   | Physical backups in mixed deployments |
     | [2.10.0](../release-notes/2.10.0.md) | Physical restore with a fallback directory | 
 
-## Availability and system requirements
+**Physical backup** is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Percona Backup for MongoDB also copies the WiredTiger storage options to the backup's metadata. 
 
-*  Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
-* WiredTiger is used as the storage engine in Percona Server for MongoDB, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) functionality.
-
-!!! warning 
-
-    During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant file growth.
-    
-!!! admonition "See also"
-
-    Percona Blog
-
-    * [Physical Backup Support in Percona Backup for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/physical-backup-support-in-percona-backup-for-mongodb/)
-    * [$backupCursorExtend in Percona Server for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/2021/06/07/experimental-feature-backupcursorextend-in-percona-server-for-mongodb/)
-
-Physical backup is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0.0, Percona Backup for MongoDB also copies the WiredTiger storage options to the backup's metadata. 
-
-Physical restore is the reverse process: `pbm-agents` shut down the `mongod` nodes, clean up the `dbPath` data directory and copy the physical files from the storage to it. 
+**Physical restore** is the reverse process: `pbm-agents` shut down the `mongod` nodes, clean up the `dbPath` data directory and copy the physical files from the storage to it. 
 
 The following diagram shows the physical restore flow:
 
@@ -43,6 +27,22 @@ During physical backups and restores, ``pbm-agents`` don't export / import data 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
 |- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point-in-time recovery requires manual operations | Sharded clusters and non-sharded replica sets |
+
+## Availability and system requirements
+
+* Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
+* WiredTiger is used as the storage engine in Percona Server for MongoDB, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) functionality.
+
+!!! warning 
+
+    During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant file growth.
+    
+!!! admonition "See also"
+
+    Percona Blog
+
+    * [Physical Backup Support in Percona Backup for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/physical-backup-support-in-percona-backup-for-mongodb/)
+    * [$backupCursorExtend in Percona Server for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/2021/06/07/experimental-feature-backupcursorextend-in-percona-server-for-mongodb/)
 
 [Make a backup](../usage/backup-physical.md){ .md-button }
 [Restore a backup](../usage/restore-physical.md){ .md-button }
