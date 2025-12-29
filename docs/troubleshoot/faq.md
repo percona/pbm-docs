@@ -40,7 +40,7 @@ Yes. The preconditions for both Point-in-Time Recovery restore and regular resto
 
 Starting with version 2.13.0, Percona Backup for MongoDB automatically retries physical backup operations when encountering the `Location50917` error. This error can occur during `$backupCursor` operations due to transient conditions such as concurrent operations or temporary resource conflicts.
 
-PBM automatically retries the backup operation up to 10 times with exponential backoff when this error occurs. In most cases, the backup will succeed on a subsequent retry attempt without requiring manual intervention.
+PBM automatically retries the backup operation up to 10 times with linear backoff when this error occurs. In most cases, the backup will succeed on a subsequent retry attempt without requiring manual intervention.
 
 If your backup continues to fail after automatic retries, check the `pbm logs` output for additional error details and ensure that your MongoDB nodes have sufficient resources and are not experiencing ongoing conflicts.
 
