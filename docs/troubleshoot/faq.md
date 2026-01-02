@@ -36,13 +36,34 @@ Yes. The preconditions for both Point-in-Time Recovery restore and regular resto
 2. Make sure no writes are made to the database during restore. This ensures data consistency.
 
 
-## Why did my physical backup fail with Location50917 error?
+## Why did my physical backup fail with Location50917 or Location50915 errors?
 
-Starting with version 2.13.0, Percona Backup for MongoDB automatically retries physical backup operations when encountering the `Location50917` error. This error can occur during `$backupCursor` operations due to transient conditions such as concurrent operations or temporary resource conflicts.
+Both `Location50917` and `Location50915` errors happen when Percona Backup for MongoDB attempts to open a `$backupCursor` during WiredTiger checkpoint operations. 
 
-PBM automatically retries the backup operation up to 10 times with linear backoff when this error occurs. In most cases, the backup will succeed on a subsequent retry attempt without requiring manual intervention.
+**Location50917** error occurs when opening a backup cursor conflicts with an active checkpoint operation
+**Location50915** is a similar timing conflict related to checkpoint operations during backup cursor initialization
 
-If your backup continues to fail after automatic retries, check the `pbm logs` output for additional error details and ensure that your MongoDB nodes have sufficient resources and are not experiencing ongoing conflicts.
+These errors typically happen in environments with:
+
+* High write workloads that trigger frequent checkpoint operations
+* Multiple concurrent backup operations
+* Database nodes under heavy load
+* Active checkpoint operations during backup initialization
+
+The errors are transient and typically resolve themselves once the checkpoint operation completes. Starting with version 2.13.0, Percona Backup for MongoDB automatically retries opening the backup cursor when encountering these errors. 
+
+PBM automatically retries the backup operation up to 10 times with linear backoff. In most cases, the backup will succeed on a subsequent retry attempt without 
+requiring manual intervention.
+
+If your backup continues to fail after automatic retries, do the following: 
+
+1. Check the `pbm logs` output for detailed error information and retry attempts
+2. Verify that your MongoDB nodes have sufficient resources (CPU, memory, disk I/O)
+3. Ensure there are no ongoing conflicts or resource contention
+4. Consider scheduling backups during periods of lower database activity if the issue persists
+5. Review checkpoint frequency settings if checkpoints are occurring excessively
+
+
 
 ## Can I install PBM on MacBook?
 
