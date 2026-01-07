@@ -328,6 +328,6 @@ nav:
   - Reference:
       - "About Percona Backup for MongoDB documentation": about-docs.md
       - reference/glossary.md
-      - reference/contributing.md
+      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md'
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md
