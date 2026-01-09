@@ -51,9 +51,13 @@
 
     During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
 
-    You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
+3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
-    A restore has the `Done` status when it succeeded on all nodes. If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. For either status, proceed with the [post-restore steps](#post-restore-steps). Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
+A restore has the `Done` status when it succeeded on all nodes. 
+
+If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
+
+For either status, proceed with the [post-restore steps](#post-restore-steps). 
 
 ### Post-restore steps
 
