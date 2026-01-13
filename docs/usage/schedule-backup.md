@@ -92,8 +92,17 @@ You can configure a `cron` task to automate storage cleanup by specifying the fo
 /usr/bin/pbm cleanup -y --older-than 30d --wait
 ``` 
 
-This command deletes backups and oplog slices that are older than 30 days. You can change the period by specifying a desired interval for the `--older-than` flag. 
+This command deletes backups and oplog slices that are older than 30 days. PBM automatically updates the metadata without requiring a manual resync, simplifying automation workflows.
 
+You can change the period by specifying a desired interval for the `--older-than` flag.
+
+Starting with version 2.13.0, you can also clean up backups from [external storages](../features/multi-storage.md) by specifying both the `--older-than` and the `--profile` flags:
+
+```bash
+/usr/bin/pbm cleanup -y --older-than 30d --profile=minio --wait
+```
+
+This approach streamlines your retention policy across multiple storages and reduces operational overhead, eliminating the need for custom cleanup scripts.
 
 !!! admonition ""
 
