@@ -6,6 +6,18 @@ This document provides an overview of MinIO as the closest S3-compatible storage
 
 [Configuration example :material-arrow-down:](#configuration-example){.md-button}
 
+## When to use the minio storage type
+
+Use the `minio` storage type in the following scenarios:
+
+* **S3-compatible storage with compatibility issues**: If you're using S3-compatible storage (such as MinIO, Ceph, or other S3 gateways) and encounter upload or download errors when using the `s3` storage type, switch to the `minio` storage type. Check the PBM logs for error messages indicating upload or download failures.
+
+* **S3-compatible storage requiring specific configuration**: Some S3-compatible storage services may require endpoint configuration or other settings that work better with the `minio` storage type.
+
+!!! tip
+
+    For S3-compatible storage, try the `s3` storage type first. Only switch to `minio` if you encounter compatibility issues or errors in the PBM logs.
+
 ## Bucket creation
 
 1. Install a [MinIO client :octicons-link-external-16:](https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc). After the installation, the `mc` is available for you.
