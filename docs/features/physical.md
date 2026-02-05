@@ -14,12 +14,12 @@
 
 ## Availability and system requirements
 
-*  Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
-* WiredTiger is used as the storage engine in Percona Server for MongoDB, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) functionality.
+* Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
+* WiredTiger storage engine, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) functionality.
 
 !!! warning 
 
-    During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant file growth.
+    During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant disk space growth during backup window. This should go back to normal after the backup cursor is closed.
     
 !!! admonition "See also"
 
@@ -28,21 +28,21 @@
     * [Physical Backup Support in Percona Backup for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/physical-backup-support-in-percona-backup-for-mongodb/)
     * [$backupCursorExtend in Percona Server for MongoDB :octicons-link-external-16:](https://www.percona.com/blog/2021/06/07/experimental-feature-backupcursorextend-in-percona-server-for-mongodb/)
 
-Physical backup is copying of physical files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0.0, Percona Backup for MongoDB also copies the WiredTiger storage options to the backup's metadata. 
+Physical backup consists of copying the files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0.0, Percona Backup for MongoDB also saves the WiredTiger storage options to the backup's metadata. 
 
-Physical restore is the reverse process: `pbm-agents` shut down the `mongod` nodes, clean up the `dbPath` data directory and copy the physical files from the storage to it. 
+Physical restore is the reverse process: `pbm-agents` shut down their local `mongod` node, clean up the `dbPath` data directory and copy back the physical files from the backup storage location. 
 
 The following diagram shows the physical restore flow:
 
 ![image](../_images/pbm-phys-restore-shard.png)
 
-During the restore, the ``pbm-agents`` temporarily start the ``mongod`` nodes using the WiredTiger storage options retrieved from the backup's metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore, this file is deleted. However, it remains for debugging if the restore were to fail. 
+During the restore, the ``pbm-agents`` temporarily restart the ``mongod`` nodes two times using the WiredTiger storage options retrieved from the backup's metadata. The logs for these starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore, this file is deleted. However, it is kept for debugging if the restore fails. 
 
-During physical backups and restores, ``pbm-agents`` don't export / import data from / to the database. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (multi-terabyte) databases.
+During physical backups and restores, ``pbm-agents`` don't export / import data from / to the database. This significantly reduces the backup / restore time compared to logical ones and is the recommended backup method for big (> 100 GB) databases.
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
-|- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore <br> - Point-in-time recovery requires manual operations | Sharded clusters and non-sharded replica sets |
+|- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No database overhead | - The backup size is bigger than for logical backups due to data fragmentation extra cost of keeping data and indexes in appropriate data structures <br> - Extra manual operations are required after the restore | Sharded clusters and non-sharded replica sets |
 
 [Make a backup](../usage/backup-physical.md){ .md-button }
 [Restore a backup](../usage/restore-physical.md){ .md-button }
@@ -68,7 +68,7 @@ The physical restore in mixed deployments has no restrictions except the version
 
 !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-You can back up and restore the data encrypted at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
+You can back up and restore data which is encrypted at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
 
 During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. You can verify them using the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup) command. Note that the encryption key is not stored nor shown as part of the backup.
 
@@ -80,7 +80,7 @@ During a backup, Percona Backup for MongoDB stores the encryption settings in th
 
     Starting with [Percona Server for MongoDB version 4.4.19-19 :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/4.4/release_notes/4.4.19-19.html), [5.0.15-13 :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/5.0/release_notes/5.0.15-13.html), [6.0.5-4 :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/release_notes/6.0.5-4.html) and higher, the master key rotation for data-at-rest encrypted with HashiCorp Vault has been improved to use the same secret key path on every server in your entire deployment. For the restore with earlier versions of Percona Server for MongoDB and PBM 2.0.5 and earlier, see the [Restore for Percona Server for MongoDB **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 using HashiCorpVault](#restore-for-percona-server-for-mongodb-before-4419-19-5015-13-605-4-using-hashicorpvault) section.
 
-To restore the encrypted data from the backup, configure the same data-at-rest encryption settings on all nodes of your destination cluster or replica set to match the settings of the original cluster where you made the backup
+To restore the encrypted data from the backup, configure the same data-at-rest encryption settings on all nodes of your destination cluster or replica set to match the settings of the original cluster where you made the backup.
 
 During the restore, Percona Backup for MongoDB restores the data to all nodes using the same master key. We recommend to rotate the master encryption key afterwards for extra security. 
 
@@ -91,7 +91,7 @@ To learn more about master key rotation, refer to the following documentation:
 
 ### Restore for Percona Server for MongoDB **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 using HashiCorpVault
 
-In Percona Server for MongoDB version **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 with the Vault server used for data-at-rest encryption, the master key rotation with the same key used for 2+ nodes is not supported. If you run these versions of Percona Server for MongoDB and PBM before 2.1.0, consider using the scenario where PBM restores the data on one node of every replica set. The remaining nodes receive the data during the initial sync. 
+In Percona Server for MongoDB version **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 with Vault server used for data-at-rest encryption, the master key rotation with the same key used for 2+ nodes is not supported. If you run these versions of Percona Server for MongoDB and PBM before 2.1.0, consider using the scenario where PBM restores the data on one node of every replica set. The remaining nodes receive the data during the initial sync. 
 
 Configure data-at-rest encryption on one node of every shard in your destination cluster or a replica set.
 
@@ -101,21 +101,21 @@ During the restore, Percona Backup for MongoDB restores the data on the node whe
 
 !!! admonition "Version added: [2.10.0](../release-notes/2.10.0.md)"
 
-An unexpected error may occur during the physical restore phase, such as corrupted backup data files, network issues accessing backup storage or unexpected PBM failures. When this happens, the files in the `dbPath` may be left in an inconsistent state and the affected `mongod` instance cannot be restarted. As a result, a replica set or shard in the cluster become non-operational. PBM becomes non-functional too, since it relies on MongoDB as both a communication channel and a metadata store. 
+An unexpected error may occur during the physical restore phase, such as corrupted backup data files, network issues accessing backup storage or unexpected PBM agent failures. When this happens, the files in the `dbPath` may be left in an inconsistent state and the affected `mongod` instance cannot be restarted. As a result, a replica set or shard in the cluster become non-operational. PBM becomes non-functional too, since it relies on MongoDB as both a communication channel and a metadata store. 
 
-To prevent this nasty situation, you can configure PBM to use a fallback directory and revert the cluster to its original state if errors occur during a physical restore. PBM copies the `dbPath` contents to the fallback directory at the restore start. Then the restore flows as usual.
+To prevent this nasty situation, you can configure PBM to use a fallback directory [--fallback-enabled](../reference/pbm-commands.md#pbm-restore) and revert the cluster to its original state if errors occur during a physical restore. PBM copies the `dbPath` contents to the fallback directory at the restore start. Then the restore flows as usual.
 
 If the restore is successful, PBM deletes the fallback directory and its contents. 
 
-If PBM detects that the cluster is in the error state, it automatically triggers the fallback procedure. PBM cleans up the uploaded backup files from the `dbPath` and moves the files from a fallback directory there. This way a cluster returns to the state before the restore and is operational. You can then retry the restore, try another backup or maintain it another way.
+If PBM detects that the cluster is in an error state, it automatically triggers the fallback procedure. PBM cleans up the uploaded backup files from the `dbPath` and moves the files from a fallback directory there. This way a cluster returns to the state before the restore and is operational. You can then retry the same restore or try restoring from a different backup.
 
 !!! warning 
 
-    Note that this functionality comes with a tradeoff: you must have enough disk space on every `mongod` instance to copy the contents of the `dbPath` to the fallback directory. For this reason, fallback directory usage is disabled by default. Read more about disk space requirements in the [Disk space evaluation](#disk-space-evaluation) section.
+    Note that this functionality comes with a tradeoff: you must have enough disk space on every `mongod` instance to copy the contents of the `dbPath` to a fallback directory. For this reason, fallback directory usage is disabled by default. Read more about disk space requirements in the [Disk space evaluation](#disk-space-evaluation) section.
 
 ### Disk space evaluation
 
-Each `mongod` node must have enough free space for PBM to copy the contents of the `dbPath` into the fallback directory. In addition, at least 15% of total disk capacity must remain free after the files copy to ensure operational stability.
+Each `mongod` node must have enough free space for PBM to copy the contents of the `dbPath` into the fallback directory. In addition, at least 15% of total disk capacity must remain free after the backup files are copied back to ensure operational stability.
 
 Before initiating a restore, PBM performs a comprehensive disk space evaluation on every `mongod` instance. This includes:
 
