@@ -15,7 +15,7 @@
 ## Availability and system requirements
 
 * Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
-* WiredTiger storage engine, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/backup-cursor.html) functionality.
+* WiredTiger storage engine, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality.
 
 !!! warning 
 
