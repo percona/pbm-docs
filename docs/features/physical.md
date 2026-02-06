@@ -30,7 +30,7 @@
 
 Physical backup consists of copying the files from the Percona Server for MongoDB `dbPath` data directory to the remote backup storage. These files include data files, journal, index files, etc. Starting with version 2.0.0, Percona Backup for MongoDB also saves the WiredTiger storage options to the backup's metadata. 
 
-Physical restore is the reverse process: `pbm-agents` shut down their local `mongod` node, clean up the `dbPath` data directory and copy back the physical files from the backup storage location. 
+Physical restore is the reverse process:  each `pbm-agent` shuts down their local `mongod` node, cleans up the `dbPath` data directory and copies back the physical files from the backup storage location. 
 
 The following diagram shows the physical restore flow:
 
