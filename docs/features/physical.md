@@ -101,7 +101,7 @@ During the restore, Percona Backup for MongoDB restores the data on the node whe
 
 !!! admonition "Version added: [2.10.0](../release-notes/2.10.0.md)"
 
-An unexpected error may occur during the physical restore phase, such as corrupted backup data files, network issues accessing backup storage or unexpected PBM agent failures. When this happens, the files in the `dbPath` may be left in an inconsistent state and the affected `mongod` instance cannot be restarted. As a result, a replica set or shard in the cluster become non-operational. PBM becomes non-functional too, since it relies on MongoDB as both a communication channel and a metadata store. 
+An unexpected error may occur during the physical restore phase, such as corrupted backup data files, network issues accessing backup storage or unexpected `pbm-agent` failures. When this happens, the files in the `dbPath` may be left in an inconsistent state and the affected `mongod` instance cannot be restarted. As a result, a replica set or shard in the cluster become non-operational. PBM becomes non-functional too, since it relies on MongoDB as both a communication channel and a metadata store. 
 
 To prevent this nasty situation, you can configure PBM to use a fallback directory [--fallback-enabled](../reference/pbm-commands.md#pbm-restore) and revert the cluster to its original state if errors occur during a physical restore. PBM copies the `dbPath` contents to the fallback directory at the restore start. Then the restore flows as usual.
 
