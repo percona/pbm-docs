@@ -30,6 +30,15 @@ Multi-format is the default data format for both full and selective backups sinc
 
 Percona Backup for MongoDB allows you to perform selective backups and restores of databases and collections. Additionally, you can choose to include users and roles defined in the database in your selective backup, ensuring that access control is restored along with the data.
 
+
+This feature is useful when:
+
+- Migrating a database to a new environment while keeping its access control intact.
+
+- Restoring a subset of collections along with the users and roles that manage them.
+
+- Creating test environments with the same security model as production.
+
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
