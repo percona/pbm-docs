@@ -68,11 +68,16 @@ This command backs up all collections in the **invoices** database along with it
 
 ### Use cases
 
-=== "Partial Migration for a database"
+=== "Partial Migration of a database"
     Organizations often start with a shared cluster hosting multiple databases for different services. Over time, scaling, performance, or compliance needs may require isolating one database into its own dedicated cluster.
+    
+    Selective backup along with the users and roles transfers both the data and the database-local authorization model required by that service to function correctly.
+
 
 === "Roll back access control changes"
-    A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
+    A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. 
+    
+    To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
 
 === "Staging environment"
     You need a production-like copy of `mydb` in a separate environment to reproduce issues, validate fixes, or conduct testing.
