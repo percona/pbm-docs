@@ -28,6 +28,8 @@ Multi-format is the default data format for both full and selective backups sinc
 
 ## Selective backup with users and roles
 
+### Overview
+
 Percona Backup for MongoDB allows you to perform selective backups and restores of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
 This feature is useful in the following cases:
@@ -51,7 +53,7 @@ where:
 The `--with-users-and-roles` flag ensures that any custom users and roles defined within the target database are included, maintaining the integrity of your access control list (ACL) without needing a full cluster restore.
 
 
-??? info "What heppens under the hood?"
+??? info "What happens under the hood?"
     - Percona Backup for MongoDB captures all collections within `mydb`.
     - Percona Backup for MongoDB filters the users and roles for entities where the `db` field matches `mydb`.
     - Global roles or users defined in the admin database for other namespaces are excluded.
@@ -63,6 +65,21 @@ pbm backup --ns="invoices.*" --with-users-and-roles
 ```
 
 This command backs up all collections in the **invoices** database along with its users and roles.
+
+### Use cases
+
+=== "Split/partial Migration of a single database"
+    Organizations often start with a shared cluster hosting multiple databases for different services. Over time, scaling, performance, or compliance needs may require isolating one database into its own dedicated cluster.
+
+=== "Roll back access control changes"
+    A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
+
+=== "Staging/test environment"
+    You need a production-like copy of `mydb` in a separate environment to reproduce issues, validate fixes, or conduct testing.
+    
+    By backing up mydb together with its users and roles, the copy reflects not only the data but also the access-control model. This enables accurate reproduction of permission-related behavior such as read/write restrictions, role grants, and user privileges.
+
+
 
 
 
