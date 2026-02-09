@@ -32,12 +32,6 @@ Multi-format is the default data format for both full and selective backups sinc
 
 Percona Backup for MongoDB allows you to perform selective backups and restores of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
-This feature is useful in the following cases:
-
-- Migrating a database to a new environment while keeping its access control intact.
-
-- Restoring a subset of collections along with the users and roles that manage them.
-
 To back up a specific namespace and include users and roles, run the following command:
 
 ```sh
@@ -56,7 +50,8 @@ The `--with-users-and-roles` flag ensures that any custom users and roles define
 ??? info "What happens under the hood?"
     - Percona Backup for MongoDB captures all collections within `mydb`.
     - Percona Backup for MongoDB filters the users and roles for entities where the `db` field matches `mydb`.
-    - Global roles or users defined in the admin database for other namespaces are excluded.
+    - Global administrative roles or users defined in other databases are excluded.
+
 
 **Example**
 
@@ -69,10 +64,7 @@ This command backs up all collections in the **invoices** database along with it
 ### Use cases
 
 === "Partial Migration of a database"
-    Organizations often start with a shared cluster hosting multiple databases for different services. Over time, scaling, performance, or compliance needs may require isolating one database into its own dedicated cluster.
-
-    Selective backup along with the users and roles transfers both the data and the access control model required by that service to function properly.
-
+    As applications scale, you may need to migrate a specific database from a shared cluster to dedicated hardware. Using `--with-users-and-roles` ensures that the destination cluster immediately inherits the application-specific users and custom roles, preventing errors post-migration.
 
 === "Roll back access control changes"
     A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. 
