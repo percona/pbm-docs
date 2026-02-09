@@ -70,8 +70,8 @@ This command backs up all collections in the **invoices** database along with it
 
 === "Partial Migration of a database"
     Organizations often start with a shared cluster hosting multiple databases for different services. Over time, scaling, performance, or compliance needs may require isolating one database into its own dedicated cluster.
-    
-    Selective backup along with the users and roles transfers both the data and the database-local authorization model required by that service to function correctly.
+
+    Selective backup along with the users and roles transfers both the data and the access control model required by that service to function properly.
 
 
 === "Roll back access control changes"
