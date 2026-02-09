@@ -51,7 +51,7 @@ where:
 The `--with-users-and-roles` flag ensures that any custom users and roles defined within the target database are included, maintaining the integrity of your access control list (ACL) without needing a full cluster restore.
 
 
-??? info "What heppens under the hood?
+??? info "What heppens under the hood?"
     - Percona Backup for MongoDB captures all collections within `mydb`.
     - Percona Backup for MongoDB filters the users and roles for entities where the `db` field matches `mydb`.
     - Global roles or users defined in the admin database for other namespaces are excluded.
