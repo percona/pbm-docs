@@ -36,6 +36,19 @@ This feature is useful in the following cases:
 
 - Restoring a subset of collections along with the users and roles that manage them.
 
+To back up a specific namespace and include users and roles, run the following command:
+
+```sh
+pbm backup --ns="mydb.*" --with-users-and-roles
+```
+
+where:
+
+`--ns="mydb.*"` specifies the namespace (all collections in mydb).
+
+`--with-users-and-roles` ensures that users and roles defined in mydb are included in the backup.
+
+
 ## Next steps
 
 [List backups](../usage/list-backup.md){.md-button}
