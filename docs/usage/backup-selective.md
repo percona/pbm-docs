@@ -68,13 +68,13 @@ This command backs up all collections in the **invoices** database along with it
 
 ### Use cases
 
-=== "Split/partial Migration of a single database"
+=== "Partial Migration for a database"
     Organizations often start with a shared cluster hosting multiple databases for different services. Over time, scaling, performance, or compliance needs may require isolating one database into its own dedicated cluster.
 
 === "Roll back access control changes"
     A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
 
-=== "Staging/test environment"
+=== "Staging environment"
     You need a production-like copy of `mydb` in a separate environment to reproduce issues, validate fixes, or conduct testing.
     
     By backing up mydb together with its users and roles, the copy reflects not only the data but also the access-control model. This enables accurate reproduction of permission-related behavior such as read/write restrictions, role grants, and user privileges.
