@@ -282,7 +282,8 @@ nav:
   - Release notes:
       - release-notes.md
       - PBM 2.x:
-        - "{{pbm.full_name}} 2.12.0 ({{date.2_12_0}})": release-notes/2.12.0.md
+        - "{{pbm.full_name}} 2.13.0 ({{date.2_13_0}})": release-notes/2.13.0.md
+        - release-notes/2.12.0.md
         - release-notes/2.11.0.md
         - release-notes/2.10.0.md
         - release-notes/2.9.1.md
