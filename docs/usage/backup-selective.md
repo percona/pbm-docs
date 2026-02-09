@@ -77,7 +77,7 @@ This command backs up all collections in the **invoices** database along with it
 === "Staging environment"
     You need a production-like copy of `mydb` in a separate environment to reproduce issues, validate fixes, or conduct testing.
     
-    By backing up mydb together with its users and roles, the copy reflects not only the data but also the access-control model. This enables accurate reproduction of permission-related behavior such as read/write restrictions, role grants, and user privileges.
+    By backing up `mydb` together with its users and roles, the copy reflects not only the data but also the access-control model. This enables accurate reproduction of permission-related behavior such as read/write restrictions, role grants, and user privileges.
 
 
 
