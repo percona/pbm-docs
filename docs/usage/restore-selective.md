@@ -69,7 +69,7 @@ where:
 pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
 ```
 
-This command restores all collections in the `invoices` database, along with the users and roles defined `in invoices`, from the backup `2025-03-10T10:44:52Z`.
+This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`.
 
 #### Use cases
 
