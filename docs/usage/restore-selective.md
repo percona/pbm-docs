@@ -41,12 +41,13 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 !!! warning
     - The `--with-users-and-roles` flag requires a collection wildcard in the namespace. For example:
 
-    `--ns="test.*" is valid` 
-    `--ns="test.col"` is not vlaid.
+    `--ns="test.*"` is valid.
+    `--ns="test.col"` is not valid.
+
     - The `--with-users-and-roles` flag applies only to users and roles defined within the database being backed up or restored. Global users and roles defined at the cluster level **are not included**.
 
     - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access control. Always verify dependencies before restore.
-    
+
     - Restoring users and roles will overwrite existing definitions in the target database. Review current role configurations before restore to avoid accidental loss of custom changes.
 
 To restore a specific namespace and include users and roles, run the following command:
