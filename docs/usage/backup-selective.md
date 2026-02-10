@@ -41,9 +41,9 @@ pbm backup --ns="mydb.*" --with-users-and-roles
 
 where:
 
-`--ns="mydb.*"` → specifies the namespace (all collections in `mydb`).
+`--ns="mydb.*"` **→** specifies the namespace (all collections in `mydb`).
 
-`--with-users-and-roles` → includes all users and custom roles defined in `mydb` in the backup.
+`--with-users-and-roles` **→** includes all users and custom roles defined in `mydb` in the backup.
 
 ??? info "What happens under the hood?"
     - Percona Backup for MongoDB captures all collections within `mydb`.
