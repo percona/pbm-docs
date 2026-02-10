@@ -30,7 +30,7 @@ Multi-format is the default data format for both full and selective backups sinc
 
 ### Overview
 
-Percona Backup for MongoDB allows you to perform selective backups of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
+Percona Backup for MongoDB enables you to perform selective backups of databases and collections. Also, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
 To back up a specific namespace and include users and roles, run the following command:
 
@@ -41,7 +41,7 @@ pbm backup --ns="mydb.*" --with-users-and-roles
 
 where:
 
-`--ns="mydb.*"` → specifies the namespace (all collections in mydb).
+`--ns="mydb.*"` → specifies the namespace (all collections in `mydb`).
 
 `--with-users-and-roles` → ensures that users and roles defined in `mydb` are included in the backup.
 
@@ -65,8 +65,7 @@ This command backs up all collections in the **invoices** database along with it
 ### Use cases
 
 === "Partial Migration of a database"
-    As applications scale, you may need to migrate a specific database from a shared cluster to dedicated hardware. Using `--with-users-and-roles` ensures that the destination cluster immediately inherits the application-specific users and custom roles, preventing errors post-migration.
-
+    You may  to migrate a specific database from a shared cluster to dedicated hardware. Using the flag `--with-users-and-roles` ensures that the destination cluster inherits the application-specific users and custom roles immediately, preventing errors post-migration.
 
 
 === "Staging environment"
