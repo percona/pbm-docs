@@ -40,7 +40,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 
 !!! warning
     - The `--with-users-and-roles` flag applies only to users and roles defined within the database being backed up or restored. Global users and roles defined at the cluster level **are not included**.
-    - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access-control. Always verify dependencies before restore.
+    - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access control. Always verify dependencies before restore.
     - Restoring users and roles will overwrite existing definitions in the target database. Review current role configurations before restore to avoid accidental loss of custom changes.
 
 
@@ -68,7 +68,8 @@ where:
 ```sh
 pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
 ```
-This command restores all collections in the `invoices` database and restores the users and roles defined in `invoices` from the  backup `2025-03-10T10:44:52Z`.
+
+This command restores all collections in the `invoices` database, along with the users and roles defined `in invoices`, from the backup `2025-03-10T10:44:52Z`.
 
 #### Use cases
 
@@ -78,7 +79,7 @@ This command restores all collections in the `invoices` database and restores th
 === "Roll back access control changes"
     A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. 
     
-    To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
+    To ensure complete recovery, you need to restore not only the data but also the users and roles tied to the database’s access controls.
 
 ### Restore a collection under a different name
 
