@@ -26,7 +26,7 @@ During the backup process, Percona Backup for MongoDB stores data in the new mul
 
 Multi-format is the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
 
-## Selective backup with users and roles
+## Backup with users and roles
 
 ### Overview
 
