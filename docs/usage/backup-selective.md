@@ -26,11 +26,11 @@ During the backup process, Percona Backup for MongoDB stores data in the new mul
 
 Multi-format is the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
 
-## Backup with users and roles
+## Selective backup with users and roles
 
 ### Overview
 
-Percona Backup for MongoDB allows you to perform selective backups and restores of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
+Percona Backup for MongoDB allows you to perform selective backups of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
 To back up a specific namespace and include users and roles, run the following command:
 
@@ -40,11 +40,11 @@ pbm backup --ns="mydb.*" --with-users-and-roles
 
 where:
 
-`--ns="mydb.*"` specifies the namespace (all collections in mydb).
+`--ns="mydb.*"` → specifies the namespace (all collections in mydb).
 
-`--with-users-and-roles` ensures that users and roles defined in `mydb` are included in the backup.
+`--with-users-and-roles` → ensures that users and roles defined in `mydb` are included in the backup.
 
-The `--with-users-and-roles` flag ensures that any custom users and roles defined within the target database are included, maintaining the integrity of your access control list (ACL) without needing a full cluster restore.
+`--with-users-and-roles` → ensures that any custom users and roles defined within the target database are included, maintaining the integrity of your access control list (ACL) without needing a full cluster restore.
 
 
 ??? info "What happens under the hood?"
@@ -66,10 +66,7 @@ This command backs up all collections in the **invoices** database along with it
 === "Partial Migration of a database"
     As applications scale, you may need to migrate a specific database from a shared cluster to dedicated hardware. Using `--with-users-and-roles` ensures that the destination cluster immediately inherits the application-specific users and custom roles, preventing errors post-migration.
 
-=== "Roll back access control changes"
-    A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. 
-    
-    To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
+
 
 === "Staging environment"
     To reproduce production issues or validate security patches, you need a staging environment that mirrors production exactly.

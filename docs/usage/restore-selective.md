@@ -32,6 +32,47 @@ To restore a [custom database with users and roles](../features/selective-backup
 pbm restore <backup_name> --ns <database.*> --with-users-and-roles
 ```
 
+### Selective restore with users and roles
+
+#### Overview
+
+Percona Backup for MongoDB allows you to perform selective restore of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
+
+To restore a specific namespace and include users and roles, run the following command:
+
+```sh
+pbm restore --ns="mydb.*" --with-users-and-roles <selective-backup-id>
+```
+
+where:
+
+`--ns="mydb.*"` → Restores only the collections belonging to mydb.
+
+`--with-users-and-roles` → Restores the database-defined users and roles alongside the data.
+
+`<selective-backup-id>` → The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
+
+??? info "What happens under the hood?"
+    - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
+    - Percona Backup for MongoDB restores roles where the db field matches `mydb`.
+    - Percona Backup for MongoDB restores users where the db field matches `mydb`, including their role assignments within `mydb`.
+
+**Example**
+
+```sh
+pbm restore --ns="invoices.*" --with-users-and-roles backup20260110_123456
+```
+
+#### Use cases
+
+=== "Partial restore after data loss"
+    A service using `mydb` experienced accidental deletes or corruption, while other databases in the cluster remain unaffected. Selective restore limits recovery to only the required database.
+
+=== "Roll back access control changes"
+    A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. 
+    
+    To ensure full recovery, you need to restore not just the data but also the users and roles tied to the database’s access-control.
+
 ### Restore a collection under a different name
 
 You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
