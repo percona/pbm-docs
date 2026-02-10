@@ -60,21 +60,18 @@ where:
 pbm backup --ns="invoices.*" --with-users-and-roles
 ```
 
-This command backs up all collections in the **invoices** database along with its users and roles.
+This command backs up all collections in the **invoices** database, along with its users and roles.
 
 ### Use cases
 
-=== "Partial Migration of a database"
-    You may  to migrate a specific database from a shared cluster to dedicated hardware. Using the flag `--with-users-and-roles` ensures that the destination cluster inherits the application-specific users and custom roles immediately, preventing errors post-migration.
+=== "Partial migration of a database"
+    As applications scale, migrating a specific database from a shared cluster to a dedicated cluster becomes necessary. Using the `--with-users-and-roles` flag ensures that the destination cluster inherits the application specific users and custom roles immediately, thereby preventing errors post-migration.
 
 
 === "Staging environment"
     To reproduce production issues or validate security patches, you need a staging environment that mirrors production exactly.
     
     By backing up `mydb` together with its users and roles, the copy reflects not only the data but also the access-control model. This enables accurate reproduction of permission-related behavior such as read/write restrictions, role grants, and user privileges.
-
-
-
 
 
 ## Next steps
