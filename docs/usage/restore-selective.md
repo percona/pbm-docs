@@ -40,13 +40,12 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 
 !!! warning
     - The `--with-users-and-roles` flag requires a collection wildcard in the namespace. For example:
+
     `--ns="test.*" is valid` 
     `--ns="test.col"` is not vlaid.
     - The `--with-users-and-roles` flag applies only to users and roles defined within the database being backed up or restored. Global users and roles defined at the cluster level **are not included**.
-needed.
     - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access control. Always verify dependencies before restore.
     - Restoring users and roles will overwrite existing definitions in the target database. Review current role configurations before restore to avoid accidental loss of custom changes.
-
 
 To restore a specific namespace and include users and roles, run the following command:
 
@@ -56,14 +55,14 @@ pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
 
 where:
 
-`--ns="mydb.*"` → Restores only the collections belonging to mydb.
+`--ns="mydb.*"` **→** Restores only the collections belonging to mydb.
 
 `--with-users-and-roles` → Restores the database-defined users and roles alongside the data.
 
-`<backup-name>` → The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
+`<backup-name>` **→** The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
 
 !!! note
-    Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not 
+    Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
 
 ??? info "What happens under the hood?"
     - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
