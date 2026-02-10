@@ -47,7 +47,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 To restore a specific namespace and include users and roles, run the following command:
 
 ```sh
-pbm restore --ns="mydb.*" --with-users-and-roles <selective-backup-id>
+pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
 ```
 
 where:
@@ -56,7 +56,7 @@ where:
 
 `--with-users-and-roles` → Restores the database-defined users and roles alongside the data.
 
-`<selective-backup-id>` → The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
+`<backup-name>` → The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
 
 ??? info "What happens under the hood?"
     - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
