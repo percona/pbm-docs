@@ -43,7 +43,8 @@ where:
 
 `--ns="mydb.*"` → specifies the namespace (all collections in `mydb`).
 
-`--with-users-and-roles` → includes all users and custom roles defined in `mydb` in the backup, maintaining the integrity of your access control list (ACL) without requiring a full cluster restore.
+`--with-users-and-roles` → includes all users and custom roles defined in `mydb` in the backup.
+
 ??? info "What happens under the hood?"
     - Percona Backup for MongoDB captures all collections within `mydb`.
     - Percona Backup for MongoDB filters the users and roles for entities where the `db` field matches `mydb`.
