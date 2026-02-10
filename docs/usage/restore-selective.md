@@ -57,9 +57,11 @@ where:
 
 `<backup-name>` **→** The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
 
-!!! note
-    - The `--with-users-and-roles` flag requires a collection wildcard in the namespace. For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
-    - Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
+The `--with-users-and-roles` flag requires a collection wildcard in the namespace. 
+
+For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
+
+Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
 
 ??? info "What happens under the hood?"
     - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
