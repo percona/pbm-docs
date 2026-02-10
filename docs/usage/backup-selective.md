@@ -34,6 +34,7 @@ Percona Backup for MongoDB allows you to perform selective backups of databases 
 
 To back up a specific namespace and include users and roles, run the following command:
 
+
 ```sh
 pbm backup --ns="mydb.*" --with-users-and-roles
 ```
