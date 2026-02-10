@@ -60,7 +60,7 @@ where:
 **Example**
 
 ```sh
-pbm restore --ns="invoices.*" --with-users-and-roles backup20260110_123456
+pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
 ```
 
 #### Use cases
