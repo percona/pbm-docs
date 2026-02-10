@@ -39,7 +39,11 @@ pbm restore <backup_name> --ns <database.*> --with-users-and-roles
 Percona Backup for MongoDB allows you to perform selective restore of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
 !!! warning
+    - The `--with-users-and-roles` flag requires a collection wildcard in the namespace. For example:
+    `--ns="test.*" is valid` 
+    `--ns="test.col"` is not vlaid.
     - The `--with-users-and-roles` flag applies only to users and roles defined within the database being backed up or restored. Global users and roles defined at the cluster level **are not included**.
+    - Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not needed.
     - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access control. Always verify dependencies before restore.
     - Restoring users and roles will overwrite existing definitions in the target database. Review current role configurations before restore to avoid accidental loss of custom changes.
 
