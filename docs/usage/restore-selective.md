@@ -57,6 +57,8 @@ where:
 
 `<backup-name>` **→** The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
 
+**Namespace requirements**
+
 The `--with-users-and-roles` flag requires a collection wildcard in the namespace. 
 
 For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
