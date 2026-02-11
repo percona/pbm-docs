@@ -62,7 +62,7 @@ This command backs up all collections in the **invoices** database, along with i
 ### Use cases
 
 === "Partial migration of a database"
-    As applications scale, migrating a specific database from a shared cluster to a dedicated cluster becomes necessary. Using the `--with-users-and-roles` flag ensures that the destination cluster inherits the application specific users and custom roles immediately, thereby preventing errors post-migration.
+    As applications scale, migrating a specific database from a shared cluster to a dedicated cluster becomes necessary. Using the `--with-users-and-roles` flag ensures that the destination cluster inherits the application-specific users and custom roles immediately, thereby preventing errors post-migration.
 
 
 === "Staging environment"
