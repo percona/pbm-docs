@@ -91,7 +91,7 @@ After the restore is complete, do the following:
 
 !!! admonition "Version added: [2.0.4](../release-notes/2.0.4.md)"
 
-During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it: 
+During physical restores, Percona Backup for MongoDB starts a temporary database instance. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to do so. If you have defined a custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it: 
 
 === ":octicons-file-code-24: Configuration file"
 
@@ -106,7 +106,7 @@ During physical restores, Percona Backup for MongoDB performs several restarts o
     pbm config --set restore.mongodLocation=/path/to/mongod/
     ```
 
-If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.
+If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify the custom path for each node.
 
 ```yaml
 restore:
@@ -115,7 +115,7 @@ restore:
        "node03:27017": /another/path/to/mongod
 ```
 
-When running in Docker, include Percona Backup for MongoDB files together with your MongoDB binaries. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
+When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
 
 ### Parallel data download
 
