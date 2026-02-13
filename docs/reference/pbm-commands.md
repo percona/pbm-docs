@@ -83,6 +83,7 @@ The command accepts the following flags:
 | Flag                     | Description               |
 | ------------------------ | ------------------------- |
 | `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20), <br> - `%Y-%M-%D` (e.g. 2020-04-20), <br> - `XXd` (e.g. 30d). Only days are supported|
+| `--profile=PROFILE_NAME` | Specifies the configuration profile for the storage to clean up. If not specified, cleanup runs on the main storage. Available starting with version 2.13.0|
 | `-w`, `--wait`           | Wait for the cleanup to finish. The flag blocks the shell session|
 | `--wait-time`  | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 | `-y`, `--yes`            | Cleans up the data storage without asking for a user's confirmation|
@@ -167,6 +168,7 @@ The command accepts the following flags:
 | Flag                     | Description             |
 | ------------------------ | ----------------------- |
 | `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2023-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2023-04-20)|
+| `--profile=PROFILE_NAME` | Specifies the configuration profile for the storage from which to delete backups. If not specified, deletion runs on the main storage. Available starting with version 2.13.0|
 | `--type=TYPE`           | Deletes backups of the specified type. Must be used together with the `-older-than` flag. Available starting with version 2.4.0|
 | `--force`                | Forcibly deletes backups without asking for user's confirmation. Deprecated. Use the `--yes` flag instead. |
 | `-y`, `--yes`            | Deletes backups without asking for user's confirmation |
