@@ -61,10 +61,11 @@ The size of the data chunk in MB to download from the S3 storage.
 
 *Type*: string
 
-The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB uses the default path to make database restarts during physical restore.
+
+The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB uses the default path to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.
 
 ### restore.mongodLocationMap
 
 *Type*: array of strings
 
-The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the values to make restarts of the database during physical restore. 
+The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the values to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.
