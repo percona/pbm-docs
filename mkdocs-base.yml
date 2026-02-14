@@ -251,6 +251,7 @@ nav:
       - reference/backup-options.md
       - reference/restore-options.md
       - reference/logging-options.md
+      - reference/pbm-agent-config-options.md
   - Administer PBM:
       - manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
