@@ -23,7 +23,7 @@ This is how Workload Identity Federation Works:
 
 5. Backups are uploaded securely to GCS without static keys.
 
-With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
+  With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
 
 ## Configuration steps
 
@@ -37,9 +37,10 @@ Follow theese steps to configure Workload Identity Federation for PBM:
     --location="global" \
     --display-name="PBM Workload Identity Pool"
     ```
+
 2. Configure a provider (OIDC Example):
 
-The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--oidc-issuer-uri` with `--aws`.
+   The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--oidc-issuer-uri` with `--aws`.
 
     ```
     gcloud iam workload-identity-pools providers create-oidc pbm-provider \
