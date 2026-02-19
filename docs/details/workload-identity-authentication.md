@@ -50,6 +50,17 @@ Follow these steps to configure Workload Identity Federation for PBM:
     --attribute-mapping="google.subject=assertion.sub"
     ```
 
+3. Create a service account for PBM backups. This service account will be impersonated by PBM when uploading backups to GCS.
+
+    ```bash
+    gcloud iam service-accounts create pbm-backup-sa \
+  --display-name="PBM Backup Service Account"
+    ```
+
+
+
+
+
 3. Grant service account impersonation:
 
     ```bash
