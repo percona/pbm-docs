@@ -23,7 +23,7 @@ This is how Workload Identity Federation Works:
 
 5. Backups are uploaded securely to GCS without static keys.
 
-  With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
+    With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
 
 ## Configuration steps
 
@@ -90,16 +90,16 @@ Follow theese steps to configure Workload Identity Federation for PBM:
         pbm config --file pbm_config.yaml
         ```
 
-??? Example "Example PBM configuration snippet"
-    ```yaml
-    storage:
-      type: gcs
-      bucket: my-backup-bucket
-      auth:
-        method: workload-identity
-        provider: pbm-provider
-        service-account: pbm-backup sa@PROJECT_ID.iam.gserviceaccount.com
-    ```
+    ??? Example "Example PBM configuration snippet"
+        ```yaml
+        storage:
+          type: gcs
+          bucket: my-backup-bucket
+          auth:
+            method: workload-identity
+            provider: pbm-provider
+            service-account: pbm-backup sa@PROJECT_ID.iam.gserviceaccount.com
+        ```
 
 !!! note
     - **PBM version:** Ensure you are using PBM 2.10.0 or higher. Earlier versions used the AWS SDK (S3 compatibility) which required HMAC keys.
