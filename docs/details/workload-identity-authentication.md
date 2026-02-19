@@ -98,7 +98,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
           auth:
             method: workload-identity
             provider: pbm-provider
-            service-account: pbm-backup sa@PROJECT_ID.iam.gserviceaccount.com
+            service-account: pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com
         ```
 
 !!! note
