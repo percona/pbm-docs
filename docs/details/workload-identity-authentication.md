@@ -11,7 +11,7 @@ Workload Identity Federation lets on‑premises or multicloud workloads access G
 ## How it works with PBM
 
 PBM integrates with Workload Identity Federation as follows:
-{ .power-number }
+{.power-number}
 
 1. PBM authenticates with its external IdP (e.g., OIDC, SAML, AWS, Azure).
 
@@ -28,7 +28,7 @@ With Workload Identity Authentication, PBM relies on **Application Default Crede
 ## Configuration steps
 
 Follow these steps to configure Workload Identity Federation for PBM:
-{ .power-number }
+{.power-number}
 
 1. Create a Workload Identity pool:
 
