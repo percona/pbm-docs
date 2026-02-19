@@ -40,31 +40,31 @@ Follow theese steps to configure Workload Identity Federation for PBM:
 
 2. Configure a provider (OIDC Example):
 
-   The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--oidc-issuer-uri` with `--aws`.
+    The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--oidc-issuer-uri` with `--aws`.
 
     ```
     gcloud iam workload-identity-pools providers create-oidc pbm-provider \
-  --workload-identity-pool="pbm-pool" \
-  --issuer-uri="https://YOUR-IDP.example.com" \
-  --location="global" \
-  --attribute-mapping="google.subject=assertion.sub"
+    --workload-identity-pool="pbm-pool" \
+    --issuer-uri="https://YOUR-IDP.example.com" \
+    --location="global" \
+    --attribute-mapping="google.subject=assertion.sub"
     ```
 
 3. Grant service account impersonation:
 
     ```sh
     gcloud iam service-accounts add-iam-policy-binding \
-  pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com \
-  --role="roles/iam.workloadIdentityUser" \
-  --member="principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/pbm-pool/subject/WORKLOAD_ID"
+    pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com \
+    --role="roles/iam.workloadIdentityUser" \
+    --member="principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/pbm-pool/subject/WORKLOAD_ID"
     ```
 
 4. Assign GCS permissions:
 
     ```
     gcloud projects add-iam-policy-binding PROJECT_ID \
-  --member="serviceAccount:pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com" \
-  --role="roles/storage.objectAdmin"
+    --member="serviceAccount:pbm-backup-    sa@PROJECT_ID.iam.gserviceaccount.com" \
+    --role="roles/storage.objectAdmin"
     ```
 
 5. PBM configuration:
