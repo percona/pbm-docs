@@ -126,6 +126,7 @@ export ISSUER_URI="https://YOUR-IDP.example.com"
       --role="roles/storage.objectAdmin"
     ```
 
+    After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
 7. PBM configuration:
 
     When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
