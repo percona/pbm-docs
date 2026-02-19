@@ -54,22 +54,30 @@ Follow these steps to configure Workload Identity Federation for PBM:
 1. Set your variables once:
 
     ```bash
-    export PROJECT_ID="my-gcp-project"
-    export PROJECT_NUMBER="123456789012"
+    # Required: your Google Cloud project ID (string)
+export PROJECT_ID="my-gcp-project"
 
-    export POOL_ID="pbm-pool"
-    export PROVIDER_ID="pbm-provider"
+  # Recommended: fetch the numeric project number automatically
+  export PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --  format="value(projectNumber)")"
 
-    export SA_NAME="pbm-backup-sa"
-    export SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+  # Workload Identity pool/provider IDs you are creating
+  export POOL_ID="pbm-pool"
+  export PROVIDER_ID="pbm-provider"
 
-    export BUCKET="my-backup-bucket"
+  # Service account PBM will impersonate
+  export SA_NAME="pbm-backup-sa"
+  export SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 
-    # This must match the subject your IdP will present (commonly the OIDC `sub` claim)
-    export WORKLOAD_SUBJECT="YOUR_WORKLOAD_IDENTITY_SUBJECT"
+  # GCS bucket where PBM writes backups
+  export BUCKET="my-backup-bucket"
 
-    # Your OIDC issuer URL (example)
-    export ISSUER_URI="https://YOUR-IDP.example.com"
+  # The external identity subject from your IdP (must match what your provider maps to google.subject)
+  # Example values depend on your IdP (OIDC 'sub' claim is most common).
+  export WORKLOAD_SUBJECT="YOUR_WORKLOAD_IDENTITY_SUBJECT"
+
+  # OIDC issuer URL for your IdP
+  export ISSUER_URI="https://YOUR-IDP.example.com"
+
 
 
 2. Create a Workload Identity pool:
