@@ -27,7 +27,7 @@ With Workload Identity Authentication, PBM relies on **Application Default Crede
 
 ## Configuration steps
 
-Follow theese steps to configure Workload Identity Federation for PBM:
+Follow these steps to configure Workload Identity Federation for PBM:
 { .power-number }
 
 1. Create a Workload Identity pool:
