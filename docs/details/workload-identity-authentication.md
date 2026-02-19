@@ -2,7 +2,7 @@
 
 Percona Backup for MongoDB (PBM) now supports Workload Identity Federation (WIF) for authenticating with Google Cloud Storage (GCS).
 
-This feature enables secure backup uploads without relying on static service account JSON keys. Instead, PBM uses short‑lived, **automatically refreshed tokens** obtained through federation with an external identity provider (IdP).
+This feature enables secure backup uploads without relying on static service account JSON keys. Instead, PBM uses short-lived, **automatically refreshed tokens** obtained through federation with an external identity provider (IdP).
 
 ## Why Workload Identity
 
@@ -17,7 +17,7 @@ PBM integrates with Workload Identity Federation as follows:
 
 2. PBM exchanges the IdP credential with Google’s Security Token Service (STS).
 
-3. STS issues a short‑lived federated token.
+3. STS issues a short-lived federated token.
 
 4. PBM uses this token to impersonate a Google Cloud service account with the required GCS permissions. PBM communicates with GCS using Google Cloud libraries/SDKs (PBM 2.10.0+ uses the Google Cloud SDK for GCS).
 
