@@ -95,17 +95,16 @@ Follow these steps to configure Workload Identity Federation for PBM:
 4. Create a service account for PBM backups. This service account will be impersonated by PBM when uploading backups to GCS.
 
     ```bash
-    gcloud iam service-accounts create pbm-backup-sa \
+    gcloud iam service-accounts create $SA_NAME \
     --display-name="PBM Backup Service Account"
     ```
 
 5. Grant service account impersonation:
 
     ```bash
-    gcloud iam service-accounts add-iam-policy-binding \
-    pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com \
-    --role="roles/iam.workloadIdentityUser" \
-    --member="principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/pbm-pool/subject/WORKLOAD_ID"
+    gcloud iam service-accounts add-iam-policy-binding "$SA_EMAIL" \
+      --role="roles/iam.workloadIdentityUser" \
+      --member="principal://iam.googleapis.com/projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL_ID/subject/$WORKLOAD_SUBJECT"
     ```
     **Where:**
 
