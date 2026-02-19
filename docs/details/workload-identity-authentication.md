@@ -25,12 +25,52 @@ PBM integrates with Workload Identity Federation as follows:
 
 With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
 
+## Prerequisites
+
+Before running commands, make sure you have:
+
+- PBM version 2.10.0 or higher
+
+- A Google Cloud project (you need both):
+
+    - PROJECT_ID (string like my-gcp-project)
+
+    - PROJECT_NUMBER (numeric)
+
+- A **GCS bucket** where backups will be stored
+
+- An **external Identity Provider (IdP)** that can provide identity tokens (commonly OIDC)
+
+- `gcloud` installed and authenticated as an admin who can create IAM resources
+
+
 ## Configuration steps
 
 Follow these steps to configure Workload Identity Federation for PBM:
 {.power-number}
 
-1. Create a Workload Identity pool:
+1. Set your variables once:
+
+  ```bash
+  export PROJECT_ID="my-gcp-project"
+  export PROJECT_NUMBER="123456789012"
+
+  export POOL_ID="pbm-pool"
+  export PROVIDER_ID="pbm-provider"
+
+  export SA_NAME="pbm-backup-sa"
+  export SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+
+  export BUCKET="my-backup-bucket"
+
+  # This must match the subject your IdP will present (commonly the OIDC `sub` claim)
+export WORKLOAD_SUBJECT="YOUR_WORKLOAD_IDENTITY_SUBJECT"
+
+  # Your OIDC issuer URL (example)
+export ISSUER_URI="https://YOUR-IDP.example.com"
+
+
+2. Create a Workload Identity pool:
 
     ```bash
     gcloud iam workload-identity-pools create pbm-pool \
@@ -38,7 +78,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
     --display-name="PBM Workload Identity Pool"
     ```
 
-2. Configure a provider (OIDC Example):
+3. Configure a provider (OIDC Example):
 
     The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--issuer-uri` with `--aws`.
 
@@ -50,14 +90,14 @@ Follow these steps to configure Workload Identity Federation for PBM:
     --attribute-mapping="google.subject=assertion.sub"
     ```
 
-3. Create a service account for PBM backups. This service account will be impersonated by PBM when uploading backups to GCS.
+4. Create a service account for PBM backups. This service account will be impersonated by PBM when uploading backups to GCS.
 
     ```bash
     gcloud iam service-accounts create pbm-backup-sa \
     --display-name="PBM Backup Service Account"
     ```
 
-4. Grant service account impersonation:
+5. Grant service account impersonation:
 
     ```bash
     gcloud iam service-accounts add-iam-policy-binding \
@@ -75,7 +115,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
 
     **YOUR-IDP →** The issuer URI of your identity provider, i.e. the value you used for the `--issuer-uri` flag in step 2 (for example, `https://accounts.google.com` for Google, or your OIDC provider URL).
 
-5. Assign GCS permissions:
+6. Assign GCS permissions:
 
     ```bash
     gcloud projects add-iam-policy-binding PROJECT_ID \
@@ -83,7 +123,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
       --role="roles/storage.objectAdmin"
     ```
 
-6. PBM configuration:
+7. PBM configuration:
 
     When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
 
@@ -115,9 +155,5 @@ Follow these steps to configure Workload Identity Federation for PBM:
             prefix: pbm
         ```
 
-!!! note
-    - **PBM version:** Ensure you are using PBM 2.10.0 or higher. Earlier versions used the AWS SDK (S3 compatibility) which required HMAC keys.
-    - **ADC (Application Default Credentials):** The PBM agent code calls the Google Cloud storage client. By removing the credentials from the config, the client defaults to google.FindDefaultCredentials().
-    - **Environment variables:** If you are using Workload Identity Federation (for on-prem/other clouds), you must set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable on the PBM agent pods/servers to point to the generated `credential-configuration.json` file.
 
 
