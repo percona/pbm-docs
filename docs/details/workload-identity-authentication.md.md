@@ -100,4 +100,9 @@ The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). 
         service-account: pbm-backup sa@PROJECT_ID.iam.gserviceaccount.com
     ```
 
+!!! note
+    - **PBM version:** Ensure you are using PBM 2.10.0 or higher. Earlier versions used the AWS SDK (S3 compatibility) which required HMAC keys.
+    - **ADC (Application Default Credentials):** The PBM agent code calls the Google Cloud storage client. By removing the credentials from the config, the client defaults to google.FindDefaultCredentials().
+    - **Environment variables:** If you are using Workload Identity Federation (for on-prem/other clouds), you must set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable on the PBM agent pods/servers to point to the generated `credential-configuration.json` file.
+
 
