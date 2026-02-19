@@ -94,11 +94,8 @@ Follow these steps to configure Workload Identity Federation for PBM:
         ```yaml
         storage:
           type: gcs
-          bucket: my-backup-bucket
-          auth:
-            method: workload-identity
-            provider: pbm-provider
-            service-account: pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com
+            bucket: my-backup-bucket
+            prefix: pbm
         ```
 
 !!! note
