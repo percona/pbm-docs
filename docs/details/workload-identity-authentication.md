@@ -90,7 +90,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
         pbm config --file pbm_config.yaml
         ```
 
-    ??? Example "Example PBM configuration file"
+    ??? example "Example PBM configuration file"
         ```yaml
         storage:
           type: gcs
