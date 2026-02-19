@@ -78,8 +78,8 @@ Follow these steps to configure Workload Identity Federation for PBM:
         storage:
           type: gcs
           gcs:
-            bucket: [YOUR_BUCKET_NAME]
-            prefix: [YOUR_PREFIX]
+            bucket: <your-bucket-name-here>
+            prefix: <your-prefix-here>
             # No credentials block here! 
             # PBM will use the ambient Workload Identity.
         ```
