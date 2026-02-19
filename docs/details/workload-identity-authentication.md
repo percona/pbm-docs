@@ -6,7 +6,7 @@ This feature enables secure backup uploads without relying on static service acc
 
 ## Why Workload Identity
 
-Workload Identity Federation lets on‑premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
+Workload Identity Federation lets on-premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
 
 ## How it works with PBM
 
