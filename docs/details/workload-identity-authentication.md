@@ -30,9 +30,6 @@ With Workload Identity Authentication, PBM relies on **Application Default Crede
 Before running commands, make sure you have:
 
 - A Google Cloud Storage (GCS) bucket created for PBM backups. If you don’t already have a bucket, follow the steps in the main GCS storage documentation: see [Create a bucket](gcs.md#create-a-bucket).
-## Prerequisites
-- A Google Cloud Storage (GCS) bucket created for PBM backups. If you don’t already have a bucket, follow the steps in the main GCS storage documentation: see [Creating a GCS bucket](../gcs.md#creating-a-gcs-bucket).
-
 
 - PBM version 2.10.0 or higher
 
