@@ -65,6 +65,15 @@ Follow these steps to configure Workload Identity Federation for PBM:
     --role="roles/iam.workloadIdentityUser" \
     --member="principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/pbm-pool/subject/WORKLOAD_ID"
     ```
+    **Where:**
+
+    **PROJECT_ID →** Your Google Cloud project ID (string, e.g., `my-gcp-project`).
+
+    **PROJECT_NUMBER →** The numeric project identifier (find with `gcloud projects describe PROJECT_ID --format="value(projectNumber)"`).
+
+    **WORKLOAD_ID →** The identity subject from your IdP that PBM uses (for example, a Kubernetes service account name or GitHub Actions workflow ID).
+
+    **YOUR-IDP →** The issuer URI of your identity provider (e.g., https://accounts.google.com for Google, or your OIDC provider URL).
 
 5. Assign GCS permissions:
 
@@ -85,8 +94,8 @@ Follow these steps to configure Workload Identity Federation for PBM:
         storage:
           type: gcs
           gcs:
-            bucket: [YOUR_BUCKET_NAME]
-            prefix: [YOUR_PREFIX]
+            bucket: <YOUR_BUCKET_NAME>
+            prefix: <YOUR_PREFIX>
             # No credentials block here! 
             # PBM will use the ambient Workload Identity.
         ```
