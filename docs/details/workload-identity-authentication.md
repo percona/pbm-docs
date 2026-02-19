@@ -6,7 +6,7 @@ This feature enables secure backup uploads without relying on static service acc
 
 ## Why Workload Identity
 
-Workload Identity Federation lets on-premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
+Workload Identity Federation lets on‑premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
 
 ## How it works with PBM
 
@@ -57,11 +57,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
   --display-name="PBM Backup Service Account"
     ```
 
-
-
-
-
-3. Grant service account impersonation:
+4. Grant service account impersonation:
 
     ```bash
     gcloud iam service-accounts add-iam-policy-binding \
@@ -70,7 +66,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
     --member="principal://iam.googleapis.com/projects/PROJECT_NUMBER/locations/global/workloadIdentityPools/pbm-pool/subject/WORKLOAD_ID"
     ```
 
-4. Assign GCS permissions:
+5. Assign GCS permissions:
 
     ```bash
     gcloud projects add-iam-policy-binding PROJECT_ID \
@@ -78,7 +74,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
       --role="roles/storage.objectAdmin"
     ```
 
-5. PBM configuration:
+6. PBM configuration:
 
     When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
 
@@ -89,8 +85,8 @@ Follow these steps to configure Workload Identity Federation for PBM:
         storage:
           type: gcs
           gcs:
-            bucket: <your-bucket-name-here>
-            prefix: <your-prefix-here>
+            bucket: [YOUR_BUCKET_NAME]
+            prefix: [YOUR_PREFIX]
             # No credentials block here! 
             # PBM will use the ambient Workload Identity.
         ```
