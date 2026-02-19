@@ -79,23 +79,24 @@ export PROJECT_ID="my-gcp-project"
   export ISSUER_URI="https://YOUR-IDP.example.com"
 
 
-
 2. Create a Workload Identity pool:
 
     ```bash
-    gcloud iam workload-identity-pools create pbm-pool \
-    --location="global" \
-    --display-name="PBM Workload Identity Pool"
+    gcloud iam workload-identity-pools create "$POOL_ID" \
+      --location="global" \
+      --display-name="PBM Workload Identity Pool"
     ```
 
-3. Configure a provider (OIDC Example):
+3. Create a provider (OIDC Example):
+
+    This maps the IdP subject (`assertion.sub`) to Google’s `google.subject`.
 
     The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--issuer-uri` with `--aws`.
 
     ```bash
     gcloud iam workload-identity-pools providers create-oidc pbm-provider \
-    --workload-identity-pool="pbm-pool" \
-    --issuer-uri="https://your-idp.example.com" \
+    --workload-identity-pool="$POOL_ID" \
+    --issuer-uri="$ISSUER_URI"\
     --location="global" \
     --attribute-mapping="google.subject=assertion.sub"
     ```
@@ -133,6 +134,7 @@ export PROJECT_ID="my-gcp-project"
     ```
 
     After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
+
 7. PBM configuration:
 
     When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
