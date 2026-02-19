@@ -8,9 +8,9 @@ This feature enables secure backup uploads without relying on static service acc
 
 Workload Identity Federation lets on‑premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
 
-## How this works with PBM
+## How it works with PBM
 
-This is how Workload Identity Federation Works:
+PBM integrates with Workload Identity Federation as follows:
 { .power-number }
 
 1. PBM authenticates with its external IdP (e.g., OIDC, SAML, AWS, Azure).
@@ -23,7 +23,7 @@ This is how Workload Identity Federation Works:
 
 5. Backups are uploaded securely to GCS without static keys.
 
-    With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
+With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
 
 ## Configuration steps
 
@@ -32,7 +32,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
 
 1. Create a Workload Identity pool:
 
-    ```
+    ```bash
     gcloud iam workload-identity-pools create pbm-pool \
     --location="global" \
     --display-name="PBM Workload Identity Pool"
@@ -42,7 +42,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
 
     The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--oidc-issuer-uri` with `--aws`.
 
-    ```
+    ```bash
     gcloud iam workload-identity-pools providers create-oidc pbm-provider \
     --workload-identity-pool="pbm-pool" \
     --issuer-uri="https://YOUR-IDP.example.com" \
@@ -52,7 +52,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
 
 3. Grant service account impersonation:
 
-    ```sh
+    ```bash
     gcloud iam service-accounts add-iam-policy-binding \
     pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com \
     --role="roles/iam.workloadIdentityUser" \
@@ -61,7 +61,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
 
 4. Assign GCS permissions:
 
-    ```
+    ```bash
     gcloud projects add-iam-policy-binding PROJECT_ID \
       --member="serviceAccount:pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com" \
     --role="roles/storage.objectAdmin"
@@ -69,12 +69,12 @@ Follow theese steps to configure Workload Identity Federation for PBM:
 
 5. PBM configuration:
 
-    When using Workload Identity, you omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
+    When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
 
     1. **New config format (YAML)**
         Create a file named `pbm_config.yaml`:
 
-        ```bash
+        ```yaml
         storage:
           type: gcs
           gcs:
@@ -90,7 +90,7 @@ Follow theese steps to configure Workload Identity Federation for PBM:
         pbm config --file pbm_config.yaml
         ```
 
-    ??? Example "Example PBM configuration snippet"
+    ??? Example "Example PBM configuration file"
         ```yaml
         storage:
           type: gcs
