@@ -64,7 +64,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
     ```bash
     gcloud projects add-iam-policy-binding PROJECT_ID \
       --member="serviceAccount:pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com" \
-    --role="roles/storage.objectAdmin"
+      --role="roles/storage.objectAdmin"
     ```
 
 5. PBM configuration:
