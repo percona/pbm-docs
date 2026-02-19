@@ -29,6 +29,8 @@ With Workload Identity Authentication, PBM relies on **Application Default Crede
 
 Before running commands, make sure you have:
 
+- A Google Cloud Storage (GCS) bucket created for PBM backups. If you don’t already have a bucket, follow the steps in the main GCS storage documentation: see [Create a bucket](gcs.md#create-a-bucket).
+## Prerequisites
 - A Google Cloud Storage (GCS) bucket created for PBM backups. If you don’t already have a bucket, follow the steps in the main GCS storage documentation: see [Creating a GCS bucket](../gcs.md#creating-a-gcs-bucket).
 
 
@@ -54,23 +56,23 @@ Follow these steps to configure Workload Identity Federation for PBM:
 
 1. Set your variables once:
 
-  ```bash
-  export PROJECT_ID="my-gcp-project"
-  export PROJECT_NUMBER="123456789012"
+    ```bash
+    export PROJECT_ID="my-gcp-project"
+    export PROJECT_NUMBER="123456789012"
 
-  export POOL_ID="pbm-pool"
-  export PROVIDER_ID="pbm-provider"
+    export POOL_ID="pbm-pool"
+    export PROVIDER_ID="pbm-provider"
 
-  export SA_NAME="pbm-backup-sa"
-  export SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+    export SA_NAME="pbm-backup-sa"
+    export SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 
-  export BUCKET="my-backup-bucket"
+    export BUCKET="my-backup-bucket"
 
-  # This must match the subject your IdP will present (commonly the OIDC `sub` claim)
-export WORKLOAD_SUBJECT="YOUR_WORKLOAD_IDENTITY_SUBJECT"
+    # This must match the subject your IdP will present (commonly the OIDC `sub` claim)
+    export WORKLOAD_SUBJECT="YOUR_WORKLOAD_IDENTITY_SUBJECT"
 
-  # Your OIDC issuer URL (example)
-export ISSUER_URI="https://YOUR-IDP.example.com"
+    # Your OIDC issuer URL (example)
+    export ISSUER_URI="https://YOUR-IDP.example.com"
 
 
 2. Create a Workload Identity pool:
