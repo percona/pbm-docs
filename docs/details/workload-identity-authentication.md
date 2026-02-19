@@ -40,7 +40,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
 
 2. Configure a provider (OIDC Example):
 
-    The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--oidc-issuer-uri` with `--aws`.
+    The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--issuer-uri` with `--aws`.
 
     ```bash
     gcloud iam workload-identity-pools providers create-oidc pbm-provider \
