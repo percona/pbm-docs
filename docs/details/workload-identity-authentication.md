@@ -73,7 +73,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
 
     **WORKLOAD_ID →** The identity subject from your IdP that PBM uses (for example, a Kubernetes service account name or GitHub Actions workflow ID).
 
-    **YOUR-IDP →** The issuer URI of your identity provider (e.g., https://accounts.google.com for Google, or your OIDC provider URL).
+    **YOUR-IDP →** The issuer URI of your identity provider, i.e. the value you used for the `--issuer-uri` flag in step 2 (for example, `https://accounts.google.com` for Google, or your OIDC provider URL).
 
 5. Assign GCS permissions:
 
