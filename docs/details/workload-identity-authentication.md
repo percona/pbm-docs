@@ -54,7 +54,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
 
     ```bash
     gcloud iam service-accounts create pbm-backup-sa \
-  --display-name="PBM Backup Service Account"
+    --display-name="PBM Backup Service Account"
     ```
 
 4. Grant service account impersonation:
