@@ -131,7 +131,7 @@ export ISSUER_URI="https://YOUR-IDP.example.com"
 
     When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
 
-    1. **New config format (YAML)**
+    1. **Create config file:**
         Create a file named `pbm_config.yaml`:
 
         ```yaml
