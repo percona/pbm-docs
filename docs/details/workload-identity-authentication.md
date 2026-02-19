@@ -88,7 +88,7 @@ export ISSUER_URI="https://YOUR-IDP.example.com"
     ```bash
     gcloud iam workload-identity-pools providers create-oidc pbm-provider \
     --workload-identity-pool="pbm-pool" \
-    --issuer-uri="https://YOUR-IDP.example.com" \
+    --issuer-uri="https://your-idp.example.com" \
     --location="global" \
     --attribute-mapping="google.subject=assertion.sub"
     ```
