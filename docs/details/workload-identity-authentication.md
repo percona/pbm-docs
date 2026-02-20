@@ -39,8 +39,6 @@ Before running commands, make sure you have:
 
     - PROJECT_NUMBER (numeric)
 
-- A **GCS bucket** where backups will be stored
-
 - An **external Identity Provider (IdP)** that can provide identity tokens (commonly OIDC)
 
 - `gcloud` installed and authenticated as an admin who can create IAM resources
