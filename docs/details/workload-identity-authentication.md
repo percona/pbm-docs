@@ -128,8 +128,8 @@ export PROJECT_ID="my-gcp-project"
 6. Assign GCS permissions:
 
     ```bash
-    gcloud projects add-iam-policy-binding PROJECT_ID \
-      --member="serviceAccount:pbm-backup-sa@PROJECT_ID.iam.gserviceaccount.com" \
+    gcloud projects add-iam-policy-binding "$PROJECT_ID" \
+      --member="serviceAccount:$SA_EMAIL" \
       --role="roles/storage.objectAdmin"
     ```
 
