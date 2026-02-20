@@ -142,7 +142,7 @@ export PROJECT_ID="my-gcp-project"
 
         ```bash
         gcloud iam workload-identity-pools create-cred-config \
-          projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL_ID/providers/pbm-provider \
+          projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL_ID/providers/PROVIDER_ID\
           --service-account="$SA_EMAIL" \
           --output-file="pbm-wif-cred.json"
         ```
