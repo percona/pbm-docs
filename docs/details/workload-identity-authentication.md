@@ -93,9 +93,9 @@ export PROJECT_ID="my-gcp-project"
     The following example uses an OIDC provider (e.g., Kubernetes, GitHub Actions). For AWS, replace `--issuer-uri` with `--aws`.
 
     ```bash
-    gcloud iam workload-identity-pools providers create-oidc pbm-provider \
+    gcloud iam workload-identity-pools providers create-oidc "$PROVIDER_ID" \
     --workload-identity-pool="$POOL_ID" \
-    --issuer-uri="$ISSUER_URI"\
+    --issuer-uri="$ISSUER_URI" \
     --location="global" \
     --attribute-mapping="google.subject=assertion.sub"
     ```
