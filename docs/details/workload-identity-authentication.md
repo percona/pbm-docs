@@ -133,7 +133,7 @@ export PROJECT_ID="my-gcp-project"
       --role="roles/storage.objectAdmin"
     ```
 
-    After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
+    Ensure that the bucket has the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
 
 7. PBM configuration:
 
