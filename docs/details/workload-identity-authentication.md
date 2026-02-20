@@ -135,8 +135,30 @@ export PROJECT_ID="my-gcp-project"
 
     Ensure that the bucket has the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
 
-7. PBM configuration:
+7. Generate and configure the Workload Identity credential configuration file:
 
+    For environments that do not provide credentials via a metadata server (for example, on‑premises, GitHub Actions, or other external IdPs), create a Workload Identity Federation credential configuration file and make it available to PBM as Application Default Credentials (ADC).
+
+    1. **Generate the credential configuration file:**
+
+        ```bash
+        gcloud iam workload-identity-pools create-cred-config \
+          projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/$POOL_ID/providers/pbm-provider \
+          --service-account="$SA_EMAIL" \
+          --output-file="pbm-wif-cred.json"
+        ```
+
+    2. **Make the file available to PBM:**
+
+        Place `pbm-wif-cred.json` on the host or container where PBM runs, and set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable so that PBM (via Google Cloud SDK) can pick it up as ADC:
+
+        ```bash
+        export GOOGLE_APPLICATION_CREDENTIALS="/path/to/pbm-wif-cred.json"
+        ```
+
+        Ensure this environment variable is set in the context where PBM commands run (for example, in the PBM container spec, systemd unit, or shell session).
+
+8. PBM configuration:
     When using Workload Identity, omit the credentials block in the PBM configuration. The Google Cloud SDK (used by PBM 2.10+) will automatically detect the environment's identity.
 
     1. **Create config file:**
