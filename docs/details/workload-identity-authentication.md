@@ -76,6 +76,7 @@ export PROJECT_ID="my-gcp-project"
   # OIDC issuer URL for your IdP
   export ISSUER_URI="https://YOUR-IDP.example.com"
 
+    ```
 
 2. Create a Workload Identity pool:
 
