@@ -58,7 +58,7 @@ Follow these steps to configure Workload Identity Federation for PBM:
 export PROJECT_ID="my-gcp-project"
 
   # Recommended: fetch the numeric project number automatically
-  export PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --  format="value(projectNumber)")"
+  export PROJECT_NUMBER="$(gcloud projects describe "$PROJECT_ID" --format="value(projectNumber)")"
 
   # Workload Identity pool/provider IDs you are creating
   export POOL_ID="pbm-pool"
