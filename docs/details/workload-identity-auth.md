@@ -72,7 +72,9 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
 2. Create a Google service account (GSA).
 
     ```bash
-    gcloud storage buckets create gs://<BUCKET_NAME> --location=<REGION>
+    gcloud iam service-accounts create <GSA_NAME> \
+      --project=<PROJECT_ID> \
+      --display-name="<GSA_NAME>"
     ```
 
 3. Grant the GSA permissions on the bucket.
