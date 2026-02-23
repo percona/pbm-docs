@@ -21,7 +21,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
 
 2. After files are in place, restart the agent on every node. 
 
-    Run the following pn every node in the restore:
+    Run the following on every node in the restore:
 
     ```bash
     pbm-agent restore-finish <restore_name> \
