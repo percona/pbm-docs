@@ -52,3 +52,8 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
 ## Limitation
 
 Only external backups created with PBM are supported. Backups created outside PBM are not supported.
+
+## Next steps
+
+- Learn more about external restores in [External restore](./restore-external.md).
+- See how to monitor and troubleshoot restores in [Track restore progress](./restore-progress.md).
