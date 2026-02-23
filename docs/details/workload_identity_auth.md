@@ -11,7 +11,7 @@ This feature enables secure backup uploads without relying on static service acc
 Workload Identity Federation lets on‑premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
 
 
-!!! info "Important"
+!!! info "note"
     The exact configuration steps depend on where PBM runs (GCE VM, GKE, on-prem, AWS, Azure, GitHub Actions, etc.). This section explains what PBM needs, and provides one end-to-end example for GCE VM, which is the simplest setup.
 
 ## How it works with PBM
