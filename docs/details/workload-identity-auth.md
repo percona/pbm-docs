@@ -12,7 +12,8 @@ Workload Identity Federation lets on‑premises or multicloud workloads access G
 
 
 !!! note
-    The exact configuration steps depend on where PBM runs (GCE VM, GKE, on-prem, AWS, Azure, GitHub Actions, etc.). This section explains what PBM needs, and provides one end-to-end example for GCE VM, which is the simplest setup.
+     The exact configuration steps depend on where PBM is deployed (GCE VM, GKE, on-prem, AWS, Azure, GitHub Actions, etc.). This section outlines the requirements for PBM and provides a comprehensive end-to-end example for GCE VM, which is the simplest setup.
+
 
 ## How it works with PBM
 
@@ -29,7 +30,7 @@ PBM integrates with Workload Identity Federation as follows:
 
 5. Backups are uploaded securely to GCS without static keys.
 
-With Workload Identity Authentication, PBM relies on **Application Default Credentials** (ADC) provided by the runtime (for example, GKE metadata server, or an external Workload Identity Federation credential configuration file). When ADC is available, PBM can upload and download backups from GCS **without embedding JSON private keys** in the PBM config.
+With Workload Identity Authentication, PBM uses **Application Default Credentials** (ADC) provided by the runtime, such as the GKE metadata server or an external Workload Identity Federation credential configuration file. When ADC is available, PBM can upload and download backups from Google Cloud Storage (GCS) **without the need to embed JSON private keys** in the PBM configuration.
 
 ## Prerequisites
 
@@ -57,7 +58,7 @@ To use Workload Identity with GCS, you must have the following:
     PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key).
 
 
-## Usecase: GCE Virtual Machine (simplest path)
+## Use case: GCE Virtual Machine (simplest path)
 
 On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and letting applications use ADC from the metadata server.
 {.power-number}
@@ -106,4 +107,4 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
 
 7. Verify authentication.
 
-    On the VM, you can sanity check that the identity is available via ADC (for example by listing bucket contents), then run a PBM backup to confirm uploads succeed.
+    On the VM, you can check that the identity is available through ADC by listing the bucket contents. Then, run a PBM backup to ensure that the uploads succeed.
