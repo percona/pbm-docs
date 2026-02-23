@@ -43,7 +43,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
 
 3. Continue the restore.
 
-After all agents are restarted and waiting at `copyReady`, run once from any host with PBM CLI access:
+    After all agents are restarted and waiting at `copyReady`, run once from any host with PBM CLI access:
 
     ```bash
     pbm restore-finish <restore_name> -c <pbm-config.yaml>
@@ -53,7 +53,7 @@ After all agents are restarted and waiting at `copyReady`, run once from any hos
 
 Only external backups created with PBM are supported. Backups created outside PBM are not supported.
 
-## Next steps
+## Useful links
 
 - Learn more about external restores in [External restore](./restore-external.md).
 - See how to monitor and troubleshoot restores in [Track restore progress](./restore-progress.md).
