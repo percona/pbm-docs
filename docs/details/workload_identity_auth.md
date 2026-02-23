@@ -103,6 +103,6 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
     pbm config --file pbm_config.yaml
     ```
 
-7. Verify.
+7. Verify authentication.
 
-    On the VM, you can sanity check that the identity is available via ADC (for example by listing bucket contents using Google tooling), then run a PBM backup to confirm uploads succeed.
+    On the VM, you can sanity check that the identity is available via ADC (for example by listing bucket contents), then run a PBM backup to confirm uploads succeed.
