@@ -36,10 +36,10 @@ With Workload Identity Authentication, PBM relies on **Application Default Crede
 To use Workload Identity with GCS, you must have the following:
 {.power-number}
 
-1. Your runtime environment must provide ADC (for example:
-    - a GCE VM or GKE node/pod with Google identity available via metadata server, or
+1. Your runtime environment must provide ADC.
+    - A GCE VM or GKE node/pod with Google identity available via metadata server, or
 
-    - an external WIF credential configuration file referenced via GOOGLE_APPLICATION_CREDENTIALS).
+    - An external WIF credential configuration file referenced via GOOGLE_APPLICATION_CREDENTIALS.
 
 2. The Google service account (GSA) that PBM uses must have the required GCS permissions on the target bucket.
 
@@ -82,7 +82,7 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
     gcloud storage buckets add-iam-policy-binding gs://<BUCKET_NAME> \
   --member="serviceAccount:<GSA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com" \
   --role="roles/storage.objectUser"
-  ```
+    ```
 
 4. Create a VM with the GSA attached.
 
