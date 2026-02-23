@@ -1,7 +1,8 @@
-# Workload Identity authentication for GCS
+# Workload Identity authentication for Google Cloud Storage
 
 !!! info "Important"
-    Workload Identity Federation (WIF) for GCS is supported in PBM version **2.13.0 or later**.
+    Workload Identity Federation (WIF) for Google Cloud Storage 
+    (GCS) is supported in PBM version **2.13.0 or later**.
 
 Percona Backup for MongoDB (PBM) now supports Workload Identity Federation (WIF) for authenticating with Google Cloud Storage (GCS).
 
