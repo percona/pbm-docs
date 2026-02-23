@@ -48,12 +48,12 @@ To use Workload Identity with GCS, you must have the following:
 
     ```yaml
     storage:
-    type: gcs
-    gcs:
+      type: gcs
+      gcs:
         bucket: <YOUR_BUCKET_NAME>
         prefix: <YOUR_PREFIX>
         credentials:
-        workloadIdentity: true
+          workloadIdentity: true
     ```
     PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key).
 
