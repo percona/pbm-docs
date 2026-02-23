@@ -33,9 +33,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
 
     - `<restore_name>` (required): used to find temporary restore data on backup storage.
     - `-c/--config` (required): PBM config to access backup storage.
-
     - `--rs, --node` (required): identify the node without connecting to mongod.
-
     - `--db-config` (optional): required only when you use encryption-at-rest (PBM does not store encryption options in metadata).
 
 
