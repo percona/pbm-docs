@@ -15,6 +15,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
     ```
 
     Where:
+    
     - Without the `--exit` flag, agents wait at `copyReady` until data files appear.
     - With the `--exit` flag, each agent exits automatically when it reaches `copyReady`.
 
