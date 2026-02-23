@@ -1,6 +1,6 @@
 # Snapshot-based restore with pbm-agent restart
 
-Percona Backup for MongoDB supports restarting pbm-agent only at the `copyReady` step during an external (snapshot-based) restore. At `copyReady`, `mongod` is down and the `datadir` is wiped, so nodes wait for new snapshot data files to be provided by an external mechanism (snapshot/rsync/etc.).
+Percona Backup for MongoDB supports the `pbm-agent` to be restarted only at the `copyReady` step during an external (snapshot-based) restore. At this stage, `mongod` is stopped, and the `datadir` has been cleared. Consequently, the nodes will remain on hold, waiting for new snapshot data files to be supplied by an external method, such as snapshotting or rsync.
 
 
 ## Procedure
@@ -19,7 +19,10 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
     - Without the `--exit` flag, agents wait at `copyReady` until data files appear.
     - With the `--exit` flag, each agent exits automatically when it reaches `copyReady`.
 
-2. After files are in place, restart the agent on every node. 
+2. After files are in place, start `pbm-agent` on every node.
+
+    !!! note
+        This step is required only if the agents were stopped with  the `--exit`  parameter.
 
     Run the following on every node in the restore:
 
