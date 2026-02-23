@@ -79,7 +79,7 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
     
     For example, grant object read/write (choose the role that matches your needs/policy):
 
-    ```bash
+    ```sh
     gcloud storage buckets add-iam-policy-binding gs://<BUCKET_NAME> \
   --member="serviceAccount:<GSA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com" \
   --role="roles/storage.objectUser"
