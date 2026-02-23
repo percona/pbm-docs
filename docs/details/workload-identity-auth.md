@@ -1,7 +1,7 @@
 # Workload Identity authentication for Google Cloud Storage
 
 !!! info "Important"
-    Workload Identity Federation (WIF) for Google Cloud Storage 
+    [Workload Identity Federation (WIF):octicons-link-external-16:](https://docs.cloud.google.com/iam/docs/workload-identity-federation) for Google Cloud Storage 
     (GCS) is supported in PBM version **2.13.0 or later**.
 
 Percona Backup for MongoDB (PBM) now supports Workload Identity Federation (WIF) for authenticating with Google Cloud Storage (GCS).
@@ -30,7 +30,7 @@ PBM integrates with Workload Identity Federation as follows:
 
 5. Backups are uploaded securely to GCS without static keys.
 
-With Workload Identity Authentication, PBM uses **Application Default Credentials** (ADC) provided by the runtime, such as the GKE metadata server or an external Workload Identity Federation credential configuration file. When ADC is available, PBM can upload and download backups from Google Cloud Storage (GCS) **without the need to embed JSON private keys** in the PBM configuration.
+With Workload Identity Authentication, PBM uses [Application Default Credentials :octicons-link-external-16:](https://cloud.google.com/docs/authentication/application-default-credentials) (ADC) provided by the runtime, such as the GKE metadata server or an external Workload Identity Federation credential configuration file. When ADC is available, PBM can upload and download backups from Google Cloud Storage (GCS) **without the need to embed JSON private keys** in the PBM configuration.
 
 ## Prerequisites
 
@@ -38,9 +38,9 @@ To use Workload Identity with GCS, you must have the following:
 {.power-number}
 
 1. Your runtime environment must provide ADC.
-    - A GCE VM or GKE node/pod with Google identity available via metadata server, or
+    - A Google Compute Engine (GCE) VM or GKE node/pod with Google identity available via metadata server, or
 
-    - An external WIF credential configuration file referenced via GOOGLE_APPLICATION_CREDENTIALS.
+    - An external WIF credential configuration file referenced via `GOOGLE_APPLICATION_CREDENTIALS`.
 
 2. The Google service account (GSA) that PBM uses must have the required GCS permissions on the target bucket.
 
