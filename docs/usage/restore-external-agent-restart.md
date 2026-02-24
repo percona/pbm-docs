@@ -1,6 +1,6 @@
 # Snapshot-based restore with pbm-agent restart
 
-Percona Backup for MongoDB supports the `pbm-agent` to be restarted only at the `copyReady` step during an external (snapshot-based) restore. At this stage, `mongod` is stopped, and the `datadir` has been cleared. Consequently, the nodes will remain on hold, waiting for new snapshot data files to be supplied by an external method, such as snapshotting or rsync.
+Percona Backup for MongoDB supports restarting `pbm-agent` only at the `copyReady` step during an external (snapshot-based) restore. At this stage, `mongod` is stopped, and the `datadir` has been cleared. Consequently, the nodes will remain on hold, waiting for new snapshot data files to be supplied by an external method, such as snapshotting or rsync.
 
 
 ## Procedure
