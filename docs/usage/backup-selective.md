@@ -18,7 +18,7 @@ To back up the **Invoices** database and all collections that it includes, run t
 ```bash
 pbm backup --ns=invoices.*
 ```
-To back up multiple namespaces, specify them as a comma-separated list for the --ns flag: `<db1.col1>,<db2.*>,<db3.collX>`. The number of namespaces to specify is unlimited.
+To back up multiple namespaces, specify them as a comma-separated list for the --ns flag: `<db1.col1>,<db2.*>,<db3.*>`. The number of namespaces to specify is unlimited.
 
 ## Selective backup with users and roles
 
