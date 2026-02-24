@@ -28,11 +28,11 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
     pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
     ```
 
-    To restore without the users and roles, skip the `--with-users-and-roles` flag.
+    - To restore without the users and roles, skip the `--with-users-and-roles` flag.
 
-     You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
+     - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
-    During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
+    - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
 
     Where:
 
@@ -55,13 +55,16 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 
         This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`. 
 
-## Namespace requirements
+### Namespace requirements
 
-The `--with-users-and-roles` flag requires a collection wildcard in the namespace. 
+The following are the namespace requirements:
+{.power-number}
 
-For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
+1. The `--with-users-and-roles` flag requires a collection wildcard in the namespace. 
 
-Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
+    For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
+
+2. Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
 
 
 ### Use cases
@@ -74,7 +77,7 @@ Use `--with-users-and-roles` only with selective restore (i.e., when you specify
     
     To ensure complete recovery, you need to restore not only the data but also the users and roles tied to the database’s access controls.
 
-### Restore a collection under a different name
+## Restore a collection under a different name
 
 You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
 
