@@ -66,8 +66,6 @@ To use Workload Identity with GCS, you must have the following:
 On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and letting applications use ADC from the metadata server.
 {.power-number}
 
-
-
 1. Create a bucket.
 
     ```bash
