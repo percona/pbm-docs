@@ -40,6 +40,53 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
     - `--rs, --node` (required): identify the node without connecting to mongod.
     - `--db-config` (optional): required only when you use encryption-at-rest (PBM does not store encryption options in metadata).
 
+    ??? info "mongod config file"
+
+        ```bash
+        security:
+           keyFile: <string>
+           clusterAuthMode: <string>
+           authorization: <string>
+           transitionToAuth: <boolean>
+           javascriptEnabled:  <boolean>
+           redactClientLogData: <boolean>
+           clusterIpSourceAllowlist:
+             - <string>
+           sasl:
+             hostName: <string>
+             serviceName: <string>
+             saslauthdSocketPath: <string>
+           enableEncryption: <boolean>
+           encryptionCipherMode: <string>
+           encryptionKeyFile: <string>
+           kmip:
+             keyIdentifier: <string>
+             rotateMasterKey: <boolean>
+             serverName: <string>
+             port: <string>
+             clientCertificateFile: <string>
+             clientCertificatePassword: <string>
+             clientCertificateSelector: <string>
+             serverCAFile: <string>
+             connectRetries: <int>
+             connectTimeoutMS: <int>
+           ldap:
+             servers: <string>
+             bind:
+                method: <string>
+                saslMechanisms: <string>
+                queryUser: <string>
+                queryPassword: <string | array>
+                useOSDefaults: <boolean>
+             transportSecurity: <string>
+             timeoutMS: <int>
+             userToDNMapping: <string>
+             authz:
+                queryTemplate: <string>
+             validateLDAPServerConfig: <boolean>
+        ```
+        You can only specify the security section in this config file.
+
 
     ??? info "What happens under the hood"
         Normal `pbm-agent` startup needs a mongod connection, but at `copyReady` mongod is down (and the datadir is wiped), so the agent can’t initialize. `pbm-agent` `restore-finish` starts the agent in a special finalize-only mode so it can complete the external restore without connecting to mongod, then exit.
