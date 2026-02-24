@@ -129,19 +129,46 @@ For external authentication, you create the `pbm` user in the format used by the
 
 For [Kerberos authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
 
-Specify the following string for MongoDB connection URI:
+You can choose any of these methods to authenticate `pbm` user against Kerberos:
 
-```bash
-PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
-```
+=== "Using a Keytab (Recommended)"
 
-Note that you must first obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
+     1. Set the env variable `KRB5_CLIENT_KTNAME` with the path to the generated keytab for `pbm` user. This way no password is required to get the ticket. 
+     
+         ```bash
+         export KRB5_CLIENT_KTNAME=/path/to/keytab
+         ```
+     
+     
+     3. Specify the following string for MongoDB connection URI with only the username:
+     
+         ```bash
+         PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+         ```
 
-```bash
-sudo -u {USER} kinit pbm
-```
+=== "Requesting a ticket manually"
 
-Note that the `{USER}` is the user that you will run the `pbm-agent` process.
+     1. Obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**. Kerberos will prompt you for the password and issue a Ticket-Granting Ticket (TGT):
+     
+         ```bash
+         sudo -u {USER} kinit pbm@PERCONATEST.COM
+         ```
+     
+         Note that the `{USER}` is the user that you will run the `pbm-agent` process. PBM doesn't refresh its ticket, so when it expires you need to get a new one.   
+     
+     2. Specify the following string for MongoDB connection URI with only the username:
+     
+         ```bash
+         PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+         ```
+
+=== "Using username and password"
+
+     You can authenticate using a connection string URI specifying your URL-encoded Kerberos principal, password, and the address of your MongoDB server:
+     
+     ```bash
+     PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>:<PASSWORD>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+     ```
 
 ### LDAP binding
 
