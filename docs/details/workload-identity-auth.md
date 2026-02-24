@@ -98,7 +98,7 @@ On a GCE VM, Workload Identity is implemented by attaching a GSA to the VM and l
       --service-account=<GSA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com \
       --scopes=cloud-platform
     ```
-5. Use the PBM config snippet below (note the workloadIdentity: `true` flag, and no `JSON` key):
+5. Use the PBM config snippet below (note the workloadIdentity: `true` flag, and no JSON key):
 
     ```yaml
     storage:
