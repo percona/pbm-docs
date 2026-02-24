@@ -30,9 +30,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 
     - To restore without the users and roles, skip the `--with-users-and-roles` flag.
 
-     - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. 
-     
-       For example, `--ns=customers.payments,invoices.*`.
+     - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
     - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
 
