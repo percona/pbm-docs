@@ -44,16 +44,16 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
 
     This is the configuration file that PBM will use during the restore. It should contain the [security options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options)                
 
-        ```bash
-        security:
-           keyFile: <string>
-           clusterAuthMode: <string>
-           authorization: <string>
-           transitionToAuth: <boolean>
-           javascriptEnabled:  <boolean>
-           redactClientLogData: <boolean>
-           clusterIpSourceAllowlist:
-        ```
+    ```bash
+    security:
+       enableEncryption: true
+       kmip:
+        serverName: <kmip_server_name>
+        port: <kmip_port>
+        clientCertificateFile: </path/client_certificate.pem>
+        serverCAFile: </path/ca.pem>
+        keyIdentifier: <key_name>
+    ```
 
     ??? info "What happens under the hood"
         Normal `pbm-agent` startup needs a mongod connection, but at `copyReady` mongod is down (and the datadir is wiped), so the agent can’t initialize. `pbm-agent` `restore-finish` starts the agent in a special finalize-only mode so it can complete the external restore without connecting to mongod, then exit.
