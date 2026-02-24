@@ -31,7 +31,7 @@ With the selective backup and restore functionality, you have the following opti
 3.	Restore a specific collection from a single database backup
 4.	Restore certain databases and/or collections from a full backup
 5.	Make a point-in time recovery for the specified databases/collections. Available for replica sets only.
-6. Perform selective restore of databases and collections, with the option to include users and roles defined in the database in your selective backup. 
+6. Perform selective restore of databases and collections, with the option to include users and roles defined in the database. 
 
 
 ## Sharded collections
