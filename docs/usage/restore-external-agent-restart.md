@@ -53,8 +53,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
            javascriptEnabled:  <boolean>
            redactClientLogData: <boolean>
            clusterIpSourceAllowlist:
-             - <string>
-           ```
+        ```
 
     ??? info "What happens under the hood"
         Normal `pbm-agent` startup needs a mongod connection, but at `copyReady` mongod is down (and the datadir is wiped), so the agent can’t initialize. `pbm-agent` `restore-finish` starts the agent in a special finalize-only mode so it can complete the external restore without connecting to mongod, then exit.
