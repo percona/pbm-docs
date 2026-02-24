@@ -791,6 +791,7 @@ The command accepts the following flags:
 
 | Flag                | Description                           |
 | ------------------- | ------------------------------------- |
+| `--exit`        | Stops the agent automatically after it reaches the `copyReady` state. |
 | `--external`        | Indicates the backup as the one made outside PBM (for example, snapshot-based)       |
 | `--time=TIME`       | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](../features/point-in-time-recovery.md) is enabled. |
 | `-w`                | Wait for the restore to finish. The flag blocks the shell session. |
