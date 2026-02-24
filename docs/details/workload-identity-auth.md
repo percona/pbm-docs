@@ -60,11 +60,13 @@ To use Workload Identity with GCS, you must have the following:
 
 ## Use case: GCE Virtual Machine (simplest path)
 
+!!! Info "Important"
+    These commands assume the **Google Cloud CLI** (gcloud) is installed and configured on the machine you run them on.
+
 On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and letting applications use ADC from the metadata server.
 {.power-number}
 
-!!! note
-    These commands assume the **Google Cloud CLI** (gcloud) is installed and configured on the machine you run them on.
+
 
 1. Create a bucket.
 
@@ -117,8 +119,6 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
 7. Verify authentication.
 
     On the VM, you can check that the identity is available through ADC by listing the bucket contents. Then, run a PBM backup to ensure that the uploads succeed.
-
-    !!! 
 
     ```bash
     gcloud storage ls gs://<BUCKET_NAME>
