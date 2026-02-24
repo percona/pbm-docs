@@ -54,7 +54,7 @@ To use Workload Identity with GCS, you must have the following:
         credentials:
           workloadIdentity: true
     ```
-    PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key).
+    PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key). You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
 
 
 ## Use case: GCE Virtual Machine (simplest path)
