@@ -5,8 +5,11 @@
     Supported only for replica sets.
     Available for logical backups.
 
-1. Before you start:
+
+Before you start:
 {.power-number}
+
+1. Ensure the following:
 
     1. Read [known limitations for selective backups and restores](../features/known-limitations.md#selective-backups-and-restores).
     2. Check that you [have made a full backup](backup-selective.md) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
