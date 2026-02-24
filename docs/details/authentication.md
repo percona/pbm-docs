@@ -141,7 +141,7 @@ For [Kerberos authentication :octicons-link-external-16:](https://docs.percona.c
     sudo -u {USER} kinit pbm@PERCONATEST.COM
     ```
 
-   Note that the `{USER}` is the user that you will run the `pbm-agent` process. PBM doesn't refresh its ticket, so when it expires you need to get a new one.
+    Note that the `{USER}` is the user that you will run the `pbm-agent` process. PBM doesn't refresh its ticket, so when it expires you need to get a new one.
 
 3. Specify the following string for MongoDB connection URI with only the username:
 
