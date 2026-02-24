@@ -73,7 +73,7 @@ To restore a specific namespace and include users and roles, run the following c
 pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
 ```
 
-To dive deep into this topic, see the section [selective restore with users and roles](../usage/restore-selective.md#restore-with-users-and-roles).
+To dive deep into this topic, see the section [selective restore with users and roles](../usage/restore-selective.md#restore-a-database-with-users-and-roles).
 
 
 ## Restore a collection under a different name
