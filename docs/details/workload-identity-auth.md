@@ -7,7 +7,7 @@ Percona Backup for MongoDB (PBM) now supports Workload Identity Federation (WIF)
 
 This feature enables secure backup uploads without relying on static service account JSON keys. Instead, PBM uses short-lived, **automatically refreshed tokens** obtained through federation with an external identity provider (IdP).
 
-Workload Identity Federation lets on‑premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
+Workload Identity Federation lets on-premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.
 
 
 !!! note
