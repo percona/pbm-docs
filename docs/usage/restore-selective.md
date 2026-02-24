@@ -67,16 +67,6 @@ The following are the namespace requirements:
 2. Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
 
 
-### Use cases
-
-=== "Partial restore after data loss"
-    A service using `mydb` experienced accidental deletes or corruption, while other databases in the cluster remain unaffected. Selective restore limits recovery to only the required database.
-
-=== "Roll back access control changes"
-    A recent modification to custom roles in `mydb` introduced permission failures. Applications that rely on those roles can no longer perform required operations. 
-    
-    To ensure complete recovery, you need to restore not only the data but also the users and roles tied to the database’s access controls.
-
 ## Restore a collection under a different name
 
 You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
