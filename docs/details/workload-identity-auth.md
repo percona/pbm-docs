@@ -64,8 +64,8 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
 {.power-number}
 
 !!! note
-    These commands require the Google Cloud CLI (gcloud) to be installed and configured on the machine you run them on.
-    
+    These commands assume the **Google Cloud CLI** (gcloud) is installed and configured on the machine you run them on.
+
 1. Create a bucket.
 
     ```bash
@@ -103,6 +103,10 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
         credentials:
           workloadIdentity: true
     ```
+
+    !!! note
+        - Application Default Credentials (ADC) are supported only with Workload Identity Federation.
+        - ADC will work only when `workloadIdentity: true` is set, and it can’t be used to make PBM accept credentials from an arbitrary GCP auth file.
 
 6. Apply the config.
 
