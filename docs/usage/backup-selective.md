@@ -22,10 +22,13 @@ To back up multiple namespaces, specify them as a comma-separated list for the -
 
 ## Selective backup with users and roles
 
+!!! admonition "Version added: [2.13.0](../release-notes/2.13.0.md)"
+
+
 ### Overview
 
-Percona Backup for MongoDB enables you to perform selective backups of databases and collections. Also, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
- 
+Percona Backup for MongoDB allows you to create selective backups of databases and collections, **including the users and roles** defined within the database. This ensures that access control is restored along with the data.
+
 To back up a specific namespace and include users and roles:
 
 !!! warning
