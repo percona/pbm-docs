@@ -30,6 +30,6 @@ Before you start:
 3. To restore the desired database to a point in time, **along with users and roles**:
 
     ```bash
-    pbm restore --time "<TIMESTAMP>" --ns "db.*" --with-users-and-roles
+    pbm restore --time <timestamp> --ns "db.*" --with-users-and-roles
     ```
 
