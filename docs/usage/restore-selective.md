@@ -22,7 +22,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
     pbm list
     ```
 
-2. To restore a specific namespace and include users and roles, run the following command:
+2. To restore a specific namespace and include users and roles, run the following command. To restore without the users and roles, skip the `--with-users-and-roles` flag.
 
     ```sh
     pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
