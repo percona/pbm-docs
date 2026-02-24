@@ -113,7 +113,7 @@ On a GCE VM, Workload Identity is implemented by attaching a GSA to the VM and l
     !!! note
         - Application Default Credentials (ADC) are used by PBM only when `credentials.workloadIdentity: true` is set.
         - With `workloadIdentity: true`, PBM relies on standard ADC sources such as the GCE/GKE metadata server or a **Workload Identity Federation external account configuration file** referenced via `GOOGLE_APPLICATION_CREDENTIALS`.
-        - PBM does **not** support using `workloadIdentity: true` to load arbitrary GCP auth files such as legacy service account JSON key files, even if they are pointed to by `GOOGLE_APPLICATION_CREDENTIALS`. Use a WIF configuration file instead.
+        - When using `workloadIdentity: true`, pbm validates that `GOOGLE_APPLICATION_CREDENTIALS` file is configured for workload federation and will reject any other credentials.
 
 6. Apply the config.
 
