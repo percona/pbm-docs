@@ -131,22 +131,23 @@ For [Kerberos authentication :octicons-link-external-16:](https://docs.percona.c
 
 1. Set the env variable `KRB5_CLIENT_KTNAME` with the path to the generated keytab for `pbm` user.
 
-   ```bash
-   export KRB5_CLIENT_KTNAME=/path/to/keytab
-   ```
+    ```bash
+    export KRB5_CLIENT_KTNAME=/path/to/keytab
+    ```
 
 2. Obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
 
-   ```bash
-   sudo -u {USER} kinit pbm@PERCONATEST.COM
-   ```
+    ```bash
+    sudo -u {USER} kinit pbm@PERCONATEST.COM
+    ```
 
    Note that the `{USER}` is the user that you will run the `pbm-agent` process. PBM doesn't refresh its ticket, so when it expires you need to get a new one.
 
 3. Specify the following string for MongoDB connection URI with only the username:
-   ```bash
-   PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
-   ```
+
+    ```bash
+    PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+    ```
 
 You can alternatively authenticate using a connection string URI specifying your URL-encoded Kerberos principal, password, and the address of your MongoDB server:
 
