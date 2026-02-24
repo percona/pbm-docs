@@ -22,7 +22,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
 2. After files are in place, start `pbm-agent` on every node.
 
     !!! note
-        This step is required only if the agents were stopped with  the `--exit`  parameter.
+        This step is required only if the agents were stopped with the `--exit` parameter.
 
     Run the following on every node in the restore:
 
