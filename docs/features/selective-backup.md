@@ -23,6 +23,7 @@ Using selective backups and restores, you work only with the desired subset of d
 You also drastically reduce time on backup / restore operations of the whole data set and save on storage consumption. 
 
 With the selective backup and restore functionality, you have the following options:
+{.power-number}
 
 1.	Back up a single database or a specific collection and restore all data from it. 
 2.  Back up certain databases and/or collections and restore either full data or specific databases/collections from it.
