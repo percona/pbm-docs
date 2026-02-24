@@ -91,6 +91,13 @@ On a GCE VM, the **Workload Identity** is just attaching a GSA to the VM and let
 
 4. Create a VM with the GSA attached.
 
+    ```bash
+    gcloud compute instances create <VM_NAME> \
+      --project=<PROJECT_ID> \
+      --zone=<ZONE> \
+      --service-account=<GSA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com \
+      --scopes=cloud-platform
+    ```
 5. Use the PBM config snippet below (note the workloadIdentity: `true` flag, and no `JSON` key):
 
     ```yaml
