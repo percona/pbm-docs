@@ -6,14 +6,14 @@
 
 You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/known-limitations.md#selective-backups-and-restores).
 
-### Restore a database with users and roles
-
-Percona Backup for MongoDB allows you to perform selective restore of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
+## Restore a database with users and roles
 
 !!! warning
     - The `--with-users-and-roles` flag applies only to users and roles defined within the database being backed up or restored. Global users and roles defined at the cluster level **are not included**.
     - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access control. Always verify dependencies before restore.
     - Restoring users and roles will overwrite existing definitions in the target database. Review current role configurations before restore to avoid accidental loss of custom changes.
+
+Percona Backup for MongoDB allows you to perform selective restore of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 {.power-number}
 
 1. List the backups
@@ -34,7 +34,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 
     During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
 
-where:
+    Where:
 
     - `--ns="mydb.*"` **→** Restores only the collections belonging to mydb.
 
@@ -42,7 +42,20 @@ where:
 
     - `<backup-name>` **→** The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
 
-**Namespace requirements**
+    ??? info "What happens under the hood?"
+        - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
+        - Percona Backup for MongoDB restores roles where the db field matches `mydb`.
+        - Percona Backup for MongoDB restores users where the db field matches `mydb`, including their role assignments within `mydb`.
+
+    ??? example "Example"
+
+        ```sh
+        pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
+        ```
+
+        This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`. 
+
+## Namespace requirements
 
 The `--with-users-and-roles` flag requires a collection wildcard in the namespace. 
 
@@ -50,20 +63,8 @@ For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
 
 Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
 
-??? info "What happens under the hood?"
-    - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
-    - Percona Backup for MongoDB restores roles where the db field matches `mydb`.
-    - Percona Backup for MongoDB restores users where the db field matches `mydb`, including their role assignments within `mydb`.
 
-??? example "Example"
-
-    ```sh
-    pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
-    ```
-
-    This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`.
-
-#### Use cases
+### Use cases
 
 === "Partial restore after data loss"
     A service using `mydb` experienced accidental deletes or corruption, while other databases in the cluster remain unaffected. Selective restore limits recovery to only the required database.
