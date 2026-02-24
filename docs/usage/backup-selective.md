@@ -14,9 +14,7 @@ Before you start, read about [selective backups known limitations](../features/k
 
 Percona Backup for MongoDB enables you to perform selective backups of databases and collections. Also, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
-During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The `oplog` is stored for all namespaces regardless whether this is a full or selective backup.
-
-Multi-format is the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB.
+During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file.
  
 
 To back up a specific namespace and include users and roles:
