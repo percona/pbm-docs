@@ -59,6 +59,9 @@ pbm backup --ns="invoices.*" --with-users-and-roles
 
 This command backs up all collections in the **invoices** database, along with its users and roles.
 
+!!! warning
+     Including users and roles (`--with-users-and-roles`) is not supported when backing up a specific collection (for example, `--ns=db.collection`). To include users and roles, you must back up the entire database by using `--ns='db.*'`.
+
 ### Use cases
 
 === "Partial migration of a database"

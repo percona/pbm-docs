@@ -8,6 +8,9 @@ You can restore a specific database or a collection either from a full or a sele
 
 ## Restore a database
 
+To restore a database, follow these steps:
+{.power-number}
+
 1. List the backups
 
     ```bash
@@ -24,17 +27,9 @@ You can restore a specific database or a collection either from a full or a sele
 
 During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
 
-### Restore with users and roles
-
-To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles) from a full backup, add the `--with-users-and-roles` flag to the `pbm restore` command:
-
-```bash
-pbm restore <backup_name> --ns <database.*> --with-users-and-roles
-```
-
 ### Selective restore with users and roles
 
-#### Overview
+### Overview
 
 Percona Backup for MongoDB allows you to perform selective restore of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
 
@@ -111,6 +106,7 @@ pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database
 ## Post-restore steps
 
 After the restore is complete, do the following:
+{.power-number}
 
 1. Start the balancer and all mongos nodes to reload the sharding metadata.
 2. We recommend to make a fresh backup to serve as the new base for future restores.
