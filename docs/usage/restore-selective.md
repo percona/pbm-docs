@@ -22,11 +22,13 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
     pbm list
     ```
 
-2. To restore a specific namespace and include users and roles, run the following command. To restore without the users and roles, skip the `--with-users-and-roles` flag.
+2. To restore a specific database and include users and roles, run the following command.
 
     ```sh
     pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
     ```
+
+    To restore without the users and roles, skip the `--with-users-and-roles` flag.
 
      You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
 
@@ -53,13 +55,13 @@ Use `--with-users-and-roles` only with selective restore (i.e., when you specify
     - Percona Backup for MongoDB restores roles where the db field matches `mydb`.
     - Percona Backup for MongoDB restores users where the db field matches `mydb`, including their role assignments within `mydb`.
 
-**Example**
+??? example "Example"
 
-```sh
-pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
-```
+    ```sh
+    pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
+    ```
 
-This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`.
+    This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`.
 
 #### Use cases
 
