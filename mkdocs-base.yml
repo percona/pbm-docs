@@ -211,6 +211,7 @@ nav:
           - Overview: features/snapshots.md
           - Make a snapshot-based backup: usage/backup-external.md
           - Restore from a snapshot-based backup: usage/restore-external.md
+          - External restore with pbm-agent restart: usage/restore-external-agent-restart.md
         - Point-in-time recovery:
           - Overview: features/point-in-time-recovery.md
           - From logical backup: usage/pitr-tutorial.md
