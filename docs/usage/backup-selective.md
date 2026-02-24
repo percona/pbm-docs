@@ -13,7 +13,7 @@ To make a selective backup, run the pbm backup command and provide the value for
 ```bash
 pbm backup --ns=customers.payments
 ```
-To back up the **Invoices** database and all collections that it includes, run the pbm backup command as follows:
+To back up the **Invoices** database and all collections that it includes, run the `pbm backup` command as follows:
 
 ```bash
 pbm backup --ns=invoices.*
@@ -32,7 +32,7 @@ Percona Backup for MongoDB allows you to create selective backups of databases a
 To back up a specific namespace and include users and roles:
 
 !!! warning
-     Including users and roles (`--with-users-and-roles`) is not supported when backing up a specific collection (for example, `--ns=db.collection`). To include users and roles, you must back up the entire database by using `--ns='db.*'`.
+    Including users and roles (`--with-users-and-roles`) isn’t supported for collection-level backups (for example, `--ns="db.collection"`). To include users and roles, you must back up entire databases only, using `--ns="db.*"`. As a result, mixed patterns like `--ns="db1.*,db2.*,db3.col"` will fail because `db3.col` targets a single collection.
 
 ```sh
 pbm backup --ns="mydb.*" --with-users-and-roles
