@@ -13,6 +13,7 @@
     | [2.5.0](../release-notes/2.5.0.md) | Ability to restore databases with users and roles |
     | [2.8.0](../release-notes/2.8.0.md) | Ability to define multiple namespaces for backup |
     | [2.8.0](../release-notes/2.8.0.md) | Ability to restore a single non-sharded collection under a different name |
+    | [2.13.0](../release-notes/2.13.0.md) | Ability to backup selective databases with users and roles |
 
 You can back up and restore certain namespaces - databases or collections. For example, if your "Payments" collection in the "Customers" database was corrupted, you can restore only this collection from your full backup. Or, if your "Invoices" database contains sensitive data and must be backed up frequently, you can configure the backup of only this database. 
 

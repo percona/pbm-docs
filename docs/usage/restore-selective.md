@@ -33,7 +33,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
      - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.*>,<db2.*>`. For example, `--ns=customers.*,invoices.*`.
 
     - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
-
+    
     **Where:**
 
     - `--ns="mydb.*"` **→** Restores only the collections belonging to mydb.
