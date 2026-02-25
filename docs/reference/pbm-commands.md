@@ -448,11 +448,11 @@ pbm list [<flags>]
 
 **Select a storage when listing backups**
 
-If you use multiple storages, you can list backups from a specific storage using the --profile flag:
+If you use multiple storages, you can list backups from a specific storage using the `--profile` flag:
 
---profile=main to list backups from the main storage
+- `--profile=main` to list backups from the main storage
 
---profile=<profile_name> to list backups from an external storage configured as a profile"
+- `--profile=<profile_name>` to list backups from an external storage configured as a profile"
 
 **Example:**
 
@@ -469,7 +469,7 @@ pbm list --profile=minio
     2024-10-11T12:00:00Z   physical   s3-west     cno        no    2024-10-11T12:01:00Z
     ```
 
-For details and naming rules (reserved values and invalid empty profile), see [Select a storage with --profile]() in Multiple storages for backups.
+For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
 
 
 The command accepts the following flags:
@@ -924,7 +924,7 @@ Backups:
   2026-02-21T14:38:11Z 2026-02-22T08:59:59Z 88.40MB   s3-west   done
   ```
 
-For details and naming rules (reserved values and invalid empty profile), see [Select a storage with --profile]() in Multiple storages for backups.
+For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
 
 
 The command accepts the following flags:
