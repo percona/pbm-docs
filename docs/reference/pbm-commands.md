@@ -452,7 +452,7 @@ If you use multiple storages, you can list backups from a specific storage using
 
 - `--profile=main` to list backups from the main storage
 
-- `--profile=<profile_name>` to list backups from an external storage configured as a profile"
+- `--profile=<profile_name>` to list backups from an external storage configured as a profile
 
 **Example:**
 
@@ -466,7 +466,8 @@ pbm list --profile=minio
     Backup snapshots:
     NAME                   TYPE        PROFILE    SELECTIVE  BASE  RESTORE TIME
     2024-10-10T10:00:00Z   logical     main       no         no    2024-10-10T10:05:00Z
-    2024-10-11T12:00:00Z   physical   s3-west     cno        no    2024-10-11T12:01:00Z
+    2024-10-11T12:00:00Z   physical   s3-west     no         no     
+2024-10-11T12:01:00Z
     ```
 
 For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
@@ -476,7 +477,7 @@ The command accepts the following flags:
 
 | Flag                | Description                      |
 | ------------------- | -------------------------------- |
-| `--profile`         | Selects the storage to `query: main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used.                              |
+| `--profile`         | Selects the storage to `--profile=main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used.                              |
 | `--restore`         | Shows last N restores. Starting with version 2.0, the output shows restore names instead of backup names, as multiple restores can be done from a single backup.           |
 | `--size=0`          | Shows last N backups.  It also provides the information whether the restore is a selective one.         |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                 |
@@ -931,7 +932,7 @@ The command accepts the following flags:
 
 | Flag                   | Description                             |
 | ---------------------- | --------------------------------------- |
-| `--profile`| Selects the storage to `query: main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used. |
+| `--profile`| Selects the storage to `--profile=main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used. |
 | `-o`, `--out=text`     | Shows the status as either plain text or a JSON object. Supported values: `text`, `json` |
 | `-p`, `--priority`     | Shows the node priorities for the backup and point-in-time recovery oplog slicing. Available starting with version 2.6.0. |
 | `--replset-remapping`  | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|
