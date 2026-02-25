@@ -25,25 +25,25 @@ To make backups to additional – **external** backup storages, a concept of a c
 
 When multiple storages are configured, PBM commands can operate on:
 
-- The main storage (configured in PBM as the default backup destination), or
+- The main storage (configured in PBM as the default backup destination).
 
 - An external storage defined as a configuration profile.
 
 To choose which storage a command should use, pass the `--profile` flag.
 
-#### Commands that support --profile
+#### Commands that support `--profile`
 
-These PBM commands accept `--profile`:
+These PBM commands accept `--profile` flag:
 
-- pbm backup
+- `pbm backup`
 
-- pbm delete-backup
+- `pbm delete-backup`
 
-- pbm cleanup
+- `pbm cleanup`
 
-- pbm list
+- `pbm list`
 
-- pbm status
+- `pbm status`
 
 If you do not specify `--profile`, PBM uses the command’s default behavior (typically the main storage).
 
@@ -51,11 +51,9 @@ If you do not specify `--profile`, PBM uses the command’s default behavior (ty
 
 You can set `--profile` to one of the following:
 
-- `--profile=main`
-	Use the main storage.
+- `--profile=main` **→** Use the main storage.
 
-- `--profile=<profile_name>`
-	Use an external storage identified by an existing configuration profile name.
+- `--profile=<profile_name>` **→** Use an external storage identified by an existing configuration profile name.
 
 ??? example "Examples"
 	```bash
@@ -84,7 +82,7 @@ Some values are reserved:
 
 #### Removing a legacy profile named main
 
-If a profile named main already exists from older configurations, rename it by removing and re-adding it under a different name. For compatibility, the command below treats main as a profile name (not the main-storage keyword):
+If a profile named `main` already exists from older configurations, rename it by removing and re-adding it under a different name. For compatibility, the command below treats main as a profile name (not the reserved keyword):
 
 ```bash
 pbm profile remove "main"
