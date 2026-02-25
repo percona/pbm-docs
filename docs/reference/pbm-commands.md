@@ -912,10 +912,11 @@ PBM Agents:
 Backups:
 =======
 SNAPSHOTS:
-NAME                  TYPE     PROFILE  SELECTIVE  BASE   RESTORE TIME STATUS
-2026-02-20T10:00:01Z logical   main      no         no    2026-02 20T10:05:22Z  done
-2026-02-21T14:30:00Z  physical  s3-west  no         no    2026-02-21T14:38:10Z  done
-2026-02-22T09:00:00Z  logical   main     yes        no    2026-02-22T09:02:45Z  done
+NAME                  TYPE      PROFILE  SELECTIVE  BASE   RESTORE TIME 
+              STATUS
+2026-02-20T10:00:01Z  logical   main      no         no    2026-02 20T10:05:22Z  done
+2026-02-21T14:30:00Z  physical  s3-west   no         no    2026-02-21T14:38:10Z  done
+2026-02-22T09:00:00Z  logical   main      yes        no    2026-02-22T09:02:45Z  done
 
 PITR CHUNKS:
 START TIME           END TIME             SIZE      PROFILE   STATUS
