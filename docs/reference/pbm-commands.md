@@ -461,7 +461,7 @@ pbm list --profile=main
 pbm list --profile=minio
 ```
 
-??? example "Output"
+???  "Output"
     ```
     Backup snapshots:
     NAME                   TYPE        PROFILE    SELECTIVE  BASE  RESTORE TIME
@@ -896,7 +896,7 @@ Example:
 pbm status --profile=minio
 ```
 
-??? example "Output:
+??? "Output"
     ```bash
     Cluster:
 =======
