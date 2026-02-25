@@ -461,7 +461,7 @@ pbm list --profile=main
 pbm list --profile=minio
 ```
 
-??? "Output"
+??? "Sample output"
     ```bash   
     Backup snapshots:
     NAME                TYPE     PROFILE    SELECTIVE  BASE  RESTORE 
@@ -899,7 +899,7 @@ Example:
 pbm status --profile=minio
 ```
 
-??? "Output"
+??? "Sample output"
     ```bash
     Cluster:
     =======
