@@ -900,30 +900,31 @@ pbm status --profile=minio
 ??? "Output"
     ```bash
     Cluster:
-=======
-  MongoDB version: 6.0.5
-  PBM version: 2.4.0
-  Storage: s3://backups/bucket/main
+    =======
+      MongoDB version: 6.0.5
+      PBM version: 2.4.0
+      Storage: s3://backups/bucket/main
 
-PBM Agents:
-==========
-  Node1:27017: OK
-  Node2:27017: OK
-  Node3:27017: OK
+    PBM Agents:
+    ==========
+      Node1:27017: OK
+      Node2:27017: OK
+      Node3:27017: OK
 
-Backups:
-=======
-  SNAPSHOTS:
-  NAME                      TYPE      PROFILE   SELECTIVE  BASE  RESTORE TIME          STATUS
-  2026-02-20T10:00:01Z      logical   main      no         no    2026-02-20T10:05:22Z  done
-  2026-02-21T14:30:00Z      physical  s3-west   no         no    2026-02-21T14:38:10Z  done
-  2026-02-22T09:00:00Z      logical   main      yes        no    2026-02-22T09:02:45Z  done
+    Backups:
+    =======
+    SNAPSHOTS:
+    NAME               TYPE      PROFILE   SELECTIVE  BASE  RESTORE TIME          STATUS
+    2026-02-20T10:00:01Z  logical   main      no         no    2026-02-20T10:05:22Z  done
+    2026-02-21T14:30:00Z   physical  s3-west   no        no    2026-02-21T14:38:10Z  done
+    2026-02-22T09:00:00Z   logical   main      yes       no    2026-02-22T09:02:45Z  done
 
-  PITR CHUNKS:
-  START TIME           END TIME             SIZE      PROFILE   STATUS
-  2026-02-20T10:05:23Z 2026-02-21T14:29:59Z 145.20MB  main      done
-  2026-02-21T14:38:11Z 2026-02-22T08:59:59Z 88.40MB   s3-west   done
-  ```
+    PITR CHUNKS:
+    START TIME           END TIME             SIZE      PROFILE   
+      STATUS
+    2026-02-20T10:05:23Z 2026-02-21T14:29:59Z 145.20MB  main      done
+    2026-02-21T14:38:11Z 2026-02-22T08:59:59Z 88.40MB   s3-west   done
+    ```
 
 For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
 
