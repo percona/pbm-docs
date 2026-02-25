@@ -45,7 +45,7 @@ These PBM commands accept `--profile` flag:
 
 - `pbm status`
 
-If you do not specify `--profile`, PBM uses the command’s default behavior (typically the main storage).
+If you do not specify `--profile`, PBM uses the command’s default behavior.
 
 #### Allowed values
 
@@ -75,8 +75,6 @@ You can set `--profile` to one of the following:
 Some values are reserved:
 
 - `main` is a reserved CLI keyword that always refers to the **main storage**.
-- Do not create a configuration profile named `main`, because it cannot be referenced reliably via `--profile`.
-
 - Default and the **empty string ("")** must not be used as profile names.
 
 
