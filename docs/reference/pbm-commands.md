@@ -461,7 +461,7 @@ pbm list --profile=main
 pbm list --profile=minio
 ```
 **Sample output**
-```bash   
+```bash
 Backup snapshots:
 NAME                  TYPE     PROFILE   SELECTIVE  BASE   RESTORE TIME
 2024-10-10T10:00:00Z  logical  main      no         no      2024-10-10T10:05:00Z
