@@ -72,10 +72,8 @@ You can set `--profile` to one of the following:
 
 #### Reserved names and profile naming rules
 
-Some values are reserved:
-
 - `main` is a reserved CLI keyword that always refers to the **main storage**.
-- Default and the **empty string ("")** must not be used as profile names.
+- PBM CLI will reject empty string `("")` and `main` as profile names.
 
 
 #### Removing a legacy profile named main
