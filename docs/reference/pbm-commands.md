@@ -429,7 +429,7 @@ Returns the help information about `pbm` commands.
 
 ## pbm list
 
-Provides the list of backups and their states. Backup states are the following:
+Provides the list of backups and their states in a tabular format, making backup information easier to read and scan.
 
 * In progress - A backup is running
 * Canceled - A backup was canceled
@@ -446,10 +446,36 @@ The command has the following syntax:
 pbm list [<flags>]
 ```
 
+**Select a storage when listing backups**
+
+If you use multiple storages, you can list backups from a specific storage using the `--profile` flag:
+
+- `--profile=main` to list backups from the main storage
+
+- `--profile=<profile_name>` to list backups from an external storage configured as a profile
+
+**Example:**
+
+```bash
+pbm list --profile=main
+pbm list --profile=minio
+```
+**Sample output**
+```bash
+Backup snapshots:
+NAME                  TYPE     PROFILE   SELECTIVE  BASE   RESTORE TIME
+2024-10-10T10:00:00Z  logical  main      no         no     2024-10-10T10:05:00Z
+2024-10-11T12:00:00Z  physical s3-west   no         no     2024-10-11T12:01:00Z
+```
+
+For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
+
+
 The command accepts the following flags:
 
 | Flag                | Description                      |
 | ------------------- | -------------------------------- |
+| `--profile`         | Selects the storage to `--profile=main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used.                              |
 | `--restore`         | Shows last N restores. Starting with version 2.0, the output shows restore names instead of backup names, as multiple restores can be done from a single backup.           |
 | `--size=0`          | Shows last N backups.  It also provides the information whether the restore is a selective one.         |
 | `-o`, `--out=text`  | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                 |
@@ -845,7 +871,9 @@ The command accepts the following flags:
 
 ## pbm status
 
-Shows the status of Percona Backup for MongoDB. The output provides the following information:
+Shows the status of backups and their states in a tabular format, making backup information easier to read and scan.
+
+The output provides the following information:
 
 * `pbm-agent` processes version, state and node type it is running on (primary or secondary)
 * Currently running backups or restores
@@ -853,10 +881,56 @@ Shows the status of Percona Backup for MongoDB. The output provides the followin
 * Point-in-Time Recovery status
 * Valid time ranges for point-in-time recovery and the data size
 
+**Select a storage when checking status**
+
+If multiple storages are configured, you can query status information for a specific storage using the --profile flag:
+
+- `--profile=main` to use the main storage
+
+- `--profile=<profile_name>` to use an external storage profile
+
+Example:
+
+```bash
+pbm status --profile=minio
+```
+
+**Sample output**
+```bash
+Cluster:
+=======
+  MongoDB version: 6.0.5
+  PBM version:     2.4.0
+  Storage:         s3://backups/bucket/main
+
+PBM Agents:
+==========
+  Node1:27017: OK
+  Node2:27017: OK
+  Node3:27017: OK
+
+Backups:
+=======
+SNAPSHOTS:
+NAME                  TYPE      PROFILE  SELECTIVE  BASE  RESTORE TIME            STATUS
+2026-02-20T10:00:01Z  logical   main     no         no    2026-02-20T10:00:01Z     done
+2026-02-21T14:30:00Z  physical  s3-west  no         no    2026-02-21T14:38:10Z     done
+2026-02-22T09:00:00Z  logical   main     yes        no    2026-02-22T09:02:45Z     done
+
+PITR CHUNKS:
+START TIME            END TIME              SIZE      PROFILE  STATUS
+2026-02-20T10:05:23Z  2026-02-21T14:29:59Z  145.20MB  main     done
+2026-02-21T14:38:11Z  2026-02-22T08:59:59Z   88.40MB  s3-west  done
+```
+
+For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
+
+
 The command accepts the following flags:
 
 | Flag                   | Description                             |
 | ---------------------- | --------------------------------------- |
+| `--profile`| Selects the storage to `--profile=main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used. |
 | `-o`, `--out=text`     | Shows the status as either plain text or a JSON object. Supported values: `text`, `json` |
 | `-p`, `--priority`     | Shows the node priorities for the backup and point-in-time recovery oplog slicing. Available starting with version 2.6.0. |
 | `--replset-remapping`  | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`|

@@ -15,13 +15,79 @@ This ability to define multiple storages for backups brings the following benefi
 * Saves costs on data transfer in case of cloud storages
 * Increases effectiveness of following your organization’s backup policy either via your own applications and tools interfaced with PBM or via Percona Everest
 
-## Configuration profiles 
+## Configuration profiles
 
 By default, PBM stores backups and point-in-time recovery oplog slices to the remote backup storage which you defined in the configuration file during the initial setup. This is the **main** backup storage.
 
 To make backups to additional – **external** backup storages, a concept of a configuration profile is introduced. A configuration profile is a file that stores only the configuration for an external backup storage.
 
-Here’s the example of the configuration profile:
+### Select a storage with --profile
+
+When multiple storages are configured, PBM commands can operate on:
+
+- The main storage (configured in PBM as the default backup destination).
+
+- An external storage defined as a configuration profile.
+
+To choose which storage a command should use, pass the `--profile` flag.
+
+#### Commands that support `--profile`
+
+These PBM commands accept `--profile` flag:
+
+- `pbm backup`
+
+- `pbm delete-backup`
+
+- `pbm cleanup`
+
+- `pbm list`
+
+- `pbm status`
+
+If you do not specify `--profile`, PBM uses the command’s default behavior.
+
+#### Allowed values
+
+You can set `--profile` to one of the following:
+
+- `--profile=main` **→** Use the main storage.
+
+- `--profile=<profile_name>` **→** Use an external storage identified by an existing configuration profile name.
+
+??? example "Examples"
+	```bash
+	# List backups from main storage
+	pbm list --profile=main
+
+	# List backups from an external storage profile
+	pbm list --profile=minio
+
+	# Show status using an external storage profile
+	pbm status --profile=minio
+
+	# Write a backup to an external storage profile
+	pbm backup -t physical --profile=minio --wait
+	```
+
+#### Reserved names and profile naming rules
+
+- `main` is a reserved CLI keyword that always refers to the **main storage**.
+- PBM CLI will reject empty string `("")` and `main` as profile names.
+
+
+#### Removing a legacy profile named main
+
+If a profile named `main` already exists from older configurations, rename it by removing and re-adding it under a different name. For compatibility, the command below treats main as a profile name (not the reserved keyword):
+
+```bash
+pbm profile remove "main"
+pbm profile add "different_name" /path/to/config.yaml
+```
+
+After renaming, use `--profile=main` to reference the main storage, and `--profile=<different_name>` to reference the external profile.
+
+#### Example: Configuration profile
 
 ```yaml title="minio.yaml"
 storage:
