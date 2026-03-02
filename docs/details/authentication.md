@@ -151,7 +151,7 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
      1. Obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**. Kerberos will prompt you for the password and issue a Ticket-Granting Ticket (TGT):
      
          ```bash
-         sudo -u {USER} kinit pbm@PERCONATEST.COM
+         sudo -u {USER} kinit <username>@<KERBEROS_REALM>
          ```
      
          !!! note 
