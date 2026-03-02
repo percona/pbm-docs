@@ -133,14 +133,14 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
 
 === "Using a Keytab (Recommended)"
 
-     1. Set the env variable `KRB5_CLIENT_KTNAME` with the path to the generated keytab for `pbm` user. This way no password is required to get the ticket. 
+     1. Set the environment variable `KRB5_CLIENT_KTNAME` with the path to the generated keytab for the `pbm` user. This way no password is required to get the ticket. 
      
          ```bash
          export KRB5_CLIENT_KTNAME=/path/to/keytab
          ```
      
      
-     3. Specify the following string for MongoDB connection URI with only the username:
+     2. Specify the following string for MongoDB connection URI with only the username:
      
          ```bash
          PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
