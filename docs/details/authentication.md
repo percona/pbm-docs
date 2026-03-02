@@ -154,9 +154,10 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
          sudo -u {USER} kinit pbm@PERCONATEST.COM
          ```
      
-         Note that the `{USER}` is the user that you will run the `pbm-agent` process. PBM doesn't refresh its ticket, so when it expires you need to get a new one.   
+         !!! note 
+            Run the `pbm-agent` process as **{USER}**. PBM does not refresh its authentication ticket automatically, so when the ticket expires you must obtain a new one.
      
-     2. Specify the following string for MongoDB connection URI with only the username:
+     2. Specify the following string for the MongoDB connection URI with only the username:
      
          ```bash
          PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
