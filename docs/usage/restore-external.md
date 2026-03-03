@@ -12,6 +12,7 @@
 ### Restore from a backup made through PBM
 
 The following procedure describes the restore process from backups [made through PBM](backup-external.md). It is also possible to attempt restoring from snapshots made without PBM (this feature is experimental). See [Restore from a backup made outside PBM](#restore-from-a-backup-made-outside-pbm).
+{.power-number}
 
 1. To perform a restore, run the following command:
 
@@ -51,6 +52,7 @@ The following procedure describes the restore process from backups [made through
 #### Post-restore steps 
 
 After the restore is complete, do the following:
+{.power-number}
 
 1. Start all `mongod` nodes
 
@@ -94,6 +96,7 @@ To restore an external backup made without PBM, you need to specify the followin
 * a timestamp to restore to
 
 To restore from a backup, do the following:
+{.power-number}
 
 1. Start a restore
 

@@ -6,33 +6,68 @@
 
 You can restore a specific database or a collection either from a full or a selective backup. Read about [known limitations of selective restores](../features/known-limitations.md#selective-backups-and-restores).
 
-## Restore a database
+## Restore a database with users and roles
+
+!!! warning
+    - The `--with-users-and-roles` flag applies only to users and roles defined within the database being backed up or restored. Global users and roles defined at the cluster level **are not included**.
+    - If applications rely on roles or privileges that span multiple databases, a selective restore of a single database may not fully reestablish access control. Always verify dependencies before restore.
+    - Restoring users and roles will overwrite existing definitions in the target database. Review current role configurations before restore to avoid accidental loss of custom changes.
+
+Percona Backup for MongoDB allows you to perform selective restore of databases and collections. Additionally, you can choose to include **users and roles defined** in the database in your selective backup, ensuring that access control is restored along with the data.
+{.power-number}
 
 1. List the backups
 
     ```bash
     pbm list
     ```
-    
-2. Run the ``pbm restore`` command in the format:
 
-    ```bash
-    pbm restore <backup_name> --ns <database.collection>
+2. To restore a specific database and include users and roles, run the following command.
+
+    ```sh
+    pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
     ```
 
- You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.col1>,<db2.*>`. For example, `--ns=customers.payments,invoices.*`.
+    - To restore without the users and roles, skip the `--with-users-and-roles` flag.
 
-During the restore, Percona Backup for MongoDB retrieves the file for the specified database / collection and restores it.
+     - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.*>,<db2.*>`. For example, `--ns=customers.*,invoices.*`.
 
-### Restore with users and roles
+    - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
+    
+    **Where:**
 
-To restore a [custom database with users and roles](../features/selective-backup.md#restore-a-database-with-users-and-roles) from a full backup, add the `--with-users-and-roles` flag to the `pbm restore` command:
+    - `--ns="mydb.*"` **→** Restores only the collections belonging to mydb.
 
-```bash
-pbm restore <backup_name> --ns <database.*> --with-users-and-roles
-```
+    - `--with-users-and-roles` **→** Restores the database-defined users and roles alongside the data.
 
-### Restore a collection under a different name
+    - `<backup-name>` **→** The identifier of the backup to restore from (as shown in Percona Backup for MongoDB backup listings and logs).
+
+    ??? info "What happens under the hood?"
+        - Percona Backup for MongoDB restores the selected collections within `mydb` from the specified backup.
+        - Percona Backup for MongoDB restores roles where the db field matches `mydb`.
+        - Percona Backup for MongoDB restores users where the db field matches `mydb`, including their role assignments within `mydb`.
+
+    ??? example "Example"
+
+        ```sh
+        pbm restore --ns="invoices.*" --with-users-and-roles 2025-03-10T10:44:52Z
+        ```
+
+        This command restores all collections in the `invoices` database, along with the users and roles defined in `invoices`, from the backup `2025-03-10T10:44:52Z`. 
+
+### Namespace requirements
+
+The following are the namespace requirements:
+{.power-number}
+
+1. The `--with-users-and-roles` flag requires a collection wildcard in the namespace. 
+
+    For example, `--ns="test.*"` is valid, but `--ns="test.col"` is not valid.
+
+2. Use `--with-users-and-roles` only with selective restore (i.e., when you specify `--ns`). If you are not using `--ns`, you are not performing a selective restore, and this option is not required.
+
+
+## Restore a collection under a different name
 
 You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.
 
@@ -55,6 +90,7 @@ pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database
 ## Post-restore steps
 
 After the restore is complete, do the following:
+{.power-number}
 
 1. Start the balancer and all mongos nodes to reload the sharding metadata.
 2. We recommend to make a fresh backup to serve as the new base for future restores.
