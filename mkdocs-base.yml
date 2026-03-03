@@ -237,6 +237,7 @@ nav:
       - AWS storage: details/s3-storage.md
       - details/minio.md
       - details/gcs.md
+      - Workload Identity authentication: details/workload-identity-auth.md
       - details/azure.md
       - details/oss.md
       - details/filesystem-storage.md
