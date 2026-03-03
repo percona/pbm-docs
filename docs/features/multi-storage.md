@@ -105,25 +105,48 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
 
 ## Delete backups
 
-You can delete backups from an external storage only by name. 
+You can delete backups from an external storage by name or by specifying a time threshold with the `--profile` flag. To delete backups older than a specified time from an external storage, you must run PBM version 2.13.0 and newer.
 
-Run the `pbm delete` command and pass the backup name:
+=== "Delete by backup name"
 
-```bash
-pbm delete-backup 2024-06-25T10:54:55Z
-```
+    Run the `pbm delete-backup` command and pass the backup name:
+
+    ```bash
+    pbm delete-backup 2024-06-25T10:54:55Z
+    ```
+
+=== "Delete backups older than specified time"
+
+    Starting with version [2.13.0](../release-notes/2.13.0.md), you can delete backups that are older than a specified time from external storages. Use the `--older-than` flag to set the retention period, and include the `--profile` flag to define the target storage. 
+    The `--profile` flag works only with the `--older-than` flag. If you pass it with the backup name, PBM fails the delete operation and reports an error.
+
+    You can use either the `pbm delete-backup` command to include only backups, or `pbm cleanup` command to also include point-in-time recovery oplog slices:
+
+    Example of the `pbm delete-backup` command:
+    
+    ```bash
+    pbm delete-backup --older-than 30d --profile=minio -y
+    ```
+
+    Example of the `pbm cleanup` command:
+
+    ```bash
+    pbm cleanup --older-than 30d --profile=minio -y
+    ```
+
+    When you omit the `--profile` flag, PBM deletes outdated data on the default (main) storage and automatically updates the metadata without requiring a manual resync.
 
 ## Implementation specifics
 
 1. You can make backups of any type except snapshot-based ones on the external storage.
 2. To start point-in-time recovery oplog slicing, you must make a backup on the main storage. A backup from an external storage is not considered a valid base backup for oplog slicing.
 3. PBM saves point-in-time recovery oplog ranges only on the main storage. Backups are saved on the storage that you define when starting a backup. 
-4. Backup process on the external storage doesn’t stop point-in-time recovery oplog slicing on the main storage. Thus, PBM saves oplog chunks related to such backups on both the main and the external storages
+4. Backup process on the external storage doesn't stop point-in-time recovery oplog slicing on the main storage. Thus, PBM saves oplog chunks related to such backups on both the main and the external storages
 5. The whole incremental chain must be stored on the same storage. To change the storage for incremental backups, you must start a new backup chain with the incremental base backup on the new storage.
 6. To restore from a backup on external storage, `pbm-agents` must have read permissions on it.
 7. To make a point-in-time recovery, you must specify the backup name via the `--base-snapshot` flag. Without it, PBM searches for the base backup on the main storage.
-8. You can delete backups from external storages only by name using the `pbm delete-backup <backup-name>` command. 
-9. You can delete backups older than the specified time using the `pbm delete-backup --older-than <time>` or `pbm cleanup --older-than <time>` commands only from the **main** storage. 
+8. You can delete backups from external storages by name using the `pbm delete-backup <backup-name>` command. 
+9. Starting with version 2.13.0, you can delete backups older than the specified time from external storages using the `pbm delete-backup --older-than <time> --profile=<profile-name>` or `pbm cleanup --older-than <time> --profile=<profile-name>` commands. Without the `--profile=<profile-name>` flag, PBM deletes data on the main storage. When you run cleanup on the main storage, PBM automatically updates the metadata without requiring a manual resync. 
 
 
 
