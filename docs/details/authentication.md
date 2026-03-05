@@ -157,12 +157,11 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
          where `{USER}` is the OS user account that runs the `pbm-agent` process.
      
          !!! note 
-             Run the `pbm-agent` process as **{USER}**. PBM does not refresh its authentication ticket automatically, so when the ticket expires you must obtain a new one.
+             Run the `pbm-agent` process as `{USER}`. PBM does not refresh its authentication ticket automatically, so when the ticket expires you must obtain a new one.
      
      2. Specify the following MongoDB connection URI without the password.
      
-         ```bash
-         PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+         ```bash         PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
          ```
 
 === "Using username and password"
