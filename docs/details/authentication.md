@@ -157,8 +157,7 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
          where `{USER}` is the OS user account that runs the `pbm-agent` process.
      
         !!! note
-              
-            Run `pbm-agent` as **`{USER}`**, where `{USER}` is the OS account that authenticates to Kerberos and owns the ticket cache. PBM does not refresh Kerberos tickets automatically. When the ticket expires, run `kinit` again **as the same `{USER}`** so the ticket cache is shared with `pbm-agent`.
+        Run `pbm-agent` as **`{USER}`**, where `{USER}` is the OS account that authenticates to Kerberos and owns the ticket cache. PBM does not refresh Kerberos tickets automatically. When the ticket expires, run `kinit` again **as the same `{USER}`** so the ticket cache is shared with `pbm-agent`.
      
      2. Specify the following MongoDB connection URI without the password.
      
