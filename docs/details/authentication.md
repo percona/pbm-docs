@@ -155,7 +155,7 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
          ```
      
          !!! note 
-            Run the `pbm-agent` process as **{USER}**. PBM does not refresh its authentication ticket automatically, so when the ticket expires you must obtain a new one.
+             Run the `pbm-agent` process as **{USER}**. PBM does not refresh its authentication ticket automatically, so when the ticket expires you must obtain a new one.
      
      2. Specify the following MongoDB connection URI without the password.
      
