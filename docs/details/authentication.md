@@ -165,11 +165,13 @@ You can choose any of these methods to authenticate `pbm` user against Kerberos:
 
 === "Using username and password"
 
-     You can authenticate using a connection string URI specifying your URL-encoded Kerberos principal, password, and the address of your MongoDB server:
+     You can authenticate using a connection string URI specifying your URL-encoded Kerberos principal and password, and the address of your MongoDB server:
      
      ```bash
      PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>:<PASSWORD>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
      ```
+     
+     Make sure that `<PASSWORD>` is also percent-encoded if it contains reserved characters (see [Passwords with special characters](#passwords-with-special-characters)).
 
 ### LDAP binding
 
