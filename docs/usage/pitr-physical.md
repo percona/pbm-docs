@@ -18,6 +18,9 @@ Percona Backup for MongoDB recognizes if it is a full or an incremental backup a
 
 You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
+```bash
+pbm describe-restore <restore-name> -c pbm_config.yaml
+```
 
 !!! note    
 
