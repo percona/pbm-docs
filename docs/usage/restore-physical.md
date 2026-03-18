@@ -55,7 +55,7 @@
 3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
     ```bash
-    pbm describe-restore <restore-name> -c pbm_config.yaml
+    pbm describe-restore <restore_name> -c pbm_config.yaml
     ```
 
 A restore has the `Done` status when it succeeded on all nodes. 
