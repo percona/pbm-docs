@@ -54,6 +54,10 @@
 
 3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
+    ```bash
+    pbm describe-restore <restore_name> -c pbm_config.yaml
+    ```
+
 A restore has the `Done` status when it succeeded on all nodes. 
 
 If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
