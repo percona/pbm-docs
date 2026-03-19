@@ -50,19 +50,38 @@ Here are the steps to integrate PBM with systemd's [System and service credentia
     shred -u pbm_uri.yaml
     ```
 
-4. Update the PBM systemd unit file 
-    
-    Edit:
-
-    `(/lib/systemd/system/pbm-agent.service)`
-
-    Update [Service]:
+4. Edit the systemd unit file (default location at `/lib/systemd/system/pbm-agent.service)` and in the `[Service]` section, add the `LoadCredentialEncrypted` and `PrivateMounts directives:`
 
     ```
     [Service]
-       LoadCredentialEncrypted=pbm_connection.yaml:/path/to/pbm_connection.yaml.cred
+    LoadCredentialEncrypted=pbm_connection.yaml:/path/to/pbm_connection.yaml.cred
     PrivateMounts=yes
     ExecStart=/usr/bin/pbm-agent -f /run/credentials/%n/pbm_connection.yaml
     ```
 
+5. Reload the systemd manager configuration:
+
+    ```sh
+    sudo systemctl daemon-reload
+    ```
+
+6. Restart the PBM agent:
+
+    ```sh
+    sudo systemctl restart pbm-agent
+    ```
+
+    ??? info "What happens under the hood"
+        Systemd automatically decrypts the credential during service startup and places it in a temporary, non-swappable directory.
+        - The path to the decrypted plaintext is stored in the $CREDENTIALS_DIRECTORY environment variable.
+        - In the example above, the PBM agent will read the contents of the file at `%d/pbm_connection.yaml` as its connection string.
+
+
+## How to verify?
+
+Run the following command to ensure the service can see the credential (this only works while the service is active):
+
+```sh
+sudo cat /run/credentials/pbm-agent.service/pbm_connection.yaml
+```
 
