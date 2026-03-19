@@ -4,19 +4,28 @@
 
 Percona Backup for MongoDB (PBM) requires access to sensitive credentials such as:
 
-- MongoDB connection URI (`PBM_MONGODB_URI`)
+- **MongoDB connection URI** (`PBM_MONGODB_URI`)
 
-- Object storage credentials defined in PBM configuration (pbm config)
+- **Object storage credentials** defined in PBM configuration (pbm config)
 
 By default, these credentials are often stored in plaintext in environment variables or configuration files. This introduces security risks such as credential leakage and unauthorized access.
 
-This section describes how to securely manage PBM credentials using systemd service credentials.
+This section describes how to securely manage PBM credentials using **systemd service credentials**.
 
-## Why use systemd credentails
+## Why use systemd credentials?
 
-Storing credentials in plaintext significantly increases the risk of compromise. Secrets placed in configuration files or environment variables can be exposed through file access, process inspection, or unauthorized system access.
+Storing credentials in plaintext significantly increases the risk of compromise. Secrets placed in configuration files or environment variables can be exposed through:
 
-`systemd` credentials mitigate these risks by enforcing strict runtime security controls.
+- File access
+- Process inspection (e.g., `ps`, `/proc`)
+- Unauthorized system access.
+
+**`systemd` credentials** mitigate these risks by:
+
+- Encrypting credentials at rest
+- Decrypting them only at service runtime
+- Storing them in a temporary, non-swappable directory
+- Restricting access to the service itself
 
 
 ## Prerequisites
@@ -73,13 +82,14 @@ Here are the steps to integrate PBM with systemd's [System and service credentia
 
     ??? info "What happens under the hood"
         Systemd automatically decrypts the credential during service startup and places it in a temporary, non-swappable directory.
+        
         - The path to the decrypted plaintext is stored in the $CREDENTIALS_DIRECTORY environment variable.
         - In the example above, the PBM agent will read the contents of the file at `%d/pbm_connection.yaml` as its connection string.
 
 
 ## How to verify?
 
-Run the following command to ensure the service can see the credential (this only works while the service is active):
+Run the following command to ensure the service can see the credential. This file is only accessible while the service is running and is stored in a secure, temporary directory.
 
 ```sh
 sudo cat /run/credentials/pbm-agent.service/pbm_connection.yaml
