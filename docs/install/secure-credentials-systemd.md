@@ -82,8 +82,8 @@ Here are the steps to integrate PBM with systemd's [System and service credentia
 
     ??? info "What happens under the hood"
         Systemd automatically decrypts the credential during service startup and places it in a temporary, non-swappable directory.
-        
-        - The path to the decrypted plaintext is stored in the $CREDENTIALS_DIRECTORY environment variable.
+
+        - The path to the decrypted plaintext is stored in the `$CREDENTIALS_DIRECTORY` environment variable.
         - In the example above, the PBM agent will read the contents of the file at `%d/pbm_connection.yaml` as its connection string.
 
 
