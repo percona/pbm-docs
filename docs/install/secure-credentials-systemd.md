@@ -58,7 +58,7 @@ Here are the steps to integrate PBM with systemd's [System and service credentia
 
     Update [Service]:
 
-    ```ini
+    ```
     [Service]
        LoadCredentialEncrypted=pbm_connection.yaml:/path/to/pbm_connection.yaml.cred
     PrivateMounts=yes
