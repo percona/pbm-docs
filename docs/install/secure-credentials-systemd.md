@@ -41,7 +41,7 @@ Storing credentials in plaintext significantly increases the risk of compromise.
 Here are the steps to integrate PBM with systemd's [System and service credentials :octicons-link-external-16:](https://systemd.io/CREDENTIALS/)
 {.power-number}
 
-1. Create a **temporary file** containing your connection string:
+1. Create a **temporary PBM agent YAML config file** containing the `mongodb-uri` key with your connection string:
 
     ```sh
     echo "mongodb-uri: mongodb://pbmuser:secretpwd@localhost:27017/?authSource=admin" > pbm_uri.yaml
