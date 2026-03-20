@@ -62,6 +62,10 @@ You can change the `username` and `password` values and specify other options fo
 
 The `pbm-agent.service` systemd unit file includes the location of the environment file. You set the MongoDB URI connection string for the `PBM_MONGODB_URI` variable within the environment file for every `pbm-agent`. 
 
+!!! warning "Security recommendation"
+    Avoid storing credentials (such as `PBM_MONGODB_URI`) in plaintext environment variables or service files. Instead, use `systemd` credentials for secure, encrypted, runtime-only access. For step-by-step instructions, see [Secure credentials with systemd](secure-credentials-systemd.md).
+
+
 ??? tip "How to find the environment file"
 
     In Ubuntu and Debian, the pbm-agent.service systemd unit file is at the path `/lib/systemd/system/pbm-agent.service`.
