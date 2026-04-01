@@ -30,11 +30,20 @@ Storing credentials in plaintext significantly increases the risk of compromise.
 
 ## Prerequisites
 
-- systemd version 250 or higher. To check your version, run:
+- systemd version 250 or higher. 
 
-    ```sh
+    To check the installed `systemd` version on your system, run:
+
+    ```bash
     systemctl --version
     ```
+
+    ??? example "Output"
+
+        ```sh
+        systemd 252 (252.5-2ubuntu3)
+        +PAM +AUDIT +SELINUX ...
+        ```
 
     The following operating systems meet this requirement:
 
