@@ -30,7 +30,19 @@ Storing credentials in plaintext significantly increases the risk of compromise.
 
 ## Prerequisites
 
-- systemd version 250 or higher
+- systemd version 250 or higher. To check your version, run:
+
+    ```sh
+    systemctl --version
+    ```
+
+    The following operating systems meet this requirement:
+
+    - RHEL/OL/Rocky Linux 9
+    - Ubuntu 24.04
+    - Debian 12
+    - Amazon Linux 2023
+
 - Root or sudo privileges
 - (Optional) TPM2 support for hardware-backed encryption
 - Kernel 5.4+
@@ -65,7 +77,7 @@ Here are the steps to integrate PBM with systemd's [System and service credentia
     [Service]
     LoadCredentialEncrypted=pbm_connection.yaml:/path/to/pbm_connection.yaml.cred
     PrivateMounts=yes
-    ExecStart=/usr/bin/pbm-agent -f /run/credentials/%n/pbm_connection.yaml
+    ExecStart=/usr/bin/pbm-agent -f %d/pbm_connection.yaml
     ```
 
 5. Reload the systemd manager configuration:
