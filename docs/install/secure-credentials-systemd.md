@@ -4,7 +4,7 @@
 
 Percona Backup for MongoDB (PBM) requires access to sensitive credentials such as:
 
-- **MongoDB connection URI** (`PBM_MONGODB_URI`)
+- **MongoDB connection URI** 
 
 - **Object storage credentials** defined in PBM configuration (pbm config)
 
