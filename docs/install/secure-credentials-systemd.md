@@ -80,7 +80,7 @@ Here are the steps to integrate PBM with systemd's [System and service credentia
     shred -u pbm_uri.yaml
     ```
 
-4. Edit the systemd unit file (default location at `/lib/systemd/system/pbm-agent.service`) and in the `[Service]` section, add the `LoadCredentialEncrypted` and `PrivateMounts` directives:
+4. Edit the systemd unit file (for example, `/lib/systemd/system/pbm-agent.service` or `/usr/lib/systemd/system/pbm-agent.service`, depending on your distribution; see the earlier *How to find the environment file* section) and in the `[Service]` section, add the `LoadCredentialEncrypted` and `PrivateMounts` directives:
 
     ```
     [Service]
