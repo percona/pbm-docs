@@ -41,10 +41,10 @@ Storing credentials in plaintext significantly increases the risk of compromise.
 
       The following operating systems meet this requirement:
 
-        - RHEL/OL/Rocky Linux 9
-        - Ubuntu 24.04
-        - Debian 12
-        - Amazon Linux 2023
+       - RHEL/OL/Rocky Linux 9
+       - Ubuntu 24.04
+       - Debian 12
+       - Amazon Linux 2023
 
 - Root or sudo privileges
 - (Optional) TPM2 support for hardware-backed encryption
