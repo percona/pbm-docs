@@ -2,15 +2,9 @@
 
 ## Overview
 
-Percona Backup for MongoDB (PBM) requires access to sensitive credentials such as:
+This guide describes how to securely store the **MongoDB connection URI** (`mongodb-uri`) for `pbm-agent` using **systemd service credentials**. The same technique can be applied to other sensitive PBM credentials, such as object storage credentials in the PBM configuration.
 
-- **MongoDB connection URI** 
-
-- **Object storage credentials** defined in PBM configuration
-
-By default, these credentials are often stored in plaintext in environment variables or configuration files. This introduces security risks such as credential leakage and unauthorized access.
-
-This section describes how to securely manage PBM credentials using **systemd service credentials**.
+By default, credentials are often stored in plaintext in environment variables or configuration files. This introduces security risks such as credential leakage and unauthorized access.
 
 ## Why use systemd credentials?
 
