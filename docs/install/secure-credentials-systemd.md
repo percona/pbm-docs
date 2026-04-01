@@ -6,7 +6,7 @@ Percona Backup for MongoDB (PBM) requires access to sensitive credentials such a
 
 - **MongoDB connection URI** 
 
-- **Object storage credentials** defined in PBM configuration (pbm config)
+- **Object storage credentials** defined in PBM configuration
 
 By default, these credentials are often stored in plaintext in environment variables or configuration files. This introduces security risks such as credential leakage and unauthorized access.
 
