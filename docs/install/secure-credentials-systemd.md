@@ -45,7 +45,7 @@ Storing credentials in plaintext significantly increases the risk of compromise.
         +PAM +AUDIT +SELINUX ...
         ```
 
-        The following operating systems meet this requirement:
+      The following operating systems meet this requirement:
 
         - RHEL/OL/Rocky Linux 9
         - Ubuntu 24.04
