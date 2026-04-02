@@ -42,6 +42,10 @@ Execute the command while connecting to the config server replica set if it is a
 cluster. Otherwise, connect to the non-sharded replica set as normal. (See
 [MongoDB connection strings - A Reminder (or Primer)](../details/authentication.md) if you are not familiar with MongoDB connection strings yet.)
 
+!!! Note
+
+    You don't need to keep the pbm_config.yaml file after running the `pbm config` command. Make sure to delete it to prevent exposure of any sensitive information. 
+
 ## Accessing or updating single config values
 
 You can set a single value at a time. For nested values, use dot-concatenated key names as shown in the following example:
