@@ -168,7 +168,9 @@ Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log 
 - `ResponseEventMessage` -logs individual event stream messages read/received by the client from the AWS S3 (response events) 
 
 !!! warning
+
     `RequestWithBody` and `ResponseWithBody` can log full HTTP payloads and related sensitive information. Enable them only temporarily for troubleshooting, and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.
+
 Additionally, for backward compatibility with PBM versions older than 2.10.0, the following deprecated options are supported:
 
 | Deprecated value | Automatically translated into         |
