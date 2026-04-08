@@ -181,7 +181,7 @@ Additionally, for backward compatibility with PBM versions older than 2.10.0, th
 
 To specify several event types, separate them by comma. When undefined, no S3 debug logging is performed. 
 
-Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see [Logging configuration definition](../manage/logpath.md).
+Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see [Logging configuration definition](../manage/logpath.md#logging-configuration-options).
 
 #### Example
 Here's an example and recommended configuration when troubleshooting AWS S3 communication:
