@@ -165,7 +165,7 @@ Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log 
 - `ResponseWithBody` - logs incoming HTTP responses, including the full response body
 - `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints 
 - `RequestEventMessage` - logs individual event stream messages written/sent from the client to the AWS S3 (request events)
-- `ResponseEventMessage` -logs individual event stream messages read/received by the client from the AWS S3 (response events) 
+- `ResponseEventMessage` - logs individual event stream messages read/received by the client from the AWS S3 (response events) 
 
 Additionally, for backward compatibility with PBM versions older than 2.10.0, following deprecated options are possible:
 
