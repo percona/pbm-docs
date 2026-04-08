@@ -119,7 +119,10 @@ serverSideEncryption:
 
 You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the `pbm logs` output so that you can debug and diagnose S3 request issues or failures.
 
-To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
+To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `Signing`, `Retries`, `Request`, `RequestWithBody`, `Response`, `ResponseWithBody`, `DeprecatedUsage`, `RequestEventMessage`. Additionally, for backward compatibility with PBM versions older than 2.10.0, deprecated values are: `LogDebug`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
+
+See [AWS S3 storage options](../reference/configuration-options.md#storage-s3-debugloglevel) for details and an example.
+
 
 ### Storage classes 
 
