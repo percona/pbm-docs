@@ -155,25 +155,41 @@ The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storag
 *Type*: string <br>
 *Required*: NO
 
-Enables S3 debug logging for different types of S3 requests. S3 log messages are printed in the `pbm logs` output.
+Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log messages are printed in the `pbm logs` output. Possible values:
 
-Starting with version 2.10.0, PBM uses AWS SDK v2. The AWS SDK v1 values are deprecated. They are kept for backward compatibility.
+- `Signing` - logs the request signing process
+- `Retries` - logs each retry attempt when a request fails with a retryable error, including the retry count
+- `Request` - logs outgoing HTTP request metadata (method, URL, headers) without the body
+- `RequestWithBody` - logs outgoing HTTP requests, including the full request body
+- `Response` - logs incoming HTTP response metadata (status code, headers) without the body
+- `ResponseWithBody` - logs incoming HTTP responses, including the full response body
+- `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints 
+- `RequestEventMessage` - logs individual event stream messages written/sent from the client to the AWS S3 (request events)
+- `ResponseEventMessage` -logs individual event stream messages read/received by the client from the AWS S3 (response events) 
 
-Please find the mapping table below:
+Additionally, for backward compatibility with PBM versions older than 2.10.0, following deprecated options are possible:
 
-| AWS SDK v1 value | AWS SDK v2 value |
-|------------------|------------------|
-| `LogDebug`       | `Request` <br> `Response`|
-| `Signing`        | `Signing`|
-| `HTTPBody`       | `RequestWithBody` <br> `ResponseWithBody`|
-| `RequestRetries` | `DebugWithRequestRetries`|
-| `RequestErrors`  | `DebugWithRequestErrors`|
-| `EventStreamBody`| `RequestWithBody` <br> `ResponseWithBody`|
+| Deprecated value | Automatically translated into         |
+|------------------|---------------------------------------|
+| `LogDebug`       | `Request`,`Response`                  |
+| `HTTPBody`       | `RequestWithBody`, `ResponseWithBody` |
+| `RequestRetries` | `Retries`                             |
+| `RequestErrors`  | `Response`                            |
+| `EventStreamBody`| `RequestWithBody`, `ResponseWithBody` |
 
+To specify several event types, separate them by comma. When undefined, no S3 debug logging is performed. 
 
-To specify several event types, separate them by comma. To lean more about the event types, see [the documentation :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go@v1.40.7/aws#LogLevelType)
+Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see [Logging configuration definition](../manage/logpath.md).
 
-When undefined, no S3 debug logging is performed.
+#### Example
+Here's an example and recommended configuration when troubleshooting AWS S3 communication:
+
+```yaml
+storage:
+  type: s3
+  s3:
+    debugLogLevels: RequestWithBody, ResponseWithBody
+```
 
 ### storage.s3.insecureSkipTLSVerify
 
