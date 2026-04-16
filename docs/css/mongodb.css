@@ -2,7 +2,10 @@
 
 .md-header,
 .md-tabs {
-background-color: #1fa23a;
+    background: 
+        linear-gradient(
+            #1fa23a
+        );
 }
 
 .superNav,
