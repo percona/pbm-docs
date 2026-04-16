@@ -7,7 +7,7 @@
 1. To make a snapshot-based backup, run the [`pbm backup`](../reference/pbm-commands.md#pbm-backup) command with the type `external`:
 
     ```bash
-    pbm backup -t external 
+    pbm backup -t external
     ```    
 
     When executing the command, PBM does the following:    
@@ -22,13 +22,17 @@
        <node-list>
        ```    
 
-    You also see the backup name. 
+    In case of replica sets, `<node-list>` will include a single node.
+    In case of sharded clusters, `<node-list>` will include a config node, and a node for each shard.
+    Node [priority](backup-priority.md) affects the nodes that are selected and included in `<node-list>`.
+
+    You also see the backup name.
 
 2. (Optional) You can check the backup progress with the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup). The command output provides the backup state and what nodes are running backup.
 
-3. At this stage, you need to copy the `dataDir` contents of each node in the `<node-list>` to the storage / make a snapshot using the technology of your choice. 
+3. At this stage, you need to copy the `dataDir` contents of each node in the `<node-list>` to the storage / make a snapshot using the technology of your choice.
 
-4. After the copy/snapshot is complete, run the following command to close the `$backupCursor` and finish the backup: 
+4. After the copy/snapshot is complete, run the following command to close the `$backupCursor` and finish the backup:
 
     ```bash
     pbm backup-finish <backup_name>
@@ -43,4 +47,3 @@
 
 * [Backup and restore types](../features/backup-types.md)
 * [Schedule backups](../usage/schedule-backup.md)
-
