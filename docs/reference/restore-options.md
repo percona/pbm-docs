@@ -82,7 +82,9 @@ restore:
   timeouts:
     balancerStop: 0
 ```
+
 - 0 (default): Wait indefinitely until the balancer stops
+
 - > 0: Maximum time (in seconds) to wait before failing the restore
 
 ??? example "Example"
