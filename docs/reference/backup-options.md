@@ -64,16 +64,12 @@ Timeout options control how long Percona Backup for MongoDB (PBM) waits for spec
 ### backup.timeouts.balancerStop
 
 *Type*: int <br>
-*Default*: 0 (disables the timeout and waits indefinitely for the balancer to stop)
-
+*Default*: 0
 Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a backup.
 
-- `0`: No timeout. PBM waits indefinitely for the balancer to stop before starting the backup.
-- `> 0`: Maximum time (in seconds) to wait before failing the backup.
+`> 0`: Maximum time (in seconds) to wait before failing the backup
 
-PBM requires the balancer to be stopped to ensure a consistent backup in sharded clusters. If the balancer does not stop within the specified time, the backup operation fails.
-
-PBM attempts to stop the balancer before starting the backup. The timer starts when PBM issues the stop request. If the timeout is reached and the balancer is still active, the backup is aborted.
+PBM stops the balancer before starting a backup to ensure consistency in sharded clusters. If the balancer does not stop within the specified timeout, the backup operation fails.
 
 ```yaml
 backup:
@@ -90,6 +86,13 @@ backup:
     ```
 
     In this example, PBM waits up to 60 seconds for the balancer to stop. If the balancer is still running after this period, the backup fails.
+
+
+This is useful when you want to:
+
+- Avoid indefinite waits during backup operations
+- Enforce stricter operational time limits in automated environments
+- Detect and fail fast if the balancer cannot be stopped
 
 ### backup.timeouts.startingStatus
 
