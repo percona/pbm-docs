@@ -46,7 +46,7 @@ The number of workers that request data chunks from the storage during the resto
 ## restore.maxDownloadBufferMb
 
 *Type*: int <br>
- 
+*Default*: `numDownloadWorkers * downloadChunkMb * 16` MB when unspecified or set to `0`
 
 The maximum size of the in-memory buffer that is used to download files from the S3 storage. When unspecified or set to 0, the size cannot exceed the value calculated as `numDownloadWorkers * downloadChunkMb * 16` MB. By default, the number of CPU cores * 32 * 16 MB.
 
