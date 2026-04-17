@@ -53,7 +53,7 @@
 
     **Interactive confirmation**
 
-    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    !!! admonition "Version added: 2.14.0"
 
     To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution.
 
