@@ -52,10 +52,6 @@
 
     During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times.
 
-    ```bash
-    pbm restore <backup_name>
-    ```
-
     **Interactive confirmation**
 
     To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution.
