@@ -111,13 +111,13 @@ The wait time (in seconds) for PBM to start backups. This timeout controls how l
 
   The 0 (zero) value resets the timeout to the default 33 seconds.
 
-### backup.oplogSpanMin
+## backup.oplogSpanMin
 
 *Type*: float64 <br>
 
 The duration (in minutes) of oplog slices saved with the logical backup snapshot. By default, the duration of backup oplog slices equals to the value defined for the [`pitr.oplogSpanMin`](pitr-options.md#pitroplogspanmin) option (default - 10 minutes). You can reduce the duration in heavy-loaded environments. Note that setting the duration to shorter periods may increase the overall backup execution time. 
 
-### backup.numParallelCollections
+## backup.numParallelCollections
 
 *Type*: int <br>
 *Default*: number of CPU cores / 2
