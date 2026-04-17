@@ -15,7 +15,7 @@ backup:
   numParallelCollections: <int>
 ```
 
-### priority
+## priority
 
 *Type*: array of strings
 
@@ -27,7 +27,7 @@ If not set, the replica set nodes have the default priority as follows:
 * secondary nodes - 1.0
 * primary node - 0.5
 
-### backup.compression
+## backup.compression
 
 *Type*: string <br>
 *Default*: s2
@@ -39,7 +39,7 @@ When `none` is specified, backups are made without compression.
 Supported values: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2`.
 
 <!-- backup-compression-level: -->
-### backup.compressionLevel
+## backup.compressionLevel
 
 *Type*: int
 
@@ -56,9 +56,47 @@ The following table shows available compression levels per compression method:
 
 Note that the greater value you specify, the more time and computing resources it will take to compress the data.
 
+
+## Backup timeouts
+
+Timeout options control how long Percona Backup for MongoDB (PBM) waits for specific conditions during backup operations.
+
+### backup.timeouts.balancerStop
+
+*Type*: int <br>
+*Default*: 0
+Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a backup.
+
+`> 0`: Maximum time (in seconds) to wait before failing the backup
+
+PBM stops the balancer before starting a backup to ensure consistency in sharded clusters. If the balancer does not stop within the specified timeout, the backup operation fails.
+
+```yaml
+backup:
+  timeouts:
+    balancerStop: 0
+```
+
+??? example "Example"
+
+    ```yaml
+    backup:
+      timeouts:
+        balancerStop: 60
+    ```
+
+    In this example, PBM waits up to 60 seconds for the balancer to stop. If the balancer is still running after this period, the backup fails.
+
+
+This is useful when you want to:
+
+- Avoid indefinite waits during backup operations
+- Enforce stricter operational time limits in automated environments
+- Detect and fail fast if the balancer cannot be stopped
+
 ### backup.timeouts.startingStatus
 
-*Type*: unit32 <br>
+*Type*: uint32 <br>
 *Default*: 33
 
 The wait time (in seconds) for PBM to start backups. This timeout controls how long PBM waits for the backup to transition from initial state to running status.
@@ -76,13 +114,13 @@ The wait time (in seconds) for PBM to start backups. This timeout controls how l
 
   The 0 (zero) value resets the timeout to the default 33 seconds.
 
-### backup.oplogSpanMin
+## backup.oplogSpanMin
 
 *Type*: float64 <br>
 
 The duration (in minutes) of oplog slices saved with the logical backup snapshot. By default, the duration of backup oplog slices equals to the value defined for the [`pitr.oplogSpanMin`](pitr-options.md#pitroplogspanmin) option (default - 10 minutes). You can reduce the duration in heavy-loaded environments. Note that setting the duration to shorter periods may increase the overall backup execution time. 
 
-### backup.numParallelCollections
+## backup.numParallelCollections
 
 *Type*: int <br>
 *Default*: number of CPU cores / 2
