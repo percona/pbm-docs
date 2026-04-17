@@ -50,7 +50,30 @@
     pbm restore <backup_name>
     ```
 
-    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
+    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times.
+
+    **Interactive confirmation**
+
+    !!! note "Version availability"
+        Interactive confirmation for `pbm restore` is available only in PBM versions that include this behavior. If your installed PBM version does not support it, `pbm restore` may start immediately or use different non-interactive options. Verify the behavior for your release with `pbm restore --help` or the command reference before relying on this prompt in scripts or operational procedures.
+
+    To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution in PBM versions that support interactive confirmation.
+    This helps prevent scenarios where a restore command is unintentionally re-run—for example, from shell history—potentially restoring an incorrect backup to a production environment.
+
+    ```bash
+    $ pbm restore <backup_name>
+
+    You are about to restore backup '<backup_name>' to the current cluster.
+    This operation may overwrite existing data.
+
+    Do you want to continue? [y/N]:
+    ```
+
+    The restore proceeds only after explicit confirmation.
+
+    For automation and non-interactive environments, check your installed version's `pbm restore --help` output or the command reference for confirmation-related options supported by your PBM release.
+
+    If no such option is available, the command waits for user input and may hang in scripts, so verify the behavior before using `pbm restore` in unattended workflows.
 
 3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
@@ -58,11 +81,11 @@
     pbm describe-restore <restore_name> -c pbm_config.yaml
     ```
 
-A restore has the `Done` status when it succeeded on all nodes. 
+    A restore has the `Done` status when it succeeded on all nodes. 
 
-If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
+    If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
 
-For either status, proceed with the [post-restore steps](#post-restore-steps). 
+    For either status, proceed with the [post-restore steps](#post-restore-steps). 
 
 ### Post-restore steps
 
