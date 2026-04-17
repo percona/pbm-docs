@@ -48,7 +48,31 @@
     pbm restore <backup_name>
     ```
 
-    Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
+    !!! note
+        You can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
+
+    **Interactive confirmation**
+
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+
+    To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution.
+
+    This helps prevent scenarios where a restore command is unintentionally re-run—for example, from shell history—potentially restoring an incorrect backup to a production environment.
+
+    ```bash
+    $ pbm restore <backup_name>
+
+    You are about to restore backup '<backup_name>' to the current cluster.
+    This operation may overwrite existing data.
+
+    Do you want to continue? [y/N]:
+    ```
+
+    The restore proceeds only after explicit confirmation.
+
+    For automation and non-interactive environments, check your installed version's `pbm restore --help` output or the command reference for confirmation-related options supported by your PBM release.
+
+    If no such option is available, the command waits for user input and may hang in scripts, so verify the behavior before using `pbm restore` in unattended workflows.
 
 ### Post-restore steps
 
