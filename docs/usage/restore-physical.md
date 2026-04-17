@@ -50,7 +50,36 @@
     pbm restore <backup_name>
     ```
 
-    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
+    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times.
+
+    ```bash
+    pbm restore <backup_name>
+    ```
+
+    **Interactive confirmation**
+
+    To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution.
+
+    This helps prevent scenarios where a restore command is unintentionally re-run—for example, from shell history—potentially restoring an incorrect backup to a production environment.
+
+    ```bash
+    $ pbm restore <backup_name>
+
+    You are about to restore backup '<backup_name>' to the current cluster.
+    This operation may overwrite existing data.
+
+    Do you want to continue? [y/N]:
+    ```
+
+    The restore proceeds only after explicit confirmation.
+
+    For automation and non-interactive environments, use the `-y` or `--yes` flag to bypass the prompt:
+
+    ```bash
+    pbm restore <backup_name> -y
+    ```
+
+    If the flag is not provided, the command waits for user input and may hang in scripts.
 
 3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
