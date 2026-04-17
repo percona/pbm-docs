@@ -54,8 +54,10 @@
 
     **Interactive confirmation**
 
-    To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution.
+    !!! note "Version availability"
+        Interactive confirmation for `pbm restore` is available only in PBM versions that include this behavior. If your installed PBM version does not support it, `pbm restore` may start immediately or use different non-interactive options. Verify the behavior for your release with `pbm restore --help` or the command reference before relying on this prompt in scripts or operational procedures.
 
+    To reduce the risk of accidental or unintended restores, the `pbm restore` command prompts for confirmation before execution in PBM versions that support interactive confirmation.
     This helps prevent scenarios where a restore command is unintentionally re-run—for example, from shell history—potentially restoring an incorrect backup to a production environment.
 
     ```bash
