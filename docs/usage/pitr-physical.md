@@ -70,7 +70,7 @@ Previously, PITR entries were applied only on the primary node, and secondary no
 
 **PITR behavior and limitations in sharded clusters**
 
-- Due to the physical restore logic and flow, PBM replays oplog events on the primary node of every shard when Percona Server for MongoDB is shut down. After the database starts, the remaining nodes receive the data during the initial sync.
+- Due to the physical restore logic and flow, PBM replays oplog events on all nodes of every shard when Percona Server for MongoDB is shut down, allowing replica set members to be started in any order.
 
 - When performing point-in-time recovery for deployments with sharded collections, PBM writes data only to existing collections and does not create new collections. If you create a new sharded collection, make a new backup to ensure it is included in subsequent restore operations.
 
