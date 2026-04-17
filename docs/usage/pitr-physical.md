@@ -35,7 +35,7 @@ pbm describe-restore <restore_name> -c pbm_config.yaml
 ### Post-restore steps
 
 After the point-in-time recovery is complete, perform these post-restore steps:
-{.power-number}  
+{.power-number}
 
 1. Restart all `mongod` nodes.    
 
