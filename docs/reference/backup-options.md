@@ -67,6 +67,27 @@ Defines the maximum time (in seconds) that PBM waits for the balancer to stop be
 
 PBM requires the balancer to be stopped to ensure a consistent backup in sharded clusters. If the balancer does not stop within the specified time, the backup operation fails.
 
+PBM attempts to stop the balancer before starting the backup. The timer starts when PBM issues the stop request
+If the timeout is reached and the balancer is still active, the backup is aborted.
+
+```yaml
+backup:
+  timeouts:
+    balancerStop: 0
+```
+- 0 (default): Wait indefinitely until the balancer stops
+- > 0: Maximum time (in seconds) to wait before failing the backup
+
+??? example "Example"
+
+    ```yaml
+    backup:
+  timeouts:
+    balancerStop: 60
+    ```
+
+    In this example, PBM waits up to 60 seconds for the balancer to stop. If the balancer is still running after this period, the backup fails.
+
 ### backup.timeouts.startingStatus
 
 *Type*: unit32 <br>
