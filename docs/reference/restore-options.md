@@ -71,7 +71,7 @@ The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB
 The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the values to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.
 
 ## restore.timeouts.balancerStop
-*Type*: integer
+*Type*: int
 
 Defines the maximum time (in seconds) that Percona Backup for MongoDB (PBM) waits for the balancer to stop before starting a logical restore.
 
