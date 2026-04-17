@@ -96,7 +96,7 @@ This is useful when you want to:
 
 ### backup.timeouts.startingStatus
 
-*Type*: unit32 <br>
+*Type*: uint32 <br>
 *Default*: 33
 
 The wait time (in seconds) for PBM to start backups. This timeout controls how long PBM waits for the backup to transition from initial state to running status.
