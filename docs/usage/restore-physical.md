@@ -69,14 +69,9 @@
 
     The restore proceeds only after explicit confirmation.
 
-    For automation and non-interactive environments, PBM versions that support confirmation bypass accept the `-y` or `--yes` flag:
+    For automation and non-interactive environments, check your installed version's `pbm restore --help` output or the command reference for confirmation-related options supported by your PBM release.
 
-    ```bash
-    pbm restore <backup_name> -y
-    ```
-
-    If your PBM version does not support these flags, the command waits for user input and may hang in scripts. Check your installed version's `pbm restore --help` output or the command reference for available options.
-
+    If no such option is available, the command waits for user input and may hang in scripts, so verify the behavior before using `pbm restore` in unattended workflows.
 3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
     ```bash
