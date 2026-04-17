@@ -15,7 +15,7 @@ backup:
   numParallelCollections: <int>
 ```
 
-### priority
+## priority
 
 *Type*: array of strings
 
@@ -27,7 +27,7 @@ If not set, the replica set nodes have the default priority as follows:
 * secondary nodes - 1.0
 * primary node - 0.5
 
-### backup.compression
+## backup.compression
 
 *Type*: string <br>
 *Default*: s2
@@ -39,7 +39,7 @@ When `none` is specified, backups are made without compression.
 Supported values: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2`.
 
 <!-- backup-compression-level: -->
-### backup.compressionLevel
+## backup.compressionLevel
 
 *Type*: int
 
@@ -55,6 +55,17 @@ The following table shows available compression levels per compression method:
 | `gzip` and `pgzip`   | -1 - default compression, 0 - no compression, 1 - best speed, 9 - best compression| -1
 
 Note that the greater value you specify, the more time and computing resources it will take to compress the data.
+
+
+## Backup timeouts
+
+Timeout options control how long Percona Backup for MongoDB (PBM) waits for specific conditions during backup operations.
+
+### backup.timeouts.balancerStop
+
+Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a backup.
+
+PBM requires the balancer to be stopped to ensure a consistent backup in sharded clusters. If the balancer does not stop within the specified time, the backup operation fails.
 
 ### backup.timeouts.startingStatus
 
