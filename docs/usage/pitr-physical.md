@@ -62,17 +62,9 @@ After the point-in-time recovery is complete, perform these post-restore steps:
 
 ### Implementation specifics
 
-During a physical restore with point-in-time recovery (PITR), PBM applies oplog entries to all nodes in each replica set. As a result, all nodes contain the same restored data files when the restore completes, allowing replica set members to be started in any order.
+1. Due to the physical restore logic and flow, PBM replays oplog events on the primary node of every shard when Percona Server for MongoDB is shut down. After the database start, the remaining nodes receive the data during the initial sync.
+2. When doing point-in-time recovery for deployments with sharded collections, PBM only writes data to existing ones and doesn’t support creating new collections. Therefore, whenever you create a new sharded collection, make a new backup for it to be included there.
 
-!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-
-Previously, PITR entries were applied only on the primary node, and secondary nodes received the updated data after startup through replication catchup. This required starting the former primary node first to ensure correct data propagation. This limitation no longer applies.
-
-**PITR behavior and limitations in sharded clusters**
-
-- Due to the physical restore logic and flow, PBM replays oplog events on the primary node of every shard when Percona Server for MongoDB is shut down. After the database starts, the remaining nodes receive the data during the initial sync.
-
-- When performing point-in-time recovery for deployments with sharded collections, PBM writes data only to existing collections and does not create new collections. If you create a new sharded collection, make a new backup to ensure it is included in subsequent restore operations.
 
 ## Useful links
 
