@@ -64,7 +64,7 @@ Timeout options control how long Percona Backup for MongoDB (PBM) waits for spec
 ### backup.timeouts.balancerStop
 
 *Type*: int <br>
-*Default*: 0
+*Default*: 0 (disables the timeout and waits indefinitely for the balancer to stop)
 
 Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a backup.
 
