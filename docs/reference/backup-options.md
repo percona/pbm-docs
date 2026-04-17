@@ -80,7 +80,6 @@ backup:
 - `> 0`: Maximum time (in seconds) to wait before failing the backup
 
 ??? example "Example"
-
     ```yaml
     backup:
       timeouts:
