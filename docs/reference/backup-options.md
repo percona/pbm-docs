@@ -83,8 +83,8 @@ backup:
 
     ```yaml
     backup:
-  timeouts:
-    balancerStop: 60
+      timeouts:
+        balancerStop: 60
     ```
 
     In this example, PBM waits up to 60 seconds for the balancer to stop. If the balancer is still running after this period, the backup fails.
