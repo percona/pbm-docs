@@ -44,7 +44,7 @@ cluster. Otherwise, connect to the non-sharded replica set as normal. (See
 
 !!! Note
 
-    You don't need to keep the pbm_config.yaml file after running the `pbm config` command. Make sure to delete it to prevent exposure of any sensitive information. 
+    You don’t need to keep the pbm_config.yaml file after running the pbm config command. Delete it to prevent potential exposure of sensitive information.
 
 ## Accessing or updating single config values
 
