@@ -57,24 +57,6 @@ After you [restored a physical backup](restore.md), do the following:
 
 4. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
 
-## Oplog replay for storage level snapshots
-
-When making a backup, Percona Backup for MongoDB stops the point-in-time recovery. This is done to maintain data consistency after the restore.
-
-Storage-level snapshots are saved with point-in-time recovery enabled. Thus, after the database restore from such a backup, point-in-time recovery is automatically enabled and starts oplog slicing. These new oplog slices might conflict with the existing oplogs saved during the backup. To replay the oplog in such a case, do the following after the restore:
-
-
-1. Disable point-in-time recovery.
-2. Delete the oplog slices that might have been created.
-3. Re-sync the data from the storage.
-4. Run the `pbm oplog-replay` command and specify the `--start` and `--end` flags with the timestamps.
-
-    ```bash
-    pbm oplog-replay --start="2022-01-02T15:00:00" --end="2022-01-03T15:00:00"
-    ```
-
-5. After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.
-
 [Known limitations](../features/known-limitations.md#oplog-replay-from-arbitrary-start-time){.md-button}
 
 
