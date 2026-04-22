@@ -70,12 +70,6 @@ Defines the maximum time (in seconds) that PBM waits for the balancer to stop be
 
 PBM stops the balancer before starting a backup to ensure consistency in sharded clusters. If the balancer does not stop within the specified timeout, the backup operation fails.
 
-```yaml
-backup:
-  timeouts:
-    balancerStop: 0
-```
-
 ??? example "Example"
 
     ```yaml
