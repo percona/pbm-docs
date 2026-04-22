@@ -14,15 +14,18 @@ PBM supports various backup and restore types. Some of them have known limitatio
 5. System collections in ``admin``, ``config``, and ``local`` databases cannot be backed up and restored selectively. You must make a full backup and restore to include them.
 6. Selective point-in-time recovery is not supported for sharded clusters.
 
+## Physical backups and restores
+1. Physical restores are not supported for MongoDB instances running without authentication if the PBM agent connects via a non-localhost interface (such as a container hostname or external IP). Because MongoDB restricts the shutdown command to the localhost interface in non-authenticated environments, PBM will be unable to stop the node to perform the restore. To avoid this limitation, ensure that the PBM_MONGODB_URI uses a localhost connection or enable authentication for your MongoDB deployment.
+
 ## Oplog slicing for point-in-time recovery
 
 Oplog slicing is an integral part of the point-in-time recovery routine that enables you to restore from a backup up to a specific moment. Read more about [point-in-time recovery](point-in-time-recovery.md).
 
-**For MongoDB 8.0 and higher versions**
+**MongoDB 8.0 and higher versions**
 
 If you [unshard a collection :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/command/unshardCollection/), make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
-**For in MongoDB 5.0 and higher versions**
+**MongoDB 5.0 and higher versions**
 
 If you [reshard :octicons-link-external-16:](https://www.mongodb.com/docs/manual/core/sharding-reshard-a-collection/) a collection, make a fresh backup and re-enable point-in-time recovery oplog slicing to prevent data inconsistency and restore failure.
 
