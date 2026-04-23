@@ -166,6 +166,8 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
     pbm-restore --time=<timestamp> --base-snapshot <backup-name>
     ```
 
+	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
 3. After the restore is complete, do the required post-restore steps depending on the restore type.
 4. Make a fresh backup to serve as the new base for future restores. 
 

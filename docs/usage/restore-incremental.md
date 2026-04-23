@@ -34,7 +34,9 @@ Restore flow from an incremental backup is the same as the restore from a full p
 pbm restore 2022-11-25T14:13:43Z
 ```
 
-Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.
+Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+After that, Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.
 
 ### Post-restore steps
 
