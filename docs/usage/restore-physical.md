@@ -50,8 +50,9 @@
     pbm restore <backup_name>
     ```
 
-    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
-
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+    
     After that, `pbm-agent` processes stop `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
 
 3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.

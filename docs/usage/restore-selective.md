@@ -29,7 +29,7 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
     ```
 
     Note:
-    - Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+    - Starting with version [2.14.0](../release-notes/2.14.0.md), before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
     - To restore without the users and roles, skip the `--with-users-and-roles` flag.
     - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.*>,<db2.*>`. For example, `--ns=customers.*,invoices.*`.
     - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
@@ -87,7 +87,8 @@ You can restore a collection under a new name up to the specified time. Instead 
 pbm restore --time=<timestamp> --ns-from <database.collection> --ns-to <database.collection_new>
 ```
 
-Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
 ## Post-restore steps
 

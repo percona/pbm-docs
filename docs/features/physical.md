@@ -192,7 +192,8 @@ A restore can succeed on most nodes, but it might fail on a few, resulting in a 
     pbm restore --time <time> --fallback-enabled=true --allow-partly-done=true
     ```
 
-Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
 If you allow partial restores (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync. 
 

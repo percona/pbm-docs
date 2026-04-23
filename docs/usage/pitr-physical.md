@@ -14,9 +14,10 @@ To restore a database from a physical backup, specify the time for the [`pbm res
 pbm restore --time <timestamp> 
 ```    
 
-Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
-After that, Percona Backup for MongoDB uses a full or an incremental backup (if available) and restores the database from it up to the specified time.     
+Percona Backup for MongoDB uses a full or an incremental backup (if available) and restores the database from it up to the specified time.     
 
 You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 

@@ -48,7 +48,10 @@
     pbm restore <backup_name>
     ```
 
-    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag). Note, you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+    Note, you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
 
 ### Post-restore steps
 
@@ -77,7 +80,8 @@ Starting with version 2.8.0, you can override the number of insertion workers pe
 pbm restore <backup_name>  --num-insertion-workers-per-collection 4 --num-parallel-collections 8
 ```
 
-Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag). 
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
 Increasing the number may increase the restore speed. However, it may also lead to unexpectedly high disk and CPU usage. Consider the trade-offs carefully before making adjustments to ensure optimal performance without overloading resources.
 
@@ -119,7 +123,8 @@ The following example illustrates the restore from a backup made on Percona Serv
     pbm restore 2023-04-10T10:51:28Z
     ```
 
-    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
 4. Set the Feature Compatibility Version value to 5.0
 

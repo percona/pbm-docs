@@ -4,7 +4,7 @@
 build
 source/ext/__pycache__
 .vscode/
-
+venv/
 
 # Local Netlify folder
 .netlify
