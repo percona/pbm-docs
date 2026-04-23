@@ -108,7 +108,7 @@ To restore from a backup, do the following:
     ```
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
     If the path to the source cluster `mongod.conf` is undefined, PBM tries to retrieve the required configuration options from the `mongod.conf` of the target cluster.    
 
