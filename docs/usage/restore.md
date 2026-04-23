@@ -49,7 +49,7 @@
     ```
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
     Note, you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
 
@@ -124,7 +124,7 @@ The following example illustrates the restore from a backup made on Percona Serv
     ```
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
 4. Set the Feature Compatibility Version value to 5.0
 

@@ -51,7 +51,7 @@
     ```
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
     
     After that, `pbm-agent` processes stop `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
 

@@ -26,7 +26,7 @@ Run the restore command as follows:
     ```
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
         
     You can specify the selective backup as the base snapshot for the Point-in-time restore. In this case, Percona Backup for MongoDB restores only the namespace(s) included in this backup to the specified time.    
 

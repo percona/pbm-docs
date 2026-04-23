@@ -41,7 +41,7 @@ Configure the replica set name mapping:
     The `--replset-remapping` flag is available for the following commands: `pbm restore`, `pbm list`, `pbm status`, `pbm oplog-replay`.
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
  
 !!! note 
 

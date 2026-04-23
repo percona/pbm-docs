@@ -15,7 +15,7 @@ pbm restore --time <timestamp>
 ```    
 
 !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    	Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
 Percona Backup for MongoDB uses a full or an incremental backup (if available) and restores the database from it up to the specified time.     
 

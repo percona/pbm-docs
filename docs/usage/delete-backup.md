@@ -17,7 +17,7 @@ The timestamp you specify for the `--older-than` flag must be in the following f
 During the cleanup, you see the backups and oplog slices to be deleted and are asked to confirm the action (to bypass it, add the `-y` or `--yes` flag):
 
 ```bash
-pbm cleanup --older-than=`%Y-%M-%D
+pbm cleanup --older-than="2023-04-20" -y
 ```
 
 Starting with version 2.13.0, you can clean up backups from [external storages](../features/multi-storage.md) by specifying the `--profile` flag:
