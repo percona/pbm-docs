@@ -7,19 +7,25 @@
 
 
 Before you start:
-{.power-number}
+  1. Read [known limitations for selective backups and restores](../features/known-limitations.md#selective-backups-and-restores).
+  2. Check that you [have made a full backup](backup-selective.md) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
 
-1. Ensure the following:
 
-    1. Read [known limitations for selective backups and restores](../features/known-limitations.md#selective-backups-and-restores).
-    2. Check that you [have made a full backup](backup-selective.md) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
-
-2. To restore the desired database or a collection to a point in time, run the ``pbm restore`` command as follows:
+## Restore the desired database or a collection to a point in time
+Run the restore command as follows:
 
     ```bash
     pbm restore --base-snapshot <backup_name> --time <timestamp> \
     --ns <db.collection>
     ```
+
+    To restore the desired database to a point in time, **along with users and roles** run:
+
+    ```bash
+    pbm restore --time <timestamp> --ns "db.*" --with-users-and-roles
+    ```
+
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
     You can specify the selective backup as the base snapshot for the Point-in-time restore. In this case, Percona Backup for MongoDB restores only the namespace(s) included in this backup to the specified time.    
 
@@ -27,9 +33,4 @@ Before you start:
 
     When point-in-time recovery is started, Percona Backup for MongoDB uses the provided base snapshot, restores the specified namespace(s) and replays oplog on top of it up to the specified time. If no base snapshot is provided, Percona Backup for MongoDB uses the most recent full backup snapshot.
 
-3. To restore the desired database to a point in time, **along with users and roles**:
-
-    ```bash
-    pbm restore --time <timestamp> --ns "db.*" --with-users-and-roles
-    ```
 
