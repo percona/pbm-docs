@@ -46,7 +46,7 @@ The number of workers that request data chunks from the storage during the resto
 ### restore.maxDownloadBufferMb
 
 *Type*: int <br>
- 
+*Default*: `numDownloadWorkers * downloadChunkMb * 16` MB when unspecified or set to `0`
 
 The maximum size of the in-memory buffer that is used to download files from the S3 storage. When unspecified or set to 0, the size cannot exceed the value calculated as `numDownloadWorkers * downloadChunkMb * 16` MB. By default, the number of CPU cores * 32 * 16 MB.
 
@@ -69,3 +69,34 @@ The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB
 *Type*: array of strings
 
 The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the values to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.
+
+### restore.timeouts.balancerStop
+
+*Type*: int <br>
+*Default*: 0 (unlimited)
+
+Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a logical restore. If set to `0` or not set (default), PBM waits indefinitely until the balancer stops.
+
+PBM stops the balancer to ensure data consistency during restore operations in sharded clusters. The timeout starts when the stop request is issued. If the balancer remains active after the timeout, the restore is aborted.
+
+```yaml
+restore:
+  timeouts:
+    balancerStop: 0
+```
+
+??? example "Example"
+    ```yaml
+    restore:
+      timeouts:
+        balancerStop: 60
+    ```
+
+    In this example, PBM waits up to 60 seconds for the balancer to stop. If the balancer is still running after this period, the restore fails.
+
+
+This is useful when you want to:
+
+- Prevent restore operations from waiting indefinitely
+- Enforce time limits in automated workflows
+- Fail fast if the balancer cannot be stopped
