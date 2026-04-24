@@ -207,11 +207,11 @@ The command has the following syntax:
 pbm describe-backup [<backup-name>] [<flags>] 
 ```
 
-| Flag                  | Description                           |
-| --------------------- | ------------------------------------- |
-| `-o` , `--out=text` | Shows the status as either plain text or a JSON object. Supported values: `text` , `json` |
-| `-l` , `--list-files` | Shows the list of files being copied for snapshot-based backups |
-| `--with-collections` | Shows the collections included in the backup. For logical and selective backups only. Available with version 2.3.0.
+| Flag                  | Description                                                                                                         |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `-o` , `--out=text`   | Shows the status as either plain text or a JSON object. Supported values: `text` , `json`                           |
+| `-l` , `--list-files` | Shows the list of files being copied for snapshot-based backups                                                     |
+| `--with-collections`  | Shows the collections included in the backup. For logical and selective backups only. Available with version 2.3.0. |
 
 ### Output
 
