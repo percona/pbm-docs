@@ -163,7 +163,7 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
 2. To make a point-in-time restore, you must explicitly pass the backup name for the `pbm restore` command:
 
     ```bash
-    pbm-restore --time=<timestamp> --base-snapshot <backup-name>
+    pbm restore --time=<timestamp> --base-snapshot <backup-name>
     ```
 
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
