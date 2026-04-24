@@ -262,7 +262,7 @@ The output document contains the following fields:
               "tokenFile": "/etc/vault/token",
               "secret": "secret/data/mongo",
               "secretVersion": 5,
-              "disableTLSForTesting": true
+              "disableTLSForTesting": false
             }
           }
         },
