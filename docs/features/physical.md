@@ -30,7 +30,7 @@ During physical backups and restores, ``pbm-agents`` don't export / import data 
 
 ## Availability and system requirements
 
-* Percona Server for MongoDB starting from versions 4.2.15-16, 4.4.6-8, 5.0 and higher. 
+* For current Percona Backup for MongoDB versions, physical backups require Percona Server for MongoDB 7.0 or newer. For support on older Percona Server for MongoDB versions, see the compatibility matrix in [Supported versions](../details/versions.md).
 * WiredTiger storage engine, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality.
 
 !!! warning 
@@ -88,13 +88,8 @@ You can back up and restore data which is encrypted at rest. Thereby you ensure 
 
 During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. You can verify them using the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup) command. Note that the encryption key is not stored nor shown as part of the backup.
 
-!!! important
-
-    Make sure that you know which master encryption key was used and keep it safe, as this key is required for the restore.
-
-!!! note
-
-    Starting with [Percona Server for MongoDB version 4.4.19-19 :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/4.4/release_notes/4.4.19-19.html), [5.0.15-13 :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/5.0/release_notes/5.0.15-13.html), [6.0.5-4 :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/release_notes/6.0.5-4.html) and higher, the master key rotation for data-at-rest encrypted with HashiCorp Vault has been improved to use the same secret key path on every server in your entire deployment. For the restore with earlier versions of Percona Server for MongoDB and PBM 2.0.5 and earlier, see the [Restore for Percona Server for MongoDB **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 using HashiCorpVault](#restore-for-percona-server-for-mongodb-before-4419-19-5015-13-605-4-using-hashicorpvault) section.
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    For data-at-rest encryption setups that use an external KMS such as HashiCorp Vault or KMIP, the master encryption key identifier is required to restore the data. PBM stores this identifier in the backup metadata. You need Percona Server for MongoDB (PSMDB) 7.0.22-12 and 8.0.12-4 or higher to use this feature. If you're using older versions of PSMDB or PBM, you have to store the identifier externally.
 
 To restore the encrypted data from the backup, configure the same data-at-rest encryption settings on all nodes of your destination cluster or replica set to match the settings of the original cluster where you made the backup.
 
@@ -104,14 +99,6 @@ To learn more about master key rotation, refer to the following documentation:
 
 * [Master key rotation in HashiCorp Vault server :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/6.0/vault.html#key-rotation)
 * [KMIP master key rotation :octicons-link-external-16:](https://www.mongodb.com/docs/manual/tutorial/rotate-encryption-key/#kmip-master-key-rotation)
-
-### Restore for Percona Server for MongoDB **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 using HashiCorpVault
-
-In Percona Server for MongoDB version **before** 4.4.19-19, 5.0.15-13, 6.0.5-4 with Vault server used for data-at-rest encryption, the master key rotation with the same key used for 2+ nodes is not supported. If you run these versions of Percona Server for MongoDB and PBM before 2.1.0, consider using the scenario where PBM restores the data on one node of every replica set. The remaining nodes receive the data during the initial sync. 
-
-Configure data-at-rest encryption on one node of every shard in your destination cluster or a replica set.
-
-During the restore, Percona Backup for MongoDB restores the data on the node where the encryption key matches the one with which the backed up data was encrypted. The other nodes are not restored, so the restore has the "partlyDone" status. You can start this node and initiate the replica set. The remaining nodes receive the data as the result of the initial sync from the restored node.  
 
 ## Physical restores with a fallback directory
 
@@ -191,7 +178,10 @@ A restore can succeed on most nodes, but it might fail on a few, resulting in a 
     ```bash
     pbm restore --time <time> --fallback-enabled=true --allow-partly-done=true
     ```
-       
+
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
 If you allow partial restores (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync. 
 
 If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the `restore.fallbackEnabled` option set to `true` or run the `pbm restore` command with the `--fallback-enabled` flag. Otherwise, a restore won't start.
