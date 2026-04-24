@@ -50,7 +50,7 @@ The number of workers that request data chunks from the storage during the resto
 
 The maximum size of the in-memory buffer that is used to download files from the S3 storage. When unspecified or set to 0, the size cannot exceed the value calculated as `numDownloadWorkers * downloadChunkMb * 16` MB. By default, the number of CPU cores * 32 * 16 MB.
 
-## restore.downloadChunkMb
+### restore.downloadChunkMb
 
 *Type*: int <br>
 *Default*: 32
@@ -68,7 +68,7 @@ The custom path to `mongod` binaries. When undefined, Percona Backup for MongoDB
 
 *Type*: array of strings
 
-The list of custom paths to `mongod` binaries on every node. PBM uses the values to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.
+The list of custom paths to `mongod` binaries on every node. Percona Backup for MongoDB uses the values to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.
 
 ### restore.timeouts.balancerStop
 
