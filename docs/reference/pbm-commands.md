@@ -272,7 +272,7 @@ The output document contains the following fields:
     }
     ```
 
-[comment]: <> (This table is in HTML as contains unordered list in the cell. It's easier to maintain that over the standard markdown table notation)
+<!-- This table uses HTML because it contains an unordered list in a cell. It's easier to maintain than standard Markdown table notation. -->
 
 <table>
   <thead>
@@ -362,9 +362,9 @@ The output document contains the following fields:
           <li> <code>last_transition_ts</code> - MongoDB Timestamp-style value of the last status transition (for example, <code>1662039300,2</code>)</li>
           <li> <code>last_write_time</code> - the human-readable indication of the last write</li>
           <li> <code>last_transition_time</code> - the human-readable indication of the time when a backup changed its status</li>
-          <li> <code>security</code> - the security options of the <code>mongod</code> process. Contains following configuration options:
+          <li> <code>security</code> - the security options of the <code>mongod</code> process. Contains the following configuration options:
             <ul>
-              <li> <code>enableEncryption</code>- boolean flag indicating if encryption at rest is enabled.</li>
+              <li> <code>enableEncryption</code> - boolean flag indicating if encryption at rest is enabled.</li>
               <li> <code>encryptionCipherMode</code> - cipher mode used for encryption (for example, "AES256-CBC", "AES256-GCM").</li>
               <li> <code>encryptionKeyFile</code> - path to the local key file for encryption.</li>
               <li> <code>relaxPermChecks</code> - boolean to relax permission checks on encryption key files.</li>
