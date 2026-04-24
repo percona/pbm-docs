@@ -30,7 +30,7 @@ During physical backups and restores, ``pbm-agents`` don't export / import data 
 
 ## Availability and system requirements
 
-* Percona Server for MongoDB 7.0 or newer
+* For current Percona Backup for MongoDB versions, physical backups require Percona Server for MongoDB 7.0 or newer. For support on older Percona Server for MongoDB versions, see the compatibility matrix in [Supported versions](../details/versions.md).
 * WiredTiger storage engine, since physical backups heavily rely on the WiredTiger [`$backupCursor` :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html) functionality.
 
 !!! warning 

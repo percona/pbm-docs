@@ -34,8 +34,6 @@ The command accepts the following flags:
 ??? "JSON output"
 
     
-
-```json
     {
       "name": "<backup_name>",
       "storage": "<my-backup-dir>"
@@ -269,7 +267,7 @@ The output document contains the following fields:
             "secretVersion": 5,
             "disableTLSForTesting": true
           }
-        },
+        }
       },
       {...},
       {...}
@@ -277,7 +275,7 @@ The output document contains the following fields:
   }
   ```
 
-[comment]: <> (This table is in HTML as contains unordered list in the cell. It's easier to mantain that over the standard markdown table notation)
+[comment]: <> (This table is in HTML as contains unordered list in the cell. It's easier to maintain that over the standard markdown table notation)
 
 <table>
   <thead>
@@ -362,7 +360,7 @@ The output document contains the following fields:
           <li> <code>size_h</code> - human-readable size string (for example, "1.5 GiB")</li>
           <li> <code>size_uncompressed</code> - uncompressed size of the backup in bytes</li>
           <li> <code>size_uncompressed_h</code> - human-readable uncompressed size string (for example, "1.6 GiB")</li>
-          <li> <code>error</code> - the error message for failed backup</li>>
+          <li> <code>error</code> - the error message for failed backup</li>
           <li> <code>last_write_ts</code> - unix timestamp of the last write operation</li>
           <li> <code>last_transition_ts</code> - unix timestamp of the last status transition</li>
           <li> <code>last_write_time</code> - the human-readable indication of the last write</li>
@@ -434,7 +432,7 @@ The command accepts the following flags:
 | Flag                     | Description             |
 | ------------------------ | ----------------------- |
 | `-c` , `--config=CONFIG` | Only for **physical restores**. Points Percona Backup for MongoDB to a configuration file so it can read the restore status from the remote storage. For example, `pbm describe-restore -c /etc/pbm/conf.yaml <restore-name>` .|
-| `-o` , `--out=TEXT` | Shows the output as either the plain text (default) or a JSON object. Supported values: ` ` text `  ` , `  ` json ` ` .|
+| `-o` , `--out=TEXT` | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.|
 
 ### Output
 
