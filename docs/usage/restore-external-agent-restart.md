@@ -38,9 +38,7 @@ This workflow lets you pause an external restore at `copyReady`, restart `pbm-ag
     - `<restore_name>` (required): used to find temporary restore data on backup storage.
     - `-c/--config` (required): PBM config to access backup storage.
     - `--rs, --node` (required): identify the node without connecting to mongod.
-    - `--db-config` (optional): required only when you use encryption-at-rest (PBM does not store encryption options in metadata).
-
-
+    - `--db-config` (optional): required only when you restore from an externally taken backup (without PBM) of a database with encryption at rest (in that case, PBM does not store encryption options in metadata). In that case, you have to provide MongoDB configuration manually via this parameter. The configuration must match the configuration from the node from which the backup was taken, not the current one. For external backups assisted by PBM, you can skip that parameter. PBM creates metadata file within `dbPath` with all necessary `mongod` options, so for the external restore PBM can read this file and provide the options to external `restore-finish` automatically.
 
     This is the configuration file that PBM will use during the restore. It should contain the [security options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#security-options)                
 
