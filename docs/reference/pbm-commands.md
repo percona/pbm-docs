@@ -260,6 +260,14 @@ The output document contains the following fields:
             "clientCertificateFile": "/etc/pykmip/mongod.pem",
             "serverCAFile": "/etc/pykmip/ca.crt",
             "keyIdentifier": "cbe0a6b4-7d7a-47c3-aa40-39abfc9a6f96"
+          },
+          "vault": {
+            "serverName": "cosmian",
+            "port": 5696,
+            "tokenFile": "/etc/vault/token",
+            "secret": "secret/data/mongo",
+            "secretVersion": 5,
+            "disableTLSForTesting": true
           }
         },
       },
@@ -349,7 +357,7 @@ The output document contains the following fields:
           <li> <code>name</code> - the replica set name</li>
           <li> <code>status</code> - the backup status on this replica set</li>
           <li> <code>node</code> - the node name and port</li>
-          <li> <code>files</code> - list of backup files (only populated for external backups)</li>
+          <li> <code>files</code> - list of backup files (only populated for snapshot-based backups)</li>
           <li> <code>size</code> - size of the backup in bytes</li>
           <li> <code>size_h</code> - human-readable size string (e.g., "1.5 GiB")</li>
           <li> <code>size_uncompressed</code> - uncompressed size of the backup in bytes</li>
@@ -371,7 +379,7 @@ The output document contains the following fields:
                   <li> <code>port</code> - Vault server port.</li>
                   <li> <code>tokenFile</code> - path to the file containing the Vault token.</li>
                   <li> <code>secret</code> - Vault secret name/path.</li>
-                  <li> <code>secretVersion</code> - version number of the Vault secret.</li>
+                  <li> <code>secretVersion</code> - version number of the Vault secret. Requires Percona Server for MongoDB 7.0.22-12 and 8.0.12-4 or higher.</li>
                   <li> <code>disableTLSForTesting</code> - flag to disable TLS (testing only).</li>
                 </ul>
               </li>
@@ -381,14 +389,14 @@ The output document contains the following fields:
                   <li> <code>port</code> - KMIP server port.</li>
                   <li> <code>clientCertificateFile</code> - client certificate for KMIP authentication.</li>
                   <li> <code>serverCAFile</code> - CA certificate for server verification.</li>
-                  <li> <code>keyIdentifier</code> - unique identifier for the encryption key.</li>
+                  <li> <code>keyIdentifier</code> - unique identifier for the encryption key. Requires Percona Server for MongoDB 7.0.22-12 and 8.0.12-4 or higher.</li>
                 </ul>
               </li>
             </ul>
           </li>
           <li> <code>configsvr</code> - indicates that this is a config server replica set</li>
           <li> <code>configshard</code> - indicates that this is a config shard replica set</li>
-          <li> <code>collections</code> - the list of collections included in the backup (only for logical backups)</li>
+          <li> <code>collections</code> - the list of collections included in the backup (only for logical and selective backups). Available since 2.13.0.</li>
         </ul>
       </td>
     </tr>
