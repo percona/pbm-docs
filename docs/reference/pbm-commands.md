@@ -209,8 +209,8 @@ pbm describe-backup [<backup-name>] [<flags>]
 
 | Flag                  | Description                                                                                                         |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `-o` , `--out=text`   | Shows the status as either plain text or a JSON object. Supported values: `text` , `json`                           |
-| `-l` , `--list-files` | Shows the list of files being copied for snapshot-based backups                                                     |
+| `-o`, `--out=text`    | Shows the status as either plain text or a JSON object. Supported values: `text`, `json`                          |
+| `-l`, `--list-files`  | Shows the list of files being copied for snapshot-based backups                                                     |
 | `--with-collections`  | Shows the collections included in the backup. For logical and selective backups only. Available with version 2.3.0. |
 
 ### Output
@@ -221,53 +221,53 @@ The output document contains the following fields:
 
     ```json
     {
-    "name": "<backup_name>",
-    "opid": "<string>",
-    "type": "logical",
-    "last_write_ts": Timestamp,
-    "last_transition_ts": Timestamp,
-    "last_write_time": "2022-09-30T14:02:49Z",
-    "last_transition_time": "2022-09-30T14:02:54Z",
-    "namespaces": [
-      "flight.booking"
-    ],
-    "mongodb_version": "<version>",
-    "fcv": "<version>",
-    "pbm_version": "<version>",
-    "status": "done",
-    "size": 470805945,
-    "size_h": "449.0 MiB",
-    "replsets": [
-      {
-        "name": "<name>",
-        "status": "done",
-        "node": "example.mongodb.com:27017",
-        "last_write_ts": Timestamp,
-        "last_transition_ts": Timestamp,
-        "last_write_time": "2022-09-30T14:02:49Z",
-        "last_transition_time": "2022-09-30T14:02:53Z",
-        "configsvr": true,
-        "security": {
-          "enableEncryption": true,
-          "kmip": {
-            "serverName": "cosmian",
-            "port": 5696,
-            "clientCertificateFile": "/etc/pykmip/mongod.pem",
-            "serverCAFile": "/etc/pykmip/ca.crt",
-            "keyIdentifier": "cbe0a6b4-7d7a-47c3-aa40-39abfc9a6f96"
-          },
-          "vault": {
-            "serverName": "cosmian",
-            "port": 5696,
-            "tokenFile": "/etc/vault/token",
-            "secret": "secret/data/mongo",
-            "secretVersion": 5,
-            "disableTLSForTesting": true
+      "name": "<backup_name>",
+      "opid": "<string>",
+      "type": "logical",
+      "last_write_ts": Timestamp,
+      "last_transition_ts": Timestamp,
+      "last_write_time": "2022-09-30T14:02:49Z",
+      "last_transition_time": "2022-09-30T14:02:54Z",
+      "namespaces": [
+        "flight.booking"
+      ],
+      "mongodb_version": "<version>",
+      "fcv": "<version>",
+      "pbm_version": "<version>",
+      "status": "done",
+      "size": 470805945,
+      "size_h": "449.0 MiB",
+      "replsets": [
+        {
+          "name": "<name>",
+          "status": "done",
+          "node": "example.mongodb.com:27017",
+          "last_write_ts": Timestamp,
+          "last_transition_ts": Timestamp,
+          "last_write_time": "2022-09-30T14:02:49Z",
+          "last_transition_time": "2022-09-30T14:02:53Z",
+          "configsvr": true,
+          "security": {
+            "enableEncryption": true,
+            "kmip": {
+              "serverName": "cosmian",
+              "port": 5696,
+              "clientCertificateFile": "/etc/pykmip/mongod.pem",
+              "serverCAFile": "/etc/pykmip/ca.crt",
+              "keyIdentifier": "cbe0a6b4-7d7a-47c3-aa40-39abfc9a6f96"
+            },
+            "vault": {
+              "serverName": "cosmian",
+              "port": 5696,
+              "tokenFile": "/etc/vault/token",
+              "secret": "secret/data/mongo",
+              "secretVersion": 5,
+              "disableTLSForTesting": true
+            }
           }
-        }
-      },
-      {...},
-      {...}
+        },
+        {...},
+        {...}
       ]
     }
     ```
@@ -358,8 +358,8 @@ The output document contains the following fields:
           <li> <code>size_uncompressed</code> - uncompressed size of the backup in bytes</li>
           <li> <code>size_uncompressed_h</code> - human-readable uncompressed size string (for example, "1.6 GiB")</li>
           <li> <code>error</code> - the error message for failed backup</li>
-          <li> <code>last_write_ts</code> - unix timestamp of the last write operation</li>
-          <li> <code>last_transition_ts</code> - unix timestamp of the last status transition</li>
+          <li> <code>last_write_ts</code> - MongoDB Timestamp-style value of the last write operation (for example, <code>1662039300,2</code>)</li>
+          <li> <code>last_transition_ts</code> - MongoDB Timestamp-style value of the last status transition (for example, <code>1662039300,2</code>)</li>
           <li> <code>last_write_time</code> - the human-readable indication of the last write</li>
           <li> <code>last_transition_time</code> - the human-readable indication of the time when a backup changed its status</li>
           <li> <code>security</code> - the security options of the <code>mongod</code> process. Contains following configuration options:
@@ -391,7 +391,7 @@ The output document contains the following fields:
           </li>
           <li> <code>configsvr</code> - indicates that this is a config server replica set</li>
           <li> <code>configshard</code> - indicates that this is a config shard replica set</li>
-          <li> <code>collections</code> - the list of collections included in the backup (only for logical and selective backups). Available since 2.13.0.</li>
+          <li> <code>collections</code> - the list of collections included in the backup for logical and selective backups. This field is populated only when <code>--with-collections</code> is used. Available since 2.3.0.</li>
         </ul>
       </td>
     </tr>
@@ -720,7 +720,7 @@ The command accepts the following flags:
 | `-n`, `--node=NODE`     | Shows logs for a specified node or a replica set.<br> Specify the node in the format `replset[/host:port]` |
 | `-f`, `--follow`        | Follow log output. Allow to view the logs dynamically |
 | `-s`, `--severity=I`    | Shows logs filtered by severity level.<br> Supported levels are (from low to high): D - Debug, I - Info (default), W - Warning, E - Error, F - Fatal.<br><br> The output includes both the specified severity level and all higher ones |
-| `--timezone`=TIMEZONE   | Timezone of the log output. <br>Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (for example `America/New_York`)
+| `--timezone=TIMEZONE`   | Timezone of the log output. <br>Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (for example `America/New_York`)
 | `-i`, `--opid=OPID`     | Show logs for an operation in progress. The operation is identified by the OpID |
 | `-x`, `--extra`         | Show extra data in the text format |
 
