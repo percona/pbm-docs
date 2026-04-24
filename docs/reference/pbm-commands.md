@@ -27,7 +27,7 @@ The command accepts the following flags:
 | `--num-parallel-collections` | Sets the number of collections to process in parallel during a specific logical backup. When undefined, `pbm-agent` processes the number of parallel collections defined for the `backup.numParallelCollections` configuration parameter. If that is undefined, the default number of collections to process in parallel is the half of the number of logical CPUs. Available starting with version 2.7.0.|
 | `-o` , `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text` , `json` |
 | `--wait` | Wait for the backup to finish. The flag blocks the shell session.|
-| `--wait-time` | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
+| `--wait-time` | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 | `-l` , `--list-files` | For external backups only. Shows the list of files per node to copy.|
 | `--ns="database.collection"` | Makes a logical backup of the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. Starting with version 2.8.0, you can pass multiple namespaces as a comma-separated list for the backup. The format is `ns=db1.*,db2.coll2,db3.coll1,db3.collX` .|
 
@@ -86,10 +86,10 @@ The command accepts the following flags:
 
 | Flag                     | Description               |
 | ------------------------ | ------------------------- |
-| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20), <br> - `%Y-%M-%D` (e.g. 2020-04-20), <br> - `XXd` (e.g. 30d). Only days are supported|
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (for example 2020-04-20T13:13:20), <br> - `%Y-%M-%D` (for example 2020-04-20), <br> - `XXd` (for example 30d). Only days are supported|
 | `--profile=PROFILE_NAME` | Specifies the configuration profile for the storage to clean up. If not specified, cleanup runs on the main storage. Available starting with version 2.13.0|
 | `-w` , `--wait` | Wait for the cleanup to finish. The flag blocks the shell session|
-| `--wait-time` | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
+| `--wait-time` | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 | `-y` , `--yes` | Cleans up the data storage without asking for a user's confirmation|
 | `--dry-run` | Checks for the old data to be deleted without deleting it. Allows to verify what data to delete| 
 
@@ -113,7 +113,7 @@ The command accepts the following flags:
 | `--set=SET` | Set a new config option value. Specify the option in the `<key.name=value>` format.                                    |
 | `-o` , `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: text, json                      |
 | `-w` , `--wait` | Wait for resync of the backup list with the storage to finish. You can only use this flag together with the `--force-resync` flag.|
-| `--wait-time` | The time to wait for PBM to report the status of the resync execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
+| `--wait-time` | The time to wait for PBM to report the status of the resync execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 | `--include-restores` | Resync the full restore metadata history from the storage. Use this flag together with the `--force-resync` flag. Note that retrieving the full restore history may affect resync performance. Available starting with version 2.10.0. |
 
 ??? "PBM configuration output"
@@ -173,7 +173,7 @@ The command accepts the following flags:
 
 | Flag                     | Description             |
 | ------------------------ | ----------------------- |
-| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2023-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2023-04-20)|
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format:<br> - `%Y-%M-%DT%H:%M:%S` (for example 2023-04-20T13:13:20) or <br> - `%Y-%M-%D` (for example 2023-04-20)|
 | `--profile=PROFILE_NAME` | Specifies the configuration profile for the storage from which to delete backups. If not specified, deletion runs on the main storage. Available starting with version 2.13.0|
 | `--type=TYPE` | Deletes backups of the specified type. Must be used together with the `-older-than` flag. Available starting with version 2.4.0|
 | `--force` | Forcibly deletes backups without asking for user's confirmation. Deprecated. Use the `--yes` flag instead. |
@@ -195,13 +195,13 @@ The command accepts the following flags:
 | Flag                     | Description               |
 | ------------------------ | ------------------------- |
 | `-a` , `--all` | Deletes all oplog slices. Deprecated. Use the `--older-than flag instead` |
-| `--older-than=TIMESTAMP` | Deletes oplog slices older than date / time specified in the format: <br> - `%Y-%M-%DT%H:%M:%S` (e.g. 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (e.g. 2020-04-20) <br><br> When you specify a timestamp, Percona Backup for MongoDB rounds it down to align with the completion time of the closest backup snapshot and deletes oplog slices that precede this time. Thus, extra slices remain. This is done to ensure oplog continuity. To illustrate, the PITR time range is `2021-08-11T11:16:21 - 2021-08-12T08:55:25` and backup snapshots are: <br><br> `2021-08-12T08:49:46Z 13.49MB [restore_to_time: 2021-08-12T08:50:06]` <br> `2021-08-11T11:36:17Z 7.37MB [restore_to_time: 2021-08-11T11:36:38]` <br> <br> Say you specify the timestamp `2021-08-11T19:16:21` . The closest backup is `2021-08-11T11:36:17Z 7.37KB [restore_to_time: 2021-08-11T11:36:38]` . PBM rounds down the timestamp to `2021-08-11T11:36:38` and deletes all slices that precede this time. As a result, your PITR time range is `2021-08-11T11:36:38 - 2021-08-12T09:00:25` . <br><br> **NOTE**: Percona Backup for MongoDB doesn’t delete the oplog slices that follow the most recent backup. This is done to ensure point in time recovery from that backup snapshot. For example, if the snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:45` , Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z` .|
+| `--older-than=TIMESTAMP` | Deletes oplog slices older than date / time specified in the format: <br> - `%Y-%M-%DT%H:%M:%S` (for example 2020-04-20T13:13:20) or <br> - `%Y-%M-%D` (for example 2020-04-20) <br><br> When you specify a timestamp, Percona Backup for MongoDB rounds it down to align with the completion time of the closest backup snapshot and deletes oplog slices that precede this time. Thus, extra slices remain. This is done to ensure oplog continuity. To illustrate, the PITR time range is `2021-08-11T11:16:21 - 2021-08-12T08:55:25` and backup snapshots are: <br><br> `2021-08-12T08:49:46Z 13.49MB [restore_to_time: 2021-08-12T08:50:06]` <br> `2021-08-11T11:36:17Z 7.37MB [restore_to_time: 2021-08-11T11:36:38]` <br> <br> Say you specify the timestamp `2021-08-11T19:16:21` . The closest backup is `2021-08-11T11:36:17Z 7.37KB [restore_to_time: 2021-08-11T11:36:38]` . PBM rounds down the timestamp to `2021-08-11T11:36:38` and deletes all slices that precede this time. As a result, your PITR time range is `2021-08-11T11:36:38 - 2021-08-12T09:00:25` . <br><br> **NOTE**: Percona Backup for MongoDB doesn’t delete the oplog slices that follow the most recent backup. This is done to ensure point in time recovery from that backup snapshot. For example, if the snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:45` , Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z` .|
 | `--force` | Forcibly deletes oplog slices without asking a user’s confirmation. Deprecated. Use the `-y` / `--yes` flag instead.  |
 | `-o` , `--out=json` | Shows the output as either the plain text (default) or a JSON object. Supported values: `text` , `json` .   |
 | `--yes` | Deletes backups without asking for user's confirmation |
 | `--dry-run` | Prints the list of oplog slices to be deleted without deleting them. You can use the flag to check what exactly will be deleted. Available starting with version 2.4.0. | 
 | `-w` , `--wait` | Wait for the deletion operation to complete. |
-| `--wait-time` | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
+| `--wait-time` | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 
 ## pbm describe-backup
 
@@ -359,9 +359,9 @@ The output document contains the following fields:
           <li> <code>node</code> - the node name and port</li>
           <li> <code>files</code> - list of backup files (only populated for snapshot-based backups)</li>
           <li> <code>size</code> - size of the backup in bytes</li>
-          <li> <code>size_h</code> - human-readable size string (e.g., "1.5 GiB")</li>
+          <li> <code>size_h</code> - human-readable size string (for example, "1.5 GiB")</li>
           <li> <code>size_uncompressed</code> - uncompressed size of the backup in bytes</li>
-          <li> <code>size_uncompressed_h</code> - human-readable uncompressed size string (e.g., "1.6 GiB")</li>
+          <li> <code>size_uncompressed_h</code> - human-readable uncompressed size string (for example, "1.6 GiB")</li>
           <li> <code>error</code> - the error message for failed backup</li>>
           <li> <code>last_write_ts</code> - unix timestamp of the last write operation</li>
           <li> <code>last_transition_ts</code> - unix timestamp of the last status transition</li>
@@ -370,7 +370,7 @@ The output document contains the following fields:
           <li> <code>security</code> - the security options of the <code>mongod</code> process. Contains following configuration options:
             <ul>
               <li> <code>enableEncryption</code>- boolean flag indicating if encryption at rest is enabled.</li>
-              <li> <code>encryptionCipherMode</code> - cipher mode used for encryption (e.g., "AES256-CBC", "AES256-GCM").</li>
+              <li> <code>encryptionCipherMode</code> - cipher mode used for encryption (for example, "AES256-CBC", "AES256-GCM").</li>
               <li> <code>encryptionKeyFile</code> - path to the local key file for encryption.</li>
               <li> <code>relaxPermChecks</code> - boolean to relax permission checks on encryption key files.</li>
               <li> <code>vault</code> - when using HashiCorp Vault as the key management service:
@@ -740,7 +740,7 @@ The command accepts the following flags:
 | `-n` , `--node=NODE` | Shows logs for a specified node or a replica set.<br> Specify the node in the format `replset[/host:port]` |
 | `-f` , `--follow` | Follow log output. Allow to view the logs dynamically |
 | `-s` , `--severity=I` | Shows logs filtered by severity level.<br> Supported levels are (from low to high): D - Debug, I - Info (default), W - Warning, E - Error, F - Fatal.<br><br> The output includes both the specified severity level and all higher ones |
-| `--timezone` =TIMEZONE   | Timezone of the log output. <br>Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (e.g. `America/New_York` )
+| `--timezone` =TIMEZONE   | Timezone of the log output. <br>Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (for example `America/New_York` )
 | `-i` , `--opid=OPID` | Show logs for an operation in progress. The operation is identified by the OpID |
 | `-x` , `--extra` | Show extra data in the text format |
 
@@ -790,7 +790,7 @@ The command accepts the following flags:
 | `end=timestamp` | The end time for the oplog replay.   |
 | `--replset-remapping` | Maps the replica set names for the oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2` . |
 | `-w` , `--wait` | Wait for the oplog replay operation to complete. |
-| `--wait-time` | The time to wait for PBM to report the status of the oplog replay execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
+| `--wait-time` | The time to wait for PBM to report the status of the oplog replay execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 
 ## pbm profile add
 
@@ -810,7 +810,7 @@ The command accepts the following flags:
 | ----------------------- | ------------------------------------ |
 | --sync                  | Add a profile defining an external storage and sync the backup list from this storage|
 |--wait                   | Wait for the profile to be added. The flag blocks the shell session.|
-| `--wait-time` | The time to wait for PBM to report the status of adding the profile and backup sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+| `--wait-time` | The time to wait for PBM to report the status of adding the profile and backup sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
 |-o, --out=text           | Shows the output format as either plain text or a JSON object. Supported values: `text` , `json` |
 
 ??? admonition "Add profile"
@@ -875,7 +875,7 @@ The command accepts the following flags:
 | Flag                    | Description                          |
 | ----------------------- | ------------------------------------ |
 | `--wait` | Wait for the profile to be removed. The flag blocks the shell session.|
-| `--wait-time` | The time to wait for PBM to report the status of the profile removal. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+| `--wait-time` | The time to wait for PBM to report the status of the profile removal. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
 | `-o` , `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text` , `json` |
 
 ??? admonition "Delete profile"
@@ -938,7 +938,7 @@ The command accepts the following flags:
 | `--all` | Syncs backup lists from all the storages.|
 | `--clear` | Clears the backup list from the storage. To clear the backup list from a specific storage, pass the profile name. When used with `--all` , clears backup lists from all storages. |
 | `--wait` | Wait for the profile to be synced. The flag blocks the shell session.|
-| `--wait-time` | The time to wait for PBM to report the status of the profile sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+| `--wait-time` | The time to wait for PBM to report the status of the profile sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
 | `-o` , `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text` , `json` |
 
 ## pbm restore
@@ -961,7 +961,7 @@ The command accepts the following flags:
 | `--external` | Indicates the backup as the one made outside PBM (for example, snapshot-based)       |
 | `--time=TIME` | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](../features/point-in-time-recovery.md) is enabled. |
 | `-w` | Wait for the restore to finish. The flag blocks the shell session. |
-| `--wait-time` | The time to wait for PBM to report the status of the restore execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (e.g. 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
+| `--wait-time` | The time to wait for PBM to report the status of the restore execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.|
 | `-o` , `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text` , `json` |
 | `--base-snapshot` | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. <br><br> In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](../usage/pitr-physical.md). <br><br> In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](../usage/pitr-physical.md). Without it, PBM looks for a logical backup to restore from.|
 | `--replset-remapping` | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2` |
