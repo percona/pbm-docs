@@ -26,7 +26,7 @@ During physical backups and restores, ``pbm-agents`` don't export / import data 
 
 | Advantages                     | Disadvantages                   |
 | ------------------------------ | ------------------------------- |
-|- Faster backup and restore speed <br> - Recommended for big, multi-TB datasets <br> - No overhead at database level | - The backup size could be bigger than for logical backups due to data fragmentation, and the cost of storing the files of each index <br> - Extra manual post-restore steps are required |
+|- Faster backup and restore speed <br> - Recommended for big, multi-terabyte datasets <br> - No overhead at database level | - The backup size could be bigger than for logical backups due to data fragmentation, and the cost of storing the files of each index <br> - Extra manual post-restore steps are required |
 
 ## Availability and system requirements
 
