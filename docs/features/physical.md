@@ -20,7 +20,7 @@ The following diagram shows the physical restore flow:
 
 ![image](../_images/pbm-phys-restore-shard.png)
 
-During the restore, the ``pbm-agents`` start a temporary non-user reachable instance of each ``mongod`` nodes using the WiredTiger storage options retrieved from the backup's metadata. The logs for these "intermediate" starts are saved to the ``pbm.restore.log`` file inside the ``dbPath``. Upon successful restore, these files are deleted. However, they remain for debugging if the restore were to fail. 
+During the restore, the ``pbm-agents`` start a temporary, non-user-reachable instance for each ``mongod`` node using the WiredTiger storage options retrieved from the backup's metadata. The logs for these "intermediate" starts are saved to a ``pbm.restore.log`` file inside each node's ``dbPath``. Upon successful restore, these log files are deleted. However, they remain for debugging if the restore were to fail. 
 
 During physical backups and restores, ``pbm-agents`` don't export / import data from / to the database. This significantly reduces the backup / restore time compared to logical backups, and is the recommended backup method for big (multi-terabyte) databases.
 
