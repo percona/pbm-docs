@@ -84,16 +84,16 @@ The physical restore in mixed deployments has no restrictions except the version
 
 !!! admonition "Version added: [2.0.0](../release-notes/2.0.0.md)"
 
-You can back up and restore data which is encrypted at rest. Thereby you ensure data safety and can also comply with security requirements such as GDPR, HIPAA, PCI DSS, or PHI.
+You can back up and restore data that is encrypted at rest. Thereby, you ensure data security and also comply with security requirements such as GDPR, HIPAA, PCI DSS, and PHI. If you use an external KMS such as HashiCorp Vault, OpenBao, or KMIP, you need the master encryption key identifier to restore the data. For security reasons, the encryption key is not stored or shown as part of the backup.
 
-During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. You can verify them using the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup) command. Note that the encryption key is not stored nor shown as part of the backup.
+During a backup, Percona Backup for MongoDB stores the encryption settings in the backup metadata. You can verify them using the [`pbm describe-backup`](../reference/pbm-commands.md#pbm-describe-backup) command.
 
 !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-    For data-at-rest encryption setups that use an external KMS such as HashiCorp Vault or KMIP, the master encryption key identifier is required to restore the data. PBM stores this identifier in the backup metadata. You need Percona Server for MongoDB (PSMDB) 7.0.22-12 and 8.0.12-4 or higher to use this feature. If you're using older versions of PSMDB or PBM, you have to store the identifier externally.
+    Additionally, PBM stores the encryption key identifier in the backup metadata. You need Percona Server for MongoDB (PSMDB) 7.0.22-12 and 8.0.12-4 or higher to use this feature. If you're using older versions of PSMDB or PBM, you have to store the identifier externally and pass it in the restore configuration.
 
-To restore the encrypted data from the backup, configure the same data-at-rest encryption settings on all nodes of your destination cluster or replica set to match the settings of the original cluster where you made the backup.
+To restore the encrypted data from the backup, you can just configure the same data-at-rest encryption settings on all nodes of your destination cluster or replica set to match the settings of the original cluster where you made the backup.
 
-During the restore, Percona Backup for MongoDB restores the data to all nodes using the same master key. We recommend to rotate the master encryption key afterwards for extra security. 
+During the restore, Percona Backup for MongoDB restores the data to all nodes using the same master key. We recommend rotating the master encryption key afterward for extra security. 
 
 To learn more about master key rotation, refer to the following documentation:
 
