@@ -20,6 +20,9 @@ The following procedure describes the restore process from backups [made through
     pbm restore --external 
     ```    
 
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
     Percona Backup for MongoDB stops the database, cleans up data directories on all nodes, provides the restore name and prompts you to copy the data:    
 
     ```{.text .no-copy}
@@ -103,6 +106,9 @@ To restore from a backup, do the following:
     ```bash
     pbm restore --external -c </path/to/mongod.conf> --ts 
     ```
+
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
     If the path to the source cluster `mongod.conf` is undefined, PBM tries to retrieve the required configuration options from the `mongod.conf` of the target cluster.    
 

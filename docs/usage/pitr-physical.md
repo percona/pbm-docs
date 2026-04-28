@@ -14,7 +14,10 @@ To restore a database from a physical backup, specify the time for the [`pbm res
 pbm restore --time <timestamp> 
 ```    
 
-Percona Backup for MongoDB recognizes if it is a full or an incremental backup and restores the database from it up to the specified time.     
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+Percona Backup for MongoDB uses a full or an incremental backup (if available) and restores the database from it up to the specified time.     
 
 You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
@@ -34,7 +37,8 @@ pbm describe-restore <restore_name> -c pbm_config.yaml
 
 ### Post-restore steps
 
-After the point-in-time recovery is complete, perform these post-restore steps:   
+After the point-in-time recovery is complete, perform these post-restore steps:
+{.power-number}
 
 1. Restart all `mongod` nodes.    
 
@@ -62,8 +66,15 @@ After the point-in-time recovery is complete, perform these post-restore steps:
 
 ### Implementation specifics
 
-1. Due to the physical restore logic and flow, PBM replays oplog events on the primary node of every shard when Percona Server for MongoDB is shut down. After the database start, the remaining nodes receive the data during the initial sync.
-2. When doing point-in-time recovery for deployments with sharded collections, PBM only writes data to existing ones and doesn’t support creating new collections. Therefore, whenever you create a new sharded collection, make a new backup for it to be included there.
+During a physical restore with point-in-time recovery (PITR), PBM applies oplog entries to all nodes in each replica set. As a result, all nodes contain the same restored data files when the restore completes, allowing replica set members to be started in any order.
+
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Previously, PITR entries were applied only on the primary node, and secondary nodes received the updated data after startup through replication catchup. This required starting the former primary node first to ensure correct data propagation. This limitation no longer applies.
+**PITR behavior and limitations in sharded clusters**
+
+- Due to the physical restore logic and flow, PBM replays oplog events on all nodes of every shard when Percona Server for MongoDB is shut down, allowing replica set members to be started in any order.
+
+- When performing point-in-time recovery for deployments with sharded collections, PBM writes data only to existing collections and does not create new collections. If you create a new sharded collection, make a new backup to ensure it is included in subsequent restore operations.
 
 
 ## Useful links
