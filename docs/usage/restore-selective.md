@@ -30,10 +30,10 @@ Percona Backup for MongoDB allows you to perform selective restore of databases 
 
     Note:
    
-   - Starting with version [2.14.0](../release-notes/2.14.0.md), before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
-   - To restore without the users and roles, skip the `--with-users-and-roles` flag.
-   - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.*>,<db2.*>`. For example, `--ns=customers.*,invoices.*`.
-   - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
+      - Starting with version [2.14.0](../release-notes/2.14.0.md), before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+      - To restore without the users and roles, skip the `--with-users-and-roles` flag.
+      - You can specify several namespaces as a comma-separated list for the `--ns` flag: `<db1.*>,<db2.*>`. For example, `--ns=customers.*,invoices.*`.
+      - During the restore, Percona Backup for MongoDB retrieves the file for the specified database/collection and restores it.
     
     **Where:**
 
