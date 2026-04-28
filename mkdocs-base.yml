@@ -187,6 +187,7 @@ nav:
       - 2. Set up and configure:
         - Initial setup: install/initial-setup.md
         - install/configure-authentication.md
+        - Secure credentials with systemd: install/secure-credentials-systemd.md
         - install/backup-storage.md
         - Start the pbm-agent process: install/start-pbm-agent.md
   - Backup and restore:
