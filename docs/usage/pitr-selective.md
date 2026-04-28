@@ -21,19 +21,17 @@ Run the restore command as follows:
     --ns <db.collection>
     ```
 
-    To restore the desired database to a point in time, **along with users and roles** run:
+To restore the desired database to a point in time, **along with users and roles** run:
 
     ```bash
     pbm restore --time <timestamp> --ns "db.*" --with-users-and-roles
     ```
 
-    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
-        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+!!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+    Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
         
-    You can specify the selective backup as the base snapshot for the Point-in-time restore. In this case, Percona Backup for MongoDB restores only the namespace(s) included in this backup to the specified time.    
+You can specify the selective backup as the base snapshot for the Point-in-time restore. In this case, Percona Backup for MongoDB restores only the namespace(s) included in this backup to the specified time.    
 
-    Alternatively, you can use a full backup snapshot and restore the desired namespaces (databases or collections) up to the specific time from it. Specify them as the comma-separated list for the `pbm restore` command.    
+Alternatively, you can use a full backup snapshot and restore the desired namespaces (databases or collections) up to the specific time from it. Specify them as the comma-separated list for the `pbm restore` command.    
 
-    When point-in-time recovery is started, Percona Backup for MongoDB uses the provided base snapshot, restores the specified namespace(s) and replays oplog on top of it up to the specified time. If no base snapshot is provided, Percona Backup for MongoDB uses the most recent full backup snapshot.
-
-
+When point-in-time recovery is started, Percona Backup for MongoDB uses the provided base snapshot, restores the specified namespace(s) and replays oplog on top of it up to the specified time. If no base snapshot is provided, Percona Backup for MongoDB uses the most recent full backup snapshot.
