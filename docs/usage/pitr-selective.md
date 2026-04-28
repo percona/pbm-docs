@@ -8,9 +8,9 @@
 
 Before you start:
 {.power-number}
-1. Read [known limitations for selective backups and restores](../features/known-limitations.md#selective-backups-and-restores).
-2. Check that you [have made a full backup](backup-selective.md) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
-
+  
+  1. Read [known limitations for selective backups and restores](../features/known-limitations.md#selective-backups-and-restores).
+  2. Check that you [have made a full backup](backup-selective.md) because it serves as the base for point-in-time recovery. Any selective backup is ignored.
 
 ## Restore the specified database or collection to a designated point in time
 
