@@ -15,7 +15,8 @@ PBM supports various backup and restore types. Some of them have known limitatio
 6. Selective point-in-time recovery is not supported for sharded clusters.
 
 ## Physical backups and restores
-Physical restores are not supported for MongoDB instances running without authentication if the PBM agent connects via a non-localhost interface (such as a container hostname or external IP). Because MongoDB restricts the shutdown command to the localhost interface in non-authenticated environments, PBM will be unable to stop the node to perform the restore. To avoid this limitation, ensure that the PBM_MONGODB_URI uses a localhost connection or enable authentication for your MongoDB deployment.
+
+Physical restores are not supported for MongoDB instances running without authentication if the PBM agent connects via a non-localhost interface (such as a container hostname or external IP). Because MongoDB restricts the shutdown command to the localhost interface in non-authenticated environments, PBM will be unable to stop the node to perform the restore. To avoid this limitation, ensure that the `PBM_MONGODB_URI` uses a `localhost` connection or enable authentication for your MongoDB deployment.
 
 ## Oplog slicing for point-in-time recovery
 

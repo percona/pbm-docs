@@ -33,7 +33,7 @@ To choose which storage a command should use, pass the `--profile` flag.
 
 #### Commands that support `--profile`
 
-These PBM commands accept `--profile` flag:
+These PBM commands accept the `--profile` flag:
 
 - `pbm backup`
 
@@ -56,6 +56,7 @@ You can set `--profile` to one of the following:
 - `--profile=<profile_name>` **→** Use an external storage identified by an existing configuration profile name.
 
 ??? example "Examples"
+
 	```bash
 	# List backups from main storage
 	pbm list --profile=main
