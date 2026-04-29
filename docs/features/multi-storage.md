@@ -33,7 +33,7 @@ To choose which storage a command should use, pass the `--profile` flag.
 
 #### Commands that support `--profile`
 
-These PBM commands accept `--profile` flag:
+These PBM commands accept the `--profile` flag:
 
 - `pbm backup`
 
@@ -56,6 +56,7 @@ You can set `--profile` to one of the following:
 - `--profile=<profile_name>` **→** Use an external storage identified by an existing configuration profile name.
 
 ??? example "Examples"
+
 	```bash
 	# List backups from main storage
 	pbm list --profile=main
@@ -163,9 +164,11 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
 2. To make a point-in-time restore, you must explicitly pass the backup name for the `pbm restore` command:
 
     ```bash
-    pbm-restore --time=<timestamp> --base-snapshot <backup-name>
+    pbm restore --time=<timestamp> --base-snapshot <backup-name>
     ```
 
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 3. After the restore is complete, do the required post-restore steps depending on the restore type.
 4. Make a fresh backup to serve as the new base for future restores. 
 
