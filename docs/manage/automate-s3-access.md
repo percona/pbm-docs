@@ -211,10 +211,10 @@ First, get the ARN of the role you created:
 aws iam get-role --role-name pbm-s3-access-role --query "Role.Arn" --output text
 ```
 
-Then, annotate the service account. Replace `<namespace>`, `<service-account-name>`, and `<role_arn>` with the correct values.
+Then, annotate the service account. Replace `<namespace>`, `<service-account-name>`, and `<role-arn>` with the correct values.
 ```bash
 kubectl annotate serviceaccount <service-account-name> -n <namespace> \
-    eks.amazonaws.com/role-arn="<role_arn>"
+    eks.amazonaws.com/role-arn="<role-arn>"
 ```
 If your pods are already running, you will need to restart them to apply the changes and inject the AWS environment variables.
 
