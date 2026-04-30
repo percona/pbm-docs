@@ -139,14 +139,16 @@ Create a JSON file (e.g., `pbm-s3-policy.json`) with the following content. Reme
             "Action": [
                 "s3:GetObject",
                 "s3:PutObject",
-                "s3:DeleteObject",
-                "s3:GetBucketLocation"
+                "s3:DeleteObject"
             ],
             "Resource": "arn:aws:s3:::your-pbm-bucket/*"
         },
         {
             "Effect": "Allow",
-            "Action": "s3:ListBucket",
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
             "Resource": "arn:aws:s3:::your-pbm-bucket"
         }
     ]
