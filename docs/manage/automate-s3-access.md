@@ -59,14 +59,16 @@ You can configure Percona Backup for MongoDB to assume an IAM role. To make this
                     "Action": [
                         "s3:GetObject",
                         "s3:PutObject",
-                        "s3:DeleteObject",
-                        "s3:GetBucketLocation"
+                        "s3:DeleteObject"
                     ],
                     "Resource": "arn:aws:s3:::your-pbm-bucket/*"
                 },
                 {
                     "Effect": "Allow",
-                    "Action": "s3:ListBucket",
+                    "Action": [
+                        "s3:ListBucket",
+                        "s3:GetBucketLocation"
+                    ],
                     "Resource": "arn:aws:s3:::your-pbm-bucket"
                 }
             ]
