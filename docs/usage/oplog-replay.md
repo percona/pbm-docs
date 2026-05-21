@@ -31,7 +31,7 @@ You can define the oplog replay stop point in two ways:
 
 !!! note ""
 
-    Starting with version 2.2.0, oplog replay on top of a physical backups made with Percona Backup for MongoDB is done automatically by PBM as part of [point-in-time recovery](pitr-physical.md). 
+    Starting with version 2.2.0, oplog replay on top of physical backups made with Percona Backup for MongoDB is done automatically as part of [point-in-time recovery](pitr-physical.md). 
 
 This section describes how to **manually** replay oplog on top of physical backups. This is useful for backups made with Percona Backup for MongoDB version 2.1.0 and earlier, where oplog apply was not automatically done by PBM.
 
