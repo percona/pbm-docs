@@ -4,7 +4,7 @@
 
 ## Considerations
 
-1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously. 
+1. Disable point-in-time recovery. Restore and point-in-time recovery oplog slicing operations are incompatible with each other and cannot be run simultaneously. 
 
     ```bash
     pbm config --set pitr.enabled=false
@@ -13,7 +13,7 @@
 2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
 3. Make sure all nodes in the cluster are healthy (i.e. report either PRIMARY or SECONDARY). Each `pbm-agent` needs to be able to connect to its local node and run queries in order to perform the restore.
 4. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
-5. At the end of a physical restore the database will be left down by `pbm-agent`. See the [Post-restore steps](#post-restore-steps) for instructions to resume normal operations.
+5. After a physical restore completes, the database remains offline because it is intentionally left down by `pbm-agent`. To bring the database back to normal operation, follow the steps in [Post-restore steps](#post-restore-steps).
 
 ## Before you start
 
@@ -37,6 +37,12 @@
     During physical restores, the database must not be automatically restarted as this is controlled by the `pbm-agent`.
    
 ## Restore a database
+
+!!! warning 
+
+    If Encryption at Rest is enabled, the restore requires access to the same encryption key that was active when the backup was taken.    
+    - For manually managed key files, update mongod.conf on all nodes to point to the original key before starting the restore procedure.
+    - For Hashicorp Vault-managed keys, ensure the historical key version is still available inside Vault. No changes to mongod.conf are required.     
 
 1. List the backups 
 
