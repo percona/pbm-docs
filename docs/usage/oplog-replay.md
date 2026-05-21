@@ -35,7 +35,7 @@ You can define the oplog replay stop point in two ways:
 
 This section describes how to **manually** replay oplog on top of physical backups. This is useful for backups made with Percona Backup for MongoDB version 2.1.0 and earlier, where oplog apply was not automatically done by PBM.
 
-After you [restore a physical backup](restore.md), do the following:
+After you [restore a physical backup](restore-physical.md), do the following:
 
 1. Stop point-in-time recovery, if enabled, to release the lock.
 
@@ -63,7 +63,7 @@ After you [restore a physical backup](restore.md), do the following:
 
 This section describes how to **manually** replay oplog on top of snapshot backups.
 
-After you [restore a snapshot backup](restore.md), do the following:
+After you [restore a snapshot backup](restore-external.md), do the following:
 
 1. Start all `mongod` nodes
 
