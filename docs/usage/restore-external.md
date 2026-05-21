@@ -67,7 +67,7 @@ After the restore is complete, do the following:
     pbm config --force-resync
     ``` 
 
-4. Optional. Perform point in time recovery by running [`pbm oplog-replay`](./oplog-replay.md#oplog-replay-for-physical-backups) using the `last_write_time` as the start, for example:
+4. Optional. Perform point in time recovery by running [`pbm oplog-replay`](./oplog-replay.md#oplog-replay-for-storage-level-snapshots) using the `last_write_time` as the start, for example:
 
     ```bash
     pbm oplog-replay --start="2026-01-02T15:00:00" --end="2026-01-03T15:00:00"
