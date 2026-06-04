@@ -14,3 +14,11 @@ An SBOM helps you:
 - Support security reviews, compliance processes, and software supply chain requirements.
 - Verify the contents of deployed software artifacts.
 
+## Where to find the SBOM
+
+| Distribution method | SBOM location |
+|---|---|
+| Binary tarball | `Percona Backup for MongoDB.cdx.json` at the archive root |
+| RPM package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json` |
+| DEB package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json` |
+| Docker image | Two SBOMs ship together — see [Docker images](#docker-images) below |
