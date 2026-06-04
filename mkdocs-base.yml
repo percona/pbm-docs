@@ -333,6 +333,7 @@ nav:
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
       - "About Percona Backup for MongoDB documentation": about-docs.md
+      - sboms-pbm.md
       - reference/glossary.md
       - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md'
       - Copyright and licensing: copyright.md
