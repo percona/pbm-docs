@@ -19,7 +19,7 @@ An SBOM helps you:
 |---|---|
 | Binary tarball | `Percona Backup for MongoDB.cdx.json` at the archive root |
 | RPM package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-{{release}}.cdx.json` |
-| DEB package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json` |
+| DEB package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-{{release}}.cdx.json` |
 | Docker image | Embedded in the image and available as an attached OCI artifact. See [Docker images](#docker-images).|
 
 
@@ -31,13 +31,13 @@ The examples below use [Trivy :octicons-link-external-16:](https://trivy.dev/){:
 
 ```bash
 # Confirm the SBOM is bundled
-tar tzf percona-backup-mongodb-<version>-x86_64.tar.gz | grep cdx.json
+tar tzf percona-backup-mongodb-{{release}}-x86_64.tar.gz | grep cdx.json
 
 # Extract and scan
-tar xzf percona-backup-mongodb-<version>-x86_64.tar.gz \
-    -C /tmp percona-backup-mongodb-<version>/percona-backup-mongodb-<version>.cdx.json
+tar xzf percona-backup-mongodb-{{release}}-x86_64.tar.gz \
+    -C /tmp percona-backup-mongodb-{{release}}/percona-backup-mongodb-{{release}}.cdx.json
 trivy sbom --severity HIGH,CRITICAL --ignore-unfixed \
-    /tmp/percona-backup-mongodb-<version>/percona-backup-mongodb-<version>.cdx.json
+    /tmp/percona-backup-mongodb-{{release}}/percona-backup-mongodb-{{release}}.cdx.json
 ```
 
 ### RPM package
@@ -48,7 +48,7 @@ rpm -ql percona-backup-mongodb | grep cdx.json
 
 # Scan it (replace 9.x with your RHEL/OL version)
 trivy sbom --severity HIGH,CRITICAL --ignore-unfixed --distro redhat/9.x \
-    /usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json
+    /usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-{{release}}.cdx.json
 ```
 
 ### DEB package
@@ -59,7 +59,7 @@ dpkg -L percona-backup-mongodb | grep cdx.json
 
 # Scan it
 trivy sbom --severity HIGH,CRITICAL --ignore-unfixed \
-    /usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json
+    /usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-{{release}}.cdx.json
 ```
 
 ### Docker images
@@ -78,7 +78,7 @@ Each PBM Docker image (Docker Hub `percona/percona-backup-mongodb`, PerconaLab `
 
 ```bash
 trivy image --severity HIGH,CRITICAL --ignore-unfixed --sbom-sources oci \
-    docker.io/percona/percona-backup-mongodb:<version>
+    docker.io/percona/percona-backup-mongodb:{{release}}
 ```
 
 
@@ -89,8 +89,8 @@ To scan the embedded SBOM from inside the container image:
 
 ```bash
 docker run --rm -it --entrypoint cat \
-    docker.io/percona/percona-backup-mongodb:<version> \
-    /usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json \
+    docker.io/percona/percona-backup-mongodb:{{release}} \
+    /usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-{{release}}.cdx.json \
     | trivy sbom --severity HIGH,CRITICAL --ignore-unfixed -
 ```
 
@@ -101,7 +101,7 @@ You can use the [ORAS CLI :octicons-link-external-16:](https://oras.land/){:targ
 ```bash
 # Use the per-architecture tag to resolve directly to the image manifest
 oras discover --format tree \
-    docker.io/percona/percona-backup-mongodb:<version>-amd64
+    docker.io/percona/percona-backup-mongodb:{{release}}-amd64
 
 # Pull the SBOM artifact using the digest from the discover output
 oras pull docker.io/percona/percona-backup-mongodb@sha256:<referrer-digest>
