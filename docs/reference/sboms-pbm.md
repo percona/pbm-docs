@@ -18,7 +18,7 @@ An SBOM helps you:
 | Distribution method | SBOM location |
 |---|---|
 | Binary tarball | `Percona Backup for MongoDB.cdx.json` at the archive root |
-| RPM package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json` |
+| RPM package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-{{release}}.cdx.json` |
 | DEB package | `/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-<version>.cdx.json` |
 | Docker image | Embedded in the image and available as an attached OCI artifact. See [Docker images](#docker-images).|
 
