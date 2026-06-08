@@ -71,7 +71,6 @@ Each PBM Docker image (Docker Hub `percona/percona-backup-mongodb`, PerconaLab `
 | **Embedded** | PBM binary and Go modules only | Inside the image filesystem |
 | **OCI-attached** | Full image — PBM and UBI9 base OS packages | Registry-side, via the OCI Referrers API |
 
-
 #### Scan via OCI Referrers API (recommended)
 
 `trivy image --sbom-sources oci` fetches the attached SBOM via the OCI Referrers API and scans it, without pulling the image:
