@@ -8,7 +8,7 @@ Starting with version <version>, every Percona Backup for MongoDB (PBM) release 
 
 An SBOM helps you:
 
-- Identify the components and dependencies included in a PCSM release.
+- Identify the components and dependencies included in a PBM release.
 - Assess known vulnerabilities using SBOM-compatible security scanners.
 - Support security reviews, compliance processes, and software supply chain requirements.
 - Verify the contents of deployed software artifacts.
