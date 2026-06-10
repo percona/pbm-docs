@@ -155,9 +155,9 @@ plugins:
       javascript_dir: js
       canonical_version: null
 
-  extra:
-      version:
-        provider: mike
+extra:
+  version:
+      provider: mike
 #  homepage: https://docs.percona.com
 
   print-site:
