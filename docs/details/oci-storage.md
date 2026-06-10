@@ -138,7 +138,7 @@ PBM must be able to create, read, overwrite, and delete backup objects.
 Create a policy that allows the PBM user group to manage objects in the bucket:
 
 ```text
-Allow group <OCI_GROUP_NAME> to manage object-family in compartment <COMPARTMENT_NAME>
+Allow group <OCI_GROUP_NAME> to manage object-family in compartment <COMPARTMENT_NAME> where target.bucket.name = '<BUCKET_NAME>'
 ```
 
 PBM also uses OCI native server-side copy operations. Add a policy for the regional Object Storage service:
