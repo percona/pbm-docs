@@ -40,7 +40,7 @@ The following procedure describes the restore process from backups [made through
     pbm restore-finish <restore_name> -c </path/to/pbm-config.yaml>
     ```    
 
-    At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
+    At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the `last_write_time` of the metadata.
 
     !!! note
 
@@ -67,9 +67,15 @@ After the restore is complete, do the following:
     pbm config --force-resync
     ``` 
 
-4. Start the balancer and start `mongos` nodes.
+4. Optional. Perform point in time recovery by running [`pbm oplog-replay`](./oplog-replay.md#oplog-replay-for-storage-level-snapshots) using the `last_write_time` as the start, for example:
 
-5. Make a fresh backup to serve as the new base for future restores. 
+    ```bash
+    pbm oplog-replay --start="2026-01-02T15:00:00" --end="2026-01-03T15:00:00"
+    ```
+    
+5. Start the balancer and start `mongos` nodes.
+
+6. Make a fresh backup to serve as the new base for future restores. 
 
 ### Restore from a backup made outside PBM
 
@@ -83,7 +89,7 @@ After the restore is complete, do the following:
 
 To restore an external backup made without PBM, you need to specify the following for the `pbm restore` command:
 
-* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM will use during the restore. It should contain the [storage options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options ) per replica set name, for example:
+* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM will use during the restore. It should contain the [storage options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) per replica set name, for example:
 
    ```yaml
    rs1:
