@@ -17,7 +17,7 @@ Use this auth type when PBM is running directly on an OCI Compute instance. The 
 
 You need:
 
-- The [Oracle Cloud Identifier (OCID):octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle){:target="_blank"} of the OCI Compute instance running PBM
+- The [Oracle Cloud Identifier (OCID) :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle){:target="_blank"} of the OCI Compute instance running PBM
 - The name of the OCI bucket PBM will use for backups
 - A home region, tenancy OCID, and compartment name with sufficient IAM privileges to create dynamic groups and policies
 
