@@ -21,7 +21,7 @@ You need:
 - The name of the OCI bucket PBM will use for backups
 - A home region, tenancy OCID, and compartment name with sufficient IAM privileges to create dynamic groups and policies
 
-### Prococedure
+### Procedure
 
 Follow these steps to set up OCI using **instancePrincipal:**
 
