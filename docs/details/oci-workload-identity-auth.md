@@ -11,7 +11,7 @@ Percona Backup for MongoDB (PBM) supports two WIF authentication types for OCI O
 
 ## instancePrincipal
 
-Use this auth type when PBM is running directly on an OCI Compute instance. The instance itself acts as the principal — no credentials file is required.
+Choose instancePrincipal when PBM runs directly on an OCI Compute instance. PBM automatically obtains OCI credentials from the instance, eliminating the need for credential files or API keys.
 
 ### Before you begin
 
@@ -38,7 +38,7 @@ Follow these steps to set up OCI using **instancePrincipal:**
     --matching-rule "ANY {instance.id = '$INSTANCE_OCID'}"
     ```
 
-    Replace the following:
+    Replace the following variables:
 
     | Variable | Description |
     |---|---|
@@ -47,7 +47,7 @@ Follow these steps to set up OCI using **instancePrincipal:**
     | `INSTANCE_DYNAMIC_GROUP_NAME` | A name for the dynamic group (e.g. `pbm-vm-group`) |
     | `INSTANCE_OCID` | OCID of the Compute instance running PBM |
 
-2. **Create an IAM policy for the dynamic group**
+2. **Create an IAM policy**
 
     Grant the dynamic group permission to manage objects in the target bucket:
 
@@ -72,7 +72,7 @@ Follow these steps to set up OCI using **instancePrincipal:**
     | `BUCKET_NAME` | Name of the OCI Object Storage bucket |
     | `INSTANCE_POLICY_NAME` | A name for the policy (e.g. `pbm-vm-policy`) |
 
-3. **Configure PBM to use instancePrincipal**
+3. **Configure PBM to authentication**
 
     In your PBM configuration, set the storage type to `oci` and the credentials type to `instancePrincipal`. No key file or passphrase is needed.
 
@@ -90,7 +90,7 @@ Follow these steps to set up OCI using **instancePrincipal:**
 
 ## okeWorkloadIdentity
 
-Use this auth type when PBM is running as a workload inside an OKE enhanced cluster. The Kubernetes service account token is exchanged for OCI credentials automatically by the OKE Workload Identity service.
+Choose `okeWorkloadIdentity` when PBM runs as a workload in an Oracle Kubernetes Engine (OKE) enhanced cluster. The Kubernetes service account token is exchanged for OCI credentials automatically by the OKE Workload Identity service.
 
 !!! note
     Your OKE cluster must be an **enhanced cluster** with Workload Identity enabled. Basic clusters do not support this feature.
