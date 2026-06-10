@@ -72,7 +72,7 @@ Follow these steps to set up OCI using **`instancePrincipal`:**
     | `BUCKET_NAME` | Name of the OCI Object Storage bucket |
     | `INSTANCE_POLICY_NAME` | A name for the policy (e.g. `pbm-vm-policy`) |
 
-3. **Configure PBM to authentication**
+3. **Configure PBM authentication**
 
     In your PBM configuration, set the storage type to `oci` and the credentials type to `instancePrincipal`. No key file or passphrase is needed.
 
