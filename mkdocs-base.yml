@@ -77,6 +77,7 @@ extra_css:
   - css/rating.css
 
 extra_javascript:
+  - js/version-select.js
   - js/promptremover.js
   - js/consent.js
   - js/rating.js
@@ -153,6 +154,11 @@ plugins:
       css_dir: css
       javascript_dir: js
       canonical_version: null
+
+  extra:
+      version:
+        provider: mike
+#  homepage: https://docs.percona.com
 
   print-site:
       add_to_navigation: false
