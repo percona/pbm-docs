@@ -95,4 +95,16 @@ Choose `okeWorkloadIdentity` when PBM runs as a workload in an Oracle Kubernetes
 !!! note
     Your OKE cluster must be an **enhanced cluster** with Workload Identity enabled. Basic clusters do not support this feature.
 
+In your PBM configuration, set the storage type to `oci` and the credentials type to `okeWorkloadIdentity`:
+
+    storage:
+      type: oci
+      oci:
+        region: <bucket_region>
+        namespace: <namespace>
+        bucket: <bucket_name>
+        prefix: <path_prefix>
+        credentials:
+          type: okeWorkloadIdentity
+
 For setup instructions, see [Configure OKE Workload Identity for workloads :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contenggrantingworkloadaccesstoresources.htm){:target="_blank"}.
