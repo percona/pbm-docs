@@ -10290,7 +10290,7 @@ Node <a href="#usage-backup-priority">priority</a> affects the nodes that are se
 <p>After you copied the files to the nodes, complete the restore with the following command:    </p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore-finish<span class="w"> </span>&lt;restore_name&gt;<span class="w"> </span>-c<span class="w"> </span>&lt;/path/to/pbm-config.yaml&gt;
 </code></pre></div>
-<p>At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the <code>restore_to_time</code> of the metadata.</p>
+<p>At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the <code>last_write_time</code> of the metadata.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If you use a filesystem as the remote backup storage, both <code>pbm-agent</code> and <code>pbm</code> CLI must have the same permissions to it. To achieve this, run the <code>pbm restore-finish</code> command as the <code>mongod</code> user:</p>
@@ -10314,6 +10314,11 @@ Node <a href="#usage-backup-priority">priority</a> affects the nodes that are se
 <li>
 <p>Run the following command to resync the backup list with the storage:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--force-resync
+</code></pre></div>
+</li>
+<li>
+<p>Optional. Perform point in time recovery by running <a href="#usage-oplog-replay-oplog-replay-for-storage-level-snapshots"><code>pbm oplog-replay</code></a> using the <code>last_write_time</code> as the start, for example:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>oplog-replay<span class="w"> </span>--start<span class="o">=</span><span class="s2">"2026-01-02T15:00:00"</span><span class="w"> </span>--end<span class="o">=</span><span class="s2">"2026-01-03T15:00:00"</span>
 </code></pre></div>
 </li>
 <li>
@@ -11647,14 +11652,15 @@ Waiting for delete to be done .[done]
         })
         </script>
         </head><body><h1 id="replay-oplog-from-arbitrary-start-time">Replay oplog from arbitrary start time<a class="headerlink" href="#usage-oplog-replay-replay-oplog-from-arbitrary-start-time" title="Permanent link">¶</a></h1>
-<p>You can replay the <a href="#reference-glossary-oplog">oplog</a> for a specific period on top of any backup: logical, physical, storage level snapshot (like <a href="#reference-glossary-ebs-snapshot">EBS-snapshot</a>). You can save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the <a href="#reference-pitr-options"><code>pitr.oplogOnly</code></a> configuration parameter:</p>
+<p>You can have PBM save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the <a href="#reference-pitr-options"><code>pitr.oplogOnly</code></a> configuration parameter:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">pitr</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">oplogOnly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<p>By replaying these oplog slices on top of the backup snapshot with the <a href="#reference-pbm-commands-pbm-oplog-replay"><code>pbm oplog-replay</code></a> command, you can manually restore sharded clusters and non-sharded replica sets to a specific point in time from a backup made by any tool and not only by Percona Backup for MongoDB. Plus, you reduce time, storage space, and administration efforts on making the redundant base backup snapshot.</p>
+<p>You can then replay the <a href="#reference-glossary-oplog">oplog</a> for a specific period on top of any backup: logical, physical, storage-level snapshot (like <a href="#reference-glossary-ebs-snapshot">EBS-snapshot</a>). </p>
+<p>By replaying these oplog slices on top of a backup snapshot with the <a href="#reference-pbm-commands-pbm-oplog-replay"><code>pbm oplog-replay</code></a> command, you can manually restore sharded clusters and non-sharded replica sets to a specific point in time from a backup made by any tool and not only by Percona Backup for MongoDB. Plus, you reduce time, storage space, and administration efforts on making the redundant base backup snapshot.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Use the oplog replay functionality with caution, only when you are sure about the starting time from which to replay oplog. The oplog replay does not guarantee data consistency when restoring from any backup. However, it is less error-prone for backups made with Percona Backup for MongoDB.</p>
+<p>Use the oplog replay functionality with caution, only when you are sure about the starting time from which to replay oplog.</p>
 </div>
 <h2 id="usage-oplog-replay-ways-to-specify-time-for-oplog-replay">Ways to specify time for oplog replay<a class="headerlink" href="#usage-oplog-replay-ways-to-specify-time-for-oplog-replay" title="Permanent link">¶</a></h2>
 <p>PBM uses MongoDB’s timestamp format for oplog replay, which provides operation-level resolution. Each oplog operation is identified by <code>(epoch, ordinal)</code>, where <code>epoch</code> is the Unix time in seconds and <code>ordinal</code> distinguishes multiple operations within the same second. The specified operation is always included in the replay.</p>
@@ -11671,10 +11677,10 @@ Waiting for delete to be done .[done]
 </ol>
 <h2 id="usage-oplog-replay-oplog-replay-for-physical-backups">Oplog replay for physical backups<a class="headerlink" href="#usage-oplog-replay-oplog-replay-for-physical-backups" title="Permanent link">¶</a></h2>
 <div class="admonition note">
-<p>Starting with version 2.2.0, oplog replay on top of a physical backups made with Percona Backup for MongoDB is done automatically as part of <a href="#usage-pitr-physical">point-in-time recovery</a>. </p>
+<p>Starting with version 2.2.0, oplog replay on top of physical backups made with Percona Backup for MongoDB is done automatically as part of <a href="#usage-pitr-physical">point-in-time recovery</a>. </p>
 </div>
-<p>This section describes how to <strong>manually</strong> replay oplog on top of physical backups made with Percona Backup for MongoDB version 2.1.0 and earlier.</p>
-<p>After you <a href="#usage-restore">restored a physical backup</a>, do the following:</p>
+<p>This section describes how to <strong>manually</strong> replay oplog on top of physical backups. This is useful for backups made with Percona Backup for MongoDB version 2.1.0 and earlier, where oplog apply was not automatically done by PBM.</p>
+<p>After you <a href="#usage-restore-physical">restore a physical backup</a>, do the following:</p>
 <ol>
 <li>
 <p>Stop point-in-time recovery, if enabled, to release the lock.</p>
@@ -11702,20 +11708,31 @@ Waiting for delete to be done .[done]
 <p>After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.</p>
 </li>
 </ol>
-<h2 id="usage-oplog-replay-oplog-replay-for-storage-level-snapshots">Oplog replay for storage level snapshots<a class="headerlink" href="#usage-oplog-replay-oplog-replay-for-storage-level-snapshots" title="Permanent link">¶</a></h2>
-<p>When making a backup, Percona Backup for MongoDB stops the point-in-time recovery. This is done to maintain data consistency after the restore.</p>
-<p>Storage-level snapshots are saved with point-in-time recovery enabled. Thus, after the database restore from such a backup, point-in-time recovery is automatically enabled and starts oplog slicing. These new oplog slices might conflict with the existing oplogs saved during the backup. To replay the oplog in such a case, do the following after the restore:</p>
+<h2 id="usage-oplog-replay-oplog-replay-for-storage-level-snapshots">Oplog replay for storage-level snapshots<a class="headerlink" href="#usage-oplog-replay-oplog-replay-for-storage-level-snapshots" title="Permanent link">¶</a></h2>
+<p>This section describes how to <strong>manually</strong> replay oplog on top of snapshot backups.</p>
+<p>After you <a href="#usage-restore-external">restore a snapshot backup</a>, do the following:</p>
 <ol>
-<li>Disable point-in-time recovery.</li>
-<li>Delete the oplog slices that might have been created.</li>
-<li>Re-sync the data from the storage.</li>
 <li>
-<p>Run the <code>pbm oplog-replay</code> command and specify the <code>--start</code> and <code>--end</code> flags with the timestamps.</p>
-<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>oplog-replay<span class="w"> </span>--start<span class="o">=</span><span class="s2">"2022-01-02T15:00:00"</span><span class="w"> </span>--end<span class="o">=</span><span class="s2">"2022-01-03T15:00:00"</span>
+<p>Start all <code>mongod</code> nodes</p>
+</li>
+<li>
+<p>Start all <code>pbm-agents</code></p>
+</li>
+<li>
+<p>Run the following command to resync the backup list with the storage:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--force-resync
 </code></pre></div>
 </li>
 <li>
-<p>After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.</p>
+<p>Run the <code>pbm oplog-replay</code> command and specify the <code>--start</code> and <code>--end</code> flags. Use the <code>last_write_time</code> from the output of <code>pbm describe-backup</code> as the start. See <a href="#usage-oplog-replay-ways-to-specify-time-for-oplog-replay">how you can specify the time</a>.</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>oplog-replay<span class="w"> </span>--start<span class="o">=</span><span class="s2">"2026-01-02T15:00:00"</span><span class="w"> </span>--end<span class="o">=</span><span class="s2">"2026-01-03T15:00:00"</span>
+</code></pre></div>
+</li>
+<li>
+<p>Start the balancer and start <code>mongos</code> nodes.</p>
+</li>
+<li>
+<p>Make a fresh backup to serve as the new base for future restores. </p>
 </li>
 </ol>
 <p><a class="md-button" href="#features-known-limitations-oplog-replay-from-arbitrary-start-time">Known limitations</a></p></body></html></section><section class="print-page" id="usage-logs" heading-number="5.10"><html><head>
