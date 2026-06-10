@@ -97,7 +97,7 @@ Choose `okeWorkloadIdentity` when PBM runs as a workload in an Oracle Kubernetes
 
 In your PBM configuration, set the storage type to `oci` and the credentials type to `okeWorkloadIdentity`:
 
-~~~yaml
+```yaml
 storage:
   type: oci
   oci:
@@ -107,5 +107,5 @@ storage:
     prefix: <path_prefix>
     credentials:
       type: okeWorkloadIdentity
-~~~
+```
 For setup instructions, see [Configure OKE Workload Identity for workloads :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contenggrantingworkloadaccesstoresources.htm){:target="_blank"}.
