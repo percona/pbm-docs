@@ -77,7 +77,6 @@ extra_css:
   - css/rating.css
 
 extra_javascript:
-  - js/version-select.js
   - js/promptremover.js
   - js/consent.js
   - js/rating.js
