@@ -174,8 +174,8 @@ plugins:
 
 extra:
   version:
-      provider: mike
-#  homepage: https://docs.percona.com
+    provider: mike
+  # homepage: https://docs.percona.com
 
 nav:
   - Home: index.md
