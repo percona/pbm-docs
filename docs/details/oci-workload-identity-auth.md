@@ -1,6 +1,6 @@
-# Oracle Cloud Storage using Workload Identity authentication
+# Oracle Cloud Storage with Workload Identity Authentication
 
-Workload Identity Federation (WIF) lets workloads authenticate to OCI resources using federated identities rather than static credentials. This eliminates the need to create, rotate, and distribute API keys or service account key files.
+Percona Backup for MongoDB (PBM) supports Workload Identity Federation (WIF) for authentication to Oracle Cloud Infrastructure (OCI) Object Storage. With WIF, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.
 
 Percona Backup for MongoDB (PBM) supports two WIF authentication types for OCI Object Storage, in addition to the default `userPrincipal`:
 
