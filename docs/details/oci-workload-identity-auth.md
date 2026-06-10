@@ -11,7 +11,7 @@ Percona Backup for MongoDB (PBM) supports two WIF authentication types for OCI O
 
 ## instancePrincipal
 
-Choose instancePrincipal when PBM runs directly on an OCI Compute instance. PBM automatically obtains OCI credentials from the instance, eliminating the need for credential files or API keys.
+Choose `instancePrincipal` when PBM runs directly on an OCI Compute instance. PBM automatically obtains OCI credentials from the instance, eliminating the need for credential files or API keys.
 
 ### Before you begin
 
