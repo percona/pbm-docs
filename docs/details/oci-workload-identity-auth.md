@@ -95,4 +95,4 @@ Use this auth type when PBM is running as a workload inside an OKE enhanced clus
 !!! note
     Your OKE cluster must be an **enhanced cluster** with Workload Identity enabled. Basic clusters do not support this feature.
 
-For setup instructions, see [Configure OKE Workload Identity for workloads:octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contenggrantingworkloadaccesstoresources.htm){:target="_blank"}.
+For setup instructions, see [Configure OKE Workload Identity for workloads :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contenggrantingworkloadaccesstoresources.htm){:target="_blank"}.
