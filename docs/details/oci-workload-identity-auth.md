@@ -23,7 +23,7 @@ You need:
 
 ### Procedure
 
-Follow these steps to set up OCI using **instancePrincipal:**
+Follow these steps to set up OCI using **`instancePrincipal`:**
 
 1. **Create a dynamic group for the instance**
 
