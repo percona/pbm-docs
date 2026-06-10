@@ -7,7 +7,7 @@
 *Type*: string <br>
 *Required*:     YES   
 
-Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
+Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`, `oci`.
 
 ## AWS S3 storage options
 
@@ -678,6 +678,55 @@ The minimum time to wait before the next retry, specified as a `time.Duration`. 
 *Default*: 60s
 
 The maximum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+## OCI Object Storage options
+
+```yaml
+storage:
+  type: oci
+  oci:
+    region: <string>
+    namespace: <string>
+    bucket: <string>
+    prefix: <string>
+    credentials:
+      type: userPrincipal
+```
+
+### storage.oci.region
+
+*Type*: string <br>
+*Required*: YES
+
+The region where your OCI Object Storage bucket is located.
+
+### storage.oci.namespace
+
+*Type*: string <br>
+*Required*: YES
+
+The Object Storage namespace for your tenancy.
+
+### storage.oci.bucket
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the OCI Object Storage bucket.
+
+### storage.oci.prefix
+
+*Type*: string <br>
+*Required*: NO
+
+The path prefix inside the bucket where PBM stores backup data.
+
+### storage.oci.credentials.type
+
+*Type*: string <br>
+*Required*: YES
+
+The OCI authentication type. Supported values: `userPrincipal`, `instancePrincipal`, `okeWorkloadIdentity`.
 
 ## Alibaba Cloud OSS storage options
 

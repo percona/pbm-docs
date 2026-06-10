@@ -81,6 +81,20 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
               key: <your-access-key>
         ```    
 
+    === ":material-database: OCI Object Storage"
+
+        ```yaml
+        storage:
+          type: oci
+          oci:
+            region: us-ashburn-1
+            namespace: your-namespace
+            bucket: your-bucket-name
+            prefix: data/pbm/backup
+            credentials:
+              type: instancePrincipal
+        ```
+
     === "Alibaba Cloud Storage"
 
         ```yaml
