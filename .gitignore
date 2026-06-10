@@ -9,6 +9,7 @@ venv/
 # Local Netlify folder
 .netlify
 site
+.cache/
 
 styles/
 
