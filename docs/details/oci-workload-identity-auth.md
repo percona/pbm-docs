@@ -78,14 +78,14 @@ Follow these steps to set up OCI using **instancePrincipal:**
 
     ```yaml
     storage:
-    type: oci
-    oci:
+      type: oci
+      oci:
         region: <bucket_region>
         namespace: <namespace>
         bucket: <bucket_name>
         prefix: <path_prefix>
         credentials:
-        type: instancePrincipal
+          type: instancePrincipal
     ```
 
 ## okeWorkloadIdentity
