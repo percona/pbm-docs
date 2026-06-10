@@ -6,7 +6,7 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem o
 * [Set a valid MongoDB connection URI string for **pbm-agent**](#set-the-mongodb-connection-uri-for-pbm-agent) 
 * [Set a valid MongoDB connection URI string for `pbm` CLI](#set-the-mongodb-connection-uri-for-pbm-cli)
 
-## Create the `pbm` user
+## Create a `pbm` user
 
 !!! info
 
