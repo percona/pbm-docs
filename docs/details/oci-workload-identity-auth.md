@@ -4,7 +4,7 @@ Workload Identity Federation (WIF) lets workloads authenticate to OCI resources 
 
 Percona Backup for MongoDB (PBM) supports two WIF authentication types for OCI Object Storage, in addition to the default `userPrincipal`:
 
-| Auth type | When to use|
+| Auth type | When to use |
 |---|---|
 | `instancePrincipal` | PBM is running on a virtual machine inside OCI |
 | `okeWorkloadIdentity` | PBM is running inside an OKE enhanced cluster |
