@@ -37,9 +37,7 @@ pbm backup --num-parallel-files=4
 ```
 
 !!! note
-    Parallel file copy applies to **physical backups to filesystem 
-    or NFS storage only**. It has no effect on logical backups or 
-    on S3-compatible storage.
+    Parallel file copy applies to **physical backups to filesystem or NFS storage only**. It has no effect on logical backups or on S3-compatible storage.
 
 ## Next steps
 
