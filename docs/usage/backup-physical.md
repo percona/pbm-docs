@@ -20,7 +20,7 @@ Starting with [2.4.0](../release-notes/2.4.0.md), PBM doesn't stop [point-in-tim
 
 ## Improve backup performance on filesystem storage
 
-For physical backups stored on a filesystem, you can control how many files PBM processes in parallel during backup and restore operations. Increasing parallelism can improve performance by allowing multiple files to be transferred or copied simultaneously.
+For physical backups stored on a filesystem, you can control how many files PBM processes in parallel during the backup operation. Increasing parallelism can improve performance by allowing multiple files to be copied simultaneously.
 
 
 To copy files in parallel, set `backup.numParallelFiles` in the 
