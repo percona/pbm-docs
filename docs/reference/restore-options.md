@@ -106,7 +106,7 @@ This is useful when you want to:
 
 *Type*: int <br>
 *Default*: 1 <br>
-*Storage*: Filesystem only <br>
+*Storage*: Filesystem / NFS only <br>
 *Restore type:* Physical only
 
 The number of files to copy in parallel during a physical restore from filesystem or NFS storage.
