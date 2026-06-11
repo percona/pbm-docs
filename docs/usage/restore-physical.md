@@ -151,11 +151,9 @@ restore:
 * `maxDownloadBufferMb` - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as `numDownloadWorkers * downloadChunkMb * 16`
 * `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
 
-## Parallel file copy for filesystem storage
+## Parallel file copy for filesystem or NFS storage
 
-By default, PBM copies backup files sequentially during a physical 
-restore from filesystem or NFS storage. On fast NFS mounts, this 
-limits restore throughput regardless of available network bandwidth.
+By default, PBM copies backup files sequentially during a physical restore from filesystem or NFS storage. On fast NFS mounts, this limits restore throughput regardless of available network bandwidth.
 
 To copy files in parallel, set `restore.numParallelFiles` in the PBM configuration:
 
