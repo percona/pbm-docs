@@ -126,7 +126,7 @@ Available starting with version 2.7.0.
 
 *Type*: int <br>
 *Default*: 1 <br>
-*Storage*: Filesystem only <br>
+*Storage*: Filesystem / NFS only <br>
 *Backup type:* Physical only
 
 The number of files to copy in parallel during a physical backup to filesystem or NFS storage.
