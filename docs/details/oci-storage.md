@@ -1,0 +1,1 @@
+# Configure Oracle Cloud Infrastructure Object Storage
