@@ -18,9 +18,9 @@ pbm backup --type=physical
     
 Starting with [2.4.0](../release-notes/2.4.0.md), PBM doesn't stop [point-in-time recovery oplog slicing](../features/point-in-time-recovery.md#oplog-slicing), if it's enabled, but runs it in parallel. This ensures [point-in-time recovery](pitr-tutorial.md) to any timestamp if it takes too long (e.g. hours) to make a backup snapshot.
 
-## Parallel file copy for filesystem storage
+## Parallel file copy for filesystem or NFS storage
 
-For physical backups stored on a filesystem, you can control how many files PBM processes in parallel during the backup operation. Increasing parallelism can improve performance by allowing multiple files to be copied simultaneously.
+For physical backups stored on a filesystem or NFS mount, you can control how many files PBM processes in parallel during the backup operation. Increasing parallelism can improve performance by allowing multiple files to be copied simultaneously.
 
 To copy files in parallel, set `backup.numParallelFiles` in the PBM configuration:
 
