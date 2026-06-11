@@ -30,7 +30,7 @@ backup:
   numParallelFiles: 4
 ```
 
-Or pass `--num-parallel-files`
+Or pass `--num-parallel-files`:
 
 ```sh
 pbm backup --num-parallel-files=4
