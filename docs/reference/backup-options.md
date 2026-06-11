@@ -13,6 +13,7 @@ backup:
     startingStatus: 60
   oplogSpanMin: <float64>
   numParallelCollections: <int>
+  numParallelFiles: <int>
 ```
 
 ## priority
