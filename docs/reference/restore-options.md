@@ -6,6 +6,7 @@ restore:
   numInsertionWorkers: <int>
   numParallelCollections: <int>
   numDownloadWorkers: <int>
+  numParallelFiles: <int>
   maxDownloadBufferMb: <int>
   downloadChunkMb: <int>
   mongodLocation: <string>
