@@ -100,3 +100,20 @@ This is useful when you want to:
 - Prevent restore operations from waiting indefinitely
 - Enforce time limits in automated workflows
 - Fail fast if the balancer cannot be stopped
+
+
+## restore.numParallelFiles
+
+*Type*: int <br>
+*Default*: 1 <br>
+*Storage*: Filesystem only <br>
+*Restore type:* Physical only
+
+The number of files to copy in parallel during a physical restore 
+from filesystem or NFS storage.
+
+The default value of `1` copies files sequentially. If parameter is not specified, files will be uploaded/downloaded sequentially.
+
+
+
+
