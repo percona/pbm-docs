@@ -32,7 +32,7 @@ backup:
 Or pass `--num-parallel-files`:
 
 ```sh
-pbm backup --num-parallel-files=4
+pbm backup --type=physical --num-parallel-files=4
 ```
 
 !!! note
