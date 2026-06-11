@@ -109,10 +109,9 @@ This is useful when you want to:
 *Storage*: Filesystem only <br>
 *Restore type:* Physical only
 
-The number of files to copy in parallel during a physical restore 
-from filesystem or NFS storage.
+The number of files to copy in parallel during a physical restore from filesystem or NFS storage.
 
-The default value of `1` copies files sequentially. If parameter is not specified, files will be uploaded/downloaded sequentially.
+The default value is `1`, which copies files sequentially.
 
 
 
