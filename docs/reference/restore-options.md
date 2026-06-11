@@ -112,7 +112,3 @@ This is useful when you want to:
 The number of files to copy in parallel during a physical restore from filesystem or NFS storage.
 
 The default value is `1`, which copies files sequentially.
-
-
-
-
