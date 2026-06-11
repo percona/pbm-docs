@@ -132,9 +132,3 @@ Available starting with version 2.7.0.
 The number of files to copy in parallel during a physical backup to filesystem or NFS storage.
 
 The default value is `1`, which copies files sequentially.
-
-
-
-
-
-
