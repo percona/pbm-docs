@@ -169,9 +169,7 @@ pbm restore <backup_name> --num-parallel-files=4
 ```
 
 !!! note
-    Parallel file copy applies to **physical restores from 
-    filesystem or NFS storage only**. It has no effect on logical 
-    restores or on S3-compatible storage.
+    Parallel file copy applies to **physical restores from filesystem or NFS storage only**. It has no effect on logical restores or on S3-compatible storage.
 
 ## Next steps
 
