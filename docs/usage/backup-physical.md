@@ -36,7 +36,7 @@ pbm backup --type=physical --num-parallel-files=4
 ```
 
 !!! note
-    Parallel file copy applies to **physical backups or incremental backups to filesystem only**. It has no effect on logical backups or on S3-compatible storage.
+    Parallel file copy applies to **physical backups and incremental physical backups stored on filesystem only**. It has no effect on logical backups or on any S3-compatible storage, regardless of backup type.
 
 ## Next steps
 
