@@ -102,7 +102,7 @@ This is useful when you want to:
 - Fail fast if the balancer cannot be stopped
 
 
-## restore.numParallelFiles
+### restore.numParallelFiles
 
 *Type*: int <br>
 *Default*: 1 <br>
