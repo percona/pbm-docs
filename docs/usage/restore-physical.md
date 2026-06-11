@@ -155,8 +155,7 @@ restore:
 
 For physical restores from filesystem storage, you can control how many files PBM copies in parallel during the restore operation. Increasing the number of parallel file copies can reduce restore time by allowing multiple files to be processed simultaneously, depending on the available system and storage resources.
 
-To copy files in parallel, set `restore.numParallelFiles` in the 
-PBM configuration:
+To copy files in parallel, set `restore.numParallelFiles` in the PBM configuration:
 
 ```yaml
 restore:
