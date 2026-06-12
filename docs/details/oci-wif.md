@@ -49,24 +49,26 @@ Replace the following variables:
 
 2. Configure PBM authentication
 
-    In your PBM configuration, set the storage type to `oci` and the credentials type to `userPrincipal`. Provide the path to the private key file and its passphrase if one was set during key generation.
+    In your PBM configuration, set the storage type to `oci` and the credentials type to `userPrincipal`. Provide the API signing key private key in PEM format.
 
     ```yaml
     storage:
-          type: oci
-          oci:
-            region: <bucket_region>
-            namespace: <namespace>
-            bucket: <bucket_name>
-            prefix: <path_prefix>
-            credentials:
-              type: userPrincipal
-              userPrincipal:
-                tenancy: <tenancy_ocid>
-                user: <user_ocid>
-                fingerprint: <key_fingerprint>
-                key: <path_to_private_key_file>
-                passphrase: <key_passphrase>
+      type: oci
+      oci:
+        region: <bucket_region>
+        namespace: <namespace>
+        bucket: <bucket_name>
+        prefix: <path_prefix>
+        credentials:
+          type: userPrincipal
+          userPrincipal:
+            tenancy: <tenancy_ocid>
+            user: <user_ocid>
+            fingerprint: <key_fingerprint>
+            privateKey: |
+              -----BEGIN PRIVATE KEY-----
+              ...
+              -----END PRIVATE KEY-----
     ```
 
 ## instancePrincipal

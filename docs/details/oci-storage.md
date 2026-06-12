@@ -174,7 +174,7 @@ oci iam policy create \
   --compartment-id "$TENANCY_OCID" \
   --name pbm-user-access \
   --description "Allow PBM user group to manage backup objects" \
-  --statements '["Allow group <OCI_GROUP_NAME> to manage object-family in compartment pbm-backup"]'
+  --statements "[\"Allow group <OCI_GROUP_NAME> to manage object-family in compartment $COMPARTMENT_NAME\"]"
 ```
 
 **Native copy policy** — grants the OCI Object Storage service 
