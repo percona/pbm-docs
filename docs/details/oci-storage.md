@@ -102,9 +102,7 @@ echo "FINGERPRINT:  $FINGERPRINT"
 echo "KEY_FILE:     $KEY_FILE"
 echo "NAMESPACE:    $NAMESPACE"
 ```
-Verify all five values are populated before continuing. An empty 
-value means the OCI CLI is not authenticated or the variable 
-was not set correctly.
+Verify all five values are populated before continuing. An empty value means the OCI CLI is not authenticated or the variable was not set correctly.
 
 ## Create a compartment
 
@@ -196,9 +194,7 @@ oci iam policy create \
 ```
 
 !!! note
-    IAM policy changes can take up to 2 minutes to propagate. 
-    If PBM reports an authorization error immediately after 
-    creating the policies, wait 2 minutes and retry.
+    IAM policy changes can take up to 2 minutes to propagate. If PBM reports an authorization error immediately after creating the policies, wait 2 minutes and retry.
 
 ## Configure PBM
 
@@ -290,8 +286,7 @@ keys are required in the configuration file.
 
    Wait for a few minutes for IAM policy propagation before testing the configuration.
 
-
-    !!! note
+   !!! note
         IAM changes for dynamic groups can take 5 to 10 minutes to propagate. The native copy policy from the previous section is still required alongside the instance 
     principal policy.
 
@@ -373,25 +368,5 @@ pbm list
 
         PITR <off>:
     ```
-
-??? example "Output"
-
-     ```sh
-      $ pbm backup
-      Starting backup "2026-06-12T07:11:31Z".....
-      Backup "2026-06-12T07:11:31Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
-     ```
-
-     ```sh
-      $ pbm list
-      Backup snapshots:
-      NAME   TYPE   PROFILE SELECTIVE   BASE   RESTORE TIME
-      -----------------------------------------------------
-      2026-06-11T13:14:51Z logical no no  2026-06-11T13:15:07
-      2026-06-12T07:04:27Z logical no no  2026-06-12T07:04:42
-    2026-06-12T07:11:31Z   logical no no  2026-06-12T07:11:46
-
-      PITR <off>:
-     ```
 
 A backup with status `done` confirms the setup is complete.
