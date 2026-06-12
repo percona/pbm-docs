@@ -238,6 +238,8 @@ Check that PBM created objects under the configured prefix:
 
 ```bash
 oci os object list \
+  --region <BUCKET_REGION> \
+  --namespace-name <NAMESPACE> \
   --bucket-name <BUCKET_NAME> \
   --prefix pbm/
 ```
