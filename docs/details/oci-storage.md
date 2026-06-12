@@ -62,7 +62,7 @@ export BUCKET_NAME=<BUCKET_NAME>
 export PBM_PREFIX=pbm
 ```
 
-Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and O`bject Storage namespace`:
+Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and `Object Storage namespace`: 
 
 ```bash
 export TENANCY_OCID=$(oci iam tenancy get \ 
