@@ -246,6 +246,7 @@ nav:
       - details/gcs.md
       - Workload Identity authentication: details/workload-identity-auth.md
       - details/azure.md
+      - OCI Object Storage: details/oci-storage.md
       - details/oss.md
       - details/filesystem-storage.md
       - details/endpoint-map.md
