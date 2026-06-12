@@ -99,6 +99,7 @@ export NAMESPACE=$(
 echo "TENANCY_OCID: $TENANCY_OCID"
 echo "USER_OCID:    $USER_OCID"
 echo "FINGERPRINT:  $FINGERPRINT"
+echo "KEY_FILE:     $KEY_FILE"
 echo "NAMESPACE:    $NAMESPACE"
 ```
 Verify all five values are populated before continuing. An empty 
