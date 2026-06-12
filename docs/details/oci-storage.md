@@ -367,5 +367,3 @@ pbm list
 
         PITR <off>:
     ```
-
-A backup with status `done` confirms the setup is complete.
