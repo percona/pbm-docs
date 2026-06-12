@@ -1,7 +1,6 @@
 # Oracle Cloud Infrastructure Object Storage
 
-Percona Backup for MongoDB (PBM) supports [OCI Object Storage]
-(https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm) 
+Percona Backup for MongoDB (PBM) supports [OCI Object Storage](https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm)
 as a remote backup destination through a dedicated OCI native 
 driver. PBM connects to OCI Object Storage using one of three 
 authentication types:
