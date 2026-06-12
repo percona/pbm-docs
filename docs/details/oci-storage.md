@@ -130,7 +130,6 @@ export COMPARTMENT_OCID=$(
 
 echo "COMPARTMENT_OCID: $COMPARTMENT_OCID"
 ```
-
 ### Create an Object Storage bucket
 
 Create the bucket:
@@ -272,17 +271,17 @@ keys are required in the configuration file.
 
 3. Configure PBM:
 
-   ```yaml
-   storage:
-     type: oci
-     oci:
-       region: <BUCKET_REGION>
-       namespace: <NAMESPACE>
-       bucket: <BUCKET_NAME>
-       prefix: pbm
-       credentials:
-         type: instancePrincipal
-   ```
+    ```yaml
+    storage:
+        type: oci
+        oci:
+        region: <BUCKET_REGION>
+        namespace: <NAMESPACE>
+        bucket: <BUCKET_NAME>
+        prefix: pbm
+        credentials:
+            type: instancePrincipal
+    ```
 
    Wait for a few minutes for IAM policy propagation before testing the configuration.
 
