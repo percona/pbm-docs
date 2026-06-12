@@ -67,18 +67,24 @@ export PBM_PREFIX=pbm
 Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and `Object Storage namespace`: 
 
 ```bash
-export TENANCY_OCID=$(oci iam tenancy get \ 
---tenancy-id "$(awk -F= '/^tenancy=/{print $2}' ~/.oci/config)" \ 
---region "$HOME_REGION" \ --query 'data.id' \ 
---raw-output)
+export TENANCY_OCID=$(
+  oci iam tenancy get \
+    --tenancy-id "$(awk -F= '/^tenancy=/{print $2}' ~/.oci/config)" \
+    --region "$HOME_REGION" \
+    --query 'data.id' \
+    --raw-output
+)
 
-export USER_OCID=$(awk -F= '/^user=/{print $2}' ~/.oci/config) 
-export FINGERPRINT=$(awk -F= '/^fingerprint=/{print $2}' ~/.oci/config) 
+export USER_OCID=$(awk -F= '/^user=/{print $2}' ~/.oci/config)
+export FINGERPRINT=$(awk -F= '/^fingerprint=/{print $2}' ~/.oci/config)
 export KEY_FILE=$(awk -F= '/^key_file=/{print $2}' ~/.oci/config)
 
-export NAMESPACE=$(oci os ns get \ 
---region "$BUCKET_REGION" \ --query 'data' \ 
---raw-output)
+export NAMESPACE=$(
+  oci os ns get \
+    --region "$BUCKET_REGION" \
+    --query 'data' \
+    --raw-output
+)
 ```
 
 ## Create a compartment
