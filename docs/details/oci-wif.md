@@ -1,9 +1,8 @@
 # Oracle Cloud Infrastructure (OCI) Object Storage with Workload Identity Authentication
 
-Percona Backup for MongoDB (PBM) supports Workload Identity authentication for Oracle Cloud Infrastructure (OCI) Object Storage. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.
+Percona Backup for MongoDB (PBM) supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.
 
-Percona Backup for MongoDB (PBM) supports two Workload Identity authentication types for OCI Object Storage, in addition to the default `userPrincipal`:
-
+Percona Backup for MongoDB (PBM) supports the default `userPrincipal` authentication method as well as the following Workload Identity options:
 | Auth type | When to use |
 |---|---|
 |`userPrincipal`|PBM is running anywhere — on-premises, on other clouds, or on OCI|
