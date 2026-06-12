@@ -6,11 +6,11 @@ as a remote backup destination through a dedicated OCI native
 driver. PBM connects to OCI Object Storage using one of three 
 authentication types:
 
-|**Authentication type**| **Use when**|
-|---------------------|-------------|
-| `userPrincipal`|PBM runs anywhere; authenticates with OCI API signing keys|                               |
-| `instancePrincipal`|PBM runs on an OCI Compute instance|                                  |
-| `okeWorkloadIdentity`|PBM runs inside an OKE enhanced cluster|
+| **Authentication type** | **Use when** |
+| --- | --- |
+| `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
+| `instancePrincipal` | PBM runs on an OCI Compute instance |
+| `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster |
 
 
 ## Prerequisites
