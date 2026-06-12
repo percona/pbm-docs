@@ -173,6 +173,11 @@ plugins:
       include_css: true
       enabled: true
 
+extra:
+  version:
+    provider: mike
+#  homepage: https://docs.percona.com
+
 nav:
   - Home: index.md
   - get-help.md
