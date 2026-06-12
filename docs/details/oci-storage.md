@@ -9,7 +9,6 @@ authentication types:
 | --- | --- |
 | `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
 | `instancePrincipal` | PBM runs on an OCI Compute instance |
-| `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster |
 
 
 ## Prerequisites
