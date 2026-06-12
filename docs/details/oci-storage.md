@@ -319,6 +319,42 @@ Verify all agents connected and storage initialized successfully:
 ```sh
 pbm status
 ```
+
+??? example "Output"
+
+    ```sh
+    $ pbm status
+    Cluster:
+    ========
+    rs1:
+    - rs101:27017 [S]: pbm-agent [v2.15.0] OK
+    - rs102:27017 [S]: pbm-agent [v2.15.0] OK
+    - rs103:27017 [P]: pbm-agent [v2.15.0] OK
+
+    PITR incremental backup:
+    ========================
+    Status [OFF]
+
+    Currently running:
+    ==================
+    (none)
+
+    Backups:
+    ========
+    Main storage:
+    Type:       OCI
+    Region:     us-ashburn-1
+    Path:       oci://idvufsl0apl6/rasika-bucket/pbm
+    Snapshots:
+    NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         STATUS
+    ------------------------------------------------------------------------------------------------------------------
+    2026-06-11T13:14:51Z      435.75KB    logical                             no     no    2026-06-11T13:15:07  done
+    [user@b0157cd96911 pbm]$ pbm backup
+    Starting backup "2026-06-12T07:04:27Z"......
+    Backup "2026-06-12T07:04:27Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
+    ```
+
+
 Every node must show `pbm-agent` as `OK` and storage as `ok`. 
 
 Run a test backup to confirm end-to-end functionality:
@@ -327,5 +363,22 @@ Run a test backup to confirm end-to-end functionality:
 pbm backup
 pbm list
 ```
+
+??? example "Output"
+
+     ```sh
+     $ pbm list
+    Backup snapshots:
+    NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME
+    -----------------------------------------------------------------------------------------------------
+    2026-06-11T13:14:51Z      logical                             no          no      2026-06-11T13:15:07
+    2026-06-12T07:04:27Z      logical                             no          no      2026-06-12T07:04:42
+     ```
+
+    ```sh
+    $ pbm backup
+    Starting backup "2026-06-12T07:11:31Z".....
+    Backup "2026-06-12T07:11:31Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
+    ```
 
 A backup with status `done` confirms the setup is complete.
