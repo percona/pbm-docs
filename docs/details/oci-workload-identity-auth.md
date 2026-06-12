@@ -6,8 +6,68 @@ Percona Backup for MongoDB (PBM) supports two Workload Identity authentication t
 
 | Auth type | When to use |
 |---|---|
-| `instancePrincipal` | PBM is running on a virtual machine inside OCI |
-| `okeWorkloadIdentity` | PBM is running inside an OKE enhanced cluster |
+|`userPrincipal`|PBM is running anywhere — on-premises, on other clouds, or on OCI|
+| `instancePrincipal`| PBM is running on a virtual machine inside OCI |
+| `okeWorkloadIdentity`| PBM is running inside an OKE enhanced cluster|
+
+## userPrincipal
+
+Choose `userPrincipal` when PBM runs outside OCI, or when you want a single authentication approach that works in any environment. PBM authenticates using an OCI user account and an API signing key.
+
+### Before you begin
+
+You need:
+
+- An OCI user account with access to the target bucket
+- An [API signing key pair :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm){:target="_blank"} (private key file and its fingerprint)
+- The [Oracle Cloud Identifier (OCID) :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle){:target="_blank"} of the user and tenancy
+- The name of the OCI bucket PBM will use for backups
+
+### Procedure
+
+1. Create an IAM policy
+   Grant the user permission to manage objects in the target bucket:
+   ```sh
+   oci iam policy create \
+      --region "$HOME_REGION" \
+      --compartment-id "$TENANCY_OCID" \
+      --name "$USER_POLICY_NAME" \
+      --description "Allow PBM user to access $BUCKET_NAME" \
+      --statements "[\"Allow group $USER_GROUP_NAME to manage objects in compartment $COMPARTMENT_NAME where target.bucket.name = '$BUCKET_NAME'\"]"
+   ```
+  
+Replace the following variables:
+
+| Variable | Description |
+|---|---|
+| `HOME_REGION` | Your tenancy's home region (e.g. `us-ashburn-1`) |
+| `TENANCY_OCID` | OCID of your OCI tenancy |
+| `USER_POLICY_NAME` | A name for the policy (e.g. `pbm-user-policy`) |
+| `USER_GROUP_NAME` | The IAM group the PBM user belongs to |
+| `COMPARTMENT_NAME` | Name of the compartment containing the bucket |
+| `BUCKET_NAME` | Name of the OCI Object Storage bucket |
+
+2. Configure PBM authentication
+
+    In your PBM configuration, set the storage type to `oci` and the credentials type to `userPrincipal`. Provide the path to the private key file and its passphrase if one was set during key generation.
+
+    ```yaml
+    storage:
+          type: oci
+          oci:
+            region: <bucket_region>
+            namespace: <namespace>
+            bucket: <bucket_name>
+            prefix: <path_prefix>
+            credentials:
+              type: userPrincipal
+              userPrincipal:
+                tenancy: <tenancy_ocid>
+                user: <user_ocid>
+                fingerprint: <key_fingerprint>
+                key: <path_to_private_key_file>
+                passphrase: <key_passphrase>
+    ```
 
 ## instancePrincipal
 
