@@ -62,9 +62,7 @@ export BUCKET_REGION=<BUCKET_REGION>
 export COMPARTMENT_NAME=<COMPARTMENT_NAME>
 export BUCKET_NAME=<BUCKET_NAME>
 
-Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and `Object Storage namespace`: 
-
-```bash
+# Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and `Object Storage namespace`:
 export TENANCY_OCID=$(
   oci iam tenancy get \
     --tenancy-id "$(awk -F= '/^tenancy=/{print $2}' ~/.oci/config)" \
