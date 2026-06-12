@@ -212,7 +212,7 @@ storage:
     credentials:
       type: instancePrincipal
 ```
-Wait for few minutes for IAM policy propagation before testing the configuration.
+Wait for a few minutes for IAM policy propagation before testing the configuration.
 
 ## Apply the PBM configuration
 
