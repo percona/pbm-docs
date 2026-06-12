@@ -170,4 +170,5 @@ storage:
     credentials:
       type: okeWorkloadIdentity
 ```
+
 For setup instructions, see [Configure OKE Workload Identity for workloads :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contenggrantingworkloadaccesstoresources.htm){:target="_blank"}.
