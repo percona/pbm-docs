@@ -352,7 +352,6 @@ pbm status
     Backup "2026-06-12T07:04:27Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
     ```
 
-
 Every node must show `pbm-agent` as `OK` and storage as `ok`. 
 
 Run a test backup to confirm end-to-end functionality:
