@@ -10,7 +10,6 @@ authentication types:
 | `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
 | `instancePrincipal` | PBM runs on an OCI Compute instance |
 
-
 ## Prerequisites
 
 Before configuring PBM, ensure that you have:
