@@ -124,9 +124,9 @@ oci os bucket create \
 Verify the bucket:
 
 ```bash
-oci os bucket get \ 
-  --region "$BUCKET_REGION" \ 
-  --namespace-name "$NAMESPACE" \ 
+oci os bucket get \
+  --region "$BUCKET_REGION" \
+  --namespace-name "$NAMESPACE" \
   --bucket-name "$BUCKET_NAME"
 ```
 
