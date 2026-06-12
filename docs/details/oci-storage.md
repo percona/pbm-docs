@@ -239,8 +239,8 @@ pbm backup
 Check that PBM created objects under the configured prefix:
 
 ```bash
-oci os object list \ 
-  --bucket-name <BUCKET_NAME> \ 
+oci os object list \
+  --bucket-name <BUCKET_NAME> \
   --prefix pbm/
 ```
 
