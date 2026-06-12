@@ -28,6 +28,7 @@ You need:
 1. **Create an IAM policy**
 
     Grant the user permission to manage objects in the target bucket:
+
     ```sh
     oci iam policy create \
         --region "$HOME_REGION" \
@@ -35,7 +36,7 @@ You need:
         --name "$USER_POLICY_NAME" \
         --description "Allow PBM user to access $BUCKET_NAME" \
         --statements "[\"Allow group $USER_GROUP_NAME to manage objects in compartment $COMPARTMENT_NAME where target.bucket.name = '$BUCKET_NAME'\"]"
-        ```
+    ```
   
     Replace the following variables:
 
