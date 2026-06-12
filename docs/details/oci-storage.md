@@ -88,7 +88,7 @@ export TENANCY_OCID=$(
 export USER_OCID=$(awk -F= '/^user=/{print $2}' ~/.oci/config)
 export FINGERPRINT=$(awk -F= '/^fingerprint=/{print $2}' ~/.oci/config)
 export KEY_FILE=$(awk -F= '/^key_file=/{print $2}' ~/.oci/config)
-
+export KEY_FILE="${KEY_FILE/#\~/$HOME}"
 export NAMESPACE=$(
   oci os ns get \
     --region "$BUCKET_REGION" \
