@@ -78,8 +78,7 @@ Choose `instancePrincipal` when PBM runs directly on an OCI Compute instance. PB
 You need:
 
 - The [Oracle Cloud Identifier (OCID) :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle){:target="_blank"} of the OCI Compute instance running PBM
-- The name of the OCI bucket PBM will use for backups
-- A home region, tenancy OCID, and compartment name with sufficient IAM privileges to create dynamic groups and policies
+- The name of the OCI bucket PBM will use for backups.
 
 ### Procedure
 
