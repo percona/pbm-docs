@@ -92,9 +92,10 @@ export NAMESPACE=$(
 Create a compartment for PBM backup resources:
 
 ```bash
-oci iam compartment create \ 
-  --region "$HOME_REGION" \ --compartment-id "$TENANCY_OCID" \ 
-  --name "$COMPARTMENT_NAME" \ 
+oci iam compartment create \
+  --region "$HOME_REGION" \
+  --compartment-id "$TENANCY_OCID" \
+  --name "$COMPARTMENT_NAME" \
   --description "PBM OCI Object Storage"
 ```
 Export the compartment OCID:
