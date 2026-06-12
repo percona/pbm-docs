@@ -10,6 +10,7 @@ authentication types:
 | `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
 | `instancePrincipal` | PBM runs on an OCI Compute instance |
 | `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster (see [Workload Identity authentication](oci-wif.md)) |
+
 ## Prerequisites
 
 Before configuring PBM, ensure that you have:
@@ -283,9 +284,9 @@ keys are required in the configuration file.
           type: instancePrincipal
     ```
 
-   Wait for a few minutes for IAM policy propagation before testing the configuration.
+    Wait for a few minutes for IAM policy propagation before testing the configuration.
 
-   !!! note
+    !!! note
         IAM changes for dynamic groups can take 5 to 10 minutes to propagate. The native copy policy from the previous section is still required alongside the instance principal policy.
 
 ## Apply the PBM configuration
