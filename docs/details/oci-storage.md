@@ -119,7 +119,6 @@ oci iam compartment create \
 ```
 Wait until the compartment is active, then export its OCID:
 
-
 ```sh
 export COMPARTMENT_OCID=$(
   oci iam compartment list \
@@ -254,26 +253,26 @@ keys are required in the configuration file.
 
 1. Create a dynamic group that includes the compute instance:
 
-   ```sh
-   oci iam dynamic-group create \
-     --region "$HOME_REGION" \
-     --compartment-id "$TENANCY_OCID" \
-     --name pbm-instance-group \
-     --description "PBM Compute instance principal" \
-     --matching-rule "ANY {instance.id = '<INSTANCE_OCID>'}"
-   ```
+    ```sh
+    oci iam dynamic-group create \
+        --region "$HOME_REGION" \
+        --compartment-id "$TENANCY_OCID" \
+        --name pbm-instance-group \
+        --description "PBM Compute instance principal" \
+        --matching-rule "ANY {instance.id = '<INSTANCE_OCID>'}"
+    ```
 
 2. Create a policy granting the dynamic group access to the bucket:
 
-   ```sh
-   oci iam policy create \
-     --region "$HOME_REGION" \
-     --compartment-id "$TENANCY_OCID" \
-     --name pbm-instance-policy \
-     --description "Allow PBM instance to access backup bucket" \
-     --statements "[\"Allow dynamic-group pbm-instance-group to manage objects \
-       in compartment pbm-backup where target.bucket.name = '<BUCKET_NAME>'\"]"
-   ```
+    ```sh
+    oci iam policy create \
+        --region "$HOME_REGION" \
+        --compartment-id "$TENANCY_OCID" \
+        --name pbm-instance-policy \
+        --description "Allow PBM instance to access backup bucket" \
+        --statements "[\"Allow dynamic-group pbm-instance-group to manage objects \
+        in compartment pbm-backup where target.bucket.name = '<BUCKET_NAME>'\"]"
+    ```
 
 3. Configure PBM:
 
@@ -292,10 +291,8 @@ keys are required in the configuration file.
    Wait for a few minutes for IAM policy propagation before testing the configuration.
 
 
-!!! note
-    IAM changes for dynamic groups can take 5 to 10 minutes 
-    to propagate. The native copy policy from the previous 
-    section is still required alongside the instance 
+    !!! note
+        IAM changes for dynamic groups can take 5 to 10 minutes to propagate. The native copy policy from the previous section is still required alongside the instance 
     principal policy.
 
 ## Apply the PBM configuration
