@@ -3,6 +3,7 @@
 Percona Backup for MongoDB (PBM) supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.
 
 Percona Backup for MongoDB (PBM) supports the default `userPrincipal` authentication method as well as the following Workload Identity options:
+
 | Auth type | When to use |
 |---|---|
 |`userPrincipal`|PBM is running anywhere — on-premises, on other clouds, or on OCI|
@@ -26,15 +27,15 @@ You need:
 
 1. **Create an IAM policy**
 
-   Grant the user permission to manage objects in the target bucket:
-   ```sh
-   oci iam policy create \
-      --region "$HOME_REGION" \
-      --compartment-id "$TENANCY_OCID" \
-      --name "$USER_POLICY_NAME" \
-      --description "Allow PBM user to access $BUCKET_NAME" \
-      --statements "[\"Allow group $USER_GROUP_NAME to manage objects in compartment $COMPARTMENT_NAME where target.bucket.name = '$BUCKET_NAME'\"]"
-   ```
+    Grant the user permission to manage objects in the target bucket:
+    ```sh
+    oci iam policy create \
+        --region "$HOME_REGION" \
+        --compartment-id "$TENANCY_OCID" \
+        --name "$USER_POLICY_NAME" \
+        --description "Allow PBM user to access $BUCKET_NAME" \
+        --statements "[\"Allow group $USER_GROUP_NAME to manage objects in compartment $COMPARTMENT_NAME where target.bucket.name = '$BUCKET_NAME'\"]"
+        ```
   
     Replace the following variables:
 
