@@ -735,7 +735,7 @@ The path prefix in the bucket. If undefined, backups are stored in the bucket ro
 *Required*: NO <br>
 *Default*: `userPrincipal`
 
-Authentication type for OCI access. Supported values: `userPrincipal`, `instancePrincipal`.
+Authentication type for OCI access. Supported values: `userPrincipal`, `instancePrincipal`, `okeWorkloadIdentity`.
 
 ### storage.oci.credentials.userPrincipal.tenancy
 
