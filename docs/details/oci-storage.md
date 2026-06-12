@@ -114,10 +114,10 @@ export COMPARTMENT_OCID=$(oci iam compartment list \
 Create the bucket:
 
 ```bash
-oci os bucket create \ 
-  --region "$BUCKET_REGION" \ 
-  --namespace-name "$NAMESPACE" \ 
-  --compartment-id "$COMPARTMENT_OCID" \ 
+oci os bucket create \
+  --region "$BUCKET_REGION" \
+  --namespace-name "$NAMESPACE" \
+  --compartment-id "$COMPARTMENT_OCID" \
   --name "$BUCKET_NAME"
 ```
 
