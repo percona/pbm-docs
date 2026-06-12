@@ -242,7 +242,7 @@ nav:
   - Storage:
       - Remote backup storage overview: details/storage-configuration.md
       - AWS S3 storage: details/s3-storage.md
-      - Oracle Cloud Storage: 
+      - Oracle Cloud Storage:
           - Overview: details/oci-storage.md
           - Workload Identity authentication: details/oci-wif.md
       - details/minio.md
