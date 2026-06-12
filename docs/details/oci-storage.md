@@ -180,7 +180,7 @@ storage:
     Indent the private key correctly before adding it to the configuration:
     
     ```sh
-    sed 's/^/ /' "$KEY_FILE"
+    sed 's/^/          /' "$KEY_FILE"
     ```
 
 ## Configure PBM with an instance principal
