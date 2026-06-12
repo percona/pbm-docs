@@ -25,7 +25,8 @@ You need:
 
 ### Procedure
 
-1. Create an IAM policy
+1. **Create an IAM policy**
+
    Grant the user permission to manage objects in the target bucket:
    ```sh
    oci iam policy create \
@@ -36,18 +37,18 @@ You need:
       --statements "[\"Allow group $USER_GROUP_NAME to manage objects in compartment $COMPARTMENT_NAME where target.bucket.name = '$BUCKET_NAME'\"]"
    ```
   
-Replace the following variables:
+    Replace the following variables:
 
-| Variable | Description |
-|---|---|
-| `HOME_REGION` | Your tenancy's home region (e.g. `us-ashburn-1`) |
-| `TENANCY_OCID` | OCID of your OCI tenancy |
-| `USER_POLICY_NAME` | A name for the policy (e.g. `pbm-user-policy`) |
-| `USER_GROUP_NAME` | The IAM group the PBM user belongs to |
-| `COMPARTMENT_NAME` | Name of the compartment containing the bucket |
-| `BUCKET_NAME` | Name of the OCI Object Storage bucket |
+    | Variable | Description |
+    |---|---|
+    | `HOME_REGION` | Your tenancy's home region (e.g. `us-ashburn-1`) |
+    | `TENANCY_OCID` | OCID of your OCI tenancy |
+    | `USER_POLICY_NAME` | A name for the policy (e.g. `pbm-user-policy`) |
+    | `USER_GROUP_NAME` | The IAM group the PBM user belongs to |
+    | `COMPARTMENT_NAME` | Name of the compartment containing the bucket |
+    | `BUCKET_NAME` | Name of the OCI Object Storage bucket |
 
-2. Configure PBM authentication
+2. **Configure PBM authentication**
 
     In your PBM configuration, set the storage type to `oci` and the credentials type to `userPrincipal`. Provide the API signing key private key in PEM format.
 
