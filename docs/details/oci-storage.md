@@ -1,29 +1,48 @@
 # Oracle Cloud Infrastructure Object Storage
 
-Percona Backup for MongoDB (PBM) supports [OCI Object Storage](https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm) as a remote backup destination through a dedicated OCI native driver, allowing you to store and manage MongoDB backups directly in OCI buckets.
+Percona Backup for MongoDB (PBM) supports [OCI Object Storage]
+(https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm) 
+as a remote backup destination through a dedicated OCI native 
+driver. PBM connects to OCI Object Storage using one of three 
+authentication types:
 
-PBM connects to OCI Object Storage using the `userPrincipal` authentication type by default, which uses OCI API signing keys. For keyless authentication, PBM also supports `instancePrincipal` for PBM running on OCI Compute instances.
+|**Authentication type**| **Use when**|
+|---------------------|-------------|
+| `userPrincipal`|PBM runs anywhere; authenticates with OCI API signing keys|                               |
+| `instancePrincipal`|PBM runs on an OCI Compute instance|                                  |
+| `okeWorkloadIdentity`|PBM runs inside an OKE enhanced cluster|
+
 
 ## Prerequisites
 
 Before configuring PBM, ensure that you have:
 
-- An Oracle Cloud Infrastructure account
-- An Object Storage bucket
-- A user with access to the bucket
-- An OCI API signing key pair (private key + uploaded public key) for the user
-- Bucket permissions that allow reading and writing objects
+- An active OCI tenancy with at least one subscribed region
+- The OCI CLI installed and configured (`oci setup config`). 
+  See the [OCI CLI documentation](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm) 
+  for installation instructions
+- An OCI user with permission to create compartments, buckets, 
+  dynamic groups, and IAM policies in your tenancy
+- An OCI API signing key pair: private key on the host running 
+  PBM, public key uploaded to the OCI user
 
 
-## Configure OCI CLI
-
-Initialize the OCI CLI configuration:
+Initialize the OCI CLI configuration if you have not done so already:
 
 ```sh
 oci setup config
 ```
 
-Use your tenancy home region as the default CLI region.
+Use your tenancy home region as the default CLI region. If the setup generated a new API key, upload the public key 
+to your OCI user:
+
+```sh
+cat ~/.oci/oci_api_key_public.pem
+```
+
+In the OCI Console, go to **User settings → Tokens and keys → 
+API keys → Add API key**, paste the public key, and confirm 
+the fingerprint matches `~/.oci/config`.
 
 If needed, update local file permissions:
 
@@ -31,13 +50,6 @@ If needed, update local file permissions:
 oci setup repair-file-permissions --file ~/.oci/config
 oci setup repair-file-permissions --file ~/.oci/oci_api_key.pem
 ```
-If the setup generated a new API key, upload the public key to your OCI user:
-
-```bash
-cat ~/.oci/oci_api_key_public.pem
-```
-
-In the OCI Console, go to **User settings → Tokens and keys → API keys → Add API key**, and paste the public key.
 
 ## Verify region access
 
@@ -52,17 +64,22 @@ oci iam region-subscription list \
 !!! note
     The region specified in the configuration must be enabled and subscribed to in your OCI tenancy.
 
-## Get required OCI values
+## Set up OCI resources
 
-Export the values required for the PBM configuration:
+### Export variables
 
-```bash
-export HOME_REGION=<HOME_REGION>
-export BUCKET_REGION=<BUCKET_REGION>
-export COMPARTMENT_NAME=<COMPARTMENT_NAME>
-export BUCKET_NAME=<BUCKET_NAME>
+Set the following variables before running any commands in this 
+section. All subsequent commands reference them.
 
-# Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and `Object Storage namespace`:
+```sh
+export HOME_REGION=<your-home-region>     # e.g. us-ashburn-1
+export BUCKET_REGION=<your-bucket-region> # e.g. eu-frankfurt-1
+export COMPARTMENT_NAME=pbm-backup
+export BUCKET_NAME=<your-bucket-name>
+```
+Retrieve and export the values PBM requires:
+
+```sh
 export TENANCY_OCID=$(
   oci iam tenancy get \
     --tenancy-id "$(awk -F= '/^tenancy=/{print $2}' ~/.oci/config)" \
@@ -81,22 +98,31 @@ export NAMESPACE=$(
     --query 'data' \
     --raw-output
 )
+
+echo "TENANCY_OCID: $TENANCY_OCID"
+echo "USER_OCID:    $USER_OCID"
+echo "FINGERPRINT:  $FINGERPRINT"
+echo "NAMESPACE:    $NAMESPACE"
 ```
+Verify all five values are populated before continuing. An empty 
+value means the OCI CLI is not authenticated or the variable 
+was not set correctly.
 
 ## Create a compartment
 
 Create a compartment for PBM backup resources:
 
-```bash
+```sh
 oci iam compartment create \
   --region "$HOME_REGION" \
   --compartment-id "$TENANCY_OCID" \
   --name "$COMPARTMENT_NAME" \
-  --description "PBM OCI Object Storage"
+  --description "PBM OCI Object Storage backup"
 ```
-Export the compartment OCID:
+Wait until the compartment is active, then export its OCID:
 
-```bash
+
+```sh
 export COMPARTMENT_OCID=$(
   oci iam compartment list \
     --region "$HOME_REGION" \
@@ -106,12 +132,15 @@ export COMPARTMENT_OCID=$(
     --query "data[?name=='$COMPARTMENT_NAME' && \"lifecycle-state\"=='ACTIVE'].id | [0]" \
     --raw-output
 )
+
+echo "COMPARTMENT_OCID: $COMPARTMENT_OCID"
 ```
-## Create an Object Storage bucket
+
+### Create an Object Storage bucket
 
 Create the bucket:
 
-```bash
+```sh
 oci os bucket create \
   --region "$BUCKET_REGION" \
   --namespace-name "$NAMESPACE" \
@@ -119,40 +148,75 @@ oci os bucket create \
   --name "$BUCKET_NAME"
 ```
 
-Verify the bucket:
+Verify the bucket was created:
 
-```bash
+```sh
 oci os bucket get \
   --region "$BUCKET_REGION" \
   --namespace-name "$NAMESPACE" \
-  --bucket-name "$BUCKET_NAME"
+  --bucket-name "$BUCKET_NAME" \
+  --query 'data.{name:name,namespace:namespace}' \
+  --output table
 ```
 
-## Configure IAM policies
+### Create IAM policies
 
 PBM must be able to create, read, overwrite, and delete backup objects.
 
-Create a policy that allows the PBM user group to manage objects in the compartment:
+Two policies are required:
 
-    Allow group <OCI_GROUP_NAME> to manage object-family in compartment <COMPARTMENT_NAME>
+**User access policy** — grants your OCI user group permission 
+to manage objects in the PBM compartment. Replace 
+`<OCI_GROUP_NAME>` with the name of the group containing 
+your PBM user:
 
-PBM also uses OCI native server-side copy operations. Add a policy for the regional Object Storage service:
-
-```bash
-Allow service objectstorage-<BUCKET_REGION> to manage object-family in compartment <COMPARTMENT_NAME> where any {
-  request.permission='OBJECT_READ',
-  request.permission='OBJECT_INSPECT',
-  request.permission='OBJECT_CREATE',
-  request.permission='OBJECT_OVERWRITE',
-  request.permission='OBJECT_DELETE'
-}
+```sh
+oci iam policy create \
+  --region "$HOME_REGION" \
+  --compartment-id "$TENANCY_OCID" \
+  --name pbm-user-access \
+  --description "Allow PBM user group to manage backup objects" \
+  --statements '["Allow group <OCI_GROUP_NAME> to manage object-family in compartment pbm-backup"]'
 ```
 
-Allow a few minutes for IAM policy changes to propagate.
+**Native copy policy** — grants the OCI Object Storage service 
+permission to copy objects internally. PBM requires this for 
+server-side copy operations:
 
-## Configure PBM with a user principal
+```sh
+oci iam policy create \
+  --region "$HOME_REGION" \
+  --compartment-id "$TENANCY_OCID" \
+  --name "pbm-native-copy-$BUCKET_REGION" \
+  --description "Allow Object Storage service to copy PBM objects" \
+  --statements "[\"Allow service objectstorage-$BUCKET_REGION to manage object-family \
+    in compartment $COMPARTMENT_NAME where any { \
+      request.permission='OBJECT_READ', \
+      request.permission='OBJECT_INSPECT', \
+      request.permission='OBJECT_CREATE', \
+      request.permission='OBJECT_OVERWRITE', \
+      request.permission='OBJECT_DELETE'}\"]"
+```
 
-Use user principal authentication when PBM runs outside OCI or when you want to authenticate with OCI API signing keys.
+!!! note
+    IAM policy changes can take up to 2 minutes to propagate. 
+    If PBM reports an authorization error immediately after 
+    creating the policies, wait 2 minutes and retry.
+
+## Configure PBM
+
+### userPrincipal
+
+Use this when PBM runs outside OCI, or when you want to 
+authenticate with OCI API signing keys.
+
+Generate the correctly indented private key before creating 
+the config file:
+
+```sh
+sed 's/^/          /' "$KEY_FILE"
+```
+Create the configuration file:
 
 ```yaml
 storage:
@@ -173,6 +237,10 @@ storage:
           ...
           -----END PRIVATE KEY-----
 ```
+!!! warning
+    The `user` value must be a user OCID starting with 
+    `ocid1.user.oc1`. A bucket or compartment OCID causes 
+    a 401 authentication failure.
 
 !!! tip
     Indent the private key correctly before adding it to the configuration:
@@ -181,23 +249,34 @@ storage:
     sed 's/^/          /' "$KEY_FILE"
     ```
 
-## Configure PBM with an instance principal
+### instancePrincipal
 
-Use instance principal authentication when PBM runs on an OCI Compute instance. This method avoids storing API signing keys in the PBM configuration.
+Use this when PBM runs on an OCI Compute instance. No API 
+keys are required in the configuration file.
 
-Create a dynamic group that includes the compute instance:
-
-```sh
-ANY {instance.id = '<INSTANCE_OCID>'}
-```
-
-Create a policy that allows the dynamic group to access the bucket:
+1. Create a dynamic group that includes the compute instance:
 
 ```sh
-Allow dynamic-group <DYNAMIC_GROUP_NAME> to manage objects in compartment <COMPARTMENT_NAME> where target.bucket.name = '<BUCKET_NAME>'
+    oci iam dynamic-group create \
+      --region "$HOME_REGION" \
+      --compartment-id "$TENANCY_OCID" \
+      --name pbm-instance-group \
+      --description "PBM Compute instance principal" \
+      --matching-rule "ANY {instance.id = '<INSTANCE_OCID>'}"
+```
+2. Create a policy granting the dynamic group access to the bucket:
+
+```sh
+    oci iam policy create \
+      --region "$HOME_REGION" \
+      --compartment-id "$TENANCY_OCID" \
+      --name pbm-instance-policy \
+      --description "Allow PBM instance to access backup bucket" \
+      --statements '["Allow dynamic-group pbm-instance-group to manage objects \
+        in compartment pbm-backup where target.bucket.name = '"'"'<BUCKET_NAME>'"'"'"]'
 ```
 
-Then configure PBM:
+3. Configure PBM:
 
 ```yaml
 storage:
@@ -211,6 +290,13 @@ storage:
       type: instancePrincipal
 ```
 Wait for a few minutes for IAM policy propagation before testing the configuration.
+
+
+!!! note
+    IAM changes for dynamic groups can take 5 to 10 minutes 
+    to propagate. The native copy policy from the previous 
+    section is still required alongside the instance 
+    principal policy.
 
 ## Apply the PBM configuration
 
@@ -228,20 +314,18 @@ pbm config --force-resync
 
 ## Verify the configuration
 
-Run a backup:
+Verify all agents connected and storage initialized successfully:
 
-```bash
+```sh
+pbm status
+```
+Every node must show `pbm-agent` as `OK` and storage as `ok`. 
+
+Run a test backup to confirm end-to-end functionality:
+
+```sh
 pbm backup
+pbm list
 ```
 
-Check that PBM created objects under the configured prefix:
-
-```bash
-oci os object list \
-  --region <BUCKET_REGION> \
-  --namespace-name <NAMESPACE> \
-  --bucket-name <BUCKET_NAME> \
-  --prefix pbm/
-```
-
-You should see backup metadata and backup files stored under the configured prefix.
+A backup with status `done` confirms the setup is complete.
