@@ -44,7 +44,9 @@ In the OCI Console, go to **User settings → Tokens and keys → API keys → A
 Check the regions available to your tenancy:
 
 ```bash
-oci iam region-subscription list \ --region <HOME_REGION> \ --output table
+oci iam region-subscription list \
+  --region <HOME_REGION> \
+  --output table
 ```
 
 !!! note
