@@ -101,13 +101,15 @@ oci iam compartment create \
 Export the compartment OCID:
 
 ```bash
-export COMPARTMENT_OCID=$(oci iam compartment list \ 
-   --region "$HOME_REGION" \ 
-   --compartment-id "$TENANCY_OCID" \ 
-   --compartment-id-in-subtree true \ 
-   --all \ 
-   --query "data[?name=='$COMPARTMENT_NAME' && \"lifecycle-state\"=='ACTIVE'].id | [0]" \ 
-   --raw-output)
+export COMPARTMENT_OCID=$(
+  oci iam compartment list \
+    --region "$HOME_REGION" \
+    --compartment-id "$TENANCY_OCID" \
+    --compartment-id-in-subtree true \
+    --all \
+    --query "data[?name=='$COMPARTMENT_NAME' && \"lifecycle-state\"=='ACTIVE'].id | [0]" \
+    --raw-output
+)
 ```
 ## Create an Object Storage bucket
 
