@@ -286,8 +286,7 @@ keys are required in the configuration file.
    Wait for a few minutes for IAM policy propagation before testing the configuration.
 
    !!! note
-        IAM changes for dynamic groups can take 5 to 10 minutes to propagate. The native copy policy from the previous section is still required alongside the instance 
-    principal policy.
+        IAM changes for dynamic groups can take 5 to 10 minutes to propagate. The native copy policy from the previous section is still required alongside the instance principal policy.
 
 ## Apply the PBM configuration
 
