@@ -356,23 +356,23 @@ pbm list
 
 ??? example "Output"
 
-```sh
-    $ pbm backup
-    Starting backup "2026-06-12T07:11:31Z".....
-    Backup "2026-06-12T07:11:31Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
-```
+    ```sh
+        $ pbm backup
+        Starting backup "2026-06-12T07:11:31Z".....
+        Backup "2026-06-12T07:11:31Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
+    ```
 
-```sh
-    $ pbm list
-    Backup snapshots:
-    NAME   TYPE   PROFILE SELECTIVE   BASE   RESTORE TIME
-    -----------------------------------------------------
-    2026-06-11T13:14:51Z logical no no  2026-06-11T13:15:07
-    2026-06-12T07:04:27Z logical no no  2026-06-12T07:04:42
-    2026-06-12T07:11:31Z logical no no  2026-06-12T07:11:46
+    ```sh
+        $ pbm list
+        Backup snapshots:
+        NAME   TYPE   PROFILE SELECTIVE   BASE   RESTORE TIME
+        -----------------------------------------------------
+        2026-06-11T13:14:51Z logical no no  2026-06-11T13:15:07
+        2026-06-12T07:04:27Z logical no no  2026-06-12T07:04:42
+        2026-06-12T07:11:31Z logical no no  2026-06-12T07:11:46
 
-    PITR <off>:
-```
+        PITR <off>:
+    ```
 
 ??? example "Output"
 
