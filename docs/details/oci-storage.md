@@ -61,8 +61,6 @@ export HOME_REGION=<HOME_REGION>
 export BUCKET_REGION=<BUCKET_REGION>
 export COMPARTMENT_NAME=<COMPARTMENT_NAME>
 export BUCKET_NAME=<BUCKET_NAME>
-export PBM_PREFIX=pbm
-```
 
 Get the `tenancy OCID`, user `OCID`, `API key fingerprint`, `private key path`, and `Object Storage namespace`: 
 
