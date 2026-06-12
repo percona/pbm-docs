@@ -11,7 +11,7 @@ Before configuring PBM, ensure that you have:
 - An Oracle Cloud Infrastructure account
 - An Object Storage bucket
 - A user with access to the bucket
-- Customer Secret Keys generated for the user
+- An OCI API signing key pair (private key + uploaded public key) for the user
 - Bucket permissions that allow reading and writing objects
 
 
