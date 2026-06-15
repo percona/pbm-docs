@@ -167,7 +167,7 @@ pbm config --set restore.indexCommitQuorum=majority
         ```
 
     4. Initiate and wait for PBM restore to complete with `pbm restore -w 2026-05-12T13:28:07Z`
-    5. Confirm commit is reflected on mongodb's logs: 
+    5. Confirm commit is reflected on MongoDB's logs:
 
       ```bash
       {"t":{"$date":"2026-05-12T14:46:13.877+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn73","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"86a30d2b-182d-4f84-9520-02620719f6b6"}},"namespace":"test.col2","collectionUUID":{"uuid":{"$uuid":"a62f0ccb-beb4-4d70-91bb-aed73caa7cc5"}},"indexes":1,"firstIndex":{"name":"test_index"},"command":{"createIndexes":"col2","v":2,"indexes":[{"key":{"field":1},"name":"test_index","unique":true,"ns":"test.col2"}],"ignoreUnknownIndexOptions":true,"commitQuorum":"majority"}}} 
