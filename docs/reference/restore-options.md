@@ -104,7 +104,7 @@ This is useful when you want to:
 ### restore.indexCommitQuorum
 
 *Type*: string or int <br>
-*Default*: votingMembers
+*Default*: `votingMembers`
 
 Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a **logical restore** operation.
 
