@@ -5,6 +5,7 @@ Percona Backup for MongoDB (PBM) can store backups in Oracle Cloud Infrastructur
 OCI Object Storage is a cloud object storage service that stores data as objects in buckets. PBM uses this storage to save backup data, metadata, and Point-in-Time Recovery oplog chunks. You can configure PBM to authenticate to OCI by using either a user principal or an instance principal.
 
 For common errors, see [Troubleshoot issues for OCI](../troubleshoot/oci.md).
+
 ## Before you start
 
 Ensure you have the following:
