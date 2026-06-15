@@ -170,6 +170,6 @@ pbm config --set restore.indexCommitQuorum=majority
 
     4. Start the restore and wait for it to complete:
 
-      ```sh
-      pbm restore -w 2026-05-12T13:28:07Z
-      ```
+        ```sh
+        pbm restore -w 2026-05-12T13:28:07Z
+        ```
