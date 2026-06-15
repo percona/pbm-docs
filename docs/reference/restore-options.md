@@ -140,7 +140,7 @@ pbm config --set restore.indexCommitQuorum=majority
         [restore.indexCommitQuorum=majority]
         ```
 
-    3. Confirm `indexCommitQuorum` appears in PBM config with the `pbm config` command:
+    3. Confirm `indexCommitQuorum` appears in the PBM config with the following command:
 
         ```text
         $ pbm config
@@ -168,4 +168,8 @@ pbm config --set restore.indexCommitQuorum=majority
           indexCommitQuorum: majority
         ```
 
-    4. Initiate and wait for PBM restore to complete with `pbm restore -w 2026-05-12T13:28:07Z`
+    4. Start the restore and wait for it to complete:
+
+      ```sh
+      pbm restore -w 2026-05-12T13:28:07Z
+      ```
