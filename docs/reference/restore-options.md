@@ -140,31 +140,31 @@ pbm config --set restore.indexCommitQuorum=majority
         ```
 
     3. Confirm `indexCommitQuorum` appears in PBM config with the `pbm config` command:
-      ```yaml
-      [root@rs101 log]# pbm config
-      storage: 
-        type: s3 
-        s3: 
-          region: us-east-1 
-          endpointUrl: http://minio:9000 
-          forcePathStyle: true 
-          bucket: bcp 
-          prefix: pbme2etest 
-          credentials: 
-            access-key-id: '***' 
-            secret-access-key: '***' 
-          maxUploadParts: 10000 
-          storageClass: STANDARD 
-          insecureSkipTLSVerify: false 
-      pitr: 
-        enabled: false 
-        compression: s2 
-      backup: 
-        oplogSpanMin: 0 
-        compression: s2 
-      restore: 
-        indexCommitQuorum: majority 
-      ```
+        ```text
+        $ pbm config
+        storage:
+          type: s3
+          s3:
+            region: us-east-1
+            endpointUrl: http://minio:9000
+            forcePathStyle: true
+            bucket: bcp
+            prefix: pbme2etest
+            credentials:
+              access-key-id: '***'
+              secret-access-key: '***'
+            maxUploadParts: 10000
+            storageClass: STANDARD
+            insecureSkipTLSVerify: false
+        pitr:
+          enabled: false
+          compression: s2
+        backup:
+          oplogSpanMin: 0
+          compression: s2
+        restore:
+          indexCommitQuorum: majority
+        ```
 
     4. Initiate and wait for PBM restore to complete with `pbm restore -w 2026-05-12T13:28:07Z`
     5. Confirm commit is reflected on mongodb's logs: 
