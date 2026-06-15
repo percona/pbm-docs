@@ -132,11 +132,11 @@ pbm config --set restore.indexCommitQuorum=majority
         pbm config --set restore.indexCommitQuorum=majority
         ```
 
-    2. Confirm command was successful:
+    2. Confirm the value was set:
 
         ```sh
-        pbm config --set restore.indexCommitQuorum=majority
-        [restore.indexCommitQuorum=majority]
+        pbm config restore.indexCommitQuorum
+        majority
         ```
 
     3. Confirm `indexCommitQuorum` appears in PBM config with the `pbm config` command:
