@@ -138,7 +138,7 @@ When running physical restores in Docker environments, you need to include Perco
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the [Speeding up MongoDB restores in PBM](https://www.percona.com/blog/speeding-up-database-restores-in-pbm) blog post by *Andrew Pogrebnoi*.
+Percona Backup for MongoDB downloads data chunks from S3 storage concurrently during physical restores, improving restore performance. For benchmarking results and implementation details, see the blog post [Speeding up MongoDB Restores in Percona Backup for MongoDB](https://www.percona.com/blog/speeding-up-restores-in-percona-backup-for-mongodb/) by *Andrew Pogrebnoi*.
 
 Here's how it works:
 
