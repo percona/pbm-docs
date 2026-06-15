@@ -165,8 +165,7 @@ pbm config --set restore.indexCommitQuorum=majority –wait
         indexCommitQuorum: majority 
       ```
 
-    4. Initiate and wait for pbm restore to complete with `pbm restore pbm restore 2026-05-12T13:28:07Z` 
-
+    4. Initiate and wait for PBM restore to complete with `pbm restore -w 2026-05-12T13:28:07Z`
     5. Confirm commit is reflected on mongodb's logs: 
 
       ```bash
