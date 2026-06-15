@@ -134,7 +134,7 @@ pbm config --set restore.indexCommitQuorum=majority –wait
     2. Confirm command was successful:
 
         ```sh
-        pbm config --set restore.indexCommitQuorum=majority –wait
+        pbm config --set restore.indexCommitQuorum=majority
         [restore.indexCommitQuorum=majority]
         ```
 
