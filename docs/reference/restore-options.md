@@ -103,7 +103,9 @@ This is useful when you want to:
 
 ### restore.indexCommitQuorum
 
-Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a restore operation.
+*Type:* int
+
+Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a **logical restore** operation.
 
 By default, Percona Backup for MongoDB waits for all voting members (`votingMembers`) to complete index building. In large replica sets, this can introduce significant delays if some nodes build indexes slower than others, blocking the entire restore process.
 
@@ -115,4 +117,62 @@ The following values are supported:
 
 `majority`: The primary commits the index as soon as a simple majority of data-bearing voting members have completed the build. This is recommended for large replica sets to prevent lagging nodes from delaying the restore process.
 
-<int>: A specific number of data-bearing voting nodes (e.g., 3) that must complete the index build. The integer value must be greater than or equal to 0.
+`<int>`: A specific number of data-bearing voting nodes (e.g., 3) that must complete the index build. The integer value must be greater than or equal to 0.
+
+```sh
+pbm config --set restore.indexCommitQuorum=majority –wait
+```
+
+??? example "Example"
+
+    1. Run the folllowing command:
+
+    ```sh
+    pbm config --set restore.indexCommitQuorum=majority –wait
+    ```
+
+    2. Confirm command was successful:
+
+      ```sh
+      pbm config --set restore.indexCommitQuorum=majority –wait
+      [restore.indexCommitQuorum=majority]
+      ```
+
+    3. Confirm `CommitQuorum` appears in pbm config with the `pbm config` command: 
+
+    ```yaml
+    [root@rs101 log]# pbm config 
+    storage: 
+      type: s3 
+      s3: 
+        region: us-east-1 
+        endpointUrl: http://minio:9000 
+        forcePathStyle: true 
+        bucket: bcp 
+        prefix: pbme2etest 
+        credentials: 
+          access-key-id: '***' 
+          secret-access-key: '***' 
+        maxUploadParts: 10000 
+        storageClass: STANDARD 
+        insecureSkipTLSVerify: false 
+    pitr: 
+      enabled: false 
+      compression: s2 
+    backup: 
+      oplogSpanMin: 0 
+      compression: s2 
+    restore: 
+      indexCommitQuorum: majority 
+    ```
+
+    4. Initiate and wait for pbm restore to complete with `pbm restore pbm restore 2026-05-12T13:28:07Z` 
+
+
+    5. Confirm commit is reflected on mongodb's logs: 
+
+      ```bash
+      {"t":{"$date":"2026-05-12T14:46:13.877+00:00"},"s":"I",  "c":"INDEX",    "id":20438,   "ctx":"conn73","msg":"Index build: registering","attr":{"buildUUID":{"uuid":{"$uuid":"86a30d2b-182d-4f84-9520-02620719f6b6"}},"namespace":"test.col2","collectionUUID":{"uuid":{"$uuid":"a62f0ccb-beb4-4d70-91bb-aed73caa7cc5"}},"indexes":1,"firstIndex":{"name":"test_index"},"command":{"createIndexes":"col2","v":2,"indexes":[{"key":{"field":1},"name":"test_index","unique":true,"ns":"test.col2"}],"ignoreUnknownIndexOptions":true,"commitQuorum":"majority"}}} 
+
+      {"t":{"$date":"2026-05-12T14:46:13.924+00:00"},"s":"I",  "c":"STORAGE",  "id":3856201, "ctx":"conn490","msg":"Index build: commit quorum satisfied","attr":{"indexBuildEntry":{"_id":{"$uuid":"86a30d2b-182d-4f84-9520-02620719f6b6"},"collectionUUID":{"$uuid":"a62f0ccb-beb4-4d70-91bb-aed73caa7cc5"},"commitQuorum":"majority","indexNames":["test_index"],"commitReadyMembers":["rs101:27017","rs103:27017"]}}}
+      ```
