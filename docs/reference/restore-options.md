@@ -103,7 +103,7 @@ This is useful when you want to:
 
 ### restore.indexCommitQuorum
 
-*Type:* int
+*Type*: string or int
 
 Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a **logical restore** operation.
 
