@@ -138,8 +138,7 @@ pbm config --set restore.indexCommitQuorum=majority –wait
         [restore.indexCommitQuorum=majority]
         ```
 
-    3. Confirm `CommitQuorum` appears in pbm config with the `pbm config` command: 
-
+    3. Confirm `indexCommitQuorum` appears in PBM config with the `pbm config` command:
       ```yaml
       [root@rs101 log]# pbm config 
       storage: 
