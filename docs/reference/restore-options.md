@@ -140,7 +140,7 @@ pbm config --set restore.indexCommitQuorum=majority
 
     3. Confirm `indexCommitQuorum` appears in PBM config with the `pbm config` command:
       ```yaml
-      [root@rs101 log]# pbm config 
+      [root@rs101 log]# pbm config
       storage: 
         type: s3 
         s3: 
