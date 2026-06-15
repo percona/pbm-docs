@@ -7,5 +7,5 @@ If you encounter issues when working with Percona Backup for MongoDB, consult th
 - [Generate diagnostics report](pbm-report.md)
 - [Partially done physical restores](restore-partial.md)
 - [Troubleshoot backup management via Percona Monitoring and Management](pbm-pmm.md)
+- [Troubleshoot OCI Object Storage](oci.md)
 - [FAQ](faq.md)
-
