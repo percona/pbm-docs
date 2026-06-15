@@ -118,7 +118,7 @@ The following values are supported:
 
 `majority`: The primary commits the index as soon as a simple majority of data-bearing voting members have completed the build. This is recommended for large replica sets to prevent lagging nodes from delaying the restore process.
 
-`<int>`: A specific number of data-bearing voting members (e.g., 3) that must complete the index build. The integer value must be between 0 and the number of data-bearing voting members (0 commits immediately).
+`<int>`: A specific number of data-bearing voting members (e.g., 3) that must complete the index build. The integer value must be between 1 and the number of data-bearing voting members. A value of 1 means the primary commits immediately after it finishes.
 
 ```sh
 pbm config --set restore.indexCommitQuorum=majority
