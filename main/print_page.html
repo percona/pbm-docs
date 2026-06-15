@@ -9701,7 +9701,7 @@ RestartUSec=100ms
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="#release-notes-2.1.0">2.1.0</a></p>
 </div>
-<p>Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the <a href="https://www.percona.com/blog/speeding-up-database-restores-in-pbm">Speeding up MongoDB restores in PBM</a> blog post by <em>Andrew Pogrebnoi</em>.</p>
+<p>Percona Backup for MongoDB downloads data chunks from S3 storage concurrently during physical restores, improving restore performance. For benchmarking results and implementation details, see the blog post <a href="https://www.percona.com/blog/speeding-up-restores-in-percona-backup-for-mongodb/">Speeding up MongoDB Restores in Percona Backup for MongoDB</a> by <em>Andrew Pogrebnoi</em>.</p>
 <p>Here’s how it works:</p>
 <p>During the physical restore, Percona Backup for MongoDB starts the workers. The number of workers equals to the number of CPU cores by default. Each worker has a memory buffer allocated for it. The buffer is split into spans for the size of the data chunk. The worker acquires the span to download a data chunk and stores it into the buffer. When the buffer is full, the worker waits for the free span to continue the download.   </p>
 <p>You can fine-tune the parallel download depending on your hardware resources and database load. Edit the PBM configuration file and specify the following settings:</p>
