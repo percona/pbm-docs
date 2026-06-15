@@ -141,6 +141,7 @@ pbm config --set restore.indexCommitQuorum=majority
         ```
 
     3. Confirm `indexCommitQuorum` appears in PBM config with the `pbm config` command:
+
         ```text
         $ pbm config
         storage:
