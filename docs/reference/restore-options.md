@@ -109,7 +109,7 @@ Specifies how many data-bearing voting nodes must complete an index build before
 
 By default, Percona Backup for MongoDB waits for all voting members (`votingMembers`) to complete index building. In large replica sets, this can introduce significant delays if some nodes build indexes slower than others, blocking the entire restore process.
 
-Aligning with the MongoDB [setIndexCommitQuorum](https://www.mongodb.com/docs/manual/reference/command/setIndexCommitQuorum/) command specifications, you can optimize restore performance by setting this option to a lower quorum threshold.
+Following MongoDB index build commit quorum semantics, you can optimize restore performance by setting this option to a lower quorum threshold.
 
 The following values are supported:
 
