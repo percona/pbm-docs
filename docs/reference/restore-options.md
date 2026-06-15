@@ -120,7 +120,7 @@ The following values are supported:
 `<int>`: A specific number of data-bearing voting nodes (e.g., 3) that must complete the index build. The integer value must be greater than or equal to 0.
 
 ```sh
-pbm config --set restore.indexCommitQuorum=majority –wait
+pbm config --set restore.indexCommitQuorum=majority
 ```
 
 ??? example "Example"
