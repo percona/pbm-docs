@@ -100,3 +100,19 @@ This is useful when you want to:
 - Prevent restore operations from waiting indefinitely
 - Enforce time limits in automated workflows
 - Fail fast if the balancer cannot be stopped
+
+### restore.indexCommitQuorum
+
+Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a restore operation.
+
+By default, Percona Backup for MongoDB waits for all voting members (`votingMembers`) to complete index building. In large replica sets, this can introduce significant delays if some nodes build indexes slower than others, blocking the entire restore process.
+
+Aligning with the MongoDB `[setIndexCommitQuorum](https://www.mongodb.com/docs/manual/reference/command/setIndexCommitQuorum/)` command specifications, you can optimize restore performance by setting this option to a lower quorum threshold.
+
+The following values are supported:
+
+`votingMembers` (Default): The primary waits for all data-bearing voting members to complete the index build.
+
+`majority`: The primary commits the index as soon as a simple majority of data-bearing voting members have completed the build. This is recommended for large replica sets to prevent lagging nodes from delaying the restore process.
+
+<int>: A specific number of data-bearing voting nodes (e.g., 3) that must complete the index build. The integer value must be greater than or equal to 0.
