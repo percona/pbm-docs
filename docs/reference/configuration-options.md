@@ -7,7 +7,7 @@
 *Type*: string <br>
 *Required*:     YES   
 
-Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
+Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`, `oci`.
 
 ## AWS S3 storage options
 
