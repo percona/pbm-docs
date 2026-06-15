@@ -1,6 +1,7 @@
 # Troubleshoot issues for OCI
 
 This page lists common Oracle Cloud Infrastructure (OCI) Object Storage issues when using PBM. For configuration instructions, see [Configure Oracle Cloud Infrastructure Object Storage](../details/oci-storage.md).
+
 ## Storage is not initialized
 
 If PBM reports that storage is not initialized, verify the following:
