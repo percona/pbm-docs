@@ -112,6 +112,7 @@ The command accepts the following flags:
 | `-w`, `--wait`     | Wait for resync of the backup list with the storage to finish. You can only use this flag together with the `--force-resync` flag.|
 | `--wait-time`  | The time to wait for PBM to report the status of the resync execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
 | `--include-restores`| Resync the full restore metadata history from the storage. Use this flag together with the `--force-resync` flag. Note that retrieving the full restore history may affect resync performance. Available starting with version 2.10.0. |
+| `--set restore.indexCommitQuorum`| Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a **logical restore** operation.|
 
 
 ??? "PBM configuration output"
@@ -1118,8 +1119,6 @@ The command accepts the following flags:
         }
     }
     ```
-
-
 
 ## pbm version
 
