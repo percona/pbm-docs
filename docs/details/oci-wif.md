@@ -2,7 +2,7 @@
 
 Percona Backup for MongoDB (PBM) supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.
 
-Percona Backup for MongoDB (PBM) supports the following Workload Identity options:
+Percona Backup for MongoDB (PBM) supports the following keyless (identity-based) authentication options:
 
 | Auth type | When to use |
 |---|---|
