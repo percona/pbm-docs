@@ -1121,8 +1121,6 @@ The command accepts the following flags:
     }
     ```
 
-
-
 ## pbm version
 
 Shows the version of Percona Backup for MongoDB.

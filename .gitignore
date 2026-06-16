@@ -16,3 +16,6 @@ styles/
 # Allow
 
 !styles/config/vocabularies/Percona/**
+
+# Generated plugin cache
+.cache/plugin/git-committers/

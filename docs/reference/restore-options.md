@@ -112,3 +112,75 @@ This is useful when you want to:
 The number of files to copy in parallel during a physical restore from filesystem or NFS storage.
 
 This is typically set to 1 (sequential restore).
+### restore.indexCommitQuorum
+
+*Type*: string or int <br>
+*Default*: `votingMembers`
+
+Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a **logical restore** operation.
+
+By default, Percona Backup for MongoDB waits for all voting members (`votingMembers`) to complete index building. In large replica sets, this can introduce significant delays if some nodes build indexes slower than others, blocking the entire restore process.
+
+Following MongoDB index build commit quorum semantics, you can optimize restore performance by setting this option to a lower quorum threshold.
+
+The following values are supported:
+
+`votingMembers` (Default): The primary waits for all data-bearing voting members to complete the index build.
+
+`majority`: The primary commits the index as soon as a simple majority of data-bearing voting members have completed the build. This is recommended for large replica sets to prevent lagging nodes from delaying the restore process.
+
+`<int>`: A specific number of data-bearing voting members (e.g., 3) that must complete the index build. The integer value must be between 1 and the number of data-bearing voting members. A value of 1 means the primary commits immediately after it finishes.
+
+```sh
+pbm config --set restore.indexCommitQuorum=majority
+```
+
+??? example "Example"
+
+    1. Run the following command:
+
+        ```sh
+        pbm config --set restore.indexCommitQuorum=majority
+        ```
+
+    2. Confirm the value was set:
+
+        ```sh
+        pbm config restore.indexCommitQuorum=
+        majority
+        [restore.indexCommitQuorum=majority]
+        ```
+
+    3. Confirm `indexCommitQuorum` appears in the PBM config with the following command:
+
+        ```text
+        $ pbm config
+        storage:
+          type: s3
+          s3:
+            region: us-east-1
+            endpointUrl: http://minio:9000
+            forcePathStyle: true
+            bucket: bcp
+            prefix: pbme2etest
+            credentials:
+              access-key-id: '***'
+              secret-access-key: '***'
+            maxUploadParts: 10000
+            storageClass: STANDARD
+            insecureSkipTLSVerify: false
+        pitr:
+          enabled: false
+          compression: s2
+        backup:
+          oplogSpanMin: 0
+          compression: s2
+        restore:
+          indexCommitQuorum: majority
+        ```
+
+    4. Start the restore and wait for it to complete:
+
+        ```sh
+        pbm restore -w 2026-05-12T13:28:07Z
+        ```
