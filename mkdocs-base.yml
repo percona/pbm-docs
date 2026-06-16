@@ -244,7 +244,7 @@ nav:
       - AWS S3 storage: details/s3-storage.md
       - Oracle Cloud Storage:
           - Overview: details/oci-storage.md
-          - Workload Identity authentication: details/oci-wif.md
+          - Workload Identity authentication (OCI): details/oci-wif.md
       - details/minio.md
       - details/gcs.md
       - Workload Identity authentication: details/workload-identity-auth.md
