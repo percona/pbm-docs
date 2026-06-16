@@ -7,8 +7,8 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
 | **Authentication type** | **Use when** |
 | --- | --- |
 | `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
-| `instancePrincipal` | PBM runs on an OCI Compute instance (see [instancePrincipal](oci-wif.md#instanceprincipal)) |
-| `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster (see [Workload Identity authentication](oci-wif.md)) |
+| `instancePrincipal` | PBM runs on an OCI Compute instance |
+| `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster |
 
 For information on identity-based authentication methods, refer to the sections on [Instance Principal](oci-wif.md/#instanceprincipal) and [OKE Workload Identity](oci-wif.md#okeworkloadidentity).
 
