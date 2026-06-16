@@ -1393,6 +1393,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#parallel-file-copy-for-filesystem-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel file copy for filesystem storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6347,6 +6358,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
       
         <li class="md-nav__item">
+  <a href="#parallel-file-copy-for-filesystem-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel file copy for filesystem storage
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#next-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6422,6 +6444,19 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant file growth.</p>
 </div>
 <p>Starting with <a href="../release-notes/2.4.0.html">2.4.0</a>, PBM doesn’t stop <a href="../features/point-in-time-recovery.html#oplog-slicing">point-in-time recovery oplog slicing</a>, if it’s enabled, but runs it in parallel. This ensures <a href="pitr-tutorial.html">point-in-time recovery</a> to any timestamp if it takes too long (e.g. hours) to make a backup snapshot.</p>
+<h2 id="parallel-file-copy-for-filesystem-storage">Parallel file copy for filesystem storage<a class="headerlink" href="#parallel-file-copy-for-filesystem-storage" title="Permanent link">¶</a></h2>
+<p>For physical backups stored on a filesystem, you can control how many files PBM processes in parallel during the backup operation. Increasing parallelism can improve performance by allowing multiple files to be copied simultaneously.</p>
+<p>To copy files in parallel, set <code>backup.numParallelFiles</code> in the PBM configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">backup</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</code></pre></div>
+<p>Or pass <code>--num-parallel-files</code>:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--type<span class="o">=</span>physical<span class="w"> </span>--num-parallel-files<span class="o">=</span><span class="m">4</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Parallel file copy applies to <strong>physical backups and incremental physical backups stored on filesystem only</strong>. It has no effect on logical backups or on any S3-compatible storage, regardless of backup type.</p>
+</div>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="list-backup.html">List backups</a>
 <a class="md-button" href="restore-physical.html">Make a restore</a>
@@ -6436,7 +6471,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 4, 2025 11:48:41 UTC">November 4, 2025</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 11, 2026 09:07:56 UTC">June 11, 2026</span>
       
         <br>
         Created:

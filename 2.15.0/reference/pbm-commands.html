@@ -6918,6 +6918,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <td>Sets the number of collections to process in parallel during a specific logical backup. When undefined, <code>pbm-agent</code> processes the number of parallel collections defined for the <code>backup.numParallelCollections</code> configuration parameter. If that is undefined, the default number of collections to process in parallel is the half of the number of logical CPUs. Available starting with version 2.7.0.</td>
 </tr>
 <tr>
+<td><code>--num-parallel-files</code></td>
+<td>Sets the number of files to process in parallel during a specific physical backup. When undefined, <code>pbm-agent</code> uses the value defined for the <code>backup.numParallelFiles</code> configuration parameter. If that is undefined, the default number of files to process in parallel is <code>1</code>.</td>
+</tr>
+<tr>
 <td><code>-o</code>, <code>--out=text</code></td>
 <td>Shows the output format as either plain text or a JSON object. Supported values: <code>text</code>, <code>json</code></td>
 </tr>
@@ -8114,6 +8118,10 @@ NAME<span class="w">                  </span>TYPE<span class="w">     </span>PRO
 <tr>
 <td><code>--num-parallel-collections</code></td>
 <td>Sets the number of collections to process in parallel during a specific logical restore. When undefined, <code>pbm-agent</code> processes the number of parallel collections defined for the <code>restore.numParallelCollections</code> configuration parameter. If that is undefined,  the default number of collections is the half of the number of logical CPUs. Available starting with version 2.7.0.</td>
+</tr>
+<tr>
+<td><code>--num-parallel-files</code></td>
+<td>Sets the number of files to copy in parallel during a specific physical restore from filesystem or NFS storage. When undefined, PBM uses the value configured for the <code>restore.numParallelFiles</code> option (default: <code>1</code>).</td>
 </tr>
 <tr>
 <td><code>--num-insertion-workers-per-collection</code></td>

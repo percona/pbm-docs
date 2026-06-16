@@ -9760,6 +9760,19 @@ By default, PBM picks the node from where it made the incremental base backup wh
 <p>During the period the backup cursor is open, database checkpoints can be created, but no checkpoints can be deleted. This may result in significant file growth.</p>
 </div>
 <p>Starting with <a href="#release-notes-2.4.0">2.4.0</a>, PBM doesn’t stop <a href="#features-point-in-time-recovery-oplog-slicing">point-in-time recovery oplog slicing</a>, if it’s enabled, but runs it in parallel. This ensures <a href="#usage-pitr-tutorial">point-in-time recovery</a> to any timestamp if it takes too long (e.g. hours) to make a backup snapshot.</p>
+<h2 id="usage-backup-physical-parallel-file-copy-for-filesystem-storage">Parallel file copy for filesystem storage<a class="headerlink" href="#usage-backup-physical-parallel-file-copy-for-filesystem-storage" title="Permanent link">¶</a></h2>
+<p>For physical backups stored on a filesystem, you can control how many files PBM processes in parallel during the backup operation. Increasing parallelism can improve performance by allowing multiple files to be copied simultaneously.</p>
+<p>To copy files in parallel, set <code>backup.numParallelFiles</code> in the PBM configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">backup</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</code></pre></div>
+<p>Or pass <code>--num-parallel-files</code>:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--type<span class="o">=</span>physical<span class="w"> </span>--num-parallel-files<span class="o">=</span><span class="m">4</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Parallel file copy applies to <strong>physical backups and incremental physical backups stored on filesystem only</strong>. It has no effect on logical backups or on any S3-compatible storage, regardless of backup type.</p>
+</div>
 <h2 id="usage-backup-physical-next-steps">Next steps<a class="headerlink" href="#usage-backup-physical-next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="#usage-list-backup">List backups</a>
 <a class="md-button" href="#usage-restore-physical">Make a restore</a>
@@ -9908,6 +9921,19 @@ RestartUSec=100ms
 <li><code>maxDownloadBufferMb</code> - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as <code>numDownloadWorkers * downloadChunkMb * 16</code></li>
 <li><code>downloadChunkMb</code> is the size of the data chunk to download (by default, 32 MB)</li>
 </ul>
+<h3 id="usage-restore-physical-parallel-file-copy-for-filesystem-or-nfs-storage">Parallel file copy for filesystem or NFS storage<a class="headerlink" href="#usage-restore-physical-parallel-file-copy-for-filesystem-or-nfs-storage" title="Permanent link">¶</a></h3>
+<p>By default, PBM copies backup files sequentially during a physical restore from filesystem or NFS storage. On fast NFS mounts, this limits restore throughput regardless of available network bandwidth.</p>
+<p>To copy files in parallel, set <code>restore.numParallelFiles</code> in the PBM configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</code></pre></div>
+<p>Or pass <code>--num-parallel-files</code>:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span>&lt;backup_name&gt;<span class="w"> </span>--num-parallel-files<span class="o">=</span><span class="m">4</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Parallel file copy applies to <strong>physical restores from filesystem or NFS storage only</strong>. It has no effect on logical restores or on S3-compatible storage.</p>
+</div>
 <h2 id="usage-restore-physical-next-steps">Next steps<a class="headerlink" href="#usage-restore-physical-next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="#usage-pitr-physical">Point-in-time recovery</a></p>
 <h2 id="usage-restore-physical-useful-links">Useful links<a class="headerlink" href="#usage-restore-physical-useful-links" title="Permanent link">¶</a></h2>
@@ -13686,6 +13712,10 @@ The <code>--profile</code> flag works only with the <code>--older-than</code> fl
 <td>Sets the number of collections to process in parallel during a specific logical backup. When undefined, <code>pbm-agent</code> processes the number of parallel collections defined for the <code>backup.numParallelCollections</code> configuration parameter. If that is undefined, the default number of collections to process in parallel is the half of the number of logical CPUs. Available starting with version 2.7.0.</td>
 </tr>
 <tr>
+<td><code>--num-parallel-files</code></td>
+<td>Sets the number of files to process in parallel during a specific physical backup. When undefined, <code>pbm-agent</code> uses the value defined for the <code>backup.numParallelFiles</code> configuration parameter. If that is undefined, the default number of files to process in parallel is <code>1</code>.</td>
+</tr>
+<tr>
 <td><code>-o</code>, <code>--out=text</code></td>
 <td>Shows the output format as either plain text or a JSON object. Supported values: <code>text</code>, <code>json</code></td>
 </tr>
@@ -14884,6 +14914,10 @@ NAME<span class="w">                  </span>TYPE<span class="w">     </span>PRO
 <td>Sets the number of collections to process in parallel during a specific logical restore. When undefined, <code>pbm-agent</code> processes the number of parallel collections defined for the <code>restore.numParallelCollections</code> configuration parameter. If that is undefined,  the default number of collections is the half of the number of logical CPUs. Available starting with version 2.7.0.</td>
 </tr>
 <tr>
+<td><code>--num-parallel-files</code></td>
+<td>Sets the number of files to copy in parallel during a specific physical restore from filesystem or NFS storage. When undefined, PBM uses the value configured for the <code>restore.numParallelFiles</code> option (default: <code>1</code>).</td>
+</tr>
+<tr>
 <td><code>--num-insertion-workers-per-collection</code></td>
 <td>Specifies the number of insertion workers to run concurrently per collection. Increasing the number for large import may increase the speed of the import. Available starting with version 2.8.0.</td>
 </tr>
@@ -15946,6 +15980,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w">    </span><span class="nt">startingStatus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 <span class="w">  </span><span class="nt">oplogSpanMin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;float64&gt;</span>
 <span class="w">  </span><span class="nt">numParallelCollections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 </code></pre></div>
 <h2 id="reference-backup-options-priority">priority<a class="headerlink" href="#reference-backup-options-priority" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: array of strings</p>
@@ -16041,7 +16076,14 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p><em>Type</em>: int <br>
 <em>Default</em>: number of CPU cores / 2</p>
 <p>The number of parallel collections to process during a logical backup. By default, the number of parallel collections is half of the number of CPU cores. By setting the value for this option you define the new default.
-Available starting with version 2.7.0.</p></body></html></section><section class="print-page" id="reference-restore-options" heading-number="8.5"><html><head>
+Available starting with version 2.7.0.</p>
+<h2 id="reference-backup-options-backupnumparallelfiles">backup.numParallelFiles<a class="headerlink" href="#reference-backup-options-backupnumparallelfiles" title="Permanent link">¶</a></h2>
+<p><em>Type</em>: int <br>
+<em>Default</em>: 1 <br>
+<em>Storage</em>: Filesystem / NFS only <br>
+<em>Backup type:</em> Physical only</p>
+<p>The number of files to copy in parallel during a physical backup to filesystem or NFS storage.</p>
+<p>The default value is <code>1</code>, which copies files sequentially.</p></body></html></section><section class="print-page" id="reference-restore-options" heading-number="8.5"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -16053,6 +16095,7 @@ Available starting with version 2.7.0.</p></body></html></section><section class
 <span class="w">  </span><span class="nt">numInsertionWorkers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">numParallelCollections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">numDownloadWorkers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">maxDownloadBufferMb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">downloadChunkMb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">mongodLocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span>
@@ -16114,6 +16157,12 @@ Available starting with version 2.7.0.</p>
 <li>Enforce time limits in automated workflows</li>
 <li>Fail fast if the balancer cannot be stopped</li>
 </ul>
+<h3 id="reference-restore-options-restorenumparallelfiles">restore.numParallelFiles<a class="headerlink" href="#reference-restore-options-restorenumparallelfiles" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: int <br>
+<em>Storage</em>: Filesystem / NFS only <br>
+<em>Restore type:</em> Physical only</p>
+<p>The number of files to copy in parallel during a physical restore from filesystem or NFS storage.</p>
+<p>This is typically set to 1 (sequential restore).</p>
 <h3 id="reference-restore-options-restoreindexcommitquorum">restore.indexCommitQuorum<a class="headerlink" href="#reference-restore-options-restoreindexcommitquorum" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string or int <br>
 <em>Default</em>: <code>votingMembers</code></p>

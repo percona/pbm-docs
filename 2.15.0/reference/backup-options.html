@@ -3358,6 +3358,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#backupnumparallelfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        backup.numParallelFiles
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6466,6 +6477,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#backupnumparallelfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        backup.numParallelFiles
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6508,6 +6530,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">    </span><span class="nt">startingStatus</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60</span>
 <span class="w">  </span><span class="nt">oplogSpanMin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;float64&gt;</span>
 <span class="w">  </span><span class="nt">numParallelCollections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 </code></pre></div>
 <h2 id="priority">priority<a class="headerlink" href="#priority" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: array of strings</p>
@@ -6604,12 +6627,19 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <em>Default</em>: number of CPU cores / 2</p>
 <p>The number of parallel collections to process during a logical backup. By default, the number of parallel collections is half of the number of CPU cores. By setting the value for this option you define the new default.
 Available starting with version 2.7.0.</p>
+<h2 id="backupnumparallelfiles">backup.numParallelFiles<a class="headerlink" href="#backupnumparallelfiles" title="Permanent link">¶</a></h2>
+<p><em>Type</em>: int <br>
+<em>Default</em>: 1 <br>
+<em>Storage</em>: Filesystem / NFS only <br>
+<em>Backup type:</em> Physical only</p>
+<p>The number of files to copy in parallel during a physical backup to filesystem or NFS storage.</p>
+<p>The default value is <code>1</code>, which copies files sequentially.</p>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 28, 2026 15:43:21 UTC">April 28, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 11, 2026 07:38:22 UTC">June 11, 2026</span>
       
         <br>
         Created:

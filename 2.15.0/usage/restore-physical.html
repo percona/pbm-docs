@@ -1471,6 +1471,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#parallel-file-copy-for-filesystem-or-nfs-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel file copy for filesystem or NFS storage
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6453,6 +6464,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#parallel-file-copy-for-filesystem-or-nfs-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel file copy for filesystem or NFS storage
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6643,6 +6665,19 @@ RestartUSec=100ms
 <li><code>maxDownloadBufferMb</code> - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as <code>numDownloadWorkers * downloadChunkMb * 16</code></li>
 <li><code>downloadChunkMb</code> is the size of the data chunk to download (by default, 32 MB)</li>
 </ul>
+<h3 id="parallel-file-copy-for-filesystem-or-nfs-storage">Parallel file copy for filesystem or NFS storage<a class="headerlink" href="#parallel-file-copy-for-filesystem-or-nfs-storage" title="Permanent link">¶</a></h3>
+<p>By default, PBM copies backup files sequentially during a physical restore from filesystem or NFS storage. On fast NFS mounts, this limits restore throughput regardless of available network bandwidth.</p>
+<p>To copy files in parallel, set <code>restore.numParallelFiles</code> in the PBM configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+</code></pre></div>
+<p>Or pass <code>--num-parallel-files</code>:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span>&lt;backup_name&gt;<span class="w"> </span>--num-parallel-files<span class="o">=</span><span class="m">4</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Parallel file copy applies to <strong>physical restores from filesystem or NFS storage only</strong>. It has no effect on logical restores or on S3-compatible storage.</p>
+</div>
 <h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="pitr-physical.html">Point-in-time recovery</a></p>
 <h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
@@ -6656,7 +6691,7 @@ RestartUSec=100ms
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 28, 2026 15:43:21 UTC">April 28, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 11, 2026 07:35:34 UTC">June 11, 2026</span>
       
         <br>
         Created:

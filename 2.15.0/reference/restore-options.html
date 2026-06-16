@@ -3392,6 +3392,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#restorenumparallelfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        restore.numParallelFiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#restoreindexcommitquorum" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6488,6 +6499,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
       
         <li class="md-nav__item">
+  <a href="#restorenumparallelfiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        restore.numParallelFiles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#restoreindexcommitquorum" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6533,6 +6555,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">numInsertionWorkers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">numParallelCollections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">numDownloadWorkers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
+<span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">maxDownloadBufferMb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">downloadChunkMb</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">mongodLocation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span>
@@ -6594,6 +6617,12 @@ Available starting with version 2.7.0.</p>
 <li>Enforce time limits in automated workflows</li>
 <li>Fail fast if the balancer cannot be stopped</li>
 </ul>
+<h3 id="restorenumparallelfiles">restore.numParallelFiles<a class="headerlink" href="#restorenumparallelfiles" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: int <br>
+<em>Storage</em>: Filesystem / NFS only <br>
+<em>Restore type:</em> Physical only</p>
+<p>The number of files to copy in parallel during a physical restore from filesystem or NFS storage.</p>
+<p>This is typically set to 1 (sequential restore).</p>
 <h3 id="restoreindexcommitquorum">restore.indexCommitQuorum<a class="headerlink" href="#restoreindexcommitquorum" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string or int <br>
 <em>Default</em>: <code>votingMembers</code></p>
@@ -6660,7 +6689,7 @@ restore:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 15, 2026 11:31:32 UTC">June 15, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 11:17:58 UTC">June 16, 2026</span>
       
         <br>
         Created:
