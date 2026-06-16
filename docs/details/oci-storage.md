@@ -349,7 +349,7 @@ Copy the generated key OCID.
 Export the key OCID and OCI IAM group name:
 
 ```sh
-export KMS_KEY_OCID="ocid1.key.oc1.eu-frankfurt-1.envbichxaaexg.abtheljs4mzstpe57rdbzhcgy3b2hhbteddpwktrhhtpmsorbm4retjoh33a"
+export KMS_KEY_OCID="<KMS_KEY_OCID>"
 export OCI_GROUP_NAME="Administrators"
 export KMS_POLICY_NAME="pbm-oci-kms-$BUCKET_REGION"
 ```
