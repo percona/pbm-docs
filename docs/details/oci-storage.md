@@ -275,7 +275,7 @@ pbm status
     Main storage:
     Type:       OCI
     Region:     us-ashburn-1
-    Path:       oci://idvufsl0apl6/rasika-bucket/pbm
+    Path:       oci://<NAMESPACE>/<BUCKET_NAME>/pbm
     (no snapshots or PITR chunks)
     ```
 
