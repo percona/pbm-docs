@@ -10,7 +10,7 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
 | `instancePrincipal` | PBM runs on an OCI Compute instance |
 | `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster |
 
-For information on identity-based authentication methods, refer to the sections on [Instance Principal](oci-wif.md#instanceprincipal) and [OKE Workload Identity](oci-wif.md#okeworkloadidentity).
+For information on workload identity based authentication methods, refer to the sections on [Instance Principal](oci-wif.md#instanceprincipal) and [OKE Workload Identity](oci-wif.md#okeworkloadidentity).
 
 
 ## Prerequisites
@@ -309,6 +309,8 @@ pbm list
 ## Server-side encryption
 
 PBM supports OCI Object Storage server-side encryption using either OCI Key Management Service (KMS) keys or customer-provided encryption keys (SSE-C). These methods are mutually exclusive. Configure only one encryption mode at a time.
+
+OCI Object Storage always encrypts data at rest using server-side encryption (SSE). By default, OCI uses Oracle-managed encryption keys and encryption cannot be disabled. The encryption settings described in this section are intended for environments that require greater control over key management, such as using customer-managed keys in OCI Key Management Service (KMS) or customer-provided encryption keys (SSE-C).
 
 ### SSE with OCI KMS
 
