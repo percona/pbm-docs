@@ -89,6 +89,14 @@
          <lastmod>2026-06-16</lastmod>
     </url>
     <url>
+         <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oci-storage.html</loc>
+         <lastmod>2026-06-16</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oci-wif.html</loc>
+         <lastmod>2026-06-16</lastmod>
+    </url>
+    <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oss.html</loc>
          <lastmod>2026-06-16</lastmod>
     </url>

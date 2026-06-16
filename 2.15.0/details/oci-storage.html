@@ -3,19 +3,21 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="If you are facing issues with physical backups and restores via PMM, follow these troubleshooting steps:">
+        <meta name="description" content="Percona Backup for MongoDB (PBM) supports OCI Object Storage
+as a remote backup destination through a dedicated OCI native
+driver. PBM connects to OCI Object Storage using one of the following authentication types:">
       
       
         <meta name="author" content="Percona LLC">
       
       
-        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/pbm-pmm.html">
+        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oci-storage.html">
       
       
-        <link rel="prev" href="restore-partial.html">
+        <link rel="prev" href="s3-storage.html">
       
       
-        <link rel="next" href="faq.html">
+        <link rel="next" href="oci-wif.html">
       
       
         
@@ -26,7 +28,7 @@
     
     
       
-        <title>Troubleshoot backup management via PMM - Percona Backup for MongoDB</title>
+        <title>Overview - Percona Backup for MongoDB</title>
       
     
     
@@ -98,7 +100,7 @@
     
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Percona Backup for MongoDB - Troubleshoot backup management via PMM">
+  <meta property="og:title" content="Percona Backup for MongoDB - Overview">
   <meta property="og:image" content="https://docs.percona.com/percona-backup-mongodb/_images/mongodb.png">
   <meta property="og:url" content="https://docs.percona.com/percona-backup-mongodb/">
 
@@ -131,7 +133,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#troubleshoot-backup-management-via-percona-monitoring-and-management" class="md-skip">
+        <a href="#oracle-cloud-infrastructure-object-storage" class="md-skip">
           Skip to content
         </a>
       
@@ -245,7 +247,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Troubleshoot backup management via PMM
+              Overview
             
           </span>
         </div>
@@ -2519,8 +2521,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -2552,11 +2556,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked="">
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -2577,7 +2581,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2595,7 +2599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/storage-configuration.html" class="md-nav__link">
+      <a href="storage-configuration.html" class="md-nav__link">
         
   
   
@@ -2623,7 +2627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/s3-storage.html" class="md-nav__link">
+      <a href="s3-storage.html" class="md-nav__link">
         
   
   
@@ -2648,8 +2652,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -2661,11 +2667,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" checked="">
         
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
@@ -2686,7 +2692,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2701,10 +2707,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../details/oci-storage.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="oci-storage.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2720,6 +2753,278 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-region-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify region access
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-oci-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up OCI resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up OCI resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-compartment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a compartment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-object-storage-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an Object Storage bucket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-iam-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create IAM policies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-pbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure PBM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure PBM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#userprincipal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        userPrincipal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-the-pbm-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply the PBM configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-side-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-side encryption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server-side encryption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sse-with-oci-kms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSE with OCI KMS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSE with OCI KMS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-kms-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a KMS key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-iam-policies-for-kms-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create IAM policies for KMS access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-pbm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure PBM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sse-c-customer-provided-encryption-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSE-C (Customer-Provided Encryption Keys)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSE-C (Customer-Provided Encryption Keys)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-an-sse-c-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate an SSE-C key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-pbm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure PBM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify encryption
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2732,7 +3037,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oci-wif.html" class="md-nav__link">
+      <a href="oci-wif.html" class="md-nav__link">
         
   
   
@@ -2768,7 +3073,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/minio.html" class="md-nav__link">
+      <a href="minio.html" class="md-nav__link">
         
   
   
@@ -2796,7 +3101,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/gcs.html" class="md-nav__link">
+      <a href="gcs.html" class="md-nav__link">
         
   
   
@@ -2824,7 +3129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/workload-identity-auth.html" class="md-nav__link">
+      <a href="workload-identity-auth.html" class="md-nav__link">
         
   
   
@@ -2852,7 +3157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/azure.html" class="md-nav__link">
+      <a href="azure.html" class="md-nav__link">
         
   
   
@@ -2880,7 +3185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oss.html" class="md-nav__link">
+      <a href="oss.html" class="md-nav__link">
         
   
   
@@ -2908,7 +3213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/filesystem-storage.html" class="md-nav__link">
+      <a href="filesystem-storage.html" class="md-nav__link">
         
   
   
@@ -2936,7 +3241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/endpoint-map.html" class="md-nav__link">
+      <a href="endpoint-map.html" class="md-nav__link">
         
   
   
@@ -3611,7 +3916,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../details/versions.html" class="md-nav__link ">
+            <a href="versions.html" class="md-nav__link ">
               
   
   
@@ -3681,7 +3986,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/deployments.html" class="md-nav__link">
+      <a href="deployments.html" class="md-nav__link">
         
   
   
@@ -3713,8 +4018,6 @@
       
   
   
-    
-  
   
   
     
@@ -3740,15 +4043,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked="">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="index.html" class="md-nav__link ">
+            <a href="../troubleshoot/index.html" class="md-nav__link ">
               
   
   
@@ -3772,7 +4075,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3792,7 +4095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshooting.html" class="md-nav__link">
+      <a href="../troubleshoot/troubleshooting.html" class="md-nav__link">
         
   
   
@@ -3820,7 +4123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="status.html" class="md-nav__link">
+      <a href="../troubleshoot/status.html" class="md-nav__link">
         
   
   
@@ -3848,7 +4151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="pbm-report.html" class="md-nav__link">
+      <a href="../troubleshoot/pbm-report.html" class="md-nav__link">
         
   
   
@@ -3876,7 +4179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="restore-partial.html" class="md-nav__link">
+      <a href="../troubleshoot/restore-partial.html" class="md-nav__link">
         
   
   
@@ -3901,19 +4204,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="pbm-pmm.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../troubleshoot/pbm-pmm.html" class="md-nav__link">
         
   
   
@@ -3929,7 +4223,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -3942,7 +4235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="faq.html" class="md-nav__link">
+      <a href="../troubleshoot/faq.html" class="md-nav__link">
         
   
   
@@ -4001,7 +4294,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../details/architecture.html" class="md-nav__link ">
+            <a href="architecture.html" class="md-nav__link ">
               
   
   
@@ -4043,7 +4336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/pbm-agent.html" class="md-nav__link">
+      <a href="pbm-agent.html" class="md-nav__link">
         
   
   
@@ -4071,7 +4364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/cli.html" class="md-nav__link">
+      <a href="cli.html" class="md-nav__link">
         
   
   
@@ -4099,7 +4392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/control-collections.html" class="md-nav__link">
+      <a href="control-collections.html" class="md-nav__link">
         
   
   
@@ -4155,7 +4448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/authentication.html" class="md-nav__link">
+      <a href="authentication.html" class="md-nav__link">
         
   
   
@@ -6192,7 +6485,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
           <div data-banner="data-banner" class="edit-contrib-banner">
     <div class="banner-content">
       <!-- Edit link centered -->
-      <a href="https://github.com/percona/pbm-docs/edit/main/docs/troubleshoot/pbm-pmm.md" title="Edit this page on GitHub" class="edit-page-link">
+      <a href="https://github.com/percona/pbm-docs/edit/main/docs/details/oci-storage.md" title="Edit this page on GitHub" class="edit-page-link">
         <span class="edit-page-icon">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
@@ -6233,6 +6526,264 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-region-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify region access
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-oci-resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up OCI resources
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up OCI resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#export-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Export variables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-compartment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a compartment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-object-storage-bucket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an Object Storage bucket
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-iam-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create IAM policies
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-pbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure PBM
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure PBM">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#userprincipal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        userPrincipal
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-the-pbm-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply the PBM configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-the-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server-side-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Server-side encryption
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Server-side encryption">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sse-with-oci-kms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSE with OCI KMS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSE with OCI KMS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-kms-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a KMS key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-iam-policies-for-kms-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create IAM policies for KMS access
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-pbm_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure PBM
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sse-c-customer-provided-encryption-keys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SSE-C (Customer-Provided Encryption Keys)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SSE-C (Customer-Provided Encryption Keys)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generate-an-sse-c-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Generate an SSE-C key
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-pbm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure PBM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-encryption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify encryption
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
         </div>
       </div>
@@ -6253,31 +6804,357 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
       
     
-    <a href="https://github.com/percona/pbm-docs/raw/main/docs/troubleshoot/pbm-pmm.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/percona/pbm-docs/raw/main/docs/details/oci-storage.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="troubleshoot-backup-management-via-percona-monitoring-and-management">Troubleshoot backup management via Percona Monitoring and Management<a class="headerlink" href="#troubleshoot-backup-management-via-percona-monitoring-and-management" title="Permanent link">¶</a></h1>
-<p>If you are facing issues with physical backups and restores via PMM, follow these troubleshooting steps:</p>
-<ol>
-<li>Ensure that the user running the <code>pmm</code> process has sufficient permissions within PBM. You can find detailed instructions in the <a href="https://docs.percona.com/percona-monitoring-and-management/3/install-pmm/install-pmm-client/connect-database/mongodb.html#create-pmm-account-and-set-permissions">PMM documentation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</li>
-<li>Make sure you have specified the user from step 1 in the MongoDB connection URI string for <code>pbm-agent</code> processes.</li>
-<li>Confirm that the system user who runs the <code>pbm-agent</code> process (by default, <code>mongod</code>) has the read / write access to both the MongoDB dbpath and the backup storage location.</li>
-<li>Examine the <code>systemd</code> restart policy for the user mentioned in step 4. Ensure it is not set to <code>always</code> or <code>on-success</code>. During physical restores, the database must not be automatically restarted as this is controlled by the <code>pbm-agent</code>.</li>
-</ol>
+<h1 id="oracle-cloud-infrastructure-object-storage">Oracle Cloud Infrastructure Object Storage<a class="headerlink" href="#oracle-cloud-infrastructure-object-storage" title="Permanent link">¶</a></h1>
+<p>Percona Backup for MongoDB (PBM) supports <a href="https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm">OCI Object Storage</a>
+as a remote backup destination through a dedicated OCI native
+driver. PBM connects to OCI Object Storage using one of the following authentication types:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Authentication type</strong></th>
+<th><strong>Use when</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>userPrincipal</code></td>
+<td>PBM runs anywhere; authenticates with OCI API signing keys</td>
+</tr>
+<tr>
+<td><code>instancePrincipal</code></td>
+<td>PBM runs on an OCI Compute instance</td>
+</tr>
+<tr>
+<td><code>okeWorkloadIdentity</code></td>
+<td>PBM runs inside an OKE enhanced cluster</td>
+</tr>
+</tbody>
+</table>
+<p>For information on workload identity based authentication methods, refer to the sections on <a href="oci-wif.html#instanceprincipal">Instance Principal</a> and <a href="oci-wif.html#okeworkloadidentity">OKE Workload Identity</a>.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<p>Before configuring PBM, ensure that you have:</p>
+<ul>
+<li>An active OCI tenancy with at least one subscribed region</li>
+<li>The OCI CLI installed and configured (oci setup config) if you intend to use command-line tools. You can also complete the configuration using the OCI Console.
+  See the <a href="https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm">OCI CLI documentation</a> 
+  for installation instructions</li>
+<li>An OCI user with permission to create compartments, buckets, dynamic groups, and IAM policies in your tenancy</li>
+</ul>
+<p>Initialize the OCI CLI configuration if you have not done so already:</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>setup<span class="w"> </span>config
+</code></pre></div>
+<p>Use your tenancy home region as the default CLI region. If the setup generated a new API key, upload the public key 
+to your OCI user:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>~/.oci/oci_api_key_public.pem
+</code></pre></div>
+<p>In the OCI Console, go to <strong>User settings → Tokens and keys → 
+API keys → Add API key</strong>, paste the public key, and confirm 
+the fingerprint matches <code>~/.oci/config</code>.</p>
+<p>If needed, update local file permissions:</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>setup<span class="w"> </span>repair-file-permissions<span class="w"> </span>--file<span class="w"> </span>~/.oci/config
+oci<span class="w"> </span>setup<span class="w"> </span>repair-file-permissions<span class="w"> </span>--file<span class="w"> </span>~/.oci/oci_api_key.pem
+</code></pre></div>
+<h2 id="verify-region-access">Verify region access<a class="headerlink" href="#verify-region-access" title="Permanent link">¶</a></h2>
+<p>Check the regions available to your tenancy:</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>iam<span class="w"> </span>region-subscription<span class="w"> </span>list<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span>&lt;HOME_REGION&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>table
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The region specified in the configuration must be enabled and subscribed to in your OCI tenancy.</p>
+</div>
+<h2 id="set-up-oci-resources">Set up OCI resources<a class="headerlink" href="#set-up-oci-resources" title="Permanent link">¶</a></h2>
+<h3 id="export-variables">Export variables<a class="headerlink" href="#export-variables" title="Permanent link">¶</a></h3>
+<p>Set the following variables before running any commands in this 
+section. All subsequent commands reference them.</p>
+<p></p><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">HOME_REGION</span><span class="o">=</span>&lt;your-home-region&gt;<span class="w">     </span><span class="c1"># e.g. us-ashburn-1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">BUCKET_REGION</span><span class="o">=</span>&lt;your-bucket-region&gt;<span class="w"> </span><span class="c1"># e.g. eu-frankfurt-1</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">COMPARTMENT_NAME</span><span class="o">=</span>&lt;your-compartment-name&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">BUCKET_NAME</span><span class="o">=</span>&lt;your-bucket-name&gt;
+</code></pre></div>
+Retrieve and export the values PBM requires:<p></p>
+<p></p><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">TENANCY_OCID</span><span class="o">=</span><span class="k">$(</span>
+<span class="w">  </span>oci<span class="w"> </span>iam<span class="w"> </span>tenancy<span class="w"> </span>get<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tenancy-id<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">'/^tenancy=/{print $2}'</span><span class="w"> </span>~/.oci/config<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--query<span class="w"> </span><span class="s1">'data.id'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--raw-output
+<span class="k">)</span>
+
+<span class="nb">export</span><span class="w"> </span><span class="nv">USER_OCID</span><span class="o">=</span><span class="k">$(</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">'/^user=/{print $2}'</span><span class="w"> </span>~/.oci/config<span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">FINGERPRINT</span><span class="o">=</span><span class="k">$(</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">'/^fingerprint=/{print $2}'</span><span class="w"> </span>~/.oci/config<span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KEY_FILE</span><span class="o">=</span><span class="k">$(</span>awk<span class="w"> </span>-F<span class="o">=</span><span class="w"> </span><span class="s1">'/^key_file=/{print $2}'</span><span class="w"> </span>~/.oci/config<span class="k">)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KEY_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">KEY_FILE</span><span class="p">/#</span><span class="se">\~</span><span class="p">/</span><span class="nv">$HOME</span><span class="si">}</span><span class="s2">"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">NAMESPACE</span><span class="o">=</span><span class="k">$(</span>
+<span class="w">  </span>oci<span class="w"> </span>os<span class="w"> </span>ns<span class="w"> </span>get<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--query<span class="w"> </span><span class="s1">'data'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--raw-output
+<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"TENANCY_OCID: </span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"USER_OCID:    </span><span class="nv">$USER_OCID</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"FINGERPRINT:  </span><span class="nv">$FINGERPRINT</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"KEY_FILE:     </span><span class="nv">$KEY_FILE</span><span class="s2">"</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"NAMESPACE:    </span><span class="nv">$NAMESPACE</span><span class="s2">"</span>
+</code></pre></div>
+Verify all five values are populated before continuing. An empty value means the OCI CLI is not authenticated or the variable was not set correctly.<p></p>
+<h3 id="create-a-compartment">Create a compartment<a class="headerlink" href="#create-a-compartment" title="Permanent link">¶</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Important</p>
+<p>While OCI resources always require a compartment, creating a dedicated one for PBM backup resources is optional. You can use the root compartment. However, Percona recommends using a separate compartment for PBM resources to improve organization and simplify IAM policy management.</p>
+</div>
+<p>Create a compartment for PBM backup resources:</p>
+<p></p><div class="highlight"><pre><span></span><code>oci<span class="w"> </span>iam<span class="w"> </span>compartment<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$COMPARTMENT_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--description<span class="w"> </span><span class="s2">"PBM OCI Object Storage backup"</span>
+</code></pre></div>
+Wait until the compartment is active, then export its OCID:<p></p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">COMPARTMENT_OCID</span><span class="o">=</span><span class="k">$(</span>
+<span class="w">  </span>oci<span class="w"> </span>iam<span class="w"> </span>compartment<span class="w"> </span>list<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--compartment-id-in-subtree<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--all<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--query<span class="w"> </span><span class="s2">"data[?name=='</span><span class="nv">$COMPARTMENT_NAME</span><span class="s2">' &amp;&amp; \"lifecycle-state\"=='ACTIVE'].id | [0]"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--raw-output
+<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"COMPARTMENT_OCID: </span><span class="nv">$COMPARTMENT_OCID</span><span class="s2">"</span>
+</code></pre></div>
+<h3 id="create-an-object-storage-bucket">Create an Object Storage bucket<a class="headerlink" href="#create-an-object-storage-bucket" title="Permanent link">¶</a></h3>
+<p>Create the bucket:</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>os<span class="w"> </span>bucket<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--namespace-name<span class="w"> </span><span class="s2">"</span><span class="nv">$NAMESPACE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$COMPARTMENT_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_NAME</span><span class="s2">"</span>
+</code></pre></div>
+<p>Verify the bucket was created:</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>os<span class="w"> </span>bucket<span class="w"> </span>get<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--namespace-name<span class="w"> </span><span class="s2">"</span><span class="nv">$NAMESPACE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket-name<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--query<span class="w"> </span><span class="s1">'data.{name:name,namespace:namespace}'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>table
+</code></pre></div>
+<h3 id="create-iam-policies">Create IAM policies<a class="headerlink" href="#create-iam-policies" title="Permanent link">¶</a></h3>
+<p>PBM must be able to create, read, overwrite, and delete backup objects.</p>
+<p>Ensure your OCI user (or the group it belongs to) has permissions to manage objects in the target bucket/compartment.</p>
+<p>Additionally, PBM requires a native copy policy that grants the OCI Object Storage service permission to copy objects internally (for server-side copy operations):</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span><span class="s2">"pbm-native-copy-</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--description<span class="w"> </span><span class="s2">"Allow Object Storage service to copy PBM objects"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--statements<span class="w"> </span><span class="s2">"[\"Allow service objectstorage-</span><span class="nv">$BUCKET_REGION</span><span class="s2"> to manage object-family \</span>
+<span class="s2">    in compartment </span><span class="nv">$COMPARTMENT_NAME</span><span class="s2"> where any { \</span>
+<span class="s2">      request.permission='OBJECT_READ', \</span>
+<span class="s2">      request.permission='OBJECT_INSPECT', \</span>
+<span class="s2">      request.permission='OBJECT_CREATE', \</span>
+<span class="s2">      request.permission='OBJECT_OVERWRITE', \</span>
+<span class="s2">      request.permission='OBJECT_DELETE'}\"]"</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>IAM policy changes can take up to 2 minutes to propagate. If PBM reports an authorization error immediately after creating the policies, wait 2 minutes and retry.</p>
+</div>
+<h2 id="configure-pbm">Configure PBM<a class="headerlink" href="#configure-pbm" title="Permanent link">¶</a></h2>
+<h3 id="userprincipal">userPrincipal<a class="headerlink" href="#userprincipal" title="Permanent link">¶</a></h3>
+<p>Use this when PBM runs outside OCI, or when you want to 
+authenticate with OCI API signing keys.</p>
+<p>Generate the correctly indented private key before creating 
+the config file:</p>
+<p></p><div class="highlight"><pre><span></span><code>sed<span class="w"> </span><span class="s1">'s/^/          /'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$KEY_FILE</span><span class="s2">"</span>
+</code></pre></div>
+Create the configuration file:<p></p>
+<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oci</span>
+<span class="w">  </span><span class="nt">oci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;BUCKET_REGION&gt;</span>
+<span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;NAMESPACE&gt;</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;BUCKET_NAME&gt;</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm</span>
+<span class="w">    </span><span class="nt">credentials</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">userPrincipal</span>
+<span class="w">      </span><span class="nt">userPrincipal</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">tenancy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;TENANCY_OCID&gt;</span>
+<span class="w">        </span><span class="nt">user</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;USER_OCID&gt;</span>
+<span class="w">        </span><span class="nt">fingerprint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;FINGERPRINT&gt;</span>
+<span class="w">        </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">          </span><span class="no">-----BEGIN PRIVATE KEY-----</span>
+<span class="w">          </span><span class="no">...</span>
+<span class="w">          </span><span class="no">-----END PRIVATE KEY-----</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>user</code> value must be a user OCID starting with 
+<code>ocid1.user.oc1</code>. A bucket or compartment OCID causes 
+a 401 authentication failure.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Indent the private key correctly before adding it to the configuration:</p>
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span><span class="s1">'s/^/          /'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$KEY_FILE</span><span class="s2">"</span>
+</code></pre></div>
+</div>
+<h2 id="apply-the-pbm-configuration">Apply the PBM configuration<a class="headerlink" href="#apply-the-pbm-configuration" title="Permanent link">¶</a></h2>
+<p>Apply the configuration:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>/path/to/oci-config.yaml
+</code></pre></div>
+<p>Force PBM to resync the storage configuration:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--force-resync
+</code></pre></div>
+<h2 id="verify-the-configuration">Verify the configuration<a class="headerlink" href="#verify-the-configuration" title="Permanent link">¶</a></h2>
+<p>Verify all agents connected and storage initialized successfully:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>status
+</code></pre></div>
+<details class="example">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pbm<span class="w"> </span>status
+Cluster:
+<span class="o">========</span>
+rs1:
+-<span class="w"> </span>rs101:27017<span class="w"> </span><span class="o">[</span>S<span class="o">]</span>:<span class="w"> </span>pbm-agent<span class="w"> </span><span class="o">[</span>v2.15.0<span class="o">]</span><span class="w"> </span>OK
+-<span class="w"> </span>rs102:27017<span class="w"> </span><span class="o">[</span>S<span class="o">]</span>:<span class="w"> </span>pbm-agent<span class="w"> </span><span class="o">[</span>v2.15.0<span class="o">]</span><span class="w"> </span>OK
+-<span class="w"> </span>rs103:27017<span class="w"> </span><span class="o">[</span>P<span class="o">]</span>:<span class="w"> </span>pbm-agent<span class="w"> </span><span class="o">[</span>v2.15.0<span class="o">]</span><span class="w"> </span>OK
+
+PITR<span class="w"> </span>incremental<span class="w"> </span>backup:
+<span class="o">========================</span>
+Status<span class="w"> </span><span class="o">[</span>OFF<span class="o">]</span>
+
+Currently<span class="w"> </span>running:
+<span class="o">==================</span>
+<span class="o">(</span>none<span class="o">)</span>
+
+Backups:
+<span class="o">========</span>
+Main<span class="w"> </span>storage:
+Type:<span class="w">       </span>OCI
+Region:<span class="w">     </span>us-ashburn-1
+Path:<span class="w">       </span>oci://&lt;NAMESPACE&gt;/&lt;BUCKET_NAME&gt;/pbm
+<span class="o">(</span>no<span class="w"> </span>snapshots<span class="w"> </span>or<span class="w"> </span>PITR<span class="w"> </span>chunks<span class="o">)</span>
+</code></pre></div>
+</details>
+<p>Every node must show <code>pbm-agent</code> as <code>OK</code> and storage as <code>ok</code>. </p>
+<p>Run a test backup to confirm end-to-end functionality:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup
+pbm<span class="w"> </span>list
+</code></pre></div>
+<details class="example">
+<summary>Output</summary>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pbm<span class="w"> </span>backup
+Starting<span class="w"> </span>backup<span class="w"> </span><span class="s2">"2026-06-12T07:11:31Z"</span>.....
+Backup<span class="w"> </span><span class="s2">"2026-06-12T07:11:31Z"</span><span class="w"> </span>saved<span class="w"> </span>to<span class="w"> </span>remote<span class="w"> </span>store<span class="w"> </span><span class="o">(</span>path:<span class="w"> </span><span class="s2">"oci://&lt;NAMESPACE&gt;/&lt;BUCKET_NAME&gt;/pbm"</span><span class="o">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>pbm<span class="w"> </span>list
+Backup<span class="w"> </span>snapshots:
+NAME<span class="w">   </span>TYPE<span class="w">   </span>PROFILE<span class="w"> </span>SELECTIVE<span class="w">   </span>BASE<span class="w">   </span>RESTORE<span class="w"> </span>TIME
+-----------------------------------------------------
+<span class="m">2026</span>-06-11T13:14:51Z<span class="w"> </span>logical<span class="w"> </span>no<span class="w"> </span>no<span class="w">  </span><span class="m">2026</span>-06-11T13:15:07
+<span class="m">2026</span>-06-12T07:04:27Z<span class="w"> </span>logical<span class="w"> </span>no<span class="w"> </span>no<span class="w">  </span><span class="m">2026</span>-06-12T07:04:42
+<span class="m">2026</span>-06-12T07:11:31Z<span class="w"> </span>logical<span class="w"> </span>no<span class="w"> </span>no<span class="w">  </span><span class="m">2026</span>-06-12T07:11:46
+
+PITR<span class="w"> </span>&lt;off&gt;:
+</code></pre></div>
+</details>
+<h2 id="server-side-encryption">Server-side encryption<a class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h2>
+<p>PBM supports OCI Object Storage server-side encryption using either OCI Key Management Service (KMS) keys or customer-provided encryption keys (SSE-C). These methods are mutually exclusive. Configure only one encryption mode at a time.</p>
+<p>OCI Object Storage always encrypts data at rest using server-side encryption (SSE). By default, OCI uses Oracle-managed encryption keys and encryption cannot be disabled. The encryption settings described in this section are intended for environments that require greater control over key management, such as using customer-managed keys in OCI Key Management Service (KMS) or customer-provided encryption keys (SSE-C).</p>
+<h3 id="sse-with-oci-kms">SSE with OCI KMS<a class="headerlink" href="#sse-with-oci-kms" title="Permanent link">¶</a></h3>
+<p>Use OCI KMS encryption when you want OCI to manage encryption and key lifecycle through OCI Vault and Key Management.</p>
+<h4 id="create-a-kms-key">Create a KMS key<a class="headerlink" href="#create-a-kms-key" title="Permanent link">¶</a></h4>
+<p>In the OCI Console, navigate to:</p>
+<p><strong>Identity &amp; Security → Key Management &amp; Secret Management → Vault</strong></p>
+<p>Open an existing vault or create a new vault in <code>$BUCKET_REGION</code>, then select:</p>
+<p><strong>Master Encryption Keys → Create Key</strong></p>
+<p>Configure the key with the following settings:</p>
+<ul>
+<li>Algorithm: AES</li>
+<li>Key length: 256 bits</li>
+</ul>
+<p>Copy the generated key OCID.</p>
+<p>Export the key OCID and OCI IAM group name:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">KMS_KEY_OCID</span><span class="o">=</span><span class="s2">"&lt;KMS_KEY_OCID&gt;"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">OCI_GROUP_NAME</span><span class="o">=</span><span class="s2">"Administrators"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KMS_POLICY_NAME</span><span class="o">=</span><span class="s2">"pbm-oci-kms-</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span>
+</code></pre></div>
+<p>If your tenancy uses identity domains, specify the group name in identity-domain-qualified format:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">OCI_GROUP_NAME</span><span class="o">=</span><span class="s2">"'Default'/'&lt;your-oci-group-name&gt;'"</span>
+</code></pre></div>
+<h4 id="create-iam-policies-for-kms-access">Create IAM policies for KMS access<a class="headerlink" href="#create-iam-policies-for-kms-access" title="Permanent link">¶</a></h4>
+<p>Create a policy that allows both the PBM user group and the regional Object Storage service to use the KMS key.</p>
+<p>The object access statement is only required if the OCI group does not already have Object Storage permissions in the target compartment.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">KMS_OBJECT_POLICY_STATEMENT</span><span class="o">=</span><span class="s2">"Allow group </span><span class="nv">$OCI_GROUP_NAME</span><span class="s2"> to manage object-family in compartment </span><span class="nv">$COMPARTMENT_NAME</span><span class="s2">"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KMS_USER_POLICY_STATEMENT</span><span class="o">=</span><span class="s2">"Allow group </span><span class="nv">$OCI_GROUP_NAME</span><span class="s2"> to use keys in compartment </span><span class="nv">$COMPARTMENT_NAME</span><span class="s2">"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KMS_OBJECTSTORAGE_POLICY_STATEMENT</span><span class="o">=</span><span class="s2">"Allow service objectstorage-</span><span class="nv">$BUCKET_REGION</span><span class="s2"> to use keys in compartment </span><span class="nv">$COMPARTMENT_NAME</span><span class="s2">"</span>
+
+oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span><span class="s2">"</span><span class="nv">$KMS_POLICY_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--description<span class="w"> </span><span class="s2">"Allow PBM user principal and Object Storage to use KMS keys in </span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--statements<span class="w"> </span><span class="s2">"[\"</span><span class="nv">$KMS_OBJECT_POLICY_STATEMENT</span><span class="s2">\",\"</span><span class="nv">$KMS_USER_POLICY_STATEMENT</span><span class="s2">\",\"</span><span class="nv">$KMS_OBJECTSTORAGE_POLICY_STATEMENT</span><span class="s2">\"]"</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Wait 1–2 minutes for OCI IAM policy propagation before applying the PBM configuration.</p>
+<p>Without the Object Storage service policy, PBM uploads fail with <code>NotAuthorizedOrFoundKmsKey</code> during <code>CreateMultipartUpload</code> operations.</p>
+</div>
+<h4 id="configure-pbm_1">Configure PBM<a class="headerlink" href="#configure-pbm_1" title="Permanent link">¶</a></h4>
+<p>Add the following to the OCI storage configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">serverSideEncryption</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">kmsKeyID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KMS_KEY_OCID&gt;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not configure <code>sseCustomerKey</code> together with <code>kmsKeyID</code>. PBM treats OCI KMS encryption and SSE-C as mutually exclusive options.</p>
+</div>
+<h3 id="sse-c-customer-provided-encryption-keys">SSE-C (Customer-Provided Encryption Keys)<a class="headerlink" href="#sse-c-customer-provided-encryption-keys" title="Permanent link">¶</a></h3>
+<p>Use SSE-C when you want full control of the encryption key material used to encrypt backup objects. PBM sends the encryption key with every Object Storage request. OCI uses the supplied key to encrypt and decrypt objects but does not persist the key.</p>
+<h4 id="generate-an-sse-c-key">Generate an SSE-C key<a class="headerlink" href="#generate-an-sse-c-key" title="Permanent link">¶</a></h4>
+<p>Generate a 256-bit AES key and encode it in Base64:</p>
+<div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>rand<span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64
+</code></pre></div>
+<p>Store the generated value securely. PBM requires the same key for all future backup, restore, and object access operations.</p>
+<h4 id="configure-pbm_2">Configure PBM<a class="headerlink" href="#configure-pbm_2" title="Permanent link">¶</a></h4>
+<p>Add the customer-provided key to the storage configuration:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">serverSideEncryption</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">sseCustomerKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;BASE64_ENCODED_AES256_KEY&gt;</span>
+</code></pre></div>
+<h4 id="verify-encryption">Verify encryption<a class="headerlink" href="#verify-encryption" title="Permanent link">¶</a></h4>
+<p>After a successful backup, verify that uploaded objects are encrypted with SSE-C:</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>os<span class="w"> </span>object<span class="w"> </span>head<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--namespace-name<span class="w"> </span><span class="s2">"</span><span class="nv">$NAMESPACE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bucket-name<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--name<span class="w"> </span><span class="s2">"&lt;object-name&gt;"</span>
+</code></pre></div>
+<p>The response indicates that the object uses customer-supplied encryption keys.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>OCI does not retain SSE-C keys. If the key is lost, encrypted backup objects cannot be decrypted or restored.</p>
+</div>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 10, 2026 13:40:38 UTC">June 10, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 10:32:47 UTC">June 16, 2026</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 17, 2024 12:43:19 UTC">June 17, 2024</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 11, 2026 14:53:42 UTC">June 11, 2026</span>
       
     
   </small>

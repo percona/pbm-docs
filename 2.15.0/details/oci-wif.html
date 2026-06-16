@@ -3,19 +3,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="If you are facing issues with physical backups and restores via PMM, follow these troubleshooting steps:">
+        <meta name="description" content="Percona Backup for MongoDB (PBM) supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.">
       
       
         <meta name="author" content="Percona LLC">
       
       
-        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/pbm-pmm.html">
+        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oci-wif.html">
       
       
-        <link rel="prev" href="restore-partial.html">
+        <link rel="prev" href="oci-storage.html">
       
       
-        <link rel="next" href="faq.html">
+        <link rel="next" href="minio.html">
       
       
         
@@ -26,7 +26,7 @@
     
     
       
-        <title>Troubleshoot backup management via PMM - Percona Backup for MongoDB</title>
+        <title>Workload Identity authentication (OCI) - Percona Backup for MongoDB</title>
       
     
     
@@ -98,7 +98,7 @@
     
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Percona Backup for MongoDB - Troubleshoot backup management via PMM">
+  <meta property="og:title" content="Percona Backup for MongoDB - Workload Identity authentication (OCI)">
   <meta property="og:image" content="https://docs.percona.com/percona-backup-mongodb/_images/mongodb.png">
   <meta property="og:url" content="https://docs.percona.com/percona-backup-mongodb/">
 
@@ -131,7 +131,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#troubleshoot-backup-management-via-percona-monitoring-and-management" class="md-skip">
+        <a href="#oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication" class="md-skip">
           Skip to content
         </a>
       
@@ -245,7 +245,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Troubleshoot backup management via PMM
+              Workload Identity authentication (OCI)
             
           </span>
         </div>
@@ -2519,8 +2519,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -2552,11 +2554,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked="">
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -2577,7 +2579,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2595,7 +2597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/storage-configuration.html" class="md-nav__link">
+      <a href="storage-configuration.html" class="md-nav__link">
         
   
   
@@ -2623,7 +2625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/s3-storage.html" class="md-nav__link">
+      <a href="s3-storage.html" class="md-nav__link">
         
   
   
@@ -2648,8 +2650,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -2661,11 +2665,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" checked="">
         
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
@@ -2686,7 +2690,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2704,7 +2708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oci-storage.html" class="md-nav__link">
+      <a href="oci-storage.html" class="md-nav__link">
         
   
   
@@ -2729,10 +2733,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../details/oci-wif.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workload Identity authentication (OCI)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="oci-wif.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2748,6 +2779,78 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#instanceprincipal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        instancePrincipal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="instancePrincipal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-you-begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you begin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#okeworkloadidentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        okeWorkloadIdentity
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2768,7 +2871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/minio.html" class="md-nav__link">
+      <a href="minio.html" class="md-nav__link">
         
   
   
@@ -2796,7 +2899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/gcs.html" class="md-nav__link">
+      <a href="gcs.html" class="md-nav__link">
         
   
   
@@ -2824,7 +2927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/workload-identity-auth.html" class="md-nav__link">
+      <a href="workload-identity-auth.html" class="md-nav__link">
         
   
   
@@ -2852,7 +2955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/azure.html" class="md-nav__link">
+      <a href="azure.html" class="md-nav__link">
         
   
   
@@ -2880,7 +2983,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oss.html" class="md-nav__link">
+      <a href="oss.html" class="md-nav__link">
         
   
   
@@ -2908,7 +3011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/filesystem-storage.html" class="md-nav__link">
+      <a href="filesystem-storage.html" class="md-nav__link">
         
   
   
@@ -2936,7 +3039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/endpoint-map.html" class="md-nav__link">
+      <a href="endpoint-map.html" class="md-nav__link">
         
   
   
@@ -3611,7 +3714,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../details/versions.html" class="md-nav__link ">
+            <a href="versions.html" class="md-nav__link ">
               
   
   
@@ -3681,7 +3784,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/deployments.html" class="md-nav__link">
+      <a href="deployments.html" class="md-nav__link">
         
   
   
@@ -3713,8 +3816,6 @@
       
   
   
-    
-  
   
   
     
@@ -3740,15 +3841,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11" checked="">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_11">
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="index.html" class="md-nav__link ">
+            <a href="../troubleshoot/index.html" class="md-nav__link ">
               
   
   
@@ -3772,7 +3873,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_11_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_11">
             <span class="md-nav__icon md-icon"></span>
             
@@ -3792,7 +3893,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshooting.html" class="md-nav__link">
+      <a href="../troubleshoot/troubleshooting.html" class="md-nav__link">
         
   
   
@@ -3820,7 +3921,7 @@
   
   
     <li class="md-nav__item">
-      <a href="status.html" class="md-nav__link">
+      <a href="../troubleshoot/status.html" class="md-nav__link">
         
   
   
@@ -3848,7 +3949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="pbm-report.html" class="md-nav__link">
+      <a href="../troubleshoot/pbm-report.html" class="md-nav__link">
         
   
   
@@ -3876,7 +3977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="restore-partial.html" class="md-nav__link">
+      <a href="../troubleshoot/restore-partial.html" class="md-nav__link">
         
   
   
@@ -3901,19 +4002,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="pbm-pmm.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../troubleshoot/pbm-pmm.html" class="md-nav__link">
         
   
   
@@ -3929,7 +4021,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -3942,7 +4033,7 @@
   
   
     <li class="md-nav__item">
-      <a href="faq.html" class="md-nav__link">
+      <a href="../troubleshoot/faq.html" class="md-nav__link">
         
   
   
@@ -4001,7 +4092,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../details/architecture.html" class="md-nav__link ">
+            <a href="architecture.html" class="md-nav__link ">
               
   
   
@@ -4043,7 +4134,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/pbm-agent.html" class="md-nav__link">
+      <a href="pbm-agent.html" class="md-nav__link">
         
   
   
@@ -4071,7 +4162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/cli.html" class="md-nav__link">
+      <a href="cli.html" class="md-nav__link">
         
   
   
@@ -4099,7 +4190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/control-collections.html" class="md-nav__link">
+      <a href="control-collections.html" class="md-nav__link">
         
   
   
@@ -4155,7 +4246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/authentication.html" class="md-nav__link">
+      <a href="authentication.html" class="md-nav__link">
         
   
   
@@ -6192,7 +6283,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
           <div data-banner="data-banner" class="edit-contrib-banner">
     <div class="banner-content">
       <!-- Edit link centered -->
-      <a href="https://github.com/percona/pbm-docs/edit/main/docs/troubleshoot/pbm-pmm.md" title="Edit this page on GitHub" class="edit-page-link">
+      <a href="https://github.com/percona/pbm-docs/edit/main/docs/details/oci-wif.md" title="Edit this page on GitHub" class="edit-page-link">
         <span class="edit-page-icon">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
@@ -6233,6 +6324,64 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#instanceprincipal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        instancePrincipal
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="instancePrincipal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#before-you-begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you begin
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#procedure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Procedure
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#okeworkloadidentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        okeWorkloadIdentity
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
         </div>
       </div>
@@ -6253,31 +6402,164 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
       
     
-    <a href="https://github.com/percona/pbm-docs/raw/main/docs/troubleshoot/pbm-pmm.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/percona/pbm-docs/raw/main/docs/details/oci-wif.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="troubleshoot-backup-management-via-percona-monitoring-and-management">Troubleshoot backup management via Percona Monitoring and Management<a class="headerlink" href="#troubleshoot-backup-management-via-percona-monitoring-and-management" title="Permanent link">¶</a></h1>
-<p>If you are facing issues with physical backups and restores via PMM, follow these troubleshooting steps:</p>
+<h1 id="oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication">Oracle Cloud Infrastructure (OCI) Object Storage with Workload Identity Authentication<a class="headerlink" href="#oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication" title="Permanent link">¶</a></h1>
+<p>Percona Backup for MongoDB (PBM) supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.</p>
+<p>Percona Backup for MongoDB (PBM) supports the following keyless (identity-based) authentication options:</p>
+<table>
+<thead>
+<tr>
+<th>Auth type</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>instancePrincipal</code></td>
+<td>PBM is running on a virtual machine inside OCI</td>
+</tr>
+<tr>
+<td><code>okeWorkloadIdentity</code></td>
+<td>PBM is running inside an OKE enhanced cluster</td>
+</tr>
+</tbody>
+</table>
+<h2 id="instanceprincipal">instancePrincipal<a class="headerlink" href="#instanceprincipal" title="Permanent link">¶</a></h2>
+<p>Choose <code>instancePrincipal</code> when PBM runs directly on an OCI Compute instance. PBM automatically obtains OCI credentials from the instance, eliminating the need for credential files or API keys.</p>
+<h3 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h3>
+<p>You need:</p>
+<ul>
+<li>The <a href="https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle" target="_blank">Oracle Cloud Identifier (OCID) <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> of the OCI Compute instance running PBM</li>
+<li>The name of the OCI bucket PBM will use for backups.</li>
+</ul>
+<h3 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">¶</a></h3>
+<p>Follow these steps to set up OCI using <strong><code>instancePrincipal</code>:</strong></p>
 <ol>
-<li>Ensure that the user running the <code>pmm</code> process has sufficient permissions within PBM. You can find detailed instructions in the <a href="https://docs.percona.com/percona-monitoring-and-management/3/install-pmm/install-pmm-client/connect-database/mongodb.html#create-pmm-account-and-set-permissions">PMM documentation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</li>
-<li>Make sure you have specified the user from step 1 in the MongoDB connection URI string for <code>pbm-agent</code> processes.</li>
-<li>Confirm that the system user who runs the <code>pbm-agent</code> process (by default, <code>mongod</code>) has the read / write access to both the MongoDB dbpath and the backup storage location.</li>
-<li>Examine the <code>systemd</code> restart policy for the user mentioned in step 4. Ensure it is not set to <code>always</code> or <code>on-success</code>. During physical restores, the database must not be automatically restarted as this is controlled by the <code>pbm-agent</code>.</li>
+<li>
+<p><strong>Create a dynamic group for the instance</strong></p>
+<p>OCI IAM policies cannot target individual instances directly. You must first add the instance to a dynamic group, then write a policy against that group.</p>
+<div class="highlight"><pre><span></span><code>oci<span class="w"> </span>iam<span class="w"> </span>dynamic-group<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--name<span class="w"> </span><span class="s2">"</span><span class="nv">$INSTANCE_DYNAMIC_GROUP_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--description<span class="w"> </span><span class="s2">"PBM VM instance principal"</span><span class="w"> </span><span class="se">\</span>
+--matching-rule<span class="w"> </span><span class="s2">"ANY {instance.id = '</span><span class="nv">$INSTANCE_OCID</span><span class="s2">'}"</span>
+</code></pre></div>
+<p>Replace the following variables:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HOME_REGION</code></td>
+<td>Your tenancy’s home region (e.g. <code>us-ashburn-1</code>)</td>
+</tr>
+<tr>
+<td><code>TENANCY_OCID</code></td>
+<td>OCID of your OCI tenancy</td>
+</tr>
+<tr>
+<td><code>INSTANCE_DYNAMIC_GROUP_NAME</code></td>
+<td>A name for the dynamic group (e.g. <code>pbm-vm-group</code>)</td>
+</tr>
+<tr>
+<td><code>INSTANCE_OCID</code></td>
+<td>OCID of the Compute instance running PBM</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Create an IAM policy</strong></p>
+<p>Grant the dynamic group permission to manage objects in the target bucket:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">INSTANCE_POLICY_STATEMENT</span><span class="o">=</span><span class="s2">"Allow dynamic-group </span><span class="nv">$INSTANCE_DYNAMIC_GROUP_NAME</span><span class="s2"> \</span>
+<span class="s2">to manage objects in compartment </span><span class="nv">$COMPARTMENT_NAME</span><span class="s2"> \</span>
+<span class="s2">where target.bucket.name = '</span><span class="nv">$BUCKET_NAME</span><span class="s2">'"</span>
+
+oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+--region<span class="w"> </span><span class="s2">"</span><span class="nv">$HOME_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--compartment-id<span class="w"> </span><span class="s2">"</span><span class="nv">$TENANCY_OCID</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--name<span class="w"> </span><span class="s2">"</span><span class="nv">$INSTANCE_POLICY_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--description<span class="w"> </span><span class="s2">"Allow PBM VM instance principal to access </span><span class="nv">$BUCKET_NAME</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+--statements<span class="w"> </span><span class="s2">"[\"</span><span class="nv">$INSTANCE_POLICY_STATEMENT</span><span class="s2">\"]"</span>
+</code></pre></div>
+<p>Replace the following additional variables:</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>COMPARTMENT_NAME</code></td>
+<td>Name of the compartment containing the bucket</td>
+</tr>
+<tr>
+<td><code>BUCKET_NAME</code></td>
+<td>Name of the OCI Object Storage bucket</td>
+</tr>
+<tr>
+<td><code>INSTANCE_POLICY_NAME</code></td>
+<td>A name for the policy (e.g. <code>pbm-vm-policy</code>)</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Configure PBM authentication</strong></p>
+<p>In your PBM configuration, set the storage type to <code>oci</code> and the credentials type to <code>instancePrincipal</code>. No key file or passphrase is needed.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oci</span>
+<span class="w">  </span><span class="nt">oci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bucket_region&gt;</span>
+<span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;namespace&gt;</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bucket_name&gt;</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;path_prefix&gt;</span>
+<span class="w">    </span><span class="nt">credentials</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">instancePrincipal</span>
+</code></pre></div>
+</li>
 </ol>
+<h2 id="okeworkloadidentity">okeWorkloadIdentity<a class="headerlink" href="#okeworkloadidentity" title="Permanent link">¶</a></h2>
+<p>Choose <code>okeWorkloadIdentity</code> when PBM runs as a workload in an Oracle Kubernetes Engine (OKE) enhanced cluster. The Kubernetes service account token is exchanged for OCI credentials automatically by the OKE Workload Identity service.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your OKE cluster must be an <strong>enhanced cluster</strong> with Workload Identity enabled. Basic clusters do not support this feature.</p>
+</div>
+<p>In your PBM configuration, set the storage type to <code>oci</code> and the credentials type to <code>okeWorkloadIdentity</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oci</span>
+<span class="w">  </span><span class="nt">oci</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bucket_region&gt;</span>
+<span class="w">    </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;namespace&gt;</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bucket_name&gt;</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;path_prefix&gt;</span>
+<span class="w">    </span><span class="nt">credentials</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">okeWorkloadIdentity</span>
+</code></pre></div>
+<p>For setup instructions, see <a href="https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contenggrantingworkloadaccesstoresources.htm" target="_blank">Configure OKE Workload Identity for workloads <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 10, 2026 13:40:38 UTC">June 10, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 16, 2026 08:43:05 UTC">June 16, 2026</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 17, 2024 12:43:19 UTC">June 17, 2024</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 12, 2026 09:25:52 UTC">June 12, 2026</span>
       
     
   </small>
