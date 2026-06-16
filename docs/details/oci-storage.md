@@ -10,7 +10,7 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
 | `instancePrincipal` | PBM runs on an OCI Compute instance (see [instancePrincipal](oci-wif.md/#instanceprincipal)) |
 | `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster (see [Workload Identity authentication](oci-wif.md)) |
 
-For identity based authentication methods, see the sections ([instancePrincipal](oci-wif.md/#instanceprincipal) and [okeWorkloadIdentity](oci-wif.md#okeworkloadidentity)).
+For information on identity-based authentication methods, refer to the sections on [Instance Principal](oci-wif.md/#instanceprincipal) and [OKE Workload Identity](oci-wif.md#okeworkloadidentity).
 
 ## Prerequisites
 
@@ -160,23 +160,9 @@ PBM must be able to create, read, overwrite, and delete backup objects.
 
 Two policies are required:
 
-**User access policy** — grants your OCI user group permission 
-to manage objects in the PBM compartment. Replace 
-`<OCI_GROUP_NAME>` with the name of the group containing 
-your PBM user:
+**User access policy** — grants your OCI user group permission
 
-```sh
-oci iam policy create \
-  --region "$HOME_REGION" \
-  --compartment-id "$TENANCY_OCID" \
-  --name pbm-user-access \
-  --description "Allow PBM user group to manage backup objects" \
-  --statements "[\"Allow group <OCI_GROUP_NAME> to manage object-family in compartment $COMPARTMENT_NAME\"]"
-```
-
-**Native copy policy** — grants the OCI Object Storage service 
-permission to copy objects internally. PBM requires this for 
-server-side copy operations:
+**Native copy policy** — grants the OCI Object Storage service permission to copy objects internally. PBM requires this for server-side copy operations:
 
 ```sh
 oci iam policy create \
