@@ -16159,10 +16159,11 @@ Available starting with version 2.7.0.</p>
 </ul>
 <h3 id="reference-restore-options-restorenumparallelfiles">restore.numParallelFiles<a class="headerlink" href="#reference-restore-options-restorenumparallelfiles" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
+<em>Default</em>: 0
 <em>Storage</em>: Filesystem / NFS only <br>
 <em>Restore type:</em> Physical only</p>
 <p>The number of files to copy in parallel during a physical restore from filesystem or NFS storage.</p>
-<p>This is typically set to 1 (sequential restore).</p>
+<p>The default value is <code>0</code>, which performs a sequential restore. This is equivalent to setting the value to <code>1</code>.</p>
 <h3 id="reference-restore-options-restoreindexcommitquorum">restore.indexCommitQuorum<a class="headerlink" href="#reference-restore-options-restoreindexcommitquorum" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string or int <br>
 <em>Default</em>: <code>votingMembers</code></p>
