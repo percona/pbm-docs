@@ -376,11 +376,7 @@ PBM supports OCI Object Storage server-side encryption using either OCI Key Mana
 
 Use OCI KMS encryption when you want OCI to manage encryption and key lifecycle through OCI Vault and Key Management.
 
-#### Optional: Configure SSE With KMS
-
-Use this when testing `PBM OCI serverSideEncryption.kmsKeyID` with `userPrincipal` authentication. Create an OCI Vault key in the same region as the Object Storage bucket, then allow both the PBM user principal and the regional Object Storage service to use the key.
-
-##### Create a KMS key
+#### Create a KMS key
 
 In the OCI Console, navigate to:
 
@@ -411,7 +407,7 @@ If your tenancy uses identity domains, specify the group name in identity-domain
 export OCI_GROUP_NAME="'Default'/'<your-oci-group-name>'"
 ```
 
-##### Create IAM policies for KMS access
+#### Create IAM policies for KMS access
 
 Create a policy that allows both the PBM user group and the regional Object Storage service to use the KMS key.
 
@@ -435,9 +431,9 @@ oci iam policy create \
 
     Without the Object Storage service policy, PBM uploads fail with `NotAuthorizedOrFoundKmsKey` during `CreateMultipartUpload` operations.
 
-##### Configure PBM
+#### Configure PBM
 
-Add the following configuration to the OCI storage configuration:
+Add the following to the OCI storage configuration:
 
 ```yaml
 serverSideEncryption:
@@ -445,15 +441,11 @@ serverSideEncryption:
 ```
 
 !!! warning
-    Do not configure `sseCustomerKey` together with `kmsKeyID`.
-
-    PBM treats OCI KMS encryption and SSE-C as mutually exclusive options.
+    Do not configure `sseCustomerKey` together with `kmsKeyID`. PBM treats OCI KMS encryption and SSE-C as mutually exclusive options.
 
 ### SSE-C (Customer-Provided Encryption Keys)
 
-Use Server-Side Encryption with Customer-Provided Keys (SSE-C) when you want full control of the encryption key material used to encrypt backup objects.
-
-PBM sends the encryption key with every Object Storage request. OCI uses the supplied key to encrypt and decrypt objects but does not persist the key.
+Use SSE-C when you want full control of the encryption key material used to encrypt backup objects. PBM sends the encryption key with every Object Storage request. OCI uses the supplied key to encrypt and decrypt objects but does not persist the key.
 
 #### Generate an SSE-C key
 
@@ -486,9 +478,7 @@ oci os object head \
   --name "<object-name>"
 ```
 
-The response should indicate that the object uses customer-supplied encryption keys.
+The response indicates that the object uses customer-supplied encryption keys.
 
 !!! warning
-    OCI does not retain SSE-C keys.
-
-    If the key is lost, encrypted backup objects cannot be decrypted or restored.
+    OCI does not retain SSE-C keys. If the key is lost, encrypted backup objects cannot be decrypted or restored.
