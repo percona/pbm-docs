@@ -367,3 +367,128 @@ pbm list
 
         PITR <off>:
     ```
+
+## Server-side encryption
+
+PBM supports OCI Object Storage server-side encryption using either OCI Key Management Service (KMS) keys or customer-provided encryption keys (SSE-C). These methods are mutually exclusive. Configure only one encryption mode at a time.
+
+### SSE with OCI KMS
+
+Use OCI KMS encryption when you want OCI to manage encryption and key lifecycle through OCI Vault and Key Management.
+
+#### Optional: Configure SSE With KMS
+
+Use this when testing `PBM OCI serverSideEncryption.kmsKeyID` with `userPrincipal` authentication. Create an OCI Vault key in the same region as the Object Storage bucket, then allow both the PBM user principal and the regional Object Storage service to use the key.
+
+##### Create a KMS key
+
+In the OCI Console, navigate to:
+
+**Identity & Security → Key Management & Secret Management → Vault**
+
+Open an existing vault or create a new vault in `$BUCKET_REGION`, then select:
+
+**Master Encryption Keys → Create Key**
+
+Configure the key with the following settings:
+
+- Algorithm: AES
+- Key length: 256 bits
+
+Copy the generated key OCID.
+
+Export the key OCID and OCI IAM group name:
+
+```sh
+export KMS_KEY_OCID="ocid1.key.oc1.eu-frankfurt-1.envbichxaaexg.abtheljs4mzstpe57rdbzhcgy3b2hhbteddpwktrhhtpmsorbm4retjoh33a"
+export OCI_GROUP_NAME="Administrators"
+export KMS_POLICY_NAME="pbm-oci-kms-$BUCKET_REGION"
+```
+
+If your tenancy uses identity domains, specify the group name in identity-domain-qualified format:
+
+```sh
+export OCI_GROUP_NAME="'Default'/'<your-oci-group-name>'"
+```
+
+##### Create IAM policies for KMS access
+
+Create a policy that allows both the PBM user group and the regional Object Storage service to use the KMS key.
+
+The object access statement is only required if the OCI group does not already have Object Storage permissions in the target compartment.
+
+```sh
+export KMS_OBJECT_POLICY_STATEMENT="Allow group $OCI_GROUP_NAME to manage object-family in compartment $COMPARTMENT_NAME"
+export KMS_USER_POLICY_STATEMENT="Allow group $OCI_GROUP_NAME to use keys in compartment $COMPARTMENT_NAME"
+export KMS_OBJECTSTORAGE_POLICY_STATEMENT="Allow service objectstorage-$BUCKET_REGION to use keys in compartment $COMPARTMENT_NAME"
+
+oci iam policy create \
+  --region "$HOME_REGION" \
+  --compartment-id "$TENANCY_OCID" \
+  --name "$KMS_POLICY_NAME" \
+  --description "Allow PBM user principal and Object Storage to use KMS keys in $BUCKET_REGION" \
+  --statements "[\"$KMS_OBJECT_POLICY_STATEMENT\",\"$KMS_USER_POLICY_STATEMENT\",\"$KMS_OBJECTSTORAGE_POLICY_STATEMENT\"]"
+```
+
+!!! note
+    Wait 1–2 minutes for OCI IAM policy propagation before applying the PBM configuration.
+
+    Without the Object Storage service policy, PBM uploads fail with `NotAuthorizedOrFoundKmsKey` during `CreateMultipartUpload` operations.
+
+##### Configure PBM
+
+Add the following configuration to the OCI storage configuration:
+
+```yaml
+serverSideEncryption:
+  kmsKeyID: <KMS_KEY_OCID>
+```
+
+!!! warning
+    Do not configure `sseCustomerKey` together with `kmsKeyID`.
+
+    PBM treats OCI KMS encryption and SSE-C as mutually exclusive options.
+
+### SSE-C (Customer-Provided Encryption Keys)
+
+Use Server-Side Encryption with Customer-Provided Keys (SSE-C) when you want full control of the encryption key material used to encrypt backup objects.
+
+PBM sends the encryption key with every Object Storage request. OCI uses the supplied key to encrypt and decrypt objects but does not persist the key.
+
+#### Generate an SSE-C key
+
+Generate a 256-bit AES key and encode it in Base64:
+
+```sh
+openssl rand 32 | base64
+```
+
+Store the generated value securely. PBM requires the same key for all future backup, restore, and object access operations.
+
+#### Configure PBM
+
+Add the customer-provided key to the storage configuration:
+
+```yaml
+serverSideEncryption:
+  sseCustomerKey: <BASE64_ENCODED_AES256_KEY>
+```
+
+#### Verify encryption
+
+After a successful backup, verify that uploaded objects are encrypted with SSE-C:
+
+```sh
+oci os object head \
+  --region "$BUCKET_REGION" \
+  --namespace-name "$NAMESPACE" \
+  --bucket-name "$BUCKET_NAME" \
+  --name "<object-name>"
+```
+
+The response should indicate that the object uses customer-supplied encryption keys.
+
+!!! warning
+    OCI does not retain SSE-C keys.
+
+    If the key is lost, encrypted backup objects cannot be decrypted or restored.
