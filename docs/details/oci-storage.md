@@ -17,14 +17,10 @@ For identity based authentication methods, see the sections ([instancePrincipal]
 Before configuring PBM, ensure that you have:
 
 - An active OCI tenancy with at least one subscribed region
-- The OCI CLI installed and configured (`oci setup config`). 
+- The OCI CLI installed and configured (oci setup config) if you intend to use command-line tools. You can also complete the configuration using the OCI Console.
   See the [OCI CLI documentation](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm) 
   for installation instructions
-- An OCI user with permission to create compartments, buckets, 
-  dynamic groups, and IAM policies in your tenancy
-- An OCI API signing key pair: private key on the host running 
-  PBM, public key uploaded to the OCI user
-
+- An OCI user with permission to create compartments, buckets, dynamic groups, and IAM policies in your tenancy
 
 Initialize the OCI CLI configuration if you have not done so already:
 
@@ -73,7 +69,7 @@ section. All subsequent commands reference them.
 ```sh
 export HOME_REGION=<your-home-region>     # e.g. us-ashburn-1
 export BUCKET_REGION=<your-bucket-region> # e.g. eu-frankfurt-1
-export COMPARTMENT_NAME=pbm-backup
+export COMPARTMENT_NAME=<your-compartment-name>
 export BUCKET_NAME=<your-bucket-name>
 ```
 Retrieve and export the values PBM requires:
@@ -107,6 +103,9 @@ echo "NAMESPACE:    $NAMESPACE"
 Verify all five values are populated before continuing. An empty value means the OCI CLI is not authenticated or the variable was not set correctly.
 
 ## Create a compartment
+
+!!! tip "Important"
+    While OCI resources always require a compartment, creating a dedicated one for PBM backup resources is optional. You can use the root compartment. However, Percona recommends using a separate compartment for PBM resources to improve organization and simplify IAM policy management.
 
 Create a compartment for PBM backup resources:
 
