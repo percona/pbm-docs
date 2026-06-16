@@ -6,6 +6,7 @@ restore:
   numInsertionWorkers: <int>
   numParallelCollections: <int>
   numDownloadWorkers: <int>
+  numParallelFiles: <int>
   maxDownloadBufferMb: <int>
   downloadChunkMb: <int>
   mongodLocation: <string>
@@ -101,6 +102,16 @@ This is useful when you want to:
 - Enforce time limits in automated workflows
 - Fail fast if the balancer cannot be stopped
 
+
+### restore.numParallelFiles
+
+*Type*: int <br>
+*Storage*: Filesystem / NFS only <br>
+*Restore type:* Physical only
+
+The number of files to copy in parallel during a physical restore from filesystem or NFS storage.
+
+This is typically set to 1 (sequential restore).
 ### restore.indexCommitQuorum
 
 *Type*: string or int <br>
