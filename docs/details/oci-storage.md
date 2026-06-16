@@ -159,11 +159,9 @@ oci os bucket get \
 
 PBM must be able to create, read, overwrite, and delete backup objects.
 
-Two policies are required:
+Ensure your OCI user (or the group it belongs to) has permissions to manage objects in the target bucket/compartment.
 
-**User access policy** — grants your OCI user group permission
-
-**Native copy policy** — grants the OCI Object Storage service permission to copy objects internally. PBM requires this for server-side copy operations:
+Additionally, PBM requires a native copy policy that grants the OCI Object Storage service permission to copy objects internally (for server-side copy operations):
 
 ```sh
 oci iam policy create \
