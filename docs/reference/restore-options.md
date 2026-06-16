@@ -102,16 +102,17 @@ This is useful when you want to:
 - Enforce time limits in automated workflows
 - Fail fast if the balancer cannot be stopped
 
-
 ### restore.numParallelFiles
 
 *Type*: int <br>
+*Default*: 0
 *Storage*: Filesystem / NFS only <br>
 *Restore type:* Physical only
 
 The number of files to copy in parallel during a physical restore from filesystem or NFS storage.
 
-This is typically set to 1 (sequential restore).
+The default value is `0`, which performs a sequential restore. This is equivalent to setting the value to `1`.
+
 ### restore.indexCommitQuorum
 
 *Type*: string or int <br>
