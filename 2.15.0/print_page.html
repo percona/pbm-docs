@@ -15360,7 +15360,68 @@ Available starting with version 2.7.0.</p>
 <li>Prevent restore operations from waiting indefinitely</li>
 <li>Enforce time limits in automated workflows</li>
 <li>Fail fast if the balancer cannot be stopped</li>
-</ul></body></html></section><section class="print-page" id="reference-logging-options" heading-number="8.6"><html><head>
+</ul>
+<h3 id="reference-restore-options-restoreindexcommitquorum">restore.indexCommitQuorum<a class="headerlink" href="#reference-restore-options-restoreindexcommitquorum" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: string or int <br>
+<em>Default</em>: <code>votingMembers</code></p>
+<p>Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a <strong>logical restore</strong> operation.</p>
+<p>By default, Percona Backup for MongoDB waits for all voting members (<code>votingMembers</code>) to complete index building. In large replica sets, this can introduce significant delays if some nodes build indexes slower than others, blocking the entire restore process.</p>
+<p>Following MongoDB index build commit quorum semantics, you can optimize restore performance by setting this option to a lower quorum threshold.</p>
+<p>The following values are supported:</p>
+<p><code>votingMembers</code> (Default): The primary waits for all data-bearing voting members to complete the index build.</p>
+<p><code>majority</code>: The primary commits the index as soon as a simple majority of data-bearing voting members have completed the build. This is recommended for large replica sets to prevent lagging nodes from delaying the restore process.</p>
+<p><code>&lt;int&gt;</code>: A specific number of data-bearing voting members (e.g., 3) that must complete the index build. The integer value must be between 1 and the number of data-bearing voting members. A value of 1 means the primary commits immediately after it finishes.</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>restore.indexCommitQuorum<span class="o">=</span>majority
+</code></pre></div>
+<details class="example">
+<summary>Example</summary>
+<ol>
+<li>
+<p>Run the following command:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>restore.indexCommitQuorum<span class="o">=</span>majority
+</code></pre></div>
+</li>
+<li>
+<p>Confirm the value was set:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>restore.indexCommitQuorum<span class="o">=</span>
+majority
+<span class="o">[</span>restore.indexCommitQuorum<span class="o">=</span>majority<span class="o">]</span>
+</code></pre></div>
+</li>
+<li>
+<p>Confirm <code>indexCommitQuorum</code> appears in the PBM config with the following command:</p>
+<div class="highlight"><pre><span></span><code>$ pbm config
+storage:
+  type: s3
+  s3:
+    region: us-east-1
+    endpointUrl: http://minio:9000
+    forcePathStyle: true
+    bucket: bcp
+    prefix: pbme2etest
+    credentials:
+      access-key-id: '***'
+      secret-access-key: '***'
+    maxUploadParts: 10000
+    storageClass: STANDARD
+    insecureSkipTLSVerify: false
+pitr:
+  enabled: false
+  compression: s2
+backup:
+  oplogSpanMin: 0
+  compression: s2
+restore:
+  indexCommitQuorum: majority
+</code></pre></div>
+</li>
+<li>
+<p>Start the restore and wait for it to complete:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span>-w<span class="w"> </span><span class="m">2026</span>-05-12T13:28:07Z
+</code></pre></div>
+</li>
+</ol>
+</details></body></html></section><section class="print-page" id="reference-logging-options" heading-number="8.6"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
