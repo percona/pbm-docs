@@ -765,6 +765,20 @@ The fingerprint of the uploaded OCI API signing public key.
 
 The private key in PEM format that pairs with the uploaded OCI API signing public key.
 
+### storage.oci.serverSideEncryption.kmsKeyID
+
+*Type*: string <br>
+*Required*: NO
+
+OCI KMS key OCID to enable server-side encryption with OCI KMS.
+
+### storage.oci.serverSideEncryption.sseCustomerKey
+
+*Type*: string <br>
+*Required*: NO
+
+Base64-encoded 256-bit key for SSE-C encryption. Do not set this together with `storage.oci.serverSideEncryption.kmsKeyID`.
+
 ## Alibaba Cloud OSS storage options
 
 ```yaml

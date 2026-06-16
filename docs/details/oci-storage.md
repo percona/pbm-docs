@@ -7,10 +7,10 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
 | **Authentication type** | **Use when** |
 | --- | --- |
 | `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
-| `instancePrincipal` | PBM runs on an OCI Compute instance (see [instancePrincipal](oci-wif.md/#instanceprincipal)) |
+| `instancePrincipal` | PBM runs on an OCI Compute instance (see [instancePrincipal](oci-wif.md#instanceprincipal)) |
 | `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster (see [Workload Identity authentication](oci-wif.md)) |
 
-For information on identity-based authentication methods, refer to the sections on [Instance Principal](oci-wif.md/#instanceprincipal) and [OKE Workload Identity](oci-wif.md#okeworkloadidentity).
+For identity-based authentication methods, see the sections ([instancePrincipal](oci-wif.md#instanceprincipal) and [okeWorkloadIdentity](oci-wif.md#okeworkloadidentity)).
 
 ## Prerequisites
 
@@ -335,7 +335,7 @@ Copy the generated key OCID.
 Export the key OCID and OCI IAM group name:
 
 ```sh
-export KMS_KEY_OCID="ocid1.key.oc1.eu-frankfurt-1.envbichxaaexg.abtheljs4mzstpe57rdbzhcgy3b2hhbteddpwktrhhtpmsorbm4retjoh33a"
+export KMS_KEY_OCID="<KMS_KEY_OCID>"
 export OCI_GROUP_NAME="Administrators"
 export KMS_POLICY_NAME="pbm-oci-kms-$BUCKET_REGION"
 ```
