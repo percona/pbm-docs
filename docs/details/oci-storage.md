@@ -103,7 +103,7 @@ echo "NAMESPACE:    $NAMESPACE"
 ```
 Verify all five values are populated before continuing. An empty value means the OCI CLI is not authenticated or the variable was not set correctly.
 
-## Create a compartment
+### Create a compartment
 
 !!! tip "Important"
     While OCI resources always require a compartment, creating a dedicated one for PBM backup resources is optional. You can use the root compartment. However, Percona recommends using a separate compartment for PBM resources to improve organization and simplify IAM policy management.
