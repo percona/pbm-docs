@@ -7,7 +7,7 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
 | **Authentication type** | **Use when** |
 | --- | --- |
 | `userPrincipal` | PBM runs anywhere; authenticates with OCI API signing keys |
-| `instancePrincipal` | PBM runs on an OCI Compute instance |
+| `instancePrincipal` | PBM runs on an OCI Compute instance (see [instancePrincipal](oci-wif.md/#instanceprincipal)) |
 | `okeWorkloadIdentity` | PBM runs inside an OKE enhanced cluster (see [Workload Identity authentication](oci-wif.md)) |
 
 
@@ -241,53 +241,6 @@ storage:
     ```sh
     sed 's/^/          /' "$KEY_FILE"
     ```
-
-### instancePrincipal
-
-Use this when PBM runs on an OCI Compute instance. No API 
-keys are required in the configuration file.
-
-1. Create a dynamic group that includes the compute instance:
-
-    ```sh
-    oci iam dynamic-group create \
-        --region "$HOME_REGION" \
-        --compartment-id "$TENANCY_OCID" \
-        --name pbm-instance-group \
-        --description "PBM Compute instance principal" \
-        --matching-rule "ANY {instance.id = '<INSTANCE_OCID>'}"
-    ```
-
-2. Create a policy granting the dynamic group access to the bucket:
-
-    ```sh
-    oci iam policy create \
-        --region "$HOME_REGION" \
-        --compartment-id "$TENANCY_OCID" \
-        --name pbm-instance-policy \
-        --description "Allow PBM instance to access backup bucket" \
-        --statements "[\"Allow dynamic-group pbm-instance-group to manage objects \
-        in compartment pbm-backup where target.bucket.name = '<BUCKET_NAME>'\"]"
-    ```
-
-3. Configure PBM:
-
-    ```yaml
-    storage:
-      type: oci
-      oci:
-        region: <BUCKET_REGION>
-        namespace: <NAMESPACE>
-        bucket: <BUCKET_NAME>
-        prefix: pbm
-        credentials:
-          type: instancePrincipal
-    ```
-
-    Wait for a few minutes for IAM policy propagation before testing the configuration.
-
-    !!! note
-        IAM changes for dynamic groups can take 5 to 10 minutes to propagate. The native copy policy from the previous section is still required alongside the instance principal policy.
 
 ## Apply the PBM configuration
 
