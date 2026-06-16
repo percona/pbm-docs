@@ -1,7 +1,7 @@
 # {{pbm.full_name}} release notes
 * [{{pbm.full_name}} 2.15.0](release-notes/2.15.0.md)
+* [{{pbm.full_name}} 2.14.0](release-notes/2.14.0.md)
 * [{{pbm.full_name}} 2.13.0](release-notes/2.13.0.md)
-* [{{pbm.full_name}} 2.12.0](release-notes/2.12.0.md)
 * [{{pbm.full_name}} 2.11.0](release-notes/2.11.0.md)
 * [{{pbm.full_name}} 2.10.0](release-notes/2.10.0.md)
 * [{{pbm.full_name}} 2.9.1](release-notes/2.9.1.md)
