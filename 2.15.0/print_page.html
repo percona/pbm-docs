@@ -5559,6 +5559,8 @@
       
         
       
+        
+      
     
     
     
@@ -5614,6 +5616,34 @@
     
   
     About Percona Backup for MongoDB documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/sboms-pbm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Software Bill of Materials
   
 
     
@@ -7932,6 +7962,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     <span class="md-ellipsis">
       
         About Percona Backup for MongoDB documentation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reference-sboms-pbm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Software Bill of Materials
       
     </span>
   </a>
@@ -19548,7 +19589,122 @@ to ensure consistency of the data being restored.</p>
 <h2 id="about-docs-report-an-issue-or-request-a-change">Report an issue or request a change<a class="headerlink" href="#about-docs-report-an-issue-or-request-a-change" title="Permanent link">¶</a></h2>
 <p>To report an issue with the documentation, leave your feedback using the widget at the bottom of the page or open a ticket in <a href="https://perconadev.atlassian.net/jira/software/c/projects/PBM/issues">Percona Backup for MongoDB Jira project <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <h2 id="about-docs-how-to-contribute">How to contribute<a class="headerlink" href="#about-docs-how-to-contribute" title="Permanent link">¶</a></h2>
-<p>Thank you for willing to contribute to Percona Backup for MongoDB project. Please check the <a href="#reference-contributing.md">Contribution guidelines</a> for  instructions.</p></body></html></section><section class="print-page" id="reference-glossary" heading-number="14.2"><html><head>
+<p>Thank you for willing to contribute to Percona Backup for MongoDB project. Please check the <a href="#reference-contributing.md">Contribution guidelines</a> for  instructions.</p></body></html></section><section class="print-page" id="reference-sboms-pbm" heading-number="14.2"><html><head>
+        <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
+        })
+        </script>
+        </head><body><h1 id="software-bill-of-materials">Software Bill of Materials<a class="headerlink" href="#reference-sboms-pbm-software-bill-of-materials" title="Permanent link">¶</a></h1>
+<p>A Software Bill of Materials (SBOM) is a machine-readable inventory of the components and dependencies included in a software release. It helps you understand what is included in a build and assess potential security or compliance risks.</p>
+<p>Starting with version 2.15.0, every Percona Backup for MongoDB (PBM) release includes a <a href="https://cyclonedx.org/specification/overview/" target="_blank">CycloneDX 1.6 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> SBOM in JSON format.</p>
+<h2 id="reference-sboms-pbm-why-it-matters">Why it matters<a class="headerlink" href="#reference-sboms-pbm-why-it-matters" title="Permanent link">¶</a></h2>
+<p>An SBOM helps you:</p>
+<ul>
+<li>Identify the components and dependencies included in a PBM release.</li>
+<li>Assess known vulnerabilities using SBOM-compatible security scanners.</li>
+<li>Support security reviews, compliance processes, and software supply chain requirements.</li>
+<li>Verify the contents of deployed software artifacts.</li>
+</ul>
+<h2 id="reference-sboms-pbm-where-to-find-the-sbom">Where to find the SBOM<a class="headerlink" href="#reference-sboms-pbm-where-to-find-the-sbom" title="Permanent link">¶</a></h2>
+<table>
+<thead>
+<tr>
+<th>Distribution method</th>
+<th>SBOM location</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binary tarball</td>
+<td><code>percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+</tr>
+<tr>
+<td>RPM package</td>
+<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+</tr>
+<tr>
+<td>DEB package</td>
+<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+</tr>
+<tr>
+<td>Docker image</td>
+<td>Embedded in the image and available as an attached OCI artifact. See <a href="#reference-sboms-pbm-docker-images">Docker images</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="reference-sboms-pbm-verifying-and-scanning-the-sbom">Verifying and scanning the SBOM<a class="headerlink" href="#reference-sboms-pbm-verifying-and-scanning-the-sbom" title="Permanent link">¶</a></h2>
+<p>The examples below use <a href="https://trivy.dev/" target="_blank">Trivy <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. You can also use other CycloneDX-compatible scanners, such as <a href="https://github.com/anchore/grype" target="_blank">Grype <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> or Snyk.</p>
+<h3 id="reference-sboms-pbm-binary-tarball">Binary tarball<a class="headerlink" href="#reference-sboms-pbm-binary-tarball" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Confirm the SBOM is bundled</span>
+tar<span class="w"> </span>tzf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
+
+<span class="c1"># Extract and scan</span>
+tar<span class="w"> </span>xzf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-C<span class="w"> </span>/tmp<span class="w"> </span>percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json
+trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/tmp/percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json
+</code></pre></div>
+<h3 id="reference-sboms-pbm-rpm-package">RPM package<a class="headerlink" href="#reference-sboms-pbm-rpm-package" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Confirm the package installs the SBOM</span>
+rpm<span class="w"> </span>-ql<span class="w"> </span>percona-backup-mongodb<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
+
+<span class="c1"># Scan it (replace 9.x with your RHEL/OL version)</span>
+trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>--distro<span class="w"> </span>redhat/9.x<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json
+</code></pre></div>
+<h3 id="reference-sboms-pbm-deb-package">DEB package<a class="headerlink" href="#reference-sboms-pbm-deb-package" title="Permanent link">¶</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Confirm the package installs the SBOM</span>
+dpkg<span class="w"> </span>-L<span class="w"> </span>percona-backup-mongodb<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
+
+<span class="c1"># Scan it</span>
+trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json
+</code></pre></div>
+<h3 id="reference-sboms-pbm-docker-images">Docker images<a class="headerlink" href="#reference-sboms-pbm-docker-images" title="Permanent link">¶</a></h3>
+<p>Each PBM Docker image (Docker Hub <code>percona/percona-backup-mongodb</code>, PerconaLab <code>perconalab/percona-backup-mongodb</code>) ships with <strong>two</strong> CycloneDX 1.6 SBOMs that describe overlapping scopes:</p>
+<table>
+<thead>
+<tr>
+<th>SBOM</th>
+<th>Scope</th>
+<th>How to access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Embedded</strong></td>
+<td>PBM binary and Go modules only</td>
+<td>Inside the image filesystem</td>
+</tr>
+<tr>
+<td><strong>OCI-attached</strong></td>
+<td>Full image — PBM and UBI9 base OS packages</td>
+<td>Registry-side, via the OCI Referrers API</td>
+</tr>
+</tbody>
+</table>
+<h4 id="reference-sboms-pbm-scan-via-oci-referrers-api-recommended">Scan via OCI Referrers API (recommended)<a class="headerlink" href="#reference-sboms-pbm-scan-via-oci-referrers-api-recommended" title="Permanent link">¶</a></h4>
+<p><code>trivy image --sbom-sources oci</code> fetches the attached SBOM via the OCI Referrers API and scans it, without pulling the image:</p>
+<div class="highlight"><pre><span></span><code>trivy<span class="w"> </span>image<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>--sbom-sources<span class="w"> </span>oci<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0
+</code></pre></div>
+<h4 id="reference-sboms-pbm-scan-the-embedded-sbom">Scan the embedded SBOM<a class="headerlink" href="#reference-sboms-pbm-scan-the-embedded-sbom" title="Permanent link">¶</a></h4>
+<p>To scan the embedded SBOM from inside the container image:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--entrypoint<span class="w"> </span>cat<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>-
+</code></pre></div>
+<h4 id="reference-sboms-pbm-advanced-inspect-oci-attached-sboms-with-oras">Advanced: Inspect OCI-attached SBOMs with ORAS<a class="headerlink" href="#reference-sboms-pbm-advanced-inspect-oci-attached-sboms-with-oras" title="Permanent link">¶</a></h4>
+<p>You can use the <a href="https://oras.land/" target="_blank">ORAS CLI <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> to discover and download OCI-attached SBOMs.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use the per-architecture tag to resolve directly to the image manifest</span>
+oras<span class="w"> </span>discover<span class="w"> </span>--format<span class="w"> </span>tree<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0-amd64
+
+<span class="c1"># Pull the SBOM artifact using the digest from the discover output</span>
+oras<span class="w"> </span>pull<span class="w"> </span>docker.io/percona/percona-backup-mongodb@sha256:&lt;referrer-digest&gt;
+</code></pre></div></body></html></section><section class="print-page" id="reference-glossary" heading-number="14.3"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19624,7 +19780,7 @@ to ensure consistency of the data being restored.</p>
 <h2 id="reference-glossary-technical-preview-feature">Technical preview feature<a class="headerlink" href="#reference-glossary-technical-preview-feature" title="Permanent link">¶</a></h2>
 <p>Technical preview features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA. </p>
 <h2 id="reference-glossary-virtual-hosted-style-access">Virtual-hosted-style access<a class="headerlink" href="#reference-glossary-virtual-hosted-style-access" title="Permanent link">¶</a></h2>
-<p>A method of constructing S3 URLs where the bucket name is part of the domain name. The URL format is <code>&lt;https://bucket-name.s3.example.com/object-key&gt;</code>. Required by AWS S3 in newer regions; enables better routing and performance in large-scale deployments.</p></body></html></section><section class="print-page" id="copyright" heading-number="14.4"><html><head>
+<p>A method of constructing S3 URLs where the bucket name is part of the domain name. The URL format is <code>&lt;https://bucket-name.s3.example.com/object-key&gt;</code>. Required by AWS S3 in newer regions; enables better routing and performance in large-scale deployments.</p></body></html></section><section class="print-page" id="copyright" heading-number="14.5"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19633,7 +19789,7 @@ to ensure consistency of the data being restored.</p>
         </head><body><h1 id="copyright-and-licensing-information">Copyright and licensing information<a class="headerlink" href="#copyright-copyright-and-licensing-information" title="Permanent link">¶</a></h1>
 <h2 id="copyright-documentation-licensing">Documentation licensing<a class="headerlink" href="#copyright-documentation-licensing" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB documentation is (C)2016-2026 Percona LLC and/or its affiliates
-and is distributed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International Public License</a> license.</p></body></html></section><section class="print-page" id="trademark-policy" heading-number="14.5"><html><head>
+and is distributed under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International Public License</a> license.</p></body></html></section><section class="print-page" id="trademark-policy" heading-number="14.6"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19692,7 +19848,7 @@ However, it is acceptable to omit the word “Percona” for brevity on the seco
 and subsequent uses, where such omission does not cause confusion.</p>
 <p>In the event of doubt as to any of the conditions or exceptions outlined in
 this Trademark Policy, please contact <a href="mailto:trademarks@percona.com">trademarks@percona.com</a> for assistance and
-we will do our very best to be helpful.</p></body></html></section><section class="print-page" id="code_of_conduct" heading-number="14.6"><html><head>
+we will do our very best to be helpful.</p></body></html></section><section class="print-page" id="code_of_conduct" heading-number="14.7"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -20018,13 +20174,15 @@ we will do our very best to be helpful.</p></body></html></section><section clas
 .print-site-enumerate-headings #section-14 > h1:before { content: '14 ' }
 .print-site-enumerate-headings #about-docs > h1:before { content: '14.1 ' }
 
-.print-site-enumerate-headings #reference-glossary > h1:before { content: '14.2 ' }
+.print-site-enumerate-headings #reference-sboms-pbm > h1:before { content: '14.2 ' }
 
-.print-site-enumerate-headings #copyright > h1:before { content: '14.4 ' }
+.print-site-enumerate-headings #reference-glossary > h1:before { content: '14.3 ' }
 
-.print-site-enumerate-headings #trademark-policy > h1:before { content: '14.5 ' }
+.print-site-enumerate-headings #copyright > h1:before { content: '14.5 ' }
 
-.print-site-enumerate-headings #code_of_conduct > h1:before { content: '14.6 ' }
+.print-site-enumerate-headings #trademark-policy > h1:before { content: '14.6 ' }
+
+.print-site-enumerate-headings #code_of_conduct > h1:before { content: '14.7 ' }
 </style>
 <hr>
 <div class="md-source-file">
