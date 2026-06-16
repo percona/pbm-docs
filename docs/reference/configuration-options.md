@@ -7,7 +7,7 @@
 *Type*: string <br>
 *Required*:     YES   
 
-Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`.
+Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`, `oci`, `oss`.
 
 ## AWS S3 storage options
 
@@ -678,6 +678,106 @@ The minimum time to wait before the next retry, specified as a `time.Duration`. 
 *Default*: 60s
 
 The maximum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+## OCI Object Storage options
+
+```yaml
+storage:
+  type: oci
+  oci:
+    region: <string>
+    namespace: <string>
+    bucket: <string>
+    prefix: <string>
+    credentials:
+      type: userPrincipal
+      userPrincipal:
+        tenancy: <string>
+        user: <string>
+        fingerprint: <string>
+        privateKey: |
+          -----BEGIN PRIVATE KEY-----
+          ...
+          -----END PRIVATE KEY-----
+```
+
+### storage.oci.region
+
+*Type*: string <br>
+*Required*: YES
+
+The OCI region where your Object Storage bucket is located.
+
+### storage.oci.namespace
+
+*Type*: string <br>
+*Required*: YES
+
+The Object Storage namespace for your OCI tenancy.
+
+### storage.oci.bucket
+
+*Type*: string <br>
+*Required*: YES
+
+The name of the Object Storage bucket where PBM stores backups.
+
+### storage.oci.prefix
+
+*Type*: string <br>
+*Required*: NO
+
+The path prefix in the bucket. If undefined, backups are stored in the bucket root.
+
+### storage.oci.credentials.type
+
+*Type*: string <br>
+*Required*: NO <br>
+*Default*: `userPrincipal`
+
+Authentication type for OCI access. Supported values: `userPrincipal`, `instancePrincipal`, `okeWorkloadIdentity`.
+
+### storage.oci.credentials.userPrincipal.tenancy
+
+*Type*: string <br>
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The tenancy OCID for OCI API signing key authentication.
+
+### storage.oci.credentials.userPrincipal.user
+
+*Type*: string <br>
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The user OCID for OCI API signing key authentication.
+
+### storage.oci.credentials.userPrincipal.fingerprint
+
+*Type*: string <br>
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The fingerprint of the uploaded OCI API signing public key.
+
+### storage.oci.credentials.userPrincipal.privateKey
+
+*Type*: string <br>
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The private key in PEM format that pairs with the uploaded OCI API signing public key.
+
+### storage.oci.serverSideEncryption.kmsKeyID
+
+*Type*: string <br>
+*Required*: NO
+
+OCI KMS key OCID to enable server-side encryption with OCI KMS.
+
+### storage.oci.serverSideEncryption.sseCustomerKey
+
+*Type*: string <br>
+*Required*: NO
+
+Base64-encoded 256-bit key for SSE-C encryption. Do not set this together with `storage.oci.serverSideEncryption.kmsKeyID`.
 
 ## Alibaba Cloud OSS storage options
 
