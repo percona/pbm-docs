@@ -291,9 +291,9 @@ pbm list
 ??? example "Output"
 
     ```sh
-        $ pbm backup
-        Starting backup "2026-06-12T07:11:31Z".....
-        Backup "2026-06-12T07:11:31Z" saved to remote store (path: "oci://idvufsl0apl6/rasika-bucket/pbm")
+    $ pbm backup
+    Starting backup "2026-06-12T07:11:31Z".....
+    Backup "2026-06-12T07:11:31Z" saved to remote store (path: "oci://<NAMESPACE>/<BUCKET_NAME>/pbm")
     ```
 
     ```sh
