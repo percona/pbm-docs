@@ -4288,6 +4288,8 @@
       
         
       
+        
+      
     
     
     
@@ -4327,6 +4329,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/2.15.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percona Backup for MongoDB 2.15.0 (2026-06-17)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6573,15 +6603,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <tbody>
 <tr>
 <td>Binary tarball</td>
-<td><code>percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+<td><code>percona-backup-mongodb-2.15.0/percona-backup-mongodb-2.15.0.cdx.json</code></td>
 </tr>
 <tr>
 <td>RPM package</td>
-<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json</code></td>
 </tr>
 <tr>
 <td>DEB package</td>
-<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json</code></td>
 </tr>
 <tr>
 <td>Docker image</td>
@@ -6593,13 +6623,13 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>The examples below use <a href="https://trivy.dev/" target="_blank">Trivy <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. You can also use other CycloneDX-compatible scanners, such as <a href="https://github.com/anchore/grype" target="_blank">Grype <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> or Snyk.</p>
 <h3 id="binary-tarball">Binary tarball<a class="headerlink" href="#binary-tarball" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Confirm the SBOM is bundled</span>
-tar<span class="w"> </span>tzf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
+tar<span class="w"> </span>tzf<span class="w"> </span>percona-backup-mongodb-2.15.0-x86_64.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
 
 <span class="c1"># Extract and scan</span>
-tar<span class="w"> </span>xzf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-C<span class="w"> </span>/tmp<span class="w"> </span>percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json
+tar<span class="w"> </span>xzf<span class="w"> </span>percona-backup-mongodb-2.15.0-x86_64.tar.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-C<span class="w"> </span>/tmp<span class="w"> </span>percona-backup-mongodb-2.15.0/percona-backup-mongodb-2.15.0.cdx.json
 trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/tmp/percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json
+<span class="w">    </span>/tmp/percona-backup-mongodb-2.15.0/percona-backup-mongodb-2.15.0.cdx.json
 </code></pre></div>
 <h3 id="rpm-package">RPM package<a class="headerlink" href="#rpm-package" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Confirm the package installs the SBOM</span>
@@ -6607,7 +6637,7 @@ rpm<span class="w"> </span>-ql<span class="w"> </span>percona-backup-mongodb<spa
 
 <span class="c1"># Scan it (replace 9.x with your RHEL/OL version)</span>
 trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>--distro<span class="w"> </span>redhat/9.x<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json
 </code></pre></div>
 <h3 id="deb-package">DEB package<a class="headerlink" href="#deb-package" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Confirm the package installs the SBOM</span>
@@ -6615,7 +6645,7 @@ dpkg<span class="w"> </span>-L<span class="w"> </span>percona-backup-mongodb<spa
 
 <span class="c1"># Scan it</span>
 trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json
 </code></pre></div>
 <h3 id="docker-images">Docker images<a class="headerlink" href="#docker-images" title="Permanent link">¶</a></h3>
 <p>Each PBM Docker image (Docker Hub <code>percona/percona-backup-mongodb</code>, PerconaLab <code>perconalab/percona-backup-mongodb</code>) ships with <strong>two</strong> CycloneDX 1.6 SBOMs that describe overlapping scopes:</p>
@@ -6643,20 +6673,20 @@ trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="
 <h4 id="scan-via-oci-referrers-api-recommended">Scan via OCI Referrers API (recommended)<a class="headerlink" href="#scan-via-oci-referrers-api-recommended" title="Permanent link">¶</a></h4>
 <p><code>trivy image --sbom-sources oci</code> fetches the attached SBOM via the OCI Referrers API and scans it, without pulling the image:</p>
 <div class="highlight"><pre><span></span><code>trivy<span class="w"> </span>image<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>--sbom-sources<span class="w"> </span>oci<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.15.0
 </code></pre></div>
 <h4 id="scan-the-embedded-sbom">Scan the embedded SBOM<a class="headerlink" href="#scan-the-embedded-sbom" title="Permanent link">¶</a></h4>
 <p>To scan the embedded SBOM from inside the container image:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--entrypoint<span class="w"> </span>cat<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.15.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>-
 </code></pre></div>
 <h4 id="advanced-inspect-oci-attached-sboms-with-oras">Advanced: Inspect OCI-attached SBOMs with ORAS<a class="headerlink" href="#advanced-inspect-oci-attached-sboms-with-oras" title="Permanent link">¶</a></h4>
 <p>You can use the <a href="https://oras.land/" target="_blank">ORAS CLI <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> to discover and download OCI-attached SBOMs.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Use the per-architecture tag to resolve directly to the image manifest</span>
 oras<span class="w"> </span>discover<span class="w"> </span>--format<span class="w"> </span>tree<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0-amd64
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.15.0-amd64
 
 <span class="c1"># Pull the SBOM artifact using the digest from the discover output</span>
 oras<span class="w"> </span>pull<span class="w"> </span>docker.io/percona/percona-backup-mongodb@sha256:&lt;referrer-digest&gt;

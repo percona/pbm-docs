@@ -4273,6 +4273,8 @@
       
         
       
+        
+      
     
     
     
@@ -4312,6 +4314,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="release-notes/2.15.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percona Backup for MongoDB 2.15.0 (2026-06-17)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -7593,6 +7623,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#release-notes-2.15.0" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Percona Backup for MongoDB 2.15.0 (2026-06-17)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#release-notes-2.14.0" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8233,7 +8274,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         </script>
         </head><body><h1 id="percona-backup-for-mongodb-documentation">Percona Backup for MongoDB documentation<a class="headerlink" href="#index-percona-backup-for-mongodb-documentation" title="Permanent link">¶</a></h1>
 <div class="admonition note">
-<p>This is the documentation for the latest release, <strong>PBM 2.14.0</strong> (<a href="#release-notes-2.14.0">Release Notes</a>).</p>
+<p>This is the documentation for the latest release, <strong>PBM 2.15.0</strong> (<a href="#release-notes-2.15.0">Release Notes</a>).</p>
 </div>
 <p>Percona Backup for MongoDB (PBM) is an open source and distributed solution for consistent backups and restores of <a href="#details-deployments">MongoDB sharded clusters and replica sets</a> to a specific point in time. Check <a href="#details-versions">supported MongoDB versions</a>.</p>
 <p>Here’s how you can make backups on a running server and/or restore your database to a specific point in time:</p>
@@ -8501,18 +8542,18 @@ MongoDB cluster (or non-sharded replica set). You don’t need to start it on th
 <ol>
 <li>
 <p>Fetch the binary tarball. Replace the version in the URL with your required version.</p>
-<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-2.14.0/binary/tarball/percona-backup-mongodb-2.14.0-x86_64.tar.gz
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>https://downloads.percona.com/downloads/percona-backup-mongodb/percona-backup-mongodb-2.15.0/binary/tarball/percona-backup-mongodb-2.15.0-x86_64.tar.gz
 </code></pre></div>
 </li>
 <li>
 <p>Extract the tarball</p>
-<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-xf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-xf<span class="w"> </span>percona-backup-mongodb-2.15.0-x86_64.tar.gz
 </code></pre></div>
 </li>
 <li>
 <p>Export the location of the binaries to the <code>PATH</code> variable</p>
 <p>For example, if you’ve extracted the tarball to your <code>home</code> directory, the command would be the following:</p>
-<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>~/percona-backup-mongodb-2.14.0/:<span class="nv">$PATH</span>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>~/percona-backup-mongodb-2.15.0/:<span class="nv">$PATH</span>
 </code></pre></div>
 </li>
 </ol>
@@ -8736,7 +8777,7 @@ COPY<span class="w"> </span>--from<span class="o">=</span>pbm<span class="w"> </
 <ul>
 <li><code>container-name</code> is the name you want to assign to your container.</li>
 <li><code>PBM_MONGODB_URI</code> is a <a href="https://docs.mongodb.com/manual/reference/connection-string/">MongoDB Connection URI <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> string used to connect to MongoDB nodes. See the <a href="#install-initial-setup">Initial setup</a> how to create the PBM user. </li>
-<li><code>tag</code> is the tag specifying the version you need. For example, <code>2.14.0</code>. Docker identifies the architecture (x86_64 or ARM64) and pulls the respective image. See the <a href="https://hub.docker.com/r/perconalab/percona-backup-mongodb/tags">full list of tags</a>.</li>
+<li><code>tag</code> is the tag specifying the version you need. For example, <code>2.15.0</code>. Docker identifies the architecture (x86_64 or ARM64) and pulls the respective image. See the <a href="https://hub.docker.com/r/perconalab/percona-backup-mongodb/tags">full list of tags</a>.</li>
 </ul>
 <p>Note that every MongoDB node (including replica set secondary members and config server replica set nodes) requires a separate instance of Percona Backup for MongoDB. Thus, a typical, 3-node MongoDB replica set requires three instances of Percona Backup for MongoDB.</p>
 <h2 id="install-docker-set-up-percona-backup-for-mongodb">Set up Percona Backup for MongoDB<a class="headerlink" href="#install-docker-set-up-percona-backup-for-mongodb" title="Permanent link">¶</a></h2>
@@ -9068,7 +9109,7 @@ ExecStart=/usr/bin/pbm-agent -f %d/pbm_connection.yaml
 <h2 class="power-number" id="install-backup-storage-procedure">Procedure<a class="headerlink" href="#install-backup-storage-procedure" title="Permanent link">¶</a></h2>
 <ol>
 <li>
-<p>Create a config file (e.g. <code>pbm_config.yaml</code>). You can use the <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">template configuration file <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and modify it as needed.</p>
+<p>Create a config file (e.g. <code>pbm_config.yaml</code>). You can use the <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">template configuration file <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and modify it as needed.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="install-backup-storage-__tabbed_1_1" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_2" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_3" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_4" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_5" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_6" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_7" name="install-backup-storage-__tabbed_1" type="radio"><div class="tabbed-labels"><label for="install-backup-storage-__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.64 10.38c0 .25.02.45.07.62.05.12.12.28.21.46.04.04.05.1.05.15 0 .07-.04.13-.13.2l-.42.28c-.06.04-.12.06-.17.06-.07 0-.13-.04-.2-.1-.09-.1-.17-.2-.24-.31-.06-.11-.13-.24-.2-.39-.52.61-1.17.92-1.96.92-.56 0-1-.16-1.33-.48-.32-.32-.49-.75-.49-1.29 0-.55.2-1 .6-1.36.41-.34.95-.52 1.63-.52.23 0 .44.02.71.06.23.03.5.08.76.14v-.48c0-.51-.1-.84-.31-1.07-.22-.21-.57-.3-1.08-.3-.24 0-.48.03-.72.08-.25.06-.49.13-.72.23-.11.04-.2.07-.23.08-.05.02-.08.02-.11.02-.09 0-.14-.06-.14-.2v-.33c0-.1.01-.18.05-.23q.045-.075.18-.12c.24-.14.51-.24.84-.32a4 4 0 0 1 1.04-.13q1.185 0 1.74.54c.37.36.55.91.55 1.64v2.15zm-2.7 1.02c.22 0 .44-.04.68-.12s.45-.23.63-.43c.11-.13.19-.27.25-.43 0-.16.05-.35.05-.58v-.27c-.2-.07-.4-.07-.62-.12a7 7 0 0 0-.62-.04c-.45 0-.77.09-.99.27s-.32.43-.32.76c0 .32.07.56.24.71.16.17.39.25.7.25m5.34.71a.6.6 0 0 1-.28-.06c-.03-.05-.08-.14-.12-.26L8.32 6.65c-.04-.15-.06-.22-.06-.27 0-.11.05-.17.16-.17h.65c.13 0 .22.02.26.07.06.04.1.13.14.26l1.11 4.4 1.04-4.4c.03-.13.07-.22.13-.26.05-.04.14-.07.25-.07h.55c.12 0 .21.02.26.07.05.04.1.13.13.26L14 11l1.14-4.46c.04-.13.09-.22.13-.26.06-.04.14-.07.26-.07h.62c.11 0 .17.06.17.17 0 .03-.01.07-.02.12 0 0-.02.08-.04.15l-1.61 5.14c-.04.14-.08.21-.15.26-.04.04-.13.07-.24.07h-.57c-.13 0-.19-.02-.27-.07a.45.45 0 0 1-.12-.26L12.27 7.5l-1.03 4.28q-.045.195-.12.27a.5.5 0 0 1-.27.06zm8.55.18c-.33 0-.7-.04-1.03-.12s-.59-.17-.76-.26a.5.5 0 0 1-.21-.19.4.4 0 0 1-.04-.18v-.34c0-.14.05-.2.15-.2h.12c.04 0 .1.05.17.08.22.1.47.18.73.23.27.05.54.08.79.08.42 0 .75-.07.97-.22.23-.17.35-.36.35-.63 0-.19-.07-.34-.18-.47-.12-.12-.35-.24-.67-.34l-.97-.3c-.48-.16-.84-.38-1.06-.68a1.58 1.58 0 0 1-.33-.97c0-.28.06-.52.18-.73.12-.22.28-.4.46-.55.22-.15.44-.26.71-.34q.39-.12.84-.12.21 0 .45.03c.14.02.28.05.42.07.14.04.26.07.38.11s.2.08.28.12c.09.05.16.1.2.16s.06.13.06.22v.32q0 .21-.15.21c-.05 0-.14-.03-.26-.08-.37-.17-.8-.26-1.27-.26-.38 0-.66.06-.89.19-.2.12-.31.32-.31.59 0 .19.07.35.2.47.13.13.38.25.73.37l.95.3c.48.14.82.36 1.03.64q.3.405.3.93c0 .28-.06.54-.17.77-.12.22-.28.42-.5.58-.19.17-.44.29-.72.38s-.62.13-.95.13m1.25 3.24C17.89 17.14 14.71 18 12 18c-3.85 0-7.3-1.42-9.91-3.77-.21-.19-.02-.44.23-.29 2.82 1.63 6.29 2.62 9.89 2.62 2.43 0 5.1-.5 7.55-1.56.37-.15.68.26.32.53M21 14.5c-.29-.37-1.86-.18-2.57-.1-.21.03-.24-.16-.05-.3 1.25-.87 3.31-.6 3.54-.33.24.3-.06 2.36-1.23 3.34-.19.15-.36.07-.28-.11.27-.68.86-2.16.59-2.5"></path></svg></span> Amazon AWS</label><label for="install-backup-storage-__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.207.006a2.16 2.16 0 0 0-1.62.582 2.15 2.15 0 0 0-.095 3.035l3.408 3.55a3.042 3.042 0 0 1-.663 4.688l-.463.239V7.285a15.42 15.42 0 0 0-8.018 10.487v.017l6.549-3.328v7.621L13.779 24V13.682l.897-.463a4.443 4.443 0 0 0 1.22-7.03l-3.37-3.525a.75.75 0 0 1 .037-1.055.75.75 0 0 1 1.056.038l.467.486-.006.006 4.07 4.244a.057.057 0 0 0 .082 0 .06.06 0 0 0 0-.07l-3.14-5.143-.149.143.149-.145C14.494.393 13.829.054 13.207.006m-.902 9.865v2.994l-4.152 2.149a14 14 0 0 1 2.767-3.928 14 14 0 0 1 1.385-1.215"></path></svg></span> S3-compatible (MinIO)</label><label for="install-backup-storage-__tabbed_1_3"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span> GCS (SA)</label><label for="install-backup-storage-__tabbed_1_4"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span> GCS (HMAC) (deprecated)</label><label for="install-backup-storage-__tabbed_1_5"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.05 4.24 6.56 18.05 2 18l5.09-8.76zm.7 1.09L22 19.76H6.74l9.3-1.66-4.87-5.79z"></path></svg></span> Microsoft Azure Blob Storage</label><label for="install-backup-storage-__tabbed_1_6">Alibaba Cloud Storage</label><label for="install-backup-storage-__tabbed_1_7"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3zm12 7h6v4h-6zm0 7h6v4h-6zm-2-4H7v5h6v2H5V9h2v2h6z"></path></svg></span> Shared local filesystem</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -10854,9 +10895,9 @@ Node <a href="#usage-backup-priority">priority</a> affects the nodes that are se
 <div class="no-copy highlight"><pre><span></span><code>Cluster:
 ========
 rs1:
-  - rs1/rs101:27017 [S], Bkp Prio: [1.0], PITR Prio: [2.5]: pbm-agent [v2.14.0] OK
-  - rs1/rs102:27017 [P], Bkp Prio: [0.5], PITR Prio: [2.0]: pbm-agent [v2.14.0] OK
-  - rs1/rs103:27017 [S], Bkp Prio: [1.0], PITR Prio: [1.0]: pbm-agent [v2.14.0] OK
+  - rs1/rs101:27017 [S], Bkp Prio: [1.0], PITR Prio: [2.5]: pbm-agent [v2.15.0] OK
+  - rs1/rs102:27017 [P], Bkp Prio: [0.5], PITR Prio: [2.0]: pbm-agent [v2.15.0] OK
+  - rs1/rs103:27017 [S], Bkp Prio: [1.0], PITR Prio: [1.0]: pbm-agent [v2.15.0] OK
 </code></pre></div>
 </details>
 <p>PBM saves oplog slices from the node with the highest priority. If this node is not responding, it selects the next priority node. If there are several nodes with the same priority, one of them is randomly elected for saving oplog slices.</p>
@@ -12129,7 +12170,7 @@ Waiting for delete to be done .[done]
 <p class="admonition-title">Important</p>
 <p>Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this <a href="#details-s3-storage-storage-bucket-creation">bucket is created</a> and managed solely by PBM.</p>
 </div>
-<p>This is the example for the basic configuration of AWS S3 storage in Percona Backup for MongoDB. You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
+<p>This is the example for the basic configuration of AWS S3 storage in Percona Backup for MongoDB. You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
@@ -12792,7 +12833,7 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 <p class="admonition-title">Important</p>
 <p>Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this <a href="#details-minio-bucket-creation">bucket is created</a> and managed solely by PBM.</p>
 </div>
-<p>This is the example for the basic configuration of MinIO and other S3-compatible storage services in Percona Backup for MongoDB. You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
+<p>This is the example for the basic configuration of MinIO and other S3-compatible storage services in Percona Backup for MongoDB. You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minio</span>
 <span class="w">  </span><span class="nt">minio</span><span class="p">:</span>
@@ -12909,7 +12950,7 @@ MIIC+TCCAeGgAwIBAgIJANH3WljB...
 </ol>
 <p>After the bucket is created, apply the proper <a href="#details-storage-configuration-permissions-setup">permissions for PBM to use the bucket</a>.</p>
 <h2 id="details-gcs-configuration-example">Configuration example<a class="headerlink" href="#details-gcs-configuration-example" title="Permanent link">¶</a></h2>
-<p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
+<p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="details-gcs-__tabbed_1_1" name="details-gcs-__tabbed_1" type="radio"><input id="details-gcs-__tabbed_1_2" name="details-gcs-__tabbed_1" type="radio"><div class="tabbed-labels"><label for="details-gcs-__tabbed_1_1">using JSON keys</label><label for="details-gcs-__tabbed_1_2">using HMAC keys (deprecated)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -13006,7 +13047,7 @@ MIIC+TCCAeGgAwIBAgIJANH3WljB...
 <span class="w">    </span><span class="nt">credentials</span><span class="p">:</span>
 <span class="w">      </span><span class="nt">workloadIdentity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key). You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.<p></p>
+PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key). You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.<p></p>
 </li>
 </ol>
 <h2 id="details-workload-identity-auth-use-case-gce-virtual-machine-simplest-path">Use case: GCE Virtual Machine (simplest path)<a class="headerlink" href="#details-workload-identity-auth-use-case-gce-virtual-machine-simplest-path" title="Permanent link">¶</a></h2>
@@ -13142,7 +13183,7 @@ PBM will then use the ADC credentials provided by the environment (rather than a
 </div>
 <p>After the bucket is created, apply the proper <a href="#details-storage-configuration-permissions-setup">permissions for PBM to use the bucket</a>.</p>
 <h2 id="details-azure-configuration-example">Configuration example<a class="headerlink" href="#details-azure-configuration-example" title="Permanent link">¶</a></h2>
-<p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
+<p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure</span>
 <span class="w">  </span><span class="nt">azure</span><span class="p">:</span>
@@ -13342,7 +13383,7 @@ PBM will then use the ADC credentials provided by the environment (rather than a
 <p>If you accidentally use a local directory instead of a remote mount, other nodes will not be able to access backup files. This will likely cause errors during restore operations, as <strong>pbm-agent</strong> processes on other replica set members cannot access backup archives stored on a local-only directory.</p>
 </div>
 <h3 id="details-filesystem-storage-configuration-example">Configuration example<a class="headerlink" href="#details-filesystem-storage-configuration-example" title="Permanent link">¶</a></h3>
-<p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
+<p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filesystem</span>
 <span class="w">  </span><span class="nt">filesystem</span><span class="p">:</span>
@@ -15200,7 +15241,7 @@ START<span class="w"> </span>TIME<span class="w">            </span>END<span cla
 <h2 id="reference-config-insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file">Insert the whole Percona Backup for MongoDB config from a YAML file<a class="headerlink" href="#reference-config-insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file" title="Permanent link">¶</a></h2>
 <p>If you are initializing a cluster or a non-sharded replica set for the first time, it is simplest to write the whole config as a YAML file and use the
 <code>pbm config --file</code> command to upload all the values in one command.</p>
-<p>You can use <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields. Or use it as a sample when writing your own one.</p>
+<p>You can use <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields. Or use it as a sample when writing your own one.</p>
 <p>A config file must have a remote backup storage configuration. Find the config file examples for every supported remote backup storage in the Storage section. For more information about available config file options, see <a href="#reference-configuration-options">Configuration file options</a>.</p>
 <p>Use the following command to upload the config file. For example, the config file name is <code>pbm_config.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>pbm_config.yaml
@@ -16745,7 +16786,7 @@ ExecStart=/usr/bin/pbm-agent -f /etc/pbm-agent.yaml
 <li>Add a new <code>mongod</code> node to a replica set </li>
 <li>
 <p><a href="#install-initial-setup">Set up and start</a> <code>pbm-agent</code> on a new node. </p>
-<p>Before doing so,  you may see the following error in <code>pbm status</code> output on your running replica set: <code>rs202:30202 [S]: pbm-agent [v2.14.0] FAILED status: ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
+<p>Before doing so,  you may see the following error in <code>pbm status</code> output on your running replica set: <code>rs202:30202 [S]: pbm-agent [v2.15.0] FAILED status: ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
 </li>
 <li>
 <p>Adjust PBM configuration for <a href="#usage-backup-priority">node priorities for backups</a>, <a href="#features-point-in-time-recovery-adjust-node-priority-for-oplog-slices">oplog slices</a> or <a href="#usage-restore-physical-define-a-mongod-binary-location">define custom paths to mongod binaries</a> to include the new node.</p>
@@ -16759,7 +16800,7 @@ ExecStart=/usr/bin/pbm-agent -f /etc/pbm-agent.yaml
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>pbm-agent
 </code></pre></div>
 <p>You may see the error like the following in the <code>pbm status</code> output on the remaining nodes:
-<code>- rs202:30202 [S]: pbm-agent [v2.14.0] FAILED status: &gt; ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
+<code>- rs202:30202 [S]: pbm-agent [v2.15.0] FAILED status: &gt; ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
 </li>
 <li>
 <p>Remove the replica set member</p>
@@ -17008,7 +17049,7 @@ need to be run on each shard as well as in the config server replica set.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>2.11.0 - 2.14.0</strong></td>
+<td><strong>2.11.0 - 2.15.0</strong></td>
 <td><a href="https://docs.percona.com/percona-server-for-mongodb/7.0/">7.0.x</a>, <a href="https://docs.percona.com/percona-server-for-mongodb/8.0/">8.0.x</a></td>
 <td><a href="https://docs.percona.com/percona-server-for-mongodb/7.0/">7.0.x</a>, <a href="https://docs.percona.com/percona-server-for-mongodb/8.0/">8.0.x</a></td>
 <td><a href="https://docs.percona.com/percona-server-for-mongodb/7.0/">7.0.x</a>, <a href="https://docs.percona.com/percona-server-for-mongodb/8.0/">8.0.x</a></td>
@@ -17071,7 +17112,7 @@ need to be run on each shard as well as in the config server replica set.</p>
 </thead>
 <tbody>
 <tr>
-<td><strong>2.11.0 - 2.14.0</strong></td>
+<td><strong>2.11.0 - 2.15.0</strong></td>
 <td>7.0.x and higher</td>
 <td>Yes</td>
 </tr>
@@ -17939,6 +17980,7 @@ pbm<span class="w"> </span>status
         </script>
         </head><body><h1 id="percona-backup-for-mongodb-release-notes">Percona Backup for MongoDB release notes<a class="headerlink" href="#release-notes-percona-backup-for-mongodb-release-notes" title="Permanent link">¶</a></h1>
 <ul>
+<li><a href="#release-notes-2.15.0">Percona Backup for MongoDB 2.15.0</a></li>
 <li><a href="#release-notes-2.14.0">Percona Backup for MongoDB 2.14.0</a></li>
 <li><a href="#release-notes-2.13.0">Percona Backup for MongoDB 2.13.0</a></li>
 <li><a href="#release-notes-2.12.0">Percona Backup for MongoDB 2.12.0</a></li>
@@ -17991,7 +18033,76 @@ pbm<span class="w"> </span>status
                     <section class='print-page md-section' id='section-13-1' heading-number='13.1'>
                         <h1>PBM 2.x<a class='headerlink' href='#section-13-1' title='Permanent link'></a>
                         </h1>
-                    <section class="print-page" id="release-notes-2.14.0" heading-number="13.1.1"><html><head>
+                    <section class="print-page" id="release-notes-2.15.0" heading-number="13.1.1"><html><head>
+        <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
+        })
+        </script>
+        </head><body><h1 id="percona-backup-for-mongodb-2150-2026-06-17">Percona Backup for MongoDB 2.15.0 (2026-06-17)<a class="headerlink" href="#release-notes-2.15.0-percona-backup-for-mongodb-2150-2026-06-17" title="Permanent link">¶</a></h1>
+<p><a class="md-button" href="#installation">Installation</a></p>
+<p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
+<h2 id="release-notes-2.15.0-release-highlights">Release highlights<a class="headerlink" href="#release-notes-2.15.0-release-highlights" title="Permanent link">¶</a></h2>
+<h3 id="release-notes-2.15.0-oracle-cloud-infrastructure-support">Oracle Cloud Infrastructure support<a class="headerlink" href="#release-notes-2.15.0-oracle-cloud-infrastructure-support" title="Permanent link">¶</a></h3>
+<p>PBM now supports Oracle Cloud Infrastructure (OCI) Object Storage as a remote backup destination through a dedicated OCI-native driver. This integration enables seamless backup and restore operations across OCI environments.</p>
+<h4 id="release-notes-2.15.0-authentication-methods">Authentication methods<a class="headerlink" href="#release-notes-2.15.0-authentication-methods" title="Permanent link">¶</a></h4>
+<p>PBM supports multiple authentication mechanisms for OCI Object Storage, including Workload Identity authentication. This approach allows secure access to OCI resources without requiring API signing keys, reducing operational overhead and strengthening security.</p>
+<p>Supported authentication methods:</p>
+<ul>
+<li>Choose <strong>User Principal</strong> when PBM runs on premises, on OCI, or in other cloud environments.</li>
+<li>Choose <strong>Instance Principal</strong> when PBM runs on OCI Compute instances.</li>
+<li>Choose <strong>OKE Workload Identity</strong> when PBM runs in Oracle Kubernetes Engine (OKE) enhanced clusters.</li>
+</ul>
+<h4 id="release-notes-2.15.0-benefits">Benefits<a class="headerlink" href="#release-notes-2.15.0-benefits" title="Permanent link">¶</a></h4>
+<ul>
+<li>
+<p>Secure access with OCI-native identity integration</p>
+</li>
+<li>
+<p>Reduced operational overhead by eliminating manual credential management</p>
+</li>
+<li>
+<p>Deployment flexibility across on-premises, cloud, and Kubernetes environments</p>
+</li>
+</ul>
+<p>For detailed information on OCI, refer to our comprehensive <a href="https://docs.percona.com/percona-backup-mongodb/details/oci-storage.html">documentation</a>.</p>
+<h3 id="release-notes-2.15.0-software-bills-of-materials-sboms">Software Bills of Materials (SBOMs)<a class="headerlink" href="#release-notes-2.15.0-software-bills-of-materials-sboms" title="Permanent link">¶</a></h3>
+<p>Percona Backup for MongoDB (PBM) now provides Software Bills of Materials (SBOMs). SBOMs improve transparency in the software supply chain by documenting the components and dependencies in a build. They are generated automatically as part of the release pipeline in the industry-standard <code>CycloneDX 1.6</code> format.</p>
+<p>SBOMs are distributed through the following channels:</p>
+<ul>
+<li>
+<p><strong>GitHub:</strong> The latest SBOM is placed in the root of the <a href="https://github.com/percona/percona-backup-mongodb">percona/percona-backup-mongodb</a> main branch.</p>
+</li>
+<li>
+<p><strong>Binaries/Tarballs:</strong> An SBOM file is included in the root directory of the release archive.</p>
+</li>
+<li>
+<p><strong>Packages:</strong> For <code>.deb</code> and <code>.rpm</code> packages, the SBOM file is installed in a standard documentation directory such as <code>/usr/share/doc/percona-backup-mongodb/</code>.</p>
+</li>
+<li>
+<p><strong>Docker:</strong> The SBOM is attached directly to the Docker image as metadata.</p>
+</li>
+</ul>
+<p>If you want to dig deeper into this topic, refer to our <a href="https://docs.percona.com/percona-backup-mongodb/reference/sboms-pbm.html">documentation</a>.</p>
+<h2 id="release-notes-2.15.0-changelog">Changelog<a class="headerlink" href="#release-notes-2.15.0-changelog" title="Permanent link">¶</a></h2>
+<h3 id="release-notes-2.15.0-new-features">New features<a class="headerlink" href="#release-notes-2.15.0-new-features" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1727">PBM-1727</a>: Percona Backup for MongoDB (PBM) now supports OCI Object Storage as a remote backup destination through a dedicated OCI-native driver.</li>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1728">PBM-1728</a>: Percona Backup for MongoDB (PBM) now supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity.</li>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1710">PBM-1710</a>: Percona Backup for MongoDB (PBM) now provides Software Bills of Materials (SBOMs) for every release.</li>
+</ul>
+<h3 id="release-notes-2.15.0-improvements">Improvements<a class="headerlink" href="#release-notes-2.15.0-improvements" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1370">PBM-1370</a>: Agent logs now include the reference date or interval supplied to cleanup commands. Previously, only the command receipt and epoch timestamp were recorded, making it difficult to determine which cleanup criteria were applied during troubleshooting and audit investigations.</li>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1668">PBM-1668</a>: The restore command now accepts a <code>commitQuorum</code> option that controls when the primary commits an index during a restore operation. You can set this to <code>majority</code>, <code>votingMembers</code>, or a specific number of nodes.
+  Without this option, MongoDB defaults to <code>votingMembers</code>, which requires all data-bearing voting members to complete index building before the index is committed. In large replica sets, this can significantly delay restore operations if index creation is slow on even a subset of nodes.</li>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1715">PBM-1715</a>: Physical backups and restores now support a <code>numParallelFiles</code> option that controls how many files PBM copies simultaneously during a backup operation. Increasing this value can improve backup performance on systems with high disk throughput.</li>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1754">PBM-1754</a>: PBM now allows configuring the buffer size used during physical backup and restore operations. This enhancement provides greater flexibility for tuning memory usage and data transfer performance, enabling you to optimize backup and restore throughput based on your environment and workload requirements.</li>
+</ul>
+<h3 id="release-notes-2.15.0-fixed-bugs">Fixed bugs<a class="headerlink" href="#release-notes-2.15.0-fixed-bugs" title="Permanent link">¶</a></h3>
+<ul>
+<li><a href="https://perconadev.atlassian.net/browse/PBM-1687">PBM-1687</a>: Fixed an issue where point-in-time recovery (PITR) was blocked when two backup commands were executed simultaneously.</li>
+</ul></body></html></section><section class="print-page" id="release-notes-2.14.0" heading-number="13.1.2"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18089,7 +18200,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1683">PBM-1683</a>: Fixed an issue where <code>pbm describe-backup</code> reported an incorrect, inflated value for <code>size_uncompressed_h</code> on non-base incremental backups. This field now accurately reflects the uncompressed size of the incremental data rather than cumulative or bloated values.</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.13.0" heading-number="13.1.2"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.13.0" heading-number="13.1.3"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18172,7 +18283,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1691">PBM-1691</a>: Resolved an issue where the PBM CLI exposed SSE credentials in JSON output.</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.12.0" heading-number="13.1.3"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.12.0" heading-number="13.1.4"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18258,7 +18369,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1627">PBM-1627</a> - GCS storage retry configurations now correctly interpret time units (e.g., ’60s’) and include a new <code>ChunkRetryDeadline</code> setting to manage upload timeouts.</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.11.0" heading-number="13.1.4"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.11.0" heading-number="13.1.5"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18290,7 +18401,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1583">PBM-1583</a>: PBM now keeps all routing collections in the target cluster and clears contents in all of them except the <code>config.system.sessions</code> collection during logical restores to avoid the “Time monotonicity violation” error</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1591">PBM-1591</a>: Logical backups now complete successfully even when time series collections share the same name across different databases.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1604">PBM-1604</a>: PBM CLI now correctly waits for restore completion in single-node replica set setups without reporting false errors.</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.10.0" heading-number="13.1.5"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.10.0" heading-number="13.1.6"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18409,7 +18520,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1564">PBM-1564</a> - Fixed the issue with  incremental backups failing with the error “source backup is stored on a different storage” by improving the storage identity checks so that only the properties that identify the storage such as region,  bucket name or prefix path are checked</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.9.1" heading-number="13.1.6"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.9.1" heading-number="13.1.7"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18423,7 +18534,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <h3 id="release-notes-2.9.1-bugs-fixed">Bugs Fixed<a class="headerlink" href="#release-notes-2.9.1-bugs-fixed" title="Permanent link">¶</a></h3>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1512">PBM-1512</a> - Resolved the issue preventing PBM from taking physical backups in deployments with MongoDB Community and Percona Server for MongoDB</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.9.0" heading-number="13.1.7"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.9.0" heading-number="13.1.8"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18470,7 +18581,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1485">PBM-1485</a> - Fixed the issue with <code>pbm-agent</code> starts by fixing the typo in pbm-agent.init file</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.8.0" heading-number="13.1.8"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.8.0" heading-number="13.1.9"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18558,7 +18669,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1441">PBM-1441</a> - Add a License file to Docker image to pass Red Hat’s certification</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.7.0" heading-number="13.1.9"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.7.0" heading-number="13.1.10"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18632,7 +18743,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1391">PBM-1391</a> - Fixed the issue with the Percona Server for MongoDB crashing after enabling point-in-time recovery routine after physical restore</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.6.0" heading-number="13.1.10"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.6.0" heading-number="13.1.11"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18759,7 +18870,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1057">PBM-1057</a> - Prevented PBM to start backup and oplog slicing on nodes that do initial sync</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.5.0" heading-number="13.1.11"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.5.0" heading-number="13.1.12"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18787,7 +18898,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1258">PBM-1258</a> - Improved the resync from storage logic to be triggered only upon changes in the configuration file. </p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.4.1" heading-number="13.1.12"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.4.1" heading-number="13.1.13"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18801,7 +18912,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <h2 id="release-notes-2.4.1-bugs-fixed">Bugs Fixed<a class="headerlink" href="#release-notes-2.4.1-bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1252">PBM-1252</a> - Fixed the issue with failing incremental backups for large data sets caused by metadata document reaching the size limit </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.4.0" heading-number="13.1.13"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.4.0" heading-number="13.1.14"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18847,7 +18958,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1223">PBM-1223</a> - Fixed an <code>unknown transaction id</code> error during logical restore </p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.3.1" heading-number="13.1.14"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.3.1" heading-number="13.1.15"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18871,7 +18982,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <h2 id="release-notes-2.3.1-bugs-fixed">Bugs Fixed<a class="headerlink" href="#release-notes-2.3.1-bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1193">PBM-1193</a> - Fixed the <code>pbm-agent</code> failure when the connection to PSMDB is lost</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.3.0" heading-number="13.1.15"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.3.0" heading-number="13.1.16"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18908,7 +19019,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li><a href="https://jira.percona.com/browse/PBM-1173">PBM-1173</a>, <a href="https://jira.percona.com/browse/PBM-1180">PBM-1180</a> - Fixed the issue with the primary node crash after the point-in-time recovery from physical backup</li>
 <li><a href="https://jira.percona.com/browse/PBM-1176">PBM-1176</a> - Fixed the decoding of the physical restore metadata to ensure correct output of the <code>pbm describe-restore</code> command</li>
 <li><a href="https://jira.percona.com/browse/PBM-1181">PBM-1181</a> - Fixed the issue with logical restore failure by excluding the <code>config.changelog</code> collection from the restore</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.2.1" heading-number="13.1.16"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.2.1" heading-number="13.1.17"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18944,7 +19055,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://jira.percona.com/browse/PBM-1155">PBM-1155</a> - Retry to open <code>$backupCursor</code> during incremental backups in case of failure</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.2.0" heading-number="13.1.17"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.2.0" heading-number="13.1.18"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -18992,7 +19103,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li><a href="https://jira.percona.com/browse/PBM-1103">PBM-1103</a> - Changed the warning message for incompatible backups in the <code>pbm status</code> output. </li>
 <li><a href="https://jira.percona.com/browse/PBM-1123">PBM-1123</a> - Fixed the issue with the restore by skipping the <code>config.image_collection</code> collection</li>
 <li><a href="https://jira.percona.com/browse/PBM-1135">PBM-1135</a> - Fixed the issue with physical backup failure on a sharded cluster</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.1.0" heading-number="13.1.18"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.1.0" heading-number="13.1.19"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19056,7 +19167,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li><a href="https://jira.percona.com/browse/PBM-1069">PBM-1069</a> - Check for incompatible incremental backups and notify accordingly in <code>pbm status</code> output</li>
 <li><a href="https://jira.percona.com/browse/PBM-1073">PBM-1073</a> - Improve performance of <code>pbm status</code> command on environments with large datasets and many backups</li>
 <li><a href="https://jira.percona.com/browse/PBM-1077">PBM-1077</a> - Save the <code>storage.bson</code> to ensure incremental backups and restores for database with data-at-rest encryption</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.0.5" heading-number="13.1.19"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.0.5" heading-number="13.1.20"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19092,7 +19203,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li>
 <p><a href="https://jira.percona.com/browse/PBM-1076">PBM-1076</a> - Update golang.org/x/net module due to CVE-2022-41723</p>
 </li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.0.4" heading-number="13.1.20"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.0.4" heading-number="13.1.21"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19120,7 +19231,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1042">PBM-1042</a> - Fixed the physical restore flow with the ability to set the custom path to <code>mongod</code> binaries</li>
 <li><a href="https://jira.percona.com/browse/PBM-1047">PBM-1047</a> - Fixed the issue with physical restore failure in a new environment.</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.0.3" heading-number="13.1.21"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.0.3" heading-number="13.1.22"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19168,7 +19279,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li><a href="https://jira.percona.com/browse/PBM-1006">PBM-1006</a> - Fix the <code>pbm-agent</code> crash during physical restore by initializing the logger for storage </li>
 <li><a href="https://jira.percona.com/browse/PBM-1008">PBM-1008</a> - Fix the selective PITR restore for a collection created after the full backup</li>
 <li><a href="https://jira.percona.com/browse/PBM-1016">PBM-1016</a> - Fix the error handling for <code>pbm describe-backup</code> command</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.0.2" heading-number="13.1.22"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.0.2" heading-number="13.1.23"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19192,7 +19303,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
 <p>This release fixes the usability issues for applications operating with Percona Backup for MongoDB by providing the error messages for the status output in the JSON format (<a href="https://jira.percona.com/browse/PBM-988">PBM-988</a>). It also includes the fix for the security vulnerability issue <a href="https://nvd.nist.gov/vuln/detail/CVE-2022-32149">CVE-2022-32149</a>.</p>
 <h2 id="release-notes-2.0.2-bugs-fixed">Bugs Fixed<a class="headerlink" href="#release-notes-2.0.2-bugs-fixed" title="Permanent link">¶</a></h2>
-<p><a href="https://jira.percona.com/browse/PBM-988">PBM-988</a>: Show error message for JSON output of the <code>pbm status</code> command</p></body></html></section><section class="print-page" id="release-notes-2.0.1" heading-number="13.1.23"><html><head>
+<p><a href="https://jira.percona.com/browse/PBM-988">PBM-988</a>: Show error message for JSON output of the <code>pbm status</code> command</p></body></html></section><section class="print-page" id="release-notes-2.0.1" heading-number="13.1.24"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -19246,7 +19357,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <li><a href="https://jira.percona.com/browse/PBM-975">PBM-975</a>: Fixed the issue with the display of point-in-time recovery chunks without base snapshot after storage resync</li>
 <li><a href="https://jira.percona.com/browse/PBM-966">PBM-966</a>: Fixed the error handling of point-in-time recovery to non-existent timestamp by <code>pbm-agents</code></li>
 <li><a href="https://jira.percona.com/browse/PBM-858">PBM-858</a>: Improve reporting of the error when an oplog chunk can’t be created due to insufficient range</li>
-</ul></body></html></section><section class="print-page" id="release-notes-2.0.0" heading-number="13.1.24"><html><head>
+</ul></body></html></section><section class="print-page" id="release-notes-2.0.0" heading-number="13.1.25"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -20379,15 +20490,15 @@ to ensure consistency of the data being restored.</p>
 <tbody>
 <tr>
 <td>Binary tarball</td>
-<td><code>percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+<td><code>percona-backup-mongodb-2.15.0/percona-backup-mongodb-2.15.0.cdx.json</code></td>
 </tr>
 <tr>
 <td>RPM package</td>
-<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json</code></td>
 </tr>
 <tr>
 <td>DEB package</td>
-<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json</code></td>
+<td><code>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json</code></td>
 </tr>
 <tr>
 <td>Docker image</td>
@@ -20399,13 +20510,13 @@ to ensure consistency of the data being restored.</p>
 <p>The examples below use <a href="https://trivy.dev/" target="_blank">Trivy <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. You can also use other CycloneDX-compatible scanners, such as <a href="https://github.com/anchore/grype" target="_blank">Grype <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> or Snyk.</p>
 <h3 id="reference-sboms-pbm-binary-tarball">Binary tarball<a class="headerlink" href="#reference-sboms-pbm-binary-tarball" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Confirm the SBOM is bundled</span>
-tar<span class="w"> </span>tzf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
+tar<span class="w"> </span>tzf<span class="w"> </span>percona-backup-mongodb-2.15.0-x86_64.tar.gz<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>cdx.json
 
 <span class="c1"># Extract and scan</span>
-tar<span class="w"> </span>xzf<span class="w"> </span>percona-backup-mongodb-2.14.0-x86_64.tar.gz<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-C<span class="w"> </span>/tmp<span class="w"> </span>percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json
+tar<span class="w"> </span>xzf<span class="w"> </span>percona-backup-mongodb-2.15.0-x86_64.tar.gz<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-C<span class="w"> </span>/tmp<span class="w"> </span>percona-backup-mongodb-2.15.0/percona-backup-mongodb-2.15.0.cdx.json
 trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/tmp/percona-backup-mongodb-2.14.0/percona-backup-mongodb-2.14.0.cdx.json
+<span class="w">    </span>/tmp/percona-backup-mongodb-2.15.0/percona-backup-mongodb-2.15.0.cdx.json
 </code></pre></div>
 <h3 id="reference-sboms-pbm-rpm-package">RPM package<a class="headerlink" href="#reference-sboms-pbm-rpm-package" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Confirm the package installs the SBOM</span>
@@ -20413,7 +20524,7 @@ rpm<span class="w"> </span>-ql<span class="w"> </span>percona-backup-mongodb<spa
 
 <span class="c1"># Scan it (replace 9.x with your RHEL/OL version)</span>
 trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>--distro<span class="w"> </span>redhat/9.x<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json
 </code></pre></div>
 <h3 id="reference-sboms-pbm-deb-package">DEB package<a class="headerlink" href="#reference-sboms-pbm-deb-package" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Confirm the package installs the SBOM</span>
@@ -20421,7 +20532,7 @@ dpkg<span class="w"> </span>-L<span class="w"> </span>percona-backup-mongodb<spa
 
 <span class="c1"># Scan it</span>
 trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json
 </code></pre></div>
 <h3 id="reference-sboms-pbm-docker-images">Docker images<a class="headerlink" href="#reference-sboms-pbm-docker-images" title="Permanent link">¶</a></h3>
 <p>Each PBM Docker image (Docker Hub <code>percona/percona-backup-mongodb</code>, PerconaLab <code>perconalab/percona-backup-mongodb</code>) ships with <strong>two</strong> CycloneDX 1.6 SBOMs that describe overlapping scopes:</p>
@@ -20449,20 +20560,20 @@ trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="
 <h4 id="reference-sboms-pbm-scan-via-oci-referrers-api-recommended">Scan via OCI Referrers API (recommended)<a class="headerlink" href="#reference-sboms-pbm-scan-via-oci-referrers-api-recommended" title="Permanent link">¶</a></h4>
 <p><code>trivy image --sbom-sources oci</code> fetches the attached SBOM via the OCI Referrers API and scans it, without pulling the image:</p>
 <div class="highlight"><pre><span></span><code>trivy<span class="w"> </span>image<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>--sbom-sources<span class="w"> </span>oci<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.15.0
 </code></pre></div>
 <h4 id="reference-sboms-pbm-scan-the-embedded-sbom">Scan the embedded SBOM<a class="headerlink" href="#reference-sboms-pbm-scan-the-embedded-sbom" title="Permanent link">¶</a></h4>
 <p>To scan the embedded SBOM from inside the container image:</p>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>--entrypoint<span class="w"> </span>cat<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.14.0.cdx.json<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.15.0<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/usr/share/doc/percona-backup-mongodb/percona-backup-mongodb-2.15.0.cdx.json<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>trivy<span class="w"> </span>sbom<span class="w"> </span>--severity<span class="w"> </span>HIGH,CRITICAL<span class="w"> </span>--ignore-unfixed<span class="w"> </span>-
 </code></pre></div>
 <h4 id="reference-sboms-pbm-advanced-inspect-oci-attached-sboms-with-oras">Advanced: Inspect OCI-attached SBOMs with ORAS<a class="headerlink" href="#reference-sboms-pbm-advanced-inspect-oci-attached-sboms-with-oras" title="Permanent link">¶</a></h4>
 <p>You can use the <a href="https://oras.land/" target="_blank">ORAS CLI <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> to discover and download OCI-attached SBOMs.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Use the per-architecture tag to resolve directly to the image manifest</span>
 oras<span class="w"> </span>discover<span class="w"> </span>--format<span class="w"> </span>tree<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.14.0-amd64
+<span class="w">    </span>docker.io/percona/percona-backup-mongodb:2.15.0-amd64
 
 <span class="c1"># Pull the SBOM artifact using the digest from the discover output</span>
 oras<span class="w"> </span>pull<span class="w"> </span>docker.io/percona/percona-backup-mongodb@sha256:&lt;referrer-digest&gt;
@@ -20849,53 +20960,55 @@ we will do our very best to be helpful.</p></body></html></section><section clas
             
 .print-site-enumerate-headings #section-13 > h1:before { content: '13 ' }
 .print-site-enumerate-headings #section-13-1 > h1:before { content: '13.1 ' }
-.print-site-enumerate-headings #release-notes-2.14.0 > h1:before { content: '13.1.1 ' }
+.print-site-enumerate-headings #release-notes-2.15.0 > h1:before { content: '13.1.1 ' }
 
-.print-site-enumerate-headings #release-notes-2.13.0 > h1:before { content: '13.1.2 ' }
+.print-site-enumerate-headings #release-notes-2.14.0 > h1:before { content: '13.1.2 ' }
 
-.print-site-enumerate-headings #release-notes-2.12.0 > h1:before { content: '13.1.3 ' }
+.print-site-enumerate-headings #release-notes-2.13.0 > h1:before { content: '13.1.3 ' }
 
-.print-site-enumerate-headings #release-notes-2.11.0 > h1:before { content: '13.1.4 ' }
+.print-site-enumerate-headings #release-notes-2.12.0 > h1:before { content: '13.1.4 ' }
 
-.print-site-enumerate-headings #release-notes-2.10.0 > h1:before { content: '13.1.5 ' }
+.print-site-enumerate-headings #release-notes-2.11.0 > h1:before { content: '13.1.5 ' }
 
-.print-site-enumerate-headings #release-notes-2.9.1 > h1:before { content: '13.1.6 ' }
+.print-site-enumerate-headings #release-notes-2.10.0 > h1:before { content: '13.1.6 ' }
 
-.print-site-enumerate-headings #release-notes-2.9.0 > h1:before { content: '13.1.7 ' }
+.print-site-enumerate-headings #release-notes-2.9.1 > h1:before { content: '13.1.7 ' }
 
-.print-site-enumerate-headings #release-notes-2.8.0 > h1:before { content: '13.1.8 ' }
+.print-site-enumerate-headings #release-notes-2.9.0 > h1:before { content: '13.1.8 ' }
 
-.print-site-enumerate-headings #release-notes-2.7.0 > h1:before { content: '13.1.9 ' }
+.print-site-enumerate-headings #release-notes-2.8.0 > h1:before { content: '13.1.9 ' }
 
-.print-site-enumerate-headings #release-notes-2.6.0 > h1:before { content: '13.1.10 ' }
+.print-site-enumerate-headings #release-notes-2.7.0 > h1:before { content: '13.1.10 ' }
 
-.print-site-enumerate-headings #release-notes-2.5.0 > h1:before { content: '13.1.11 ' }
+.print-site-enumerate-headings #release-notes-2.6.0 > h1:before { content: '13.1.11 ' }
 
-.print-site-enumerate-headings #release-notes-2.4.1 > h1:before { content: '13.1.12 ' }
+.print-site-enumerate-headings #release-notes-2.5.0 > h1:before { content: '13.1.12 ' }
 
-.print-site-enumerate-headings #release-notes-2.4.0 > h1:before { content: '13.1.13 ' }
+.print-site-enumerate-headings #release-notes-2.4.1 > h1:before { content: '13.1.13 ' }
 
-.print-site-enumerate-headings #release-notes-2.3.1 > h1:before { content: '13.1.14 ' }
+.print-site-enumerate-headings #release-notes-2.4.0 > h1:before { content: '13.1.14 ' }
 
-.print-site-enumerate-headings #release-notes-2.3.0 > h1:before { content: '13.1.15 ' }
+.print-site-enumerate-headings #release-notes-2.3.1 > h1:before { content: '13.1.15 ' }
 
-.print-site-enumerate-headings #release-notes-2.2.1 > h1:before { content: '13.1.16 ' }
+.print-site-enumerate-headings #release-notes-2.3.0 > h1:before { content: '13.1.16 ' }
 
-.print-site-enumerate-headings #release-notes-2.2.0 > h1:before { content: '13.1.17 ' }
+.print-site-enumerate-headings #release-notes-2.2.1 > h1:before { content: '13.1.17 ' }
 
-.print-site-enumerate-headings #release-notes-2.1.0 > h1:before { content: '13.1.18 ' }
+.print-site-enumerate-headings #release-notes-2.2.0 > h1:before { content: '13.1.18 ' }
 
-.print-site-enumerate-headings #release-notes-2.0.5 > h1:before { content: '13.1.19 ' }
+.print-site-enumerate-headings #release-notes-2.1.0 > h1:before { content: '13.1.19 ' }
 
-.print-site-enumerate-headings #release-notes-2.0.4 > h1:before { content: '13.1.20 ' }
+.print-site-enumerate-headings #release-notes-2.0.5 > h1:before { content: '13.1.20 ' }
 
-.print-site-enumerate-headings #release-notes-2.0.3 > h1:before { content: '13.1.21 ' }
+.print-site-enumerate-headings #release-notes-2.0.4 > h1:before { content: '13.1.21 ' }
 
-.print-site-enumerate-headings #release-notes-2.0.2 > h1:before { content: '13.1.22 ' }
+.print-site-enumerate-headings #release-notes-2.0.3 > h1:before { content: '13.1.22 ' }
 
-.print-site-enumerate-headings #release-notes-2.0.1 > h1:before { content: '13.1.23 ' }
+.print-site-enumerate-headings #release-notes-2.0.2 > h1:before { content: '13.1.23 ' }
 
-.print-site-enumerate-headings #release-notes-2.0.0 > h1:before { content: '13.1.24 ' }
+.print-site-enumerate-headings #release-notes-2.0.1 > h1:before { content: '13.1.24 ' }
+
+.print-site-enumerate-headings #release-notes-2.0.0 > h1:before { content: '13.1.25 ' }
 
 .print-site-enumerate-headings #section-13-2 > h1:before { content: '13.2 ' }
 .print-site-enumerate-headings #release-notes-1.8.1 > h1:before { content: '13.2.1 ' }

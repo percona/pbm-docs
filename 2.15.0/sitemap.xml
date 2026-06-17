@@ -2,586 +2,590 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/index.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/404.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/CODE_OF_CONDUCT.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/about-docs.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/copyright.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/get-help.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/installation.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/intro.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/pmm.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/system-requirements.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/trademark-policy.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/architecture.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/authentication.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/azure.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/cli.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/control-collections.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/deployments.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/endpoint-map.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/filesystem-storage.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/gcs.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/minio.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oci-storage.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oci-wif.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/oss.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/pbm-agent.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/s3-storage.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/storage-configuration.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/versions.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/details/workload-identity-auth.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/backup-sharding.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/backup-types.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/comparison.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/incremental-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/known-limitations.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/logical.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/multi-storage.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/physical.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/point-in-time-recovery.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/restore-new-env.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/restore-remapping.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/selective-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/snapshots.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/features/split-merge-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/backup-storage.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/configure-authentication.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/docker.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/initial-setup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/repos.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/secure-credentials-systemd.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/source.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/start-pbm-agent.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/install/tarball.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/automate-s3-access.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/change-nodes.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/configure-remotely.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/logpath.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/overview.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/start-agent-with-config.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/uninstalling.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/manage/upgrading.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/backup-options.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/config.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/configuration-options.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/glossary.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/logging-options.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/pbm-agent-config-options.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/pbm-commands.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/pitr-options.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/restore-options.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/sboms-pbm.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/0.5.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.0.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.1.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.1.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.1.3.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.2.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.2.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.3.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.3.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.3.2.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.3.3.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.3.4.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.4.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.4.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.5.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.6.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.6.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.7.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.8.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/1.8.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.0.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.0.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.0.2.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.0.3.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.0.4.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.0.5.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.1.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.10.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.11.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.12.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.13.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.14.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.15.0.html</loc>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.2.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.2.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.3.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.3.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.4.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.4.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.5.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.6.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.7.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.8.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.9.0.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/release-notes/2.9.1.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/index.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/faq.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/pbm-pmm.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/pbm-report.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/restore-partial.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/status.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/troubleshoot/troubleshooting.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/backup-external.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/backup-incremental.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/backup-physical.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/backup-priority.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/backup-selective.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/cancel-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/compression.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/delete-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/describe-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/list-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/logs.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/oplog-replay.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/pitr-physical.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/pitr-selective.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/pitr-tutorial.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore-external-agent-restart.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore-external.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore-incremental.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore-physical.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore-progress.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore-selective.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/restore.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/schedule-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
     <url>
          <loc>https://docs.percona.com/percona-backup-mongodb/2.15.0/usage/start-backup.html</loc>
-         <lastmod>2026-06-16</lastmod>
+         <lastmod>2026-06-17</lastmod>
     </url>
 </urlset>

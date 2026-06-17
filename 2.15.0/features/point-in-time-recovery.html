@@ -4413,6 +4413,8 @@
       
         
       
+        
+      
     
     
     
@@ -4452,6 +4454,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/2.15.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percona Backup for MongoDB 2.15.0 (2026-06-17)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6624,9 +6654,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="no-copy highlight"><pre><span></span><code>Cluster:
 ========
 rs1:
-  - rs1/rs101:27017 [S], Bkp Prio: [1.0], PITR Prio: [2.5]: pbm-agent [v2.14.0] OK
-  - rs1/rs102:27017 [P], Bkp Prio: [0.5], PITR Prio: [2.0]: pbm-agent [v2.14.0] OK
-  - rs1/rs103:27017 [S], Bkp Prio: [1.0], PITR Prio: [1.0]: pbm-agent [v2.14.0] OK
+  - rs1/rs101:27017 [S], Bkp Prio: [1.0], PITR Prio: [2.5]: pbm-agent [v2.15.0] OK
+  - rs1/rs102:27017 [P], Bkp Prio: [0.5], PITR Prio: [2.0]: pbm-agent [v2.15.0] OK
+  - rs1/rs103:27017 [S], Bkp Prio: [1.0], PITR Prio: [1.0]: pbm-agent [v2.15.0] OK
 </code></pre></div>
 </details>
 <p>PBM saves oplog slices from the node with the highest priority. If this node is not responding, it selects the next priority node. If there are several nodes with the same priority, one of them is randomly elected for saving oplog slices.</p>

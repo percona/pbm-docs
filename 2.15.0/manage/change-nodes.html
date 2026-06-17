@@ -4361,6 +4361,8 @@
       
         
       
+        
+      
     
     
     
@@ -4400,6 +4402,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/2.15.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percona Backup for MongoDB 2.15.0 (2026-06-17)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6360,7 +6390,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Add a new <code>mongod</code> node to a replica set </li>
 <li>
 <p><a href="../install/initial-setup.html">Set up and start</a> <code>pbm-agent</code> on a new node. </p>
-<p>Before doing so,  you may see the following error in <code>pbm status</code> output on your running replica set: <code>rs202:30202 [S]: pbm-agent [v2.14.0] FAILED status: ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
+<p>Before doing so,  you may see the following error in <code>pbm status</code> output on your running replica set: <code>rs202:30202 [S]: pbm-agent [v2.15.0] FAILED status: ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
 </li>
 <li>
 <p>Adjust PBM configuration for <a href="../usage/backup-priority.html">node priorities for backups</a>, <a href="../features/point-in-time-recovery.html#adjust-node-priority-for-oplog-slices">oplog slices</a> or <a href="../usage/restore-physical.html#define-a-mongod-binary-location">define custom paths to mongod binaries</a> to include the new node.</p>
@@ -6374,7 +6404,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>stop<span class="w"> </span>pbm-agent
 </code></pre></div>
 <p>You may see the error like the following in the <code>pbm status</code> output on the remaining nodes:
-<code>- rs202:30202 [S]: pbm-agent [v2.14.0] FAILED status: &gt; ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
+<code>- rs202:30202 [S]: pbm-agent [v2.15.0] FAILED status: &gt; ERROR with lost agent, last heartbeat: 1748531485</code>. This is expected behavior.</p>
 </li>
 <li>
 <p>Remove the replica set member</p>

@@ -4372,6 +4372,8 @@
       
         
       
+        
+      
     
     
     
@@ -4411,6 +4413,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release-notes/2.15.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Percona Backup for MongoDB 2.15.0 (2026-06-17)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -6398,7 +6428,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <h2 id="insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file">Insert the whole Percona Backup for MongoDB config from a YAML file<a class="headerlink" href="#insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file" title="Permanent link">¶</a></h2>
 <p>If you are initializing a cluster or a non-sharded replica set for the first time, it is simplest to write the whole config as a YAML file and use the
 <code>pbm config --file</code> command to upload all the values in one command.</p>
-<p>You can use <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.14.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields. Or use it as a sample when writing your own one.</p>
+<p>You can use <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields. Or use it as a sample when writing your own one.</p>
 <p>A config file must have a remote backup storage configuration. Find the config file examples for every supported remote backup storage in the Storage section. For more information about available config file options, see <a href="configuration-options.html">Configuration file options</a>.</p>
 <p>Use the following command to upload the config file. For example, the config file name is <code>pbm_config.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>pbm_config.yaml
