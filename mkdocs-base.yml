@@ -8,7 +8,7 @@ copyright: >
   — <a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
-edit_uri: edit/main/docs/
+edit_uri: edit/2.15.0/docs/
 
 use_directory_urls: false
 
@@ -132,7 +132,7 @@ plugins:
   git-committers:
     enabled: !ENV [CI, false]
     repository: percona/pbm-docs
-    branch: "main"
+    branch: "2.15.0"
   tags: {}
   glightbox: {}
   open-in-new-tab: {}
@@ -344,7 +344,7 @@ nav:
       - "About Percona Backup for MongoDB documentation": about-docs.md
       - reference/sboms-pbm.md
       - reference/glossary.md
-      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md'
+      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/2.15.0/CONTRIBUTING.md'
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md
       - Code of conduct: CODE_OF_CONDUCT.md
