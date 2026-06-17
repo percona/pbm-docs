@@ -126,7 +126,7 @@ restore:
        "node03:27017": /another/path/to/mongod
 ```
 
-When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
+When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/2.15.0/install/docker.html) for more information.
 
 ### Parallel data download
 
