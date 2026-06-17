@@ -8578,7 +8578,7 @@ COPY<span class="w"> </span>--from<span class="o">=</span>pbm<span class="w"> </
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>&lt;container-name&gt;<span class="w"> </span>pbm<span class="w"> </span>backup
 </code></pre></div>
 <p>where <code>&lt;container-name&gt;</code> is the name you assigned to the container and <code>pbm backup</code> is the command to start a backup.</p>
-<p>In the same way you can run other pbm commands. Find the full list of available commands in <a href="https://docs.percona.com/percona-backup-mongodb/reference/pbm-commands.html">Percona Backup for MongoDB reference</a>.</p>
+<p>In the same way you can run other pbm commands. Find the full list of available commands in <a href="https://docs.percona.com/percona-backup-mongodb/2.14.0/reference/pbm-commands.html">Percona Backup for MongoDB reference</a>.</p>
 <h2 id="install-docker-next-steps">Next steps<a class="headerlink" href="#install-docker-next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="#usage-list-backup">List backups <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg></span></a></p></body></html></section></section>
                     <section class='print-page md-section' id='section-3-3' heading-number='3.3'>
@@ -17265,7 +17265,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <p>Percona Backup for MongoDB (PBM) 2.13.0 now supports <strong>Workload Identity Federation (WIF)</strong> when authenticating with Google Cloud Storage (GCS).</p>
 <p>With WIF, you can upload backups to GCS without relying on long-lived service account JSON keys. PBM authenticates using short-lived tokens obtained through federation with an external identity provider (IdP).</p>
 <p>Workload Identity Federation lets on-premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.</p>
-<p>For detailed information, refer to our comprehensive <a href="https://docs.percona.com/percona-backup-mongodb/details/workload-identity-auth.html">documentation</a>.</p>
+<p>For detailed information, refer to our comprehensive <a href="https://docs.percona.com/percona-backup-mongodb/2.14.0/details/workload-identity-auth.html">documentation</a>.</p>
 </div>
 <div class="tabbed-block">
 <h3 id="release-notes-2.13.0-selective-backups-including-users-and-roles">Selective backups including users and roles<a class="headerlink" href="#release-notes-2.13.0-selective-backups-including-users-and-roles" title="Permanent link">¶</a></h3>
@@ -17273,7 +17273,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <p>To back up a specific namespace and include users and roles:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--ns<span class="o">=</span><span class="s2">"mydb.*"</span><span class="w"> </span>--with-users-and-roles
 </code></pre></div>
-<p>For detailed information about this feature, see our <a href="https://docs.percona.com/percona-backup-mongodb/usage/backup-selective.html#selective-backup-with-users-and-roles">documentation</a>.</p>
+<p>For detailed information about this feature, see our <a href="https://docs.percona.com/percona-backup-mongodb/2.14.0/usage/backup-selective.html#selective-backup-with-users-and-roles">documentation</a>.</p>
 </div>
 </div>
 </div>
