@@ -14,8 +14,7 @@ Percona Backup for MongoDB requires a dedicated database user holding a specific
 
 ### `readWrite` (on `admin` db)
 
-PBM stores its operational metadata — backup status, restore progress, configuration, and agent coordination — in the `admin.pbmConfig` and `admin.pbmBackups` collections. The `readWrite` role grants PBM the ability to read from and write to these collections so all agents in a cluster can share state and coordinate operations.
-
+PBM stores its operational metadata — backup status, restore progress, configuration, and agent coordination — in the PBM control collections in the `admin` database (for example, `admin.pbmConfig`, `admin.pbmBackups`, `admin.pbmAgents`, and others; see [PBM control collections](../details/control-collections.md)). The `readWrite` role grants PBM the ability to read from and write to these collections so all agents in a cluster can share state and coordinate operations.
 This role is scoped to the `admin` database only. It does not grant read or write access to application databases.
 
 ### `backup`
@@ -40,8 +39,7 @@ This role is only exercised during a restore operation. It grants broad write pr
 
 ### `pbmAnyAction` (custom role on `admin` db)
 
-This custom role grants the `anyAction` privilege on `anyResource`, which allows PBM to execute a small set of commands that fall outside what the standard built-in roles cover:
-
+This custom role grants the `anyAction` privilege on `anyResource`, which is effectively full administrative access. PBM uses this capability for a limited set of commands that fall outside what the standard built-in roles cover:
 - `setParameter` / `getParameter` — to read or temporarily adjust certain `mongod` parameters during backup/restore (for example, disabling the balancer on sharded clusters).
 - `fsync` / `fsyncUnlock` — on some backup paths (particularly for physical/hot backups with Percona Server for MongoDB), PBM may need to flush and lock the WiredTiger storage engine.
 - Oplog-related and internal commands — certain replication and storage-engine commands needed for consistent point-in-time backups are not exposed by any standard role.
