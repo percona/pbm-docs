@@ -291,6 +291,8 @@ nav:
       - PBM control collections: details/control-collections.md
       - How PBM works: 'intro.md'
       - details/authentication.md
+      - details/pbm-user-roles.md
+
   - Release notes:
       - release-notes.md
       - PBM 2.x:

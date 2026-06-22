@@ -45,6 +45,8 @@ Percona Backup for MongoDB uses the authentication and authorization subsystem o
 
 You can change the `username` and `password` values and specify other options for the `createUser` command as you require. But you must grant this user the roles as shown above.
 
+For an explanation of why each role is required and what it does and does not grant, see [PBM user roles reference](../details/pbm-user-roles.md).
+
 
 !!! tip
 
