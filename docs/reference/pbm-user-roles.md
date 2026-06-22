@@ -8,7 +8,7 @@ Percona Backup for MongoDB requires a dedicated database user holding a specific
 | `backup`        | All databases    | Read-only    | Full data + oplog snapshot for backup         |
 | `clusterMonitor`| Cluster metadata | Read-only    | Topology awareness, safe scheduling           |
 | `restore`       | All databases    | Write        | Replay data during restore operations         |
-| `pbmAnyAction`  | All resources    | Any action   | Privileged commands not covered by built-in roles (`fsync`, `setParameter`, etc.) |
+| `pbmAnyAction`  | All resources    | Any action   | Privileged commands not covered by built-in roles (`applyOps`, `_configsvrBalancerStop`, `_configsvrBalancerStatus`, `shutdown`) |
 
 ## Built-in MongoDB roles
 
