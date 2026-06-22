@@ -3,19 +3,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Percona is happy to announce the release of Percona Backup for MongoDB 1.1.0 on January 16, 2020.">
+        <meta name="description" content="Percona Backup for MongoDB requires a dedicated database user holding a specific set of MongoDB roles. The table below gives a quick overview; the sections that follow explain why each role is needed and what it does — and does not — grant.">
       
       
         <meta name="author" content="Percona LLC">
       
       
-        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.15.0/2.15.0/release-notes/1.1.0.html">
+        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.15.0/2.15.0/details/pbm-user-roles.html">
       
       
-        <link rel="prev" href="1.1.1.html">
+        <link rel="prev" href="authentication.html">
       
       
-        <link rel="next" href="1.0.0.html">
+        <link rel="next" href="../release-notes.html">
       
       
         
@@ -26,7 +26,7 @@
     
     
       
-        <title>Percona Backup for MongoDB 1.1.0 (2020-01-16) - Percona Backup for MongoDB</title>
+        <title>PBM user database roles - Percona Backup for MongoDB</title>
       
     
     
@@ -98,7 +98,7 @@
     
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Percona Backup for MongoDB - Percona Backup for MongoDB 1.1.0 (2020-01-16)">
+  <meta property="og:title" content="Percona Backup for MongoDB - PBM user database roles">
   <meta property="og:image" content="https://docs.percona.com/percona-backup-mongodb/2.15.0/_images/mongodb.png">
   <meta property="og:url" content="https://docs.percona.com/percona-backup-mongodb/2.15.0/">
 
@@ -131,7 +131,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#percona-backup-for-mongodb-110" class="md-skip">
+        <a href="#pbm-user-database-roles" class="md-skip">
           Skip to content
         </a>
       
@@ -245,7 +245,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Percona Backup for MongoDB 1.1.0 (2020-01-16)
+              PBM user database roles
             
           </span>
         </div>
@@ -2595,7 +2595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/storage-configuration.html" class="md-nav__link">
+      <a href="storage-configuration.html" class="md-nav__link">
         
   
   
@@ -2623,7 +2623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/s3-storage.html" class="md-nav__link">
+      <a href="s3-storage.html" class="md-nav__link">
         
   
   
@@ -2704,7 +2704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oci-storage.html" class="md-nav__link">
+      <a href="oci-storage.html" class="md-nav__link">
         
   
   
@@ -2732,7 +2732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oci-wif.html" class="md-nav__link">
+      <a href="oci-wif.html" class="md-nav__link">
         
   
   
@@ -2768,7 +2768,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/minio.html" class="md-nav__link">
+      <a href="minio.html" class="md-nav__link">
         
   
   
@@ -2796,7 +2796,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/gcs.html" class="md-nav__link">
+      <a href="gcs.html" class="md-nav__link">
         
   
   
@@ -2824,7 +2824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/workload-identity-auth.html" class="md-nav__link">
+      <a href="workload-identity-auth.html" class="md-nav__link">
         
   
   
@@ -2852,7 +2852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/azure.html" class="md-nav__link">
+      <a href="azure.html" class="md-nav__link">
         
   
   
@@ -2880,7 +2880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/oss.html" class="md-nav__link">
+      <a href="oss.html" class="md-nav__link">
         
   
   
@@ -2908,7 +2908,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/filesystem-storage.html" class="md-nav__link">
+      <a href="filesystem-storage.html" class="md-nav__link">
         
   
   
@@ -2936,7 +2936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/endpoint-map.html" class="md-nav__link">
+      <a href="endpoint-map.html" class="md-nav__link">
         
   
   
@@ -3611,7 +3611,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../details/versions.html" class="md-nav__link ">
+            <a href="versions.html" class="md-nav__link ">
               
   
   
@@ -3681,7 +3681,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/deployments.html" class="md-nav__link">
+      <a href="deployments.html" class="md-nav__link">
         
   
   
@@ -3962,8 +3962,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -3983,15 +3985,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_12" checked="">
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../details/architecture.html" class="md-nav__link ">
+            <a href="architecture.html" class="md-nav__link ">
               
   
   
@@ -4015,7 +4017,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_12_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_12">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4033,7 +4035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/pbm-agent.html" class="md-nav__link">
+      <a href="pbm-agent.html" class="md-nav__link">
         
   
   
@@ -4061,7 +4063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/cli.html" class="md-nav__link">
+      <a href="cli.html" class="md-nav__link">
         
   
   
@@ -4089,7 +4091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/control-collections.html" class="md-nav__link">
+      <a href="control-collections.html" class="md-nav__link">
         
   
   
@@ -4145,7 +4147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../details/authentication.html" class="md-nav__link">
+      <a href="authentication.html" class="md-nav__link">
         
   
   
@@ -4170,10 +4172,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../details/pbm-user-roles.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PBM user database roles
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="pbm-user-roles.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -4189,6 +4218,117 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#built-in-mongodb-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Built-in MongoDB roles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Built-in MongoDB roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#readwrite-on-admin-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        readWrite (on admin db)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clustermonitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        clusterMonitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        restore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom role
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pbmanyaction-custom-role-on-admin-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pbmAnyAction (custom role on admin db)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4205,10 +4345,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -4220,11 +4358,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked="">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13">
         
           
           <div class="md-nav__link md-nav__container">
@@ -4252,7 +4390,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4369,7 +4507,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.15.0.html" class="md-nav__link">
+      <a href="../release-notes/2.15.0.html" class="md-nav__link">
         
   
   
@@ -4397,7 +4535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.14.0.html" class="md-nav__link">
+      <a href="../release-notes/2.14.0.html" class="md-nav__link">
         
   
   
@@ -4425,7 +4563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.13.0.html" class="md-nav__link">
+      <a href="../release-notes/2.13.0.html" class="md-nav__link">
         
   
   
@@ -4453,7 +4591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.12.0.html" class="md-nav__link">
+      <a href="../release-notes/2.12.0.html" class="md-nav__link">
         
   
   
@@ -4481,7 +4619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.11.0.html" class="md-nav__link">
+      <a href="../release-notes/2.11.0.html" class="md-nav__link">
         
   
   
@@ -4509,7 +4647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.10.0.html" class="md-nav__link">
+      <a href="../release-notes/2.10.0.html" class="md-nav__link">
         
   
   
@@ -4537,7 +4675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.9.1.html" class="md-nav__link">
+      <a href="../release-notes/2.9.1.html" class="md-nav__link">
         
   
   
@@ -4565,7 +4703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.9.0.html" class="md-nav__link">
+      <a href="../release-notes/2.9.0.html" class="md-nav__link">
         
   
   
@@ -4593,7 +4731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.8.0.html" class="md-nav__link">
+      <a href="../release-notes/2.8.0.html" class="md-nav__link">
         
   
   
@@ -4621,7 +4759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.7.0.html" class="md-nav__link">
+      <a href="../release-notes/2.7.0.html" class="md-nav__link">
         
   
   
@@ -4649,7 +4787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.6.0.html" class="md-nav__link">
+      <a href="../release-notes/2.6.0.html" class="md-nav__link">
         
   
   
@@ -4677,7 +4815,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.5.0.html" class="md-nav__link">
+      <a href="../release-notes/2.5.0.html" class="md-nav__link">
         
   
   
@@ -4705,7 +4843,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.4.1.html" class="md-nav__link">
+      <a href="../release-notes/2.4.1.html" class="md-nav__link">
         
   
   
@@ -4733,7 +4871,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.4.0.html" class="md-nav__link">
+      <a href="../release-notes/2.4.0.html" class="md-nav__link">
         
   
   
@@ -4761,7 +4899,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.3.1.html" class="md-nav__link">
+      <a href="../release-notes/2.3.1.html" class="md-nav__link">
         
   
   
@@ -4789,7 +4927,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.3.0.html" class="md-nav__link">
+      <a href="../release-notes/2.3.0.html" class="md-nav__link">
         
   
   
@@ -4817,7 +4955,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.2.1.html" class="md-nav__link">
+      <a href="../release-notes/2.2.1.html" class="md-nav__link">
         
   
   
@@ -4845,7 +4983,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.2.0.html" class="md-nav__link">
+      <a href="../release-notes/2.2.0.html" class="md-nav__link">
         
   
   
@@ -4873,7 +5011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.1.0.html" class="md-nav__link">
+      <a href="../release-notes/2.1.0.html" class="md-nav__link">
         
   
   
@@ -4901,7 +5039,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.0.5.html" class="md-nav__link">
+      <a href="../release-notes/2.0.5.html" class="md-nav__link">
         
   
   
@@ -4929,7 +5067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.0.4.html" class="md-nav__link">
+      <a href="../release-notes/2.0.4.html" class="md-nav__link">
         
   
   
@@ -4957,7 +5095,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.0.3.html" class="md-nav__link">
+      <a href="../release-notes/2.0.3.html" class="md-nav__link">
         
   
   
@@ -4985,7 +5123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.0.2.html" class="md-nav__link">
+      <a href="../release-notes/2.0.2.html" class="md-nav__link">
         
   
   
@@ -5013,7 +5151,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.0.1.html" class="md-nav__link">
+      <a href="../release-notes/2.0.1.html" class="md-nav__link">
         
   
   
@@ -5041,7 +5179,7 @@
   
   
     <li class="md-nav__item">
-      <a href="2.0.0.html" class="md-nav__link">
+      <a href="../release-notes/2.0.0.html" class="md-nav__link">
         
   
   
@@ -5074,10 +5212,8 @@
                 
   
   
-    
   
   
-  
     
     
       
@@ -5125,11 +5261,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_2" checked="">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13_2">
         
           
           <label class="md-nav__link" for="__nav_13_2" id="__nav_13_2_label" tabindex="0">
@@ -5150,7 +5286,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_13_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5168,7 +5304,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.8.1.html" class="md-nav__link">
+      <a href="../release-notes/1.8.1.html" class="md-nav__link">
         
   
   
@@ -5196,7 +5332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.8.0.html" class="md-nav__link">
+      <a href="../release-notes/1.8.0.html" class="md-nav__link">
         
   
   
@@ -5224,7 +5360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.7.0.html" class="md-nav__link">
+      <a href="../release-notes/1.7.0.html" class="md-nav__link">
         
   
   
@@ -5252,7 +5388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.6.1.html" class="md-nav__link">
+      <a href="../release-notes/1.6.1.html" class="md-nav__link">
         
   
   
@@ -5280,7 +5416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.6.0.html" class="md-nav__link">
+      <a href="../release-notes/1.6.0.html" class="md-nav__link">
         
   
   
@@ -5308,7 +5444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.5.0.html" class="md-nav__link">
+      <a href="../release-notes/1.5.0.html" class="md-nav__link">
         
   
   
@@ -5336,7 +5472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.4.1.html" class="md-nav__link">
+      <a href="../release-notes/1.4.1.html" class="md-nav__link">
         
   
   
@@ -5364,7 +5500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.4.0.html" class="md-nav__link">
+      <a href="../release-notes/1.4.0.html" class="md-nav__link">
         
   
   
@@ -5392,7 +5528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.3.4.html" class="md-nav__link">
+      <a href="../release-notes/1.3.4.html" class="md-nav__link">
         
   
   
@@ -5420,7 +5556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.3.3.html" class="md-nav__link">
+      <a href="../release-notes/1.3.3.html" class="md-nav__link">
         
   
   
@@ -5448,7 +5584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.3.2.html" class="md-nav__link">
+      <a href="../release-notes/1.3.2.html" class="md-nav__link">
         
   
   
@@ -5476,7 +5612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.3.1.html" class="md-nav__link">
+      <a href="../release-notes/1.3.1.html" class="md-nav__link">
         
   
   
@@ -5504,7 +5640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.3.0.html" class="md-nav__link">
+      <a href="../release-notes/1.3.0.html" class="md-nav__link">
         
   
   
@@ -5532,7 +5668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.2.1.html" class="md-nav__link">
+      <a href="../release-notes/1.2.1.html" class="md-nav__link">
         
   
   
@@ -5560,7 +5696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.2.0.html" class="md-nav__link">
+      <a href="../release-notes/1.2.0.html" class="md-nav__link">
         
   
   
@@ -5588,7 +5724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.1.3.html" class="md-nav__link">
+      <a href="../release-notes/1.1.3.html" class="md-nav__link">
         
   
   
@@ -5616,7 +5752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.1.1.html" class="md-nav__link">
+      <a href="../release-notes/1.1.1.html" class="md-nav__link">
         
   
   
@@ -5641,37 +5777,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Percona Backup for MongoDB 1.1.0 (2020-01-16)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="1.1.0.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../release-notes/1.1.0.html" class="md-nav__link">
         
   
   
@@ -5687,61 +5796,6 @@
   
 
       </a>
-      
-        
-
-  
-
-<nav class="md-nav md-nav--secondary" aria-label="On this page">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      On this page
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        New Features
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#improvements" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Improvements
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bugs-fixed" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Bugs Fixed
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -5754,7 +5808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="1.0.0.html" class="md-nav__link">
+      <a href="../release-notes/1.0.0.html" class="md-nav__link">
         
   
   
@@ -5782,7 +5836,7 @@
   
   
     <li class="md-nav__item">
-      <a href="0.5.0.html" class="md-nav__link">
+      <a href="../release-notes/0.5.0.html" class="md-nav__link">
         
   
   
@@ -6326,7 +6380,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
           <div data-banner="data-banner" class="edit-contrib-banner">
     <div class="banner-content">
       <!-- Edit link centered -->
-      <a href="https://github.com/percona/pbm-docs/edit/2.15.0/docs/release-notes/1.1.0.md" title="Edit this page on GitHub" class="edit-page-link">
+      <a href="https://github.com/percona/pbm-docs/edit/2.15.0/docs/details/pbm-user-roles.md" title="Edit this page on GitHub" class="edit-page-link">
         <span class="edit-page-icon">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
@@ -6374,35 +6428,91 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#new-features" class="md-nav__link">
+  <a href="#built-in-mongodb-roles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        New Features
+        Built-in MongoDB roles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Built-in MongoDB roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#readwrite-on-admin-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        readWrite (on admin db)
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#improvements" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#backup" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Improvements
+        backup
       
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#bugs-fixed" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#clustermonitor" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bugs Fixed
+        clusterMonitor
       
     </span>
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        restore
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom role
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom role">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pbmanyaction-custom-role-on-admin-db" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pbmAnyAction (custom role on admin db)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -6428,73 +6538,90 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
       
     
-    <a href="https://github.com/percona/pbm-docs/raw/2.15.0/docs/release-notes/1.1.0.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/percona/pbm-docs/raw/2.15.0/docs/details/pbm-user-roles.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="percona-backup-for-mongodb-110">Percona Backup for MongoDB 1.1.0<a class="headerlink" href="#percona-backup-for-mongodb-110" title="Permanent link">¶</a></h1>
-<p>Percona is happy to announce the release of Percona Backup for MongoDB 1.1.0 on January 16, 2020.</p>
-<p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB
-sharded clusters and replica sets. This is a tool for creating consistent
-backups across a MongoDB sharded cluster (or a single replica set), and for
-restoring those backups to a specific point in time. The project was inspired by
-(and intends to replace) the Percona-Lab/mongodb_consistent_backup tool.</p>
-<p>Percona Backup for MongoDB supports <a href="https://www.percona.com/software/mongo-database/percona-server-for-mongodb">Percona Server for MongoDB</a>
-or <a href="https://www.mongodb.com/download-center/community">MongoDB Community Server</a> version 3.6 or higher with
-<a href="https://docs.mongodb.com/manual/replication/">MongoDB replication</a>
-enabled. Binaries for the supported platforms as well as the tarball with source
-code are available from the <a href="https://www.percona.com/downloads/percona-backup-mongodb/">Percona Backup for MongoDB download page</a>. For more
-information about Percona Backup for MongoDB and the installation steps, see the documentation.</p>
-<p>Percona Backup for MongoDB 1.1.0 introduces the new <code>pbm config</code> command to enable configuring
-the store from the command line in addition to the configuration file. This
-command effectively replaces pbm store which was only able to read store
-configuration from the configuration file.</p>
-<div class="highlight"><pre><span></span><code>$ pbm config --set storage.s3.bucket="operator-testing"
-</code></pre></div>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
-<ul>
-<li><a href="https://jira.percona.com/browse/PBM-344">PBM-344</a>: New pbm config command to support configuring the store
-from the command line.</li>
-</ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
-<ul>
-<li><a href="https://jira.percona.com/browse/PBM-361">PBM-361</a>: Improved the processing of timestamps when using oplog.</li>
-</ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
-<ul>
-<li>
-<p><a href="https://jira.percona.com/browse/PBM-214">PBM-214</a>: <code>pbm-agent</code> could crash with restore command running
-forever, if the primary node became unavailable during the restore operation.</p>
-</li>
-<li>
-<p><a href="https://jira.percona.com/browse/PBM-279">PBM-279</a>: <code>pbm-agent</code> could be started with an invalid config file.</p>
-</li>
-<li>
-<p><a href="https://jira.percona.com/browse/PBM-338">PBM-338</a>: Backups that failed could appear in the output of the pbm
-list command.</p>
-</li>
-<li>
-<p><a href="https://jira.percona.com/browse/PBM-362">PBM-362</a>: The <code>pbm backup</code> could fail when called from the primary
-node if there were no healthy secondaries.</p>
-</li>
-<li>
-<p><a href="https://jira.percona.com/browse/PBM-369">PBM-369</a>: ReplicaSets could not establish connections when TLS was
-used in the cluster.</p>
-</li>
-</ul>
+<h1 id="pbm-user-database-roles">PBM user database roles<a class="headerlink" href="#pbm-user-database-roles" title="Permanent link">¶</a></h1>
+<p>Percona Backup for MongoDB requires a dedicated database user holding a specific set of MongoDB roles. The table below gives a quick overview; the sections that follow explain why each role is needed and what it does — and does not — grant.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Scope</th>
+<th>Access type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readWrite</code></td>
+<td><code>admin</code> db only</td>
+<td>Read + write</td>
+<td>PBM metadata / agent coordination collections</td>
+</tr>
+<tr>
+<td><code>backup</code></td>
+<td>All databases</td>
+<td>Read-only</td>
+<td>Full data + oplog snapshot for backup</td>
+</tr>
+<tr>
+<td><code>clusterMonitor</code></td>
+<td>Cluster metadata</td>
+<td>Read-only</td>
+<td>Topology awareness, safe scheduling</td>
+</tr>
+<tr>
+<td><code>restore</code></td>
+<td>All databases</td>
+<td>Write</td>
+<td>Replay data during restore operations</td>
+</tr>
+<tr>
+<td><code>pbmAnyAction</code></td>
+<td>All resources</td>
+<td>Any action</td>
+<td>Privileged commands not covered by built-in roles (<code>applyOps</code>, <code>_configsvrBalancerStop</code>, <code>_configsvrBalancerStatus</code>, <code>shutdown</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="built-in-mongodb-roles">Built-in MongoDB roles<a class="headerlink" href="#built-in-mongodb-roles" title="Permanent link">¶</a></h2>
+<h3 id="readwrite-on-admin-db"><code>readWrite</code> (on <code>admin</code> db)<a class="headerlink" href="#readwrite-on-admin-db" title="Permanent link">¶</a></h3>
+<p>PBM stores its operational metadata — backup status, restore progress, configuration, and agent coordination — in the PBM control collections in the <code>admin</code> database (for example, <code>admin.pbmConfig</code>, <code>admin.pbmBackups</code>, <code>admin.pbmAgents</code>, and others; see <a href="control-collections.html">PBM control collections</a>). The <code>readWrite</code> role grants PBM the ability to read from and write to these collections so all agents in a cluster can share state and coordinate operations.
+This role is scoped to the <code>admin</code> database only. It does not grant read or write access to application databases.</p>
+<h3 id="backup"><code>backup</code><a class="headerlink" href="#backup" title="Permanent link">¶</a></h3>
+<p>The <code>backup</code> role is a MongoDB built-in role that allows reading all data across all databases and collections (via <code>listDatabases</code>, <code>listCollections</code>, and <code>find</code> on all namespaces), as well as reading the oplog (<code>local.oplog.rs</code>). PBM requires this to stream a consistent snapshot of all data during a backup, including the oplog data needed for point-in-time recovery (PITR).</p>
+<p>This is a read-only role with respect to application data. No write access to application databases is granted by this role alone.</p>
+<h3 id="clustermonitor"><code>clusterMonitor</code><a class="headerlink" href="#clustermonitor" title="Permanent link">¶</a></h3>
+<p>PBM agents need to query the cluster topology and health — member states, replication lag, shard configuration, and whether a node is primary or secondary — to make safe decisions about where to run a backup, when to wait for replication to catch up, and how to coordinate across a replica set or sharded cluster. The <code>clusterMonitor</code> role grants access to commands like <code>serverStatus</code>, <code>replSetGetStatus</code>, <code>listShards</code>, and similar diagnostic commands.</p>
+<p>This role grants read-only access to monitoring and operational metadata. It does not allow modifying cluster configuration or accessing application data.</p>
+<h3 id="restore"><code>restore</code><a class="headerlink" href="#restore" title="Permanent link">¶</a></h3>
+<p>During a restore operation, PBM needs to write data back into all databases and collections, recreate indexes, and replay oplog entries to reach a consistent point-in-time state. The <code>restore</code> role grants the necessary <code>insert</code>, <code>update</code>, and <code>createCollection</code>/<code>createIndex</code> privileges across all namespaces to perform these operations.</p>
+<p>This role is only exercised during a restore operation. It grants broad write privileges and should be treated as a sensitive, privileged role in your access review process.</p>
+<h2 id="custom-role">Custom role<a class="headerlink" href="#custom-role" title="Permanent link">¶</a></h2>
+<h3 id="pbmanyaction-custom-role-on-admin-db"><code>pbmAnyAction</code> (custom role on <code>admin</code> db)<a class="headerlink" href="#pbmanyaction-custom-role-on-admin-db" title="Permanent link">¶</a></h3>
+<p>This custom role grants the <code>anyAction</code> privilege on <code>anyResource</code>, which is effectively full administrative access. PBM uses this capability for a limited set of commands that fall outside what the standard built-in roles cover:
+- <code>setParameter</code> / <code>getParameter</code> — to read or temporarily adjust certain <code>mongod</code> parameters during backup/restore (for example, disabling the balancer on sharded clusters).
+- <code>fsync</code> / <code>fsyncUnlock</code> — on some backup paths (particularly for physical/hot backups with Percona Server for MongoDB), PBM may need to flush and lock the WiredTiger storage engine.
+- Oplog-related and internal commands — certain replication and storage-engine commands needed for consistent point-in-time backups are not exposed by any standard role.</p>
+<div class="admonition note">
+<p class="admonition-title">Compliance note</p>
+<p>This is the most privileged role in the set. It is intentionally custom and narrowly justified by gaps in MongoDB’s built-in role model. This role is assigned to a dedicated service account (<code>pbmuser</code>) used exclusively by the PBM agent process — not by any human operator or application.</p>
+</div>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 18, 2022 08:51:11 UTC">August 18, 2022</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 22, 2026 09:05:28 UTC">June 22, 2026</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 18, 2022 08:51:11 UTC">August 18, 2022</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 22, 2026 09:05:28 UTC">June 22, 2026</span>
       
     
   </small>

@@ -3976,6 +3976,8 @@
       
         
       
+        
+      
     
     
     
@@ -4143,6 +4145,34 @@
     
   
     Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="details/pbm-user-roles.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PBM user database roles
   
 
     
@@ -7582,6 +7612,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#details-pbm-user-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PBM user database roles
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8897,6 +8938,7 @@ COPY<span class="w"> </span>--from<span class="o">=</span>pbm<span class="w"> </
 </li>
 </ol>
 <p>You can change the <code>username</code> and <code>password</code> values and specify other options for the <code>createUser</code> command as you require. But you must grant this user the roles as shown above.</p>
+<p>For an explanation of why each role is required and what it does and does not grant, see <a href="#details-pbm-user-roles">PBM user roles reference</a>.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>To view all the host+port lists for the shard replica sets in a cluster, run the following command:</p>
@@ -17972,7 +18014,79 @@ pbm<span class="w"> </span>status
 <p>If Percona Backup for MongoDB runs in Amazon Elastic Kubernetes Service (EKS) (e.g. as Percona Operator for MongoDB), it accesses the AWS S3 storage and other services using the credentials stored in the IAM role associated with the service account in EKS and assigned to the Pod where Percona Backup for MongoDB is deployed.  </p>
 <p>This saves you from creating and passing the AWS credentials to Pods explicitly thus increasing the overall security of your deployment.</p>
 <p>To learn more about managing access to EKS, see <a href="https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html">Learn how EKS Pod Identity grants pods access to AWS services <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
-<p>For how to configure Percona Operator for MongoDB to use AWS S3 storage, refer to the <a href="https://docs.percona.com/percona-operator-for-mongodb/backups-storage.html#amazon-s3-or-s3-compatible-storage">Configure storage for backups <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> documentation.</p></body></html></section></section><section class="print-page" id="release-notes" heading-number="13"><html><head>
+<p>For how to configure Percona Operator for MongoDB to use AWS S3 storage, refer to the <a href="https://docs.percona.com/percona-operator-for-mongodb/backups-storage.html#amazon-s3-or-s3-compatible-storage">Configure storage for backups <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> documentation.</p></body></html></section><section class="print-page" id="details-pbm-user-roles" heading-number="12.6"><html><head>
+        <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
+        })
+        </script>
+        </head><body><h1 id="pbm-user-database-roles">PBM user database roles<a class="headerlink" href="#details-pbm-user-roles-pbm-user-database-roles" title="Permanent link">¶</a></h1>
+<p>Percona Backup for MongoDB requires a dedicated database user holding a specific set of MongoDB roles. The table below gives a quick overview; the sections that follow explain why each role is needed and what it does — and does not — grant.</p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Scope</th>
+<th>Access type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readWrite</code></td>
+<td><code>admin</code> db only</td>
+<td>Read + write</td>
+<td>PBM metadata / agent coordination collections</td>
+</tr>
+<tr>
+<td><code>backup</code></td>
+<td>All databases</td>
+<td>Read-only</td>
+<td>Full data + oplog snapshot for backup</td>
+</tr>
+<tr>
+<td><code>clusterMonitor</code></td>
+<td>Cluster metadata</td>
+<td>Read-only</td>
+<td>Topology awareness, safe scheduling</td>
+</tr>
+<tr>
+<td><code>restore</code></td>
+<td>All databases</td>
+<td>Write</td>
+<td>Replay data during restore operations</td>
+</tr>
+<tr>
+<td><code>pbmAnyAction</code></td>
+<td>All resources</td>
+<td>Any action</td>
+<td>Privileged commands not covered by built-in roles (<code>applyOps</code>, <code>_configsvrBalancerStop</code>, <code>_configsvrBalancerStatus</code>, <code>shutdown</code>)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="details-pbm-user-roles-built-in-mongodb-roles">Built-in MongoDB roles<a class="headerlink" href="#details-pbm-user-roles-built-in-mongodb-roles" title="Permanent link">¶</a></h2>
+<h3 id="details-pbm-user-roles-readwrite-on-admin-db"><code>readWrite</code> (on <code>admin</code> db)<a class="headerlink" href="#details-pbm-user-roles-readwrite-on-admin-db" title="Permanent link">¶</a></h3>
+<p>PBM stores its operational metadata — backup status, restore progress, configuration, and agent coordination — in the PBM control collections in the <code>admin</code> database (for example, <code>admin.pbmConfig</code>, <code>admin.pbmBackups</code>, <code>admin.pbmAgents</code>, and others; see <a href="#details-control-collections">PBM control collections</a>). The <code>readWrite</code> role grants PBM the ability to read from and write to these collections so all agents in a cluster can share state and coordinate operations.
+This role is scoped to the <code>admin</code> database only. It does not grant read or write access to application databases.</p>
+<h3 id="details-pbm-user-roles-backup"><code>backup</code><a class="headerlink" href="#details-pbm-user-roles-backup" title="Permanent link">¶</a></h3>
+<p>The <code>backup</code> role is a MongoDB built-in role that allows reading all data across all databases and collections (via <code>listDatabases</code>, <code>listCollections</code>, and <code>find</code> on all namespaces), as well as reading the oplog (<code>local.oplog.rs</code>). PBM requires this to stream a consistent snapshot of all data during a backup, including the oplog data needed for point-in-time recovery (PITR).</p>
+<p>This is a read-only role with respect to application data. No write access to application databases is granted by this role alone.</p>
+<h3 id="details-pbm-user-roles-clustermonitor"><code>clusterMonitor</code><a class="headerlink" href="#details-pbm-user-roles-clustermonitor" title="Permanent link">¶</a></h3>
+<p>PBM agents need to query the cluster topology and health — member states, replication lag, shard configuration, and whether a node is primary or secondary — to make safe decisions about where to run a backup, when to wait for replication to catch up, and how to coordinate across a replica set or sharded cluster. The <code>clusterMonitor</code> role grants access to commands like <code>serverStatus</code>, <code>replSetGetStatus</code>, <code>listShards</code>, and similar diagnostic commands.</p>
+<p>This role grants read-only access to monitoring and operational metadata. It does not allow modifying cluster configuration or accessing application data.</p>
+<h3 id="details-pbm-user-roles-restore"><code>restore</code><a class="headerlink" href="#details-pbm-user-roles-restore" title="Permanent link">¶</a></h3>
+<p>During a restore operation, PBM needs to write data back into all databases and collections, recreate indexes, and replay oplog entries to reach a consistent point-in-time state. The <code>restore</code> role grants the necessary <code>insert</code>, <code>update</code>, and <code>createCollection</code>/<code>createIndex</code> privileges across all namespaces to perform these operations.</p>
+<p>This role is only exercised during a restore operation. It grants broad write privileges and should be treated as a sensitive, privileged role in your access review process.</p>
+<h2 id="details-pbm-user-roles-custom-role">Custom role<a class="headerlink" href="#details-pbm-user-roles-custom-role" title="Permanent link">¶</a></h2>
+<h3 id="details-pbm-user-roles-pbmanyaction-custom-role-on-admin-db"><code>pbmAnyAction</code> (custom role on <code>admin</code> db)<a class="headerlink" href="#details-pbm-user-roles-pbmanyaction-custom-role-on-admin-db" title="Permanent link">¶</a></h3>
+<p>This custom role grants the <code>anyAction</code> privilege on <code>anyResource</code>, which is effectively full administrative access. PBM uses this capability for a limited set of commands that fall outside what the standard built-in roles cover:
+- <code>setParameter</code> / <code>getParameter</code> — to read or temporarily adjust certain <code>mongod</code> parameters during backup/restore (for example, disabling the balancer on sharded clusters).
+- <code>fsync</code> / <code>fsyncUnlock</code> — on some backup paths (particularly for physical/hot backups with Percona Server for MongoDB), PBM may need to flush and lock the WiredTiger storage engine.
+- Oplog-related and internal commands — certain replication and storage-engine commands needed for consistent point-in-time backups are not exposed by any standard role.</p>
+<div class="admonition note">
+<p class="admonition-title">Compliance note</p>
+<p>This is the most privileged role in the set. It is intentionally custom and narrowly justified by gaps in MongoDB’s built-in role model. This role is assigned to a dedicated service account (<code>pbmuser</code>) used exclusively by the PBM agent process — not by any human operator or application.</p>
+</div></body></html></section></section><section class="print-page" id="release-notes" heading-number="13"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -20952,6 +21066,8 @@ we will do our very best to be helpful.</p></body></html></section><section clas
 .print-site-enumerate-headings #intro > h1:before { content: '12.4 ' }
 
 .print-site-enumerate-headings #details-authentication > h1:before { content: '12.5 ' }
+
+.print-site-enumerate-headings #details-pbm-user-roles > h1:before { content: '12.6 ' }
 
 .print-site-enumerate-headings #release-notes > h1:before { content: '13 ' }
 
