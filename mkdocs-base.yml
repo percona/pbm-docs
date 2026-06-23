@@ -340,7 +340,7 @@ nav:
       - "About Percona Backup for MongoDB documentation": about-docs.md
       - reference/sboms-pbm.md
       - reference/glossary.md
-      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/2.15.0/CONTRIBUTING.md'
+      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md'
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md
       - Code of conduct: CODE_OF_CONDUCT.md
