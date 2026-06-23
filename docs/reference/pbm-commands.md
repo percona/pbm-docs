@@ -25,6 +25,7 @@ The command accepts the following flags:
 | `--compression`| Create a backup with compression. <br> Supported compression methods: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2` <br> The `none` value means no compression is done during backup. |
 | `--compression-level` | Configure the compression level from 0 to 10. The default value depends on the compression method used.  |
 | `--num-parallel-collections`| Sets the number of collections to process in parallel during a specific logical backup. When undefined, `pbm-agent` processes the number of parallel collections defined for the `backup.numParallelCollections` configuration parameter. If that is undefined, the default number of collections to process in parallel is the half of the number of logical CPUs. Available starting with version 2.7.0.|
+| `--num-parallel-files`| Sets the number of files to process in parallel during a specific physical backup. When undefined, `pbm-agent` uses the value defined for the `backup.numParallelFiles` configuration parameter. If that is undefined, the default number of files to process in parallel is `1`. |
 | `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
 | `--wait`       | Wait for the backup to finish. The flag blocks the shell session.|
 | `--wait-time`  | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). <br><br>When not set, PBM waits till the command executes. <br><br>If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.| 
@@ -940,6 +941,7 @@ The command accepts the following flags:
 | `--with-users-and-roles` | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.| 
 | `-c`, `--config`     | The path to the `mongod.conf` file |
 | `--num-parallel-collections`| Sets the number of collections to process in parallel during a specific logical restore. When undefined, `pbm-agent` processes the number of parallel collections defined for the `restore.numParallelCollections` configuration parameter. If that is undefined,  the default number of collections is the half of the number of logical CPUs. Available starting with version 2.7.0.|
+| `--num-parallel-files` | Sets the number of files to copy in parallel during a specific physical restore from filesystem or NFS storage. When undefined, PBM uses the value configured for the `restore.numParallelFiles` option (default: `1`). |
 | `--num-insertion-workers-per-collection`| Specifies the number of insertion workers to run concurrently per collection. Increasing the number for large import may increase the speed of the import. Available starting with version 2.8.0.|
 | `--ns-from`="database.collection" |Specifies the name of the collection you want to restore under a new name. It indicates the collection present in the backup that you are targeting for restoration. Available starting with version 2.8.0.|
 | `--ns-to`="database.collection" | Specifies the new name for the collection you are restoring from the original one. Available starting with version 2.8.0.|
@@ -1118,8 +1120,6 @@ The command accepts the following flags:
         }
     }
     ```
-
-
 
 ## pbm version
 
