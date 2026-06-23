@@ -132,7 +132,7 @@ restore:
        "node03:27017": /another/path/to/mongod
 ```
 
-When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
+When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/2.15.0/install/docker.html) for more information.
 
 ### Parallel data download
 
@@ -157,6 +157,25 @@ restore:
 * `maxDownloadBufferMb` - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as `numDownloadWorkers * downloadChunkMb * 16`
 * `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
 
+### Parallel file copy for filesystem or NFS storage
+
+By default, PBM copies backup files sequentially during a physical restore from filesystem or NFS storage. On fast NFS mounts, this limits restore throughput regardless of available network bandwidth.
+
+To copy files in parallel, set `restore.numParallelFiles` in the PBM configuration:
+
+```yaml
+restore:
+  numParallelFiles: 4
+```
+
+Or pass `--num-parallel-files`:
+
+```sh
+pbm restore <backup_name> --num-parallel-files=4
+```
+
+!!! note
+    Parallel file copy applies to **physical restores from filesystem or NFS storage only**. It has no effect on logical restores or on S3-compatible storage.
 
 ## Next steps
 

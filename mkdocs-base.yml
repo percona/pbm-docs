@@ -8,7 +8,7 @@ copyright: >
   — <a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
-edit_uri: edit/2.14.0/docs/
+edit_uri: edit/2.15.0/docs/
 
 use_directory_urls: false
 
@@ -132,7 +132,7 @@ plugins:
   git-committers:
     enabled: !ENV [CI, false]
     repository: percona/pbm-docs
-    branch: "2.14.0"
+    branch: "2.15.0"
   tags: {}
   glightbox: {}
   open-in-new-tab: {}
@@ -175,7 +175,7 @@ plugins:
 extra:
   version:
     provider: mike
-  # homepage: https://docs.percona.com
+#  homepage: https://docs.percona.com
 
 nav:
   - Home: index.md
@@ -241,6 +241,9 @@ nav:
   - Storage:
       - Remote backup storage overview: details/storage-configuration.md
       - AWS S3 storage: details/s3-storage.md
+      - Oracle Cloud Infrastructure (OCI) Object Storage:
+          - Overview: details/oci-storage.md
+          - Workload Identity authentication (OCI): details/oci-wif.md
       - details/minio.md
       - details/gcs.md
       - Workload Identity authentication: details/workload-identity-auth.md
@@ -287,10 +290,13 @@ nav:
       - PBM control collections: details/control-collections.md
       - How PBM works: 'intro.md'
       - details/authentication.md
+      - details/pbm-user-roles.md
+
   - Release notes:
       - release-notes.md
       - PBM 2.x:
-        - "{{pbm.full_name}} 2.14.0 ({{date.2_14_0}})": release-notes/2.14.0.md
+        - "{{pbm.full_name}} 2.15.0 ({{date.2_15_0}})": release-notes/2.15.0.md
+        - release-notes/2.14.0.md
         - release-notes/2.13.0.md
         - release-notes/2.12.0.md
         - release-notes/2.11.0.md
@@ -337,8 +343,9 @@ nav:
         - 'Percona Backup for MongoDB 0.5.0 (2019-06-17)': 'release-notes/0.5.0.md'
   - Reference:
       - "About Percona Backup for MongoDB documentation": about-docs.md
+      - reference/sboms-pbm.md
       - reference/glossary.md
-      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md'
+      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/2.15.0/CONTRIBUTING.md'
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md
       - Code of conduct: CODE_OF_CONDUCT.md

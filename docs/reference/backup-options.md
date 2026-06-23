@@ -13,6 +13,7 @@ backup:
     startingStatus: 60
   oplogSpanMin: <float64>
   numParallelCollections: <int>
+  numParallelFiles: <int>
 ```
 
 ## priority
@@ -121,3 +122,14 @@ The duration (in minutes) of oplog slices saved with the logical backup snapshot
 The number of parallel collections to process during a logical backup. By default, the number of parallel collections is half of the number of CPU cores. By setting the value for this option you define the new default.
 Available starting with version 2.7.0.
 
+
+## backup.numParallelFiles
+
+*Type*: int <br>
+*Default*: 1 <br>
+*Storage*: Filesystem / NFS only <br>
+*Backup type:* Physical only
+
+The number of files to copy in parallel during a physical backup to filesystem or NFS storage.
+
+The default value is `1`, which copies files sequentially.

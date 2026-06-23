@@ -32,7 +32,6 @@ By default, Docker will pull the image from Docker Hub if it is not available lo
 
 Start Percona Backup for MongoDB container with the following command:
 
-
 ```bash
 docker run --name <container-name> -e PBM_MONGODB_URI="mongodb://<PBM_USER>:<PBM_USER_PASSWORD>@<HOST>:<PORT>" -d percona/percona-backup-mongodb:<tag>
 ```
@@ -94,7 +93,7 @@ docker exec -it <container-name> pbm backup
 
 where `<container-name>` is the name you assigned to the container and `pbm backup` is the command to start a backup.
 
-In the same way you can run other pbm commands. Find the full list of available commands in [Percona Backup for MongoDB reference](https://docs.percona.com/percona-backup-mongodb/2.14.0/reference/pbm-commands.html).
+In the same way you can run other pbm commands. Find the full list of available commands in [Percona Backup for MongoDB reference](https://docs.percona.com/percona-backup-mongodb/2.15.0/reference/pbm-commands.html).
 
 ## Next steps
 

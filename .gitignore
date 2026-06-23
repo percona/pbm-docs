@@ -9,6 +9,7 @@ venv/
 # Local Netlify folder
 .netlify
 site
+.cache/
 
 styles/
 
@@ -16,3 +17,6 @@ styles/
 
 !styles/config/vocabularies/Percona/**
 .cache/
+
+# Generated plugin cache
+.cache/plugin/git-committers/
