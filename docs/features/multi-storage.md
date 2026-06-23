@@ -15,13 +15,80 @@ This ability to define multiple storages for backups brings the following benefi
 * Saves costs on data transfer in case of cloud storages
 * Increases effectiveness of following your organization’s backup policy either via your own applications and tools interfaced with PBM or via Percona Everest
 
-## Configuration profiles 
+## Configuration profiles
 
 By default, PBM stores backups and point-in-time recovery oplog slices to the remote backup storage which you defined in the configuration file during the initial setup. This is the **main** backup storage.
 
 To make backups to additional – **external** backup storages, a concept of a configuration profile is introduced. A configuration profile is a file that stores only the configuration for an external backup storage.
 
-Here’s the example of the configuration profile:
+### Select a storage with --profile
+
+When multiple storages are configured, PBM commands can operate on:
+
+- The main storage (configured in PBM as the default backup destination).
+
+- An external storage defined as a configuration profile.
+
+To choose which storage a command should use, pass the `--profile` flag.
+
+#### Commands that support `--profile`
+
+These PBM commands accept the `--profile` flag:
+
+- `pbm backup`
+
+- `pbm delete-backup`
+
+- `pbm cleanup`
+
+- `pbm list`
+
+- `pbm status`
+
+If you do not specify `--profile`, PBM uses the command’s default behavior.
+
+#### Allowed values
+
+You can set `--profile` to one of the following:
+
+- `--profile=main` **→** Use the main storage.
+
+- `--profile=<profile_name>` **→** Use an external storage identified by an existing configuration profile name.
+
+??? example "Examples"
+
+	```bash
+	# List backups from main storage
+	pbm list --profile=main
+
+	# List backups from an external storage profile
+	pbm list --profile=minio
+
+	# Show status using an external storage profile
+	pbm status --profile=minio
+
+	# Write a backup to an external storage profile
+	pbm backup -t physical --profile=minio --wait
+	```
+
+#### Reserved names and profile naming rules
+
+- `main` is a reserved CLI keyword that always refers to the **main storage**.
+- PBM CLI will reject empty string `("")` and `main` as profile names.
+
+
+#### Removing a legacy profile named main
+
+If a profile named `main` already exists from older configurations, rename it by removing and re-adding it under a different name. For compatibility, the command below treats main as a profile name (not the reserved keyword):
+
+```bash
+pbm profile remove "main"
+pbm profile add "different_name" /path/to/config.yaml
+```
+
+After renaming, use `--profile=main` to reference the main storage, and `--profile=<different_name>` to reference the external profile.
+
+#### Example: Configuration profile
 
 ```yaml title="minio.yaml"
 storage:
@@ -97,33 +164,58 @@ Before you start, make sure that `pbm-agents` have the read permissions to backu
 2. To make a point-in-time restore, you must explicitly pass the backup name for the `pbm restore` command:
 
     ```bash
-    pbm-restore --time=<timestamp> --base-snapshot <backup-name>
+    pbm restore --time=<timestamp> --base-snapshot <backup-name>
     ```
 
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 3. After the restore is complete, do the required post-restore steps depending on the restore type.
 4. Make a fresh backup to serve as the new base for future restores. 
 
 ## Delete backups
 
-You can delete backups from an external storage only by name. 
+You can delete backups from an external storage by name or by specifying a time threshold with the `--profile` flag. To delete backups older than a specified time from an external storage, you must run PBM version 2.13.0 and newer.
 
-Run the `pbm delete` command and pass the backup name:
+=== "Delete by backup name"
 
-```bash
-pbm delete-backup 2024-06-25T10:54:55Z
-```
+    Run the `pbm delete-backup` command and pass the backup name:
+
+    ```bash
+    pbm delete-backup 2024-06-25T10:54:55Z
+    ```
+
+=== "Delete backups older than specified time"
+
+    Starting with version [2.13.0](../release-notes/2.13.0.md), you can delete backups that are older than a specified time from external storages. Use the `--older-than` flag to set the retention period, and include the `--profile` flag to define the target storage. 
+    The `--profile` flag works only with the `--older-than` flag. If you pass it with the backup name, PBM fails the delete operation and reports an error.
+
+    You can use either the `pbm delete-backup` command to include only backups, or `pbm cleanup` command to also include point-in-time recovery oplog slices:
+
+    Example of the `pbm delete-backup` command:
+    
+    ```bash
+    pbm delete-backup --older-than 30d --profile=minio -y
+    ```
+
+    Example of the `pbm cleanup` command:
+
+    ```bash
+    pbm cleanup --older-than 30d --profile=minio -y
+    ```
+
+    When you omit the `--profile` flag, PBM deletes outdated data on the default (main) storage and automatically updates the metadata without requiring a manual resync.
 
 ## Implementation specifics
 
 1. You can make backups of any type except snapshot-based ones on the external storage.
 2. To start point-in-time recovery oplog slicing, you must make a backup on the main storage. A backup from an external storage is not considered a valid base backup for oplog slicing.
 3. PBM saves point-in-time recovery oplog ranges only on the main storage. Backups are saved on the storage that you define when starting a backup. 
-4. Backup process on the external storage doesn’t stop point-in-time recovery oplog slicing on the main storage. Thus, PBM saves oplog chunks related to such backups on both the main and the external storages
+4. Backup process on the external storage doesn't stop point-in-time recovery oplog slicing on the main storage. Thus, PBM saves oplog chunks related to such backups on both the main and the external storages
 5. The whole incremental chain must be stored on the same storage. To change the storage for incremental backups, you must start a new backup chain with the incremental base backup on the new storage.
 6. To restore from a backup on external storage, `pbm-agents` must have read permissions on it.
 7. To make a point-in-time recovery, you must specify the backup name via the `--base-snapshot` flag. Without it, PBM searches for the base backup on the main storage.
-8. You can delete backups from external storages only by name using the `pbm delete-backup <backup-name>` command. 
-9. You can delete backups older than the specified time using the `pbm delete-backup --older-than <time>` or `pbm cleanup --older-than <time>` commands only from the **main** storage. 
+8. You can delete backups from external storages by name using the `pbm delete-backup <backup-name>` command. 
+9. Starting with version 2.13.0, you can delete backups older than the specified time from external storages using the `pbm delete-backup --older-than <time> --profile=<profile-name>` or `pbm cleanup --older-than <time> --profile=<profile-name>` commands. Without the `--profile=<profile-name>` flag, PBM deletes data on the main storage. When you run cleanup on the main storage, PBM automatically updates the metadata without requiring a manual resync. 
 
 
 

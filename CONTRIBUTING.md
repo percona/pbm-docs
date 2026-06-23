@@ -10,6 +10,30 @@ This repository contains the source file for PBM documentation and this document
 
 If you'd like to submit a code patch, follow the [Contributing guide in PBM code repository](https://github.com/percona/percona-backup-mongodb/blob/main/CONTRIBUTING.md). 
 
+By contributing, you agree to the [Percona Community code of conduct](https://github.com/percona/community/blob/main/content/contribute/coc.md).
+
+## How to contribute
+
+You can contribute to documentation in the following ways:
+
+**1. Request a doc change through a Jira issue**
+
+If you've spotted a doc issue (a typo, broken links, inaccurate instructions, etc.) but don't have time nor desire to fix it yourself - let us know about it.
+
+1. Click the [Jira issue tracker](https://jira.percona.com/projects/PBM/issues) in your browser.
+2. Sign in (create a Jira account if you don't have one).
+3. (Optional but recommended) Search if the issue you want to report is already reported.
+4. Click the [Create issue](https://perconadev.atlassian.net/secure/CreateIssue.jspa) shortcut to create an issue
+5. Select the Percona Backup for MongoDB in the Project dropdown and the issue type in the Issue Type dropdown. Click Next.
+6. Describe the issue you have detected in the Summary, Description, Steps To Reproduce, Affects Version fields. 
+7. Click Create.
+
+**2. Leave your feedback**
+
+We'd like to hear from you. Click **Rate this page** and leave your feedback. We will appreciate you leaving your email so that we can reach out to you with clarifications or updates, if needed.
+
+3. **[Contribute to documentation yourself](#contribute-to-documentation-yourself)**
+
 ## Contributing to documentation
 
 Percona Backup for MongoDB documentation is written in [Markdown] language, so you can 
@@ -22,7 +46,7 @@ The doc files are in the `docs` directory.
 
 ### Edit documentation online via GitHub
 
-1. Click the <img src="_resource/.icons/edit_page.png" width="20px" height="20px"/> **Edit this page** icon next to the page title. The source `.md` file of the page opens in GitHub editor in your browser. If you haven’t worked with the repository before, GitHub creates a [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) of it for you.
+1. Click the **Edit this page** link on the sidebar. The source `.md` file of the page opens in GitHub editor in your browser. If you haven't worked with the repository before, GitHub creates a [fork](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo) of it for you.
 
 2. Edit the page. You can check your changes on the **Preview** tab.
 
@@ -48,7 +72,7 @@ The steps are the following:
 git clone git@github.com:<your_name>/pbm-docs.git
 ```
 
-3. Change the directory to ``pbm-docs`` and add the remote upstream repository:
+3. Change the directory to `pbm-docs` and add the remote upstream repository:
 
 ```sh
 git remote add upstream git@github.com:percona/pbm-docs.git
@@ -60,14 +84,17 @@ git remote add upstream git@github.com:percona/pbm-docs.git
 git fetch upstream
 git merge upstream/main
 ```
+  
+  Always pull the latest changes before you start editing the documentation.
 
-5. Create a separate branch for your changes
+
+5. Create a separate branch for your changes. If there is a Jira ticket related to your contribution, name your branch in the following way: `<Jira issue number>-<short description>`. For example
 
 ```sh
-git checkout -b <my_branch>
+git checkout -b PBM-123-My-fix
 ```
 
-6. Make changes. See the [Repository structure](#repository-structure) to for details what files this repo contains and their purpose.
+6. Make changes. See the [Repository structure](#repository-structure) for details what files this repo contains and their purpose. 
 7. Check your changes. Some editors (Sublime Text, VSCode and others) have the Markdown preview which you can use to check how the page is rendered. Alternatively, you can [build the documentation](#building-the-documentation) to know exactly how the documentation looks on the web site.
 8. Commit your changes. The [commit message guidelines](https://gist.github.com/robertpainsi/b632364184e70900af4ab688decf6f53) will help you with writing great commit messages
 
@@ -75,32 +102,9 @@ git checkout -b <my_branch>
 
 ### Building the documentation
 
-To verify how your changes look, generate the static site with the documentation. This process is called *building*. You can do it in these ways:
+To verify how your changes look, generate the static site with the documentation. This process is called *building*. 
 
-- [Use Docker](#use-docker)
-- [Install MkDocs and build locally](#install-sphinx-and-build-locally)
-
-#### Use Docker
-
-1. [Get Docker](https://docs.docker.com/get-docker/)
-2. We use [our Docker image](https://hub.docker.com/repository/docker/perconalab/pmm-doc-md) to build documentation. Run the following command:
-
-```sh
-docker run --rm -v $(pwd):/docs perconalab/pmm-doc-md mkdocs build
-```
-   If Docker can't find the image locally, it first downloads the image, and then runs it to build the documentation.
-
-3. Go to the ``site`` directory and open the ``index.html`` file to see the documentation.
-
-If you want to see the changes as you edit the docs, use this command instead:
-
-```sh
-docker run --rm -v $(pwd):/docs -p 8000:8000 perconalab/pmm-doc-md mkdocs serve --dev-addr=0.0.0.0:8000
-```
-
-Wait until you see `INFO    -  Start detecting changes`, then enter `0.0.0.0:8000` in the browser's address bar. The documentation automatically reloads after you save the changes in source files.
-
-#### Install MkDocs and build locally
+#### Preconditions
 
 1. Install [Python].
 
@@ -110,38 +114,29 @@ Wait until you see `INFO    -  Start detecting changes`, then enter `0.0.0.0:800
     pip install -r requirements.txt
     ```
 
-3. Build the site:
+#### Build the site
+
+1. To build the site, run:
 
     ```sh
     mkdocs build
     ```
 
-4. Open `site/index.html`
+2. Open `site/index.html`
 
-Or, to run the built-in web server:
+#### Live preview
+
+To view your changes as you make them, run the following command:
 
 ```sh
 mkdocs serve
 ```
 
+Paste the <http://127.0.0.1:8000> in your browser and you will see the documentation. The page reloads automatically as you make changes.
+
 #### PDF
 
-To create the PDF version of the documentation, use the following command:
-
-* With Docker:
-
-    ```sh
-    docker run --rm -v $(pwd):/docs -e ENABLE_PDF_EXPORT=1 perconalab/pmm-doc-md mkdocs build -f mkdocs-pdf.yml
-    ```
-
-* Without:
-
-    ```sh
-    ENABLE_PDF_EXPORT=1 mkdocs build -f mkdocs-pdf.yml
-    ```
-
-The PDF is in `site/_pdf`.
-
+To build the PDF documentation, open the `site/print_page.html` in your browser. Save it as PDF. Depending on the browser, you may need to select the Export to PDF, Print - Save as PDF or just Save and select PDF as the output format.
 
 ## After your pull request is merged
 
@@ -152,19 +147,20 @@ Once your pull request is merged, you are an official Percona Community Contribu
 The repository includes the following directories and files:
 
 - `mkdocs-base.yml` - the base configuration file. It includes general settings and documentation structure.
-- `mkdocs.yml` - configuration file. Contains the settings for building the docs with Material theme.
-- `mkdocs-pdf.yml` - configuration file. Contains the settings for building the PDF docs.
+- `mkdocs.yml` - configuration file. Contains the settings for building the docs with the Material theme.
 - `docs`:
   - `*.md` - Source markdown files.
   - `_images` - Images, logos and favicons
+  - `_templates` - The PDF cover page template
   - `css` - Styles
   - `js` - Javascript files
-- `_resource`:
-   - `templates`:
-     - ``styles.scss`` - Styling for PDF documents
-   - `theme`:
-      - `main.html` - The layout template for hosting the documentation on Percona website
-   - overrides - The folder with the Material theme template customization for builds
+  - `fonts` - Fonts used in the docs
+- `_resource` - The set of Material theme templates with our customizations  
+  - `.icons` - Custom icons used in the documentation
+  - `overrides`:
+    - `partials` - The layout templates for various parts of the documentation such as header, copyright and others.
+    - `main.html` - The layout template for hosting the documentation on Percona website
+- `_resourcepdf` - The set of Material theme templates with our customizations for PDF builds
 - `site` - This is where the output HTML files are put after the build
 
 

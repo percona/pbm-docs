@@ -94,7 +94,7 @@ docker exec -it <container-name> pbm backup
 
 where `<container-name>` is the name you assigned to the container and `pbm backup` is the command to start a backup.
 
-In the same way you can run other pbm commands. Find the full list of available commands in [Percona Backup for MongoDB reference](https://docs.percona.com/percona-backup-mongodb/reference/pbm-commands.html).
+In the same way you can run other pbm commands. Find the full list of available commands in [Percona Backup for MongoDB reference](https://docs.percona.com/percona-backup-mongodb/2.14.0/reference/pbm-commands.html).
 
 ## Next steps
 

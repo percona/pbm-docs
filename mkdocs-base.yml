@@ -4,11 +4,11 @@ site_name: Percona Backup for MongoDB
 site_description: documentation
 site_author: Percona LLC
 copyright: >
-  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2025
+  <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2026
   — <a href="#" onclick="Osano.cm.showDrawer('osano-cm-dom-info-dialog-open')">Cookie Preferences</a>
 repo_name: percona/pbm-docs
 repo_url: https://github.com/percona/pbm-docs
-edit_uri: edit/main/docs/
+edit_uri: edit/2.14.0/docs/
 
 use_directory_urls: false
 
@@ -74,10 +74,12 @@ extra_css:
   - css/mongodb.css
   - css/landing.css
   - css/nocopy.css
+  - css/rating.css
 
 extra_javascript:
   - js/promptremover.js
   - js/consent.js
+  - js/rating.js
 
 markdown_extensions:
   abbr: {}
@@ -130,7 +132,7 @@ plugins:
   git-committers:
     enabled: !ENV [CI, false]
     repository: percona/pbm-docs
-    branch: "main"
+    branch: "2.14.0"
   tags: {}
   glightbox: {}
   open-in-new-tab: {}
@@ -151,7 +153,6 @@ plugins:
       css_dir: css
       javascript_dir: js
       canonical_version: null
-
   print-site:
       add_to_navigation: false
       print_page_title: 'Percona Backup for MongoDB documentation'
@@ -171,6 +172,11 @@ plugins:
       include_css: true
       enabled: true
 
+extra:
+  version:
+    provider: mike
+  # homepage: https://docs.percona.com
+
 nav:
   - Home: index.md
   - get-help.md
@@ -185,6 +191,7 @@ nav:
       - 2. Set up and configure:
         - Initial setup: install/initial-setup.md
         - install/configure-authentication.md
+        - Secure credentials with systemd: install/secure-credentials-systemd.md
         - install/backup-storage.md
         - Start the pbm-agent process: install/start-pbm-agent.md
   - Backup and restore:
@@ -209,6 +216,7 @@ nav:
           - Overview: features/snapshots.md
           - Make a snapshot-based backup: usage/backup-external.md
           - Restore from a snapshot-based backup: usage/restore-external.md
+          - External restore with pbm-agent restart: usage/restore-external-agent-restart.md
         - Point-in-time recovery:
           - Overview: features/point-in-time-recovery.md
           - From logical backup: usage/pitr-tutorial.md
@@ -232,9 +240,10 @@ nav:
         - Backup management via PMM: pmm.md
   - Storage:
       - Remote backup storage overview: details/storage-configuration.md
-      - AWS storage: details/s3-storage.md
+      - AWS S3 storage: details/s3-storage.md
       - details/minio.md
       - details/gcs.md
+      - Workload Identity authentication: details/workload-identity-auth.md
       - details/azure.md
       - details/oss.md
       - details/filesystem-storage.md
@@ -249,6 +258,7 @@ nav:
       - reference/backup-options.md
       - reference/restore-options.md
       - reference/logging-options.md
+      - reference/pbm-agent-config-options.md
   - Administer PBM:
       - manage/overview.md
       - 'PBM configuration via pipelines': 'manage/configure-remotely.md'
@@ -280,7 +290,9 @@ nav:
   - Release notes:
       - release-notes.md
       - PBM 2.x:
-        - "{{pbm.full_name}} 2.12.0 ({{date.2_12_0}})": release-notes/2.12.0.md
+        - "{{pbm.full_name}} 2.14.0 ({{date.2_14_0}})": release-notes/2.14.0.md
+        - release-notes/2.13.0.md
+        - release-notes/2.12.0.md
         - release-notes/2.11.0.md
         - release-notes/2.10.0.md
         - release-notes/2.9.1.md
@@ -326,6 +338,7 @@ nav:
   - Reference:
       - "About Percona Backup for MongoDB documentation": about-docs.md
       - reference/glossary.md
-      - reference/contributing.md
+      - Contribution guidelines: 'https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md'
       - Copyright and licensing: copyright.md
       - Trademark policy: trademark-policy.md
+      - Code of conduct: CODE_OF_CONDUCT.md

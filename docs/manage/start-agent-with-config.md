@@ -62,3 +62,5 @@ For the initial `pbm-agent` start, you require the credentials of a `pbm` user. 
     ```bash
     pbm-agent -f /etc/pbm-agent.yaml
 	```
+
+See all available configuration options in the [pbm-agent configuration file options](../reference/pbm-agent-config-options.md) reference.

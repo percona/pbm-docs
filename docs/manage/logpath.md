@@ -20,7 +20,7 @@ You can define a logging configuration when you start a `pbm-agent` as follows:
 
 * using the command line flags. This setting has the highest priority and overrides other setup options.
 * using environment variables 
-* via the configuration file. This setting is available starting with version 2.9.0.
+* [via the configuration file](start-agent-with-config.md). This setting is available starting with version 2.9.0.
 
 ## Logging configuration options
 

@@ -13,6 +13,7 @@
     | [2.5.0](../release-notes/2.5.0.md) | Ability to restore databases with users and roles |
     | [2.8.0](../release-notes/2.8.0.md) | Ability to define multiple namespaces for backup |
     | [2.8.0](../release-notes/2.8.0.md) | Ability to restore a single non-sharded collection under a different name |
+    | [2.13.0](../release-notes/2.13.0.md) | Ability to backup specific databases along with their users and roles |
 
 You can back up and restore certain namespaces - databases or collections. For example, if your "Payments" collection in the "Customers" database was corrupted, you can restore only this collection from your full backup. Or, if your "Invoices" database contains sensitive data and must be backed up frequently, you can configure the backup of only this database. 
 
@@ -23,12 +24,14 @@ Using selective backups and restores, you work only with the desired subset of d
 You also drastically reduce time on backup / restore operations of the whole data set and save on storage consumption. 
 
 With the selective backup and restore functionality, you have the following options:
+{.power-number}
 
 1.	Back up a single database or a specific collection and restore all data from it. 
-2.  Back up certain databases and / or collections and restore either full data or specific databases / collections from it.
-2.	Restore a specific collection from a single database backup
-3.	Restore certain databases and / or collections from a full backup
-4.	Make a point-in time recovery for the specified databases / collections. Available for replica sets only.
+2.  Back up certain databases and/or collections and restore either full data or specific databases/collections from it.
+3.	Restore a specific collection from a single database backup
+4.	Restore certain databases and/or collections from a full backup
+5.	Make a point-in time recovery for the specified databases/collections. Available for replica sets only.
+6. Perform selective restore of databases and collections, with the option to include users and roles defined in the database. 
 
 
 ## Sharded collections
@@ -50,7 +53,9 @@ Note that selective backups and restores operate only with data and router confi
 
 During the selective restore, the primary shard for a database is set to the state it had during the backup. For example, the primary shard for the database "Staff" during backup was A. After you restore the  "Staff" database, the primary shard will be set to A even if you moved the primary from A to B before the restore. All non-sharded collections will be restored on A; however, they will not be deleted from B. You must take needed actions (cleanup or move the primary back to B) to maintain them. 
 
-## Restore a database with users and roles
+## Restore with users and roles
+
+### Overview
 
 !!! admonition "Version added: [2.5.0](../release-notes/2.5.0.md)"
 
@@ -61,6 +66,15 @@ Consider these specifics of selective restore with users and roles:
 * You can restore custom databases from a full backup. 
 * Users and roles must be created in custom databases. For security considerations, users created in `admin`, `config` and `local` databases cannot be a part of a selective restore.
 * If users and roles exist in a database during the restore, they will be overwritten from the backup.
+
+To restore a specific namespace and include users and roles, run the following command:
+
+```bash
+pbm restore --ns="mydb.*" --with-users-and-roles <backup-name>
+```
+
+To dive deep into this topic, see the section [selective restore with users and roles](../usage/restore-selective.md#restore-a-database-with-users-and-roles).
+
 
 ## Restore a collection under a different name
 

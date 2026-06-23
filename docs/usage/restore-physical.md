@@ -4,7 +4,7 @@
 
 ## Considerations
 
-1. Disable point-in-time recovery. A restore and point-in-time recovery oplog slicing are incompatible operations and cannot be run simultaneously. 
+1. Disable point-in-time recovery. Restore and point-in-time recovery oplog slicing operations are incompatible with each other and cannot be run simultaneously. 
 
     ```bash
     pbm config --set pitr.enabled=false
@@ -13,6 +13,7 @@
 2. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
 3. Make sure all nodes in the cluster are healthy (i.e. report either PRIMARY or SECONDARY). Each `pbm-agent` needs to be able to connect to its local node and run queries in order to perform the restore.
 4. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
+5. After a physical restore completes, the database remains offline because it is intentionally left down by `pbm-agent`. To bring the database back to normal operation, follow the steps in [Post-restore steps](#post-restore-steps).
 
 ## Before you start
 
@@ -37,6 +38,12 @@
    
 ## Restore a database
 
+!!! warning 
+
+    If Encryption at Rest is enabled, the restore requires access to the same encryption key that was active when the backup was taken.    
+    - For manually managed key files, update mongod.conf on all nodes to point to the original key before starting the restore procedure.
+    - For Hashicorp Vault-managed keys, ensure the historical key version is still available inside Vault. No changes to mongod.conf are required.     
+
 1. List the backups 
 
     ```bash
@@ -49,11 +56,22 @@
     pbm restore <backup_name>
     ```
 
-    During the physical restore, `pbm-agent` processes stop the `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+    
+    After that, `pbm-agent` processes stop `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times. 
 
-    You can [track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
+3. [Track the restore progress](restore-progress.md) using the `pbm describe-restore` command. Don't run any other commands since they may interrupt the restore flow and cause the issues with the database.
 
-    A restore has the `Done` status when it succeeded on all nodes. If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. For either status, proceed with the [post-restore steps](#post-restore-steps). Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
+    ```bash
+    pbm describe-restore <restore_name> -c pbm_config.yaml
+    ```
+
+A restore has the `Done` status when it succeeded on all nodes. 
+
+If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the [Partially done physical restores](../troubleshoot/restore-partial.md) chapter. 
+
+For either status, proceed with the [post-restore steps](#post-restore-steps). 
 
 ### Post-restore steps
 
@@ -90,7 +108,7 @@ After the restore is complete, do the following:
 
 !!! admonition "Version added: [2.0.4](../release-notes/2.0.4.md)"
 
-During physical restores, Percona Backup for MongoDB performs several restarts of the database. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to access the database. If you have defined the custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it: 
+During physical restores, Percona Backup for MongoDB starts a temporary database instance. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to do so. If you have defined a custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it: 
 
 === ":octicons-file-code-24: Configuration file"
 
@@ -105,7 +123,7 @@ During physical restores, Percona Backup for MongoDB performs several restarts o
     pbm config --set restore.mongodLocation=/path/to/mongod/
     ```
 
-If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify your custom paths for each node.
+If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify the custom path for each node.
 
 ```yaml
 restore:
@@ -114,13 +132,13 @@ restore:
        "node03:27017": /another/path/to/mongod
 ```
 
-When running in Docker, include Percona Backup for MongoDB files together with your MongoDB binaries. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
+When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
 
 ### Parallel data download
 
 !!! admonition "Version added: [2.1.0](../release-notes/2.1.0.md)"
 
-Percona Backup for MongoDB downloads data chunks from the S3 storage concurrently during physical restore. Read more about benchmarking results in the [Speeding up MongoDB restores in PBM](https://www.percona.com/blog/speeding-up-database-restores-in-pbm) blog post by *Andrew Pogrebnoi*.
+Percona Backup for MongoDB downloads data chunks from S3 storage concurrently during physical restores, improving restore performance. For benchmarking results and implementation details, see the blog post [Speeding up MongoDB Restores in Percona Backup for MongoDB](https://www.percona.com/blog/speeding-up-restores-in-percona-backup-for-mongodb/) by *Andrew Pogrebnoi*.
 
 Here's how it works:
 

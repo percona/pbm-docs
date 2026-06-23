@@ -12,12 +12,16 @@
 ### Restore from a backup made through PBM
 
 The following procedure describes the restore process from backups [made through PBM](backup-external.md). It is also possible to attempt restoring from snapshots made without PBM (this feature is experimental). See [Restore from a backup made outside PBM](#restore-from-a-backup-made-outside-pbm).
+{.power-number}
 
 1. To perform a restore, run the following command:
 
     ```bash
     pbm restore --external 
     ```    
+
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
     Percona Backup for MongoDB stops the database, cleans up data directories on all nodes, provides the restore name and prompts you to copy the data:    
 
@@ -33,17 +37,17 @@ The following procedure describes the restore process from backups [made through
 3. After you copied the files to the nodes, complete the restore with the following command:    
 
     ```bash
-    pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml>
+    pbm restore-finish <restore_name> -c </path/to/pbm-config.yaml>
     ```    
 
-    At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the `restore_to_time` of the metadata.
+    At this stage, Percona Backup for MongoDB reads the metadata from the backup, prepares the data for the cluster / replica set start and ensures its consistency. The database is restored to the timestamp specified in the `last_write_time` of the metadata.
 
     !!! note
 
         If you use a filesystem as the remote backup storage, both `pbm-agent` and `pbm` CLI must have the same permissions to it. To achieve this, run the `pbm restore-finish` command as the `mongod` user:
 
         ```bash
-        sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
+        sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-config.yaml> --mongodb-uri=MONGODB_URI
         ```
 
 4. Optional. You can track the restore progress by running the [`pbm describe-restore`](../reference/pbm-commands.md#pbm-describe-restore) command.
@@ -51,6 +55,7 @@ The following procedure describes the restore process from backups [made through
 #### Post-restore steps 
 
 After the restore is complete, do the following:
+{.power-number}
 
 1. Start all `mongod` nodes
 
@@ -62,9 +67,15 @@ After the restore is complete, do the following:
     pbm config --force-resync
     ``` 
 
-4. Start the balancer and start `mongos` nodes.
+4. Optional. Perform point in time recovery by running [`pbm oplog-replay`](./oplog-replay.md#oplog-replay-for-storage-level-snapshots) using the `last_write_time` as the start, for example:
 
-5. Make a fresh backup to serve as the new base for future restores. 
+    ```bash
+    pbm oplog-replay --start="2026-01-02T15:00:00" --end="2026-01-03T15:00:00"
+    ```
+    
+5. Start the balancer and start `mongos` nodes.
+
+6. Make a fresh backup to serve as the new base for future restores. 
 
 ### Restore from a backup made outside PBM
 
@@ -78,7 +89,7 @@ After the restore is complete, do the following:
 
 To restore an external backup made without PBM, you need to specify the following for the `pbm restore` command:
 
-* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM will use during the restore. It should contain the [storage options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options ) per replica set name, for example:
+* a path to the configuration file of the `mongod` node on the source cluster from where the backup was made. This is the configuration file that PBM will use during the restore. It should contain the [storage options :octicons-link-external-16:](https://www.mongodb.com/docs/manual/reference/configuration-options/#storage-options) per replica set name, for example:
 
    ```yaml
    rs1:
@@ -94,12 +105,16 @@ To restore an external backup made without PBM, you need to specify the followin
 * a timestamp to restore to
 
 To restore from a backup, do the following:
+{.power-number}
 
 1. Start a restore
 
     ```bash
     pbm restore --external -c </path/to/mongod.conf> --ts 
     ```
+
+    !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
+        Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
     If the path to the source cluster `mongod.conf` is undefined, PBM tries to retrieve the required configuration options from the `mongod.conf` of the target cluster.    
 
@@ -110,7 +125,7 @@ To restore from a backup, do the following:
 3. Complete the restore by running:
 
     ```bash
-    pbm restore-finish <restore_name> -c </path/to/pbm.conf.yaml>
+    pbm restore-finish <restore_name> -c </path/to/pbm-config.yaml>
     ```    
 
     At this stage, Percona Backup for MongoDB prepares the data for the cluster / replica set start and ensures its consistency. 
@@ -120,7 +135,7 @@ To restore from a backup, do the following:
         If you use a filesystem as the remote backup storage, both `pbm-agent` and `pbm` CLI must have the same permissions to it. To achieve this, run the `pbm restore-finish` command as the `mongod` user:
 
         ```bash
-        sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-conf.yaml> --mongodb-uri=MONGODB_URI
+        sudo -u mongod -s pbm restore-finish <restore_name> -c </path/to/pbm-config.yaml> --mongodb-uri=MONGODB_URI
         ```
 
 4. Don't forget to complete the [post-restore steps](#post-restore-steps).

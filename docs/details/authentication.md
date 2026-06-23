@@ -129,19 +129,51 @@ For external authentication, you create the `pbm` user in the format used by the
 
 For [Kerberos authentication :octicons-link-external-16:](https://docs.percona.com/percona-server-for-mongodb/latest/authentication.html#kerberos-authentication), create the `pbm` user in the `$external` database in the format `<username@KERBEROS_REALM>` (e.g. [pbm@PERCONATEST.COM](mailto:pbm@PERCONATEST.COM)).
 
-Specify the following string for MongoDB connection URI:
+You can choose any of these methods to authenticate `pbm` user against Kerberos:
 
-```bash
-PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
-```
+=== "Using a Keytab (Recommended)"
 
-Note that you must first obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**:
+     1. Set the environment variable `KRB5_CLIENT_KTNAME` with the path to the generated keytab for the `pbm` user. This way no password is required to get the ticket. 
+     
+         ```bash
+         export KRB5_CLIENT_KTNAME=/path/to/keytab
+         ```
+     
+     
+     2. Specify the following MongoDB connection URI without the password:
+     
+         ```bash
+         PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+         ```
 
-```bash
-sudo -u {USER} kinit pbm
-```
+=== "Requesting a ticket manually"
 
-Note that the `{USER}` is the user that you will run the `pbm-agent` process.
+     1. Obtain the ticket for the `pbm` user with the `kinit` command before you start the **pbm-agent**. Kerberos will prompt you for the password and issue a Ticket-Granting Ticket (TGT):
+     
+         ```bash
+         sudo -u {USER} kinit <username>@<KERBEROS_REALM>
+         ```
+     
+         where `{USER}` is the OS user account that runs the `pbm-agent` process.
+     
+        !!! note
+            
+            Run `pbm-agent` as **`{USER}`**, where `{USER}` is the OS account that authenticates to Kerberos and owns the ticket cache. PBM does not refresh Kerberos tickets automatically. When the ticket expires, run `kinit` again **as the same `{USER}`** so the ticket cache is shared with `pbm-agent`.
+     
+     2. Specify the following MongoDB connection URI without the password.
+     
+         ```bash         PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+         ```
+
+=== "Using username and password"
+
+     You can authenticate using a connection string URI specifying your URL-encoded Kerberos principal and password, and the address of your MongoDB server:
+     
+     ```bash
+     PBM_MONGODB_URI="mongodb://<username>%40<KERBEROS_REALM>:<PASSWORD>@<hostname>:27018/?authMechanism=GSSAPI&authSource=%24external&replSetName=xxxx"
+     ```
+     
+     Make sure that `<PASSWORD>` is also percent-encoded if it contains reserved characters (see [Passwords with special characters](#passwords-with-special-characters)).
 
 ### LDAP binding
 

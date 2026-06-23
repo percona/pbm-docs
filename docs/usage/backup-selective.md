@@ -8,23 +8,46 @@
 
 Before you start, read about [selective backups known limitations](../features/known-limitations.md#selective-backups-and-restores).
 
-To make a selective backup, run the `pbm backup` command and provide the value for the `--ns` flag in the format `<database.collection>`. The `--ns` flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
+To make a selective backup, run the pbm backup command and provide the value for the --ns flag in the format <database.collection>. The --ns flag value is case sensitive. For example, to back up the "Payments" collection, run the following command:
 
 ```bash
 pbm backup --ns=customers.payments
 ```
-
-To back up the "Invoices" database and all collections that it includes, run the ``pbm backup`` command as follows:
+To back up the **Invoices** database and all collections that it includes, run the `pbm backup` command as follows:
 
 ```bash
 pbm backup --ns=invoices.*
 ```
+To back up multiple namespaces, specify them as a comma-separated list for the --ns flag: `<db1.col1>,<db2.*>,<db3.*>`. The number of namespaces to specify is unlimited.
 
-To back up multiple namespaces, specify them as a comma-separated list for the `--ns` flag: `<db1.col1>`,`<db2.*>`,`<db3.collX>`. The number of namespaces to specify is unlimited.
+## Selective backup with users and roles
 
-During the backup process, Percona Backup for MongoDB stores data in the new multi-file format where each collection has a separate file. The oplog is stored for all namespaces regardless whether this is a full or selective backup.
+!!! admonition "Version added: [2.13.0](../release-notes/2.13.0.md)"
 
-Multi-format is the default data format for both full and selective backups since it allows selective restore. Note, however, that you can make only full restores from backups made with earlier versions of Percona Backup for MongoDB. 
+
+### Overview
+
+Percona Backup for MongoDB allows you to create selective backups of databases and collections, **including the users and roles** defined within the database. This ensures that access control is restored along with the data.
+
+To back up a specific namespace and include users and roles:
+
+!!! warning
+    Including users and roles (`--with-users-and-roles`) isn’t supported for collection-level backups (for example, `--ns="db.collection"`). To include users and roles, you must back up entire databases only, using `--ns="db.*"`. As a result, mixed patterns like `--ns="db1.*,db2.*,db3.col"` will fail because `db3.col` targets a single collection.
+
+```sh
+pbm backup --ns="mydb.*" --with-users-and-roles
+```
+
+**Where:**
+
+- `--ns="mydb.*"` **→** specifies the namespace (all collections in `mydb`).
+
+- `--with-users-and-roles` **→** includes all users and custom roles defined in `mydb` in the backup.
+
+??? info "What happens under the hood?"
+    - Percona Backup for MongoDB captures all collections within `mydb`.
+    - Percona Backup for MongoDB filters the users and roles for entities where the `db` field matches `mydb`.
+    - Global administrative roles or users defined in other databases are excluded.
 
 
 ## Next steps

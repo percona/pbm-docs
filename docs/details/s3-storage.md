@@ -9,7 +9,6 @@ This document provides overview for the native AWS S3 services. To use MinIO and
 
 [Configuration example :material-arrow-down:](#configuration-example){.md-button}
 
-
 ## Storage bucket creation
 
 To create a bucket, do the following.
@@ -120,7 +119,10 @@ serverSideEncryption:
 
 You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the `pbm logs` output so that you can debug and diagnose S3 request issues or failures.
 
-To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `LogDebug`, `Signing`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
+To enable S3 debug logging, set the `storage.s3.DebugLogLevel` option in Percona Backup for MongoDB configuration. The supported values are: `Signing`, `Retries`, `Request`, `RequestWithBody`, `Response`, `ResponseWithBody`, `DeprecatedUsage`, `RequestEventMessage`. Additionally, for backward compatibility with PBM versions older than 2.10.0, deprecated values are: `LogDebug`, `HTTPBody`, `RequestRetries`, `RequestErrors`, `EventStreamBody`.
+
+See [AWS S3 storage options](../reference/configuration-options.md#storage-s3-debugloglevel) for details and an example.
+
 
 ### Storage classes 
 
@@ -150,8 +152,6 @@ retryer:
 
 This upload retry increases the chances of data upload completion in cases of unstable connection.
 
-<<<<<<< HEAD
-=======
 ## Data upload to storage with self-signed TLS certificates
 
 Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don't use certificates signed by public Certificate Authorities (CAs).
@@ -203,6 +203,4 @@ pbm config --set storage.s3.insecureSkipTLSVerify=True
 !!! warning 
 
     Use this option with caution as it might leave a hole for man-in-the-middle attacks.
->>>>>>> Removed prompt sign from code blocks
-
 
