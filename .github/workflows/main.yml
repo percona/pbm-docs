@@ -3,7 +3,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
 vale:
   name: runner / vale
