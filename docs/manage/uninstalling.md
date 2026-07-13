@@ -14,7 +14,7 @@ Follow these steps to remove Percona Backup for MongoDB (PBM) from your environm
 
     If an operation is still running, wait for it to finish (or [cancel it](../reference/pbm-commands.md#pbm-cancel-backup)) before continuing. Removing PBM while an operation is active can leave your backup storage or control collections in an inconsistent state.
 
-2. Disable PITR
+2. Disable point in time recovery
 
     If point in time recovery is still enabled, PBM will just start writing new oplog slices again right after cleanup
 
