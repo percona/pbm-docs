@@ -1,19 +1,82 @@
 # Uninstall Percona Backup for MongoDB
 
-To uninstall Percona Backup for MongoDB, do the following steps:
+Follow these steps to remove Percona Backup for MongoDB (PBM) from your environment.
 
+## 1. Confirm no backups are running
 
-1. Check that no backups are currently in progress in the output of [`pbm list`](../reference/pbm-commands.md#pbm-list).
+Check that no backup or restore is currently in progress:
 
-2. Before the next 2 steps, make sure you know where the remote backup storage
-is, so you can delete backups made by Percona Backup for MongoDB. If it is an  S3-compatible object storage, you will need to use another tool such as Amazon AWS’s “aws s3”, Minio’s `mc`, the web AWS Management Console, etc. to do that once Percona Backup for MongoDB is uninstalled. Don’t forget to note the connection credentials before they are deleted too.
+```bash
+pbm list
+```
 
-3. Uninstall the **pbm-agent** and `pbm` executables. If you installed using a
-package manager, see [Install Percona Backup for MongoDB](../installation.md) for relevant package names and commands for your OS distribution.
+If an operation is still running, wait for it to finish (or [cancel it](../reference/pbm-commands.md#pbm-list)) before continuing. Removing PBM while an operation is active can leave your backup storage or control collections in an inconsistent state.
 
-4. Drop the PBM control collections.
+## 2. Disable PITR
 
-5. Drop the PBM database user. If this is a cluster, the `dropUser` command will
-need to be run on each shard as well as in the config server replica set.
+If point in time recovery is still enabled, PBM will just start writing new oplog slices again right after cleanup
 
-6. (Optional) Delete the backups from the remote backup storage.
+```bash
+pbm config --set pitr.enabled=false
+```
+
+## 3. (Optional) Delete backups from remote storage
+
+If you no longer need the backups PBM created, delete them from the remote storage using the `pbm cleanup` command. For example:
+
+```bash
+pbm cleanup --older-than=0d --yes
+```
+
+!!! info 
+
+    If you're using PBM's multi-storage feature, you'll need to repeat the cleanup with --profile <name> for each storage profile — pbm cleanup only targets the currently active one by default.
+
+## 4. Uninstall the pbm-agent and pbm executables
+
+Run these commands on every node where PBM is installed.
+
+=== ":material-debian: On Debian and Ubuntu"    
+
+```bash
+sudo apt remove percona-backup-mongodb
+```
+
+=== ":material-redhat: On RHEL and derivatives" 
+
+```bash
+sudo yum remove percona-backup-mongodb
+```
+
+If you installed PBM a different way (tarball, source build, Docker), remove the binaries and any systemd service/config files manually instead. See [Install Percona Backup for MongoDB](../installation.md) for details on how PBM was set up on your system.
+
+## 5. Drop the PBM control collections
+
+PBM stores its state in a set of collections in the `admin` database — on the config server replica set for a sharded cluster, or on the replica set itself otherwise. Connect with `mongosh` and drop them:
+
+```javascript
+use admin
+db.pbmBackups.drop()
+db.pbmAgents.drop()
+db.pbmConfig.drop()
+db.pbmCmd.drop()
+db.pbmLock.drop()
+db.pbmLockOp.drop()
+db.pbmLog.drop()
+db.pbmOpLog.drop()
+db.pbmPITRChunks.drop()
+db.pbmPITRState.drop()
+db.pbmRestores.drop()
+db.pbmStatus.drop()
+```
+
+## 6. Drop the PBM database user
+
+Drop the MongoDB user PBM used to authenticate (commonly named `pbm` or similar — check what you used when [setting up authentication](../install/configure-authentication.md)):
+
+```javascript
+use admin
+db.dropUser("pbm")
+```
+
+**In a sharded cluster**, run this same command on **each shard's primary** as well as on the **config server replica set** — dropping the user in one place doesn't remove it from the others.
