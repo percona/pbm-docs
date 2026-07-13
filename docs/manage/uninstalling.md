@@ -2,6 +2,8 @@
 
 Follow these steps to remove Percona Backup for MongoDB (PBM) from your environment.
 
+## Procedure {.power-number}
+
 1. Confirm no backups are running
 
     Check that no backup or restore is currently in progress:
