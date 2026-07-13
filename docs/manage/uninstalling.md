@@ -72,7 +72,7 @@ Follow these steps to remove Percona Backup for MongoDB (PBM) from your environm
     db.pbmStatus.drop()
     ```
 
-## 6. Drop the PBM database user
+6. Drop the PBM database user
 
     Drop the MongoDB user PBM used to authenticate (commonly named `pbm` or similar — check what you used when [setting up authentication](../install/configure-authentication.md)):
     
