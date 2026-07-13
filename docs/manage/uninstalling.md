@@ -2,7 +2,7 @@
 
 Follow these steps to remove Percona Backup for MongoDB (PBM) from your environment.
 
-## 1. Confirm no backups are running
+1. Confirm no backups are running
 
 Check that no backup or restore is currently in progress:
 
@@ -10,9 +10,9 @@ Check that no backup or restore is currently in progress:
 pbm list
 ```
 
-If an operation is still running, wait for it to finish (or [cancel it](../reference/pbm-commands.md#pbm-list)) before continuing. Removing PBM while an operation is active can leave your backup storage or control collections in an inconsistent state.
+If an operation is still running, wait for it to finish (or [cancel it](../reference/pbm-commands.md#pbm-cancel-backup)) before continuing. Removing PBM while an operation is active can leave your backup storage or control collections in an inconsistent state.
 
-## 2. Disable PITR
+2. Disable PITR
 
 If point in time recovery is still enabled, PBM will just start writing new oplog slices again right after cleanup
 
@@ -20,7 +20,7 @@ If point in time recovery is still enabled, PBM will just start writing new oplo
 pbm config --set pitr.enabled=false
 ```
 
-## 3. (Optional) Delete backups from remote storage
+3. (Optional) Delete backups from remote storage
 
 If you no longer need the backups PBM created, delete them from the remote storage using the `pbm cleanup` command. For example:
 
@@ -28,29 +28,29 @@ If you no longer need the backups PBM created, delete them from the remote stora
 pbm cleanup --older-than=0d --yes
 ```
 
-!!! info 
+!!! warn 
 
     If you're using PBM's multi-storage feature, you'll need to repeat the cleanup with --profile <name> for each storage profile — pbm cleanup only targets the currently active one by default.
 
-## 4. Uninstall the pbm-agent and pbm executables
+4. Uninstall the pbm-agent and pbm executables
 
 Run these commands on every node where PBM is installed.
 
 === ":material-debian: On Debian and Ubuntu"    
 
-```bash
-sudo apt remove percona-backup-mongodb
-```
+    ```bash
+    sudo apt remove percona-backup-mongodb
+    ```
 
 === ":material-redhat: On RHEL and derivatives" 
 
-```bash
-sudo yum remove percona-backup-mongodb
-```
+    ```bash
+    sudo yum remove percona-backup-mongodb
+    ```
 
 If you installed PBM a different way (tarball, source build, Docker), remove the binaries and any systemd service/config files manually instead. See [Install Percona Backup for MongoDB](../installation.md) for details on how PBM was set up on your system.
 
-## 5. Drop the PBM control collections
+5. Drop the PBM control collections
 
 PBM stores its state in a set of collections in the `admin` database — on the config server replica set for a sharded cluster, or on the replica set itself otherwise. Connect with `mongosh` and drop them:
 
