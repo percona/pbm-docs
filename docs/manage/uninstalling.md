@@ -68,7 +68,9 @@ Follow these steps to remove Percona Backup for MongoDB (PBM) from your environm
     db.pbmOpLog.drop()
     db.pbmPITR.drop()
     db.pbmPITRChunks.drop()
+    db.pbmPITRState.drop()
     db.pbmRestores.drop()
+    db.pbmStatus.drop()
     ```
 
 6. Drop the PBM database user
