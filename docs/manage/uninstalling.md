@@ -30,7 +30,7 @@ Follow these steps to remove Percona Backup for MongoDB (PBM) from your environm
     pbm cleanup --older-than=0d --yes
     ```
     
-    !!! warn 
+    !!! warning
     
         If you're using PBM's multi-storage feature, you'll need to repeat the cleanup with --profile <name> for each storage profile — pbm cleanup only targets the currently active one by default.
 
