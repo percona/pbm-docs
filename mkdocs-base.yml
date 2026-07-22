@@ -81,6 +81,10 @@ extra_javascript:
   - js/consent.js
   - js/rating.js
 
+extra:
+  version:
+    provider: mike
+
 markdown_extensions:
   abbr: {}
   attr_list: {}
