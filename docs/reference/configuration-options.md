@@ -164,24 +164,12 @@ Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log 
 - `Response` - logs incoming HTTP response metadata (status code, headers) without the body
 - `ResponseWithBody` - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers
 - `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints 
-- `RequestEventMessage` - logs individual event stream messages written/sent from the client to the AWS S3 (request events)
-- `ResponseEventMessage` - logs individual event stream messages read/received by the client from the AWS S3 (response events) 
 
 !!! warning
 
     `RequestWithBody` and `ResponseWithBody` can log full HTTP payloads and related sensitive information. Enable them only temporarily for troubleshooting, and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.
 
-Additionally, for backward compatibility with PBM versions older than 2.10.0, the following deprecated options are supported:
-
-| Deprecated value | Automatically translated into         |
-|------------------|---------------------------------------|
-| `LogDebug`       | `Request`,`Response`                  |
-| `HTTPBody`       | `RequestWithBody`, `ResponseWithBody` |
-| `RequestRetries` | `Retries`                             |
-| `RequestErrors`  | `Response`                            |
-| `EventStreamBody`| `RequestWithBody`, `ResponseWithBody` |
-
-To specify several event types, separate them by comma. When undefined, no S3 debug logging is performed. 
+To specify several values, separate them by comma. When undefined, no S3 debug logging is performed.
 
 Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see [Logging configuration definition](../manage/logpath.md#logging-configuration-options).
 
