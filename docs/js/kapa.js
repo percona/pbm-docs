@@ -14,6 +14,7 @@
 
         button.id = "ask-percona-ai";
         button.type = "button";
+        button.setAttribute("aria-label", "Ask Percona AI");
 
         button.innerHTML = `
             <span class="percona-star">✨</span>
