@@ -75,11 +75,13 @@ extra_css:
   - css/landing.css
   - css/nocopy.css
   - css/rating.css
+  - css/kapa.css
 
 extra_javascript:
   - js/promptremover.js
   - js/consent.js
   - js/rating.js
+  - js/kapa.js
 
 markdown_extensions:
   abbr: {}
