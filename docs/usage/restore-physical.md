@@ -40,8 +40,9 @@
 
 !!! warning 
 
-    If Encryption at Rest is enabled, the restore requires access to the same encryption key that was active when the backup was taken.    
-    - For manually managed key files, update mongod.conf on all nodes to point to the original key before starting the restore procedure.
+    If Encryption at Rest is enabled, the restore requires access to the same encryption key that was active when the backup was taken.
+
+    - For manually managed key files, update `mongod.conf` on all nodes to point to the original key before starting the restore procedure.
     - For Hashicorp Vault-managed keys, ensure the historical key version is still available inside Vault. No changes to mongod.conf are required.     
 
 1. List the backups 
