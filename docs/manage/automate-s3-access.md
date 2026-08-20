@@ -132,7 +132,7 @@ When `pbm-agent` runs on an EC2 instance, it can assume a target IAM role using 
     storage:
       type: s3
       s3:
-        region: <your-S3-region>
+        region: <your-s3-region>
         bucket: <bucket-name>
     ```
 
