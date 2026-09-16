@@ -81,6 +81,10 @@ extra_javascript:
   - js/rating.js
   - js/kapa.js
 
+extra:
+  version:
+    provider: mike
+
 markdown_extensions:
   abbr: {}
   attr_list: {}
