@@ -134,7 +134,7 @@ To view log entries for a specific backup, filter by the backup event:
 ```bash
 pbm logs --event=backup/2026-08-24T12:17:58Z
 ```
-For more information about filtering log output, see [View backup logs](logs.md)
+For more information about filtering log output, see [View backup logs](logs.md).
 
 !!! note
     Backup duration and restore time represent different values. Duration shows how long the backup operation ran. Restore time identifies the latest point to which the backup can restore data. See [Restore to time](list-backup.md#restore-to-time).
