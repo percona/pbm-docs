@@ -39,15 +39,14 @@ jobs:
           pip install wheel
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-     # Configure git auth right before it's needed, scoped to this checkout only,
-      # so the credential isn't live on disk for the earlier setup steps.
+     # Configure git auth right before deploy so mike can reuse it in its publish checkout.
       - name: Configure git
         env:
           ROBOT_TOKEN: ${{ secrets.ROBOT_TOKEN }}
         run: |
-          git config --local http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf '%s' "x-access-token:${ROBOT_TOKEN}" | base64 -w0)"
-          git config user.name "GitHub Action"
-          git config user.email "github-action@users.noreply.github.com"
+          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf '%s' "x-access-token:${ROBOT_TOKEN}" | base64 -w0)"
+          git config --global user.name "GitHub Action"
+          git config --global user.email "github-action@users.noreply.github.com"
 
      # Deploy docs
       - name: Deploy docs
@@ -61,4 +60,4 @@ jobs:
  # Drop the credential as soon as it's no longer needed
       - name: Clear git credentials
         if: always()
-        run: git config --local --unset-all http.https://github.com/.extraheader || true
+        run: git config --global --unset-all http.https://github.com/.extraheader || true
