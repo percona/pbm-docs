@@ -115,7 +115,7 @@ For a backup that is still running, the finish time and duration are not availab
 
 ### Check timing in the logs with `pbm logs`
 
-When a backup finishes, pbm logs includes a summary with the backup name, start time, finish time, and duration:
+When a backup finishes, the `pbm logs` output includes a summary with the backup name, start time, finish time, and duration:
 
 ```bash
 pbm logs
