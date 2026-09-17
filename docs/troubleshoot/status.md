@@ -14,7 +14,7 @@ The output provides the information about:
 
 * The currently running backups / restores, if any
 
-* Backups stored in the remote backup storage: backup name, type, completion time, size, duration and status (success, ongoing, failed)
+* Backups stored in the remote backup storage: backup name, type, completion time, size, duration and status (for example, `done`, `running`, `error` or `canceled`)
 
 * [Point-in-time recovery](../features/point-in-time-recovery.md) status (enabled or disabled)
 
