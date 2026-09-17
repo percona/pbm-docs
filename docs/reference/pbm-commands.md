@@ -575,9 +575,10 @@ pbm list --profile=minio
 **Sample output**
 ```bash
 Backup snapshots:
-NAME                  TYPE     PROFILE   SELECTIVE  BASE   RESTORE TIME
-2024-10-10T10:00:00Z  logical  main      no         no     2024-10-10T10:05:00Z
-2024-10-11T12:00:00Z  physical s3-west   no         no     2024-10-11T12:01:00Z
+NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+---------------------------------------------------------------------------------------------------------------
+2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
 ```
 
 For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
