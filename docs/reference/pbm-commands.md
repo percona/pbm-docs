@@ -1016,7 +1016,7 @@ pbm status --profile=minio
 Cluster:
 =======
   MongoDB version: 6.0.5
-  PBM version:     2.4.0
+  PBM version:     2.15.0
   Storage:         s3://backups/bucket/main
 
 PBM Agents:
@@ -1028,10 +1028,10 @@ PBM Agents:
 Backups:
 =======
 SNAPSHOTS:
-NAME                  TYPE      PROFILE  SELECTIVE  BASE  RESTORE TIME            DURATION  STATUS
-2026-02-20T10:00:01Z  logical   main     no         no    2026-02-20T10:00:01Z   21s       done
-2026-02-21T14:30:00Z  physical  s3-west  no         no    2026-02-21T14:38:10Z   8m10s     done
-2026-02-22T09:00:00Z  logical   main     yes        no    2026-02-22T09:02:45Z   2m45s     done
+NAME                      SIZE        TYPE          PROFILE  SEL    BASE  RESTORE TIME         DURATION    STATUS
+2026-02-20T10:00:01Z      491.98KB    logical       main     no     no    2026-02-20T10:00:22  21s         done
+2026-02-21T14:30:00Z      284.06KB    physical      s3-west  no     no    2026-02-21T14:38:10  8m10s       done
+2026-02-22T09:00:00Z      840.17MB    logical       main     yes    no    2026-02-22T09:03:45  2m45s       done
 
 PITR CHUNKS:
 START TIME            END TIME              SIZE      PROFILE  STATUS
