@@ -1029,11 +1029,11 @@ Backups:
 =======
 http://minio:9000/mybackups
   Snapshots:
-    NAME                      SIZE        TYPE          SEL    BASE  RESTORE TIME         DURATION    STATUS
-    --------------------------------------------------------------------------------------------------------
-    2026-02-20T10:00:01Z      491.98KB    logical       no     no    2026-02-20T10:00:22  21s         done
-    2026-02-21T14:30:00Z      284.06KB    physical      no     no    2026-02-21T14:38:10  8m10s       done
-    2026-02-22T09:00:00Z      840.17MB    logical       yes    no    2026-02-22T09:03:45  2m45s       done
+    NAME                      SIZE        TYPE          PROFILE  SEL    BASE  RESTORE TIME         DURATION    STATUS
+    -----------------------------------------------------------------------------------------------------------------
+    2026-02-20T10:00:01Z      491.98KB    logical       minio    no     no    2026-02-20T10:00:22  21s         done
+    2026-02-21T14:30:00Z      284.06KB    physical      minio    no     no    2026-02-21T14:38:10  8m10s       done
+    2026-02-22T09:00:00Z      840.17MB    logical       minio    yes    no    2026-02-22T09:03:45  2m45s       done
   PITR chunks [233.60MB]:
     2026-02-20T10:05:23Z - 2026-02-21T14:29:59Z 145.20MB
     2026-02-21T14:38:11Z - 2026-02-22T08:59:59Z  88.40MB
