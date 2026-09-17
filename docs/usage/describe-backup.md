@@ -43,9 +43,14 @@ Timing information is available through the following commands:
 * `pbm describe-backup`
 * `pbm logs`
 
-### Check backup duration with `pbm status`
+### Check duration with `pbm status`
 
 The **Snapshots** section of the `pbm status` output includes a `DURATION` column:
+
+```bash
+pbm status
+```
+
 ??? example "Sample output"
 
     ```text
@@ -58,7 +63,7 @@ The **Snapshots** section of the `pbm status` output includes a `DURATION` colum
       2026-08-24T12:17:58Z      840.17MB    logical                             no     no    2026-08-24T12:21:36  3m51s       done
       2026-08-24T12:17:24Z      2.06GB      physical                            no     no    2026-08-24T12:17:27  20s         done
     ```
-### Compare backup durations with `pbm list`
+### Check duration with `pbm list`
 
 The `pbm list` output includes the duration of every listed backup:
 
@@ -78,7 +83,7 @@ pbm list
 
 For more information, see [List backups](list-backup.md).
 
-### View timing details for a backup
+### Check start and finish times with `pbm describe-backup`
 
 Use `pbm describe-backup` to view the start time, finish time, and duration of a specific backup:
 
@@ -104,11 +109,11 @@ The timing fields have the following meanings:
 | `finish`    | Time when the backup finished            |
 | `duration`  | Elapsed time between start and finish    |
 
-Start and finish timestamps are shown in UTC and use the [RFC 3339 format :octicons-link-external-16:](https://www.rfc-editor.org/rfc/rfc3339){target=_blank}.
+Start and finish timestamps are shown in UTC and use the [RFC 3339 format :octicons-link-external-16:](https://www.rfc-editor.org/rfc/rfc3339){target=_blank}. Durations are written the way `Go` formats them: `20s, 3m51s, 1h14m2s`. Anything under a minute shows seconds only.
 
-For a backup that is still running, the finish time and duration are not available. PBM also omits the duration if it cannot determine a valid interval from the stored timestamps.
+For a backup that is still running, the finish time and duration are not available. PBM also omits the duration when the stored timestamps do not form a valid interval.
 
-### View backup timing in the logs
+### Check timing in the logs with `pbm logs`
 
 When a backup finishes, pbm logs includes a summary with the backup name, start time, finish time, and duration:
 
@@ -130,6 +135,9 @@ To view log entries for a specific backup, filter by the backup event:
 pbm logs --event=backup/2026-08-24T12:17:58Z
 ```
 For more information about filtering log output, see [View backup logs](logs.md)
+
+!!! note
+    Backup duration and restore time represent different values. Duration shows how long the backup operation ran. Restore time identifies the latest point to which the backup can restore data. See [Restore to time](list-backup.md#restore-to-time).
 
 
 ## View backup size
