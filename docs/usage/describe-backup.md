@@ -31,7 +31,112 @@ The output provides the backup name, type, status, size and the information abou
       error: ""
     ```
 
-Starting with version 2.10.0, the command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing [physical restores with a fallback directory](../features/physical.md#physical-restores-with-a-fallback-directory).
+## Backup timing
+
+PBM shows the start time, finish time, and duration of a backup. You can use this information to compare backup performance and identify operations that take longer than expected.
+
+
+Timing information is available through the following commands:
+
+* `pbm status`
+* `pbm list`
+* `pbm describe-backup`
+* `pbm logs`
+
+### Check backup duration with `pbm status`
+
+The **Snapshots** section of the `pbm status` output includes a `DURATION` column:
+??? example "Sample output"
+
+  ```text
+  Cluster:
+  ...
+
+  Snapshots:
+    NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         DURATION    STATUS
+    ------------------------------------------------------------------------------------------------------------------------------
+    2026-08-24T12:17:58Z      840.17MB    logical                             no     no    2026-08-24T12:21:36  3m51s       done
+    2026-08-24T12:17:24Z      2.06GB      physical                            no     no    2026-08-24T12:17:27  20s         done
+  ```
+### Compare backup durations with `pbm list`
+
+The `pbm list` output includes the duration of every listed backup:
+
+```bash
+pbm list
+```
+
+??? example "Sample output"
+
+  ```text
+  Backup snapshots:
+    NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+    ---------------------------------------------------------------------------------------------------------------
+    2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+    2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
+  ```
+
+For more information, see [List backups](list-backup.md).
+
+### View timing details for a backup
+
+Use `pbm describe-backup` to view the start time, finish time, and duration of a specific backup:
+
+```bash
+pbm describe-backup 2026-08-24T12:17:58Z
+```
+
+??? example "Sample output"
+    ```{.yaml .no-copy}
+    name: "2026-08-24T12:17:58Z"
+    ...
+    start: "2026-08-24T12:17:58Z"
+    finish: "2026-08-24T12:21:49Z"
+    duration: 3m51s
+    ...
+    ```
+
+The timing fields have the following meanings:
+
+| **Field**   | **Description**                          |
+|-------------|------------------------------------------|
+| `start`     | Time when PBM started the backup         |
+| `finish`    | Time when the backup finished            |
+| `duration`  | Elapsed time between start and finish    |
+
+Start and finish timestamps are shown in UTC and use the [RFC 3339 format :octicons-link-external-16:](https://www.rfc-editor.org/rfc/rfc3339){target=_blank}.
+
+For a backup that is still running, the finish time and duration are not available. PBM also omits the duration if it cannot determine a valid interval from the stored timestamps.
+
+### View backup timing in the logs
+
+When a backup finishes, pbm logs includes a summary with the backup name, start time, finish time, and duration:
+
+```bash
+pbm logs
+```
+
+??? example "Sample output"
+    ```{.text .no-copy}
+    ...
+    2026-08-24T12:21:49Z I [cfg/cfg00:30000] [backup/2026-08-24T12:17:58Z] backup finished
+    2026-08-24T12:21:49Z I [cfg/cfg00:30000] [backup/2026-08-24T12:17:58Z] backup: 2026-08-24T12:17:58Z, start: 2026-08-24T12:17:58Z, finish: 2026-08-24T12:21:49Z, duration: 3m51s
+    ...
+    ```
+
+To view log entries for a specific backup, filter by the backup event:
+
+```bash
+pbm logs --event=backup/2026-08-24T12:17:58Z
+```
+For more information about filtering log output, see [View backup logs](logs.md)
+
+
+## View backup size
+
+!!! admonition "Version added: 2.10.0"
+
+The command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing [physical restores with a fallback directory](../features/physical.md#physical-restores-with-a-fallback-directory).
 
 ??? example "Sample output"
 
@@ -52,6 +157,8 @@ Starting with version 2.10.0, the command output displays the uncompressed backu
       node: rs202:30202
       size_h: 3.3 GiB
       size_uncompressed_h: 3.6 GiB
+
+## View collections in a backup
 
 !!! admonition "Version added: [2.3.0](../release-notes/2.3.0.md)"
 
