@@ -1027,16 +1027,16 @@ PBM Agents:
 
 Backups:
 =======
-SNAPSHOTS:
-NAME                      SIZE        TYPE          PROFILE  SEL    BASE  RESTORE TIME         DURATION    STATUS
-2026-02-20T10:00:01Z      491.98KB    logical       main     no     no    2026-02-20T10:00:22  21s         done
-2026-02-21T14:30:00Z      284.06KB    physical      s3-west  no     no    2026-02-21T14:38:10  8m10s       done
-2026-02-22T09:00:00Z      840.17MB    logical       main     yes    no    2026-02-22T09:03:45  2m45s       done
-
-PITR CHUNKS:
-START TIME            END TIME              SIZE      PROFILE  STATUS
-2026-02-20T10:05:23Z  2026-02-21T14:29:59Z  145.20MB  main     done
-2026-02-21T14:38:11Z  2026-02-22T08:59:59Z   88.40MB  s3-west  done
+s3://backups/bucket/main
+  Snapshots:
+    NAME                      SIZE        TYPE          PROFILE  SEL    BASE  RESTORE TIME         DURATION    STATUS
+    -----------------------------------------------------------------------------------------------------------------
+    2026-02-20T10:00:01Z      491.98KB    logical       main     no     no    2026-02-20T10:00:22  21s         done
+    2026-02-21T14:30:00Z      284.06KB    physical      s3-west  no     no    2026-02-21T14:38:10  8m10s       done
+    2026-02-22T09:00:00Z      840.17MB    logical       main     yes    no    2026-02-22T09:03:45  2m45s       done
+  PITR chunks [233.60MB]:
+    2026-02-20T10:05:23Z - 2026-02-21T14:29:59Z 145.20MB
+    2026-02-21T14:38:11Z - 2026-02-22T08:59:59Z  88.40MB
 ```
 
 For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
