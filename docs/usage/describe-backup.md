@@ -35,8 +35,7 @@ The output provides the backup name, type, status, size and the information abou
 
 PBM shows the start time, finish time, and duration of a backup. You can use this information to compare backup performance and identify operations that take longer than expected.
 
-
-Timing information is available through the following commands:
+You can view this timing information with the following commands:
 
 * `pbm status`
 * `pbm list`
