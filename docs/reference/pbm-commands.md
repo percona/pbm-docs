@@ -993,7 +993,7 @@ The output provides the following information:
 
 * `pbm-agent` processes version, state and node type it is running on (primary or secondary)
 * Currently running backups or restores
-* Backups stored in the remote storage and their status
+* Backups stored in the remote storage, including their duration and status
 * Point-in-Time Recovery status
 * Valid time ranges for point-in-time recovery and the data size
 
@@ -1028,10 +1028,10 @@ PBM Agents:
 Backups:
 =======
 SNAPSHOTS:
-NAME                  TYPE      PROFILE  SELECTIVE  BASE  RESTORE TIME            STATUS
-2026-02-20T10:00:01Z  logical   main     no         no    2026-02-20T10:00:01Z     done
-2026-02-21T14:30:00Z  physical  s3-west  no         no    2026-02-21T14:38:10Z     done
-2026-02-22T09:00:00Z  logical   main     yes        no    2026-02-22T09:02:45Z     done
+NAME                  TYPE      PROFILE  SELECTIVE  BASE  RESTORE TIME            DURATION  STATUS
+2026-02-20T10:00:01Z  logical   main     no         no    2026-02-20T10:00:01Z   21s       done
+2026-02-21T14:30:00Z  physical  s3-west  no         no    2026-02-21T14:38:10Z   8m10s     done
+2026-02-22T09:00:00Z  logical   main     yes        no    2026-02-22T09:02:45Z   2m45s     done
 
 PITR CHUNKS:
 START TIME            END TIME              SIZE      PROFILE  STATUS

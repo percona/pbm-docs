@@ -14,7 +14,7 @@ The output provides the information about:
 
 * The currently running backups / restores, if any
 
-* Backups stored in the remote backup storage: backup name, type, completion time, size and status (success, ongoing, failed)
+* Backups stored in the remote backup storage: backup name, type, completion time, size, duration and status (success, ongoing, failed)
 
 * [Point-in-time recovery](../features/point-in-time-recovery.md) status (enabled or disabled)
 
@@ -54,15 +54,16 @@ This simplifies troubleshooting since the whole information is provided in one p
     ========
     S3 us-east-1 https://storage.googleapis.com/backup-test
        Snapshots:
-        2025-06-03T09:55:47Z 0.00B <physical> ongoing [running: running / 2025-06-03T09:55:50]
-        2025-03-16T10:36:52Z 491.98KB <physical> success [restore_to_time: 2025-03-16T10:37:13]
-        2025-03-15T12:59:47Z 284.06KB <physical> success [restore_to_time: 2025-03-15T13:00:08]
-        2025-03-11T16:23:55Z 284.82KB <physical> success [restore_to_time: 2025-03-11T16:24:16]
-        2025-03-11T16:22:35Z 284.04KB <physical> success [restore_to_time: 2025-03-11T16:22:56]
-        2025-03-11T16:21:15Z 283.36KB <physical> success [restore_to_time: 2025-03-11T16:21:36]
-        2025-03-11T16:19:54Z 281.73KB <physical> success [restore_to_time: 2025-03-11T16:20:15]
-        2025-03-11T16:19:00Z 281.73KB <physical> success [restore_to_time: 2025-03-11T16:19:21]
-        2025-03-11T15:30:38Z 287.07KB <physical> success [restore_to_time: 2025-03-11T15:30:59]
+        NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         DURATION    STATUS
+        ------------------------------------------------------------------------------------------------------------------------------
+        2025-03-16T10:36:52Z      491.98KB    physical                            no     no    2025-03-16T10:37:13  21s         done
+        2025-03-15T12:59:47Z      284.06KB    physical                            no     no    2025-03-15T13:00:08  21s         done
+        2025-03-11T16:23:55Z      284.82KB    physical                            no     no    2025-03-11T16:24:16  21s         done
+        2025-03-11T16:22:35Z      284.04KB    physical                            no     no    2025-03-11T16:22:56  21s         done
+        2025-03-11T16:21:15Z      283.36KB    physical                            no     no    2025-03-11T16:21:36  21s         done
+        2025-03-11T16:19:54Z      281.73KB    physical                            no     no    2025-03-11T16:20:15  21s         done
+        2025-03-11T16:19:00Z      281.73KB    physical                            no     no    2025-03-11T16:19:21  21s         done
+        2025-03-11T15:30:38Z      287.07KB    physical                            no     no    2025-03-11T15:30:59  21s         done
       PITR chunks [1.10MB]:
         2025-03-16T10:37:13 - 2025-03-16T10:43:26 44.17KB
     ```
@@ -129,4 +130,3 @@ Check backup progress:
         2020/05/06 21:31:34
         2020/05/06 21:31:37 [########################]  test.testt2  300000/300000  (100.0%)
         ```
-
