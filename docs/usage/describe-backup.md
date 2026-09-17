@@ -48,16 +48,16 @@ Timing information is available through the following commands:
 The **Snapshots** section of the `pbm status` output includes a `DURATION` column:
 ??? example "Sample output"
 
-  ```text
-  Cluster:
-  ...
+    ```text
+    Cluster:
+    ...
 
-  Snapshots:
-    NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         DURATION    STATUS
-    ------------------------------------------------------------------------------------------------------------------------------
-    2026-08-24T12:17:58Z      840.17MB    logical                             no     no    2026-08-24T12:21:36  3m51s       done
-    2026-08-24T12:17:24Z      2.06GB      physical                            no     no    2026-08-24T12:17:27  20s         done
-  ```
+    Snapshots:
+      NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         DURATION    STATUS
+      ------------------------------------------------------------------------------------------------------------------------------
+      2026-08-24T12:17:58Z      840.17MB    logical                             no     no    2026-08-24T12:21:36  3m51s       done
+      2026-08-24T12:17:24Z      2.06GB      physical                            no     no    2026-08-24T12:17:27  20s         done
+    ```
 ### Compare backup durations with `pbm list`
 
 The `pbm list` output includes the duration of every listed backup:
@@ -68,13 +68,13 @@ pbm list
 
 ??? example "Sample output"
 
-  ```text
-  Backup snapshots:
-    NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
-    ---------------------------------------------------------------------------------------------------------------
-    2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
-    2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
-  ```
+    ```text
+    Backup snapshots:
+      NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+      ---------------------------------------------------------------------------------------------------------------
+      2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+      2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
+    ```
 
 For more information, see [List backups](list-backup.md).
 
@@ -157,6 +157,7 @@ The command output displays the uncompressed backup size for the whole cluster a
       node: rs202:30202
       size_h: 3.3 GiB
       size_uncompressed_h: 3.6 GiB
+    ```
 
 ## View collections in a backup
 
