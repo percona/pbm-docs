@@ -1,9 +1,9 @@
 name: Build Percona Backup for MongoDB docs
 on:
   push:
-    branches: 
+    branches:
       - main
-     
+
 jobs:
   build:
     name: Deploy docs
@@ -11,44 +11,48 @@ jobs:
     permissions:
       contents: write
 
-    steps: 
-      #Pull the latest changes
+    steps:
+      # Pull the latest changes
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0  # fetch all commits/branches
-      #Prepare the env
+
+      # Prepare the env
       - name: Set up Python
         uses: actions/setup-python@0b93645e9fea7318ecaed2b359559ac225c90a2b # v5.3.0
         with:
           python-version: '3.x'
 
-      #Extract release from YAML
+      # Extract release from YAML
       - name: Extract release from variables
         run: |
           RELEASE=$(grep '^release:' variables.yml | awk '{print $2}' | tr -d "'")
           echo "RELEASE=$RELEASE" >> $GITHUB_ENV
 #          PRUNED_VERSION=$(grep '^pruned_version:' variables.yml | awk '{print $2}' | tr -d "'")
-#          echo "PRUNED_VERSION"=$"PRUNED_VERSION" >> $GITHUB_ENV
+#          echo "PRUNED_VERSION=$PRUNED_VERSION" >> $GITHUB_ENV
 
-      
-      #Set up MkDocs
+      # Set up MkDocs
       - name: Install MkDocs
         run: |
           python -m pip install --upgrade pip
           pip install wheel
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-     # Configure git auth right before deploy so mike can reuse it in its publish checkout.
+      # Same auth pattern as k8sps-docs: leave checkout credentials in place
+      # (GITHUB_TOKEN can push to whichever repo runs the workflow — fork or percona),
+      # and rewrite GitHub HTTPS URLs to the robot token for mike.
       - name: Configure git
         env:
           ROBOT_TOKEN: ${{ secrets.ROBOT_TOKEN }}
         run: |
-          git config --global http.https://github.com/.extraheader "AUTHORIZATION: basic $(printf '%s' "x-access-token:${ROBOT_TOKEN}" | base64 -w0)"
-          git config --global user.name "GitHub Action"
-          git config --global user.email "github-action@users.noreply.github.com"
+          git config --global url."https://percona-platform-robot:${ROBOT_TOKEN}@github.com".insteadOf "https://github.com"
+          git config user.name "GitHub Action"
+          git config user.email "github-action@users.noreply.github.com"
+          git config user.password "${ROBOT_TOKEN}"
+          echo "GIT_USER=percona-platform-robot:${ROBOT_TOKEN}" >> $GITHUB_ENV
 
-     # Deploy docs
+      # Deploy docs
       - name: Deploy docs
         env:
           MKDOCS_GIT_COMMITTERS_APIKEY: ${{ secrets.ROBOT_TOKEN }}
@@ -56,8 +60,8 @@ jobs:
           mike deploy $RELEASE -u latest -b publish -p
           mike set-default latest -b publish -p
 #          mike delete $PRUNED_VERSION -b publish -p
-      
- # Drop the credential as soon as it's no longer needed
+
+      # Drop the credential as soon as it's no longer needed
       - name: Clear git credentials
         if: always()
         run: git config --global --unset-all http.https://github.com/.extraheader || true
