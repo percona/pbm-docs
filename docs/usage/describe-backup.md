@@ -108,7 +108,7 @@ The timing fields have the following meanings:
 | `finish`    | Time when the backup finished            |
 | `duration`  | Elapsed time between start and finish    |
 
-Start and finish timestamps are shown in UTC and use the [RFC 3339 format :octicons-link-external-16:](https://www.rfc-editor.org/rfc/rfc3339){target=_blank}. Durations are written the way `Go` formats them: `20s, 3m51s, 1h14m2s`. Anything under a minute shows seconds only.
+Start and finish timestamps are shown in UTC and use the [RFC 3339 format :octicons-link-external-16:](https://www.rfc-editor.org/rfc/rfc3339){target=_blank}. Durations are written in formats: `20s, 3m51s, 1h14m2s`. Anything under a minute shows seconds only.
 
 For a backup that is still running, the finish time and duration are not available. PBM also omits the duration when the stored timestamps do not form a valid interval.
 
