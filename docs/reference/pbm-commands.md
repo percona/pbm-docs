@@ -575,9 +575,10 @@ pbm list --profile=minio
 **Sample output**
 ```bash
 Backup snapshots:
-NAME                  TYPE     PROFILE   SELECTIVE  BASE   RESTORE TIME
-2024-10-10T10:00:00Z  logical  main      no         no     2024-10-10T10:05:00Z
-2024-10-11T12:00:00Z  physical s3-west   no         no     2024-10-11T12:01:00Z
+NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+---------------------------------------------------------------------------------------------------------------
+2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
 ```
 
 For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
@@ -992,7 +993,7 @@ The output provides the following information:
 
 * `pbm-agent` processes version, state and node type it is running on (primary or secondary)
 * Currently running backups or restores
-* Backups stored in the remote storage and their status
+* Backups stored in the remote storage, including their duration and status
 * Point-in-Time Recovery status
 * Valid time ranges for point-in-time recovery and the data size
 
@@ -1015,8 +1016,8 @@ pbm status --profile=minio
 Cluster:
 =======
   MongoDB version: 6.0.5
-  PBM version:     2.4.0
-  Storage:         s3://backups/bucket/main
+  PBM version:     2.15.0
+  Storage:         http://minio:9000/mybackups
 
 PBM Agents:
 ==========
@@ -1026,16 +1027,16 @@ PBM Agents:
 
 Backups:
 =======
-SNAPSHOTS:
-NAME                  TYPE      PROFILE  SELECTIVE  BASE  RESTORE TIME            STATUS
-2026-02-20T10:00:01Z  logical   main     no         no    2026-02-20T10:00:01Z     done
-2026-02-21T14:30:00Z  physical  s3-west  no         no    2026-02-21T14:38:10Z     done
-2026-02-22T09:00:00Z  logical   main     yes        no    2026-02-22T09:02:45Z     done
-
-PITR CHUNKS:
-START TIME            END TIME              SIZE      PROFILE  STATUS
-2026-02-20T10:05:23Z  2026-02-21T14:29:59Z  145.20MB  main     done
-2026-02-21T14:38:11Z  2026-02-22T08:59:59Z   88.40MB  s3-west  done
+http://minio:9000/mybackups
+  Snapshots:
+    NAME                      SIZE        TYPE          PROFILE  SEL    BASE  RESTORE TIME         DURATION    STATUS
+    -----------------------------------------------------------------------------------------------------------------
+    2026-02-20T10:00:01Z      491.98KB    logical       minio    no     no    2026-02-20T10:00:22  21s         done
+    2026-02-21T14:30:00Z      284.06KB    physical      minio    no     no    2026-02-21T14:38:10  8m10s       done
+    2026-02-22T09:00:00Z      840.17MB    logical       minio    yes    no    2026-02-22T09:03:45  2m45s       done
+  PITR chunks [233.60MB]:
+    2026-02-20T10:05:23Z - 2026-02-21T14:29:59Z 145.20MB
+    2026-02-21T14:38:11Z - 2026-02-22T08:59:59Z  88.40MB
 ```
 
 For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with --profile](../features/multi-storage.md#select-a-storage-with---profile).
