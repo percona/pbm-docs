@@ -75,10 +75,70 @@ You can find [the configuration file template :octicons-link-external-16:](https
 
 ## Enable parallel uploads
 
-You can upload backup data to Google Cloud Storage in parallel. This can improve upload throughput for large backups, particularly when PBM uses Workload Identity authentication and the native Google Cloud Storage client.
+Parallel uploads can reduce the time required to send large backup files to Google Cloud Storage. The improvement depends on the available network bandwidth, storage performance, and resources on the host running pbm-agent.
 
-During a parallel upload, PBM divides a backup object into parts and uploads several parts at the same time. Google Cloud Storage stores the parts as temporary obj
+To enable parallel uploads, use the GCS gRPC client and set the number of concurrent uploads:
 
+Parallel uploads are available only with the gRPC client. To enable them, set:
+
+* `clientType` to `grpc`
+* `parallelUploadConcurrency` to a value greater than `1`
+
+The following example enables four concurrent uploads:
+
+```yaml
+storage:
+  type: gcs
+  gcs:
+    bucket: <bucket-name>
+    prefix: <optional-prefix>
+    clientType: grpc
+    parallelUploadConcurrency: 4
+    chunkSize: 16MB
+    credentials:
+      workloadIdentity: true
+       #storage:
+  type: gcs
+  gcs:
+    bucket: <bucket-name>
+    prefix: <optional-prefix>
+    clientType: grpc
+    parallelUploadConcurrency: 4
+    chunkSize: 16MB
+    credentials:
+      # Use your existing service account or Workload Identity configuration.
+```
+
+You can use parallel uploads with either Workload Identity or service account credentials. Keep the credentials section that matches your authentication method.
+
+Apply the configuration:
+
+```sh
+pbm config --file pbm_config.yaml
+```
+### Configure upload concurrency
+
+The `parallelUploadConcurrency` option controls how many parts PBM uploads at the same time.
+
+A higher value can improve throughput when network bandwidth and storage performance are available. It also increases the number of concurrent requests and the resources used by the upload. Start with a moderate value, such as `4`, and measure backup performance before increasing it.
+
+If p`arallelUploadConcurrency` is omitted or set to `1`, PBM uses a standard upload.
+
+### Configure the part size
+
+For parallel uploads, `chunkSize` defines the size of each temporary part. If you do not set it, PBM uses a default part size of 16 MiB.
+
+Larger parts reduce the number of temporary objects and compose operations. Smaller parts give PBM more work to distribute across concurrent upload operations. Choose a value that fits your backup size, available memory, and network capacity.
+
+!!! note
+    Parallel uploads require both `clientType: grpc` and a `parallelUploadConcurrency` value greater than `1`. The JSON client does not support this feature. If you configure parallel uploads with the JSON client, PBM performs a standard upload instead.
+
+!!! warning
+    - Parallel upload support in the upstream Google Cloud Storage Go client is experimental. Test the configuration with representative backup sizes before using it in production.
+    - Parallel uploads create temporary objects in the destination bucket. The credentials used by PBM must have permission to delete these objects. An interrupted upload can leave temporary objects behind. Consider configuring an [Object Lifecycle Management rule :octicons-link-external-16:](https://docs.cloud.google.com/storage/docs/lifecycle){:target="_blank"} to remove abandoned temporary objects.
+    - Review your bucket settings before enabling this feature. Retention policies, default object holds, soft delete, and Object Versioning can prevent immediate cleanup or increase storage costs. See [Parallel composite uploads :octicons-link-external-16:](https://docs.cloud.google.com/storage/docs/parallel-composite-uploads){:target="_blank"} for details.
+
+For the upstream client configuration and defaults, see ParallelUploadConfig in the Google Cloud Storage Go client :octicons-link-external-16:{="_blank"}.
 
 ## Adjust PBM configuration to use GCS
 
