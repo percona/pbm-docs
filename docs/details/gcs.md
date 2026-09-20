@@ -72,6 +72,14 @@ You can find [the configuration file template :octicons-link-external-16:](https
 		   hmacSecret: <your-secret-key-here>
 	```
 
+
+## Enable parallel uploads
+
+You can upload backup data to Google Cloud Storage in parallel. This can improve upload throughput for large backups, particularly when PBM uses Workload Identity authentication and the native Google Cloud Storage client.
+
+During a parallel upload, PBM divides a backup object into parts and uploads several parts at the same time. Google Cloud Storage stores the parts as temporary obj
+
+
 ## Adjust PBM configuration to use GCS
 
 Starting with version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. If you are upgrading from an earlier version, you need to adjust your PBM configuration as follows:
