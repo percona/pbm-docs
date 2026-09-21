@@ -142,7 +142,7 @@ A higher concurrency value does not always produce a faster backup. The value th
 
 ### Disable parallel uploads
 
-To disable parallel uploads, remove `parallelUploadConcurrency` from the configuration or set it to `0`.
+To disable parallel uploads, remove `parallelUploadConcurrency` from the configuration or set it to a value that is not greater than `1`.
 
 You can continue using the `grpc` client with parallel uploads disabled. You do not need to switch back to the `json` client.
 
