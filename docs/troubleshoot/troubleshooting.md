@@ -107,7 +107,7 @@ pbm-speed-test storage --help
                                     Compression level (specific to the compression type)
 
 
-## Parallel loads in GCS
+## Parallel uploads in GCS
 
 If PBM does not use parallel uploads, check that:
 
