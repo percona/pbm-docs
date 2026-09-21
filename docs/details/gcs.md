@@ -127,6 +127,7 @@ Keep your existing `credentials` section in the configuration file.
     ```bash
     pbm config --file pbm_config.yaml
     ```
+    
 2. Check the active configuration:
 
     ```bash
