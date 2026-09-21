@@ -126,20 +126,6 @@ For the complete list of GCS settings, see [Remote backup storage options](../re
 
 A higher concurrency value does not always produce a faster backup. The value that works best depends on the available resources and workload.
 
-??? example "How concurrency can affect upload time"
-
-    The following results illustrate how different concurrency values affected upload time in two environments:
-
-    | **Environment** | **Dataset** | **Standard upload** | **Concurrency 4** | **Concurrency 10** | **Concurrency 20** | **Concurrency 40** | 
-    |---|---:|---:|---:|---:|---:|---:| 
-    | `i3en.xlarge`, 4 vCPUs | 39.81 GiB | 11m 43s | 13m 57s | Not recorded | 9m 52s | 13m 11s | 
-    | `i3en.3xlarge`, 12 vCPUs | 79.64 GiB | 7m 56s | 7m 57s | 8m 44s | 8m 39s | 6m 55s | 
-
-    A higher concurrency value did not always produce a faster backup. Concurrency `20` produced the shortest average duration in the 4-vCPU environment, while concurrency `40` produced the shortest average duration in the 12-vCPU environment.
-    
-    !!! note
-        These values are specific to the environments and workloads shown. Network capacity, available CPUs, storage performance, and backup size can affect upload speed. Compare several concurrency values with a representative backup before choosing a value for your deployment.
-
 ### Disable parallel uploads
 
 To disable parallel uploads, remove `parallelUploadConcurrency` from the configuration or set it to a value that is not greater than `1`.

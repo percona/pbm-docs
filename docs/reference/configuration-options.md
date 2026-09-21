@@ -155,7 +155,7 @@ The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storag
 *Type*: string <br>
 *Required*: NO
 
-Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log messages are printed in the `pbm logs` output. Possible values:
+Controls which AWS S3 client operations PBM writes to the `pbm logs` output. The values correspond to the [client log modes in the AWS SDK for Go v2 :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode).
 
 - `Signing` - logs the request signing process
 - `Retries` - logs each retry attempt when a request fails with a retryable error, including the retry count
@@ -163,18 +163,33 @@ Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log 
 - `RequestWithBody` - logs outgoing HTTP requests, including the full request body; may expose sensitive data such as object contents, credentials, tokens, or headers
 - `Response` - logs incoming HTTP response metadata (status code, headers) without the body
 - `ResponseWithBody` - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers
-- `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints 
+- `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints
+- `RequestEventMessage` - logs individual event stream messages that the client sends to AWS S3
+- `ResponseEventMessage` - logs individual event stream messages that the client receives from AWS S3
+
 
 !!! warning
-
     `RequestWithBody` and `ResponseWithBody` can log full HTTP payloads and related sensitive information. Enable them only temporarily for troubleshooting, and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.
 
 To specify several values, separate them by comma. When undefined, no S3 debug logging is performed.
 
-Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see [Logging configuration definition](../manage/logpath.md#logging-configuration-options).
+!!! note
+    Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see [Logging configuration options](../manage/logpath.md#logging-configuration-options).
+
+#### Compatibility with earlier values
+
+PBM continues to accept debug log values used in versions earlier than 2.10.0. It automatically translates them into the corresponding supported values:
+
+| Deprecated value from PBM earlier than 2.10.0 | Automatically translated into |
+| -------------| ----------------------------- |
+| `LogDebug`                                     | `Request`, `Response`         |
+| `HTTPBody`                                     | `RequestWithBody`, `ResponseWithBody` |
+| `RequestRetries`                               | `Retries`                     |
+| `RequestErrors`                                | `Response`                    |
+| `EventStreamBody`                              | `RequestWithBody`, `ResponseWithBody` |
 
 #### Example
-Here's an example and recommended configuration when troubleshooting AWS S3 communication:
+The following example logs request and response bodies when troubleshooting AWS S3 communication:
 
 ```yaml
 storage:
@@ -422,13 +437,13 @@ storage:
  type: gcs
  gcs:
     bucket: pbm-testing
-    prefix: pbm/test
-    clientType: json
-    parallelUploadConcurrency: <int>
     chunkSize: <int>
+    prefix: pbm/test
     credentials:
       clientEmail: <your-client-email-here>
       privateKey: <your-private-key-here>
+      hmacAccessKey: <your-HMAC-key-here>
+      hmacSecret: <your-HMAC-secret-here>
     maxObjSizeGB: 5018
 ```
 
@@ -439,35 +454,12 @@ storage:
 
 The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
 
-### storage.gcs.clientType
-
-*Type*: string <br>
-*Required*: NO <br>
-*Default*: `json`
-
-The GCS client type that PBM uses. Supported values are `json` and `grpc`. Use `grpc` with `storage.gcs.parallelUploadConcurrency` greater than `1` to enable parallel uploads.
-
 ### storage.gcs.chunkSize
 
 *Type*: string <br>
-*Required*: NO <br>
-*Default*: 10 MiB for standard uploads; 16 MiB for parallel uploads
+*Required*: NO
 
-The size of each data chunk sent to GCS. If you omit this option, PBM uses the following default:
-
-- 10 MiB for standard uploads
-
-- 16 MiB for parallel uploads, when `storage.gcs.clientType` is `grpc` and `storage.gcs.parallelUploadConcurrency` is greater than 1
-
-An explicitly configured value overrides the default for either upload mode.
-
-### storage.gcs.parallelUploadConcurrency
-
-*Type*: int <br>
-*Required*: NO <br>
-*Default*: 0 (parallel uploads disabled)
-
-The maximum number of parts PBM uploads concurrently to GCS. Set a value greater than 1 to enable parallel uploads. Parallel uploads require `storage.gcs.clientType` to be set to `grpc`.
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.
 
 ### storage.gcs.prefix
 
@@ -489,6 +481,24 @@ The email address that uniquely identifies your service account in GCS.
 *Required*: YES
 
 The private key of the service account used to authenticate the request.
+
+### storage.gcs.credentials.hmacAccessKey
+
+*Type*: string <br>
+*Required*: YES
+
+The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
+
+The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
+
+### storage.gcs.credentials.hmacSecret
+
+*Type*: string <br>
+*Required*: YES
+
+A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
+
+The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
 
 ### storage.gcs.retryer.backoffInitial
 
