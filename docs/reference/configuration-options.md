@@ -429,8 +429,6 @@ storage:
     credentials:
       clientEmail: <your-client-email-here>
       privateKey: <your-private-key-here>
-      hmacAccessKey: <your-HMAC-key-here>
-      hmacSecret: <your-HMAC-secret-here>
     maxObjSizeGB: 5018
 ```
 
@@ -493,24 +491,6 @@ The email address that uniquely identifies your service account in GCS.
 *Required*: YES
 
 The private key of the service account used to authenticate the request.
-
-### storage.gcs.credentials.hmacAccessKey
-
-*Type*: string <br>
-*Required*: YES
-
-The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
-
-The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
-
-### storage.gcs.credentials.hmacSecret
-
-*Type*: string <br>
-*Required*: YES
-
-A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
-
-The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
 
 ### storage.gcs.retryer.backoffInitial
 
