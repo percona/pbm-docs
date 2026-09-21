@@ -469,7 +469,7 @@ The size of data chunks in bytes to be uploaded to the storage bucket in a singl
 *Required*: NO <br>
 *Default*: 0 (parallel uploads disabled)
 
-The maximum number of parts PBM uploads concurrently to GCS. Set a value greater than 1 to enable parallel uploads. Parallel uploads require `storage.gcs.clientType `to be set to `grpc`.
+The maximum number of parts PBM uploads concurrently to GCS. Set a value greater than 1 to enable parallel uploads. Parallel uploads require `storage.gcs.clientType` to be set to `grpc`.
 
 ### storage.gcs.prefix
 
