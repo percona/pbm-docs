@@ -14,7 +14,7 @@ PBM communicates with GCS through the JSON API and authenticates using a service
 To use GCS, you need the following:
 
 * [create a service account :octicons-link-external-16:](https://cloud.google.com/iam/docs/service-accounts-create#iam-service-accounts-create-console) 
-* [add JSON keys :octicons-link-external-16:](https://cloud.google.com/iam/docs/keys-create-delete#creating) for the service account.
+* For static service account authentication, [add JSON keys :octicons-link-external-16:](https://cloud.google.com/iam/docs/keys-create-delete#creating). Alternatively, configure [Workload Identity authentication](workload-identity-auth.md).
 * [create a bucket](#create-a-bucket)
 * [add the GCS configuration to PBM](#configuration-example) 
 
