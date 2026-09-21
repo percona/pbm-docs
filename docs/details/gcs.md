@@ -122,7 +122,7 @@ pbm config --list
 ### Configuration options
 
 | **Option** | **Description**| **Default**|
-|------------|------------------------------|
+|------------|----------------|-------------|
 | `clientType`               | GCS client used by PBM. Parallel uploads require `grpc`. If you use `json`, PBM performs a standard upload. | `json`                       |
 | `parallelUploadConcurrency`| Maximum number of parts PBM uploads concurrently. A value greater than 1 enables parallel uploads. | Parallel uploads are disabled |
 | `chunkSize`                | Size of each part uploaded in parallel.                                    | 16 MiB when parallel uploads are enabled |
