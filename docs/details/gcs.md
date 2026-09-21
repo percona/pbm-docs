@@ -170,7 +170,7 @@ You can continue using the `gRPC` client with parallel uploads disabled. You do 
 
 Parallel upload support in the Google Cloud Storage `Go` client is **experimental**. Its behavior and configuration may change in a future upstream release.
 
-Test parallel uploads with representative backup data before enabling them in production. See the upstream [`ParallelUploadConfig` documentation :octicons-link-external-16:](https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig){="_blank"}.
+Test parallel uploads with representative backup data before enabling them in production. See the upstream [`ParallelUploadConfig` documentation :octicons-link-external-16:](https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig){:target="_blank"}.
 
 ## Adjust PBM configuration to use GCS
 
