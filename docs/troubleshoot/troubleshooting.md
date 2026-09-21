@@ -107,3 +107,14 @@ pbm-speed-test storage --help
                                     Compression level (specific to the compression type)
 
 
+## Parallel loads in GCS
+
+If PBM does not use parallel uploads, check that:
+
+* PBM is version 2.16.0 or later.
+* `storage.type` is set to `gcs`.
+* `clientType` is set to `grpc`.
+* `parallelUploadConcurrency` is greater than 1.
+* The updated configuration is active on the cluster.
+
+If an upload fails during cleanup, verify that the PBM credentials can delete objects and that the bucket does not have a retention policy or object hold preventing deletion.

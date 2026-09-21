@@ -72,19 +72,28 @@ You can find [the configuration file template :octicons-link-external-16:](https
 		   hmacSecret: <your-secret-key-here>
 	```
 
+## Parallel uploads to GCS
 
-## Enable parallel uploads
+Parallel uploads can reduce the time required to send large backup files to Google Cloud Storage. The improvement depends on the available network bandwidth, storage performance, and resources on the host running `pbm-agent`.
 
-Parallel uploads can reduce the time required to send large backup files to Google Cloud Storage. The improvement depends on the available network bandwidth, storage performance, and resources on the host running pbm-agent.
+This feature applies only when PBM writes data to GCS. It does not change how PBM downloads backup data during a restore.
 
-To enable parallel uploads, use the GCS gRPC client and set the number of concurrent uploads:
+### Before you start
 
-Parallel uploads are available only with the gRPC client. To enable them, set:
+Make sure that:
 
-* `clientType` to `grpc`
-* `parallelUploadConcurrency` to a value greater than `1`
+* You are running PBM 2.16.0 or later.
+* Your PBM configuration uses the native GCS storage type.
+* The credentials used by PBM can create, compose, and delete objects in the GCS bucket.
+* The destination bucket does not have settings that prevent PBM from deleting temporary objects.
 
-The following example enables four concurrent uploads:
+Parallel uploads work with both service account credentials and Workload Identity authentication. Keep the authentication configuration already defined for your GCS storage. For Workload Identity configuration, see [Workload Identity authentication](workload-identity-auth.md).
+
+
+### Configure parallel uploads
+
+Set `clientType` to `grpc` and `parallelUploadConcurrency` to a value greater than 1:
+
 
 ```yaml
 storage:
@@ -95,50 +104,90 @@ storage:
     clientType: grpc
     parallelUploadConcurrency: 4
     chunkSize: 16MB
-    credentials:
-      workloadIdentity: true
-       #storage:
-  type: gcs
-  gcs:
-    bucket: <bucket-name>
-    prefix: <optional-prefix>
-    clientType: grpc
-    parallelUploadConcurrency: 4
-    chunkSize: 16MB
-    credentials:
-      # Use your existing service account or Workload Identity configuration.
 ```
 
-You can use parallel uploads with either Workload Identity or service account credentials. Keep the credentials section that matches your authentication method.
+Keep your existing `credentials` section in the configuration file.
 
 Apply the configuration:
 
-```sh
+```bash
 pbm config --file pbm_config.yaml
 ```
-### Configure upload concurrency
+Check the active configuration:
 
-The `parallelUploadConcurrency` option controls how many parts PBM uploads at the same time.
+```bash
+pbm config --list
+```
 
-A higher value can improve throughput when network bandwidth and storage performance are available. It also increases the number of concurrent requests and the resources used by the upload. Start with a moderate value, such as `4`, and measure backup performance before increasing it.
+### Configuration options
 
-If p`arallelUploadConcurrency` is omitted or set to `1`, PBM uses a standard upload.
+| **Option** | **Description**| **Default**|
+|------------|------------------------------|
+| `clientType`               | GCS client used by PBM. Parallel uploads require `grpc`. If you use `json`, PBM performs a standard upload. | `json`                       |
+| `parallelUploadConcurrency`| Maximum number of parts PBM uploads concurrently. A value greater than 1 enables parallel uploads. | Parallel uploads are disabled |
+| `chunkSize`                | Size of each part uploaded in parallel.                                    | 16 MiB when parallel uploads are enabled |
 
-### Configure the part size
+For the complete list of GCS settings, see [Remote backup storage options](../reference/configuration-options.md).
 
-For parallel uploads, `chunkSize` defines the size of each temporary part. If you do not set it, PBM uses a default part size of 16 MiB.
+### Tune upload performance
 
-Larger parts reduce the number of temporary objects and compose operations. Smaller parts give PBM more work to distribute across concurrent upload operations. Choose a value that fits your backup size, available memory, and network capacity.
+The `parallelUploadConcurrency` value controls how many parts PBM uploads at the same time. The example uses a value of `4`.
 
-!!! note
-    Parallel uploads require both `clientType: grpc` and a `parallelUploadConcurrency` value greater than `1`. The JSON client does not support this feature. If you configure parallel uploads with the JSON client, PBM performs a standard upload instead.
+Run a representative backup and compare its duration with a standard upload. Parallel uploads can improve throughput when network and disk speed are not limiting factors.
 
-!!! warning
-    - Parallel upload support in the upstream Google Cloud Storage Go client is experimental. Test the configuration with representative backup sizes before using it in production.
-    - Parallel uploads create temporary objects in the destination bucket. The credentials used by PBM must have permission to delete these objects. An interrupted upload can leave temporary objects behind. Consider configuring an [Object Lifecycle Management rule :octicons-link-external-16:](https://docs.cloud.google.com/storage/docs/lifecycle){:target="_blank"} to remove abandoned temporary objects.
-    - Review your bucket settings before enabling this feature. Retention policies, default object holds, soft delete, and Object Versioning can prevent immediate cleanup or increase storage costs. See [Parallel composite uploads :octicons-link-external-16:](https://docs.cloud.google.com/storage/docs/parallel-composite-uploads){:target="_blank"} for details.
+The `chunkSize` option controls the size of each part. If you do not set it, PBM uses 16 MiB for parallel uploads.
 
-For the upstream client configuration and defaults, see ParallelUploadConfig in the Google Cloud Storage Go client :octicons-link-external-16:{="_blank"}.
+??? example "Parallel upload performance"
+    The following configuration uses a 16 MiB part size and allows four concurrent uploads:
+
+    ```yaml
+    storage:
+    type: gcs
+    gcs:
+        bucket: pbm-e2e-tests
+        prefix: pbme2etest
+        clientType: grpc
+        chunkSize: 16777216
+        parallelUploadConcurrency: 4
+    ```
+
+    The following results compare standard uploads with several `parallelUploadConcurrency` values on two environments.
+
+    **i3en.xlarge with 4 vCPUs and a 39.81 GiB dataset**
+
+    | Configuration | Runs | Average |
+    |---|---|---|
+    | Standard upload | 11m 42s, 9m 55s, 11m 33s, 15m 50s, 11m 29s, 10m 50s, 10m 44s | 11m 43s |
+    | Concurrency 4 | 13m 11s, 10m 12s, 13m 32s, 18m 51s | 13m 57s |
+    | Concurrency 20 | 9m 54s, 9m 49s | 9m 52s |
+    | Concurrency 40 | 13m 11s | 13m 11s |
+
+    **i3en.3xlarge with 12 vCPUs and a 79.64 GiB dataset**
+
+    | Configuration | Runs | Average |
+    |---|---|---|
+    | Standard upload | 7m 8s, 9m 26s, 7m 15s | 7m 56s |
+    | Concurrency 4 | 9m 32s, 7m 46s, 6m 34s | 7m 57s |
+    | Concurrency 10 | 6m 39s, 12m 48s, 6m 45s | 8m 44s |
+    | Concurrency 20 | 9m 29s, 8m 8s, 8m 19s | 8m 39s |
+    | Concurrency 40 | 6m 32s, 7m 31s, 6m 42s | 6m 55s |
+
+    A higher concurrency value does not always produce a faster backup. In this example, concurrency `20` performed best on the 4-vCPU environment, while concurrency `40` performed best on the 12-vCPU environment.
+
+    !!! note
+        Performance varies by environment and workload. Network capacity, available CPUs, storage performance, and backup size can all affect upload speed. Compare several concurrency values with a representative backup before choosing a value for your deployment.
+
+### Disable parallel uploads
+
+To disable parallel uploads, remove `parallelUploadConcurrency` from the configuration or set it to `1`.
+
+You can continue using the `gRPC` client with parallel uploads disabled. You do not need to switch back to the `JSON` client.
+
+### Experimental upstream feature
+
+Parallel upload support in the Google Cloud Storage `Go` client is **experimental**. Its behavior and configuration may change in a future upstream release.
+
+Test parallel uploads with representative backup data before enabling them in production. See the upstream [`ParallelUploadConfig` documentation :octicons:](https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig){="_blank"}.
 
 ## Adjust PBM configuration to use GCS
 
