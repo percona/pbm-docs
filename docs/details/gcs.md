@@ -121,17 +121,18 @@ storage:
 In this example, PBM divides a backup object into 16 MiB parts and uploads up to **four** parts concurrently.
 
 Keep your existing `credentials` section in the configuration file.
+{.power-number}
 
-Apply the configuration:
+1. Apply the configuration:
 
-```bash
-pbm config --file pbm_config.yaml
-```
-Check the active configuration:
+    ```bash
+    pbm config --file pbm_config.yaml
+    ```
+2. Check the active configuration:
 
-```bash
-pbm config --list
-```
+    ```bash
+    pbm config --list
+    ```
 
 ### Configuration options
 
@@ -166,12 +167,6 @@ A higher concurrency value does not always produce a faster backup. The value th
 To disable parallel uploads, remove `parallelUploadConcurrency` from the configuration or set it to `1`.
 
 You can continue using the `gRPC` client with parallel uploads disabled. You do not need to switch back to the `JSON` client.
-
-### Experimental upstream feature
-
-Parallel upload support in the Google Cloud Storage `Go` client is **experimental**. Its behavior and configuration may change in a future upstream release.
-
-Test parallel uploads with representative backup data before enabling them in production. See the upstream [`ParallelUploadConfig` documentation :octicons-link-external-16:](https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig){="_blank"}.
 
 ## Adjust PBM configuration to use GCS
 
