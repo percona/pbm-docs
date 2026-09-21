@@ -169,7 +169,7 @@ Controls which AWS S3 client operations PBM writes to the `pbm logs` output. The
 
 
 !!! warning
-    `RequestWithBody` and `ResponseWithBody` can log full HTTP payloads and related sensitive information. Enable them only temporarily for troubleshooting, and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.
+    `Request` and `RequestWithBody` can log sensitive request headers, while `RequestWithBody` and `ResponseWithBody` can also log full HTTP payloads. Enable these modes only temporarily for troubleshooting and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.
 
 To specify several values, separate them by comma. When undefined, no S3 debug logging is performed.
 
