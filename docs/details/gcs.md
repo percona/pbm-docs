@@ -6,8 +6,7 @@ You can use Google Cloud Storage (GCS) as a remote backup storage for Percona Ba
 
     Starting from version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. See how to [adjust your PBM configuration to use GCS](#adjust-pbm-configuration-to-use-gcs) after the upgrade.
 
-
-PBM supports communication with GCS via the JSON API and XML API. The preferred approach is to use the JSON API with a service account. HMAC keys are mainly useful for compatibility with S3-style APIs.
+PBM can communicate with GCS through the JSON, XML, and gRPC APIs. The native GCS storage type supports the JSON and gRPC clients with service account credentials or Workload Identity authentication. HMAC keys use the XML API and are mainly useful for compatibility with S3-style APIs.
 
 !!! warning "HMAC keys support deprecation"
 
@@ -84,7 +83,7 @@ This feature applies only when PBM writes data to GCS. It does not change how PB
 
 ### How parallel uploads work
 
-The Google Cloud Storage client divides a large backup object into parts and uploads multiple parts concurrently. The chunkSize option controls the size of each part, while parallelUploadConcurrency controls the maximum number of concurrent uploads.
+The Google Cloud Storage client divides a large backup object into parts and uploads multiple parts concurrently. The `chunkSize` option controls the size of each part. The `parallelUploadConcurrency` option controls the maximum number of concurrent uploads.
 
 GCS composes the uploaded parts into the final backup object. The client then makes a best-effort attempt to remove the temporary part objects. If the upload process exits unexpectedly, some temporary objects may remain in the bucket.
 
@@ -115,9 +114,8 @@ storage:
     prefix: <optional-prefix>
     clientType: grpc
     parallelUploadConcurrency: 4
-    chunkSize: 16MB
 ```
-In this example, PBM divides a backup object into 16 MiB parts and uploads up to **four** parts concurrently.
+In this example, chunkSize is omitted, so PBM uses the 16 MiB default for parallel uploads. PBM uploads up to four parts concurrently.
 
 Keep your existing `credentials` section in the configuration file.
 {.power-number}
@@ -127,7 +125,7 @@ Keep your existing `credentials` section in the configuration file.
     ```bash
     pbm config --file pbm_config.yaml
     ```
-    
+
 2. Check the active configuration:
 
     ```bash
@@ -139,8 +137,8 @@ Keep your existing `credentials` section in the configuration file.
 | **Option** | **Description**| **Default**|
 |------------|----------------|-------------|
 | `clientType`               | GCS client used by PBM. Parallel uploads require `grpc`. If you use `json`, PBM performs a standard upload. | `json`                       |
-| `parallelUploadConcurrency`| Maximum number of parts PBM uploads concurrently. A value greater than 1 enables parallel uploads. | Parallel uploads are disabled |
-| `chunkSize`                | Size of each part uploaded in parallel.                                    | 16 MiB when parallel uploads are enabled |
+| `parallelUploadConcurrency`| Maximum number of parts PBM uploads concurrently. A value greater than 1 enables parallel uploads when `clientType` is `grpc`. | 0 (parallel uploads disabled)|
+| `chunkSize`                | Size of each data chunk sent to GCS. If you omit this option, PBM selects the default based on the upload mode. | 10 MiB for standard uploads; 16 MiB for parallel uploads|
 
 For the complete list of GCS settings, see [Remote backup storage options](../reference/configuration-options.md).
 
@@ -150,17 +148,17 @@ A higher concurrency value does not always produce a faster backup. The value th
 
 ??? example "How concurrency can affect upload time"
 
-    The following averages show how different concurrency values affected two environments: 
-    
+    The following results illustrate how different concurrency values affected upload time in two environments:
+
     | **Environment** | **Dataset** | **Standard upload** | **Concurrency 4** | **Concurrency 10** | **Concurrency 20** | **Concurrency 40** | 
     |---|---:|---:|---:|---:|---:|---:| 
     | `i3en.xlarge`, 4 vCPUs | 39.81 GiB | 11m 43s | 13m 57s | Not recorded | 9m 52s | 13m 11s | 
     | `i3en.3xlarge`, 12 vCPUs | 79.64 GiB | 7m 56s | 7m 57s | 8m 44s | 8m 39s | 6m 55s | 
+
+    A higher concurrency value did not always produce a faster backup. Concurrency `20` produced the shortest average duration in the 4-vCPU environment, while concurrency `40` produced the shortest average duration in the 12-vCPU environment.
     
-    Concurrency `20` produced the shortest average duration in the 4-vCPU environment. Concurrency `40` produced the shortest average duration in the 12-vCPU environment. Other parallel-upload settings were equal to or slower than the standard upload. 
-    
-    !!! note 
-        These values are specific to the environments and workloads shown. Network capacity, available CPUs, storage performance, and backup size can affect upload speed. Compare several concurrency values with a representative backup before choosing a value for your deployment.
+    !!! note
+    These values are specific to the environments and workloads shown. Network capacity, available CPUs, storage performance, and backup size can affect upload speed. Compare several concurrency values with a representative backup before choosing a value for your deployment.
 
 ### Disable parallel uploads
 
