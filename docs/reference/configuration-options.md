@@ -437,13 +437,14 @@ storage:
  type: gcs
  gcs:
     bucket: pbm-testing
+    clientType: json
     chunkSize: <int>
+    parallelUploadConcurrency: <int>
     prefix: pbm/test
     credentials:
+      workloadIdentity: <bool>
       clientEmail: <your-client-email-here>
       privateKey: <your-private-key-here>
-      hmacAccessKey: <your-HMAC-key-here>
-      hmacSecret: <your-HMAC-secret-here>
     maxObjSizeGB: 5018
 ```
 
@@ -459,7 +460,23 @@ The name of the storage bucket. See the [GCS bucket naming guidelines](https://c
 *Type*: string <br>
 *Required*: NO
 
-The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB for parallel uploads.
+
+### storage.gcs.clientType
+
+*Type*: string <br>
+*Required*: NO<br>
+*Default*: `json`
+
+The GCS client used by PBM. Supported values are `json` and `grpc`. Parallel uploads require `grpc`.
+
+### storage.gcs.parallelUploadConcurrency
+
+*Type*: int <br>
+*Required*: NO<br>
+*Default*: 0
+
+The maximum number of parts PBM uploads concurrently. A value greater than `1` enables parallel uploads when `storage.gcs.clientType` is `grpc`.
 
 ### storage.gcs.prefix
 
@@ -471,34 +488,24 @@ The path to the data directory in the bucket. If undefined, backups are stored i
 ### storage.gcs.credentials.clientEmail
 
 *Type*: string <br>
-*Required*: YES
+*Required*: NO
 
-The email address that uniquely identifies your service account in GCS.
+The email address that uniquely identifies your service account in GCS. Required unless `storage.gcs.credentials.workloadIdentity` is `true`.
 
 ### storage.gcs.credentials.privateKey
 
 *Type*: string <br>
-*Required*: YES
+*Required*: NO
 
-The private key of the service account used to authenticate the request.
+The private key of the service account used to authenticate the request. Required unless `storage.gcs.credentials.workloadIdentity` is `true`.
 
-### storage.gcs.credentials.hmacAccessKey
+### storage.gcs.credentials.workloadIdentity
 
-*Type*: string <br>
-*Required*: YES
+*Type*: boolean <br>
+*Required*: NO<br>
+*Default*: `false`
 
-The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. 
-
-The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
-
-### storage.gcs.credentials.hmacSecret
-
-*Type*: string <br>
-*Required*: YES
-
-A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. 
-
-The use of HMAC keys is deprecated starting with version 2.12.0. Use the `storage.gcs.credentials.clientEmail` and `storage.gcs.credentials.privateKey` instead.
+Set this option to `true` to use Workload Identity instead of static service account JSON keys.
 
 ### storage.gcs.retryer.backoffInitial
 

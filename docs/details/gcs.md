@@ -40,16 +40,16 @@ After the bucket is created, apply the proper [permissions for PBM to use the bu
 
 You can find [the configuration file template :octicons-link-external-16:](https://github.com/percona/percona-backup-mongodb/blob/v{{release}}/packaging/conf/pbm-conf-reference.yml) and uncomment the required fields.
 
-    ```yaml
-    storage:
-     type: gcs
-     gcs:
-         bucket: pbm-testing
-         prefix: pbm/test
-         credentials:
-           clientEmail: <your-service-account-email-here>
-           privateKey: <your-private-key-here>
-    ```
+```yaml
+storage:
+ type: gcs
+ gcs:
+     bucket: pbm-testing
+     prefix: pbm/test
+     credentials:
+       clientEmail: <your-service-account-email-here>
+       privateKey: <your-private-key-here>
+```
 
 ## Parallel uploads to GCS
 
