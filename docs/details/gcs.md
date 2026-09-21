@@ -115,7 +115,7 @@ storage:
     clientType: grpc
     parallelUploadConcurrency: 4
 ```
-In this example, chunkSize is omitted, so PBM uses the 16 MiB default for parallel uploads. PBM uploads up to four parts concurrently.
+In this example, `chunkSize` is omitted, so PBM uses the 16 MiB default for parallel uploads. PBM uploads up to four parts concurrently.
 
 Keep your existing `credentials` section in the configuration file.
 {.power-number}
@@ -160,7 +160,7 @@ A higher concurrency value does not always produce a faster backup. The value th
     A higher concurrency value did not always produce a faster backup. Concurrency `20` produced the shortest average duration in the 4-vCPU environment, while concurrency `40` produced the shortest average duration in the 12-vCPU environment.
     
     !!! note
-    These values are specific to the environments and workloads shown. Network capacity, available CPUs, storage performance, and backup size can affect upload speed. Compare several concurrency values with a representative backup before choosing a value for your deployment.
+        These values are specific to the environments and workloads shown. Network capacity, available CPUs, storage performance, and backup size can affect upload speed. Compare several concurrency values with a representative backup before choosing a value for your deployment.
 
 ### Disable parallel uploads
 
