@@ -450,7 +450,7 @@ The GCS client type that PBM uses. Supported values are `json` and `grpc`. Use `
 ### storage.gcs.chunkSize
 
 *Type*: string <br>
-*Required*: NO
+*Required*: NO <br>
 *Default*: 10 MiB for standard uploads; 16 MiB for parallel uploads
 
 The size of each data chunk sent to GCS. If you omit this option, PBM uses the following default:
