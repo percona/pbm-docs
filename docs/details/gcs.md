@@ -88,8 +88,7 @@ The Google Cloud Storage client divides a large backup object into parts and upl
 
 GCS composes the uploaded parts into the final backup object. The client then makes a best-effort attempt to remove the temporary part objects. If the upload process exits unexpectedly, some temporary objects may remain in the bucket.
 
-For details, see the upstream [Parallel Uploads documentation :octicons-link-external-16:]
-(https://pkg.go.dev/cloud.google.com/go/storage#hdr-Parallel_Uploads){:target="_blank"}.
+For details, see the upstream [Parallel Uploads documentation :octicons-link-external-16:](https://pkg.go.dev/cloud.google.com/go/storage#hdr-Parallel_Uploads){:target="_blank"}.
 
 ### Before you start
 
