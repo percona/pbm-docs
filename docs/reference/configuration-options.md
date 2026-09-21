@@ -461,8 +461,6 @@ The size of each data chunk sent to GCS. If you omit this option, PBM uses the f
 
 An explicitly configured value overrides the default for either upload mode.
 
-The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB when parallel uploads are enabled.
-
 ### storage.gcs.parallelUploadConcurrency
 
 *Type*: int <br>
