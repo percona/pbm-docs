@@ -422,8 +422,10 @@ storage:
  type: gcs
  gcs:
     bucket: pbm-testing
-    chunkSize: <int>
     prefix: pbm/test
+    clientType: json
+    parallelUploadConcurrency: <int>
+    chunkSize: <int>
     credentials:
       clientEmail: <your-client-email-here>
       privateKey: <your-private-key-here>
@@ -439,12 +441,28 @@ storage:
 
 The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
 
+### storage.gcs.clientType
+
+*Type*: string <br>
+*Required*: NO <br>
+*Default*: `json`
+
+The GCS client type that PBM uses. Supported values are `json` and `grpc`. Use `grpc` with `storage.gcs.parallelUploadConcurrency` greater than `1` to enable parallel uploads.
+
 ### storage.gcs.chunkSize
 
 *Type*: string <br>
 *Required*: NO
 
 The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.
+
+### storage.gcs.parallelUploadConcurrency
+
+*Type*: int <br>
+*Required*: NO <br>
+*Default*: `1` (parallel uploads disabled)
+
+The maximum number of parts PBM uploads concurrently to GCS. Set a value greater than `1` to enable parallel uploads. Parallel uploads require `storage.gcs.clientType` to be set to `grpc`.
 
 ### storage.gcs.prefix
 
