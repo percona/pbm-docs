@@ -454,7 +454,7 @@ The GCS client type that PBM uses. Supported values are `json` and `grpc`. Use `
 *Type*: string <br>
 *Required*: NO
 
-The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB when parallel uploads are enabled.
 
 ### storage.gcs.parallelUploadConcurrency
 

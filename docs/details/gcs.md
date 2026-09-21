@@ -140,7 +140,7 @@ Keep your existing `credentials` section in the configuration file.
 |------------|----------------|-------------|
 | `clientType`               | GCS client used by PBM. Parallel uploads require `grpc`. If you use `json`, PBM performs a standard upload. | `json`                       |
 | `parallelUploadConcurrency`| Maximum number of parts PBM uploads concurrently. A value greater than 1 enables parallel uploads. | Parallel uploads are disabled |
-| `chunkSize`                | Size of each part uploaded in parallel.                                    | 16 MiB when parallel uploads are enabled |
+| `chunkSize`                | Size of each part uploaded in parallel.                                    | 10 MiB for standard uploads; 16 MiB when parallel uploads are enabled |
 
 For the complete list of GCS settings, see [Remote backup storage options](../reference/configuration-options.md).
 
