@@ -6,7 +6,7 @@ You can use Google Cloud Storage (GCS) as a remote backup storage for Percona Ba
 
     Starting from version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. See how to [adjust your PBM configuration to use GCS](#adjust-pbm-configuration-to-use-gcs) after the upgrade.
 
-PBM communicates with GCS through the JSON API and authenticates using a service account.
+PBM communicates with GCS through the JSON API by default and can use the gRPC client for parallel uploads. PBM authenticates using either a service account or Workload Identity.
 
 !!! warning "HMAC authentication removed in PBM 2.16.0"
     PBM 2.16.0 removes support for authenticating to GCS with HMAC keys. Before upgrading, replace `hmacAccessKey` and `hmacSecret` in your PBM configuration with `clientEmail` and `privateKey`. PBM 2.16.0 treats the HMAC options as unrecognized configuration fields and cannot access the backup storage until you update the configuration.
