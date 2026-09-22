@@ -153,7 +153,7 @@ Configure the policy and enable it before you run a dry run. When `lifecycle.ena
 3. Run the cleanup:
 
     ```bash
-    $ pbm cleanup --lifecycle --wait
+    pbm cleanup --lifecycle --wait
     ```
 
     PBM displays the lifecycle report and asks you to confirm the deletion. Enter `N` or press `Ctrl+C` at the confirmation prompt to cancel.
