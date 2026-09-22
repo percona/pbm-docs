@@ -123,41 +123,41 @@ For details about the configuration file and how to apply it, see [Configure PBM
 
 ## Example retention policies
 
-### Rolling retention
+=== "Rolling retention"
 
-The following policy keeps all completed backups for seven days, one weekly backup for four weeks, and one monthly backup for 12 months. This policy suits most deployments.
+  The following policy keeps all completed backups for seven days, one weekly backup for four weeks, and one monthly backup for 12 months. This policy suits most deployments.
 
-```yaml
-lifecycle:
-  enabled: false
-  strategy: rolling
-  minKeep: 1
-  prompt: true
-  purgeFailed: true
-  dailyRetention: 7
-  weeklyRetention: 4
-  monthlyRetention: 12
-```
+  ```yaml
+  lifecycle:
+    enabled: false
+    strategy: rolling
+    minKeep: 1
+    prompt: true
+    purgeFailed: true
+    dailyRetention: 7
+    weeklyRetention: 4
+    monthlyRetention: 12
+  ```
 
-Keep `enabled: false` while you review the policy. Run a dry run before you enable rotation.
+  Keep `enabled: false` while you review the policy. Run a dry run before you enable rotation.
 
-### Calendar retention
+=== "Calendar retention"
 
-The following policy keeps all completed backups for 14 days, targets Friday backups for eight weeks, and targets the 15th of each month for six months.
+    The following policy keeps all completed backups for 14 days, targets Friday backups for eight weeks, and targets the 15th of each month for six months.
 
-```yaml
-lifecycle:
-  enabled: false
-  strategy: calendar
-  minKeep: 1
-  prompt: true
-  purgeFailed: false
-  dailyRetention: 14
-  weeklyRetention: 8
-  weeklyDay: 5
-  monthlyRetention: 6
-  monthlyDay: 15
-```
+    ```yaml
+    lifecycle:
+      enabled: false
+      strategy: calendar
+      minKeep: 1
+      prompt: true
+      purgeFailed: false
+      dailyRetention: 14
+      weeklyRetention: 8
+      weeklyDay: 5
+      monthlyRetention: 6
+      monthlyDay: 15
+    ```
 
 ## Run a lifecycle rotation
 
@@ -360,7 +360,7 @@ Automated run (prompt: false) detected. Purge aborted to protect your backups.
 
 Review the lifecycle configuration and the backups selected for retention before you run the rotation again.
 
-## Related topics
+## Next steps
 
 - [Configure backup storage](../reference/config.md)
 
