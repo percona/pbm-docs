@@ -1,22 +1,8 @@
 # Backup lifecycle management
 
-2026-09-22 · @Rasika Chivate
+The Backup Lifecycle Management feature automates the retention and rotation of Percona Backup for MongoDB (PBM) backups. This feature allows administrators to define a **Grandfather-Father-Son (GFS)** style retention policy to automatically purge aged data while preserving specific historical recovery points for long-term compliance, disaster recovery, and cost management.
 
-Backup lifecycle management rotates your backups for you. You define a retention policy once, and Percona Backup for MongoDB (PBM) purges aged backups while it protects the restore points you depend on. The feature follows the Grandfather-Father-Son (GFS) rotation scheme, which holds three tiers at the same time:
-
-- Daily backups, for immediate disaster recovery
-- Weekly backups, for short-term historical rollback
-- Monthly backups, as long-term anchors for audits
-
-A GFS policy replaces the `cron` and `pbm delete-backup` scripts that many teams maintain by hand. Unlike a script, the engine checks point-in-time recovery (PITR) chains and running backups before a purge.
-
-
-!!! note
-
-    Lifecycle management is turned off after an upgrade. PBM deletes nothing until you set `lifecycle.enabled` to `true`.
-
-
-## How rotation works
+## How retention works
 
 A backup passes through three stages as the backup ages.
 
@@ -26,34 +12,30 @@ The `dailyRetention` option defines a keep-everything zone, measured backward fr
 
 ### The weekly and monthly windows
 
-Past the daily window, PBM groups backups into buckets and keeps one backup per bucket. The `strategy` option decides how the grouping works.
+Past the daily window, Percona Backup for MongoDB (PBM) groups backups into buckets and keeps one backup per bucket. The `strategy` option decides how the grouping works.
 
-| Strategy | Grouping method | Best for |
+| **Strategy** | **Grouping method** | **Best for** |
 | --- | --- | --- |
 | `rolling` (default) | Time decay. PBM divides the timeline into seven-day and 30-day chunks, then keeps the newest backup in each chunk. | Cloud deployments and schedules that drift. A paused or failed backup job costs you nothing, since PBM keeps the closest available backup in the window. |
 | `calendar` | Strict anchoring. PBM keeps backups taken on the exact days named by `weeklyDay` and `monthlyDay`. | Finance, healthcare, and any audit that names a date, such as the end-of-month state of the database. |
-
 
 !!! note
 
     Under the `calendar` strategy, a missed anchor date has a fallback. If no backup exists for the 15th, PBM scans that month and keeps the closest backup, such as the one from the 14th or the 16th.
 
-
 ## Mixed backup types
 
 Many deployments take both physical and logical backups. The bucketing engine sorts candidates into separate lanes by type, so one type never crowds out another. Each week and each month keeps its own logical, physical, and incremental anchor. The rule applies to the global configuration and to storage profiles alike.
-
 
 !!! note
 
     Type separation protects both backup types, but long-term archives of both consume storage. To keep physical backups for a year and logical backups for three days, use separate storage profiles.
 
-
 ## Configuration options
 
 The `lifecycle` block in the PBM configuration controls the feature:
 
-| Option | Type | Default | Description |
+| **Option** | **Type** | **Default** | **Description** |
 | --- | --- | --- | --- |
 | `lifecycle.enabled` | Boolean | `false` | Turns on automated rotation. While the value stays `false`, PBM purges nothing. |
 | `lifecycle.strategy` | String | `rolling` | Sets the rotation algorithm. Values: `rolling` or `calendar`. |
@@ -114,10 +96,9 @@ lifecycle:
   monthlyDay: 15
 ```
 
-
 !!! note
 
-    Both examples start with `enabled: false`. Validate the rules 
+    Both examples start with `enabled: false`. Validate the rules with a dry run, then turn the feature on.
 
 ## Run a rotation
 
@@ -184,66 +165,71 @@ A policy applies at one of two scopes.
 
 Use the global scope when one set of rules suits all your data. Use profiles when retention lengths differ, or when buckets in separate regions carry separate compliance rules. A common split keeps physical backups for a year and logical backups for three days.
 
-### Step 1. Configure the physical profile
+### Procedure
 
-Create `pbm-physical.conf` with the storage settings and the long-term rules:
+Follow these steps:
+{.power-number}
 
-```yaml
-storage:
-  type: s3
-  s3:
-    region: us-east-1
-    bucket: mongo-physical-backups
-    prefix: pbm/physical
-lifecycle:
-  enabled: true
-  strategy: rolling
-  minKeep: 1
-  prompt: true
-  purgeFailed: true
-  dailyRetention: 7
-  weeklyRetention: 4
-  monthlyRetention: 12
-```
+1. Configure the physical profile
 
-```bash
-pbm profile add physical-backup pbm-physical.conf
-```
+    Create `pbm-physical.conf` with the storage settings and the long-term rules:
 
-### Step 2. Configure the logical profile
+    ```yaml
+    storage:
+      type: s3
+      s3:
+        region: us-east-1
+        bucket: mongo-physical-backups
+        prefix: pbm/physical
+    lifecycle:
+      enabled: true
+      strategy: rolling
+      minKeep: 1
+      prompt: true
+      purgeFailed: true
+      dailyRetention: 7
+      weeklyRetention: 4
+      monthlyRetention: 12
+    ```
 
-Create `pbm-logical.conf` with the short-term rules. A value of `0` turns off the weekly and monthly tiers:
+    ```bash
+    pbm profile add physical-backup pbm-physical.conf
+    ```
 
-```yaml
-storage:
-  type: s3
-  s3:
-    region: us-east-1
-    bucket: mongo-logical-backups
-    prefix: pbm/logical
-lifecycle:
-  enabled: true
-  strategy: rolling
-  minKeep: 1
-  prompt: true
-  purgeFailed: true
-  dailyRetention: 3
-  weeklyRetention: 0
-  monthlyRetention: 0
-```
+2. Configure the logical profile
 
-```bash
-pbm profile add logical-backup pbm-logical.conf
-```
+    Create `pbm-logical.conf` with the short-term rules. A value of `0` turns off the weekly and monthly tiers:
 
-### Step 3. Rotate one profile
+    ```yaml
+    storage:
+      type: s3
+      s3:
+        region: us-east-1
+        bucket: mongo-logical-backups
+        prefix: pbm/logical
+    lifecycle:
+      enabled: true
+      strategy: rolling
+      minKeep: 1
+      prompt: true
+      purgeFailed: true
+      dailyRetention: 3
+      weeklyRetention: 0
+      monthlyRetention: 0
+    ```
 
-Add the `--profile` flag to evaluate or purge a single profile. PBM ignores the global configuration for that run and tags each kept backup with the tier that saved it, such as `[Daily]` or `[Weekly]`:
+    ```bash
+    pbm profile add logical-backup pbm-logical.conf
+    ```
 
-```bash
-pbm lifecycle --profile=physical-backup --dry-run
-pbm lifecycle --profile=logical-backup --dry-run
-```
+3. Rotate one profile
+
+    Add the `--profile` flag to evaluate or purge a single profile. PBM ignores the global configuration for that run and tags each kept backup with the tier that saved it, such as `[Daily]` or `[Weekly]`:
+
+    ```bash
+    pbm lifecycle --profile=physical-backup --dry-run
+    pbm lifecycle --profile=logical-backup --dry-run
+    ```
 
 ## Automate the rotation
 
@@ -271,17 +257,15 @@ Profiles rotate one at a time:
 30 2 * * * /usr/bin/pbm lifecycle --profile=logical-backup --out json >> /var/log/pbm-lifecycle-logi.log 2>&1
 ```
 
-
 !!! warning
 
     Profiles carry their own settings. Set `prompt: false` inside each profile configuration file as well, not only in the global configuration.
-
 
 ## Safety checks
 
 PBM protects recoverability during a rotation with the following guards.
 
-| Situation | Behavior |
+| **Situation** | **Behavior** |
 | --- | --- |
 | A purge would leave too few backups | The rotation aborts in full when the survivors fall below `minKeep`. |
 | A backup is the base for an active PITR chain | PBM refuses the deletion and logs an `ErrBaseForPITR` warning. |
@@ -294,6 +278,7 @@ An aborted automated run logs the reason. Review your retention settings when th
 
 
 !!! WARNING
-    This rotation would leave you with 0 backup(s), which is below the safety threshold of 1 (minKeep).
-Automated run (prompt: false) detected. Purge aborted to protect your backups.
+    ```
+    This rotation would leave you with 0 backup(s), which is below the safety threshold of 1 (minKeep). Automated run (prompt: false) detected. Purge aborted to protect your backups.
+    ```
 
