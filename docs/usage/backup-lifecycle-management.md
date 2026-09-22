@@ -2,76 +2,134 @@
 
 The Backup Lifecycle Management feature automates the retention and rotation of Percona Backup for MongoDB (PBM) backups. This feature allows administrators to define a **Grandfather-Father-Son (GFS)** style retention policy to automatically purge aged data while preserving specific historical recovery points for long-term compliance, disaster recovery, and cost management.
 
+PBM supports two retention strategies:
+
+- `rolling` keeps the newest available backup in each retention window.
+
+- `calendar` keeps backups from configured days of the week or month.
+
+A lifecycle policy applies to all backups, or to a single storage profile.
+
+!!! warning
+
+    Lifecycle rotation permanently deletes the backups selected for purging. Run `pbm lifecycle --dry-run` and review the report before you enable rotation.
+
 ## How retention works
 
-A backup passes through three stages as the backup ages.
+Three retention tiers make up a policy:
 
-### The daily window
+- Daily: keeps every completed backup for the configured number of days.
 
-The `dailyRetention` option defines a keep-everything zone, measured backward from the run time. Every successful backup inside the window stays, with no bucketing. A value of `7` with a backup every six hours keeps all 28 backups.
+- Weekly: keeps one backup for each weekly retention window.
 
-### The weekly and monthly windows
+- Monthly: keeps one backup for each monthly retention window.
 
-Past the daily window, Percona Backup for MongoDB (PBM) groups backups into buckets and keeps one backup per bucket. The `strategy` option decides how the grouping works.
+Set a retention value to `0` to turn that tier off.
 
-| **Strategy** | **Grouping method** | **Best for** |
-| --- | --- | --- |
-| `rolling` (default) | Time decay. PBM divides the timeline into seven-day and 30-day chunks, then keeps the newest backup in each chunk. | Cloud deployments and schedules that drift. A paused or failed backup job costs you nothing, since PBM keeps the closest available backup in the window. |
-| `calendar` | Strict anchoring. PBM keeps backups taken on the exact days named by `weeklyDay` and `monthlyDay`. | Finance, healthcare, and any audit that names a date, such as the end-of-month state of the database. |
+For example, with the following settings:
+
+```yaml
+lifecycle:
+  dailyRetention: 7
+  weeklyRetention: 4
+  monthlyRetention: 12
+```
+
+PBM keeps every completed backup from the last seven days, with no thinning inside that window. Take a backup every six hours and all 28 stay. Older backups move into the weekly and monthly tiers, where PBM keeps one backup per window and purges the rest.
+
+### Rolling strategy
+
+The `rolling` strategy is the default.
+
+PBM measures the age of a backup from the time the rotation runs, rather than from the calendar date on the backup. Past the daily window, the timeline splits into seven-day windows for the weekly tier and 30-day windows for the monthly tier. PBM keeps the newest backup in each window.
+
+This behavior helps when backups do not run at the same time every day, or when a scheduled backup is missed. PBM keeps the available backup that fits the window best, so a gap in the schedule does not break the policy.
+
+```yaml
+lifecycle:
+  strategy: rolling
+```
+
+### Calendar strategy
+
+The `calendar` strategy targets configured days of the week and month.
+
+Use `weeklyDay` to specify the day of the week for weekly retention:
+
+- `0` = Sunday
+
+- `1` = Monday
+
+- `2` = Tuesday
+
+- `3` = Wednesday
+
+- `4` = Thursday
+
+- `5` = Friday
+
+- `6` = Saturday
+
+Use `monthlyDay` to specify the day of the month, from `1` to `31`.
+
+??? example
+
+    ```yaml
+    lifecycle:
+      strategy: calendar
+      weeklyRetention: 8
+      weeklyDay: 5
+      monthlyRetention: 6
+      monthlyDay: 15
+    ```
+
+    This configuration targets Friday backups for weekly retention and backups from the 15th of the month for monthly retention.
 
 !!! note
 
-    Under the `calendar` strategy, a missed anchor date has a fallback. If no backup exists for the 15th, PBM scans that month and keeps the closest backup, such as the one from the 14th or the 16th.
+    A calendar policy does not require a backup on the target day. If the 15th has no backup, PBM keeps the closest available backup from that month.
 
-## Mixed backup types
+## Configuration
 
-Many deployments take both physical and logical backups. The bucketing engine sorts candidates into separate lanes by type, so one type never crowds out another. Each week and each month keeps its own logical, physical, and incremental anchor. The rule applies to the global configuration and to storage profiles alike.
-
-!!! note
-
-    Type separation protects both backup types, but long-term archives of both consume storage. To keep physical backups for a year and logical backups for three days, use separate storage profiles.
-
-## Configuration options
-
-The `lifecycle` block in the PBM configuration controls the feature:
+Configure lifecycle management in the `lifecycle` section of the PBM configuration.
 
 | **Option** | **Type** | **Default** | **Description** |
 | --- | --- | --- | --- |
-| `lifecycle.enabled` | Boolean | `false` | Turns on automated rotation. While the value stays `false`, PBM purges nothing. |
-| `lifecycle.strategy` | String | `rolling` | Sets the rotation algorithm. Values: `rolling` or `calendar`. |
-| `lifecycle.minKeep` | Integer | `1` | Circuit breaker. PBM aborts the whole rotation if a purge drops the count of kept backups below this number. |
-| `lifecycle.prompt` | Boolean | `true` | Prints the keep and purge lists and waits for a `[y/N]` answer. Set to `false` for `cron` jobs. |
-| `lifecycle.purgeFailed` | Boolean | `false` | Controls failed and canceled backups. `false` protects them without a time limit. `true` keeps them for the length of the daily window, then deletes them. |
-| `lifecycle.dailyRetention` | Integer | `0` | Number of days to keep every completed backup. Set to `0` to turn the tier off. |
-| `lifecycle.weeklyRetention` | Integer | `0` | Number of weeks to keep one weekly backup. Set to `0` to turn the tier off. |
-| `lifecycle.weeklyDay` | Integer | `0` | Day of the week to target, from `0` for Sunday to `6` for Saturday. Applies to the `calendar` strategy. |
-| `lifecycle.monthlyRetention` | Integer | `0` | Number of months to keep one monthly backup. Set to `0` to turn the tier off. |
-| `lifecycle.monthlyDay` | Integer | `1` | Day of the month to target, from `1` to `31`. Applies to the `calendar` strategy. |
+| `lifecycle.enabled` | Boolean | `false` | Enables lifecycle rotation. |
+| `lifecycle.strategy` | String | `rolling` | Retention strategy. Supported values are `rolling` and `calendar`. |
+| `lifecycle.minKeep` | Integer | `1` | Minimum number of backups that must remain after a rotation. PBM aborts the rotation if the number would fall below this value. |
+| `lifecycle.prompt` | Boolean | `true` | Prompts for confirmation before deleting backups. Set to `false` when you run lifecycle rotation without interactive input. |
+| `lifecycle.purgeFailed` | Boolean | `false` | Controls retention of failed and canceled backups. When `false`, PBM protects them indefinitely. When `true`, PBM keeps them for the `dailyRetention` period. |
+| `lifecycle.dailyRetention` | Integer | `0` | Number of days to keep every completed backup. |
+| `lifecycle.weeklyRetention` | Integer | `0` | Number of weeks to retain one weekly backup. |
+| `lifecycle.weeklyDay` | Integer | `0` | Day of the week to target when `strategy` is `calendar`. |
+| `lifecycle.monthlyRetention` | Integer | `0` | Number of months to retain one monthly backup. |
+| `lifecycle.monthlyDay` | Integer | `1` | Day of the month to target when `strategy` is `calendar`. |
 
-Set an option from the command line:
+Set individual options from the command line:
 
 ```bash
 pbm config --set lifecycle.dailyRetention=7
 ```
 
-Or add the block to the PBM configuration file and apply the file:
+You can also apply a configuration file:
 
 ```bash
 pbm config --file=<PATH_TO_CONFIG_FILE>
 ```
 
-## Example policies
+For details about the configuration file and how to apply it, see [Configure PBM](../reference/config.md).
 
-### Recommended baseline
+## Example retention policies
 
-For most deployments, start with seven daily, four weekly, and 12 monthly backups under the `rolling` strategy, paired with `purgeFailed: true`.
+### Rolling retention
 
-Seven days cover the mistake you notice within a week. Four weeks cover silent corruption that nobody caught in time. Twelve months cover audits under standards such as SOC 2, HIPAA, and PCI DSS.
+The following policy keeps all completed backups for seven days, one weekly backup for four weeks, and one monthly backup for 12 months. This policy suits most deployments.
 
 ```yaml
 lifecycle:
   enabled: false
-  strategy: "rolling"
+  strategy: rolling
   minKeep: 1
   prompt: true
   purgeFailed: true
@@ -80,14 +138,18 @@ lifecycle:
   monthlyRetention: 12
 ```
 
-### Calendar policy for an audit
+Keep `enabled: false` while you review the policy. Run a dry run before you enable rotation.
 
-This policy keeps every backup for 14 days, the Friday backup for eight weeks, and the backup from the 15th of the month for six months:
+### Calendar retention
+
+The following policy keeps all completed backups for 14 days, targets Friday backups for eight weeks, and targets the 15th of each month for six months.
 
 ```yaml
 lifecycle:
   enabled: false
-  strategy: "calendar"
+  strategy: calendar
+  minKeep: 1
+  prompt: true
   purgeFailed: false
   dailyRetention: 14
   weeklyRetention: 8
@@ -96,23 +158,19 @@ lifecycle:
   monthlyDay: 15
 ```
 
-!!! note
+## Run a lifecycle rotation
 
-    Both examples start with `enabled: false`. Validate the rules with a dry run, then turn the feature on.
+Lifecycle rotation deletes backups permanently, so validate the policy first. The command uses the same connection options, environment variables, and authentication as every other PBM command.
 
-## Run a rotation
+### 1. Run a dry run
 
-A purge deletes data permanently, so PBM separates the decision from the action. The command uses the same connection options, environment variables, and authentication as every other PBM command.
-
-### Step 1. Validate with a dry run
-
-The `--dry-run` flag overrides the `enabled: false` safety switch. PBM evaluates the rules against your storage and prints a report. Nothing leaves storage:
+Use `--dry-run` to see which backups PBM would keep and purge. The flag works while `lifecycle.enabled` is `false`, so you can test a policy before you turn rotation on.
 
 ```bash
 pbm lifecycle --dry-run
 ```
 
-Output:
+The dry run deletes nothing.
 
 ```text
 Lifecycle Report (Dry Run: true)
@@ -129,21 +187,25 @@ Backups to PURGE (2):
   - 2026-03-24T04:02:01Z
 ```
 
-Check that the oldest restore point you depend on appears under the backups to keep.
+Check that the restore points you need appear under `Backups to KEEP`.
 
-### Step 2. Turn the feature on
+### 2. Enable lifecycle rotation
+
+After you verify the dry-run results, enable lifecycle rotation:
 
 ```bash
 pbm config --set lifecycle.enabled=true
 ```
 
-### Step 3. Run the rotation
+### 3. Run the rotation
+
+Run the lifecycle command:
 
 ```bash
 pbm lifecycle
 ```
 
-With `prompt: true`, PBM prints the same report and waits for your answer:
+With `lifecycle.prompt` set to `true`, PBM displays the backups selected for retention and purging, then asks for confirmation before it deletes them.
 
 ```text
 Are you sure you want to permanently delete the purged backups? [y/N]: y
@@ -152,133 +214,160 @@ Purging backup 2026-03-18T04:02:01Z...
 Lifecycle rotation complete.
 ```
 
-To cancel, answer `N` or press `Ctrl+C`. A `Ctrl+C` during the deletion aborts the remaining purges.
+Enter `N` or press `Ctrl+C` at the confirmation prompt to cancel the operation. If deletion has already started, `Ctrl+C` stops the remaining purge operations.
 
-## Separate retention per storage profile
+## Use lifecycle policies with storage profiles
 
-A policy applies at one of two scopes.
+You can configure lifecycle policies globally or per storage profile.
 
-| Scope | What it covers | Command |
+| Scope | Description | Command |
 | --- | --- | --- |
-| Global | All backups, with the same rules for every backup type | `pbm lifecycle` |
-| Profile | Only the backups routed to that profile | `pbm lifecycle --profile=<PROFILE_NAME>` |
+| Global | Applies the lifecycle policy to backups managed by the global configuration. | `pbm lifecycle` |
+| Profile | Applies the lifecycle policy to backups routed to a specific storage profile. | `pbm lifecycle --profile=<PROFILE_NAME>` |
 
-Use the global scope when one set of rules suits all your data. Use profiles when retention lengths differ, or when buckets in separate regions carry separate compliance rules. A common split keeps physical backups for a year and logical backups for three days.
+Use a storage profile when different backup sets need different retention periods. A common split keeps physical backups in one profile for a year, and logical backups in another for a few days.
 
-### Procedure
+Add the `lifecycle` section to the profile configuration file, alongside the storage settings. The following file, `pbm-physical.conf`, holds the long-term policy:
 
-Follow these steps:
-{.power-number}
+```yaml
+storage:
+  type: s3
+  s3:
+    region: us-east-1
+    bucket: mongo-physical-backups
+    prefix: pbm/physical
+lifecycle:
+  enabled: true
+  strategy: rolling
+  minKeep: 1
+  prompt: true
+  purgeFailed: true
+  dailyRetention: 7
+  weeklyRetention: 4
+  monthlyRetention: 12
+```
 
-1. Configure the physical profile
+Apply the configuration:
 
-    Create `pbm-physical.conf` with the storage settings and the long-term rules:
+```bash
+pbm profile add physical-backup pbm-physical.conf
+```
 
-    ```yaml
-    storage:
-      type: s3
-      s3:
-        region: us-east-1
-        bucket: mongo-physical-backups
-        prefix: pbm/physical
-    lifecycle:
-      enabled: true
-      strategy: rolling
-      minKeep: 1
-      prompt: true
-      purgeFailed: true
-      dailyRetention: 7
-      weeklyRetention: 4
-      monthlyRetention: 12
-    ```
+A second file, `pbm-logical.conf`, holds a shorter retention period. A value of `0` turns off the weekly and monthly tiers:
 
-    ```bash
-    pbm profile add physical-backup pbm-physical.conf
-    ```
+```yaml
+storage:
+  type: s3
+  s3:
+    region: us-east-1
+    bucket: mongo-logical-backups
+    prefix: pbm/logical
+lifecycle:
+  enabled: true
+  strategy: rolling
+  minKeep: 1
+  prompt: true
+  purgeFailed: true
+  dailyRetention: 3
+  weeklyRetention: 0
+  monthlyRetention: 0
+```
 
-2. Configure the logical profile
+```bash
+pbm profile add logical-backup pbm-logical.conf
+```
 
-    Create `pbm-logical.conf` with the short-term rules. A value of `0` turns off the weekly and monthly tiers:
+Use the `--profile` option to evaluate a specific profile:
 
-    ```yaml
-    storage:
-      type: s3
-      s3:
-        region: us-east-1
-        bucket: mongo-logical-backups
-        prefix: pbm/logical
-    lifecycle:
-      enabled: true
-      strategy: rolling
-      minKeep: 1
-      prompt: true
-      purgeFailed: true
-      dailyRetention: 3
-      weeklyRetention: 0
-      monthlyRetention: 0
-    ```
+```bash
+pbm lifecycle --profile=physical-backup --dry-run
+pbm lifecycle --profile=logical-backup --dry-run
+```
 
-    ```bash
-    pbm profile add logical-backup pbm-logical.conf
-    ```
+When you name a profile, PBM evaluates the lifecycle policy configured for that profile and ignores the global configuration.
 
-3. Rotate one profile
+See [Storage profiles](../usage/profiles.md) for information about creating and configuring PBM storage profiles.
 
-    Add the `--profile` flag to evaluate or purge a single profile. PBM ignores the global configuration for that run and tags each kept backup with the tier that saved it, such as `[Daily]` or `[Weekly]`:
+## Retention of different backup types
 
-    ```bash
-    pbm lifecycle --profile=physical-backup --dry-run
-    pbm lifecycle --profile=logical-backup --dry-run
-    ```
+PBM can manage physical, logical, and incremental backups.
 
-## Automate the rotation
+Lifecycle management keeps each backup type in a separate retention group. A logical backup does not replace a physical backup in the same retention window, and a physical backup does not replace a logical one.
 
-A daily `cron` job keeps storage under control without manual work. First turn off the interactive prompt, which waits forever in the background, and confirm the circuit breaker:
+For example, if a weekly retention window holds both a physical and a logical backup, PBM retains one backup of each type for that window.
+
+If you need different retention periods for different backup types, use separate storage profiles and configure a lifecycle policy for each profile.
+
+!!! note
+
+    Long retention periods for both physical and logical backups increase storage usage. Separate storage profiles give each backup type its own retention period.
+
+## Automate lifecycle rotation
+
+You can run lifecycle rotation from `cron` or another scheduler.
+
+Before you automate the command, disable the interactive confirmation prompt. A prompt in a scheduled job waits for an answer that never arrives:
 
 ```bash
 pbm config --set lifecycle.prompt=false
+```
+
+If you use storage profiles, set `prompt: false` in the lifecycle configuration for each profile that you automate.
+
+Keep the `minKeep` safety setting in place:
+
+```bash
 pbm config --set lifecycle.minKeep=1
 ```
 
-Schedule the run for off-peak hours, away from your backup jobs. The `--out json` flag produces output that a log collector can parse:
+Run lifecycle rotation at a different time from your backup jobs, so that backup and retention operations do not compete for resources. The `--out json` option writes machine-readable output, which suits a log file.
+
+The following `cron` entry runs the global lifecycle rotation every day at 3:00 AM:
 
 ```bash
-# Run the rotation every day at 3:00 AM
 0 3 * * * /usr/bin/pbm lifecycle --out json >> /var/log/pbm-lifecycle-global.log 2>&1
 ```
 
-Profiles rotate one at a time:
+You can also schedule profile rotations separately:
 
 ```bash
-# Long-term physical backups at 2:00 AM
 0 2 * * * /usr/bin/pbm lifecycle --profile=physical-backup --out json >> /var/log/pbm-lifecycle-phys.log 2>&1
-
-# Short-term logical backups at 2:30 AM
 30 2 * * * /usr/bin/pbm lifecycle --profile=logical-backup --out json >> /var/log/pbm-lifecycle-logi.log 2>&1
 ```
 
-!!! warning
-
-    Profiles carry their own settings. Set `prompt: false` inside each profile configuration file as well, not only in the global configuration.
-
 ## Safety checks
 
-PBM protects recoverability during a rotation with the following guards.
+PBM applies several checks while it evaluates backups for removal.
 
-| **Situation** | **Behavior** |
+| Situation | PBM behavior |
 | --- | --- |
-| A purge would leave too few backups | The rotation aborts in full when the survivors fall below `minKeep`. |
-| A backup is the base for an active PITR chain | PBM refuses the deletion and logs an `ErrBaseForPITR` warning. |
-| A backup is in progress | Backups in the `starting`, `running`, or `dumpDone` state stay out of the evaluation. |
-| A backup matches several rules at once | PBM flags the backup for each tier and keeps a single copy until the longest window expires. |
-| A backup failed or was canceled | `purgeFailed: false` protects the backup without a time limit. `purgeFailed: true` keeps the backup for the length of the daily window, then deletes it. A failed backup never serves as a weekly or monthly anchor. |
-| No backup exists on a calendar anchor date | PBM keeps the closest backup from that month. |
+| A rotation would leave fewer backups than `minKeep` | PBM aborts the rotation. |
+| A backup is required as the base for an active point-in-time recovery (PITR) chain | PBM does not delete the backup and reports an `ErrBaseForPITR` warning. |
+| A backup is in progress | Backups in the `starting`, `running`, or `dumpDone` state are excluded from lifecycle evaluation. |
+| A backup matches more than one retention rule | PBM keeps the backup until the longest applicable retention period expires. |
+| A backup failed or was canceled | With `purgeFailed: false`, PBM protects it indefinitely. With `purgeFailed: true`, PBM keeps it for the `dailyRetention` period. Failed backups are not selected for weekly or monthly retention. |
+| No backup exists on a calendar target date | PBM retains the closest available backup from that month. |
 
-An aborted automated run logs the reason. Review your retention settings when this message appears:
+If `minKeep` aborts an automated rotation, PBM reports the reason in its output.
 
+```text
+WARNING: This rotation would leave you with 0 backup(s), which is below
+the safety threshold of 1 (minKeep).
 
-!!! WARNING
-    ```
-    This rotation would leave you with 0 backup(s), which is below the safety threshold of 1 (minKeep). Automated run (prompt: false) detected. Purge aborted to protect your backups.
-    ```
+Automated run (prompt: false) detected. Purge aborted to protect your backups.
+```
+
+Review the lifecycle configuration and the backups selected for retention before you run the rotation again.
+
+## Related topics
+
+- [Configure backup storage](../reference/config.md)
+
+- [Storage profiles](../usage/profiles.md)
+
+- [Delete backups](../usage/delete-backup.md)
+
+- [Restore a backup](../usage/restore.md)
+
+- [Point-in-time recovery](../features/point-in-time-recovery.md)
 
