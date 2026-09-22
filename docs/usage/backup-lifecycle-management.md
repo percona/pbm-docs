@@ -23,14 +23,13 @@ PBM evaluates the three tiers independently. A backup is retained if it matches 
 Set a retention value to `0` to disable that tier.
 
 !!! warning
+    - If you set all three retention values and `minKeep` to `0`, PBM can select every eligible backup for deletion.
 
-    If you set all three retention values and `minKeep` to `0`, PBM can select every eligible backup for deletion.
-
-PBM evaluates backup times in UTC. In-progress backups and backups created at or after the evaluation time are not considered for deletion.
+    - PBM evaluates backup times in UTC. In-progress backups and backups created at or after the evaluation time are not considered for deletion.
 
 ## Choose a retention strategy
 
-PBM supports `rolling` and `calendar` retention strategies. Both strategies keep every eligible backup inside the daily retention period. They differ in how they select weekly and monthly backups.
+PBM supports `rolling` and `calendar` retention strategies.
 
 ### Rolling strategy
 
@@ -90,7 +89,7 @@ You can set an individual option from the command line:
 pbm config --set lifecycle.dailyRetention=7
 ```
 
-To apply several settings together, add the `lifecycle` section to a configuration file and apply the file:
+To apply several settings together, add the `lifecycle` section to the configuration file:
 
 ```bash
 pbm config --file <PATH_TO_CONFIG_FILE> --wait
@@ -135,26 +134,25 @@ lifecycle:
 ## Preview and run lifecycle cleanup
 
 Configure the policy and enable it before you run a dry run. When `lifecycle.enabled` is `false`, PBM reports all backups as retained and does not calculate deletion candidates.
-
 {.power-number}
 
 1. Enable the policy:
 
-    ```{.bash data-prompt="$"}
-    $ pbm config --set lifecycle.enabled=true --wait
+    ```bash
+    pbm config --set lifecycle.enabled=true --wait
     ```
 
 2. Preview the result:
 
-    ```{.bash data-prompt="$"}
-    $ pbm cleanup --lifecycle --dry-run
+    ```bash
+    pbm cleanup --lifecycle --dry-run
     ```
 
     PBM reports the backups it would keep and purge without deleting any data. Review the **Backups to PURGE** list carefully.
 
 3. Run the cleanup:
 
-    ```{.bash data-prompt="$"}
+    ```bash
     $ pbm cleanup --lifecycle --wait
     ```
 
@@ -162,9 +160,8 @@ Configure the policy and enable it before you run a dry run. When `lifecycle.ena
 
     The `--wait` flag keeps the command attached until the cleanup finishes. Without it, PBM starts the cleanup and returns control to the shell.
 
-!!! note
-
-    Use `--yes` to skip the confirmation prompt only after you have reviewed a dry run. This flag is required for unattended cleanup.
+    !!! note
+        Use `--yes` to skip the confirmation prompt only after you have reviewed a dry run. This flag is required for unattended cleanup.
 
 ## Apply a policy to a storage profile
 
@@ -192,20 +189,20 @@ lifecycle:
 
 Add the profile:
 
-```{.bash data-prompt="$"}
-$ pbm profile add physical-backup pbm-physical.conf --wait
+```bash
+pbm profile add physical-backup pbm-physical.conf --wait
 ```
 
 Preview the policy for this profile:
 
-```{.bash data-prompt="$"}
-$ pbm cleanup --lifecycle --profile=physical-backup --dry-run
+```bash
+pbm cleanup --lifecycle --profile=physical-backup --dry-run
 ```
 
 Run the cleanup after reviewing the report:
 
-```{.bash data-prompt="$"}
-$ pbm cleanup --lifecycle --profile=physical-backup --wait
+```bash
+pbm cleanup --lifecycle --profile=physical-backup --wait
 ```
 
 When you specify `--profile`, PBM uses the lifecycle policy from that profile and evaluates only its backups. Without `--profile`, PBM uses the main configuration and evaluates backups in the main storage.
@@ -240,7 +237,7 @@ To automate cleanup for a storage profile, include `--profile=<PROFILE_NAME>`:
 
 PBM applies the following safeguards when it evaluates and deletes backups:
 
-| Situation | PBM behavior |
+| **Situation** | **PBM behavior** |
 | --- | --- |
 | Lifecycle management is disabled | Keeps all backups and does not produce deletion targets. |
 | Cleanup would retain fewer successful restore points than `minKeep` | Aborts the cleanup. |
