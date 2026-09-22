@@ -37,57 +37,58 @@ lifecycle:
 
 PBM keeps every completed backup from the last seven days, with no thinning inside that window. Take a backup every six hours and all 28 stay. Older backups move into the weekly and monthly tiers, where PBM keeps one backup per window and purges the rest.
 
-### Rolling strategy
 
-The `rolling` strategy is the default.
+=== "Rolling strategy"
 
-PBM measures the age of a backup from the time the rotation runs, rather than from the calendar date on the backup. Past the daily window, the timeline splits into seven-day windows for the weekly tier and 30-day windows for the monthly tier. PBM keeps the newest backup in each window.
+    The `rolling` strategy is the default.
 
-This behavior helps when backups do not run at the same time every day, or when a scheduled backup is missed. PBM keeps the available backup that fits the window best, so a gap in the schedule does not break the policy.
+    PBM measures the age of a backup from the time the rotation runs, rather than from the calendar date on the backup. Past the daily window, the timeline splits into seven-day windows for the weekly tier and 30-day windows for the monthly tier. PBM keeps the newest backup in each window.
 
-```yaml
-lifecycle:
-  strategy: rolling
-```
-
-### Calendar strategy
-
-The `calendar` strategy targets configured days of the week and month.
-
-Use `weeklyDay` to specify the day of the week for weekly retention:
-
-- `0` = Sunday
-
-- `1` = Monday
-
-- `2` = Tuesday
-
-- `3` = Wednesday
-
-- `4` = Thursday
-
-- `5` = Friday
-
-- `6` = Saturday
-
-Use `monthlyDay` to specify the day of the month, from `1` to `31`.
-
-??? example
+    This behavior helps when backups do not run at the same time every day, or when a scheduled backup is missed. PBM keeps the available backup that fits the window best, so a gap in the schedule does not break the policy.
 
     ```yaml
     lifecycle:
-      strategy: calendar
-      weeklyRetention: 8
-      weeklyDay: 5
-      monthlyRetention: 6
-      monthlyDay: 15
+      strategy: rolling
     ```
 
-    This configuration targets Friday backups for weekly retention and backups from the 15th of the month for monthly retention.
+=== "Calendar strategy"
 
-!!! note
+      The `calendar` strategy targets configured days of the week and month.
 
-    A calendar policy does not require a backup on the target day. If the 15th has no backup, PBM keeps the closest available backup from that month.
+      Use `weeklyDay` to specify the day of the week for weekly retention:
+
+      - `0` = Sunday
+
+      - `1` = Monday
+
+      - `2` = Tuesday
+
+      - `3` = Wednesday
+
+      - `4` = Thursday
+
+      - `5` = Friday
+
+      - `6` = Saturday
+
+      Use `monthlyDay` to specify the day of the month, from `1` to `31`.
+
+      ??? example
+
+          ```yaml
+          lifecycle:
+            strategy: calendar
+            weeklyRetention: 8
+            weeklyDay: 5
+            monthlyRetention: 6
+            monthlyDay: 15
+          ```
+
+          This configuration targets Friday backups for weekly retention and backups from the 15th of the month for monthly retention.
+
+      !!! note
+
+          A calendar policy does not require a backup on the target day. If the 15th has no backup, PBM keeps the closest available backup from that month.
 
 ## Configuration
 
