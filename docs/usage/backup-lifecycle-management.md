@@ -1,8 +1,8 @@
 # Backup lifecycle management
 
-Backup lifecycle management tells Percona Backup for MongoDB (PBM) how long to keep each backup and when to remove the ones that have aged out. You define the policy once, and PBM handles the cleanup.
+Backup lifecycle management tells Percona Backup for MongoDB (PBM) how long to retain each backup and when to remove those that have aged out. You define the policy once, and PBM handles the cleanup.
 
-The policy follows the Grandfather-Father-Son (GFS) retention scheme. Keep every backup for a recent period, then keep fewer as backups age. A common policy keeps every backup for seven days, one backup per week for four weeks, and one backup per month for 12 months.
+The policy follows the Grandfather-Father-Son (GFS) retention scheme. Keep every backup for a recent period, then keep fewer as backups age. A common policy keeps every backup for 7 days, 1 backup per week for 4 weeks, and 1 backup per month for 12 months.
 
 A lifecycle policy applies to all backups, or to a single storage profile.
 
@@ -56,7 +56,7 @@ The `calendar` strategy targets specific days:
       monthlyDay: 15
     ```
 
-    This policy keeps Friday backups for eight weeks and backups from the 15th of each month for six months.
+    This policy retains Friday backups for 8 weeks and backups from the 15th of each month for 6 months.
 
 !!! note
 
@@ -138,8 +138,8 @@ Lifecycle rotation deletes backups permanently. Validate the policy first.
     pbm lifecycle --dry-run
     ```
 
-    The report shows which backups PBM would keep and purge. No deletions occur. The flag works while `lifecycle.enabled` is `false`, so you can test a policy before you enable rotation.
-
+    The report shows which backups PBM would keep and which it would purge. No deletions occur. The flag works when `lifecycle.enabled` is `false`, so you can test a policy before enabling rotation.
+      
       ```text
       Lifecycle Report (Dry Run: true)
       Enabled: false | Strategy: ROLLING | Purge Failed: true
@@ -177,7 +177,7 @@ Lifecycle policies can apply globally or per storage profile.
 | Global | Applies to all backups. | `pbm lifecycle` |
 | Profile | Applies to backups in a specific profile. | `pbm lifecycle --profile=<PROFILE_NAME>` |
 
-Use profiles when different backup sets need different retention. A common split keeps physical backups for the long term and logical backups for a few days.
+Use profiles when different backup sets require different retention periods. A common split keeps physical backups for the long term and logical backups for a few days.
 
 Add the `lifecycle` section to the profile configuration file, alongside the storage settings:
 
