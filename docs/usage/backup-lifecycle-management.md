@@ -2,7 +2,7 @@
 
 Backup lifecycle management helps you control how long Percona Backup for MongoDB (PBM) keeps backups. You define a retention policy, and PBM identifies the backups that have aged out and can be removed.
 
-PBM uses a Grandfather-Father-Son (GFS) retention model. You can keep every recent backup, then retain fewer recovery points as the backups age. For example, you can keep all backups for seven days, one backup per week for four weeks, and one backup per month for 12 months.
+PBM uses a [Grandfather-Father-Son (GFS) retention model :octicons-link-external-16:](https://en.wikipedia.org/wiki/Backup_rotation_scheme#Grandfather-father-son){:target="_blank"}. You can keep every recent backup, then retain fewer recovery points as the backups age. For example, you can keep all backups for seven days, one backup per week for four weeks, and one backup per month for 12 months.
 
 You can define a lifecycle policy for the main storage or for an individual [storage profile](../features/multi-storage.md).
 
