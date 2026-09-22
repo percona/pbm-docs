@@ -152,7 +152,7 @@ Lifecycle rotation deletes backups permanently. Validate the policy first.
         Backups to PURGE (2):
           - 2026-03-25T04:02:02Z
           - 2026-03-24T04:02:01Z
-        ```
+      ```
 
 2. Enable rotation
 
