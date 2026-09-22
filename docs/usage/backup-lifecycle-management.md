@@ -86,14 +86,14 @@ Define lifecycle settings in the `lifecycle` section of the [PBM configuration](
 
 You can set an individual option from the command line:
 
-```{.bash data-prompt="$"}
-$ pbm config --set lifecycle.dailyRetention=7
+```bash
+pbm config --set lifecycle.dailyRetention=7
 ```
 
 To apply several settings together, add the `lifecycle` section to a configuration file and apply the file:
 
-```{.bash data-prompt="$"}
-$ pbm config --file <PATH_TO_CONFIG_FILE> --wait
+```bash
+pbm config --file <PATH_TO_CONFIG_FILE> --wait
 ```
 
 ## Example policies
