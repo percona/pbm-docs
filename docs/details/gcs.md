@@ -6,7 +6,7 @@ You can use Google Cloud Storage (GCS) as a remote backup storage for Percona Ba
 
     Starting from version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. See how to [adjust your PBM configuration to use GCS](#adjust-pbm-configuration-to-use-gcs) after the upgrade.
 
-PBM communicates with GCS through the JSON API by default and can use the gRPC client for parallel uploads. PBM authenticates using either a service account or Workload Identity.
+PBM communicates with GCS through the JSON API by default. You can configure the gRPC client for both standard and parallel uploads. PBM authenticates using either a service account or Workload Identity.
 
 !!! warning "HMAC authentication removed in PBM 2.16.0"
     PBM 2.16.0 removes support for authenticating to GCS with HMAC keys. Before upgrading, replace `hmacAccessKey` and `hmacSecret` in your PBM configuration with `clientEmail` and `privateKey`. PBM 2.16.0 treats the HMAC options as unrecognized configuration fields and cannot access the backup storage until you update the configuration.
@@ -57,8 +57,9 @@ Parallel uploads can reduce the time required to send large backup files to Goog
 
 This feature applies only when PBM writes data to GCS. It does not change how PBM downloads backup data during a restore.
 
-!!! warning
+!!! warning "Experimental feature"
     - Parallel upload support in the Google Cloud Storage Go client is experimental. The upstream API may change in future releases and is not yet recommended for production use.
+    - The current SDK implementation can leave temporary part objects under the `gcs-go-sdk-pu-tmp` prefix. Configure an external cleanup job to remove these objects. Schedule the cleanup outside your backup window so that it does not remove parts from an active upload.
     - Evaluate parallel uploads with a representative backup before enabling them in production. For details, see the upstream [`ParallelUploadConfig` documentation :octicons-link-external-16:](https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig){:target="_blank"}.
 
 ### How parallel uploads work
