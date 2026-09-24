@@ -2171,6 +2171,8 @@
       
         
       
+        
+      
     
     
     
@@ -2310,6 +2312,34 @@
     
   
     Cancel a backup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="usage/backup-lifecycle-management.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup lifecycle management
   
 
     
@@ -6943,6 +6973,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     <span class="md-ellipsis">
       
         Cancel a backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage-backup-lifecycle-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup lifecycle management
       
     </span>
   </a>
@@ -11712,7 +11753,293 @@ Backup<span class="w"> </span>cancellation<span class="w"> </span>has<span class
 </code></pre></div>
 <p><strong>Output</strong>:</p>
 <div class="no-copy highlight"><pre><span></span><code>2020-04-30T18:05:26Z  Canceled at 2020-04-30T18:05:37Z
-</code></pre></div></body></html></section><section class="print-page" id="usage-delete-backup" heading-number="5.5"><html><head>
+</code></pre></div></body></html></section><section class="print-page" id="usage-backup-lifecycle-management" heading-number="5.5"><html><head>
+        <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
+        })
+        </script>
+        </head><body><h1 id="backup-lifecycle-management">Backup lifecycle management<a class="headerlink" href="#usage-backup-lifecycle-management-backup-lifecycle-management" title="Permanent link">¶</a></h1>
+<p>Backup lifecycle management helps you control how long Percona Backup for MongoDB (PBM) keeps backups. You define a retention policy, and PBM identifies the backups that have aged out and can be removed.</p>
+<p>PBM uses a <a href="https://en.wikipedia.org/wiki/Backup_rotation_scheme#Grandfather-father-son" target="_blank">Grandfather-Father-Son (GFS) retention model <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. You can keep every recent backup, then retain fewer recovery points as the backups age. For example, you can keep all backups for seven days, one backup per week for four weeks, and one backup per month for 12 months.</p>
+<p>You can define a lifecycle policy for the main storage or for an individual <a href="#features-multi-storage">storage profile</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Lifecycle cleanup permanently deletes the selected backups. Always run <code>pbm cleanup --lifecycle --dry-run</code> and review the report before you proceed with deletion.</p>
+</div>
+<h2 id="usage-backup-lifecycle-management-how-retention-works">How retention works<a class="headerlink" href="#usage-backup-lifecycle-management-how-retention-works" title="Permanent link">¶</a></h2>
+<p>A lifecycle policy can include three retention tiers:</p>
+<ul>
+<li><strong>Daily</strong> keeps every eligible backup within the configured number of days.</li>
+<li><strong>Weekly</strong> keeps one backup of each type in every weekly retention window.</li>
+<li><strong>Monthly</strong> keeps one backup of each type in every monthly retention window.</li>
+</ul>
+<p>PBM evaluates the three tiers independently. A backup is retained if it matches at least one tier. For example, the same backup can satisfy the daily, weekly, and monthly rules.</p>
+<p>Set a retention value to <code>0</code> to disable that tier.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>If you set all three retention values and <code>minKeep</code> to <code>0</code>, PBM can select every eligible backup for deletion.</p>
+</li>
+<li>
+<p>PBM evaluates backup times in UTC. In-progress backups and backups created at or after the evaluation time are not considered for deletion.</p>
+</li>
+</ul>
+</div>
+<h2 id="usage-backup-lifecycle-management-choose-a-retention-strategy">Choose a retention strategy<a class="headerlink" href="#usage-backup-lifecycle-management-choose-a-retention-strategy" title="Permanent link">¶</a></h2>
+<p>PBM supports <code>rolling</code> and <code>calendar</code> retention strategies.</p>
+<h3 id="usage-backup-lifecycle-management-rolling-strategy">Rolling strategy<a class="headerlink" href="#usage-backup-lifecycle-management-rolling-strategy" title="Permanent link">¶</a></h3>
+<p>The <code>rolling</code> strategy is the default. It measures backup age from the time the lifecycle command runs and divides the history into fixed windows:</p>
+<ul>
+<li>Weekly retention uses seven-day windows.</li>
+<li>Monthly retention uses 30-day windows.</li>
+</ul>
+<p>PBM keeps the newest backup of each type in every window. This strategy works well when backup times vary or an occasional scheduled backup is missed.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
+</code></pre></div>
+<h3 id="usage-backup-lifecycle-management-calendar-strategy">Calendar strategy<a class="headerlink" href="#usage-backup-lifecycle-management-calendar-strategy" title="Permanent link">¶</a></h3>
+<p>The <code>calendar</code> strategy groups backups by calendar week and calendar month. Within each period, PBM selects the backup closest to the configured target day:</p>
+<ul>
+<li><code>weeklyDay</code> sets the target weekday. Use <code>0</code> for Sunday through <code>6</code> for Saturday.</li>
+<li><code>monthlyDay</code> sets the target day of the month. Use a value from <code>1</code> through <code>31</code>.</li>
+</ul>
+<p>If no backup exists on the target day, PBM keeps the closest eligible backup in that week or month. When <code>monthlyDay</code> is later than the last day of a month, PBM uses the last day of that month as the target.</p>
+<details class="example">
+<summary>Keep Friday and mid-month backups</summary>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">calendar</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">weeklyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">  </span><span class="nt">monthlyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+</code></pre></div>
+<p>This policy keeps one backup of each type closest to Friday in every retained week and one backup of each type closest to the 15<sup>th</sup> in every retained month.</p>
+</details>
+<h2 id="usage-backup-lifecycle-management-configuration-options">Configuration options<a class="headerlink" href="#usage-backup-lifecycle-management-configuration-options" title="Permanent link">¶</a></h2>
+<p>Define lifecycle settings in the <code>lifecycle</code> section of the <a href="#reference-config">PBM configuration</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lifecycle.enabled</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>Enables lifecycle policy evaluation and cleanup. When disabled, PBM keeps all backups.</td>
+</tr>
+<tr>
+<td><code>lifecycle.strategy</code></td>
+<td>String</td>
+<td><code>rolling</code></td>
+<td>Sets the retention strategy. Supported values are <code>rolling</code> and <code>calendar</code>.</td>
+</tr>
+<tr>
+<td><code>lifecycle.minKeep</code></td>
+<td>Integer</td>
+<td><code>1</code></td>
+<td>Sets the minimum number of completed, successful restore points that must remain. PBM aborts the cleanup if it would retain fewer restore points. Set to <code>0</code> to disable this safeguard.</td>
+</tr>
+<tr>
+<td><code>lifecycle.purgeFailed</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>Controls the retention of failed and canceled backups. When <code>false</code>, PBM keeps them. When <code>true</code>, PBM keeps them only during the daily retention period.</td>
+</tr>
+<tr>
+<td><code>lifecycle.dailyRetention</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the number of days to keep every eligible backup.</td>
+</tr>
+<tr>
+<td><code>lifecycle.weeklyRetention</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the number of weeks for which PBM keeps one backup of each type per week.</td>
+</tr>
+<tr>
+<td><code>lifecycle.weeklyDay</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the target weekday for the <code>calendar</code> strategy. Use <code>0</code> for Sunday through <code>6</code> for Saturday.</td>
+</tr>
+<tr>
+<td><code>lifecycle.monthlyRetention</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the number of months for which PBM keeps one backup of each type per month.</td>
+</tr>
+<tr>
+<td><code>lifecycle.monthlyDay</code></td>
+<td>Integer</td>
+<td><code>1</code></td>
+<td>Sets the target day of the month for the <code>calendar</code> strategy. Use a value from <code>1</code> through <code>31</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>You can set an individual option from the command line:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>lifecycle.dailyRetention<span class="o">=</span><span class="m">7</span>
+</code></pre></div>
+<p>To apply several settings together, add the <code>lifecycle</code> section to the configuration file:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>&lt;PATH_TO_CONFIG_FILE&gt;<span class="w"> </span>--wait
+</code></pre></div>
+<h2 id="usage-backup-lifecycle-management-example-policies">Example policies<a class="headerlink" href="#usage-backup-lifecycle-management-example-policies" title="Permanent link">¶</a></h2>
+<h3 id="usage-backup-lifecycle-management-rolling-retention">Rolling retention<a class="headerlink" href="#usage-backup-lifecycle-management-rolling-retention" title="Permanent link">¶</a></h3>
+<p>The following policy keeps all eligible backups for seven days, one backup of each type per week for four weeks, and one backup of each type per 30-day window for 12 months:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
+<span class="w">  </span><span class="nt">minKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">purgeFailed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">dailyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+</code></pre></div>
+<p>With <code>purgeFailed: true</code>, failed and canceled backups are kept during the seven-day daily retention period and become eligible for deletion after that period.</p>
+<h3 id="usage-backup-lifecycle-management-calendar-retention">Calendar retention<a class="headerlink" href="#usage-backup-lifecycle-management-calendar-retention" title="Permanent link">¶</a></h3>
+<p>The following policy keeps all eligible backups for 14 days, one backup of each type closest to Friday for eight calendar weeks, and one backup of each type closest to the 15<sup>th</sup> for six calendar months:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">calendar</span>
+<span class="w">  </span><span class="nt">minKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">purgeFailed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">dailyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">14</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">weeklyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">  </span><span class="nt">monthlyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+</code></pre></div>
+<h2 id="usage-backup-lifecycle-management-preview-and-run-lifecycle-cleanup">Preview and run lifecycle cleanup<a class="headerlink" href="#usage-backup-lifecycle-management-preview-and-run-lifecycle-cleanup" title="Permanent link">¶</a></h2>
+<p class="power-number">Configure the policy and enable it before you run a dry run. When <code>lifecycle.enabled</code> is <code>false</code>, PBM reports all backups as retained and does not calculate deletion candidates.</p>
+<ol>
+<li>
+<p>Enable the policy:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>lifecycle.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--wait
+</code></pre></div>
+</li>
+<li>
+<p>Preview the result:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--dry-run
+</code></pre></div>
+<p>PBM reports the backups it would keep and purge without deleting any data. Review the <strong>Backups to PURGE</strong> list carefully.</p>
+</li>
+<li>
+<p>Run the cleanup:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--wait
+</code></pre></div>
+<p>PBM displays the lifecycle report and asks you to confirm the deletion. Enter <code>N</code> or press <code>Ctrl+C</code> at the confirmation prompt to cancel.</p>
+<p>The <code>--wait</code> flag keeps the command attached until the cleanup finishes. Without it, PBM starts the cleanup and returns control to the shell.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code>--yes</code> to skip the confirmation prompt only after you have reviewed a dry run. This flag is required for unattended cleanup.</p>
+</div>
+</li>
+</ol>
+<h2 id="usage-backup-lifecycle-management-apply-a-policy-to-a-storage-profile">Apply a policy to a storage profile<a class="headerlink" href="#usage-backup-lifecycle-management-apply-a-policy-to-a-storage-profile" title="Permanent link">¶</a></h2>
+<p>The lifecycle policy in the main PBM configuration applies only to backups in the main storage. A policy in a storage profile applies only to backups created in that profile.</p>
+<p>For example, create <code>pbm-physical.conf</code> with the storage and lifecycle settings for the profile:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
+<span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us-east-1</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongo-physical-backups</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm/physical</span>
+
+<span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
+<span class="w">  </span><span class="nt">minKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">purgeFailed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">dailyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+</code></pre></div>
+<p>Add the profile:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </span>physical-backup<span class="w"> </span>pbm-physical.conf<span class="w"> </span>--wait
+</code></pre></div>
+<p>Preview the policy for this profile:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--dry-run
+</code></pre></div>
+<p>Run the cleanup after reviewing the report:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--wait
+</code></pre></div>
+<p>When you specify <code>--profile</code>, PBM uses the lifecycle policy from that profile and evaluates only its backups. Without <code>--profile</code>, PBM uses the main configuration and evaluates backups in the main storage.</p>
+<p>For details about creating and managing storage profiles, see <a href="#features-multi-storage">Multiple storages for backups</a>.</p>
+<h2 id="usage-backup-lifecycle-management-retention-by-backup-type">Retention by backup type<a class="headerlink" href="#usage-backup-lifecycle-management-retention-by-backup-type" title="Permanent link">¶</a></h2>
+<p>For weekly and monthly retention, PBM evaluates logical, physical, and incremental backups separately. One backup type cannot replace another as the retained backup for a window. If a weekly window contains eligible logical and physical backups, PBM keeps one of each type.</p>
+<p>The same retention values apply to all backup types in a given storage. To use different retention periods, send the backup types to separate storage profiles and define a lifecycle policy in each profile.</p>
+<p>PBM also preserves incremental backup dependencies. If any backup in an incremental chain must be retained, PBM keeps the complete chain required to restore it.</p>
+<h2 id="usage-backup-lifecycle-management-automate-lifecycle-cleanup">Automate lifecycle cleanup<a class="headerlink" href="#usage-backup-lifecycle-management-automate-lifecycle-cleanup" title="Permanent link">¶</a></h2>
+<p>You can schedule lifecycle cleanup with <code>cron</code> or another scheduler. Use <code>--yes</code> so the command does not wait for confirmation, and keep <code>minKeep</code> enabled as a safeguard.</p>
+<p>Run lifecycle cleanup at a different time from scheduled backups. The following example evaluates the main storage every day at 03:00. It writes JSON output to one log file and progress messages or errors to another:</p>
+<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/usr/bin/pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--yes<span class="w"> </span>--wait<span class="w"> </span>--out<span class="o">=</span>json<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle.jsonl<span class="w"> </span><span class="m">2</span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle.err
+</code></pre></div>
+<p>To automate cleanup for a storage profile, include <code>--profile=&lt;PROFILE_NAME&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/usr/bin/pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--yes<span class="w"> </span>--wait<span class="w"> </span>--out<span class="o">=</span>json<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle-physical.jsonl<span class="w"> </span><span class="m">2</span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle-physical.err
+</code></pre></div>
+<h2 id="usage-backup-lifecycle-management-cleanup-safeguards">Cleanup safeguards<a class="headerlink" href="#usage-backup-lifecycle-management-cleanup-safeguards" title="Permanent link">¶</a></h2>
+<p>PBM applies the following safeguards when it evaluates and deletes backups:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Situation</strong></th>
+<th><strong>PBM behavior</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lifecycle management is disabled</td>
+<td>Keeps all backups and does not produce deletion targets.</td>
+</tr>
+<tr>
+<td>Cleanup would retain fewer successful restore points than <code>minKeep</code></td>
+<td>Aborts the cleanup.</td>
+</tr>
+<tr>
+<td>A backup is required as the base for an active <a href="#features-point-in-time-recovery">point-in-time recovery</a> timeline</td>
+<td>Keeps the backup and reports it as a PITR base snapshot.</td>
+</tr>
+<tr>
+<td>A retained backup belongs to an incremental chain</td>
+<td>Keeps the complete chain required to restore that backup.</td>
+</tr>
+<tr>
+<td>An incremental chain is incomplete or invalid</td>
+<td>Keeps the affected chain members.</td>
+</tr>
+<tr>
+<td>A backup is in progress</td>
+<td>Excludes it from lifecycle evaluation.</td>
+</tr>
+<tr>
+<td>A selective backup is present</td>
+<td>Excludes it from lifecycle cleanup and keeps it.</td>
+</tr>
+<tr>
+<td>A backup matches more than one retention rule</td>
+<td>Keeps it until it no longer matches any rule.</td>
+</tr>
+<tr>
+<td>A backup failed or was canceled</td>
+<td>Keeps it when <code>purgeFailed</code> is <code>false</code>. When <code>purgeFailed</code> is <code>true</code>, keeps it only within the daily retention period. Failed and canceled backups are not selected for weekly or monthly retention.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usage-backup-lifecycle-management-next-steps">Next steps<a class="headerlink" href="#usage-backup-lifecycle-management-next-steps" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="#reference-config">Configure PBM</a></li>
+<li><a href="#features-multi-storage">Multiple storages for backups</a></li>
+<li><a href="#usage-delete-backup">Delete backups</a></li>
+<li><a href="#features-point-in-time-recovery">Point-in-time recovery</a></li>
+</ul></body></html></section><section class="print-page" id="usage-delete-backup" heading-number="5.6"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -11958,7 +12285,7 @@ Waiting for delete to be done .[done]
 </div>
 </div>
 </div>
-<p>To enable <a href="#usage-pitr-tutorial">point-in-time recovery</a> from the most recent backup snapshot, Percona Backup for MongoDB does not delete slices that were made after that snapshot. For example, if the most recent snapshot is <code>2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]</code> and you specify the timestamp <code>2021-07-20T07:05:44</code>, Percona Backup for MongoDB deletes only slices that were made before <code>2021-07-20T07:05:23Z</code>.</p></body></html></section><section class="print-page" id="usage-restore-progress" heading-number="5.6"><html><head>
+<p>To enable <a href="#usage-pitr-tutorial">point-in-time recovery</a> from the most recent backup snapshot, Percona Backup for MongoDB does not delete slices that were made after that snapshot. For example, if the most recent snapshot is <code>2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]</code> and you specify the timestamp <code>2021-07-20T07:05:44</code>, Percona Backup for MongoDB deletes only slices that were made before <code>2021-07-20T07:05:23Z</code>.</p></body></html></section><section class="print-page" id="usage-restore-progress" heading-number="5.7"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -11990,7 +12317,7 @@ Waiting for delete to be done .[done]
 <li>Restore status on the node</li>
 <li>Last transition time</li>
 </ul>
-<p>Check the <a href="#reference-pbm-commands-output_1">pbm describe-restore</a> for the full list of fields and their description.</p></body></html></section><section class="print-page" id="usage-backup-priority" heading-number="5.7"><html><head>
+<p>Check the <a href="#reference-pbm-commands-output_1">pbm describe-restore</a> for the full list of fields and their description.</p></body></html></section><section class="print-page" id="usage-backup-priority" heading-number="5.8"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -12033,7 +12360,7 @@ Waiting for delete to be done .[done]
 <p>Adjusting node priority interferes the default flow for incremental backups, where PBM tries to schedule the incremental backup on happen on the same node that made the base backup. If you list only a subset of nodes in the priority list, the remaining nodes receive the default priority 1.0. This may result in the incremental backup being taken from a node that didn’t make the base backup. </p>
 <p>To workaround it, list either all nodes or at least a single node from every replica set in the priorities list.</p>
 </div>
-<p>This ability to adjust node priority helps you manage your backup strategy by selecting specific nodes or nodes from preferred data centers. In geographically distributed infrastructures, you can reduce network latency by making backups from nodes in geographically closest locations.</p></body></html></section><section class="print-page" id="usage-compression" heading-number="5.8"><html><head>
+<p>This ability to adjust node priority helps you manage your backup strategy by selecting specific nodes or nodes from preferred data centers. In geographically distributed infrastructures, you can reduce network latency by making backups from nodes in geographically closest locations.</p></body></html></section><section class="print-page" id="usage-compression" heading-number="5.9"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -12081,7 +12408,7 @@ Waiting for delete to be done .[done]
 </tr>
 </tbody>
 </table>
-<p>Note that the higher value you specify, the more time and computing resources it will take to compress the data.</p></body></html></section><section class="print-page" id="usage-oplog-replay" heading-number="5.9"><html><head>
+<p>Note that the higher value you specify, the more time and computing resources it will take to compress the data.</p></body></html></section><section class="print-page" id="usage-oplog-replay" heading-number="5.10"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -12171,7 +12498,7 @@ Waiting for delete to be done .[done]
 <p>Make a fresh backup to serve as the new base for future restores. </p>
 </li>
 </ol>
-<p><a class="md-button" href="#features-known-limitations-oplog-replay-from-arbitrary-start-time">Known limitations</a></p></body></html></section><section class="print-page" id="usage-logs" heading-number="5.10"><html><head>
+<p><a class="md-button" href="#features-known-limitations-oplog-replay-from-arbitrary-start-time">Known limitations</a></p></body></html></section><section class="print-page" id="usage-logs" heading-number="5.11"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -12224,7 +12551,7 @@ Waiting for delete to be done .[done]
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Log information from <code>pbmLog</code> collection is shown in the UTC timezone and from the stderr - in the server’s time zone.</p>
-</div></body></html></section><section class="print-page" id="pmm" heading-number="5.11"><html><head>
+</div></body></html></section><section class="print-page" id="pmm" heading-number="5.12"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();
@@ -21400,19 +21727,21 @@ we will do our very best to be helpful.</p></body></html></section><section clas
 
 .print-site-enumerate-headings #usage-cancel-backup > h1:before { content: '5.4 ' }
 
-.print-site-enumerate-headings #usage-delete-backup > h1:before { content: '5.5 ' }
+.print-site-enumerate-headings #usage-backup-lifecycle-management > h1:before { content: '5.5 ' }
 
-.print-site-enumerate-headings #usage-restore-progress > h1:before { content: '5.6 ' }
+.print-site-enumerate-headings #usage-delete-backup > h1:before { content: '5.6 ' }
 
-.print-site-enumerate-headings #usage-backup-priority > h1:before { content: '5.7 ' }
+.print-site-enumerate-headings #usage-restore-progress > h1:before { content: '5.7 ' }
 
-.print-site-enumerate-headings #usage-compression > h1:before { content: '5.8 ' }
+.print-site-enumerate-headings #usage-backup-priority > h1:before { content: '5.8 ' }
 
-.print-site-enumerate-headings #usage-oplog-replay > h1:before { content: '5.9 ' }
+.print-site-enumerate-headings #usage-compression > h1:before { content: '5.9 ' }
 
-.print-site-enumerate-headings #usage-logs > h1:before { content: '5.10 ' }
+.print-site-enumerate-headings #usage-oplog-replay > h1:before { content: '5.10 ' }
 
-.print-site-enumerate-headings #pmm > h1:before { content: '5.11 ' }
+.print-site-enumerate-headings #usage-logs > h1:before { content: '5.11 ' }
+
+.print-site-enumerate-headings #pmm > h1:before { content: '5.12 ' }
 
 .print-site-enumerate-headings #section-6 > h1:before { content: '6 ' }
 .print-site-enumerate-headings #details-storage-configuration > h1:before { content: '6.1 ' }

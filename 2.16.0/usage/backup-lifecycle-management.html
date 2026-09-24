@@ -3,37 +3,37 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="documentation">
+        <meta name="description" content="Backup lifecycle management helps you control how long Percona Backup for MongoDB (PBM) keeps backups. You define a retention policy, and PBM identifies the backups that have aged out and can be removed.">
       
       
         <meta name="author" content="Percona LLC">
       
       
-        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.16.0/release-notes.html">
+        <link rel="canonical" href="https://docs.percona.com/percona-backup-mongodb/2.16.0/usage/backup-lifecycle-management.html">
       
       
-        <link rel="prev" href="details/pbm-user-roles.html">
+        <link rel="prev" href="cancel-backup.html">
       
       
-        <link rel="next" href="release-notes/2.16.0.html">
+        <link rel="next" href="delete-backup.html">
       
       
         
       
       
-      <link rel="icon" href="_images/mongodb-fav.svg">
+      <link rel="icon" href="../_images/mongodb-fav.svg">
       <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
-        <title>Release notes - Percona Backup for MongoDB</title>
+        <title>Backup lifecycle management - Percona Backup for MongoDB</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -52,29 +52,29 @@
       
     
     
-      <link rel="stylesheet" href="css/print-site.css">
+      <link rel="stylesheet" href="../css/print-site.css">
     
-      <link rel="stylesheet" href="css/print-site-material.css">
+      <link rel="stylesheet" href="../css/print-site-material.css">
     
       <link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.3/css/line.css">
     
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
     
-      <link rel="stylesheet" href="css/extra.css">
+      <link rel="stylesheet" href="../css/extra.css">
     
-      <link rel="stylesheet" href="css/design.css">
+      <link rel="stylesheet" href="../css/design.css">
     
-      <link rel="stylesheet" href="css/osano.css">
+      <link rel="stylesheet" href="../css/osano.css">
     
-      <link rel="stylesheet" href="css/mongodb.css">
+      <link rel="stylesheet" href="../css/mongodb.css">
     
-      <link rel="stylesheet" href="css/nocopy.css">
+      <link rel="stylesheet" href="../css/nocopy.css">
     
-      <link rel="stylesheet" href="css/rating.css">
+      <link rel="stylesheet" href="../css/rating.css">
     
-      <link rel="stylesheet" href="css/kapa.css">
+      <link rel="stylesheet" href="../css/kapa.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -96,11 +96,11 @@
     
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Percona Backup for MongoDB - Release notes">
+  <meta property="og:title" content="Percona Backup for MongoDB - Backup lifecycle management">
   <meta property="og:image" content="https://docs.percona.com/percona-backup-mongodb/latest/_images/mongodb.png">
   <meta property="og:url" content="https://docs.percona.com/percona-backup-mongodb/latest/index.html">
 
-  <link href="assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
             html.glightbox-open { overflow: initial; height: 100%; }
             .gslide-title { margin-top: 0px; user-select: text; }
             .gslide-desc { color: #666; user-select: text; }
@@ -129,7 +129,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#percona-backup-for-mongodb-release-notes" class="md-skip">
+        <a href="#backup-lifecycle-management" class="md-skip">
           Skip to content
         </a>
       
@@ -220,9 +220,9 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
 
     <!-- Link to home -->
-    <a href="index.html" title="Percona Backup for MongoDB" class="md-header__button md-logo" aria-label="Percona Backup for MongoDB" data-md-component="logo">
+    <a href="../index.html" title="Percona Backup for MongoDB" class="md-header__button md-logo" aria-label="Percona Backup for MongoDB" data-md-component="logo">
       
-  <img src="_images/mongodb-mark.svg" alt="logo">
+  <img src="../_images/mongodb-mark.svg" alt="logo">
 
     </a>
 
@@ -235,7 +235,7 @@
     <!-- Header title -->
     <div class="md-header__title">
       <div class="md-header__ellipsis">
-        <a href="index.html" class="md-header__topic">
+        <a href="../index.html" class="md-header__topic">
           <span class="md-ellipsis">
             Percona Backup for MongoDB
           </span>
@@ -243,7 +243,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Release notes
+              Backup lifecycle management
             
           </span>
         </div>
@@ -387,9 +387,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="index.html" title="Percona Backup for MongoDB" class="md-nav__button md-logo" aria-label="Percona Backup for MongoDB" data-md-component="logo">
+    <a href="../index.html" title="Percona Backup for MongoDB" class="md-nav__button md-logo" aria-label="Percona Backup for MongoDB" data-md-component="logo">
       
-  <img src="_images/mongodb-mark.svg" alt="logo">
+  <img src="../_images/mongodb-mark.svg" alt="logo">
 
     </a>
     Percona Backup for MongoDB
@@ -416,7 +416,7 @@
   
   
     <li class="md-nav__item">
-      <a href="index.html" class="md-nav__link">
+      <a href="../index.html" class="md-nav__link">
         
   
   
@@ -443,7 +443,7 @@
   
   
     <li class="md-nav__item">
-      <a href="get-help.html" class="md-nav__link">
+      <a href="../get-help.html" class="md-nav__link">
         
   
   
@@ -525,7 +525,7 @@
   
   
     <li class="md-nav__item">
-      <a href="installation.html" class="md-nav__link">
+      <a href="../installation.html" class="md-nav__link">
         
   
   
@@ -612,7 +612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="system-requirements.html" class="md-nav__link">
+      <a href="../system-requirements.html" class="md-nav__link">
         
   
   
@@ -640,7 +640,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/repos.html" class="md-nav__link">
+      <a href="../install/repos.html" class="md-nav__link">
         
   
   
@@ -668,7 +668,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/tarball.html" class="md-nav__link">
+      <a href="../install/tarball.html" class="md-nav__link">
         
   
   
@@ -696,7 +696,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/source.html" class="md-nav__link">
+      <a href="../install/source.html" class="md-nav__link">
         
   
   
@@ -724,7 +724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/docker.html" class="md-nav__link">
+      <a href="../install/docker.html" class="md-nav__link">
         
   
   
@@ -819,7 +819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/initial-setup.html" class="md-nav__link">
+      <a href="../install/initial-setup.html" class="md-nav__link">
         
   
   
@@ -847,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/configure-authentication.html" class="md-nav__link">
+      <a href="../install/configure-authentication.html" class="md-nav__link">
         
   
   
@@ -875,7 +875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/secure-credentials-systemd.html" class="md-nav__link">
+      <a href="../install/secure-credentials-systemd.html" class="md-nav__link">
         
   
   
@@ -903,7 +903,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/backup-storage.html" class="md-nav__link">
+      <a href="../install/backup-storage.html" class="md-nav__link">
         
   
   
@@ -931,7 +931,7 @@
   
   
     <li class="md-nav__item">
-      <a href="install/start-pbm-agent.html" class="md-nav__link">
+      <a href="../install/start-pbm-agent.html" class="md-nav__link">
         
   
   
@@ -1045,7 +1045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/backup-types.html" class="md-nav__link">
+      <a href="../features/backup-types.html" class="md-nav__link">
         
   
   
@@ -1128,7 +1128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/logical.html" class="md-nav__link">
+      <a href="../features/logical.html" class="md-nav__link">
         
   
   
@@ -1156,7 +1156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/start-backup.html" class="md-nav__link">
+      <a href="start-backup.html" class="md-nav__link">
         
   
   
@@ -1184,7 +1184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore.html" class="md-nav__link">
+      <a href="restore.html" class="md-nav__link">
         
   
   
@@ -1275,7 +1275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/physical.html" class="md-nav__link">
+      <a href="../features/physical.html" class="md-nav__link">
         
   
   
@@ -1303,7 +1303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/backup-physical.html" class="md-nav__link">
+      <a href="backup-physical.html" class="md-nav__link">
         
   
   
@@ -1331,7 +1331,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore-physical.html" class="md-nav__link">
+      <a href="restore-physical.html" class="md-nav__link">
         
   
   
@@ -1422,7 +1422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/incremental-backup.html" class="md-nav__link">
+      <a href="../features/incremental-backup.html" class="md-nav__link">
         
   
   
@@ -1450,7 +1450,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/backup-incremental.html" class="md-nav__link">
+      <a href="backup-incremental.html" class="md-nav__link">
         
   
   
@@ -1478,7 +1478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore-incremental.html" class="md-nav__link">
+      <a href="restore-incremental.html" class="md-nav__link">
         
   
   
@@ -1569,7 +1569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/selective-backup.html" class="md-nav__link">
+      <a href="../features/selective-backup.html" class="md-nav__link">
         
   
   
@@ -1597,7 +1597,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/backup-selective.html" class="md-nav__link">
+      <a href="backup-selective.html" class="md-nav__link">
         
   
   
@@ -1625,7 +1625,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore-selective.html" class="md-nav__link">
+      <a href="restore-selective.html" class="md-nav__link">
         
   
   
@@ -1718,7 +1718,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/snapshots.html" class="md-nav__link">
+      <a href="../features/snapshots.html" class="md-nav__link">
         
   
   
@@ -1746,7 +1746,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/backup-external.html" class="md-nav__link">
+      <a href="backup-external.html" class="md-nav__link">
         
   
   
@@ -1774,7 +1774,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore-external.html" class="md-nav__link">
+      <a href="restore-external.html" class="md-nav__link">
         
   
   
@@ -1802,7 +1802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore-external-agent-restart.html" class="md-nav__link">
+      <a href="restore-external-agent-restart.html" class="md-nav__link">
         
   
   
@@ -1895,7 +1895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/point-in-time-recovery.html" class="md-nav__link">
+      <a href="../features/point-in-time-recovery.html" class="md-nav__link">
         
   
   
@@ -1923,7 +1923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/pitr-tutorial.html" class="md-nav__link">
+      <a href="pitr-tutorial.html" class="md-nav__link">
         
   
   
@@ -1951,7 +1951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/pitr-physical.html" class="md-nav__link">
+      <a href="pitr-physical.html" class="md-nav__link">
         
   
   
@@ -1979,7 +1979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/pitr-selective.html" class="md-nav__link">
+      <a href="pitr-selective.html" class="md-nav__link">
         
   
   
@@ -2015,7 +2015,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/backup-sharding.html" class="md-nav__link">
+      <a href="../features/backup-sharding.html" class="md-nav__link">
         
   
   
@@ -2043,7 +2043,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/restore-new-env.html" class="md-nav__link">
+      <a href="../features/restore-new-env.html" class="md-nav__link">
         
   
   
@@ -2071,7 +2071,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/restore-remapping.html" class="md-nav__link">
+      <a href="../features/restore-remapping.html" class="md-nav__link">
         
   
   
@@ -2099,7 +2099,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/known-limitations.html" class="md-nav__link">
+      <a href="../features/known-limitations.html" class="md-nav__link">
         
   
   
@@ -2131,8 +2131,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -2164,11 +2166,11 @@
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked="">
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -2189,7 +2191,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -2207,7 +2209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/list-backup.html" class="md-nav__link">
+      <a href="list-backup.html" class="md-nav__link">
         
   
   
@@ -2235,7 +2237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/describe-backup.html" class="md-nav__link">
+      <a href="describe-backup.html" class="md-nav__link">
         
   
   
@@ -2263,7 +2265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/schedule-backup.html" class="md-nav__link">
+      <a href="schedule-backup.html" class="md-nav__link">
         
   
   
@@ -2291,7 +2293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/cancel-backup.html" class="md-nav__link">
+      <a href="cancel-backup.html" class="md-nav__link">
         
   
   
@@ -2316,10 +2318,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="usage/backup-lifecycle-management.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Backup lifecycle management
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="backup-lifecycle-management.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -2335,6 +2364,194 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#how-retention-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How retention works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-retention-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose a retention strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose a retention strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rolling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rolling-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling retention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar retention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-and-run-lifecycle-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview and run lifecycle cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-a-policy-to-a-storage-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply a policy to a storage profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retention-by-backup-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retention by backup type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automate-lifecycle-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automate lifecycle cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup-safeguards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleanup safeguards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2347,7 +2564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/delete-backup.html" class="md-nav__link">
+      <a href="delete-backup.html" class="md-nav__link">
         
   
   
@@ -2375,7 +2592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/restore-progress.html" class="md-nav__link">
+      <a href="restore-progress.html" class="md-nav__link">
         
   
   
@@ -2403,7 +2620,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/backup-priority.html" class="md-nav__link">
+      <a href="backup-priority.html" class="md-nav__link">
         
   
   
@@ -2431,7 +2648,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/compression.html" class="md-nav__link">
+      <a href="compression.html" class="md-nav__link">
         
   
   
@@ -2459,7 +2676,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/oplog-replay.html" class="md-nav__link">
+      <a href="oplog-replay.html" class="md-nav__link">
         
   
   
@@ -2487,7 +2704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="usage/logs.html" class="md-nav__link">
+      <a href="logs.html" class="md-nav__link">
         
   
   
@@ -2515,7 +2732,7 @@
   
   
     <li class="md-nav__item">
-      <a href="pmm.html" class="md-nav__link">
+      <a href="../pmm.html" class="md-nav__link">
         
   
   
@@ -2623,7 +2840,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/storage-configuration.html" class="md-nav__link">
+      <a href="../details/storage-configuration.html" class="md-nav__link">
         
   
   
@@ -2651,7 +2868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/s3-storage.html" class="md-nav__link">
+      <a href="../details/s3-storage.html" class="md-nav__link">
         
   
   
@@ -2732,7 +2949,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/oci-storage.html" class="md-nav__link">
+      <a href="../details/oci-storage.html" class="md-nav__link">
         
   
   
@@ -2760,7 +2977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/oci-wif.html" class="md-nav__link">
+      <a href="../details/oci-wif.html" class="md-nav__link">
         
   
   
@@ -2796,7 +3013,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/minio.html" class="md-nav__link">
+      <a href="../details/minio.html" class="md-nav__link">
         
   
   
@@ -2824,7 +3041,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/gcs.html" class="md-nav__link">
+      <a href="../details/gcs.html" class="md-nav__link">
         
   
   
@@ -2852,7 +3069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/workload-identity-auth.html" class="md-nav__link">
+      <a href="../details/workload-identity-auth.html" class="md-nav__link">
         
   
   
@@ -2880,7 +3097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/azure.html" class="md-nav__link">
+      <a href="../details/azure.html" class="md-nav__link">
         
   
   
@@ -2908,7 +3125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/oss.html" class="md-nav__link">
+      <a href="../details/oss.html" class="md-nav__link">
         
   
   
@@ -2936,7 +3153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/filesystem-storage.html" class="md-nav__link">
+      <a href="../details/filesystem-storage.html" class="md-nav__link">
         
   
   
@@ -2964,7 +3181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/endpoint-map.html" class="md-nav__link">
+      <a href="../details/endpoint-map.html" class="md-nav__link">
         
   
   
@@ -2992,7 +3209,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/multi-storage.html" class="md-nav__link">
+      <a href="../features/multi-storage.html" class="md-nav__link">
         
   
   
@@ -3020,7 +3237,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/split-merge-backup.html" class="md-nav__link">
+      <a href="../features/split-merge-backup.html" class="md-nav__link">
         
   
   
@@ -3055,7 +3272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/pbm-commands.html" class="md-nav__link">
+      <a href="../reference/pbm-commands.html" class="md-nav__link">
         
   
   
@@ -3145,7 +3362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/config.html" class="md-nav__link">
+      <a href="../reference/config.html" class="md-nav__link">
         
   
   
@@ -3173,7 +3390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/configuration-options.html" class="md-nav__link">
+      <a href="../reference/configuration-options.html" class="md-nav__link">
         
   
   
@@ -3201,7 +3418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/pitr-options.html" class="md-nav__link">
+      <a href="../reference/pitr-options.html" class="md-nav__link">
         
   
   
@@ -3229,7 +3446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/backup-options.html" class="md-nav__link">
+      <a href="../reference/backup-options.html" class="md-nav__link">
         
   
   
@@ -3257,7 +3474,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/restore-options.html" class="md-nav__link">
+      <a href="../reference/restore-options.html" class="md-nav__link">
         
   
   
@@ -3285,7 +3502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/logging-options.html" class="md-nav__link">
+      <a href="../reference/logging-options.html" class="md-nav__link">
         
   
   
@@ -3313,7 +3530,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/pbm-agent-config-options.html" class="md-nav__link">
+      <a href="../reference/pbm-agent-config-options.html" class="md-nav__link">
         
   
   
@@ -3376,7 +3593,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="manage/overview.html" class="md-nav__link ">
+            <a href="../manage/overview.html" class="md-nav__link ">
               
   
   
@@ -3418,7 +3635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/configure-remotely.html" class="md-nav__link">
+      <a href="../manage/configure-remotely.html" class="md-nav__link">
         
   
   
@@ -3446,7 +3663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/automate-s3-access.html" class="md-nav__link">
+      <a href="../manage/automate-s3-access.html" class="md-nav__link">
         
   
   
@@ -3474,7 +3691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/logpath.html" class="md-nav__link">
+      <a href="../manage/logpath.html" class="md-nav__link">
         
   
   
@@ -3502,7 +3719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/start-agent-with-config.html" class="md-nav__link">
+      <a href="../manage/start-agent-with-config.html" class="md-nav__link">
         
   
   
@@ -3530,7 +3747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/change-nodes.html" class="md-nav__link">
+      <a href="../manage/change-nodes.html" class="md-nav__link">
         
   
   
@@ -3558,7 +3775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/upgrading.html" class="md-nav__link">
+      <a href="../manage/upgrading.html" class="md-nav__link">
         
   
   
@@ -3586,7 +3803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="manage/uninstalling.html" class="md-nav__link">
+      <a href="../manage/uninstalling.html" class="md-nav__link">
         
   
   
@@ -3639,7 +3856,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="details/versions.html" class="md-nav__link ">
+            <a href="../details/versions.html" class="md-nav__link ">
               
   
   
@@ -3681,7 +3898,7 @@
   
   
     <li class="md-nav__item">
-      <a href="features/comparison.html" class="md-nav__link">
+      <a href="../features/comparison.html" class="md-nav__link">
         
   
   
@@ -3709,7 +3926,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/deployments.html" class="md-nav__link">
+      <a href="../details/deployments.html" class="md-nav__link">
         
   
   
@@ -3774,7 +3991,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="troubleshoot/index.html" class="md-nav__link ">
+            <a href="../troubleshoot/index.html" class="md-nav__link ">
               
   
   
@@ -3818,7 +4035,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshoot/troubleshooting.html" class="md-nav__link">
+      <a href="../troubleshoot/troubleshooting.html" class="md-nav__link">
         
   
   
@@ -3846,7 +4063,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshoot/status.html" class="md-nav__link">
+      <a href="../troubleshoot/status.html" class="md-nav__link">
         
   
   
@@ -3874,7 +4091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshoot/pbm-report.html" class="md-nav__link">
+      <a href="../troubleshoot/pbm-report.html" class="md-nav__link">
         
   
   
@@ -3902,7 +4119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshoot/restore-partial.html" class="md-nav__link">
+      <a href="../troubleshoot/restore-partial.html" class="md-nav__link">
         
   
   
@@ -3930,7 +4147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshoot/pbm-pmm.html" class="md-nav__link">
+      <a href="../troubleshoot/pbm-pmm.html" class="md-nav__link">
         
   
   
@@ -3958,7 +4175,7 @@
   
   
     <li class="md-nav__item">
-      <a href="troubleshoot/faq.html" class="md-nav__link">
+      <a href="../troubleshoot/faq.html" class="md-nav__link">
         
   
   
@@ -4019,7 +4236,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="details/architecture.html" class="md-nav__link ">
+            <a href="../details/architecture.html" class="md-nav__link ">
               
   
   
@@ -4061,7 +4278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/pbm-agent.html" class="md-nav__link">
+      <a href="../details/pbm-agent.html" class="md-nav__link">
         
   
   
@@ -4089,7 +4306,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/cli.html" class="md-nav__link">
+      <a href="../details/cli.html" class="md-nav__link">
         
   
   
@@ -4117,7 +4334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/control-collections.html" class="md-nav__link">
+      <a href="../details/control-collections.html" class="md-nav__link">
         
   
   
@@ -4145,7 +4362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="intro.html" class="md-nav__link">
+      <a href="../intro.html" class="md-nav__link">
         
   
   
@@ -4173,7 +4390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/authentication.html" class="md-nav__link">
+      <a href="../details/authentication.html" class="md-nav__link">
         
   
   
@@ -4201,7 +4418,7 @@
   
   
     <li class="md-nav__item">
-      <a href="details/pbm-user-roles.html" class="md-nav__link">
+      <a href="../details/pbm-user-roles.html" class="md-nav__link">
         
   
   
@@ -4233,10 +4450,8 @@
       
   
   
-    
   
   
-  
     
     
       
@@ -4248,15 +4463,15 @@
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13" checked="">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_13">
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="release-notes.html" class="md-nav__link md-nav__link--active">
+            <a href="../release-notes.html" class="md-nav__link ">
               
   
   
@@ -4274,13 +4489,13 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_13" id="__nav_13_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_13" id="__nav_13_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_13_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_13">
             <span class="md-nav__icon md-icon"></span>
             
@@ -4399,7 +4614,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.16.0.html" class="md-nav__link">
+      <a href="../release-notes/2.16.0.html" class="md-nav__link">
         
   
   
@@ -4427,7 +4642,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.15.0.html" class="md-nav__link">
+      <a href="../release-notes/2.15.0.html" class="md-nav__link">
         
   
   
@@ -4455,7 +4670,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.14.0.html" class="md-nav__link">
+      <a href="../release-notes/2.14.0.html" class="md-nav__link">
         
   
   
@@ -4483,7 +4698,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.13.0.html" class="md-nav__link">
+      <a href="../release-notes/2.13.0.html" class="md-nav__link">
         
   
   
@@ -4511,7 +4726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.12.0.html" class="md-nav__link">
+      <a href="../release-notes/2.12.0.html" class="md-nav__link">
         
   
   
@@ -4539,7 +4754,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.11.0.html" class="md-nav__link">
+      <a href="../release-notes/2.11.0.html" class="md-nav__link">
         
   
   
@@ -4567,7 +4782,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.10.0.html" class="md-nav__link">
+      <a href="../release-notes/2.10.0.html" class="md-nav__link">
         
   
   
@@ -4595,7 +4810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.9.1.html" class="md-nav__link">
+      <a href="../release-notes/2.9.1.html" class="md-nav__link">
         
   
   
@@ -4623,7 +4838,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.9.0.html" class="md-nav__link">
+      <a href="../release-notes/2.9.0.html" class="md-nav__link">
         
   
   
@@ -4651,7 +4866,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.8.0.html" class="md-nav__link">
+      <a href="../release-notes/2.8.0.html" class="md-nav__link">
         
   
   
@@ -4679,7 +4894,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.7.0.html" class="md-nav__link">
+      <a href="../release-notes/2.7.0.html" class="md-nav__link">
         
   
   
@@ -4707,7 +4922,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.6.0.html" class="md-nav__link">
+      <a href="../release-notes/2.6.0.html" class="md-nav__link">
         
   
   
@@ -4735,7 +4950,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.5.0.html" class="md-nav__link">
+      <a href="../release-notes/2.5.0.html" class="md-nav__link">
         
   
   
@@ -4763,7 +4978,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.4.1.html" class="md-nav__link">
+      <a href="../release-notes/2.4.1.html" class="md-nav__link">
         
   
   
@@ -4791,7 +5006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.4.0.html" class="md-nav__link">
+      <a href="../release-notes/2.4.0.html" class="md-nav__link">
         
   
   
@@ -4819,7 +5034,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.3.1.html" class="md-nav__link">
+      <a href="../release-notes/2.3.1.html" class="md-nav__link">
         
   
   
@@ -4847,7 +5062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.3.0.html" class="md-nav__link">
+      <a href="../release-notes/2.3.0.html" class="md-nav__link">
         
   
   
@@ -4875,7 +5090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.2.1.html" class="md-nav__link">
+      <a href="../release-notes/2.2.1.html" class="md-nav__link">
         
   
   
@@ -4903,7 +5118,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.2.0.html" class="md-nav__link">
+      <a href="../release-notes/2.2.0.html" class="md-nav__link">
         
   
   
@@ -4931,7 +5146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.1.0.html" class="md-nav__link">
+      <a href="../release-notes/2.1.0.html" class="md-nav__link">
         
   
   
@@ -4959,7 +5174,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.0.5.html" class="md-nav__link">
+      <a href="../release-notes/2.0.5.html" class="md-nav__link">
         
   
   
@@ -4987,7 +5202,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.0.4.html" class="md-nav__link">
+      <a href="../release-notes/2.0.4.html" class="md-nav__link">
         
   
   
@@ -5015,7 +5230,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.0.3.html" class="md-nav__link">
+      <a href="../release-notes/2.0.3.html" class="md-nav__link">
         
   
   
@@ -5043,7 +5258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.0.2.html" class="md-nav__link">
+      <a href="../release-notes/2.0.2.html" class="md-nav__link">
         
   
   
@@ -5071,7 +5286,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.0.1.html" class="md-nav__link">
+      <a href="../release-notes/2.0.1.html" class="md-nav__link">
         
   
   
@@ -5099,7 +5314,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/2.0.0.html" class="md-nav__link">
+      <a href="../release-notes/2.0.0.html" class="md-nav__link">
         
   
   
@@ -5224,7 +5439,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.8.1.html" class="md-nav__link">
+      <a href="../release-notes/1.8.1.html" class="md-nav__link">
         
   
   
@@ -5252,7 +5467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.8.0.html" class="md-nav__link">
+      <a href="../release-notes/1.8.0.html" class="md-nav__link">
         
   
   
@@ -5280,7 +5495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.7.0.html" class="md-nav__link">
+      <a href="../release-notes/1.7.0.html" class="md-nav__link">
         
   
   
@@ -5308,7 +5523,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.6.1.html" class="md-nav__link">
+      <a href="../release-notes/1.6.1.html" class="md-nav__link">
         
   
   
@@ -5336,7 +5551,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.6.0.html" class="md-nav__link">
+      <a href="../release-notes/1.6.0.html" class="md-nav__link">
         
   
   
@@ -5364,7 +5579,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.5.0.html" class="md-nav__link">
+      <a href="../release-notes/1.5.0.html" class="md-nav__link">
         
   
   
@@ -5392,7 +5607,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.4.1.html" class="md-nav__link">
+      <a href="../release-notes/1.4.1.html" class="md-nav__link">
         
   
   
@@ -5420,7 +5635,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.4.0.html" class="md-nav__link">
+      <a href="../release-notes/1.4.0.html" class="md-nav__link">
         
   
   
@@ -5448,7 +5663,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.3.4.html" class="md-nav__link">
+      <a href="../release-notes/1.3.4.html" class="md-nav__link">
         
   
   
@@ -5476,7 +5691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.3.3.html" class="md-nav__link">
+      <a href="../release-notes/1.3.3.html" class="md-nav__link">
         
   
   
@@ -5504,7 +5719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.3.2.html" class="md-nav__link">
+      <a href="../release-notes/1.3.2.html" class="md-nav__link">
         
   
   
@@ -5532,7 +5747,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.3.1.html" class="md-nav__link">
+      <a href="../release-notes/1.3.1.html" class="md-nav__link">
         
   
   
@@ -5560,7 +5775,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.3.0.html" class="md-nav__link">
+      <a href="../release-notes/1.3.0.html" class="md-nav__link">
         
   
   
@@ -5588,7 +5803,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.2.1.html" class="md-nav__link">
+      <a href="../release-notes/1.2.1.html" class="md-nav__link">
         
   
   
@@ -5616,7 +5831,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.2.0.html" class="md-nav__link">
+      <a href="../release-notes/1.2.0.html" class="md-nav__link">
         
   
   
@@ -5644,7 +5859,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.1.3.html" class="md-nav__link">
+      <a href="../release-notes/1.1.3.html" class="md-nav__link">
         
   
   
@@ -5672,7 +5887,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.1.1.html" class="md-nav__link">
+      <a href="../release-notes/1.1.1.html" class="md-nav__link">
         
   
   
@@ -5700,7 +5915,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.1.0.html" class="md-nav__link">
+      <a href="../release-notes/1.1.0.html" class="md-nav__link">
         
   
   
@@ -5728,7 +5943,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/1.0.0.html" class="md-nav__link">
+      <a href="../release-notes/1.0.0.html" class="md-nav__link">
         
   
   
@@ -5756,7 +5971,7 @@
   
   
     <li class="md-nav__item">
-      <a href="release-notes/0.5.0.html" class="md-nav__link">
+      <a href="../release-notes/0.5.0.html" class="md-nav__link">
         
   
   
@@ -5862,7 +6077,7 @@
   
   
     <li class="md-nav__item">
-      <a href="about-docs.html" class="md-nav__link">
+      <a href="../about-docs.html" class="md-nav__link">
         
   
   
@@ -5890,7 +6105,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/sboms-pbm.html" class="md-nav__link">
+      <a href="../reference/sboms-pbm.html" class="md-nav__link">
         
   
   
@@ -5918,7 +6133,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/glossary.html" class="md-nav__link">
+      <a href="../reference/glossary.html" class="md-nav__link">
         
   
   
@@ -5974,7 +6189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="copyright.html" class="md-nav__link">
+      <a href="../copyright.html" class="md-nav__link">
         
   
   
@@ -6002,7 +6217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="trademark-policy.html" class="md-nav__link">
+      <a href="../trademark-policy.html" class="md-nav__link">
         
   
   
@@ -6030,7 +6245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="CODE_OF_CONDUCT.html" class="md-nav__link">
+      <a href="../CODE_OF_CONDUCT.html" class="md-nav__link">
         
   
   
@@ -6300,7 +6515,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
           <div data-banner="data-banner" class="edit-contrib-banner">
     <div class="banner-content">
       <!-- Edit link centered -->
-      <a href="https://github.com/percona/pbm-docs/edit/main/docs/release-notes.md" title="Edit this page on GitHub" class="edit-page-link">
+      <a href="https://github.com/percona/pbm-docs/edit/main/docs/usage/backup-lifecycle-management.md" title="Edit this page on GitHub" class="edit-page-link">
         <span class="edit-page-icon">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
@@ -6341,6 +6556,180 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#how-retention-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How retention works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-retention-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose a retention strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose a retention strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rolling-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration options
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-policies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example policies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example policies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rolling-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rolling retention
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calendar-retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calendar retention
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-and-run-lifecycle-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview and run lifecycle cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apply-a-policy-to-a-storage-profile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apply a policy to a storage profile
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retention-by-backup-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retention by backup type
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#automate-lifecycle-cleanup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automate lifecycle cleanup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cleanup-safeguards" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cleanup safeguards
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
         </div>
       </div>
@@ -6361,72 +6750,304 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
       
     
-    <a href="https://github.com/percona/pbm-docs/raw/main/docs/release-notes.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/percona/pbm-docs/raw/main/docs/usage/backup-lifecycle-management.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"></path></svg>
     </a>
   
 
 
-<h1 id="percona-backup-for-mongodb-release-notes">Percona Backup for MongoDB release notes<a class="headerlink" href="#percona-backup-for-mongodb-release-notes" title="Permanent link">¶</a></h1>
+<h1 id="backup-lifecycle-management">Backup lifecycle management<a class="headerlink" href="#backup-lifecycle-management" title="Permanent link">¶</a></h1>
+<p>Backup lifecycle management helps you control how long Percona Backup for MongoDB (PBM) keeps backups. You define a retention policy, and PBM identifies the backups that have aged out and can be removed.</p>
+<p>PBM uses a <a href="https://en.wikipedia.org/wiki/Backup_rotation_scheme#Grandfather-father-son" target="_blank">Grandfather-Father-Son (GFS) retention model <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. You can keep every recent backup, then retain fewer recovery points as the backups age. For example, you can keep all backups for seven days, one backup per week for four weeks, and one backup per month for 12 months.</p>
+<p>You can define a lifecycle policy for the main storage or for an individual <a href="../features/multi-storage.html">storage profile</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Lifecycle cleanup permanently deletes the selected backups. Always run <code>pbm cleanup --lifecycle --dry-run</code> and review the report before you proceed with deletion.</p>
+</div>
+<h2 id="how-retention-works">How retention works<a class="headerlink" href="#how-retention-works" title="Permanent link">¶</a></h2>
+<p>A lifecycle policy can include three retention tiers:</p>
 <ul>
-<li><a href="release-notes/2.16.0.html">Percona Backup for MongoDB 2.16.0</a></li>
-<li><a href="release-notes/2.15.0.html">Percona Backup for MongoDB 2.15.0</a></li>
-<li><a href="release-notes/2.14.0.html">Percona Backup for MongoDB 2.14.0</a></li>
-<li><a href="release-notes/2.13.0.html">Percona Backup for MongoDB 2.13.0</a></li>
-<li><a href="release-notes/2.12.0.html">Percona Backup for MongoDB 2.12.0</a></li>
-<li><a href="release-notes/2.11.0.html">Percona Backup for MongoDB 2.11.0</a></li>
-<li><a href="release-notes/2.10.0.html">Percona Backup for MongoDB 2.10.0</a></li>
-<li><a href="release-notes/2.9.1.html">Percona Backup for MongoDB 2.9.1</a></li>
-<li><a href="release-notes/2.9.0.html">Percona Backup for MongoDB 2.9.0</a></li>
-<li><a href="release-notes/2.8.0.html">Percona Backup for MongoDB 2.8.0</a></li>
-<li><a href="release-notes/2.7.0.html">Percona Backup for MongoDB 2.7.0</a></li>
-<li><a href="release-notes/2.6.0.html">Percona Backup for MongoDB 2.6.0</a></li>
-<li><a href="release-notes/2.5.0.html">Percona Backup for MongoDB 2.5.0</a></li>
-<li><a href="release-notes/2.4.1.html">Percona Backup for MongoDB 2.4.1</a></li>
-<li><a href="release-notes/2.4.0.html">Percona Backup for MongoDB 2.4.0</a></li>
-<li><a href="release-notes/2.3.1.html">Percona Backup for MongoDB 2.3.1</a></li>
-<li><a href="release-notes/2.3.0.html">Percona Backup for MongoDB 2.3.0</a></li>
-<li><a href="release-notes/2.2.1.html">Percona Backup for MongoDB 2.2.1</a></li>
-<li><a href="release-notes/2.2.0.html">Percona Backup for MongoDB 2.2.0</a></li>
-<li><a href="release-notes/2.1.0.html">Percona Backup for MongoDB 2.1.0</a></li>
-<li><a href="release-notes/2.0.5.html">Percona Backup for MongoDB 2.0.5</a></li>
-<li><a href="release-notes/2.0.4.html">Percona Backup for MongoDB 2.0.4</a></li>
-<li><a href="release-notes/2.0.3.html">Percona Backup for MongoDB 2.0.3</a></li>
-<li><a href="release-notes/2.0.2.html">Percona Backup for MongoDB 2.0.2</a></li>
-<li><a href="release-notes/2.0.1.html">Percona Backup for MongoDB 2.0.1</a></li>
-<li><a href="release-notes/2.0.0.html">Percona Backup for MongoDB 2.0.0</a></li>
-<li><a href="release-notes/1.8.1.html">Percona Backup for MongoDB 1.8.1</a></li>
-<li><a href="release-notes/1.8.0.html">Percona Backup for MongoDB 1.8.0</a></li>
-<li><a href="release-notes/1.7.0.html">Percona Backup for MongoDB 1.7.0</a></li>
-<li><a href="release-notes/1.6.1.html">Percona Backup for MongoDB 1.6.1</a></li>
-<li><a href="release-notes/1.6.0.html">Percona Backup for MongoDB 1.6.0</a></li>
-<li><a href="release-notes/1.5.0.html">Percona Backup for MongoDB 1.5.0</a></li>
-<li><a href="release-notes/1.4.1.html">Percona Backup for MongoDB 1.4.1</a></li>
-<li><a href="release-notes/1.4.0.html">Percona Backup for MongoDB 1.4.0</a></li>
-<li><a href="release-notes/1.3.4.html">Percona Backup for MongoDB 1.3.4</a></li>
-<li><a href="release-notes/1.3.3.html">Percona Backup for MongoDB 1.3.3</a></li>
-<li><a href="release-notes/1.3.2.html">Percona Backup for MongoDB 1.3.2</a></li>
-<li><a href="release-notes/1.3.1.html">Percona Backup for MongoDB 1.3.1</a></li>
-<li><a href="release-notes/1.3.0.html">Percona Backup for MongoDB 1.3.0</a></li>
-<li><a href="release-notes/1.2.1.html">Percona Backup for MongoDB 1.2.1</a></li>
-<li><a href="release-notes/1.2.0.html">Percona Backup for MongoDB 1.2.0</a></li>
-<li><a href="release-notes/1.1.3.html">Percona Backup for MongoDB 1.1.3</a></li>
-<li><a href="release-notes/1.1.1.html">Percona Backup for MongoDB 1.1.1</a></li>
-<li><a href="release-notes/1.1.0.html">Percona Backup for MongoDB 1.1.0</a></li>
-<li><a href="release-notes/1.0.0.html">Percona Backup for MongoDB 1.0.0</a></li>
-<li><a href="release-notes/0.5.0.html">Percona Backup for MongoDB 0.5.0</a></li>
+<li><strong>Daily</strong> keeps every eligible backup within the configured number of days.</li>
+<li><strong>Weekly</strong> keeps one backup of each type in every weekly retention window.</li>
+<li><strong>Monthly</strong> keeps one backup of each type in every monthly retention window.</li>
+</ul>
+<p>PBM evaluates the three tiers independently. A backup is retained if it matches at least one tier. For example, the same backup can satisfy the daily, weekly, and monthly rules.</p>
+<p>Set a retention value to <code>0</code> to disable that tier.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>If you set all three retention values and <code>minKeep</code> to <code>0</code>, PBM can select every eligible backup for deletion.</p>
+</li>
+<li>
+<p>PBM evaluates backup times in UTC. In-progress backups and backups created at or after the evaluation time are not considered for deletion.</p>
+</li>
+</ul>
+</div>
+<h2 id="choose-a-retention-strategy">Choose a retention strategy<a class="headerlink" href="#choose-a-retention-strategy" title="Permanent link">¶</a></h2>
+<p>PBM supports <code>rolling</code> and <code>calendar</code> retention strategies.</p>
+<h3 id="rolling-strategy">Rolling strategy<a class="headerlink" href="#rolling-strategy" title="Permanent link">¶</a></h3>
+<p>The <code>rolling</code> strategy is the default. It measures backup age from the time the lifecycle command runs and divides the history into fixed windows:</p>
+<ul>
+<li>Weekly retention uses seven-day windows.</li>
+<li>Monthly retention uses 30-day windows.</li>
+</ul>
+<p>PBM keeps the newest backup of each type in every window. This strategy works well when backup times vary or an occasional scheduled backup is missed.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
+</code></pre></div>
+<h3 id="calendar-strategy">Calendar strategy<a class="headerlink" href="#calendar-strategy" title="Permanent link">¶</a></h3>
+<p>The <code>calendar</code> strategy groups backups by calendar week and calendar month. Within each period, PBM selects the backup closest to the configured target day:</p>
+<ul>
+<li><code>weeklyDay</code> sets the target weekday. Use <code>0</code> for Sunday through <code>6</code> for Saturday.</li>
+<li><code>monthlyDay</code> sets the target day of the month. Use a value from <code>1</code> through <code>31</code>.</li>
+</ul>
+<p>If no backup exists on the target day, PBM keeps the closest eligible backup in that week or month. When <code>monthlyDay</code> is later than the last day of a month, PBM uses the last day of that month as the target.</p>
+<details class="example">
+<summary>Keep Friday and mid-month backups</summary>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">calendar</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">weeklyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">  </span><span class="nt">monthlyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+</code></pre></div>
+<p>This policy keeps one backup of each type closest to Friday in every retained week and one backup of each type closest to the 15<sup>th</sup> in every retained month.</p>
+</details>
+<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">¶</a></h2>
+<p>Define lifecycle settings in the <code>lifecycle</code> section of the <a href="../reference/config.html">PBM configuration</a>.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lifecycle.enabled</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>Enables lifecycle policy evaluation and cleanup. When disabled, PBM keeps all backups.</td>
+</tr>
+<tr>
+<td><code>lifecycle.strategy</code></td>
+<td>String</td>
+<td><code>rolling</code></td>
+<td>Sets the retention strategy. Supported values are <code>rolling</code> and <code>calendar</code>.</td>
+</tr>
+<tr>
+<td><code>lifecycle.minKeep</code></td>
+<td>Integer</td>
+<td><code>1</code></td>
+<td>Sets the minimum number of completed, successful restore points that must remain. PBM aborts the cleanup if it would retain fewer restore points. Set to <code>0</code> to disable this safeguard.</td>
+</tr>
+<tr>
+<td><code>lifecycle.purgeFailed</code></td>
+<td>Boolean</td>
+<td><code>false</code></td>
+<td>Controls the retention of failed and canceled backups. When <code>false</code>, PBM keeps them. When <code>true</code>, PBM keeps them only during the daily retention period.</td>
+</tr>
+<tr>
+<td><code>lifecycle.dailyRetention</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the number of days to keep every eligible backup.</td>
+</tr>
+<tr>
+<td><code>lifecycle.weeklyRetention</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the number of weeks for which PBM keeps one backup of each type per week.</td>
+</tr>
+<tr>
+<td><code>lifecycle.weeklyDay</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the target weekday for the <code>calendar</code> strategy. Use <code>0</code> for Sunday through <code>6</code> for Saturday.</td>
+</tr>
+<tr>
+<td><code>lifecycle.monthlyRetention</code></td>
+<td>Integer</td>
+<td><code>0</code></td>
+<td>Sets the number of months for which PBM keeps one backup of each type per month.</td>
+</tr>
+<tr>
+<td><code>lifecycle.monthlyDay</code></td>
+<td>Integer</td>
+<td><code>1</code></td>
+<td>Sets the target day of the month for the <code>calendar</code> strategy. Use a value from <code>1</code> through <code>31</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>You can set an individual option from the command line:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>lifecycle.dailyRetention<span class="o">=</span><span class="m">7</span>
+</code></pre></div>
+<p>To apply several settings together, add the <code>lifecycle</code> section to the configuration file:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>&lt;PATH_TO_CONFIG_FILE&gt;<span class="w"> </span>--wait
+</code></pre></div>
+<h2 id="example-policies">Example policies<a class="headerlink" href="#example-policies" title="Permanent link">¶</a></h2>
+<h3 id="rolling-retention">Rolling retention<a class="headerlink" href="#rolling-retention" title="Permanent link">¶</a></h3>
+<p>The following policy keeps all eligible backups for seven days, one backup of each type per week for four weeks, and one backup of each type per 30-day window for 12 months:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
+<span class="w">  </span><span class="nt">minKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">purgeFailed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">dailyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+</code></pre></div>
+<p>With <code>purgeFailed: true</code>, failed and canceled backups are kept during the seven-day daily retention period and become eligible for deletion after that period.</p>
+<h3 id="calendar-retention">Calendar retention<a class="headerlink" href="#calendar-retention" title="Permanent link">¶</a></h3>
+<p>The following policy keeps all eligible backups for 14 days, one backup of each type closest to Friday for eight calendar weeks, and one backup of each type closest to the 15<sup>th</sup> for six calendar months:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">calendar</span>
+<span class="w">  </span><span class="nt">minKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">purgeFailed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">dailyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">14</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">8</span>
+<span class="w">  </span><span class="nt">weeklyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
+<span class="w">  </span><span class="nt">monthlyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+</code></pre></div>
+<h2 id="preview-and-run-lifecycle-cleanup">Preview and run lifecycle cleanup<a class="headerlink" href="#preview-and-run-lifecycle-cleanup" title="Permanent link">¶</a></h2>
+<p class="power-number">Configure the policy and enable it before you run a dry run. When <code>lifecycle.enabled</code> is <code>false</code>, PBM reports all backups as retained and does not calculate deletion candidates.</p>
+<ol>
+<li>
+<p>Enable the policy:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>lifecycle.enabled<span class="o">=</span><span class="nb">true</span><span class="w"> </span>--wait
+</code></pre></div>
+</li>
+<li>
+<p>Preview the result:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--dry-run
+</code></pre></div>
+<p>PBM reports the backups it would keep and purge without deleting any data. Review the <strong>Backups to PURGE</strong> list carefully.</p>
+</li>
+<li>
+<p>Run the cleanup:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--wait
+</code></pre></div>
+<p>PBM displays the lifecycle report and asks you to confirm the deletion. Enter <code>N</code> or press <code>Ctrl+C</code> at the confirmation prompt to cancel.</p>
+<p>The <code>--wait</code> flag keeps the command attached until the cleanup finishes. Without it, PBM starts the cleanup and returns control to the shell.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use <code>--yes</code> to skip the confirmation prompt only after you have reviewed a dry run. This flag is required for unattended cleanup.</p>
+</div>
+</li>
+</ol>
+<h2 id="apply-a-policy-to-a-storage-profile">Apply a policy to a storage profile<a class="headerlink" href="#apply-a-policy-to-a-storage-profile" title="Permanent link">¶</a></h2>
+<p>The lifecycle policy in the main PBM configuration applies only to backups in the main storage. A policy in a storage profile applies only to backups created in that profile.</p>
+<p>For example, create <code>pbm-physical.conf</code> with the storage and lifecycle settings for the profile:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
+<span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">region</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">us-east-1</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongo-physical-backups</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm/physical</span>
+
+<span class="nt">lifecycle</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
+<span class="w">  </span><span class="nt">minKeep</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">  </span><span class="nt">purgeFailed</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">dailyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7</span>
+<span class="w">  </span><span class="nt">weeklyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
+<span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
+</code></pre></div>
+<p>Add the profile:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </span>physical-backup<span class="w"> </span>pbm-physical.conf<span class="w"> </span>--wait
+</code></pre></div>
+<p>Preview the policy for this profile:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--dry-run
+</code></pre></div>
+<p>Run the cleanup after reviewing the report:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--wait
+</code></pre></div>
+<p>When you specify <code>--profile</code>, PBM uses the lifecycle policy from that profile and evaluates only its backups. Without <code>--profile</code>, PBM uses the main configuration and evaluates backups in the main storage.</p>
+<p>For details about creating and managing storage profiles, see <a href="../features/multi-storage.html">Multiple storages for backups</a>.</p>
+<h2 id="retention-by-backup-type">Retention by backup type<a class="headerlink" href="#retention-by-backup-type" title="Permanent link">¶</a></h2>
+<p>For weekly and monthly retention, PBM evaluates logical, physical, and incremental backups separately. One backup type cannot replace another as the retained backup for a window. If a weekly window contains eligible logical and physical backups, PBM keeps one of each type.</p>
+<p>The same retention values apply to all backup types in a given storage. To use different retention periods, send the backup types to separate storage profiles and define a lifecycle policy in each profile.</p>
+<p>PBM also preserves incremental backup dependencies. If any backup in an incremental chain must be retained, PBM keeps the complete chain required to restore it.</p>
+<h2 id="automate-lifecycle-cleanup">Automate lifecycle cleanup<a class="headerlink" href="#automate-lifecycle-cleanup" title="Permanent link">¶</a></h2>
+<p>You can schedule lifecycle cleanup with <code>cron</code> or another scheduler. Use <code>--yes</code> so the command does not wait for confirmation, and keep <code>minKeep</code> enabled as a safeguard.</p>
+<p>Run lifecycle cleanup at a different time from scheduled backups. The following example evaluates the main storage every day at 03:00. It writes JSON output to one log file and progress messages or errors to another:</p>
+<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/usr/bin/pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--yes<span class="w"> </span>--wait<span class="w"> </span>--out<span class="o">=</span>json<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle.jsonl<span class="w"> </span><span class="m">2</span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle.err
+</code></pre></div>
+<p>To automate cleanup for a storage profile, include <code>--profile=&lt;PROFILE_NAME&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/usr/bin/pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--yes<span class="w"> </span>--wait<span class="w"> </span>--out<span class="o">=</span>json<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle-physical.jsonl<span class="w"> </span><span class="m">2</span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle-physical.err
+</code></pre></div>
+<h2 id="cleanup-safeguards">Cleanup safeguards<a class="headerlink" href="#cleanup-safeguards" title="Permanent link">¶</a></h2>
+<p>PBM applies the following safeguards when it evaluates and deletes backups:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Situation</strong></th>
+<th><strong>PBM behavior</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lifecycle management is disabled</td>
+<td>Keeps all backups and does not produce deletion targets.</td>
+</tr>
+<tr>
+<td>Cleanup would retain fewer successful restore points than <code>minKeep</code></td>
+<td>Aborts the cleanup.</td>
+</tr>
+<tr>
+<td>A backup is required as the base for an active <a href="../features/point-in-time-recovery.html">point-in-time recovery</a> timeline</td>
+<td>Keeps the backup and reports it as a PITR base snapshot.</td>
+</tr>
+<tr>
+<td>A retained backup belongs to an incremental chain</td>
+<td>Keeps the complete chain required to restore that backup.</td>
+</tr>
+<tr>
+<td>An incremental chain is incomplete or invalid</td>
+<td>Keeps the affected chain members.</td>
+</tr>
+<tr>
+<td>A backup is in progress</td>
+<td>Excludes it from lifecycle evaluation.</td>
+</tr>
+<tr>
+<td>A selective backup is present</td>
+<td>Excludes it from lifecycle cleanup and keeps it.</td>
+</tr>
+<tr>
+<td>A backup matches more than one retention rule</td>
+<td>Keeps it until it no longer matches any rule.</td>
+</tr>
+<tr>
+<td>A backup failed or was canceled</td>
+<td>Keeps it when <code>purgeFailed</code> is <code>false</code>. When <code>purgeFailed</code> is <code>true</code>, keeps it only within the daily retention period. Failed and canceled backups are not selected for weekly or monthly retention.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="../reference/config.html">Configure PBM</a></li>
+<li><a href="../features/multi-storage.html">Multiple storages for backups</a></li>
+<li><a href="delete-backup.html">Delete backups</a></li>
+<li><a href="../features/point-in-time-recovery.html">Point-in-time recovery</a></li>
 </ul>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 15:51:00 UTC">September 21, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 22, 2026 14:29:33 UTC">September 22, 2026</span>
       
         <br>
         Created:
-        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 18, 2022 08:51:11 UTC">August 18, 2022</span>
+        <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 22, 2026 09:44:47 UTC">September 22, 2026</span>
       
     
   </small>
@@ -6521,23 +7142,23 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": ".", "features": ["search.highlight", "search.share", "search.suggest", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "navigation.indexes", "content.tooltips", "content.tabs.link", "content.action.view", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["search.highlight", "search.share", "search.suggest", "navigation.top", "navigation.tracking", "navigation.instant", "navigation.instant.progress", "navigation.indexes", "content.tooltips", "content.tabs.link", "content.action.view", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
 
-      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
-        <script src="js/print-site.js"></script>
+        <script src="../js/print-site.js"></script>
       
-        <script src="js/promptremover.js"></script>
+        <script src="../js/promptremover.js"></script>
       
-        <script src="js/consent.js"></script>
+        <script src="../js/consent.js"></script>
       
-        <script src="js/rating.js"></script>
+        <script src="../js/rating.js"></script>
       
-        <script src="js/kapa.js"></script>
+        <script src="../js/kapa.js"></script>
       
-        <script src="js/open_in_new_tab.js"></script>
+        <script src="../js/open_in_new_tab.js"></script>
       
     
 
