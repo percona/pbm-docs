@@ -20,6 +20,9 @@ To use GCS, you need the following:
 
 ## Create a bucket
 
+To create a bucket, follow these steps:
+{.power-number}
+
 1. Install and configure the [gcloud CLI :octicons-link-external-16:](https://cloud.google.com/sdk/docs/install)
 
 2. Create a bucket
@@ -136,6 +139,7 @@ You can continue using the `grpc` client with parallel uploads disabled. You do 
 ## Adjust PBM configuration to use GCS
 
 Starting with version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. If you are upgrading from an earlier version, you need to adjust your PBM configuration as follows:
+{.power-number}
 
 1. Change the `storage.type` from `s3` to `gcs`.
 2. Change the `storage.s3` section to `storage.gcs` and adjust the parameters accordingly. See the [Configuration example](#configuration-example) above.
