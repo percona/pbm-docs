@@ -2244,6 +2244,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    View detailed information about a backup
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="describe-backup.html" class="md-nav__link md-nav__link--active">
         
   
@@ -2260,6 +2278,110 @@
   
 
       </a>
+      
+        
+
+  
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#backup-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-duration-with-pbm-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check duration with pbm status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-duration-with-pbm-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check duration with pbm list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-start-and-finish-times-with-pbm-describe-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check start and finish times with pbm describe-backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-timing-in-the-logs-with-pbm-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check timing in the logs with pbm logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-backup-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View backup size
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-collections-in-a-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View collections in a backup
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -6321,6 +6443,97 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      On this page
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#backup-timing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Backup timing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backup timing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#check-duration-with-pbm-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check duration with pbm status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-duration-with-pbm-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check duration with pbm list
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-start-and-finish-times-with-pbm-describe-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check start and finish times with pbm describe-backup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#check-timing-in-the-logs-with-pbm-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Check timing in the logs with pbm logs
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-backup-size" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View backup size
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#view-collections-in-a-backup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        View collections in a backup
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
         </div>
       </div>
@@ -6375,28 +6588,130 @@ replsets:
   error: ""
 </code></pre></div>
 </details>
-<p>Starting with version 2.10.0, the command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing <a href="../features/physical.html#physical-restores-with-a-fallback-directory">physical restores with a fallback directory</a>.</p>
+<h2 id="backup-timing">Backup timing<a class="headerlink" href="#backup-timing" title="Permanent link">¶</a></h2>
+<p>PBM shows the start time, finish time, and duration of a backup. You can use this information to compare backup performance and identify operations that take longer than expected.</p>
+<p>You can view this timing information with the following commands:</p>
+<ul>
+<li><code>pbm status</code></li>
+<li><code>pbm list</code></li>
+<li><code>pbm describe-backup</code></li>
+<li><code>pbm logs</code></li>
+</ul>
+<h3 id="check-duration-with-pbm-status">Check duration with <code>pbm status</code><a class="headerlink" href="#check-duration-with-pbm-status" title="Permanent link">¶</a></h3>
+<p>The <strong>Snapshots</strong> section of the <code>pbm status</code> output includes a <code>DURATION</code> column:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>status
+</code></pre></div>
 <details class="example">
 <summary>Sample output</summary>
-<p>```{.text .no-copy}
-pbm describe-backup 2025-06-05T16:57:35Z
-name: “2025-06-05T16:57:35Z”
+<div class="highlight"><pre><span></span><code>Cluster:
+...
+
+Snapshots:
+  NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         DURATION    STATUS
+  ------------------------------------------------------------------------------------------------------------------------------
+  2026-08-24T12:17:58Z      840.17MB    logical                             no     no    2026-08-24T12:21:36  3m51s       done
+  2026-08-24T12:17:24Z      2.06GB      physical                            no     no    2026-08-24T12:17:27  20s         done
+</code></pre></div>
+</details>
+<h3 id="check-duration-with-pbm-list">Check duration with <code>pbm list</code><a class="headerlink" href="#check-duration-with-pbm-list" title="Permanent link">¶</a></h3>
+<p>The <code>pbm list</code> output includes the duration of every listed backup:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>list
+</code></pre></div>
+<details class="example">
+<summary>Sample output</summary>
+<div class="highlight"><pre><span></span><code>Backup snapshots:
+  NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+  ---------------------------------------------------------------------------------------------------------------
+  2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+  2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
+</code></pre></div>
+</details>
+<p>For more information, see <a href="list-backup.html">List backups</a>.</p>
+<h3 id="check-start-and-finish-times-with-pbm-describe-backup">Check start and finish times with <code>pbm describe-backup</code><a class="headerlink" href="#check-start-and-finish-times-with-pbm-describe-backup" title="Permanent link">¶</a></h3>
+<p>Use <code>pbm describe-backup</code> to view the start time, finish time, and duration of a specific backup:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>describe-backup<span class="w"> </span><span class="m">2026</span>-08-24T12:17:58Z
+</code></pre></div>
+<details class="example">
+<summary>Sample output</summary>
+<div class="no-copy highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-08-24T12:17:58Z"</span>
+<span class="nn">...</span>
+<span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-08-24T12:17:58Z"</span>
+<span class="nt">finish</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-08-24T12:21:49Z"</span>
+<span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3m51s</span>
+<span class="nn">...</span>
+</code></pre></div>
+</details>
+<p>The timing fields have the following meanings:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td>Time when PBM started the backup</td>
+</tr>
+<tr>
+<td><code>finish</code></td>
+<td>Time when the backup finished</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Elapsed time between start and finish</td>
+</tr>
+</tbody>
+</table>
+<p>Start and finish timestamps are shown in UTC and use the <a href="https://www.rfc-editor.org/rfc/rfc3339" target="_blank">RFC 3339 format <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Durations are written in formats: <code>20s, 3m51s, 1h14m2s</code>. Anything under a minute shows seconds only.</p>
+<p>For a backup that is still running, the finish time and duration are not available. PBM also omits the duration when the stored timestamps do not form a valid interval.</p>
+<h3 id="check-timing-in-the-logs-with-pbm-logs">Check timing in the logs with <code>pbm logs</code><a class="headerlink" href="#check-timing-in-the-logs-with-pbm-logs" title="Permanent link">¶</a></h3>
+<p>When a backup finishes, the <code>pbm logs</code> output includes a summary with the backup name, start time, finish time, and duration:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs
+</code></pre></div>
+<details class="example">
+<summary>Sample output</summary>
+<div class="no-copy highlight"><pre><span></span><code>...
+2026-08-24T12:21:49Z I [cfg/cfg00:30000] [backup/2026-08-24T12:17:58Z] backup finished
+2026-08-24T12:21:49Z I [cfg/cfg00:30000] [backup/2026-08-24T12:17:58Z] backup: 2026-08-24T12:17:58Z, start: 2026-08-24T12:17:58Z, finish: 2026-08-24T12:21:49Z, duration: 3m51s
+...
+</code></pre></div>
+</details>
+<p>To view log entries for a specific backup, filter by the backup event:</p>
+<p></p><div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs<span class="w"> </span>--event<span class="o">=</span>backup/2026-08-24T12:17:58Z
+</code></pre></div>
+For more information about filtering log output, see <a href="logs.html">View backup logs</a>.<p></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Backup duration and restore time represent different values. Duration shows how long the backup operation ran. Restore time identifies the latest point to which the backup can restore data. See <a href="list-backup.html#restore-to-time">Restore to time</a>.</p>
+</div>
+<h2 id="view-backup-size">View backup size<a class="headerlink" href="#view-backup-size" title="Permanent link">¶</a></h2>
+<div class="admonition admonition">
+<p class="admonition-title">Version added: 2.10.0</p>
+</div>
+<p>The command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing <a href="../features/physical.html#physical-restores-with-a-fallback-directory">physical restores with a fallback directory</a>.</p>
+<details class="example">
+<summary>Sample output</summary>
+<div class="no-copy highlight"><pre><span></span><code>pbm describe-backup 2025-06-05T16:57:35Z
+name: "2025-06-05T16:57:35Z"
 opid: 6841cc7f1f576b79efb26752
 type: physical
-…
+...
 status: done
 size_h: 3.3 GiB
 size_uncompressed_h: 4.0 GiB
 ....
-replsets:</p>
-<ul>
-<li>name: rs2
+replsets:
+
+- name: rs2
   status: done
   node: rs202:30202
   size_h: 3.3 GiB
-  size_uncompressed_h: 3.6 GiB</li>
-</ul>
+  size_uncompressed_h: 3.6 GiB
+</code></pre></div>
 </details>
+<h2 id="view-collections-in-a-backup">View collections in a backup<a class="headerlink" href="#view-collections-in-a-backup" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.3.0.html">2.3.0</a></p>
 </div>
@@ -6480,7 +6795,7 @@ replsets:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 4, 2025 11:48:41 UTC">November 4, 2025</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 18, 2026 07:40:48 UTC">September 18, 2026</span>
       
         <br>
         Created:

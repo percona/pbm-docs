@@ -6448,18 +6448,16 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Backup name </li>
 <li>Backup type: <a href="../features/logical.html">logical</a>, <a href="../features/physical.html">physical</a>, <a href="../features/selective-backup.html">selective</a>, <a href="../features/incremental-backup.html">incremental</a>. Available starting with version 1.7.0 </li>
 <li>The time to which the sharded cluster / non-shared replica set will be returned to after the restore. Available starting with version 1.4.0.</li>
+<li>The duration of the completed backup</li>
 <li>If <a href="../features/point-in-time-recovery.html">point-in-time recovery</a> is enabled, its status and the valid time ranges for the restore</li>
 </ul>
 <details class="example">
 <summary>Sample output</summary>
 <div class="no-copy highlight"><pre><span></span><code>Backup snapshots:
-  2025-03-10T10:44:52Z &lt;logical&gt; [restore_to_time: 2025-03-10T10:44:56]
-  2025-03-10T10:49:20Z &lt;physical&gt; [restore_to_time: 2025-03-10T10:49:23]
-  2025-03-10T10:50:22Z &lt;incremental&gt; [restore_to_time: 2025-03-10T10:50:25]
-  2025-03-10T10:51:02Z &lt;incremental&gt; [restore_to_time: 2025-03-10T10:51:04]
-  2025-03-10T10:57:47Z &lt;incremental&gt; [restore_to_time: 2025-03-10T10:57:49]
-  2025-03-10T11:04:25Z &lt;incremental&gt; [restore_to_time: 2025-03-10T11:04:27]
-  2025-03-10T11:05:03Z &lt;logical, selective&gt; [restore_to_time: 2025-03-10T11:05:07]
+  NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+  ---------------------------------------------------------------------------------------------------------------
+  2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+  2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
 </code></pre></div>
 </details>
 <h2 id="restore-to-time">Restore to time<a class="headerlink" href="#restore-to-time" title="Permanent link">¶</a></h2>
@@ -6475,7 +6473,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 4, 2025 11:48:41 UTC">November 4, 2025</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 17, 2026 11:08:10 UTC">September 17, 2026</span>
       
         <br>
         Created:

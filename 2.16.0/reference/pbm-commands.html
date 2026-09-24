@@ -7716,9 +7716,10 @@ pbm<span class="w"> </span>list<span class="w"> </span>--profile<span class="o">
 </code></pre></div>
 <strong>Sample output</strong>
 <div class="highlight"><pre><span></span><code>Backup<span class="w"> </span>snapshots:
-NAME<span class="w">                  </span>TYPE<span class="w">     </span>PROFILE<span class="w">   </span>SELECTIVE<span class="w">  </span>BASE<span class="w">   </span>RESTORE<span class="w"> </span>TIME
-<span class="m">2024</span>-10-10T10:00:00Z<span class="w">  </span>logical<span class="w">  </span>main<span class="w">      </span>no<span class="w">         </span>no<span class="w">     </span><span class="m">2024</span>-10-10T10:05:00Z
-<span class="m">2024</span>-10-11T12:00:00Z<span class="w">  </span>physical<span class="w"> </span>s3-west<span class="w">   </span>no<span class="w">         </span>no<span class="w">     </span><span class="m">2024</span>-10-11T12:01:00Z
+NAME<span class="w">                      </span>TYPE<span class="w">          </span>PROFILE<span class="w">               </span>SELECTIVE<span class="w">   </span>BASE<span class="w">    </span>RESTORE<span class="w"> </span>TIME<span class="w">         </span>DURATION
+---------------------------------------------------------------------------------------------------------------
+<span class="m">2026</span>-08-24T12:17:24Z<span class="w">      </span>physical<span class="w">                            </span>no<span class="w">          </span>no<span class="w">      </span><span class="m">2026</span>-08-24T12:17:27<span class="w">  </span>20s
+<span class="m">2026</span>-08-24T12:17:58Z<span class="w">      </span>logical<span class="w">                             </span>no<span class="w">          </span>no<span class="w">      </span><span class="m">2026</span>-08-24T12:21:36<span class="w">  </span>3m51s
 </code></pre></div><p></p>
 <p>For details and naming rules (reserved values and invalid empty profile), see the section <a href="../features/multi-storage.html#select-a-storage-with---profile">Select a storage with –profile</a>.</p>
 <p>The command accepts the following flags:</p>
@@ -8279,7 +8280,7 @@ NAME<span class="w">                  </span>TYPE<span class="w">     </span>PRO
 <ul>
 <li><code>pbm-agent</code> processes version, state and node type it is running on (primary or secondary)</li>
 <li>Currently running backups or restores</li>
-<li>Backups stored in the remote storage and their status</li>
+<li>Backups stored in the remote storage, including their duration and status</li>
 <li>Point-in-Time Recovery status</li>
 <li>Valid time ranges for point-in-time recovery and the data size</li>
 </ul>
@@ -8300,8 +8301,8 @@ NAME<span class="w">                  </span>TYPE<span class="w">     </span>PRO
 </p><div class="highlight"><pre><span></span><code>Cluster:
 <span class="o">=======</span>
 <span class="w">  </span>MongoDB<span class="w"> </span>version:<span class="w"> </span><span class="m">6</span>.0.5
-<span class="w">  </span>PBM<span class="w"> </span>version:<span class="w">     </span><span class="m">2</span>.4.0
-<span class="w">  </span>Storage:<span class="w">         </span>s3://backups/bucket/main
+<span class="w">  </span>PBM<span class="w"> </span>version:<span class="w">     </span><span class="m">2</span>.15.0
+<span class="w">  </span>Storage:<span class="w">         </span>http://minio:9000/mybackups
 
 PBM<span class="w"> </span>Agents:
 <span class="o">==========</span>
@@ -8311,16 +8312,16 @@ PBM<span class="w"> </span>Agents:
 
 Backups:
 <span class="o">=======</span>
-SNAPSHOTS:
-NAME<span class="w">                  </span>TYPE<span class="w">      </span>PROFILE<span class="w">  </span>SELECTIVE<span class="w">  </span>BASE<span class="w">  </span>RESTORE<span class="w"> </span>TIME<span class="w">            </span>STATUS
-<span class="m">2026</span>-02-20T10:00:01Z<span class="w">  </span>logical<span class="w">   </span>main<span class="w">     </span>no<span class="w">         </span>no<span class="w">    </span><span class="m">2026</span>-02-20T10:00:01Z<span class="w">     </span><span class="k">done</span>
-<span class="m">2026</span>-02-21T14:30:00Z<span class="w">  </span>physical<span class="w">  </span>s3-west<span class="w">  </span>no<span class="w">         </span>no<span class="w">    </span><span class="m">2026</span>-02-21T14:38:10Z<span class="w">     </span><span class="k">done</span>
-<span class="m">2026</span>-02-22T09:00:00Z<span class="w">  </span>logical<span class="w">   </span>main<span class="w">     </span>yes<span class="w">        </span>no<span class="w">    </span><span class="m">2026</span>-02-22T09:02:45Z<span class="w">     </span><span class="k">done</span>
-
-PITR<span class="w"> </span>CHUNKS:
-START<span class="w"> </span>TIME<span class="w">            </span>END<span class="w"> </span>TIME<span class="w">              </span>SIZE<span class="w">      </span>PROFILE<span class="w">  </span>STATUS
-<span class="m">2026</span>-02-20T10:05:23Z<span class="w">  </span><span class="m">2026</span>-02-21T14:29:59Z<span class="w">  </span><span class="m">145</span>.20MB<span class="w">  </span>main<span class="w">     </span><span class="k">done</span>
-<span class="m">2026</span>-02-21T14:38:11Z<span class="w">  </span><span class="m">2026</span>-02-22T08:59:59Z<span class="w">   </span><span class="m">88</span>.40MB<span class="w">  </span>s3-west<span class="w">  </span><span class="k">done</span>
+http://minio:9000/mybackups
+<span class="w">  </span>Snapshots:
+<span class="w">    </span>NAME<span class="w">                      </span>SIZE<span class="w">        </span>TYPE<span class="w">          </span>PROFILE<span class="w">  </span>SEL<span class="w">    </span>BASE<span class="w">  </span>RESTORE<span class="w"> </span>TIME<span class="w">         </span>DURATION<span class="w">    </span>STATUS
+<span class="w">    </span>-----------------------------------------------------------------------------------------------------------------
+<span class="w">    </span><span class="m">2026</span>-02-20T10:00:01Z<span class="w">      </span><span class="m">491</span>.98KB<span class="w">    </span>logical<span class="w">       </span>minio<span class="w">    </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2026</span>-02-20T10:00:22<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2026</span>-02-21T14:30:00Z<span class="w">      </span><span class="m">284</span>.06KB<span class="w">    </span>physical<span class="w">      </span>minio<span class="w">    </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2026</span>-02-21T14:38:10<span class="w">  </span>8m10s<span class="w">       </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2026</span>-02-22T09:00:00Z<span class="w">      </span><span class="m">840</span>.17MB<span class="w">    </span>logical<span class="w">       </span>minio<span class="w">    </span>yes<span class="w">    </span>no<span class="w">    </span><span class="m">2026</span>-02-22T09:03:45<span class="w">  </span>2m45s<span class="w">       </span><span class="k">done</span>
+<span class="w">  </span>PITR<span class="w"> </span>chunks<span class="w"> </span><span class="o">[</span><span class="m">233</span>.60MB<span class="o">]</span>:
+<span class="w">    </span><span class="m">2026</span>-02-20T10:05:23Z<span class="w"> </span>-<span class="w"> </span><span class="m">2026</span>-02-21T14:29:59Z<span class="w"> </span><span class="m">145</span>.20MB
+<span class="w">    </span><span class="m">2026</span>-02-21T14:38:11Z<span class="w"> </span>-<span class="w"> </span><span class="m">2026</span>-02-22T08:59:59Z<span class="w">  </span><span class="m">88</span>.40MB
 </code></pre></div><p></p>
 <p>For details and naming rules (reserved values and invalid empty profile), see the section <a href="../features/multi-storage.html#select-a-storage-with---profile">Select a storage with –profile</a>.</p>
 <p>The command accepts the following flags:</p>
@@ -8465,7 +8466,7 @@ START<span class="w"> </span>TIME<span class="w">            </span>END<span cla
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 15, 2026 09:16:39 UTC">June 15, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 17, 2026 11:24:56 UTC">September 17, 2026</span>
       
         <br>
         Created:

@@ -11351,18 +11351,16 @@ Starting with version <a href="#release-notes-2.2.0">2.2.0</a>, you can restore 
 <li>Backup name </li>
 <li>Backup type: <a href="#features-logical">logical</a>, <a href="#features-physical">physical</a>, <a href="#features-selective-backup">selective</a>, <a href="#features-incremental-backup">incremental</a>. Available starting with version 1.7.0 </li>
 <li>The time to which the sharded cluster / non-shared replica set will be returned to after the restore. Available starting with version 1.4.0.</li>
+<li>The duration of the completed backup</li>
 <li>If <a href="#features-point-in-time-recovery">point-in-time recovery</a> is enabled, its status and the valid time ranges for the restore</li>
 </ul>
 <details class="example">
 <summary>Sample output</summary>
 <div class="no-copy highlight"><pre><span></span><code>Backup snapshots:
-  2025-03-10T10:44:52Z &lt;logical&gt; [restore_to_time: 2025-03-10T10:44:56]
-  2025-03-10T10:49:20Z &lt;physical&gt; [restore_to_time: 2025-03-10T10:49:23]
-  2025-03-10T10:50:22Z &lt;incremental&gt; [restore_to_time: 2025-03-10T10:50:25]
-  2025-03-10T10:51:02Z &lt;incremental&gt; [restore_to_time: 2025-03-10T10:51:04]
-  2025-03-10T10:57:47Z &lt;incremental&gt; [restore_to_time: 2025-03-10T10:57:49]
-  2025-03-10T11:04:25Z &lt;incremental&gt; [restore_to_time: 2025-03-10T11:04:27]
-  2025-03-10T11:05:03Z &lt;logical, selective&gt; [restore_to_time: 2025-03-10T11:05:07]
+  NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+  ---------------------------------------------------------------------------------------------------------------
+  2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+  2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
 </code></pre></div>
 </details>
 <h2 id="usage-list-backup-restore-to-time">Restore to time<a class="headerlink" href="#usage-list-backup-restore-to-time" title="Permanent link">¶</a></h2>
@@ -11405,28 +11403,130 @@ replsets:
   error: ""
 </code></pre></div>
 </details>
-<p>Starting with version 2.10.0, the command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing <a href="#features-physical-physical-restores-with-a-fallback-directory">physical restores with a fallback directory</a>.</p>
+<h2 id="usage-describe-backup-backup-timing">Backup timing<a class="headerlink" href="#usage-describe-backup-backup-timing" title="Permanent link">¶</a></h2>
+<p>PBM shows the start time, finish time, and duration of a backup. You can use this information to compare backup performance and identify operations that take longer than expected.</p>
+<p>You can view this timing information with the following commands:</p>
+<ul>
+<li><code>pbm status</code></li>
+<li><code>pbm list</code></li>
+<li><code>pbm describe-backup</code></li>
+<li><code>pbm logs</code></li>
+</ul>
+<h3 id="usage-describe-backup-check-duration-with-pbm-status">Check duration with <code>pbm status</code><a class="headerlink" href="#usage-describe-backup-check-duration-with-pbm-status" title="Permanent link">¶</a></h3>
+<p>The <strong>Snapshots</strong> section of the <code>pbm status</code> output includes a <code>DURATION</code> column:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>status
+</code></pre></div>
 <details class="example">
 <summary>Sample output</summary>
-<p>```{.text .no-copy}
-pbm describe-backup 2025-06-05T16:57:35Z
-name: “2025-06-05T16:57:35Z”
+<div class="highlight"><pre><span></span><code>Cluster:
+...
+
+Snapshots:
+  NAME                      SIZE        TYPE          PROFILE               SEL    BASE  RESTORE TIME         DURATION    STATUS
+  ------------------------------------------------------------------------------------------------------------------------------
+  2026-08-24T12:17:58Z      840.17MB    logical                             no     no    2026-08-24T12:21:36  3m51s       done
+  2026-08-24T12:17:24Z      2.06GB      physical                            no     no    2026-08-24T12:17:27  20s         done
+</code></pre></div>
+</details>
+<h3 id="usage-describe-backup-check-duration-with-pbm-list">Check duration with <code>pbm list</code><a class="headerlink" href="#usage-describe-backup-check-duration-with-pbm-list" title="Permanent link">¶</a></h3>
+<p>The <code>pbm list</code> output includes the duration of every listed backup:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>list
+</code></pre></div>
+<details class="example">
+<summary>Sample output</summary>
+<div class="highlight"><pre><span></span><code>Backup snapshots:
+  NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+  ---------------------------------------------------------------------------------------------------------------
+  2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+  2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
+</code></pre></div>
+</details>
+<p>For more information, see <a href="#usage-list-backup">List backups</a>.</p>
+<h3 id="usage-describe-backup-check-start-and-finish-times-with-pbm-describe-backup">Check start and finish times with <code>pbm describe-backup</code><a class="headerlink" href="#usage-describe-backup-check-start-and-finish-times-with-pbm-describe-backup" title="Permanent link">¶</a></h3>
+<p>Use <code>pbm describe-backup</code> to view the start time, finish time, and duration of a specific backup:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>describe-backup<span class="w"> </span><span class="m">2026</span>-08-24T12:17:58Z
+</code></pre></div>
+<details class="example">
+<summary>Sample output</summary>
+<div class="no-copy highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-08-24T12:17:58Z"</span>
+<span class="nn">...</span>
+<span class="nt">start</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-08-24T12:17:58Z"</span>
+<span class="nt">finish</span><span class="p">:</span><span class="w"> </span><span class="s">"2026-08-24T12:21:49Z"</span>
+<span class="nt">duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3m51s</span>
+<span class="nn">...</span>
+</code></pre></div>
+</details>
+<p>The timing fields have the following meanings:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td>Time when PBM started the backup</td>
+</tr>
+<tr>
+<td><code>finish</code></td>
+<td>Time when the backup finished</td>
+</tr>
+<tr>
+<td><code>duration</code></td>
+<td>Elapsed time between start and finish</td>
+</tr>
+</tbody>
+</table>
+<p>Start and finish timestamps are shown in UTC and use the <a href="https://www.rfc-editor.org/rfc/rfc3339" target="_blank">RFC 3339 format <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Durations are written in formats: <code>20s, 3m51s, 1h14m2s</code>. Anything under a minute shows seconds only.</p>
+<p>For a backup that is still running, the finish time and duration are not available. PBM also omits the duration when the stored timestamps do not form a valid interval.</p>
+<h3 id="usage-describe-backup-check-timing-in-the-logs-with-pbm-logs">Check timing in the logs with <code>pbm logs</code><a class="headerlink" href="#usage-describe-backup-check-timing-in-the-logs-with-pbm-logs" title="Permanent link">¶</a></h3>
+<p>When a backup finishes, the <code>pbm logs</code> output includes a summary with the backup name, start time, finish time, and duration:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs
+</code></pre></div>
+<details class="example">
+<summary>Sample output</summary>
+<div class="no-copy highlight"><pre><span></span><code>...
+2026-08-24T12:21:49Z I [cfg/cfg00:30000] [backup/2026-08-24T12:17:58Z] backup finished
+2026-08-24T12:21:49Z I [cfg/cfg00:30000] [backup/2026-08-24T12:17:58Z] backup: 2026-08-24T12:17:58Z, start: 2026-08-24T12:17:58Z, finish: 2026-08-24T12:21:49Z, duration: 3m51s
+...
+</code></pre></div>
+</details>
+<p>To view log entries for a specific backup, filter by the backup event:</p>
+<p></p><div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs<span class="w"> </span>--event<span class="o">=</span>backup/2026-08-24T12:17:58Z
+</code></pre></div>
+For more information about filtering log output, see <a href="#usage-logs">View backup logs</a>.<p></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Backup duration and restore time represent different values. Duration shows how long the backup operation ran. Restore time identifies the latest point to which the backup can restore data. See <a href="#usage-list-backup-restore-to-time">Restore to time</a>.</p>
+</div>
+<h2 id="usage-describe-backup-view-backup-size">View backup size<a class="headerlink" href="#usage-describe-backup-view-backup-size" title="Permanent link">¶</a></h2>
+<div class="admonition admonition">
+<p class="admonition-title">Version added: 2.10.0</p>
+</div>
+<p>The command output displays the uncompressed backup size for the whole cluster and the compressed/uncompressed size for each replica set. This helps PBM evaluate the required disk space when doing <a href="#features-physical-physical-restores-with-a-fallback-directory">physical restores with a fallback directory</a>.</p>
+<details class="example">
+<summary>Sample output</summary>
+<div class="no-copy highlight"><pre><span></span><code>pbm describe-backup 2025-06-05T16:57:35Z
+name: "2025-06-05T16:57:35Z"
 opid: 6841cc7f1f576b79efb26752
 type: physical
-…
+...
 status: done
 size_h: 3.3 GiB
 size_uncompressed_h: 4.0 GiB
 ....
-replsets:</p>
-<ul>
-<li>name: rs2
+replsets:
+
+- name: rs2
   status: done
   node: rs202:30202
   size_h: 3.3 GiB
-  size_uncompressed_h: 3.6 GiB</li>
-</ul>
+  size_uncompressed_h: 3.6 GiB
+</code></pre></div>
 </details>
+<h2 id="usage-describe-backup-view-collections-in-a-backup">View collections in a backup<a class="headerlink" href="#usage-describe-backup-view-collections-in-a-backup" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="#release-notes-2.3.0">2.3.0</a></p>
 </div>
@@ -14613,9 +14713,10 @@ pbm<span class="w"> </span>list<span class="w"> </span>--profile<span class="o">
 </code></pre></div>
 <strong>Sample output</strong>
 <div class="highlight"><pre><span></span><code>Backup<span class="w"> </span>snapshots:
-NAME<span class="w">                  </span>TYPE<span class="w">     </span>PROFILE<span class="w">   </span>SELECTIVE<span class="w">  </span>BASE<span class="w">   </span>RESTORE<span class="w"> </span>TIME
-<span class="m">2024</span>-10-10T10:00:00Z<span class="w">  </span>logical<span class="w">  </span>main<span class="w">      </span>no<span class="w">         </span>no<span class="w">     </span><span class="m">2024</span>-10-10T10:05:00Z
-<span class="m">2024</span>-10-11T12:00:00Z<span class="w">  </span>physical<span class="w"> </span>s3-west<span class="w">   </span>no<span class="w">         </span>no<span class="w">     </span><span class="m">2024</span>-10-11T12:01:00Z
+NAME<span class="w">                      </span>TYPE<span class="w">          </span>PROFILE<span class="w">               </span>SELECTIVE<span class="w">   </span>BASE<span class="w">    </span>RESTORE<span class="w"> </span>TIME<span class="w">         </span>DURATION
+---------------------------------------------------------------------------------------------------------------
+<span class="m">2026</span>-08-24T12:17:24Z<span class="w">      </span>physical<span class="w">                            </span>no<span class="w">          </span>no<span class="w">      </span><span class="m">2026</span>-08-24T12:17:27<span class="w">  </span>20s
+<span class="m">2026</span>-08-24T12:17:58Z<span class="w">      </span>logical<span class="w">                             </span>no<span class="w">          </span>no<span class="w">      </span><span class="m">2026</span>-08-24T12:21:36<span class="w">  </span>3m51s
 </code></pre></div><p></p>
 <p>For details and naming rules (reserved values and invalid empty profile), see the section <a href="#features-multi-storage-select-a-storage-with---profile">Select a storage with –profile</a>.</p>
 <p>The command accepts the following flags:</p>
@@ -15176,7 +15277,7 @@ NAME<span class="w">                  </span>TYPE<span class="w">     </span>PRO
 <ul>
 <li><code>pbm-agent</code> processes version, state and node type it is running on (primary or secondary)</li>
 <li>Currently running backups or restores</li>
-<li>Backups stored in the remote storage and their status</li>
+<li>Backups stored in the remote storage, including their duration and status</li>
 <li>Point-in-Time Recovery status</li>
 <li>Valid time ranges for point-in-time recovery and the data size</li>
 </ul>
@@ -15197,8 +15298,8 @@ NAME<span class="w">                  </span>TYPE<span class="w">     </span>PRO
 </p><div class="highlight"><pre><span></span><code>Cluster:
 <span class="o">=======</span>
 <span class="w">  </span>MongoDB<span class="w"> </span>version:<span class="w"> </span><span class="m">6</span>.0.5
-<span class="w">  </span>PBM<span class="w"> </span>version:<span class="w">     </span><span class="m">2</span>.4.0
-<span class="w">  </span>Storage:<span class="w">         </span>s3://backups/bucket/main
+<span class="w">  </span>PBM<span class="w"> </span>version:<span class="w">     </span><span class="m">2</span>.15.0
+<span class="w">  </span>Storage:<span class="w">         </span>http://minio:9000/mybackups
 
 PBM<span class="w"> </span>Agents:
 <span class="o">==========</span>
@@ -15208,16 +15309,16 @@ PBM<span class="w"> </span>Agents:
 
 Backups:
 <span class="o">=======</span>
-SNAPSHOTS:
-NAME<span class="w">                  </span>TYPE<span class="w">      </span>PROFILE<span class="w">  </span>SELECTIVE<span class="w">  </span>BASE<span class="w">  </span>RESTORE<span class="w"> </span>TIME<span class="w">            </span>STATUS
-<span class="m">2026</span>-02-20T10:00:01Z<span class="w">  </span>logical<span class="w">   </span>main<span class="w">     </span>no<span class="w">         </span>no<span class="w">    </span><span class="m">2026</span>-02-20T10:00:01Z<span class="w">     </span><span class="k">done</span>
-<span class="m">2026</span>-02-21T14:30:00Z<span class="w">  </span>physical<span class="w">  </span>s3-west<span class="w">  </span>no<span class="w">         </span>no<span class="w">    </span><span class="m">2026</span>-02-21T14:38:10Z<span class="w">     </span><span class="k">done</span>
-<span class="m">2026</span>-02-22T09:00:00Z<span class="w">  </span>logical<span class="w">   </span>main<span class="w">     </span>yes<span class="w">        </span>no<span class="w">    </span><span class="m">2026</span>-02-22T09:02:45Z<span class="w">     </span><span class="k">done</span>
-
-PITR<span class="w"> </span>CHUNKS:
-START<span class="w"> </span>TIME<span class="w">            </span>END<span class="w"> </span>TIME<span class="w">              </span>SIZE<span class="w">      </span>PROFILE<span class="w">  </span>STATUS
-<span class="m">2026</span>-02-20T10:05:23Z<span class="w">  </span><span class="m">2026</span>-02-21T14:29:59Z<span class="w">  </span><span class="m">145</span>.20MB<span class="w">  </span>main<span class="w">     </span><span class="k">done</span>
-<span class="m">2026</span>-02-21T14:38:11Z<span class="w">  </span><span class="m">2026</span>-02-22T08:59:59Z<span class="w">   </span><span class="m">88</span>.40MB<span class="w">  </span>s3-west<span class="w">  </span><span class="k">done</span>
+http://minio:9000/mybackups
+<span class="w">  </span>Snapshots:
+<span class="w">    </span>NAME<span class="w">                      </span>SIZE<span class="w">        </span>TYPE<span class="w">          </span>PROFILE<span class="w">  </span>SEL<span class="w">    </span>BASE<span class="w">  </span>RESTORE<span class="w"> </span>TIME<span class="w">         </span>DURATION<span class="w">    </span>STATUS
+<span class="w">    </span>-----------------------------------------------------------------------------------------------------------------
+<span class="w">    </span><span class="m">2026</span>-02-20T10:00:01Z<span class="w">      </span><span class="m">491</span>.98KB<span class="w">    </span>logical<span class="w">       </span>minio<span class="w">    </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2026</span>-02-20T10:00:22<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2026</span>-02-21T14:30:00Z<span class="w">      </span><span class="m">284</span>.06KB<span class="w">    </span>physical<span class="w">      </span>minio<span class="w">    </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2026</span>-02-21T14:38:10<span class="w">  </span>8m10s<span class="w">       </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2026</span>-02-22T09:00:00Z<span class="w">      </span><span class="m">840</span>.17MB<span class="w">    </span>logical<span class="w">       </span>minio<span class="w">    </span>yes<span class="w">    </span>no<span class="w">    </span><span class="m">2026</span>-02-22T09:03:45<span class="w">  </span>2m45s<span class="w">       </span><span class="k">done</span>
+<span class="w">  </span>PITR<span class="w"> </span>chunks<span class="w"> </span><span class="o">[</span><span class="m">233</span>.60MB<span class="o">]</span>:
+<span class="w">    </span><span class="m">2026</span>-02-20T10:05:23Z<span class="w"> </span>-<span class="w"> </span><span class="m">2026</span>-02-21T14:29:59Z<span class="w"> </span><span class="m">145</span>.20MB
+<span class="w">    </span><span class="m">2026</span>-02-21T14:38:11Z<span class="w"> </span>-<span class="w"> </span><span class="m">2026</span>-02-22T08:59:59Z<span class="w">  </span><span class="m">88</span>.40MB
 </code></pre></div><p></p>
 <p>For details and naming rules (reserved values and invalid empty profile), see the section <a href="#features-multi-storage-select-a-storage-with---profile">Select a storage with –profile</a>.</p>
 <p>The command accepts the following flags:</p>
@@ -17606,7 +17707,7 @@ usage: pbm-speed-test storage</p>
 <p>The currently running backups / restores, if any</p>
 </li>
 <li>
-<p>Backups stored in the remote backup storage: backup name, type, completion time, size and status (success, ongoing, failed)</p>
+<p>Backups stored in the remote backup storage: backup name, type, completion time, size, duration and status (for example, <code>done</code>, <code>running</code>, <code>error</code> or <code>canceled</code>)</p>
 </li>
 <li>
 <p><a href="#features-point-in-time-recovery">Point-in-time recovery</a> status (enabled or disabled)</p>
@@ -17647,15 +17748,16 @@ Backups:
 <span class="o">========</span>
 S3<span class="w"> </span>us-east-1<span class="w"> </span>https://storage.googleapis.com/backup-test
 <span class="w">   </span>Snapshots:
-<span class="w">    </span><span class="m">2025</span>-06-03T09:55:47Z<span class="w"> </span><span class="m">0</span>.00B<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>ongoing<span class="w"> </span><span class="o">[</span>running:<span class="w"> </span>running<span class="w"> </span>/<span class="w"> </span><span class="m">2025</span>-06-03T09:55:50<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-16T10:36:52Z<span class="w"> </span><span class="m">491</span>.98KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-16T10:37:13<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-15T12:59:47Z<span class="w"> </span><span class="m">284</span>.06KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-15T13:00:08<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-11T16:23:55Z<span class="w"> </span><span class="m">284</span>.82KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-11T16:24:16<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-11T16:22:35Z<span class="w"> </span><span class="m">284</span>.04KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-11T16:22:56<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-11T16:21:15Z<span class="w"> </span><span class="m">283</span>.36KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-11T16:21:36<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-11T16:19:54Z<span class="w"> </span><span class="m">281</span>.73KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-11T16:20:15<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-11T16:19:00Z<span class="w"> </span><span class="m">281</span>.73KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-11T16:19:21<span class="o">]</span>
-<span class="w">    </span><span class="m">2025</span>-03-11T15:30:38Z<span class="w"> </span><span class="m">287</span>.07KB<span class="w"> </span>&lt;physical&gt;<span class="w"> </span>success<span class="w"> </span><span class="o">[</span>restore_to_time:<span class="w"> </span><span class="m">2025</span>-03-11T15:30:59<span class="o">]</span>
+<span class="w">    </span>NAME<span class="w">                      </span>SIZE<span class="w">        </span>TYPE<span class="w">          </span>PROFILE<span class="w">               </span>SEL<span class="w">    </span>BASE<span class="w">  </span>RESTORE<span class="w"> </span>TIME<span class="w">         </span>DURATION<span class="w">    </span>STATUS
+<span class="w">    </span>------------------------------------------------------------------------------------------------------------------------------
+<span class="w">    </span><span class="m">2025</span>-03-16T10:36:52Z<span class="w">      </span><span class="m">491</span>.98KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-16T10:37:13<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-15T12:59:47Z<span class="w">      </span><span class="m">284</span>.06KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-15T13:00:08<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-11T16:23:55Z<span class="w">      </span><span class="m">284</span>.82KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-11T16:24:16<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-11T16:22:35Z<span class="w">      </span><span class="m">284</span>.04KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-11T16:22:56<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-11T16:21:15Z<span class="w">      </span><span class="m">283</span>.36KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-11T16:21:36<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-11T16:19:54Z<span class="w">      </span><span class="m">281</span>.73KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-11T16:20:15<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-11T16:19:00Z<span class="w">      </span><span class="m">281</span>.73KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-11T16:19:21<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
+<span class="w">    </span><span class="m">2025</span>-03-11T15:30:38Z<span class="w">      </span><span class="m">287</span>.07KB<span class="w">    </span>physical<span class="w">                            </span>no<span class="w">     </span>no<span class="w">    </span><span class="m">2025</span>-03-11T15:30:59<span class="w">  </span>21s<span class="w">         </span><span class="k">done</span>
 <span class="w">  </span>PITR<span class="w"> </span>chunks<span class="w"> </span><span class="o">[</span><span class="m">1</span>.10MB<span class="o">]</span>:
 <span class="w">    </span><span class="m">2025</span>-03-16T10:37:13<span class="w"> </span>-<span class="w"> </span><span class="m">2025</span>-03-16T10:43:26<span class="w"> </span><span class="m">44</span>.17KB
 </code></pre></div>
