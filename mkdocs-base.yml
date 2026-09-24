@@ -230,6 +230,7 @@ nav:
         - usage/describe-backup.md
         - usage/schedule-backup.md
         - usage/cancel-backup.md
+        - usage/backup-lifecycle-management.md
         - usage/delete-backup.md
         - usage/restore-progress.md
         - usage/backup-priority.md
