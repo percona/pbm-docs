@@ -6761,7 +6761,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </code></pre></div>
 <h3 id="debug-logging">Debug logging<a class="headerlink" href="#debug-logging" title="Permanent link">¶</a></h3>
 <p>You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the <code>pbm logs</code> output so that you can debug and diagnose S3 request issues or failures.</p>
-<p>To enable S3 debug logging, set the <code>storage.s3.debugLogLevels</code> option in Percona Backup for MongoDB configuration. The supported values are: <code>Signing</code>, <code>Retries</code>, <code>Request</code>, <code>RequestWithBody</code>, <code>Response</code>, <code>ResponseWithBody</code>, <code>DeprecatedUsage</code>.</p>
+<p>To enable S3 debug logging, set the <code>storage.s3.debugLogLevels</code> option in the PBM configuration. Supported values are <code>Signing</code>, <code>Retries</code>, <code>Request</code>, <code>RequestWithBody</code>, <code>Response</code>, <code>ResponseWithBody</code>, <code>DeprecatedUsage</code>, <code>RequestEventMessage</code>, and <code>ResponseEventMessage</code>.</p>
 <p>See <a href="../reference/configuration-options.html#storages3debugloglevels">AWS S3 storage options</a> for details and an example.</p>
 <h3 id="storage-classes">Storage classes<a class="headerlink" href="#storage-classes" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB supports <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 storage classes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Knowing your data access patterns, you can set the S3 storage class in Percona Backup for MongoDB configuration. When Percona Backup for MongoDB uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.</p>
@@ -6825,7 +6825,7 @@ MIIC+TCCAeGgAwIBAgIJANH3WljB...
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 30, 2026 09:16:03 UTC">July 30, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 16:46:46 UTC">September 21, 2026</span>
       
         <br>
         Created:

@@ -9150,7 +9150,7 @@ ExecStart=/usr/bin/pbm-agent -f %d/pbm_connection.yaml
 <ol>
 <li>
 <p>Create a config file (e.g. <code>pbm_config.yaml</code>). You can use the <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">template configuration file <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and modify it as needed.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:7"><input checked="checked" id="install-backup-storage-__tabbed_1_1" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_2" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_3" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_4" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_5" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_6" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_7" name="install-backup-storage-__tabbed_1" type="radio"><div class="tabbed-labels"><label for="install-backup-storage-__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.64 10.38c0 .25.02.45.07.62.05.12.12.28.21.46.04.04.05.1.05.15 0 .07-.04.13-.13.2l-.42.28c-.06.04-.12.06-.17.06-.07 0-.13-.04-.2-.1-.09-.1-.17-.2-.24-.31-.06-.11-.13-.24-.2-.39-.52.61-1.17.92-1.96.92-.56 0-1-.16-1.33-.48-.32-.32-.49-.75-.49-1.29 0-.55.2-1 .6-1.36.41-.34.95-.52 1.63-.52.23 0 .44.02.71.06.23.03.5.08.76.14v-.48c0-.51-.1-.84-.31-1.07-.22-.21-.57-.3-1.08-.3-.24 0-.48.03-.72.08-.25.06-.49.13-.72.23-.11.04-.2.07-.23.08-.05.02-.08.02-.11.02-.09 0-.14-.06-.14-.2v-.33c0-.1.01-.18.05-.23q.045-.075.18-.12c.24-.14.51-.24.84-.32a4 4 0 0 1 1.04-.13q1.185 0 1.74.54c.37.36.55.91.55 1.64v2.15zm-2.7 1.02c.22 0 .44-.04.68-.12s.45-.23.63-.43c.11-.13.19-.27.25-.43 0-.16.05-.35.05-.58v-.27c-.2-.07-.4-.07-.62-.12a7 7 0 0 0-.62-.04c-.45 0-.77.09-.99.27s-.32.43-.32.76c0 .32.07.56.24.71.16.17.39.25.7.25m5.34.71a.6.6 0 0 1-.28-.06c-.03-.05-.08-.14-.12-.26L8.32 6.65c-.04-.15-.06-.22-.06-.27 0-.11.05-.17.16-.17h.65c.13 0 .22.02.26.07.06.04.1.13.14.26l1.11 4.4 1.04-4.4c.03-.13.07-.22.13-.26.05-.04.14-.07.25-.07h.55c.12 0 .21.02.26.07.05.04.1.13.13.26L14 11l1.14-4.46c.04-.13.09-.22.13-.26.06-.04.14-.07.26-.07h.62c.11 0 .17.06.17.17 0 .03-.01.07-.02.12 0 0-.02.08-.04.15l-1.61 5.14c-.04.14-.08.21-.15.26-.04.04-.13.07-.24.07h-.57c-.13 0-.19-.02-.27-.07a.45.45 0 0 1-.12-.26L12.27 7.5l-1.03 4.28q-.045.195-.12.27a.5.5 0 0 1-.27.06zm8.55.18c-.33 0-.7-.04-1.03-.12s-.59-.17-.76-.26a.5.5 0 0 1-.21-.19.4.4 0 0 1-.04-.18v-.34c0-.14.05-.2.15-.2h.12c.04 0 .1.05.17.08.22.1.47.18.73.23.27.05.54.08.79.08.42 0 .75-.07.97-.22.23-.17.35-.36.35-.63 0-.19-.07-.34-.18-.47-.12-.12-.35-.24-.67-.34l-.97-.3c-.48-.16-.84-.38-1.06-.68a1.58 1.58 0 0 1-.33-.97c0-.28.06-.52.18-.73.12-.22.28-.4.46-.55.22-.15.44-.26.71-.34q.39-.12.84-.12.21 0 .45.03c.14.02.28.05.42.07.14.04.26.07.38.11s.2.08.28.12c.09.05.16.1.2.16s.06.13.06.22v.32q0 .21-.15.21c-.05 0-.14-.03-.26-.08-.37-.17-.8-.26-1.27-.26-.38 0-.66.06-.89.19-.2.12-.31.32-.31.59 0 .19.07.35.2.47.13.13.38.25.73.37l.95.3c.48.14.82.36 1.03.64q.3.405.3.93c0 .28-.06.54-.17.77-.12.22-.28.42-.5.58-.19.17-.44.29-.72.38s-.62.13-.95.13m1.25 3.24C17.89 17.14 14.71 18 12 18c-3.85 0-7.3-1.42-9.91-3.77-.21-.19-.02-.44.23-.29 2.82 1.63 6.29 2.62 9.89 2.62 2.43 0 5.1-.5 7.55-1.56.37-.15.68.26.32.53M21 14.5c-.29-.37-1.86-.18-2.57-.1-.21.03-.24-.16-.05-.3 1.25-.87 3.31-.6 3.54-.33.24.3-.06 2.36-1.23 3.34-.19.15-.36.07-.28-.11.27-.68.86-2.16.59-2.5"></path></svg></span> Amazon AWS</label><label for="install-backup-storage-__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.207.006a2.16 2.16 0 0 0-1.62.582 2.15 2.15 0 0 0-.095 3.035l3.408 3.55a3.042 3.042 0 0 1-.663 4.688l-.463.239V7.285a15.42 15.42 0 0 0-8.018 10.487v.017l6.549-3.328v7.621L13.779 24V13.682l.897-.463a4.443 4.443 0 0 0 1.22-7.03l-3.37-3.525a.75.75 0 0 1 .037-1.055.75.75 0 0 1 1.056.038l.467.486-.006.006 4.07 4.244a.057.057 0 0 0 .082 0 .06.06 0 0 0 0-.07l-3.14-5.143-.149.143.149-.145C14.494.393 13.829.054 13.207.006m-.902 9.865v2.994l-4.152 2.149a14 14 0 0 1 2.767-3.928 14 14 0 0 1 1.385-1.215"></path></svg></span> S3-compatible (MinIO)</label><label for="install-backup-storage-__tabbed_1_3"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span> GCS (SA)</label><label for="install-backup-storage-__tabbed_1_4"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span> GCS (HMAC) (deprecated)</label><label for="install-backup-storage-__tabbed_1_5"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.05 4.24 6.56 18.05 2 18l5.09-8.76zm.7 1.09L22 19.76H6.74l9.3-1.66-4.87-5.79z"></path></svg></span> Microsoft Azure Blob Storage</label><label for="install-backup-storage-__tabbed_1_6">Alibaba Cloud Storage</label><label for="install-backup-storage-__tabbed_1_7"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3zm12 7h6v4h-6zm0 7h6v4h-6zm-2-4H7v5h6v2H5V9h2v2h6z"></path></svg></span> Shared local filesystem</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="install-backup-storage-__tabbed_1_1" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_2" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_3" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_4" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_5" name="install-backup-storage-__tabbed_1" type="radio"><input id="install-backup-storage-__tabbed_1_6" name="install-backup-storage-__tabbed_1" type="radio"><div class="tabbed-labels"><label for="install-backup-storage-__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.64 10.38c0 .25.02.45.07.62.05.12.12.28.21.46.04.04.05.1.05.15 0 .07-.04.13-.13.2l-.42.28c-.06.04-.12.06-.17.06-.07 0-.13-.04-.2-.1-.09-.1-.17-.2-.24-.31-.06-.11-.13-.24-.2-.39-.52.61-1.17.92-1.96.92-.56 0-1-.16-1.33-.48-.32-.32-.49-.75-.49-1.29 0-.55.2-1 .6-1.36.41-.34.95-.52 1.63-.52.23 0 .44.02.71.06.23.03.5.08.76.14v-.48c0-.51-.1-.84-.31-1.07-.22-.21-.57-.3-1.08-.3-.24 0-.48.03-.72.08-.25.06-.49.13-.72.23-.11.04-.2.07-.23.08-.05.02-.08.02-.11.02-.09 0-.14-.06-.14-.2v-.33c0-.1.01-.18.05-.23q.045-.075.18-.12c.24-.14.51-.24.84-.32a4 4 0 0 1 1.04-.13q1.185 0 1.74.54c.37.36.55.91.55 1.64v2.15zm-2.7 1.02c.22 0 .44-.04.68-.12s.45-.23.63-.43c.11-.13.19-.27.25-.43 0-.16.05-.35.05-.58v-.27c-.2-.07-.4-.07-.62-.12a7 7 0 0 0-.62-.04c-.45 0-.77.09-.99.27s-.32.43-.32.76c0 .32.07.56.24.71.16.17.39.25.7.25m5.34.71a.6.6 0 0 1-.28-.06c-.03-.05-.08-.14-.12-.26L8.32 6.65c-.04-.15-.06-.22-.06-.27 0-.11.05-.17.16-.17h.65c.13 0 .22.02.26.07.06.04.1.13.14.26l1.11 4.4 1.04-4.4c.03-.13.07-.22.13-.26.05-.04.14-.07.25-.07h.55c.12 0 .21.02.26.07.05.04.1.13.13.26L14 11l1.14-4.46c.04-.13.09-.22.13-.26.06-.04.14-.07.26-.07h.62c.11 0 .17.06.17.17 0 .03-.01.07-.02.12 0 0-.02.08-.04.15l-1.61 5.14c-.04.14-.08.21-.15.26-.04.04-.13.07-.24.07h-.57c-.13 0-.19-.02-.27-.07a.45.45 0 0 1-.12-.26L12.27 7.5l-1.03 4.28q-.045.195-.12.27a.5.5 0 0 1-.27.06zm8.55.18c-.33 0-.7-.04-1.03-.12s-.59-.17-.76-.26a.5.5 0 0 1-.21-.19.4.4 0 0 1-.04-.18v-.34c0-.14.05-.2.15-.2h.12c.04 0 .1.05.17.08.22.1.47.18.73.23.27.05.54.08.79.08.42 0 .75-.07.97-.22.23-.17.35-.36.35-.63 0-.19-.07-.34-.18-.47-.12-.12-.35-.24-.67-.34l-.97-.3c-.48-.16-.84-.38-1.06-.68a1.58 1.58 0 0 1-.33-.97c0-.28.06-.52.18-.73.12-.22.28-.4.46-.55.22-.15.44-.26.71-.34q.39-.12.84-.12.21 0 .45.03c.14.02.28.05.42.07.14.04.26.07.38.11s.2.08.28.12c.09.05.16.1.2.16s.06.13.06.22v.32q0 .21-.15.21c-.05 0-.14-.03-.26-.08-.37-.17-.8-.26-1.27-.26-.38 0-.66.06-.89.19-.2.12-.31.32-.31.59 0 .19.07.35.2.47.13.13.38.25.73.37l.95.3c.48.14.82.36 1.03.64q.3.405.3.93c0 .28-.06.54-.17.77-.12.22-.28.42-.5.58-.19.17-.44.29-.72.38s-.62.13-.95.13m1.25 3.24C17.89 17.14 14.71 18 12 18c-3.85 0-7.3-1.42-9.91-3.77-.21-.19-.02-.44.23-.29 2.82 1.63 6.29 2.62 9.89 2.62 2.43 0 5.1-.5 7.55-1.56.37-.15.68.26.32.53M21 14.5c-.29-.37-1.86-.18-2.57-.1-.21.03-.24-.16-.05-.3 1.25-.87 3.31-.6 3.54-.33.24.3-.06 2.36-1.23 3.34-.19.15-.36.07-.28-.11.27-.68.86-2.16.59-2.5"></path></svg></span> Amazon AWS</label><label for="install-backup-storage-__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.207.006a2.16 2.16 0 0 0-1.62.582 2.15 2.15 0 0 0-.095 3.035l3.408 3.55a3.042 3.042 0 0 1-.663 4.688l-.463.239V7.285a15.42 15.42 0 0 0-8.018 10.487v.017l6.549-3.328v7.621L13.779 24V13.682l.897-.463a4.443 4.443 0 0 0 1.22-7.03l-3.37-3.525a.75.75 0 0 1 .037-1.055.75.75 0 0 1 1.056.038l.467.486-.006.006 4.07 4.244a.057.057 0 0 0 .082 0 .06.06 0 0 0 0-.07l-3.14-5.143-.149.143.149-.145C14.494.393 13.829.054 13.207.006m-.902 9.865v2.994l-4.152 2.149a14 14 0 0 1 2.767-3.928 14 14 0 0 1 1.385-1.215"></path></svg></span> S3-compatible (MinIO)</label><label for="install-backup-storage-__tabbed_1_3"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23 14.75C23 18.2 20.2 21 16.75 21h-9.5C3.8 21 1 18.2 1 14.75c0-2.14 1.08-4.03 2.71-5.15C4.58 5.82 7.96 3 12 3s7.42 2.82 8.29 6.6A6.22 6.22 0 0 1 23 14.75M16.63 17c1.31 0 2.37-1.06 2.37-2.37 0-1.28-1-2.33-2.28-2.38l.03-.5a4.754 4.754 0 0 0-8.32-3.14c1.5.29 2.8 1.11 3.71 2.25L9.5 13.5c-.42-.73-1.21-1.25-2.12-1.25-1.32 0-2.38 1.06-2.38 2.38 0 1.27 1 2.3 2.25 2.37z"></path></svg></span> GCS (service account)</label><label for="install-backup-storage-__tabbed_1_4"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.05 4.24 6.56 18.05 2 18l5.09-8.76zm.7 1.09L22 19.76H6.74l9.3-1.66-4.87-5.79z"></path></svg></span> Microsoft Azure Blob Storage</label><label for="install-backup-storage-__tabbed_1_5">Alibaba Cloud Storage</label><label for="install-backup-storage-__tabbed_1_6"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3h6v4H3zm12 7h6v4h-6zm0 7h6v4h-6zm-2-4H7v5h6v2H5V9h2v2h6z"></path></svg></span> Shared local filesystem</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
@@ -9187,17 +9187,6 @@ ExecStart=/usr/bin/pbm-agent -f %d/pbm_connection.yaml
 <span class="w">     </span><span class="nt">credentials</span><span class="p">:</span>
 <span class="w">       </span><span class="nt">clientEmail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-service-account-email&gt;</span>
 <span class="w">       </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-service-account-private-key-here&gt;</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
-<span class="w">  </span><span class="nt">gcs</span><span class="p">:</span>
-<span class="w">     </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm-testing</span>
-<span class="w">     </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm/test</span>
-<span class="w">     </span><span class="nt">credentials</span><span class="p">:</span>
-<span class="w">       </span><span class="nt">hmacAccessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-access-key-id-here&gt;</span>
-<span class="w">       </span><span class="nt">hmacSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-secret-key-here&gt;</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -12298,7 +12287,7 @@ Waiting for delete to be done .[done]
 </code></pre></div>
 <h3 id="details-s3-storage-debug-logging">Debug logging<a class="headerlink" href="#details-s3-storage-debug-logging" title="Permanent link">¶</a></h3>
 <p>You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the <code>pbm logs</code> output so that you can debug and diagnose S3 request issues or failures.</p>
-<p>To enable S3 debug logging, set the <code>storage.s3.debugLogLevels</code> option in Percona Backup for MongoDB configuration. The supported values are: <code>Signing</code>, <code>Retries</code>, <code>Request</code>, <code>RequestWithBody</code>, <code>Response</code>, <code>ResponseWithBody</code>, <code>DeprecatedUsage</code>.</p>
+<p>To enable S3 debug logging, set the <code>storage.s3.debugLogLevels</code> option in the PBM configuration. Supported values are <code>Signing</code>, <code>Retries</code>, <code>Request</code>, <code>RequestWithBody</code>, <code>Response</code>, <code>ResponseWithBody</code>, <code>DeprecatedUsage</code>, <code>RequestEventMessage</code>, and <code>ResponseEventMessage</code>.</p>
 <p>See <a href="#reference-configuration-options-storages3debugloglevels">AWS S3 storage options</a> for details and an example.</p>
 <h3 id="details-s3-storage-storage-classes">Storage classes<a class="headerlink" href="#details-s3-storage-storage-classes" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB supports <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 storage classes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Knowing your data access patterns, you can set the S3 storage class in Percona Backup for MongoDB configuration. When Percona Backup for MongoDB uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.</p>
@@ -12975,27 +12964,20 @@ MIIC+TCCAeGgAwIBAgIJANH3WljB...
 <div class="admonition admonition">
 <p>Starting from version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. See how to <a href="#details-gcs-adjust-pbm-configuration-to-use-gcs">adjust your PBM configuration to use GCS</a> after the upgrade.</p>
 </div>
-<p>PBM supports communication with GCS via the JSON API and XML API. The preferred approach is to use the JSON API with a service account. HMAC keys are mainly useful for compatibility with S3-style APIs.</p>
+<p>PBM communicates with GCS through the JSON API by default. You can configure the gRPC client for both standard and parallel uploads. PBM authenticates using either a service account or Workload Identity.</p>
 <div class="admonition warning">
-<p class="admonition-title">HMAC keys support deprecation</p>
-<p>Starting with version 2.12.0, HMAC keys support is deprecated. We encourage you to use GCS connection type with native JSON keys.</p>
+<p class="admonition-title">HMAC authentication removed in PBM 2.16.0</p>
+<p>PBM 2.16.0 removes support for authenticating to GCS with HMAC keys. Before upgrading, replace <code>hmacAccessKey</code> and <code>hmacSecret</code> in your PBM configuration with <code>clientEmail</code> and <code>privateKey</code>. PBM 2.16.0 treats the HMAC options as unrecognized configuration fields and cannot access the backup storage until you update the configuration.</p>
 </div>
 <p>To use GCS, you need the following:</p>
 <ul>
 <li><a href="https://cloud.google.com/iam/docs/service-accounts-create#iam-service-accounts-create-console">create a service account <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> </li>
-<li>
-<p>add keys for the service account:</p>
-<ul>
-<li><a href="https://cloud.google.com/iam/docs/keys-create-delete#creating">add JSON keys <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> or</li>
-<li><a href="https://cloud.google.com/storage/docs/authentication/managing-hmackeys">add HMAC keys <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. This method is deprecated and not recommended for use</li>
-</ul>
-</li>
-<li>
-<p><a href="#details-gcs-create-a-bucket">create a bucket</a></p>
-</li>
+<li>For static service account authentication, <a href="https://cloud.google.com/iam/docs/keys-create-delete#creating">add JSON keys <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Alternatively, configure <a href="#details-workload-identity-auth">Workload Identity authentication</a>.</li>
+<li><a href="#details-gcs-create-a-bucket">create a bucket</a></li>
 <li><a href="#details-gcs-configuration-example">add the GCS configuration to PBM</a> </li>
 </ul>
 <h2 id="details-gcs-create-a-bucket">Create a bucket<a class="headerlink" href="#details-gcs-create-a-bucket" title="Permanent link">¶</a></h2>
+<p class="power-number">To create a bucket, follow these steps:</p>
 <ol>
 <li>
 <p>Install and configure the <a href="https://cloud.google.com/sdk/docs/install">gcloud CLI <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a></p>
@@ -13014,9 +12996,6 @@ MIIC+TCCAeGgAwIBAgIJANH3WljB...
 <p>After the bucket is created, apply the proper <a href="#details-storage-configuration-permissions-setup">permissions for PBM to use the bucket</a>.</p>
 <h2 id="details-gcs-configuration-example">Configuration example<a class="headerlink" href="#details-gcs-configuration-example" title="Permanent link">¶</a></h2>
 <p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.15.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="details-gcs-__tabbed_1_1" name="details-gcs-__tabbed_1" type="radio"><input id="details-gcs-__tabbed_1_2" name="details-gcs-__tabbed_1" type="radio"><div class="tabbed-labels"><label for="details-gcs-__tabbed_1_1">using JSON keys</label><label for="details-gcs-__tabbed_1_2">using HMAC keys (deprecated)</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
 <span class="w"> </span><span class="nt">gcs</span><span class="p">:</span>
@@ -13026,25 +13005,92 @@ MIIC+TCCAeGgAwIBAgIJANH3WljB...
 <span class="w">       </span><span class="nt">clientEmail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-service-account-email-here&gt;</span>
 <span class="w">       </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-private-key-here&gt;</span>
 </code></pre></div>
+<h2 id="details-gcs-parallel-uploads-to-gcs">Parallel uploads to GCS<a class="headerlink" href="#details-gcs-parallel-uploads-to-gcs" title="Permanent link">¶</a></h2>
+<p>Parallel uploads can reduce the time required to send large backup files to Google Cloud Storage. The improvement depends on the available network bandwidth, storage performance, and resources on the host running <code>pbm-agent</code>.</p>
+<p>This feature applies only when PBM writes data to GCS. It does not change how PBM downloads backup data during a restore.</p>
+<div class="admonition warning">
+<p class="admonition-title">Experimental feature</p>
+<ul>
+<li>Parallel upload support in the Google Cloud Storage Go client is experimental. The upstream API may change in future releases and is not yet recommended for production use.</li>
+<li>The current SDK implementation can leave temporary part objects under the <code>gcs-go-sdk-pu-tmp</code> prefix. Configure an external cleanup job to remove these objects. Schedule the cleanup outside your backup window so that it does not remove parts from an active upload.</li>
+<li>Evaluate parallel uploads with a representative backup before enabling them in production. For details, see the upstream <a href="https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig" target="_blank"><code>ParallelUploadConfig</code> documentation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</li>
+</ul>
 </div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
-<span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
-<span class="w"> </span><span class="nt">gcs</span><span class="p">:</span>
-<span class="w">     </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm-testing</span>
-<span class="w">     </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm/test</span>
-<span class="w">     </span><span class="nt">credentials</span><span class="p">:</span>
-<span class="w">       </span><span class="nt">hmacAccessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-access-key-id-here&gt;</span>
-<span class="w">       </span><span class="nt">hmacSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-secret-key-here&gt;</span>
+<h3 id="details-gcs-how-parallel-uploads-work">How parallel uploads work<a class="headerlink" href="#details-gcs-how-parallel-uploads-work" title="Permanent link">¶</a></h3>
+<p>The Google Cloud Storage client divides a large backup object into parts and uploads multiple parts concurrently. The <code>chunkSize</code> option controls the size of each part. The <code>parallelUploadConcurrency</code> option controls the maximum number of concurrent uploads.</p>
+<p>GCS composes the uploaded parts into the final backup object. The client then makes a best-effort attempt to remove the temporary part objects. If the upload process exits unexpectedly, some temporary objects may remain in the bucket.</p>
+<p>For details, see the upstream <a href="https://pkg.go.dev/cloud.google.com/go/storage#hdr-Parallel_Uploads" target="_blank">Parallel Uploads documentation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
+<h3 id="details-gcs-before-you-start">Before you start<a class="headerlink" href="#details-gcs-before-you-start" title="Permanent link">¶</a></h3>
+<p>Make sure that:</p>
+<ul>
+<li>You are running PBM 2.16.0 or later.</li>
+<li>Your PBM configuration uses the native GCS storage type.</li>
+<li>The credentials used by PBM can create, compose, and delete objects in the GCS bucket.</li>
+<li>The destination bucket does not have settings that prevent PBM from deleting temporary objects.</li>
+</ul>
+<p>Parallel uploads work with both service account credentials and Workload Identity authentication. Keep the authentication configuration already defined for your GCS storage. For Workload Identity configuration, see <a href="#details-workload-identity-auth">Workload Identity authentication</a>.</p>
+<h3 id="details-gcs-configure-parallel-uploads">Configure parallel uploads<a class="headerlink" href="#details-gcs-configure-parallel-uploads" title="Permanent link">¶</a></h3>
+<p>Set <code>clientType</code> to <code>grpc</code> and <code>parallelUploadConcurrency</code> to a value greater than <code>1</code>:</p>
+<p></p><div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
+<span class="w">  </span><span class="nt">gcs</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bucket-name&gt;</span>
+<span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;optional-prefix&gt;</span>
+<span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">grpc</span>
+<span class="w">    </span><span class="nt">parallelUploadConcurrency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span>
 </code></pre></div>
-</div>
-</div>
-</div>
+In this example, <code>chunkSize</code> is omitted, so PBM uses the 16 MiB default for parallel uploads. PBM uploads up to four parts concurrently.<p></p>
+<p class="power-number">Keep your existing <code>credentials</code> section in the configuration file.</p>
+<ol>
+<li>
+<p>Apply the configuration:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>pbm_config.yaml
+</code></pre></div>
+</li>
+<li>
+<p>Check the active configuration:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--list
+</code></pre></div>
+</li>
+</ol>
+<h3 id="details-gcs-configuration-options">Configuration options<a class="headerlink" href="#details-gcs-configuration-options" title="Permanent link">¶</a></h3>
+<table>
+<thead>
+<tr>
+<th><strong>Option</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Default</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>clientType</code></td>
+<td>GCS client used by PBM. Parallel uploads require <code>grpc</code>. If you use <code>json</code>, PBM performs a standard upload.</td>
+<td><code>json</code></td>
+</tr>
+<tr>
+<td><code>parallelUploadConcurrency</code></td>
+<td>Maximum number of parts PBM uploads concurrently. A value greater than 1 enables parallel uploads when <code>clientType</code> is <code>grpc</code>.</td>
+<td>0 (parallel uploads disabled)</td>
+</tr>
+<tr>
+<td><code>chunkSize</code></td>
+<td>Size, in bytes, of each data chunk sent to GCS. If you omit this option, PBM selects the default based on the upload mode.</td>
+<td>10485760 bytes (10 MiB) for standard uploads; 16777216 bytes (16 MiB) for parallel uploads</td>
+</tr>
+</tbody>
+</table>
+<p>For the complete list of GCS settings, see <a href="#reference-configuration-options">Remote backup storage options</a>.</p>
+<h3 id="details-gcs-choose-a-concurrency-value">Choose a concurrency value<a class="headerlink" href="#details-gcs-choose-a-concurrency-value" title="Permanent link">¶</a></h3>
+<p>A higher concurrency value does not always produce a faster backup. The value that works best depends on the available resources and workload.</p>
+<h3 id="details-gcs-disable-parallel-uploads">Disable parallel uploads<a class="headerlink" href="#details-gcs-disable-parallel-uploads" title="Permanent link">¶</a></h3>
+<p>To disable parallel uploads, remove <code>parallelUploadConcurrency</code> from the configuration or set it to a value that is not greater than <code>1</code>.</p>
+<p>You can continue using the <code>grpc</code> client with parallel uploads disabled. You do not need to switch back to the <code>json</code> client.</p>
 <h2 id="details-gcs-adjust-pbm-configuration-to-use-gcs">Adjust PBM configuration to use GCS<a class="headerlink" href="#details-gcs-adjust-pbm-configuration-to-use-gcs" title="Permanent link">¶</a></h2>
-<p>Starting with version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. If you are upgrading from an earlier version, you need to adjust your PBM configuration as follows:</p>
+<p class="power-number">Starting with version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. If you are upgrading from an earlier version, you need to adjust your PBM configuration as follows:</p>
 <ol>
 <li>Change the <code>storage.type</code> from <code>s3</code> to <code>gcs</code>.</li>
-<li>Change the <code>storage.s3</code> section to <code>storage.gcs</code> and adjust the parameters accordingly. See the <a href="#details-gcs-configuration-example">Configuration example</a> above. Select the option depending on the authentication method you use.</li>
+<li>Change the <code>storage.s3</code> section to <code>storage.gcs</code> and adjust the parameters accordingly. See the <a href="#details-gcs-configuration-example">Configuration example</a> above.</li>
 </ol></body></html></section><section class="print-page" id="details-workload-identity-auth" heading-number="6.6"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
@@ -15450,7 +15496,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <h3 id="reference-configuration-options-storages3debugloglevels">storage.s3.debugLogLevels<a class="headerlink" href="#reference-configuration-options-storages3debugloglevels" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
-<p>Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log messages are printed in the <code>pbm logs</code> output. Possible values:</p>
+<p>Controls which AWS S3 client operations PBM writes to the <code>pbm logs</code> output. The values correspond to the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode">client log modes in the AWS SDK for Go v2 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <ul>
 <li><code>Signing</code> - logs the request signing process</li>
 <li><code>Retries</code> - logs each retry attempt when a request fails with a retryable error, including the retry count</li>
@@ -15458,16 +15504,53 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <li><code>RequestWithBody</code> - logs outgoing HTTP requests, including the full request body; may expose sensitive data such as object contents, credentials, tokens, or headers</li>
 <li><code>Response</code> - logs incoming HTTP response metadata (status code, headers) without the body</li>
 <li><code>ResponseWithBody</code> - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers</li>
-<li><code>DeprecatedUsage</code> - logs deprecated usage of AWS S3 endpoints </li>
+<li><code>DeprecatedUsage</code> - logs deprecated usage of AWS S3 endpoints</li>
+<li><code>RequestEventMessage</code> - logs individual event stream messages that the client sends to AWS S3</li>
+<li><code>ResponseEventMessage</code> - logs individual event stream messages that the client receives from AWS S3</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><code>RequestWithBody</code> and <code>ResponseWithBody</code> can log full HTTP payloads and related sensitive information. Enable them only temporarily for troubleshooting, and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.</p>
+<p><code>Request</code> and <code>RequestWithBody</code> can log sensitive request headers, while <code>RequestWithBody</code> and <code>ResponseWithBody</code> can also log full HTTP payloads. Enable these modes only temporarily for troubleshooting and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.</p>
 </div>
 <p>To specify several values, separate them by comma. When undefined, no S3 debug logging is performed.</p>
-<p>Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see <a href="#manage-logpath-logging-configuration-options">Logging configuration definition</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see <a href="#manage-logpath-logging-configuration-options">Logging configuration options</a>.</p>
+</div>
+<h4 id="reference-configuration-options-compatibility-with-earlier-values">Compatibility with earlier values<a class="headerlink" href="#reference-configuration-options-compatibility-with-earlier-values" title="Permanent link">¶</a></h4>
+<p>PBM continues to accept debug log values used in versions earlier than 2.10.0. It automatically translates them into the corresponding supported values:</p>
+<table>
+<thead>
+<tr>
+<th>Deprecated value from PBM earlier than 2.10.0</th>
+<th>Automatically translated into</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LogDebug</code></td>
+<td><code>Request</code>, <code>Response</code></td>
+</tr>
+<tr>
+<td><code>HTTPBody</code></td>
+<td><code>RequestWithBody</code>, <code>ResponseWithBody</code></td>
+</tr>
+<tr>
+<td><code>RequestRetries</code></td>
+<td><code>Retries</code></td>
+</tr>
+<tr>
+<td><code>RequestErrors</code></td>
+<td><code>Response</code></td>
+</tr>
+<tr>
+<td><code>EventStreamBody</code></td>
+<td><code>RequestWithBody</code>, <code>ResponseWithBody</code></td>
+</tr>
+</tbody>
+</table>
 <h4 id="reference-configuration-options-example">Example<a class="headerlink" href="#reference-configuration-options-example" title="Permanent link">¶</a></h4>
-<p>Here’s an example and recommended configuration when troubleshooting AWS S3 communication:</p>
+<p>The following example logs request and response bodies when troubleshooting AWS S3 communication:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
@@ -15624,13 +15707,14 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
 <span class="w"> </span><span class="nt">gcs</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm-testing</span>
+<span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">json</span>
 <span class="w">    </span><span class="nt">chunkSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
+<span class="w">    </span><span class="nt">parallelUploadConcurrency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm/test</span>
 <span class="w">    </span><span class="nt">credentials</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">workloadIdentity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bool&gt;</span>
 <span class="w">      </span><span class="nt">clientEmail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-client-email-here&gt;</span>
 <span class="w">      </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-private-key-here&gt;</span>
-<span class="w">      </span><span class="nt">hmacAccessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-HMAC-key-here&gt;</span>
-<span class="w">      </span><span class="nt">hmacSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-HMAC-secret-here&gt;</span>
 <span class="w">    </span><span class="nt">maxObjSizeGB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5018</span>
 </code></pre></div>
 <h3 id="reference-configuration-options-storagegcsbucket">storage.gcs.bucket<a class="headerlink" href="#reference-configuration-options-storagegcsbucket" title="Permanent link">¶</a></h3>
@@ -15640,29 +15724,34 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <h3 id="reference-configuration-options-storagegcschunksize">storage.gcs.chunkSize<a class="headerlink" href="#reference-configuration-options-storagegcschunksize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
-<p>The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.</p>
+<p>The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB for parallel uploads.</p>
+<h3 id="reference-configuration-options-storagegcsclienttype">storage.gcs.clientType<a class="headerlink" href="#reference-configuration-options-storagegcsclienttype" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: string <br>
+<em>Required</em>: NO<br>
+<em>Default</em>: <code>json</code></p>
+<p>The GCS client used by PBM. Supported values are <code>json</code> and <code>grpc</code>. Parallel uploads require <code>grpc</code>.</p>
+<h3 id="reference-configuration-options-storagegcsparalleluploadconcurrency">storage.gcs.parallelUploadConcurrency<a class="headerlink" href="#reference-configuration-options-storagegcsparalleluploadconcurrency" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: int <br>
+<em>Required</em>: NO<br>
+<em>Default</em>: 0</p>
+<p>The maximum number of parts PBM uploads concurrently. A value greater than <code>1</code> enables parallel uploads when <code>storage.gcs.clientType</code> is <code>grpc</code>.</p>
 <h3 id="reference-configuration-options-storagegcsprefix">storage.gcs.prefix<a class="headerlink" href="#reference-configuration-options-storagegcsprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
 <h3 id="reference-configuration-options-storagegcscredentialsclientemail">storage.gcs.credentials.clientEmail<a class="headerlink" href="#reference-configuration-options-storagegcscredentialsclientemail" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>The email address that uniquely identifies your service account in GCS.</p>
+<em>Required</em>: NO</p>
+<p>The email address that uniquely identifies your service account in GCS. Required unless <code>storage.gcs.credentials.workloadIdentity</code> is <code>true</code>.</p>
 <h3 id="reference-configuration-options-storagegcscredentialsprivatekey">storage.gcs.credentials.privateKey<a class="headerlink" href="#reference-configuration-options-storagegcscredentialsprivatekey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>The private key of the service account used to authenticate the request.</p>
-<h3 id="reference-configuration-options-storagegcscredentialshmacaccesskey">storage.gcs.credentials.hmacAccessKey<a class="headerlink" href="#reference-configuration-options-storagegcscredentialshmacaccesskey" title="Permanent link">¶</a></h3>
-<p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. </p>
-<p>The use of HMAC keys is deprecated starting with version 2.12.0. Use the <code>storage.gcs.credentials.clientEmail</code> and <code>storage.gcs.credentials.privateKey</code> instead.</p>
-<h3 id="reference-configuration-options-storagegcscredentialshmacsecret">storage.gcs.credentials.hmacSecret<a class="headerlink" href="#reference-configuration-options-storagegcscredentialshmacsecret" title="Permanent link">¶</a></h3>
-<p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. </p>
-<p>The use of HMAC keys is deprecated starting with version 2.12.0. Use the <code>storage.gcs.credentials.clientEmail</code> and <code>storage.gcs.credentials.privateKey</code> instead.</p>
+<em>Required</em>: NO</p>
+<p>The private key of the service account used to authenticate the request. Required unless <code>storage.gcs.credentials.workloadIdentity</code> is <code>true</code>.</p>
+<h3 id="reference-configuration-options-storagegcscredentialsworkloadidentity">storage.gcs.credentials.workloadIdentity<a class="headerlink" href="#reference-configuration-options-storagegcscredentialsworkloadidentity" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: boolean <br>
+<em>Required</em>: NO<br>
+<em>Default</em>: <code>false</code></p>
+<p>Set this option to <code>true</code> to use Workload Identity instead of static service account JSON keys.</p>
 <h3 id="reference-configuration-options-storagegcsretryerbackoffinitial">storage.gcs.retryer.backoffInitial<a class="headerlink" href="#reference-configuration-options-storagegcsretryerbackoffinitial" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO
@@ -17444,7 +17533,17 @@ usage: pbm-speed-test storage</p>
       –compression=s2           Compression type <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd>
       –compression-level=COMPRESSION-LEVEL
                                 Compression level (specific to the compression type)</zstd></pgzip></s2></lz4></snappy></gzip></none></p>
-</details></body></html></section><section class="print-page" id="troubleshoot-status" heading-number="11.3"><html><head>
+</details>
+<h2 id="troubleshoot-troubleshooting-parallel-uploads-in-gcs">Parallel uploads in GCS<a class="headerlink" href="#troubleshoot-troubleshooting-parallel-uploads-in-gcs" title="Permanent link">¶</a></h2>
+<p>If PBM does not use parallel uploads, check that:</p>
+<ul>
+<li>PBM is version 2.16.0 or later.</li>
+<li><code>storage.type</code> is set to <code>gcs</code>.</li>
+<li><code>clientType</code> is set to <code>grpc</code>.</li>
+<li><code>parallelUploadConcurrency</code> is greater than 1.</li>
+<li>The updated configuration is active on the cluster.</li>
+</ul>
+<p>If an upload fails during cleanup, verify that the PBM credentials can delete objects and that the bucket does not have a retention policy or object hold preventing deletion.</p></body></html></section><section class="print-page" id="troubleshoot-status" heading-number="11.3"><html><head>
         <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', function () {
             remove_material_navigation();remove_mkdocs_theme_navigation();generate_toc();

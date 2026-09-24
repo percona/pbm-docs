@@ -3402,6 +3402,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#compatibility-with-earlier-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compatibility with earlier values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3783,6 +3794,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#storagegcsclienttype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        storage.gcs.clientType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storagegcsparalleluploadconcurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        storage.gcs.parallelUploadConcurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#storagegcsprefix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3816,21 +3849,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#storagegcscredentialshmacaccesskey" class="md-nav__link">
+  <a href="#storagegcscredentialsworkloadidentity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        storage.gcs.credentials.hmacAccessKey
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#storagegcscredentialshmacsecret" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        storage.gcs.credentials.hmacSecret
+        storage.gcs.credentials.workloadIdentity
       
     </span>
   </a>
@@ -7753,6 +7775,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#compatibility-with-earlier-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compatibility with earlier values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#example" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8134,6 +8167,28 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
         
           <li class="md-nav__item">
+  <a href="#storagegcsclienttype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        storage.gcs.clientType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#storagegcsparalleluploadconcurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        storage.gcs.parallelUploadConcurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#storagegcsprefix" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8167,21 +8222,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
         
           <li class="md-nav__item">
-  <a href="#storagegcscredentialshmacaccesskey" class="md-nav__link">
+  <a href="#storagegcscredentialsworkloadidentity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        storage.gcs.credentials.hmacAccessKey
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#storagegcscredentialshmacsecret" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        storage.gcs.credentials.hmacSecret
+        storage.gcs.credentials.workloadIdentity
       
     </span>
   </a>
@@ -8906,7 +8950,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <h3 id="storages3debugloglevels">storage.s3.debugLogLevels<a class="headerlink" href="#storages3debugloglevels" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
-<p>Enables AWS S3 debug logging for different types of AWS S3 requests. AWS S3 log messages are printed in the <code>pbm logs</code> output. Possible values:</p>
+<p>Controls which AWS S3 client operations PBM writes to the <code>pbm logs</code> output. The values correspond to the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode">client log modes in the AWS SDK for Go v2 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <ul>
 <li><code>Signing</code> - logs the request signing process</li>
 <li><code>Retries</code> - logs each retry attempt when a request fails with a retryable error, including the retry count</li>
@@ -8914,16 +8958,53 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <li><code>RequestWithBody</code> - logs outgoing HTTP requests, including the full request body; may expose sensitive data such as object contents, credentials, tokens, or headers</li>
 <li><code>Response</code> - logs incoming HTTP response metadata (status code, headers) without the body</li>
 <li><code>ResponseWithBody</code> - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers</li>
-<li><code>DeprecatedUsage</code> - logs deprecated usage of AWS S3 endpoints </li>
+<li><code>DeprecatedUsage</code> - logs deprecated usage of AWS S3 endpoints</li>
+<li><code>RequestEventMessage</code> - logs individual event stream messages that the client sends to AWS S3</li>
+<li><code>ResponseEventMessage</code> - logs individual event stream messages that the client receives from AWS S3</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><code>RequestWithBody</code> and <code>ResponseWithBody</code> can log full HTTP payloads and related sensitive information. Enable them only temporarily for troubleshooting, and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.</p>
+<p><code>Request</code> and <code>RequestWithBody</code> can log sensitive request headers, while <code>RequestWithBody</code> and <code>ResponseWithBody</code> can also log full HTTP payloads. Enable these modes only temporarily for troubleshooting and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.</p>
 </div>
 <p>To specify several values, separate them by comma. When undefined, no S3 debug logging is performed.</p>
-<p>Note, this setting may result in excessive logging. By default, log entries are stored in a capped collection in your database. To redirect logs into a separate file, see <a href="../manage/logpath.html#logging-configuration-options">Logging configuration definition</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see <a href="../manage/logpath.html#logging-configuration-options">Logging configuration options</a>.</p>
+</div>
+<h4 id="compatibility-with-earlier-values">Compatibility with earlier values<a class="headerlink" href="#compatibility-with-earlier-values" title="Permanent link">¶</a></h4>
+<p>PBM continues to accept debug log values used in versions earlier than 2.10.0. It automatically translates them into the corresponding supported values:</p>
+<table>
+<thead>
+<tr>
+<th>Deprecated value from PBM earlier than 2.10.0</th>
+<th>Automatically translated into</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LogDebug</code></td>
+<td><code>Request</code>, <code>Response</code></td>
+</tr>
+<tr>
+<td><code>HTTPBody</code></td>
+<td><code>RequestWithBody</code>, <code>ResponseWithBody</code></td>
+</tr>
+<tr>
+<td><code>RequestRetries</code></td>
+<td><code>Retries</code></td>
+</tr>
+<tr>
+<td><code>RequestErrors</code></td>
+<td><code>Response</code></td>
+</tr>
+<tr>
+<td><code>EventStreamBody</code></td>
+<td><code>RequestWithBody</code>, <code>ResponseWithBody</code></td>
+</tr>
+</tbody>
+</table>
 <h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h4>
-<p>Here’s an example and recommended configuration when troubleshooting AWS S3 communication:</p>
+<p>The following example logs request and response bodies when troubleshooting AWS S3 communication:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
@@ -9080,13 +9161,14 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
 <span class="w"> </span><span class="nt">gcs</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">bucket</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm-testing</span>
+<span class="w">    </span><span class="nt">clientType</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">json</span>
 <span class="w">    </span><span class="nt">chunkSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
+<span class="w">    </span><span class="nt">parallelUploadConcurrency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">    </span><span class="nt">prefix</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pbm/test</span>
 <span class="w">    </span><span class="nt">credentials</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">workloadIdentity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;bool&gt;</span>
 <span class="w">      </span><span class="nt">clientEmail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-client-email-here&gt;</span>
 <span class="w">      </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-private-key-here&gt;</span>
-<span class="w">      </span><span class="nt">hmacAccessKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-HMAC-key-here&gt;</span>
-<span class="w">      </span><span class="nt">hmacSecret</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-HMAC-secret-here&gt;</span>
 <span class="w">    </span><span class="nt">maxObjSizeGB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5018</span>
 </code></pre></div>
 <h3 id="storagegcsbucket">storage.gcs.bucket<a class="headerlink" href="#storagegcsbucket" title="Permanent link">¶</a></h3>
@@ -9096,29 +9178,34 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <h3 id="storagegcschunksize">storage.gcs.chunkSize<a class="headerlink" href="#storagegcschunksize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
-<p>The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. Default data chunk size is 10MB.</p>
+<p>The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB for parallel uploads.</p>
+<h3 id="storagegcsclienttype">storage.gcs.clientType<a class="headerlink" href="#storagegcsclienttype" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: string <br>
+<em>Required</em>: NO<br>
+<em>Default</em>: <code>json</code></p>
+<p>The GCS client used by PBM. Supported values are <code>json</code> and <code>grpc</code>. Parallel uploads require <code>grpc</code>.</p>
+<h3 id="storagegcsparalleluploadconcurrency">storage.gcs.parallelUploadConcurrency<a class="headerlink" href="#storagegcsparalleluploadconcurrency" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: int <br>
+<em>Required</em>: NO<br>
+<em>Default</em>: 0</p>
+<p>The maximum number of parts PBM uploads concurrently. A value greater than <code>1</code> enables parallel uploads when <code>storage.gcs.clientType</code> is <code>grpc</code>.</p>
 <h3 id="storagegcsprefix">storage.gcs.prefix<a class="headerlink" href="#storagegcsprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
 <h3 id="storagegcscredentialsclientemail">storage.gcs.credentials.clientEmail<a class="headerlink" href="#storagegcscredentialsclientemail" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>The email address that uniquely identifies your service account in GCS.</p>
+<em>Required</em>: NO</p>
+<p>The email address that uniquely identifies your service account in GCS. Required unless <code>storage.gcs.credentials.workloadIdentity</code> is <code>true</code>.</p>
 <h3 id="storagegcscredentialsprivatekey">storage.gcs.credentials.privateKey<a class="headerlink" href="#storagegcscredentialsprivatekey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>The private key of the service account used to authenticate the request.</p>
-<h3 id="storagegcscredentialshmacaccesskey">storage.gcs.credentials.hmacAccessKey<a class="headerlink" href="#storagegcscredentialshmacaccesskey" title="Permanent link">¶</a></h3>
-<p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>The HMAC access key associated with your service account. The access key is used to authenticate the request to GCS via the XML API. </p>
-<p>The use of HMAC keys is deprecated starting with version 2.12.0. Use the <code>storage.gcs.credentials.clientEmail</code> and <code>storage.gcs.credentials.privateKey</code> instead.</p>
-<h3 id="storagegcscredentialshmacsecret">storage.gcs.credentials.hmacSecret<a class="headerlink" href="#storagegcscredentialshmacsecret" title="Permanent link">¶</a></h3>
-<p><em>Type</em>: string <br>
-<em>Required</em>: YES</p>
-<p>A 40-character Base-64 encoded string that is linked to a specific HMAC access ID. You receive the secret when you create an HMAC key. It is used to create signatures as part of the authentication process. </p>
-<p>The use of HMAC keys is deprecated starting with version 2.12.0. Use the <code>storage.gcs.credentials.clientEmail</code> and <code>storage.gcs.credentials.privateKey</code> instead.</p>
+<em>Required</em>: NO</p>
+<p>The private key of the service account used to authenticate the request. Required unless <code>storage.gcs.credentials.workloadIdentity</code> is <code>true</code>.</p>
+<h3 id="storagegcscredentialsworkloadidentity">storage.gcs.credentials.workloadIdentity<a class="headerlink" href="#storagegcscredentialsworkloadidentity" title="Permanent link">¶</a></h3>
+<p><em>Type</em>: boolean <br>
+<em>Required</em>: NO<br>
+<em>Default</em>: <code>false</code></p>
+<p>Set this option to <code>true</code> to use Workload Identity instead of static service account JSON keys.</p>
 <h3 id="storagegcsretryerbackoffinitial">storage.gcs.retryer.backoffInitial<a class="headerlink" href="#storagegcsretryerbackoffinitial" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO
@@ -9412,7 +9499,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 30, 2026 09:16:03 UTC">July 30, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 16:50:26 UTC">September 21, 2026</span>
       
         <br>
         Created:

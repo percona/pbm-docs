@@ -3890,6 +3890,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#parallel-uploads-in-gcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel uploads in GCS
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6414,6 +6425,17 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#parallel-uploads-in-gcs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel uploads in GCS
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -6527,12 +6549,22 @@ usage: pbm-speed-test storage</p>
       –compression-level=COMPRESSION-LEVEL
                                 Compression level (specific to the compression type)</zstd></pgzip></s2></lz4></snappy></gzip></none></p>
 </details>
+<h2 id="parallel-uploads-in-gcs">Parallel uploads in GCS<a class="headerlink" href="#parallel-uploads-in-gcs" title="Permanent link">¶</a></h2>
+<p>If PBM does not use parallel uploads, check that:</p>
+<ul>
+<li>PBM is version 2.16.0 or later.</li>
+<li><code>storage.type</code> is set to <code>gcs</code>.</li>
+<li><code>clientType</code> is set to <code>grpc</code>.</li>
+<li><code>parallelUploadConcurrency</code> is greater than 1.</li>
+<li>The updated configuration is active on the cluster.</li>
+</ul>
+<p>If an upload fails during cleanup, verify that the PBM credentials can delete objects and that the bucket does not have a retention policy or object hold preventing deletion.</p>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 4, 2025 11:48:41 UTC">November 4, 2025</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 07:35:37 UTC">September 21, 2026</span>
       
         <br>
         Created:
