@@ -10,7 +10,34 @@ A logical restore, including point-in-time recovery, may fail if the backup cont
 (Location6781400) Time series bucket document is missing 'control' field
 ```
 
-Before restoring an affected backup, connect directly to every data-bearing `mongod` in the target deployment (not through a cluster connection). Record the current value of the [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} server parameter on each instance, then set it to `false` on each one. Keep it disabled for the duration of the restore, then restore the recorded value on each instance.
+Before starting the restore, disable the TTL monitor on every data-bearing mongod instance in the target deployment. The [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){="_blank"} parameter applies to individual instances, so configure each one separately:
+{.power-number}
+
+1. Connect directly to the instance using `mongosh` with `directConnection=true` in the connection string. Do not connect through `mongos`.
+
+2. Check and record the current setting:
+
+    ```sh
+    db.adminCommand({ getParameter: 1, ttlMonitorEnabled: 1 })
+    ```
+
+3. Disable the TTL monitor:
+
+    ```sh
+    db.adminCommand({ setParameter: 1, ttlMonitorEnabled: false })
+    ```
+
+4. Keep the TTL monitor disabled on these instances until the restore finishes. Then restore the recorded setting on each instance. For example, if the previous value was true, run:
+
+    ```sh
+    db.adminCommand({ setParameter: 1, ttlMonitorEnabled: true })
+    ```
+
+!!! warning "TTL cleanup"
+
+    Disabling the TTL monitor pauses automatic removal of expired data, including data in system collections. Limit this pause to the restore operation.
+
+    When TTL cleanup resumes, restored data that has already expired becomes eligible for deletion, even if it had not expired at the selected recovery point.
 
 For details about time series expiration, see [Automatic removal for time series collections :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}.
 
