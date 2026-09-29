@@ -12,11 +12,6 @@ A logical restore, including point-in-time recovery, may fail if the backup cont
 
 Before restoring an affected backup, manually disable the TTL monitor on the target deployment using the [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} server parameter. Keep it disabled for the duration of the restore, then restore its previous setting.
 
-!!! warning "TTL cleanup affects restored data"
-    Disabling the TTL monitor pauses expiration for all collections on the affected `mongod` instance, including system collections. Keep this pause as short as possible.
-
-    When TTL cleanup resumes, restored data that has already expired becomes eligible for deletion, even if it had not expired at the selected recovery point.
-
 For details about time series expiration, see [Automatic removal for time series collections :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}.
 
 
