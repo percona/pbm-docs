@@ -10,7 +10,7 @@ A logical restore, including point-in-time recovery, may fail if the backup cont
 (Location6781400) Time series bucket document is missing 'control' field
 ```
 
-Before restoring an affected backup, manually disable the TTL monitor on the target deployment using the [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} server parameter. Keep it disabled for the duration of the restore, then restore its previous setting.
+Before restoring an affected backup, connect directly to every data-bearing `mongod` in the target deployment (not through a cluster connection). Record the current value of the [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} server parameter on each instance, then set it to `false` on each one. Keep it disabled for the duration of the restore, then restore the recorded value on each instance.
 
 For details about time series expiration, see [Automatic removal for time series collections :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}.
 
