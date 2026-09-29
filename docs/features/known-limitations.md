@@ -4,7 +4,7 @@ PBM supports various backup and restore types. Some of them have known limitatio
 
 ## Logical restores of time series collections with expiration
 
-A logical restore, including point-in-time recovery, may fail if the backup contains a time series collection configured with `expireAfterSeconds`. During the restore, MongoDB’s TTL monitor can remove expired time series buckets that PBM still needs for oplog replay. The restore may fail with the following error:
+A logical restore, including point-in-time recovery, may fail if the backup contains a time series collection configured with `expireAfterSeconds`. During the restore, MongoDB’s TTL monitor can remove expired time series buckets that PBM still needs for oplog replay. The restore may fail with an error similar to the following:
 
 ```text
 (Location6781400) Time series bucket document is missing 'control' field
