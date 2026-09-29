@@ -10,7 +10,7 @@ A logical restore, including point-in-time recovery, may fail if the backup cont
 (Location6781400) Time series bucket document is missing 'control' field
 ```
 
-Before starting the restore, disable the TTL monitor on every data-bearing mongod instance in the target deployment. The [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){="_blank"} parameter applies to individual instances, so configure each one separately:
+Before starting the restore, disable the TTL monitor on every data-bearing mongod instance in the target deployment. The [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} parameter applies to individual instances, so configure each one separately:
 {.power-number}
 
 1. Connect directly to the instance using `mongosh` with `directConnection=true` in the connection string. Do not connect through `mongos`.
