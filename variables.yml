@@ -8,7 +8,6 @@ year: '2026'
 pbm:
   full_name: 'Percona Backup for MongoDB'
 date:
-  2_17_0: 2026-10-14
   2_16_0: 2026-09-24
   2_15_0: 2026-06-17
   2_14_0: 2026-04-29
