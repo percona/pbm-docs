@@ -155,7 +155,7 @@ The [storage class :octicons-link-external-16:](https://aws.amazon.com/s3/storag
 *Type*: string <br>
 *Required*: NO
 
-Controls which AWS S3 client operations PBM writes to the `pbm logs` output. The values correspond to the [client log modes in the AWS SDK for Go v2 :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode).
+Controls which AWS S3 client operations PBM writes to the `pbm logs` output. The values correspond to the [client log modes in the AWS SDK for Go v2 :octicons-link-external-16:](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode){:target="_blank"}.
 
 - `Signing` - logs the request signing process
 - `Retries` - logs each retry attempt when a request fails with a retryable error, including the retry count
@@ -164,8 +164,6 @@ Controls which AWS S3 client operations PBM writes to the `pbm logs` output. The
 - `Response` - logs incoming HTTP response metadata (status code, headers) without the body
 - `ResponseWithBody` - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers
 - `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints
-- `RequestEventMessage` - logs individual event stream messages that the client sends to AWS S3
-- `ResponseEventMessage` - logs individual event stream messages that the client receives from AWS S3
 
 
 !!! warning
@@ -176,17 +174,31 @@ To specify several values, separate them by comma. When undefined, no S3 debug l
 !!! note
     Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see [Logging configuration options](../manage/logpath.md#logging-configuration-options).
 
-#### Compatibility with earlier values
+#### Replace removed values
 
-PBM continues to accept debug log values used in versions earlier than 2.10.0. It automatically translates them into the corresponding supported values:
+Starting with PBM 2.16.0, the values `LogDebug`, `HTTPBody`, `RequestRetries`, `RequestErrors`, and `EventStreamBody` are no longer supported. PBM no longer translates them automatically. If your configuration uses these values, replace them before upgrading:
 
-| Deprecated value from PBM earlier than 2.10.0 | Automatically translated into |
-| -------------| ----------------------------- |
-| `LogDebug`                                     | `Request`, `Response`         |
-| `HTTPBody`                                     | `RequestWithBody`, `ResponseWithBody` |
-| `RequestRetries`                               | `Retries`                     |
-| `RequestErrors`                                | `Response`                    |
-| `EventStreamBody`                              | `RequestWithBody`, `ResponseWithBody` |
+| Removed value | Replacement |
+| ------------- | ----------- |
+| `LogDebug` | `Request`, `Response` |
+| `HTTPBody` | `RequestWithBody`, `ResponseWithBody` |
+| `RequestRetries` | `Retries` |
+| `RequestErrors` | `Response` |
+| `EventStreamBody` | `RequestWithBody`, `ResponseWithBody` |
+
+`RequestEventMessage` and `ResponseEventMessage` are also unsupported. Use the supported values listed above.
+
+PBM rejects unsupported values when you apply a configuration file or set this option with `pbm config --set`. An existing unsupported value also prevents storage initialization. For example, `LogDebug` produces an error containing:
+
+```text
+unsupported S3 client debug log level "LogDebug"
+```
+
+To replace `LogDebug` with request and response logging, run:
+
+```sh
+pbm config --set storage.s3.debugLogLevels="Request,Response"
+```
 
 #### Example
 The following example logs request and response bodies when troubleshooting AWS S3 communication:
