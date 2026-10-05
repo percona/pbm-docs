@@ -4,12 +4,18 @@
 
 ## Considerations
 
+Before starting a restore, review the following:
+{.power-number}
+
 1. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
 
 2. For versions 2.3.1 and earlier, disable [Point-in-time recovery](../features/point-in-time-recovery.md) before running `pbm restore`. This is because Point-in-Time recovery oplog slicing and restore are incompatible operations and cannot be run together.
 
 
 ## Before you start
+
+Before starting a restore, complete the following steps:
+{.power-number}
 
 1. Stop the balancer and disable chunks autosplit. To verify that both are disabled, run the following command:
 
@@ -68,13 +74,14 @@ To avoid the failure, disable the TTL monitor before you start the restore:
 Sharded time series collections are not supported. See [Known limitations for backups and restores](../features/known-limitations.md).
 
 ## Restore a database
+To restore a database, follow these steps:
+{.power-number}
 
 1. List the backups to restore from
 
     ```bash
     pbm list
     ```
-
 
 2. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
 
@@ -85,11 +92,15 @@ Sharded time series collections are not supported. See [Known limitations for ba
     !!! admonition "Version added: [2.14.0](../release-notes/2.14.0.md)"
         Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
 
-    Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
+    !!! note
+        You can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. 
+        
+        To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](../features/restore-new-env.md).
 
 ### Post-restore steps
 
 After a cluster’s restore is complete, do the following:
+{.power-number}
 
 1. Start the balancer and all `mongos` nodes to reload the sharding metadata. 
 2. We recommend to make a fresh backup to serve as the new base for future restores. 
@@ -106,7 +117,6 @@ restore:
 ```
 
 The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
-
 
 Starting with version 2.8.0, you can override the number of insertion workers per collection and the number of collections to process in parallel during a logical restore. For example:
 
@@ -131,6 +141,7 @@ Starting with version 2.1.0, Percona Backup for MongoDB stores the FCV value in 
 ```
 
 The following example illustrates the restore from a backup made on Percona Server for MongoDB 4.4 on Percona Server for MongoDB 5.0.
+{.power-number}
 
 1. Check the FCV value for the backup
 
