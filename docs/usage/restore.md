@@ -33,6 +33,26 @@
 
 4. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](../features/point-in-time-recovery.md).
 
+## Restore time series collections
+
+Starting with PBM 2.17.0, oplog replay bypasses document validation. This prevents validation errors caused by intermediate document states during a logical restore, including restores of time series collections backed up during sustained writes.
+
+No additional PBM configuration is required. Follow the [restore procedure](#restore-a-database) or the procedure for [point-in-time recovery from logical backups](pitr-tutorial.md).
+
+If a time series collection uses [`expireAfterSeconds` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}, the restore can still fail. MongoDB's TTL monitor can delete expired buckets needed for oplog replay. The restore may fail with a bucket document structure error such as:
+
+```text
+(Location6781400) Time series bucket document is missing 'control' field
+```
+
+Before restoring an affected backup, connect directly to each data-bearing `mongod` in the target deployment. Record the current value of [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} on each instance, then set it to `false` for the duration of the restore. Restore each instance's original value after the operation finishes, including if it fails.
+
+!!! warning "Limit the time with TTL monitoring disabled"
+
+    Disabling the TTL monitor also pauses expiration for other TTL-managed data and can affect MongoDB internal operations. Restore the original settings before resuming normal operation. When TTL monitoring resumes, expired data is eligible for deletion.
+
+Sharded time series collections remain unsupported. For more information, see [Known limitations for backups and restores](../features/known-limitations.md).
+
 ## Restore a database
 
 1. List the backups to restore from
