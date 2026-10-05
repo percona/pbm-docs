@@ -53,23 +53,23 @@ applyOps: (Location6781400) Time series bucket document is missing 'control' fie
 
 This applies only to the `expireAfterSeconds` collection option. Regular TTL indexes aren't affected.
 
-To avoid the failure, disable the TTL monitor before you start the restore:
+To avoid the failure, disable the TTL monitor before you start the logical restore, including point-in-time recovery. Keep it disabled for the duration of the restore:
 {.power-number}
 
 1. Connect directly to each data-bearing `mongod` in the target deployment.
 2. Note the current value of [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"}, then set it to `false`:
 
-```javascript
+    ```javascript
     db.adminCommand({ getParameter: 1, ttlMonitorEnabled: 1 })
     db.adminCommand({ setParameter: 1, ttlMonitorEnabled: false })
-```
+    ```
 
 3. Run the restore.
 4. Set `ttlMonitorEnabled` back to its original value on each instance, even if the restore fails.
 
 !!! warning
 
-    While the TTL monitor is off, expiration stops for all TTL-managed data and some MongoDB internal operations can be affected. Re-enable it as soon as the restore ends.
+    While the TTL monitor is off, expiration stops for all TTL-managed data and some MongoDB internal operations can be affected. Restore each instance's original setting as soon as the restore ends.
 
 Sharded time series collections are not supported. See [Known limitations for backups and restores](../features/known-limitations.md).
 
