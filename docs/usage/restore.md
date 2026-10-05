@@ -35,23 +35,37 @@
 
 ## Restore time series collections
 
-Starting with PBM 2.17.0, oplog replay bypasses document validation. This prevents validation errors caused by intermediate document states during a logical restore, including restores of time series collections backed up during sustained writes.
+During a logical restore, PBM bypasses document validation when it replays the oplog. This lets you restore time series collections that were backed up during sustained writes. No extra PBM configuration is needed. Follow the [restore procedure](#restore-a-database) or [point-in-time recovery from logical backups](pitr-tutorial.md).
 
-No additional PBM configuration is required. Follow the [restore procedure](#restore-a-database) or the procedure for [point-in-time recovery from logical backups](pitr-tutorial.md).
+### Collections with `expireAfterSeconds`
 
-If a time series collection uses [`expireAfterSeconds` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}, the restore can still fail. MongoDB's TTL monitor can delete expired buckets needed for oplog replay. The restore may fail with a bucket document structure error such as:
+If a time series collection uses [`expireAfterSeconds` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}, the TTL monitor can delete buckets that oplog replay still needs. The restore then fails with an error like this:
 
 ```text
-(Location6781400) Time series bucket document is missing 'control' field
+applyOps: (Location6781400) Time series bucket document is missing 'control' field
 ```
 
-Before restoring an affected backup, connect directly to each data-bearing `mongod` in the target deployment. Record the current value of [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} on each instance, then set it to `false` for the duration of the restore. Restore each instance's original value after the operation finishes, including if it fails.
+This applies only to the `expireAfterSeconds` collection option. Regular TTL indexes aren't affected.
 
-!!! warning "Limit the time with TTL monitoring disabled"
+To avoid the failure, disable the TTL monitor before you start the restore:
+{.power-number}
 
-    Disabling the TTL monitor also pauses expiration for other TTL-managed data and can affect MongoDB internal operations. Restore the original settings before resuming normal operation. When TTL monitoring resumes, expired data is eligible for deletion.
+1. Connect directly to each data-bearing `mongod` in the target deployment.
+2. Note the current value of [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"}, then set it to `false`:
 
-Sharded time series collections remain unsupported. For more information, see [Known limitations for backups and restores](../features/known-limitations.md).
+```javascript
+    db.adminCommand({ getParameter: 1, ttlMonitorEnabled: 1 })
+    db.adminCommand({ setParameter: 1, ttlMonitorEnabled: false })
+```
+
+3. Run the restore.
+4. Set `ttlMonitorEnabled` back to its original value on each instance, even if the restore fails.
+
+!!! warning
+
+    While the TTL monitor is off, expiration stops for all TTL-managed data and some MongoDB internal operations can be affected. Re-enable it as soon as the restore ends.
+
+Sharded time series collections are not supported. See [Known limitations for backups and restores](../features/known-limitations.md).
 
 ## Restore a database
 

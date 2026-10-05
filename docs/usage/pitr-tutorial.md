@@ -2,7 +2,8 @@
 
 --8<-- "pitr-preparation.md"
 
-If the backup contains time series collections, review [Restore time series collections](restore.md#restore-time-series-collections) before starting recovery. Collections with expiration require additional preparation.
+
+If your backup includes time series collections, refer to [Restore time series collections](restore.md#restore-time-series-collections) before you start. Collections with expiration need extra steps.
 
 ## Procedure
 
