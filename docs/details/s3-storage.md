@@ -12,6 +12,7 @@ This document provides overview for the native AWS S3 services. To use MinIO and
 ## Storage bucket creation
 
 To create a bucket, do the following.
+{.power-number}
 
 1. Install and configure [AWS CLI :octicons-link-external-16:](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
@@ -174,15 +175,15 @@ Configure certificate trust on each host where `pbm-agent` or the PBM CLI runs:
 
     - For a single certificate file or bundle:
 
-      ```bash
-      export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
-      ```
+        ```bash
+        export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+        ```
 
     - For a directory containing multiple certificate files:
 
-      ```bash
-      export SSL_CERT_DIR=/etc/pbm/certificates
-      ```
+        ```bash
+        export SSL_CERT_DIR=/etc/pbm/certificates
+        ```
 
     These commands set the variable for the current shell and processes started from it, including the PBM CLI.
 

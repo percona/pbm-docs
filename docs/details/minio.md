@@ -39,9 +39,9 @@ To create a bucket, do the following.
 
 4. Verify the bucket creation
 
-   ```bash
-   mc ls myminio
-   ```
+    ```bash
+    mc ls myminio
+    ```
 
 After the bucket is created, apply the proper [permissions for PBM to use the bucket](storage-configuration.md#permissions-setup).
 
