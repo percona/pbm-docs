@@ -174,7 +174,7 @@ To specify several values, separate them by comma. When undefined, no S3 debug l
 !!! note
     Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see [Logging configuration options](../manage/logpath.md#logging-configuration-options).
 
-#### Replace removed values
+#### Unsupported values and replacements
 
 Starting with PBM 2.16.0, the values `LogDebug`, `HTTPBody`, `RequestRetries`, `RequestErrors`, and `EventStreamBody` are no longer supported. PBM no longer translates them automatically. If your configuration uses these values, replace them before upgrading:
 
