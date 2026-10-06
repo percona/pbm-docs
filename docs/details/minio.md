@@ -20,6 +20,9 @@ Use the `minio` storage type in the following scenarios:
 
 ## Bucket creation
 
+To create a bucket, do the following.
+{.power-number}
+
 1. Install a [MinIO client :octicons-link-external-16:](https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc). After the installation, the `mc` is available for you.
 
 2. Configure the `mc` command line tool with a MinIO Server

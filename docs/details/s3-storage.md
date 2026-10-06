@@ -156,33 +156,37 @@ This upload retry increases the chances of data upload completion in cases of un
 
 Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don't use certificates signed by public Certificate Authorities (CAs).
 
-Use `SSL_CERT_FILE` for a PEM file containing the certificates PBM needs to trust. The file can contain certificates for more than one storage service. Alternatively, use `SSL_CERT_DIR` for a directory containing separate PEM certificate files. This is useful when [storage profiles](../features/multi-storage.md) connect to services that use different certificates.
+If your [storage profiles](../features/multi-storage.md) use services with different certificates, PBM needs to trust all of them. You can provide the certificates in one of two ways:
+
+- Set `SSL_CERT_FILE` to a single PEM file that contains all the certificates.
+- Set `SSL_CERT_DIR` to a directory that contains separate PEM files.
 
 If neither variable is set, PBM uses the system root certificates. For details about these environment variables, see [Go certificate loading :octicons-link-external-16:](https://pkg.go.dev/crypto/x509#SystemCertPool){:target="_blank"}.
 
 ### Usage example
 
 Configure certificate trust on each host where `pbm-agent` or the PBM CLI runs:
+{.power-number}
 
 1. Place the certificates in PEM format on each host. For a single file, this example uses `/etc/ssl/minio-ca.crt`. For separate files, place the certificates for each storage service in a directory, such as `/etc/pbm/certificates`.
 
-2. Set the environment variable for the approach you chose.
+2. Set the environment variable to point to your certificate file or directory.
 
-    For a single certificate file or bundle:
+    - For a single certificate file or bundle:
 
-    ```bash
-    export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
-    ```
+      ```bash
+      export SSL_CERT_FILE=/etc/ssl/minio-ca.crt
+      ```
 
-    For a directory containing multiple certificate files:
+    - For a directory containing multiple certificate files:
 
-    ```bash
-    export SSL_CERT_DIR=/etc/pbm/certificates
-    ```
+      ```bash
+      export SSL_CERT_DIR=/etc/pbm/certificates
+      ```
 
     These commands set the variable for the current shell and processes started from it, including the PBM CLI.
 
-3. If `pbm-agent` runs as a systemd service, add the selected variable to the agent's environment file. A shell `export` does not configure the service environment. See [how to find the agent's environment file](../install/configure-authentication.md#set-the-mongodb-connection-uri-for-pbm-agent).
+3. If `pbm-agent` runs as a `systemd` service, add the selected variable to the agent's environment file. A shell `export` does not configure the service environment. See [how to find the agent's environment file](../install/configure-authentication.md#set-the-mongodb-connection-uri-for-pbm-agent).
 
     For example, add this line to use the certificate directory:
 
