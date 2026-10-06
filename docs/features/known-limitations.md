@@ -2,6 +2,48 @@
 
 PBM supports various backup and restore types. Some of them have known limitations. This page lists them per backup / restore type and serves as a single source of truth for known limitations.
 
+## Logical restores of time series collections with expiration
+
+A logical restore, including point-in-time recovery, may fail if the backup contains a time series collection configured with `expireAfterSeconds`. During the restore, MongoDB’s TTL monitor can remove expired time series buckets that PBM still needs for oplog replay. The restore may fail with an error similar to:
+
+```text
+(Location6781400) Time series bucket document is missing 'control' field
+```
+
+Before starting the restore, manually disable the TTL monitor on the primary of the target replica set. For a sharded cluster, disable it on the primary of the config server replica set and the primary of each shard replica set. Keep it disabled for the duration of the restore.
+
+The [`ttlMonitorEnabled` :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled){:target="_blank"} parameter applies to individual instances, so configure each primary separately:
+{.power-number}
+
+1. Connect directly to the instance using `mongosh` with `directConnection=true` in the connection string. Do not connect through `mongos`.
+
+2. Check and record the current setting:
+
+    ```sh
+    db.adminCommand({ getParameter: 1, ttlMonitorEnabled: 1 })
+    ```
+
+3. Disable the TTL monitor:
+
+    ```sh
+    db.adminCommand({ setParameter: 1, ttlMonitorEnabled: false })
+    ```
+
+4. When the restore ends, restore the recorded setting on each instance, even if the restore fails. For example, if the previous value was `true`, run:
+
+    ```sh
+    db.adminCommand({ setParameter: 1, ttlMonitorEnabled: true })
+    ```
+
+!!! warning "TTL cleanup"
+
+    Disabling the TTL monitor pauses automatic removal of expired data, including data in system collections. Limit this pause to the restore operation.
+
+    When TTL cleanup resumes, restored data that has already expired becomes eligible for deletion, even if it had not expired at the selected recovery point.
+
+For details about time series expiration, see [Automatic removal for time series collections :octicons-link-external-16:](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/){:target="_blank"}.
+
+
 ## Selective backups and restores
 
 1. Only **logical** backups and restores are supported.
