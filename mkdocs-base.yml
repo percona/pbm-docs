@@ -198,7 +198,7 @@ nav:
         - Logical:
           - Overview: features/logical.md
           - Make a logical backup : "usage/start-backup.md"
-          - Restore from a logical backup: usage/restore.md
+          - Restore logical backups and time series collections: usage/restore.md
         - Physical:
           - Overview: features/physical.md
           - Make a physical backup: usage/backup-physical.md
