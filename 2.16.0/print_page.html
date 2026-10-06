@@ -12668,7 +12668,7 @@ Waiting for delete to be done .[done]
 <p>This document provides overview for the native AWS S3 services. To use MinIO and other S3-compatible storage services, see <a href="#details-minio">S3-compatible storage</a>.</p>
 <p><a class="md-button" href="#details-s3-storage-configuration-example">Configuration example <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 4h2v12l5.5-5.5 1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5 11 16z"></path></svg></span></a></p>
 <h2 id="details-s3-storage-storage-bucket-creation">Storage bucket creation<a class="headerlink" href="#details-s3-storage-storage-bucket-creation" title="Permanent link">¶</a></h2>
-<p>To create a bucket, do the following.</p>
+<p class="power-number">To create a bucket, do the following.</p>
 <ol>
 <li>
 <p>Install and configure <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">AWS CLI <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a></p>
@@ -12776,35 +12776,45 @@ Waiting for delete to be done .[done]
 <p>This upload retry increases the chances of data upload completion in cases of unstable connection.</p>
 <h2 id="details-s3-storage-data-upload-to-storage-with-self-signed-tls-certificates">Data upload to storage with self-signed TLS certificates<a class="headerlink" href="#details-s3-storage-data-upload-to-storage-with-self-signed-tls-certificates" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don’t use certificates signed by public Certificate Authorities (CAs).</p>
-<p>Providing a whole chain of certificates is recommended to ensure the connection is legit. The <code>SSL_CERT_FILE</code> environment variable specifies the path to a custom certificate chain file in PEM-format that PBM uses to validate TLS/SSL connection. </p>
+<p>If your <a href="#features-multi-storage">storage profiles</a> use services with different certificates, PBM needs to trust all of them. You can provide the certificates in one of two ways:</p>
+<ul>
+<li>Set <code>SSL_CERT_FILE</code> to a single PEM file that contains all the certificates.</li>
+<li>Set <code>SSL_CERT_DIR</code> to a directory that contains separate PEM files.</li>
+</ul>
+<p>If neither variable is set, PBM uses the system root certificates. For details about these environment variables, see <a href="https://pkg.go.dev/crypto/x509#SystemCertPool" target="_blank">Go certificate loading <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <h3 id="details-s3-storage-usage-example">Usage example<a class="headerlink" href="#details-s3-storage-usage-example" title="Permanent link">¶</a></h3>
-<p>Let’s assume that your custom CA certificate is at <code>/etc/ssl/minio-ca.crt</code> path and your S3 endpoint is <code>https://minio.internal.local:9000</code>. To use self-issued TLS certificates, do the following:</p>
+<p class="power-number">Configure certificate trust on each host where <code>pbm-agent</code> or the PBM CLI runs:</p>
 <ol>
 <li>
-<p>Ensure the cert file is in PEM format. Use the following command to check it:</p>
-<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/ssl/minio-ca.crt
-</code></pre></div>
-<details class="example">
-<summary>Sample output</summary>
-<div class="highlight"><pre><span></span><code>-----BEGIN CERTIFICATE-----
-MIIC+TCCAeGgAwIBAgIJANH3WljB...
------END CERTIFICATE-----
-</code></pre></div>
-</details>
+<p>Place the certificates in PEM format on each host. For a single file, this example uses <code>/etc/ssl/minio-ca.crt</code>. For separate files, place the certificates for each storage service in a directory, such as <code>/etc/pbm/certificates</code>.</p>
 </li>
 <li>
-<p>Set the <code>SSL_CERT_FILE</code> environment variable to that file’s path on each host where <code>pbm-agent</code> and PBM CLI are running:</p>
+<p>Set the environment variable to point to your certificate file or directory.</p>
+<ul>
+<li>
+<p>For a single certificate file or bundle:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>/etc/ssl/minio-ca.crt
 </code></pre></div>
-<p>If this variable isn’t set, PBM uses the system root certificates.</p>
 </li>
 <li>
-<p>Restart <code>pbm-agent</code>:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>pbm-agent
+<p>For a directory containing multiple certificate files:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_DIR</span><span class="o">=</span>/etc/pbm/certificates
+</code></pre></div>
+</li>
+</ul>
+<p>These commands set the variable for the current shell and processes started from it, including the PBM CLI.</p>
+</li>
+<li>
+<p>If <code>pbm-agent</code> runs as a <code>systemd</code> service, add the selected variable to the agent’s environment file. A shell <code>export</code> does not configure the service environment. See <a href="#install-configure-authentication-set-the-mongodb-connection-uri-for-pbm-agent">how to find the agent’s environment file</a>.</p>
+<p>For example, add this line to use the certificate directory:</p>
+<div class="highlight"><pre><span></span><code><span class="na">SSL_CERT_DIR</span><span class="o">=</span><span class="s">/etc/pbm/certificates</span>
+</code></pre></div>
+<p>Restart the service to apply the change:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>pbm-agent
 </code></pre></div>
 </li>
 <li>
-<p>Verify that your custom certificate is recognized. Check PBM logs for successful S3 access. </p>
+<p>Check <a href="#reference-pbm-commands-pbm-logs">PBM logs</a> for successful storage access.</p>
 </li>
 </ol>
 <p>Alternatively, you can disable the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:</p>
@@ -13327,6 +13337,7 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 <p>For S3-compatible storage, try the <code>s3</code> storage type first. Only switch to <code>minio</code> if you encounter compatibility issues or errors in the PBM logs.</p>
 </div>
 <h2 id="details-minio-bucket-creation">Bucket creation<a class="headerlink" href="#details-minio-bucket-creation" title="Permanent link">¶</a></h2>
+<p class="power-number">To create a bucket, do the following.</p>
 <ol>
 <li>
 <p>Install a <a href="https://min.io/docs/minio/linux/reference/minio-mc.html#install-mc">MinIO client <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. After the installation, the <code>mc</code> is available for you.</p>
@@ -13343,10 +13354,10 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 </li>
 <li>
 <p>Verify the bucket creation</p>
-</li>
-</ol>
 <div class="highlight"><pre><span></span><code>mc<span class="w"> </span>ls<span class="w"> </span>myminio
 </code></pre></div>
+</li>
+</ol>
 <p>After the bucket is created, apply the proper <a href="#details-storage-configuration-permissions-setup">permissions for PBM to use the bucket</a>.</p>
 <h2 id="details-minio-configuration-example">Configuration example<a class="headerlink" href="#details-minio-configuration-example" title="Permanent link">¶</a></h2>
 <div class="admonition important">
@@ -13384,35 +13395,53 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 <p>This upload retry increases the chances of data upload completion in cases of unstable connection.</p>
 <h2 id="details-minio-data-upload-to-storage-with-self-signed-tls-certificates">Data upload to storage with self-signed TLS certificates<a class="headerlink" href="#details-minio-data-upload-to-storage-with-self-signed-tls-certificates" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don’t use certificates signed by public Certificate Authorities (CAs).</p>
-<p>Providing a whole chain of certificates is recommended to ensure the connection is legit. The <code>SSL_CERT_FILE</code> environment variable specifies the path to a custom certificate chain file in PEM-format that PBM uses to validate TLS/SSL connection. </p>
+<p>If your <a href="#features-multi-storage">storage profiles</a> use services with different certificates, PBM needs to trust all of them. You can provide the certificates in one of two ways:</p>
+<ul>
+<li>Set <code>SSL_CERT_FILE</code> to a single PEM file that contains all the certificates.</li>
+<li>Set <code>SSL_CERT_DIR</code> to a directory that contains separate PEM files.</li>
+</ul>
+<p>If neither variable is set, PBM uses the system root certificates. For details about these environment variables, see <a href="https://pkg.go.dev/crypto/x509#SystemCertPool" target="_blank">Go certificate loading <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <h3 id="details-minio-usage-example">Usage example<a class="headerlink" href="#details-minio-usage-example" title="Permanent link">¶</a></h3>
-<p>Let’s assume that your custom CA certificate is at <code>/etc/ssl/minio-ca.crt</code> path and your S3 endpoint is <code>https://minio.internal.local:9000</code>. To use self-issued TLS certificates, do the following:</p>
+<p class="power-number">Configure certificate trust on each host where <code>pbm-agent</code> or the PBM CLI runs:</p>
 <ol>
 <li>
-<p>Ensure the cert file is in PEM format. Use the following command to check it:</p>
-<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>/etc/ssl/minio-ca.crt
-</code></pre></div>
-<details class="example">
-<summary>Sample output</summary>
-<div class="highlight"><pre><span></span><code>-----BEGIN CERTIFICATE-----
-MIIC+TCCAeGgAwIBAgIJANH3WljB...
------END CERTIFICATE-----
-</code></pre></div>
-</details>
+<p>Place the certificates in <a href="https://www.ssl.com/guide/pem-der-crt-and-cer-x-509-encodings-and-conversions/" target="_blank">PEM <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> format on each host. </p>
+<ul>
+<li>
+<p>For a single file, this example uses <code>/etc/ssl/minio-ca.crt</code>. </p>
 </li>
 <li>
-<p>Set the <code>SSL_CERT_FILE</code> environment variable to that file’s path on each host where <code>pbm-agent</code> and PBM CLI are running:</p>
+<p>For separate files, place the certificates for each storage service in a directory, such as <code>/etc/pbm/certificates</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Set the environment variable to point to your certificate file or directory.</p>
+<ul>
+<li>
+<p>For a single certificate file or bundle:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span>/etc/ssl/minio-ca.crt
 </code></pre></div>
-<p>If this variable isn’t set, PBM uses the system root certificates.</p>
 </li>
 <li>
-<p>Restart <code>pbm-agent</code>:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>pbm-agent
+<p>For a directory containing multiple certificate files:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_DIR</span><span class="o">=</span>/etc/pbm/certificates
+</code></pre></div>
+</li>
+</ul>
+<p>These commands set the variable for the current shell and processes started from it, including the PBM CLI.</p>
+</li>
+<li>
+<p>If <code>pbm-agent</code> runs as a <code>systemd</code> service, add the selected variable to the agent’s environment file. A shell <code>export</code> does not configure the service environment. See <a href="#install-configure-authentication-set-the-mongodb-connection-uri-for-pbm-agent">how to find the agent’s environment file</a>.</p>
+<p>For example, add this line to use the certificate directory:</p>
+<div class="highlight"><pre><span></span><code><span class="na">SSL_CERT_DIR</span><span class="o">=</span><span class="s">/etc/pbm/certificates</span>
+</code></pre></div>
+<p>Restart the service to apply the change:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>pbm-agent
 </code></pre></div>
 </li>
 <li>
-<p>Verify that your custom certificate is recognized. Check PBM logs for successful storage access. </p>
+<p>Check <a href="#reference-pbm-commands-pbm-logs">PBM logs</a> for successful storage access.</p>
 </li>
 </ol>
 <p>Alternatively, you can turn off the TLS verification of the S3 storage in Percona Backup for MongoDB configuration:</p>
