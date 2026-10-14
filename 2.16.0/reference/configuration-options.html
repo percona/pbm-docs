@@ -3424,10 +3424,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#compatibility-with-earlier-values" class="md-nav__link">
+  <a href="#unsupported-values-and-replacements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Compatibility with earlier values
+        Unsupported values and replacements
       
     </span>
   </a>
@@ -7827,10 +7827,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#compatibility-with-earlier-values" class="md-nav__link">
+  <a href="#unsupported-values-and-replacements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Compatibility with earlier values
+        Unsupported values and replacements
       
     </span>
   </a>
@@ -9002,7 +9002,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <h3 id="storages3debugloglevels">storage.s3.debugLogLevels<a class="headerlink" href="#storages3debugloglevels" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
-<p>Controls which AWS S3 client operations PBM writes to the <code>pbm logs</code> output. The values correspond to the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode">client log modes in the AWS SDK for Go v2 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
+<p>Controls which AWS S3 client operations PBM writes to the <code>pbm logs</code> output. The values correspond to the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode" target="_blank">client log modes in the AWS SDK for Go v2 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <ul>
 <li><code>Signing</code> - logs the request signing process</li>
 <li><code>Retries</code> - logs each retry attempt when a request fails with a retryable error, including the retry count</li>
@@ -9011,8 +9011,6 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <li><code>Response</code> - logs incoming HTTP response metadata (status code, headers) without the body</li>
 <li><code>ResponseWithBody</code> - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers</li>
 <li><code>DeprecatedUsage</code> - logs deprecated usage of AWS S3 endpoints</li>
-<li><code>RequestEventMessage</code> - logs individual event stream messages that the client sends to AWS S3</li>
-<li><code>ResponseEventMessage</code> - logs individual event stream messages that the client receives from AWS S3</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -9023,13 +9021,13 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p class="admonition-title">Note</p>
 <p>Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see <a href="../manage/logpath.html#logging-configuration-options">Logging configuration options</a>.</p>
 </div>
-<h4 id="compatibility-with-earlier-values">Compatibility with earlier values<a class="headerlink" href="#compatibility-with-earlier-values" title="Permanent link">¶</a></h4>
-<p>PBM continues to accept debug log values used in versions earlier than 2.10.0. It automatically translates them into the corresponding supported values:</p>
+<h4 id="unsupported-values-and-replacements">Unsupported values and replacements<a class="headerlink" href="#unsupported-values-and-replacements" title="Permanent link">¶</a></h4>
+<p>Starting with PBM 2.16.0, the values <code>LogDebug</code>, <code>HTTPBody</code>, <code>RequestRetries</code>, <code>RequestErrors</code>, and <code>EventStreamBody</code> are no longer supported. PBM no longer translates them automatically. If your configuration uses these values, replace them before upgrading:</p>
 <table>
 <thead>
 <tr>
-<th>Deprecated value from PBM earlier than 2.10.0</th>
-<th>Automatically translated into</th>
+<th>Removed value</th>
+<th>Replacement</th>
 </tr>
 </thead>
 <tbody>
@@ -9055,6 +9053,13 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 </tr>
 </tbody>
 </table>
+<p><code>RequestEventMessage</code> and <code>ResponseEventMessage</code> are also unsupported. Use the supported values listed above.</p>
+<p>PBM rejects unsupported values when you apply a configuration file or set this option with <code>pbm config --set</code>. An existing unsupported value also prevents storage initialization. For example, <code>LogDebug</code> produces an error containing:</p>
+<div class="highlight"><pre><span></span><code>unsupported S3 client debug log level "LogDebug"
+</code></pre></div>
+<p>To replace <code>LogDebug</code> with request and response logging, run:</p>
+<div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>storage.s3.debugLogLevels<span class="o">=</span><span class="s2">"Request,Response"</span>
+</code></pre></div>
 <h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h4>
 <p>The following example logs request and response bodies when troubleshooting AWS S3 communication:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
@@ -9551,7 +9556,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2026 16:50:26 UTC">September 21, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 06:29:08 UTC">October 6, 2026</span>
       
         <br>
         Created:
