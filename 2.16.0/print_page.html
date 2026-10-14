@@ -11350,6 +11350,38 @@ Starting with version <a href="#release-notes-2.2.0">2.2.0</a>, you can restore 
         </script>
         </head><body><h1 id="known-limitations-for-backups-and-restores">Known limitations for backups and restores<a class="headerlink" href="#features-known-limitations-known-limitations-for-backups-and-restores" title="Permanent link">¶</a></h1>
 <p>PBM supports various backup and restore types. Some of them have known limitations. This page lists them per backup / restore type and serves as a single source of truth for known limitations.</p>
+<h2 id="features-known-limitations-logical-restores-of-time-series-collections-with-expiration">Logical restores of time series collections with expiration<a class="headerlink" href="#features-known-limitations-logical-restores-of-time-series-collections-with-expiration" title="Permanent link">¶</a></h2>
+<p>A logical restore, including point-in-time recovery, may fail if the backup contains a time series collection configured with <code>expireAfterSeconds</code>. During the restore, MongoDB’s TTL monitor can remove expired time series buckets that PBM still needs for oplog replay. The restore may fail with an error similar to:</p>
+<div class="highlight"><pre><span></span><code>(Location6781400) Time series bucket document is missing 'control' field
+</code></pre></div>
+<p>Before starting the restore, manually disable the TTL monitor on the primary of the target replica set. For a sharded cluster, disable it on the primary of the config server replica set and the primary of each shard replica set. Keep it disabled for the duration of the restore.</p>
+<p class="power-number">The <a href="https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled" target="_blank"><code>ttlMonitorEnabled</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> parameter applies to individual instances, so configure each primary separately:</p>
+<ol>
+<li>
+<p>Connect directly to the instance using <code>mongosh</code> with <code>directConnection=true</code> in the connection string. Do not connect through <code>mongos</code>.</p>
+</li>
+<li>
+<p>Check and record the current setting:</p>
+<div class="highlight"><pre><span></span><code>db.adminCommand<span class="o">({</span><span class="w"> </span>getParameter:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>ttlMonitorEnabled:<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">})</span>
+</code></pre></div>
+</li>
+<li>
+<p>Disable the TTL monitor:</p>
+<div class="highlight"><pre><span></span><code>db.adminCommand<span class="o">({</span><span class="w"> </span>setParameter:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>ttlMonitorEnabled:<span class="w"> </span><span class="nb">false</span><span class="w"> </span><span class="o">})</span>
+</code></pre></div>
+</li>
+<li>
+<p>When the restore ends, restore the recorded setting on each instance, even if the restore fails. For example, if the previous value was <code>true</code>, run:</p>
+<div class="highlight"><pre><span></span><code>db.adminCommand<span class="o">({</span><span class="w"> </span>setParameter:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span>ttlMonitorEnabled:<span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">})</span>
+</code></pre></div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">TTL cleanup</p>
+<p>Disabling the TTL monitor pauses automatic removal of expired data, including data in system collections. Limit this pause to the restore operation.</p>
+<p>When TTL cleanup resumes, restored data that has already expired becomes eligible for deletion, even if it had not expired at the selected recovery point.</p>
+</div>
+<p>For details about time series expiration, see <a href="https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/" target="_blank">Automatic removal for time series collections <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <h2 id="features-known-limitations-selective-backups-and-restores">Selective backups and restores<a class="headerlink" href="#features-known-limitations-selective-backups-and-restores" title="Permanent link">¶</a></h2>
 <ol>
 <li>Only <strong>logical</strong> backups and restores are supported.</li>
