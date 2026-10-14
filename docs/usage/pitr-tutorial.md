@@ -2,6 +2,9 @@
 
 --8<-- "pitr-preparation.md"
 
+
+If your backup includes time series collections, refer to [Restore time series collections](restore.md#restore-time-series-collections) before you start. Collections with expiration need extra steps.
+
 ## Procedure
 
 Run [`pbm restore`](../reference/pbm-commands.md#pbm-restore) and specify the timestamp from the valid range:    

@@ -8,6 +8,8 @@ Logical restore is the reverse process: The ``pbm-agent`` retrieves the backup d
 
     Sharded time series collections are not supported. 
 
+During logical restores, oplog replay bypasses document validation to prevent validation errors from interrupting the restore. If you backed up time series collections during sustained writes, see [Restore time series collections](../usage/restore.md#restore-time-series-collections). It also explains how to prepare collections that have expiration configured. 
+
 The following diagram shows the restore flow.
 
 ![image](../_images/pbm-restore-shard.png)
