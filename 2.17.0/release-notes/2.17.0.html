@@ -6637,7 +6637,6 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Physical restores, with or without PITR, are also more stable. PBM now disables the time-to-live (TTL) monitor for the duration of the restore, so TTL deletions no longer interfere with oplog replay or cause duplicate key errors in collections with unique indexes. TTL monitoring resumes by default when you start MongoDB after the restore.</p>
 <p>This release also fixes a storage download deadlock that could leave physical PITR waiting indefinitely. Oplog replay no longer blocks the reads PBM uses to track restore progress.</p>
 <p>For details, see <a href="../usage/pitr-physical.html">Restore to a point in time from a physical backup</a>.</p>
-<p>For details, see <a href="../usage/pitr-physical.html">Restore to a point in time from a physical backup</a>.</p>
 <h3 id="time-series-collections-restore-without-errors">Time series collections restore without errors<a class="headerlink" href="#time-series-collections-restore-without-errors" title="Permanent link">¶</a></h3>
 <p>PBM fixes two issues that could interrupt restores of time series collections:</p>
 <ul>
@@ -6690,7 +6689,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2026 08:13:03 UTC">October 15, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2026 13:36:15 UTC">October 15, 2026</span>
       
         <br>
         Created:

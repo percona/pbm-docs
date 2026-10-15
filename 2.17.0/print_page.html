@@ -18898,7 +18898,6 @@ This role is scoped to the <code>admin</code> database only. It does not grant r
 <p>Physical restores, with or without PITR, are also more stable. PBM now disables the time-to-live (TTL) monitor for the duration of the restore, so TTL deletions no longer interfere with oplog replay or cause duplicate key errors in collections with unique indexes. TTL monitoring resumes by default when you start MongoDB after the restore.</p>
 <p>This release also fixes a storage download deadlock that could leave physical PITR waiting indefinitely. Oplog replay no longer blocks the reads PBM uses to track restore progress.</p>
 <p>For details, see <a href="#usage-pitr-physical">Restore to a point in time from a physical backup</a>.</p>
-<p>For details, see <a href="#usage-pitr-physical">Restore to a point in time from a physical backup</a>.</p>
 <h3 id="release-notes-2.17.0-time-series-collections-restore-without-errors">Time series collections restore without errors<a class="headerlink" href="#release-notes-2.17.0-time-series-collections-restore-without-errors" title="Permanent link">¶</a></h3>
 <p>PBM fixes two issues that could interrupt restores of time series collections:</p>
 <ul>
