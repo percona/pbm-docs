@@ -6685,66 +6685,12 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1817">PBM-1817</a>: Corrected physical PITR to apply index creation and deletion commands from the oplog, as well as index changes made with <code>collMod</code>.</p>
 </li>
 </ul>
-<h1 id="percona-backup-for-mongodb-2170-2026-10-14_1">Percona Backup for MongoDB 2.17.0 (2026-10-14)<a class="headerlink" href="#percona-backup-for-mongodb-2170-2026-10-14_1" title="Permanent link">¶</a></h1>
-<p><a class="md-button" href="../installation.html">Installation</a></p>
-<p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
-<p>PBM 2.17.0 improves physical point-in-time recovery (PITR) and restores of time series collections. It also helps you identify why an incremental backup failed and delete backups left in an unfinished state.</p>
-<h2 id="release-highlights_1">Release highlights<a class="headerlink" href="#release-highlights_1" title="Permanent link">¶</a></h2>
-<h3 id="physical-point-in-time-recovery-restores-index-changes_1">Physical point-in-time recovery restores index changes<a class="headerlink" href="#physical-point-in-time-recovery-restores-index-changes_1" title="Permanent link">¶</a></h3>
-<p>Physical PITR now applies index creation, deletion, and modification operations from the oplog. Previously, PBM skipped them. The restored database now has the same indexes as the source at the restore target time.</p>
-<p>Physical restores, with or without PITR, are also more stable. PBM now disables the time-to-live (TTL) monitor for the duration of the restore, so TTL deletions no longer interfere with oplog replay or cause duplicate key errors in collections with unique indexes. TTL monitoring resumes by default when you start MongoDB after the restore.</p>
-<p>This release also fixes a storage download deadlock that could leave physical PITR waiting indefinitely. Oplog replay no longer blocks the reads PBM uses to track restore progress.</p>
-<p>For details, see <a href="../usage/pitr-physical.html">Restore to a point in time from a physical backup</a>.</p>
-<h3 id="time-series-collections-restore-without-errors_1">Time series collections restore without errors<a class="headerlink" href="#time-series-collections-restore-without-errors_1" title="Permanent link">¶</a></h3>
-<p>PBM fixes two issues that could interrupt restores of time series collections:</p>
-<ul>
-<li>Index creation during PITR no longer fails with <code>IllegalOperation</code> errors.</li>
-<li>Logical restores, including PITR, no longer fail with <code>DocumentValidationFailure</code> errors when the time series collections were backed up under high write throughput. PBM now bypasses document validation during oplog replay.</li>
-</ul>
-<p>For additional details, refer to the <a href="../usage/restore.html#restore-time-series-collections">Restore time series collections</a> documentation.</p>
-<h3 id="improved-error-reporting-for-incremental-backups_1">Improved error reporting for incremental backups<a class="headerlink" href="#improved-error-reporting-for-incremental-backups_1" title="Permanent link">¶</a></h3>
-<p>When an incremental backup fails on a shard, PBM reports the underlying error instead of a generic convergence timeout. The message helps you identify the cause and decide what to do next.</p>
-<p>For example, if the previous incremental backup was made on another node, PBM explains that the incremental backup history is unavailable and that you need to create a new base incremental backup.</p>
-<h2 id="changelog_1">Changelog<a class="headerlink" href="#changelog_1" title="Permanent link">¶</a></h2>
-<h3 id="improvements_1">Improvements<a class="headerlink" href="#improvements_1" title="Permanent link">¶</a></h3>
-<ul>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1775">PBM-1775</a>: PBM now reports the failing shard’s error for backups in sharded clusters, including missing incremental backup history, instead of a generic convergence timeout.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1821">PBM-1821</a>: Updated Go to 1.27.1, along with the MongoDB Go driver, MongoDB Database Tools, and other third-party dependencies.</p>
-</li>
-</ul>
-<h3 id="fixed-bugs_1">Fixed bugs<a class="headerlink" href="#fixed-bugs_1" title="Permanent link">¶</a></h3>
-<ul>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1762">PBM-1762</a>: Corrected index creation during PITR of time series collections to prevent <code>IllegalOperation</code> errors.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1763">PBM-1763</a>: Prevented <code>DocumentValidationFailure</code> errors during oplog replay for time series collections. For collections with <code>expireAfterSeconds</code>, <a href="#time-series-collections-restore-without-errors">manually disable the TTL monitor</a> before a logical restore, including PITR. Keep it disabled throughout the restore. Restore its original setting afterward, even if the restore fails.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1779">PBM-1779</a>: PBM now automatically disables the TTL monitor during physical restores, with or without PITR. This prevents TTL deletions from causing duplicate key errors during oplog replay.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1795">PBM-1795</a>: Eliminated a storage download deadlock that could prevent physical PITR from completing.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1802">PBM-1802</a>: Backups with stale heartbeats can now be deleted, even if their metadata shows a <code>starting</code> or <code>running</code> state.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1813">PBM-1813</a>: Fixed logical restore failures caused by bucket data validation errors in time series collections backed up under high write throughput.</p>
-</li>
-<li>
-<p><a href="https://perconadev.atlassian.net/browse/PBM-1817">PBM-1817</a>: Corrected physical PITR to apply index creation and deletion commands from the oplog, as well as index changes made with <code>collMod</code>.</p>
-</li>
-</ul>
 <hr>
 <div class="md-source-file">
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 12:51:13 UTC">October 6, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 15, 2026 08:13:03 UTC">October 15, 2026</span>
       
         <br>
         Created:
