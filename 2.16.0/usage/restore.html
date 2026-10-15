@@ -44,7 +44,7 @@
 
     
       
-        <title>Restore logical backups and time series collections - Percona Backup for MongoDB</title>
+        <title>Restore from a logical backup - Percona Backup for MongoDB</title>
       
     
     
@@ -114,7 +114,7 @@
     
   
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Percona Backup for MongoDB - Restore logical backups and time series collections">
+  <meta property="og:title" content="Percona Backup for MongoDB - Restore from a logical backup">
   <meta property="og:image" content="https://docs.percona.com/percona-backup-mongodb/latest/_images/mongodb.png">
   <meta property="og:url" content="https://docs.percona.com/percona-backup-mongodb/latest/index.html">
 
@@ -235,7 +235,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Restore logical backups and time series collections
+              Restore from a logical backup
             
           </span>
         </div>
@@ -1196,7 +1196,7 @@
   <span class="md-ellipsis">
     
   
-    Restore logical backups and time series collections
+    Restore from a logical backup
   
 
     
@@ -1214,7 +1214,7 @@
   <span class="md-ellipsis">
     
   
-    Restore logical backups and time series collections
+    Restore from a logical backup
   
 
     
@@ -1260,34 +1260,6 @@
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#restore-time-series-collections" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore time series collections
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Restore time series collections">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#collections-with-expireafterseconds" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Collections with expireAfterSeconds
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -6535,34 +6507,6 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
       
         <li class="md-nav__item">
-  <a href="#restore-time-series-collections" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Restore time series collections
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Restore time series collections">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#collections-with-expireafterseconds" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Collections with expireAfterSeconds
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#restore-a-database" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6666,7 +6610,6 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <h1 id="restore-from-a-logical-backup">Restore from a logical backup<a class="headerlink" href="#restore-from-a-logical-backup" title="Permanent link">¶</a></h1>
 <p>To restore a backup, use the <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or <a href="../features/incremental-backup.html">incremental</a>) and restores the database up to the <a href="../reference/glossary.html#completion-time">restore_to_time</a> timestamp (available in <code>pbm list</code> output starting with version 1.4.0).</p>
 <h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
-<p class="power-number">Before starting a restore, review the following:</p>
 <ol>
 <li>
 <p>While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.</p>
@@ -6676,7 +6619,6 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ol>
 <h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
-<p class="power-number">Before starting a restore, complete the following steps:</p>
 <ol>
 <li>
 <p>Stop the balancer and disable chunks autosplit. To verify that both are disabled, run the following command:</p>
@@ -6700,34 +6642,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see <a href="../features/point-in-time-recovery.html">Point-in-time recovery</a>.</p>
 </li>
 </ol>
-<h2 id="restore-time-series-collections">Restore time series collections<a class="headerlink" href="#restore-time-series-collections" title="Permanent link">¶</a></h2>
-<p>During a logical restore, PBM bypasses document validation when it replays the oplog. This lets you restore time series collections that were backed up during sustained writes. No extra PBM configuration is needed. Follow the <a href="#restore-a-database">restore procedure</a> or <a href="pitr-tutorial.html">point-in-time recovery from logical backups</a>.</p>
-<h3 id="collections-with-expireafterseconds">Collections with <code>expireAfterSeconds</code><a class="headerlink" href="#collections-with-expireafterseconds" title="Permanent link">¶</a></h3>
-<p>If a time series collection uses <a href="https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/" target="_blank"><code>expireAfterSeconds</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>, the TTL monitor can delete buckets that oplog replay still needs. The restore then fails with an error like this:</p>
-<div class="highlight"><pre><span></span><code>applyOps: (Location6781400) Time series bucket document is missing 'control' field
-</code></pre></div>
-<p>This applies only to the <code>expireAfterSeconds</code> collection option. Regular TTL indexes aren’t affected.</p>
-<p class="power-number">To avoid the failure, disable the TTL monitor before you start the logical restore, including point-in-time recovery. Keep it disabled for the duration of the restore:</p>
-<ol>
-<li>Connect directly to each data-bearing <code>mongod</code> in the target deployment.</li>
-<li>
-<p>Note the current value of <a href="https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled" target="_blank"><code>ttlMonitorEnabled</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>, then set it to <code>false</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">adminCommand</span><span class="p">({</span><span class="w"> </span><span class="nx">getParameter</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">ttlMonitorEnabled</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="p">})</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">adminCommand</span><span class="p">({</span><span class="w"> </span><span class="nx">setParameter</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">ttlMonitorEnabled</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">})</span>
-</code></pre></div>
-</li>
-<li>
-<p>Run the restore.</p>
-</li>
-<li>Set <code>ttlMonitorEnabled</code> back to its original value on each instance, even if the restore fails.</li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>While the TTL monitor is off, expiration stops for all TTL-managed data and some MongoDB internal operations can be affected. Restore each instance’s original setting as soon as the restore ends.</p>
-</div>
-<p>Sharded time series collections are not supported. See <a href="../features/known-limitations.html">Known limitations for backups and restores</a>.</p>
 <h2 id="restore-a-database">Restore a database<a class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
-<p class="power-number">To restore a database, follow these steps:</p>
 <ol>
 <li>
 <p>List the backups to restore from</p>
@@ -6742,15 +6657,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p class="admonition-title">Version added: <a href="../release-notes/2.14.0.html">2.14.0</a></p>
 <p>Before a restore operation is executed you have to confirm the action (to bypass it, add the <code>-y</code> or <code>--yes</code> flag).</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>You can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. </p>
-<p>To learn how to restore a backup into a new environment, see <a href="../features/restore-new-env.html">Restoring a backup into a new environment</a>.</p>
-</div>
+<p>Note that you can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one. To learn how to restore a backup into a new environment, see <a href="../features/restore-new-env.html">Restoring a backup into a new environment</a>.</p>
 </li>
 </ol>
 <h3 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
-<p class="power-number">After a cluster’s restore is complete, do the following:</p>
+<p>After a cluster’s restore is complete, do the following:</p>
 <ol>
 <li>Start the balancer and all <code>mongos</code> nodes to reload the sharding metadata. </li>
 <li>We recommend to make a fresh backup to serve as the new base for future restores. </li>
@@ -6777,7 +6688,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="no-copy highlight"><pre><span></span><code><span class="m">2023</span>-04-10T10:48:54Z<span class="w"> </span><span class="m">302</span>.80KB<span class="w"> </span>&lt;logical&gt;<span class="w"> </span><span class="o">[</span>ERROR:<span class="w"> </span>backup<span class="w"> </span>FCV<span class="w"> </span><span class="s2">"6.0"</span><span class="w"> </span>is<span class="w"> </span>incompatible<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>running<span class="w"> </span>mongo<span class="w"> </span>FCV<span class="w"> </span><span class="s2">"5.0"</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">2023</span>-04-10T10:49:14Z<span class="o">]</span>
 <span class="m">2023</span>-04-10T08:40:10Z<span class="w"> </span><span class="m">172</span>.25KB<span class="w"> </span>&lt;logical&gt;<span class="w"> </span><span class="o">[</span>ERROR:<span class="w"> </span>backup<span class="w"> </span>mongo<span class="w"> </span>version<span class="w"> </span><span class="s2">"6.0.5-4"</span><span class="w"> </span>is<span class="w"> </span>incompatible<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>running<span class="w"> </span>mongo<span class="w"> </span>version<span class="w"> </span><span class="s2">"5.0.15-13"</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">2023</span>-04-10T08:40:28Z<span class="o">]</span>
 </code></pre></div>
-<p class="power-number">The following example illustrates the restore from a backup made on Percona Server for MongoDB 4.4 on Percona Server for MongoDB 5.0.</p>
+<p>The following example illustrates the restore from a backup made on Percona Server for MongoDB 4.4 on Percona Server for MongoDB 5.0.</p>
 <ol>
 <li>
 <p>Check the FCV value for the backup</p>
@@ -6823,7 +6734,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 5, 2026 08:21:39 UTC">October 5, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 28, 2026 15:43:21 UTC">April 28, 2026</span>
       
         <br>
         Created:

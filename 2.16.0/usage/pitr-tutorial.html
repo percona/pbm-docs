@@ -1185,7 +1185,7 @@
   <span class="md-ellipsis">
     
   
-    Restore logical backups and time series collections
+    Restore from a logical backup
   
 
     
@@ -6572,7 +6572,6 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Stop the balancer and <code>mongos</code> nodes.</li>
 <li>Make sure no writes are made to the database during restore. </li>
 </ol>
-<p>If your backup includes time series collections, refer to <a href="restore.html#restore-time-series-collections">Restore time series collections</a> before you start. Collections with expiration need extra steps.</p>
 <h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">¶</a></h2>
 <p>Run <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> and specify the timestamp from the valid range:    </p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span>--time<span class="o">=</span><span class="s2">"2022-12-14T14:27:04"</span>
@@ -6629,7 +6628,7 @@ PITR &lt;off&gt;:
   <small>
     
       Last update:
-      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 5, 2026 07:55:38 UTC">October 5, 2026</span>
+      <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 28, 2026 15:43:21 UTC">April 28, 2026</span>
       
         <br>
         Created:
