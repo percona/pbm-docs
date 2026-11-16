@@ -84,6 +84,7 @@ PBM stops the balancer to ensure data consistency during restore operations in s
 restore:
   timeouts:
     balancerStop: 0
+    mongodShutdown: 1800
 ```
 
 ??? example "Example"
@@ -101,6 +102,26 @@ This is useful when you want to:
 - Prevent restore operations from waiting indefinitely
 - Enforce time limits in automated workflows
 - Fail fast if the balancer cannot be stopped
+
+### restore.timeouts.mongodShutdown
+
+*Type*: int <br>
+*Default*: 1800 (30 minutes) <br>
+*Restore type*: Physical and external
+
+The maximum time, in seconds, that PBM waits for `mongod` to shut down during a physical or external restore. The wait includes the final WiredTiger checkpoint. On large datasets, the checkpoint can take longer than the default 30 minutes. Increase this value if the restore fails because `mongod` does not shut down within the timeout.
+
+If the option is omitted or set to `0`, PBM uses the 30-minute default.
+
+??? example "Increase the shutdown timeout to 60 minutes"
+
+    ```yaml
+    restore:
+      timeouts:
+        mongodShutdown: 3600
+    ```
+
+    This configuration gives `mongod` up to 60 minutes to finish shutting down during a physical or external restore.
 
 ### restore.numParallelFiles
 
