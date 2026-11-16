@@ -71,10 +71,30 @@ For the description of configuration options, see [Configuration file options](.
 
 The following sections describe how you can fine-tune your storage configuration: 
 
+* [upload concurrency](#tune-upload-concurrency)
 * [debug logging](#debug-logging) 
 * [upload retries](#upload-retries) 
 * [data upload to storage with self-signed TLS certificates](#data-upload-to-storage-with-self-signed-tls-certificates)  
 * [multiple endpoints to the same S3 storage](endpoint-map.md) 
+
+### Tune upload concurrency
+
+Starting with PBM 2.18.0, you can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
+
+For example, to upload two parts concurrently, add this option to your PBM configuration:
+
+```yaml
+storage:
+  type: minio
+  minio:
+    uploadConcurrency: 2
+```
+
+Add this setting to your existing MinIO storage configuration, keeping your endpoint, bucket, and credentials.
+
+If you omit the option or specify a non-positive value, PBM uses a default of `1` on systems with 1 to 3 CPUs and `2` on systems with 4 or more CPUs. You can specify a positive integer explicitly, regardless of the CPU count.
+
+Higher concurrency can increase upload throughput, but it also uses more memory for upload buffers. Start with the default and adjust the value for your workload and available memory. See [`storage.minio.uploadConcurrency`](../reference/configuration-options.md#storageminiouploadconcurrency) for details.
 
 ### Debug logging
 
