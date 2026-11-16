@@ -79,7 +79,7 @@ The following sections describe how you can fine-tune your storage configuration
 
 ### Tune upload concurrency
 
-Starting with PBM 2.18.0, you can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
+You can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
 
 For example, to upload two parts concurrently, run this command after configuring MinIO storage:
 
