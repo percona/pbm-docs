@@ -115,6 +115,14 @@ The time, in seconds, that PBM waits for `mongod` to shut down during a physical
 
 If the option is omitted or set to `0`, PBM uses the 30-minute default.
 
+To increase the shutdown timeout to 60 minutes, run:
+
+```bash
+pbm config --set restore.timeouts.mongodShutdown=3600
+```
+
+Alternatively, set the timeout in the PBM configuration file:
+
 ??? example "Increase the shutdown timeout to 60 minutes"
 
     ```yaml
@@ -124,6 +132,8 @@ If the option is omitted or set to `0`, PBM uses the 30-minute default.
     ```
 
     This configuration gives `mongod` up to 60 minutes to finish shutting down during a physical or external restore.
+
+If `mongod` does not shut down within the configured timeout, PBM reports an error and the restore fails. This setting controls the shutdown wait, not the duration of the entire restore.
 
 ### restore.numParallelFiles
 
