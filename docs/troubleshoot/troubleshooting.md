@@ -117,7 +117,7 @@ If shutdown takes longer than the timeout, the restore can fail with an error su
 timeout (30m0s) during waiting for lock file <path>/mongod.lock
 ```
 
-Check the [PBM logs](../usage/logs.md) to confirm that the error occurred while waiting for `mongod` to shut down. If shutdown needs more time, increase the timeout. For example, to allow 60 minutes, run:
+Check the [individual `pbm-agent` logs](../install/start-pbm-agent.md#how-to-see-the-pbm-agent-log) for the shutdown timeout error. Physical restore details are not available through `pbm logs`. If shutdown needs more time, increase the timeout. For example, to allow 60 minutes, run:
 
 ```bash
 pbm config --set restore.timeouts.mongodShutdown=3600
