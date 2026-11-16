@@ -98,7 +98,7 @@ storage:
     uploadConcurrency: 2
 ```
 
-Replace the endpoint, bucket, and credentials with values for your storage. This example uses a 10 MiB part size, which was tested during the investigation in PBM-1827. The `uploadConcurrency` value is an example, not a recommended setting for every deployment. Adjust both values based on your backup workload, available memory, and upload performance.
+Replace the endpoint, bucket, and credentials with values for your storage. The example uses a 10 MiB part size and sets `uploadConcurrency` to `2`. These values are illustrative, not recommended defaults. Adjust them based on your backup workload, available memory, and upload performance.
 
 If you omit the option or specify a non-positive value, PBM uses a default of `1` on systems with 1 to 3 CPUs and `2` on systems with 4 or more CPUs. You can specify a positive integer explicitly, regardless of the CPU count.
 
