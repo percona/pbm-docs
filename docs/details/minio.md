@@ -81,28 +81,24 @@ The following sections describe how you can fine-tune your storage configuration
 
 You can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
 
-The following configuration is based on the backup workload used to test this feature in [PBM implementation PR #1409](https://github.com/percona/percona-backup-mongodb/pull/1409). It sets `uploadConcurrency` to `2` alongside the MinIO storage and backup options used in that test.
+The following example shows a complete MinIO storage configuration with upload concurrency set to `2`. It uses the configuration options from [PBM-1827](https://perconadev.atlassian.net/browse/PBM-1827) and [implementation PR #1409](https://github.com/percona/percona-backup-mongodb/pull/1409).
 
 ```yaml
 storage:
   type: minio
   minio:
-    endpoint: minio:9000
+    endpoint: <your-minio-endpoint>
     region: us-east-1
-    bucket: bcp
-    prefix: pbm1827/local
-    secure: false
+    bucket: <your-backup-bucket>
+    secure: true
     credentials:
-      access-key-id: minio1234
-      secret-access-key: minio1234
-    partSize: 67108864
+      access-key-id: <your-access-key-id>
+      secret-access-key: <your-secret-key>
+    partSize: 10485760
     uploadConcurrency: 2
-backup:
-  compression: s2
-  numParallelCollections: 4
 ```
 
-The endpoint, bucket, prefix, and credentials are test values from the implementation PR. Replace them with your own storage settings before using this example. The `partSize`, `numParallelCollections`, and `uploadConcurrency` values are illustrative, not recommended defaults.
+Replace the endpoint, bucket, and credentials with values for your storage. This example uses a 10 MiB part size, which was tested during the investigation in PBM-1827. The `uploadConcurrency` value is an example, not a recommended setting for every deployment. Adjust both values based on your backup workload, available memory, and upload performance.
 
 If you omit the option or specify a non-positive value, PBM uses a default of `1` on systems with 1 to 3 CPUs and `2` on systems with 4 or more CPUs. You can specify a positive integer explicitly, regardless of the CPU count.
 
