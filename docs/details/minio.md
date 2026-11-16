@@ -81,24 +81,24 @@ The following sections describe how you can fine-tune your storage configuration
 
 You can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
 
-The following example shows how to configure MinIO storage with two concurrent uploads.
+!!! example "MinIO configuration with two concurrent uploads"
 
-```yaml
-storage:
-  type: minio
-  minio:
-    endpoint: <your-minio-endpoint>
-    region: us-east-1
-    bucket: <your-backup-bucket>
-    secure: true
-    credentials:
-      access-key-id: <your-access-key-id>
-      secret-access-key: <your-secret-key>
-    partSize: 10485760
-    uploadConcurrency: 2
-```
+    ```yaml
+    storage:
+      type: minio
+      minio:
+        endpoint: <your-minio-endpoint>
+        region: us-east-1
+        bucket: <your-backup-bucket>
+        secure: true
+        credentials:
+          access-key-id: <your-access-key-id>
+          secret-access-key: <your-secret-key>
+        partSize: 10485760
+        uploadConcurrency: 2
+    ```
 
-Replace the endpoint, bucket, and credentials with values for your storage. The example uses a 10 MiB part size and sets `uploadConcurrency` to `2`. These values are illustrative, not recommended defaults. Adjust them based on your backup workload, available memory, and upload performance.
+    Replace the endpoint, bucket, and credentials with values for your storage. The example uses a 10 MiB part size and sets `uploadConcurrency` to `2`. These values are illustrative, not recommended defaults. Adjust them based on your backup workload, available memory, and upload performance.
 
 If you omit the option or specify a non-positive value, PBM uses a default of `1` on systems with 1 to 3 CPUs and `2` on systems with 4 or more CPUs. You can specify a positive integer explicitly, regardless of the CPU count.
 
