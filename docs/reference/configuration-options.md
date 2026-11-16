@@ -314,6 +314,7 @@ storage:
       session-token: <string>
       signature-ver: V4
     partSize: 10485760 (10 MB)
+    uploadConcurrency: <int>
     retryer:
       numMaxRetries: 10
     maxObjSizeGB: 5018
@@ -418,6 +419,16 @@ Allows using the deprecated AWS Signature version 2 for backward compatibility w
 *Required*: NO
 
 The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB.
+
+### storage.minio.uploadConcurrency
+
+*Type*: int<br>
+*Required*: NO<br>
+*Default*: `1` for 1 to 3 CPUs; `2` for 4 or more CPUs
+
+The number of parts PBM uploads concurrently to MinIO or other S3-compatible storage using the `minio` storage type. Set a positive integer to control upload concurrency. If the option is omitted or set to `0` or a negative value, PBM uses the CPU-based default.
+
+Increasing this value can improve upload throughput but also increases memory usage for parallel uploads. Choose a value based on the available memory and backup workload. See [Tune MinIO upload concurrency](../details/minio.md#tune-upload-concurrency).
 
 ### storage.minio.retryer.numMaxRetries
 

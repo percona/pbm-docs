@@ -71,10 +71,42 @@ For the description of configuration options, see [Configuration file options](.
 
 The following sections describe how you can fine-tune your storage configuration: 
 
+* [upload concurrency](#tune-upload-concurrency)
 * [debug logging](#debug-logging) 
 * [upload retries](#upload-retries) 
 * [data upload to storage with self-signed TLS certificates](#data-upload-to-storage-with-self-signed-tls-certificates)  
 * [multiple endpoints to the same S3 storage](endpoint-map.md) 
+
+### Tune upload concurrency
+
+You can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
+
+??? example "MinIO configuration with two concurrent uploads"
+
+    ```yaml
+    storage:
+      type: minio
+      minio:
+        endpoint: <your-minio-endpoint>
+        region: us-east-1
+        bucket: <your-backup-bucket>
+        secure: true
+        credentials:
+          access-key-id: <your-access-key-id>
+          secret-access-key: <your-secret-key>
+        partSize: 10485760
+        uploadConcurrency: 2
+    ```
+
+    Replace the endpoint, bucket, and credentials with values for your storage. The example uses a 10 MiB part size and sets `uploadConcurrency` to `2`. These values are illustrative, not recommended defaults. Adjust them based on your backup workload, available memory, and upload performance.
+
+If you omit the option or specify a non-positive value, PBM uses a default of `1` on systems with 1 to 3 CPUs and `2` on systems with 4 or more CPUs. You can specify a positive integer explicitly, regardless of the CPU count.
+
+Higher concurrency can increase upload throughput, but it also uses more memory for upload buffers. Start with the default and adjust the value for your workload and available memory. See [`storage.minio.uploadConcurrency`](../reference/configuration-options.md#storageminiouploadconcurrency) for details.
+
+
+!!! tip "Important"
+    If uploads are slower than you need, increase `uploadConcurrency`. If PBM uses too much memory, lower `uploadConcurrency` or `partSize`.
 
 ### Debug logging
 

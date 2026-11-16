@@ -19,3 +19,10 @@ styles/
 
 # Generated plugin cache
 .cache/plugin/git-committers/
+
+# Local Python environment and MkDocs output
+.venv/
+site/
+__pycache__/
+*.pyc
+mkdocs-build.log
