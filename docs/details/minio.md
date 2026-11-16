@@ -81,7 +81,7 @@ The following sections describe how you can fine-tune your storage configuration
 
 You can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
 
-!!! example "MinIO configuration with two concurrent uploads"
+??? example "MinIO configuration with two concurrent uploads"
 
     ```yaml
     storage:
