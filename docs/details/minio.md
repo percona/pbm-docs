@@ -81,7 +81,7 @@ The following sections describe how you can fine-tune your storage configuration
 
 You can control the number of concurrent parts uploaded to MinIO and other S3-compatible storage configured with the `minio` storage type. Use `storage.minio.uploadConcurrency` to balance upload throughput against memory consumption.
 
-The following example shows a complete MinIO storage configuration with upload concurrency set to `2`. It uses the configuration options from [PBM-1827](https://perconadev.atlassian.net/browse/PBM-1827) and [implementation PR #1409](https://github.com/percona/percona-backup-mongodb/pull/1409).
+The following example shows how to configure MinIO storage with two concurrent uploads.
 
 ```yaml
 storage:
