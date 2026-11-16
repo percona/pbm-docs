@@ -92,7 +92,7 @@ If you omit the option or specify a non-positive value, PBM uses a default of `1
 Higher concurrency can increase upload throughput, but it also uses more memory for upload buffers. Start with the default and adjust the value for your workload and available memory. See [`storage.minio.uploadConcurrency`](../reference/configuration-options.md#storageminiouploadconcurrency) for details.
 
 
-!!! info "Important"
+!!! tip "Important"
     If uploads are slower than you need, increase `uploadConcurrency`. If PBM uses too much memory, lower `uploadConcurrency` or `partSize`.
 
 ### Debug logging
