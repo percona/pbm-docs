@@ -111,7 +111,9 @@ This is useful when you want to:
 *Default*: 1800 (30 minutes) <br>
 *Restore type*: Physical and external
 
-The time, in seconds, that PBM waits for `mongod` to shut down during a physical or external restore, including its final WiredTiger checkpoint. On large datasets, shutdown can take more than 30 minutes. Increase this timeout if a restore fails while waiting for `mongod` to shut down.
+The maximum time, in seconds, that PBM waits for `mongod` to shut down during a physical or external restore. The wait includes the final WiredTiger checkpoint. On large datasets, the checkpoint can take longer than the default 30 minutes. 
+
+Increase this value if the restore fails because `mongod` does not shut down within the timeout.
 
 If the option is omitted or set to `0`, PBM uses the 30-minute default.
 
@@ -130,11 +132,7 @@ Alternatively, set the timeout in the PBM configuration file:
       timeouts:
         mongodShutdown: 3600
     ```
-
-    This configuration gives `mongod` up to 60 minutes to finish shutting down during a physical or external restore.
-
-If `mongod` does not shut down within the configured timeout, PBM reports an error and the restore fails. This setting controls the shutdown wait, not the duration of the entire restore.
-
+    
 ### restore.numParallelFiles
 
 *Type*: int <br>
