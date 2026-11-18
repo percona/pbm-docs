@@ -28,6 +28,8 @@ Percona Backup for MongoDB needs its own dedicated S3 bucket exclusively for bac
 
     === ":simple-minio: S3-compatible (MinIO)"    
 
+        The `minio` storage type requires PBM 2.12.0 or later. For earlier versions, use `type: s3` and set [`storage.s3.endpointUrl`](../reference/configuration-options.md#storages3endpointurl) to your MinIO endpoint URL.
+
         ```yaml
         storage:
           type: minio
