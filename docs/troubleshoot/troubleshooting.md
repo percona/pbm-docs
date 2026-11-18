@@ -107,6 +107,24 @@ pbm-speed-test storage --help
                                     Compression level (specific to the compression type)
 
 
+## MongoDB shutdown timeout during restore
+
+During a physical or external restore, PBM waits for `mongod` to shut down. On large datasets, the final WiredTiger checkpoint may take longer than the default 30-minute timeout.
+
+If shutdown takes longer than the timeout, the restore can fail with an error such as:
+
+```text
+timeout (30m0s) during waiting for lock file <path>/mongod.lock
+```
+
+Check the [individual `pbm-agent` logs](../install/start-pbm-agent.md#how-to-see-the-pbm-agent-log) for the shutdown timeout error. Physical restore details are not available through `pbm logs`. If shutdown needs more time, increase the timeout. For example, to allow 60 minutes, run:
+
+```bash
+pbm config --set restore.timeouts.mongodShutdown=3600
+```
+
+For details, see [MongoDB shutdown timeout](../reference/restore-options.md#restoretimeoutsmongodshutdown). Before attempting another restore, check its status and follow the [guidance for partially done physical restores](restore-partial.md) if applicable.
+
 ## Parallel uploads in GCS
 
 If PBM does not use parallel uploads, check that:

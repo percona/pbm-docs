@@ -13,6 +13,9 @@ restore:
   mongodLocationMap:
      "node01:2017": <string>
      "node03:27017": <string>
+  timeouts:
+    balancerStop: <int>
+    mongodShutdown: <int>
 ```
 
 ### restore.batchSize
@@ -102,6 +105,34 @@ This is useful when you want to:
 - Enforce time limits in automated workflows
 - Fail fast if the balancer cannot be stopped
 
+### restore.timeouts.mongodShutdown
+
+*Type*: int <br>
+*Default*: 1800 (30 minutes) <br>
+*Restore type*: Physical and external
+
+The maximum time, in seconds, that PBM waits for `mongod` to shut down during a physical or external restore.
+
+Increase this value if the restore fails because `mongod` does not shut down within the timeout.
+
+If the option is omitted or set to `0`, PBM uses the 30-minute default.
+
+To increase the shutdown timeout to 60 minutes, run:
+
+```bash
+pbm config --set restore.timeouts.mongodShutdown=3600
+```
+
+Alternatively, set the timeout in the PBM configuration file:
+
+??? example "Increase the shutdown timeout to 60 minutes"
+
+    ```yaml
+    restore:
+      timeouts:
+        mongodShutdown: 3600
+    ```
+    
 ### restore.numParallelFiles
 
 *Type*: int <br>
