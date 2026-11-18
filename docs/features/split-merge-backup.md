@@ -15,11 +15,16 @@ The following table provides default maximum size limits for the supported backu
 | **Alibaba Cloud OSS** | 48.8 TB |
 | **Filesystem storage** | 4.9 TB |
 
-These defaults are sufficient to satisfy the majority of use cases. However, you can configure a new maximum size for backup files for the storage you use. To do this, define the file size in GB for the `maxObjSizeGB` configuration parameter. 
+These defaults are sufficient for most use cases.
 
-Define new limits with caution, only when you are absolutely sure in your actions. Setting a too low value may cause a single backup file to be split into a too large number of smaller files and this may affect performance.
+## Override the maximum file size for testing
 
-This is the configuration example for the AWS S3 storage:
+The `maxObjSizeGB` configuration parameter lets you override the default maximum backup file size, in GB. Use it to test how PBM splits large backup files.
+
+!!! warning
+    `maxObjSizeGB` is intended for **testing only**. Setting a value that is too low can split a backup into many small files and affect performance. Don't change this limit in production configurations.
+
+The following AWS S3 configuration is an example for testing:
 
 ```yaml
 storage:

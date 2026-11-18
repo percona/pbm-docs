@@ -38,7 +38,6 @@ storage:
       numMaxRetries: 3
       minRetryDelay: 30ms
       maxRetryDelay: 5m
-    maxObjSizeGB: 5018
 ```
 
 ### storage.s3.provider
@@ -282,13 +281,6 @@ The minimum time to wait before the next retry, specified as a *time.Duration*. 
 
 The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. 
 
-### storage.s3.maxObjSizeGB
-
-*Type*: float64 <br>
-*Required*: NO <br>
-*Default*: 5018
-
-The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ## MinIO type storage options
 
@@ -316,7 +308,6 @@ storage:
     partSize: 10485760 (10 MB)
     retryer:
       numMaxRetries: 10
-    maxObjSizeGB: 5018
     debugTrace: false 
 ```
 
@@ -427,13 +418,6 @@ The size of data chunks in bytes to be uploaded to the storage bucket. Default: 
 
 The maximum number of retries to upload data to MinIO / S3-compatible storage. A zero value means no retries will be performed.
 
-### storage.minio.maxObjSizeGB
-
-*Type*: float64<br>
-*Required*: NO<br>
-*Default*: 5018
-
-The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ### storage.minio.debugTrace
 
@@ -457,7 +441,6 @@ storage:
       workloadIdentity: <bool>
       clientEmail: <your-client-email-here>
       privateKey: <your-private-key-here>
-    maxObjSizeGB: 5018
 ```
 
 ### storage.gcs.bucket
@@ -573,13 +556,6 @@ Defaults to nanoseconds if no unit is provided.
 
 Available starting with version 2.12.0.
 
-### storage.gcs.maxObjSizeGB
-
-*Type*: float64 <br>
-*Required*: NO <br>
-*Default*: 5018
-
-The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ## Filesystem storage options
 
@@ -588,7 +564,6 @@ storage:
   type: filesystem
   filesystem:
     path: <string>
-  maxObjSizeGB: 5018
 ```
 
 ### storage.filesystem.path
@@ -598,13 +573,6 @@ storage:
 
 The path to the backup directory
 
-### storage.filesystem.maxObjSizeGB
-
-*Type*: float64 <br>
-*Required*: NO <br>
-*Default*: 5018
-
-The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ## Microsoft Azure Blob storage options
 
@@ -618,7 +586,6 @@ storage:
     prefix: <string>
     credentials:
       key: <your-access-key>
-    maxObjSizeGB: 194560
     retryer:
       numMaxRetries: 3
       minRetryDelay: 800ms
@@ -668,13 +635,6 @@ The path to the data directory in the bucket. If undefined, backups are stored i
 
 Your access key to authorize access to data in your storage account.
 
-### storage.azure.maxObjSizeGB
-
-*Type*: float64 <br>
-*Required*: NO <br>
-*Default*: 194560
-
-The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](../features/split-merge-backup.md).
 
 ### storage.azure.retryer.numMaxRetries
 
@@ -824,7 +784,6 @@ storage:
     uploadPartSize: <int>
     maxUploadParts: <int>
     connectTimeout: 5s
-    maxObjSizeGB: 48700
     retryer:
       maxAttempts: 5
       maxBackoff: 300s
