@@ -14,4 +14,4 @@ To report an issue with the documentation, leave your feedback using the widget 
 
 ## How to contribute
 
-Thank you for willing to contribute to Percona Backup for MongoDB project. Please check the [Contribution guidelines](reference/contributing.md) for  instructions.
+Thank you for willing to contribute to Percona Backup for MongoDB project. Please check the [Contribution guidelines](https://github.com/percona/pbm-docs/blob/main/CONTRIBUTING.md) for  instructions.
