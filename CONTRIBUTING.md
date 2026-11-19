@@ -43,7 +43,6 @@ Before you start, learn what [git], [MkDocs] and [Docker] are and what [Markdown
 
 The doc files are in the `docs` directory.
 
-Follow the [Percona Documentation Style Guide](https://github.com/percona/doc-style-guide/tree/main/docs) for wording and formatting.
 
 ### Edit documentation online via GitHub
 
