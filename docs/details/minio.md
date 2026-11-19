@@ -6,6 +6,10 @@ This document provides an overview of MinIO as the closest S3-compatible storage
 
 [Configuration example :material-arrow-down:](#configuration-example){.md-button}
 
+!!! admonition "Version added: [2.12.0](../release-notes/2.12.0.md)"
+
+    The `minio` storage type is available starting with PBM 2.12.0. For earlier versions, use `type: s3` with a `storage.s3` configuration block and set [`storage.s3.endpointUrl`](../reference/configuration-options.md#storages3endpointurl) to your MinIO endpoint URL.
+
 ## When to use the minio storage type
 
 The `minio` storage type requires PBM 2.12.0 or later. For earlier versions,
