@@ -10,7 +10,7 @@ mkdocs-with-pdf
 mkdocs-git-revision-date-plugin
 mkdocs-git-revision-date-localized-plugin
 mkdocs-bootstrap-tables-plugin
-mkdocs-section-index>=0.3.10
+mkdocs-section-index
 mkdocs-htmlproofer-plugin
 mkdocs-meta-descriptions-plugin
 mkdocs-glightbox
