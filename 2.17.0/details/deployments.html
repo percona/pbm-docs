@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6400,7 +6400,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="supported-mongodb-deployments">Supported MongoDB deployments<a class="headerlink" href="#supported-mongodb-deployments" title="Permanent link">¶</a></h1>
+<h1 id="supported-mongodb-deployments">Supported MongoDB deployments<a data-markdown-ignore class="headerlink" href="#supported-mongodb-deployments" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB works with sharded clusters and replica sets. It doesn’t work on standalone MongoDB instances. This is because Percona Backup for MongoDB requires <a href="../reference/glossary.html#oplog">oplog</a> to guarantee backup consistency. Oplog is available on nodes with replication enabled.</p>
 <p>For testing purposes, you can deploy Percona Backup for MongoDB on a single-node replica set. To convert a standalone server into a replica set, specify the <code>replication.replSetName</code> option in the configuration file and then initiate the replica set.</p>
 <div class="admonition admonition">

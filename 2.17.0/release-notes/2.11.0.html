@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6603,24 +6603,24 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2110-2025-09-25">Percona Backup for MongoDB 2.11.0 (2025-09-25)<a class="headerlink" href="#percona-backup-for-mongodb-2110-2025-09-25" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2110-2025-09-25">Percona Backup for MongoDB 2.11.0 (2025-09-25)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2110-2025-09-25" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release provides the following features and improvements:</p>
-<h2 id="ensure-successful-upload-of-any-size-backup">Ensure successful upload of any size backup<a class="headerlink" href="#ensure-successful-upload-of-any-size-backup" title="Permanent link">¶</a></h2>
+<h2 id="ensure-successful-upload-of-any-size-backup">Ensure successful upload of any size backup<a data-markdown-ignore class="headerlink" href="#ensure-successful-upload-of-any-size-backup" title="Permanent link">¶</a></h2>
 <p>When backup files are so large that they exceed the object size limit for backup storage, PBM now splits such files into pieces that fall within the size limit and uploads them to the storage. PBM names these pieces to identify and manage them later. The reverse process occurs during the data read for a restore: PBM merges the pieces into a single file and proceeds with the command execution. You can redefine the default size limit using PBM configuration and ensure your backups are uploaded regardless of the size. Learn more about how to do it in the <a href="../features/split-merge-backup.html">documentation</a>.</p>
-<h2 id="dropped-support-of-mongodb-60">Dropped support of MongoDB 6.0<a class="headerlink" href="#dropped-support-of-mongodb-60" title="Permanent link">¶</a></h2>
+<h2 id="dropped-support-of-mongodb-60">Dropped support of MongoDB 6.0<a data-markdown-ignore class="headerlink" href="#dropped-support-of-mongodb-60" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB drops support of MongoDB 6.0. Existing functionality in Percona Backup for MongoDB remains compatible with MongoDB 6.0 and Percona Server for MongoDB 6.0; however, further enhancements and bug fixes are no longer tested against this version.</p>
-<h2 id="known-limitations-for-using-hmac-keys-on-gcs">Known limitations for using HMAC keys on GCS<a class="headerlink" href="#known-limitations-for-using-hmac-keys-on-gcs" title="Permanent link">¶</a></h2>
+<h2 id="known-limitations-for-using-hmac-keys-on-gcs">Known limitations for using HMAC keys on GCS<a data-markdown-ignore class="headerlink" href="#known-limitations-for-using-hmac-keys-on-gcs" title="Permanent link">¶</a></h2>
 <p>In PBM version 2.10.0 and higher, when you run backups to GCS via HMAC keys, incomplete backups may be incorrectly marked as successful if network interruptions occur during the backup process. This results in corrupted or partially uploaded archives being stored and treated as valid backups, which can later fail during restore operations. This issue is addressed in <a href="https://perconadev.atlassian.net/browse/PBM-1605">PBM-1605</a>. Until the issue is resolved, we recommend using a native GCS connection type with JSON keys rather than HMAC keys to ensure backup integrity.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1490">PBM-1490</a>: Physical backups now automatically split and reassemble very large files, preventing failures when uploading to storage with size limits.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1597">PBM-1597</a>: PBM now displays more specific error messages when your MongoDB version is incompatible, guiding you on whether to upgrade MongoDB or PBM.</li>
 </ul>
-<h2 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
+<h2 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1497">PBM-1497</a>: Point-in-Time Recovery (PITR) now accurately reports failure when oplog replay encounters errors.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1569">PBM-1569</a>: The <code>pbm restore</code> command now displays a clear message when required arguments are missing, rather than a confusing parsing error.</li>

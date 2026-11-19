@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6605,15 +6605,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="restore-from-a-snapshot-based-backup">Restore from a snapshot-based backup<a class="headerlink" href="#restore-from-a-snapshot-based-backup" title="Permanent link">¶</a></h1>
+<h1 id="restore-from-a-snapshot-based-backup">Restore from a snapshot-based backup<a data-markdown-ignore class="headerlink" href="#restore-from-a-snapshot-based-backup" title="Permanent link">¶</a></h1>
 <p>To restore a backup, use the <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or <a href="../features/incremental-backup.html">incremental</a>) and restores the database up to the <a href="../reference/glossary.html#completion-time">restore_to_time</a> timestamp (available in <code>pbm list</code> output starting with version 1.4.0).</p>
-<h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
+<h2 id="considerations">Considerations<a data-markdown-ignore class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
 <ol>
 <li>Shut down all <code>mongos</code> nodes. If you have set up the automatic restart of the database, disable it.</li>
 <li>Stop the arbiter nodes manually since there’s no <code>pbm-agent</code> on these nodes to do that automatically.</li>
 </ol>
-<h2 id="restore-a-database">Restore a database<a class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
-<h3 id="restore-from-a-backup-made-through-pbm">Restore from a backup made through PBM<a class="headerlink" href="#restore-from-a-backup-made-through-pbm" title="Permanent link">¶</a></h3>
+<h2 id="restore-a-database">Restore a database<a data-markdown-ignore class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
+<h3 id="restore-from-a-backup-made-through-pbm">Restore from a backup made through PBM<a data-markdown-ignore class="headerlink" href="#restore-from-a-backup-made-through-pbm" title="Permanent link">¶</a></h3>
 <p class="power-number">The following procedure describes the restore process from backups <a href="backup-external.html">made through PBM</a>. It is also possible to attempt restoring from snapshots made without PBM (this feature is experimental). See <a href="#restore-from-a-backup-made-outside-pbm">Restore from a backup made outside PBM</a>.</p>
 <ol>
 <li>
@@ -6650,7 +6650,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Optional. You can track the restore progress by running the <a href="../reference/pbm-commands.html#pbm-describe-restore"><code>pbm describe-restore</code></a> command.</p>
 </li>
 </ol>
-<h4 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h4>
+<h4 id="post-restore-steps">Post-restore steps<a data-markdown-ignore class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h4>
 <p class="power-number">After the restore is complete, do the following:</p>
 <ol>
 <li>
@@ -6676,7 +6676,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Make a fresh backup to serve as the new base for future restores. </p>
 </li>
 </ol>
-<h3 id="restore-from-a-backup-made-outside-pbm">Restore from a backup made outside PBM<a class="headerlink" href="#restore-from-a-backup-made-outside-pbm" title="Permanent link">¶</a></h3>
+<h3 id="restore-from-a-backup-made-outside-pbm">Restore from a backup made outside PBM<a data-markdown-ignore class="headerlink" href="#restore-from-a-backup-made-outside-pbm" title="Permanent link">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This feature is experimental.</p>
@@ -6732,7 +6732,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Don’t forget to complete the <a href="#post-restore-steps">post-restore steps</a>.</p>
 </li>
 </ol>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="restore-progress.html">View restore progress</a></li>
 </ul>

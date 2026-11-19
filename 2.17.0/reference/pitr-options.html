@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6579,7 +6579,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="point-in-time-recovery-options">Point-in-time recovery options<a class="headerlink" href="#point-in-time-recovery-options" title="Permanent link">¶</a></h1>
+<h1 id="point-in-time-recovery-options">Point-in-time recovery options<a data-markdown-ignore class="headerlink" href="#point-in-time-recovery-options" title="Permanent link">¶</a></h1>
 <div class="highlight"><pre><span></span><code><span class="nt">pitr</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;boolean&gt;</span>
 <span class="w">  </span><span class="nt">oplogSpanMin</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;float64&gt;</span>
@@ -6591,21 +6591,21 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">    </span><span class="s">"rs2:27018"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 <span class="w">    </span><span class="s">"rs3:27019"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"> </span>
 </code></pre></div>
-<h3 id="pitrenabled">pitr.enabled<a class="headerlink" href="#pitrenabled" title="Permanent link">¶</a></h3>
+<h3 id="pitrenabled">pitr.enabled<a data-markdown-ignore class="headerlink" href="#pitrenabled" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Default</em>: False</p>
 <p>Enables point-in-time recovery</p>
-<h3 id="pitroplogspanmin">pitr.oplogSpanMin<a class="headerlink" href="#pitroplogspanmin" title="Permanent link">¶</a></h3>
+<h3 id="pitroplogspanmin">pitr.oplogSpanMin<a data-markdown-ignore class="headerlink" href="#pitroplogspanmin" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: float64 <br>
 <em>Default</em>: 10</p>
 <p>The duration of an oplog span in minutes. If set when the <code>pbm-agent</code> is making an oplog slice, the slice’s span is updated right away.</p>
 <p>If the new duration is smaller than the previous one, the <code>pbm-agent</code> is triggered to save a new slice with the updated span. If the duration is larger, then the next slice is saved with the updated span in scheduled time.</p>
-<h3 id="pitrcompression">pitr.compression<a class="headerlink" href="#pitrcompression" title="Permanent link">¶</a></h3>
+<h3 id="pitrcompression">pitr.compression<a data-markdown-ignore class="headerlink" href="#pitrcompression" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Default</em>: s2</p>
 <p>The compression method for Point-in-Time Recovery oplog slices. </p>
 <p>Supported values: <code>gzip</code>, <code>snappy</code>, <code>lz4</code>, <code>s2</code>, <code>pgzip</code>, <code>zstd</code>. Default: <code>s2</code>.</p>
-<h3 id="pitrcompressionlevel">pitr.compressionLevel<a class="headerlink" href="#pitrcompressionlevel" title="Permanent link">¶</a></h3>
+<h3 id="pitrcompressionlevel">pitr.compressionLevel<a data-markdown-ignore class="headerlink" href="#pitrcompressionlevel" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int</p>
 <p>The compression level is from <code>0</code> till <code>10</code>. The default value depends on the compression method used.</p>
 <p>The following table shows available compression levels per compression method:</p>
@@ -6641,13 +6641,13 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tbody>
 </table>
 <p>Note that the greater value you specify, the more time and computing resources it will take to compress the data.</p>
-<h3 id="pitroplogonly">pitr.oplogOnly<a class="headerlink" href="#pitroplogonly" title="Permanent link">¶</a></h3>
+<h3 id="pitroplogonly">pitr.oplogOnly<a data-markdown-ignore class="headerlink" href="#pitroplogonly" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Default</em>: False <br>
 <em>Required</em>: NO</p>
 <p>Controls whether the base backup is required to start <a href="../features/point-in-time-recovery.html#oplog-slicing">Point-in-Time recovery oplog slicing</a>. When set to true, Percona Backup for MongoDB saves oplog chunks without the base backup snapshot.</p>
 <p>To learn more about the usage, see <a href="../usage/oplog-replay.html">Point-in-Time Recovery oplog replay</a>.</p>
-<h3 id="pitrpriority">pitr.priority<a class="headerlink" href="#pitrpriority" title="Permanent link">¶</a></h3>
+<h3 id="pitrpriority">pitr.priority<a data-markdown-ignore class="headerlink" href="#pitrpriority" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: array of strings</p>
 <p>The list of <code>mongod</code> nodes and their priority for saving oplog slices. The node with the highest priority is elected for saving oplog slices. If several nodes have the same priority, the one among them is randomly elected.</p>
 <p>If not set, the replica set nodes have the default priority as follows:</p>

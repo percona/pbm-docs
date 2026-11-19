@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6515,9 +6515,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="start-the-pbm-agent-process">Start the <code>pbm-agent</code> process<a class="headerlink" href="#start-the-pbm-agent-process" title="Permanent link">¶</a></h1>
+<h1 id="start-the-pbm-agent-process">Start the <code>pbm-agent</code> process<a data-markdown-ignore class="headerlink" href="#start-the-pbm-agent-process" title="Permanent link">¶</a></h1>
 <p>Start <code>pbm-agent</code> on every server with the <code>mongod</code> node installed. </p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Using <code>systemd</code></label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256.5 8a120 120 0 1 1 0 240 120 120 0 1 1 0-240m-29.8 296h60.9c-12.9 26.8-7.8 58.2 11.5 79.5-20.2 22.3-24.8 55.8-9.4 83.4l22.5 40.4c.9 1.6 1.9 3.2 2.9 4.7h-237c-16.4 0-29.7-13.3-29.7-29.7 0-98.5 79.8-178.3 178.3-178.3m205.9-56.4c0-13.3 10.7-24 24-24h48c13.3 0 24 10.7 24 24v6.1c0 18.9 24.1 32.8 40.5 23.4l5-2.9c11.6-6.7 26.5-2.6 33 9.1l22.4 40.2c6.2 11.2 2.6 25.2-8.2 32l-4.7 2.9c-16.2 10.1-16.2 39.9 0 50.1l4.6 2.9c10.8 6.8 14.5 20.8 8.3 32L607 483.8c-6.5 11.7-21.4 15.9-33 9.1l-4.9-2.9c-16.4-9.5-40.5 4.5-40.5 23.4v6.1c0 13.3-10.7 24-24 24h-48c-13.3 0-24-10.7-24-24v-5.9c0-19-24.2-33-40.7-23.5l-4.8 2.8c-11.6 6.7-26.4 2.6-33-9.1l-22.6-40.4c-6.2-11.2-2.6-25.3 8.3-32.1l4.4-2.7c16.3-10.1 16.3-40.1 0-50.2l-4.5-2.8c-10.9-6.8-14.5-20.9-8.3-32.1l22.5-40.3c6.5-11.7 21.4-15.8 32.9-9.1l4.8 2.8c16.5 9.5 40.7-4.5 40.7-23.5v-5.9zm99.9 136.2a52 52 0 1 0-104 0 52 52 0 1 0 104 0"></path></svg></span> Manually</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Using <code>systemd</code></label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256.5 8a120 120 0 1 1 0 240 120 120 0 1 1 0-240m-29.8 296h60.9c-12.9 26.8-7.8 58.2 11.5 79.5-20.2 22.3-24.8 55.8-9.4 83.4l22.5 40.4c.9 1.6 1.9 3.2 2.9 4.7h-237c-16.4 0-29.7-13.3-29.7-29.7 0-98.5 79.8-178.3 178.3-178.3m205.9-56.4c0-13.3 10.7-24 24-24h48c13.3 0 24 10.7 24 24v6.1c0 18.9 24.1 32.8 40.5 23.4l5-2.9c11.6-6.7 26.5-2.6 33 9.1l22.4 40.2c6.2 11.2 2.6 25.2-8.2 32l-4.7 2.9c-16.2 10.1-16.2 39.9 0 50.1l4.6 2.9c10.8 6.8 14.5 20.8 8.3 32L607 483.8c-6.5 11.7-21.4 15.9-33 9.1l-4.9-2.9c-16.4-9.5-40.5 4.5-40.5 23.4v6.1c0 13.3-10.7 24-24 24h-48c-13.3 0-24-10.7-24-24v-5.9c0-19-24.2-33-40.7-23.5l-4.8 2.8c-11.6 6.7-26.4 2.6-33-9.1l-22.6-40.4c-6.2-11.2-2.6-25.3 8.3-32.1l4.4-2.7c16.3-10.1 16.3-40.1 0-50.2l-4.5-2.8c-10.9-6.8-14.5-20.9-8.3-32.1l22.5-40.3c6.5-11.7 21.4-15.8 32.9-9.1l4.8 2.8c16.5 9.5 40.7-4.5 40.7-23.5v-5.9zm99.9 136.2a52 52 0 1 0-104 0 52 52 0 1 0 104 0"></path></svg></span> Manually</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>We recommend to use the packaged service scripts to run <code>pbm-agent</code>.</p>
@@ -6535,7 +6535,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="
 </div>
 </div>
 </div>
-<h2 id="multiple-agents-on-the-same-host">Multiple agents on the same host<a class="headerlink" href="#multiple-agents-on-the-same-host" title="Permanent link">¶</a></h2>
+<h2 id="multiple-agents-on-the-same-host">Multiple agents on the same host<a data-markdown-ignore class="headerlink" href="#multiple-agents-on-the-same-host" title="Permanent link">¶</a></h2>
 <p>Let’s say you run a config server (listen port <code>27019</code>) on the same host as another <code>mongod</code> process (listen port <code>27018</code>). </p>
 <p>In this case there should be two <code>pbm-agent</code> processes:</p>
 <ul>
@@ -6600,7 +6600,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
 </code></pre></div>
 </li>
 </ol>
-<h2 id="how-to-see-the-pbm-agent-log">How to see the <code>pbm-agent</code> log<a class="headerlink" href="#how-to-see-the-pbm-agent-log" title="Permanent link">¶</a></h2>
+<h2 id="how-to-see-the-pbm-agent-log">How to see the <code>pbm-agent</code> log<a data-markdown-ignore class="headerlink" href="#how-to-see-the-pbm-agent-log" title="Permanent link">¶</a></h2>
 <p>With the packaged <code>systemd</code> service, the log output to <code>stdout</code> is captured by
 systemd’s default redirection to <code>systemd-journald</code>. You can view it with the
 command below. See <code>man journalctl</code> for useful options such as <code>--lines</code>, <code>--follow</code>, etc.</p>
@@ -6614,7 +6614,7 @@ Jan<span class="w"> </span><span class="m">22</span><span class="w"> </span><spa
 <p>If you started <code>pbm-agent</code> manually, see the file you redirected <code>stdout</code> and <code>stderr</code> to.</p>
 <p>When a message <code>pbm agent is listening for the commands</code> is printed to the
 <code>pbm-agent</code> log file, <code>pbm-agent</code> confirms that it has connected to its <code>mongod</code> node successfully.</p>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="../usage/backup-physical.html">Make a backup <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg></span></a></p>
 <hr>
 <div class="md-source-file">

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6537,7 +6537,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-210-2023-04-18">Percona Backup for MongoDB 2.1.0 (2023-04-18)<a class="headerlink" href="#percona-backup-for-mongodb-210-2023-04-18" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-210-2023-04-18">Percona Backup for MongoDB 2.1.0 (2023-04-18)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-210-2023-04-18" title="Permanent link">¶</a></h1>
 <table>
 <thead>
 <tr>
@@ -6553,7 +6553,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tbody>
 </table>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../features/incremental-backup.html">Incremental physical backups</a> are now generally available enabling you to use them in production environments. Note that due to the changes in metadata files required for the restore, backups made with previous PBM versions are incompatible for the restore with PBM 2.1.0. </li>
 <li>You can now <a href="../features/selective-backup.html#sharded-collections">selectively back up and restore sharded collections</a>. This improves the management of a desired subset of data in sharded clusters and saves you extra costs on data storage and transfer. This is the tech preview feature due to some <a href="../features/known-limitations.html#selective-backups-and-restores">known limitations</a>.</li>
@@ -6562,11 +6562,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>The improved handling of master keys for data at rest encryption in Percona Server for MongoDB and the retrieval of the key ID/secret path by PBM from a backup simplifies the environment preparation for the physical restore and improves the restore flow.</li>
 <li>The support of AWS tokens for the access to the S3 storage improves the security of your infrastructure and the integration with applications that interact with AWS resources via tokens.</li>
 </ul>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
+<h2 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1007">PBM-1007</a> - Selective backup/restore for sharded collections</li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-850">PBM-850</a> - Add ability to delete older backups</li>
 <li><a href="https://jira.percona.com/browse/PBM-875">PBM-875</a> - Concurrent download from S3 compatible storages</li>
@@ -6584,7 +6584,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="https://jira.percona.com/browse/PBM-1078">PBM-1078</a> - Preserve vault options during intermediate restarts</li>
 <li><a href="https://jira.percona.com/browse/PBM-1085">PBM-1085</a> - Add the <code>--yes</code> flag for commands where <code>--force</code> is used</li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-979">PBM-979</a> - Add support for delayed/arbiter nodes on physical restore</li>
 <li><a href="https://jira.percona.com/browse/PBM-1012">PBM-1012</a> - Drop a collection during selective oplog replay on the create collection stage</li>

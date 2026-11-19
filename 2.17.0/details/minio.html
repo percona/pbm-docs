@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6647,11 +6647,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="minio-and-s3-compatible-storage">MinIO and S3-compatible storage<a class="headerlink" href="#minio-and-s3-compatible-storage" title="Permanent link">¶</a></h1>
+<h1 id="minio-and-s3-compatible-storage">MinIO and S3-compatible storage<a data-markdown-ignore class="headerlink" href="#minio-and-s3-compatible-storage" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB (PBM) works with both AWS S3 and other S3-compatible storage services. We test S3-compatible storage services with PBM using <a href="https://min.io/">MinIO <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <p>This document provides an overview of MinIO as the closest S3-compatible storage. To use the native AWS S3 service, see <a href="s3-storage.html">AWS S3 storage</a>.</p>
 <p><a class="md-button" href="#configuration-example">Configuration example <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 4h2v12l5.5-5.5 1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5 11 16z"></path></svg></span></a></p>
-<h2 id="when-to-use-the-minio-storage-type">When to use the minio storage type<a class="headerlink" href="#when-to-use-the-minio-storage-type" title="Permanent link">¶</a></h2>
+<h2 id="when-to-use-the-minio-storage-type">When to use the minio storage type<a data-markdown-ignore class="headerlink" href="#when-to-use-the-minio-storage-type" title="Permanent link">¶</a></h2>
 <p>Use the <code>minio</code> storage type in the following scenarios:</p>
 <ul>
 <li>
@@ -6665,7 +6665,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p class="admonition-title">Tip</p>
 <p>For S3-compatible storage, try the <code>s3</code> storage type first. Only switch to <code>minio</code> if you encounter compatibility issues or errors in the PBM logs.</p>
 </div>
-<h2 id="bucket-creation">Bucket creation<a class="headerlink" href="#bucket-creation" title="Permanent link">¶</a></h2>
+<h2 id="bucket-creation">Bucket creation<a data-markdown-ignore class="headerlink" href="#bucket-creation" title="Permanent link">¶</a></h2>
 <p class="power-number">To create a bucket, do the following.</p>
 <ol>
 <li>
@@ -6688,7 +6688,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ol>
 <p>After the bucket is created, apply the proper <a href="storage-configuration.html#permissions-setup">permissions for PBM to use the bucket</a>.</p>
-<h2 id="configuration-example">Configuration example<a class="headerlink" href="#configuration-example" title="Permanent link">¶</a></h2>
+<h2 id="configuration-example">Configuration example<a data-markdown-ignore class="headerlink" href="#configuration-example" title="Permanent link">¶</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this <a href="#bucket-creation">bucket is created</a> and managed solely by PBM.</p>
@@ -6705,7 +6705,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">      </span><span class="nt">secret-access-key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-secret-key-here&gt;</span>
 </code></pre></div>
 <p>For the description of configuration options, see <a href="../reference/configuration-options.html">Configuration file options</a>.</p>
-<h2 id="fine-tune-storage-configuration">Fine-tune storage configuration<a class="headerlink" href="#fine-tune-storage-configuration" title="Permanent link">¶</a></h2>
+<h2 id="fine-tune-storage-configuration">Fine-tune storage configuration<a data-markdown-ignore class="headerlink" href="#fine-tune-storage-configuration" title="Permanent link">¶</a></h2>
 <p>The following sections describe how you can fine-tune your storage configuration: </p>
 <ul>
 <li><a href="#debug-logging">debug logging</a> </li>
@@ -6713,16 +6713,16 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="#data-upload-to-storage-with-self-signed-tls-certificates">data upload to storage with self-signed TLS certificates</a>  </li>
 <li><a href="endpoint-map.html">multiple endpoints to the same S3 storage</a> </li>
 </ul>
-<h3 id="debug-logging">Debug logging<a class="headerlink" href="#debug-logging" title="Permanent link">¶</a></h3>
+<h3 id="debug-logging">Debug logging<a data-markdown-ignore class="headerlink" href="#debug-logging" title="Permanent link">¶</a></h3>
 <p>You can enable debug logging for different types of storage requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints log messages in the <code>pbm logs</code> output so that you can debug and diagnose storage request issues or failures.</p>
 <p>To enable debug logging, set the <code>storage.minio.debugTrace</code> option in Percona Backup for MongoDB configuration. This instructs PBM to also print HTTP trace from the MinIO storage in the logs.</p>
-<h2 id="upload-retries">Upload retries<a class="headerlink" href="#upload-retries" title="Permanent link">¶</a></h2>
+<h2 id="upload-retries">Upload retries<a data-markdown-ignore class="headerlink" href="#upload-retries" title="Permanent link">¶</a></h2>
 <p>You can set up the number of attempts for Percona Backup for MongoDB to upload data to S3 storage. Set the <code>storage.minio.retryer.numMaxRetries</code> option in Percona Backup for MongoDB configuration.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">retryer</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">numMaxRetries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
 </code></pre></div>
 <p>This upload retry increases the chances of data upload completion in cases of unstable connection.</p>
-<h2 id="data-upload-to-storage-with-self-signed-tls-certificates">Data upload to storage with self-signed TLS certificates<a class="headerlink" href="#data-upload-to-storage-with-self-signed-tls-certificates" title="Permanent link">¶</a></h2>
+<h2 id="data-upload-to-storage-with-self-signed-tls-certificates">Data upload to storage with self-signed TLS certificates<a data-markdown-ignore class="headerlink" href="#data-upload-to-storage-with-self-signed-tls-certificates" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don’t use certificates signed by public Certificate Authorities (CAs).</p>
 <p>If your <a href="../features/multi-storage.html">storage profiles</a> use services with different certificates, PBM needs to trust all of them. You can provide the certificates in one of two ways:</p>
 <ul>
@@ -6730,7 +6730,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Set <code>SSL_CERT_DIR</code> to a directory that contains separate PEM files.</li>
 </ul>
 <p>If neither variable is set, PBM uses the system root certificates. For details about these environment variables, see <a href="https://pkg.go.dev/crypto/x509#SystemCertPool" target="_blank">Go certificate loading <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
-<h3 id="usage-example">Usage example<a class="headerlink" href="#usage-example" title="Permanent link">¶</a></h3>
+<h3 id="usage-example">Usage example<a data-markdown-ignore class="headerlink" href="#usage-example" title="Permanent link">¶</a></h3>
 <p class="power-number">Configure certificate trust on each host where <code>pbm-agent</code> or the PBM CLI runs:</p>
 <ol>
 <li>

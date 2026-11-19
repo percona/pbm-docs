@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6535,7 +6535,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="output-pbm-agent-logs-to-a-file">Output pbm-agent logs to a file<a class="headerlink" href="#output-pbm-agent-logs-to-a-file" title="Permanent link">¶</a></h1>
+<h1 id="output-pbm-agent-logs-to-a-file">Output pbm-agent logs to a file<a data-markdown-ignore class="headerlink" href="#output-pbm-agent-logs-to-a-file" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.8.0.html">2.8.0</a></p>
 </div>
@@ -6551,14 +6551,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><strong>simplify the log collection process</strong> for further analysis</li>
 <li><strong>comply with the logging and auditing requirements</strong> by storing logs in a secure location for the required period</li>
 </ul>
-<h2 id="logging-configuration-definition">Logging configuration definition<a class="headerlink" href="#logging-configuration-definition" title="Permanent link">¶</a></h2>
+<h2 id="logging-configuration-definition">Logging configuration definition<a data-markdown-ignore class="headerlink" href="#logging-configuration-definition" title="Permanent link">¶</a></h2>
 <p>You can define a logging configuration when you start a <code>pbm-agent</code> as follows:</p>
 <ul>
 <li>using the command line flags. This setting has the highest priority and overrides other setup options.</li>
 <li>using environment variables </li>
 <li><a href="start-agent-with-config.html">via the configuration file</a>. This setting is available starting with version 2.9.0.</li>
 </ul>
-<h2 id="logging-configuration-options">Logging configuration options<a class="headerlink" href="#logging-configuration-options" title="Permanent link">¶</a></h2>
+<h2 id="logging-configuration-options">Logging configuration options<a data-markdown-ignore class="headerlink" href="#logging-configuration-options" title="Permanent link">¶</a></h2>
 <p>The logging configuration options are:</p>
 <table>
 <thead>
@@ -6590,9 +6590,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h2>
+<h2 id="example">Example<a data-markdown-ignore class="headerlink" href="#example" title="Permanent link">¶</a></h2>
 <p>Start the <code>pbm-agent</code> on every node with the following command:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.41 3c1.39 2.71 1.94 5.84 1.59 9-.2 3.16-1.3 6.29-3.17 9l-1.53-1c1.61-2.43 2.55-5.2 2.7-8 .34-2.8-.11-5.57-1.3-8zM5.17 3 6.7 4C5.09 6.43 4.15 9.2 4 12c-.34 2.8.12 5.57 1.3 8l-1.69 1c-1.4-2.71-1.96-5.83-1.61-9 .2-3.16 1.3-6.29 3.17-9m6.91 7.68 2.32-3.23h2.53l-3.78 5 2.2 4.92h-2.26L11.71 14l-2.43 3.33H6.76l3.9-5.12-2.13-4.76h2.27z"></path></svg></span> Environment variables</label><label for="__tabbed_1_3"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><input id="__tabbed_1_3" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.41 3c1.39 2.71 1.94 5.84 1.59 9-.2 3.16-1.3 6.29-3.17 9l-1.53-1c1.61-2.43 2.55-5.2 2.7-8 .34-2.8-.11-5.57-1.3-8zM5.17 3 6.7 4C5.09 6.43 4.15 9.2 4 12c-.34 2.8.12 5.57 1.3 8l-1.69 1c-1.4-2.71-1.96-5.83-1.61-9 .2-3.16 1.3-6.29 3.17-9m6.91 7.68 2.32-3.23h2.53l-3.78 5 2.2 4.92h-2.26L11.71 14l-2.43 3.33H6.76l3.9-5.12-2.13-4.76h2.27z"></path></svg></span> Environment variables</label><label for="__tabbed_1_3"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>pbm-agent<span class="w"> </span>--log-path<span class="o">=</span>/var/log/pbm-agent.log<span class="w"> </span>--log-level<span class="o">=</span>W<span class="w"> </span>--log-json
@@ -6626,7 +6626,7 @@ pbm-agent
 </div>
 <p>If PBM cannot write to the specified file due to some error, it falls back to the <code>STDERR</code> stream. And you can always retrieve the logging information using the <code>pbm logs</code> command.</p>
 <p>This ability to output logs to a file at a custom path enhances log management, making it easier to monitor and audit PBM operations effectively, and facilitates regulatory compliance.</p>
-<h2 id="configuration-reload">Configuration reload<a class="headerlink" href="#configuration-reload" title="Permanent link">¶</a></h2>
+<h2 id="configuration-reload">Configuration reload<a data-markdown-ignore class="headerlink" href="#configuration-reload" title="Permanent link">¶</a></h2>
 <p>You can dynamically change the log level and output format via the configuration file. </p>
 <p>Update the desired options in the configuration file. PBM detects the changes and applies them saving you from restarting the agent.</p>
 <hr>

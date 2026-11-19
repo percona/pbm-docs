@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6513,21 +6513,21 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="logging-options">Logging options<a class="headerlink" href="#logging-options" title="Permanent link">¶</a></h1>
+<h1 id="logging-options">Logging options<a data-markdown-ignore class="headerlink" href="#logging-options" title="Permanent link">¶</a></h1>
 <p>The following options are for the pbm-agent configuration. Read more about it in the <a href="../manage/start-agent-with-config.html">Start pbm-agent using the configuration file</a> chapter.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">log</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="s">"/var/log/pbm.json"</span>
 <span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="s">"info"</span>
 <span class="w">  </span><span class="nt">json</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<h3 id="path">path<a class="headerlink" href="#path" title="Permanent link">¶</a></h3>
+<h3 id="path">path<a data-markdown-ignore class="headerlink" href="#path" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string</p>
 <p>The path to the log file. The file is created if it doesn’t exist. The default value is <code>/dev/stderr</code> which means that the logs are written to the standard error output. If PBM cannot write logs to the specified path for due to some error, it falls back to the default path.</p>
-<h3 id="level">level<a class="headerlink" href="#level" title="Permanent link">¶</a></h3>
+<h3 id="level">level<a data-markdown-ignore class="headerlink" href="#level" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string</p>
 <p>The log severity level. Supported levels are (from low to high): D - Debug (default), I - Info, W - Warning, E - Error, F - Fatal.</p>
 <p>The output includes both the specified severity level and all higher ones.</p>
-<h3 id="json">json<a class="headerlink" href="#json" title="Permanent link">¶</a></h3>
+<h3 id="json">json<a data-markdown-ignore class="headerlink" href="#json" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean</p>
 <p>Output log messages in JSON format. If undefined, logs are written in the default text format.</p>
 <hr>

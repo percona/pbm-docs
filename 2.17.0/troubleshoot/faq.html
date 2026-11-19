@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6623,8 +6623,8 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="faq">FAQ<a class="headerlink" href="#faq" title="Permanent link">¶</a></h1>
-<h2 id="whats-the-difference-between-pbm-and-mongodump">What’s the difference between PBM and <code>mongodump</code>?<a class="headerlink" href="#whats-the-difference-between-pbm-and-mongodump" title="Permanent link">¶</a></h2>
+<h1 id="faq">FAQ<a data-markdown-ignore class="headerlink" href="#faq" title="Permanent link">¶</a></h1>
+<h2 id="whats-the-difference-between-pbm-and-mongodump">What’s the difference between PBM and <code>mongodump</code>?<a data-markdown-ignore class="headerlink" href="#whats-the-difference-between-pbm-and-mongodump" title="Permanent link">¶</a></h2>
 <p><code>mongodump</code> is a “logical” backup solution only while Percona Backup for MongoDB supports both logical and physical backups. Both solutions have equal performance for non-sharded replica sets. However, as opposed to <code>mongodump</code>, Percona Backup for MongoDB allows you to achieve the following goals:</p>
 <ul>
 <li>Make consistent backups and restores in sharded clusters.</li>
@@ -6632,15 +6632,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Restore your database to a specific point in time.</li>
 <li>Run backups / restores on each replica set in parallel while <code>mongodump</code> runs in one process on <code>mongos</code> node.</li>
 </ul>
-<h2 id="why-does-percona-backup-for-mongodb-use-utc-timezone-instead-of-server-local-timezone">Why does Percona Backup for MongoDB use UTC timezone instead of server local timezone?<a class="headerlink" href="#why-does-percona-backup-for-mongodb-use-utc-timezone-instead-of-server-local-timezone" title="Permanent link">¶</a></h2>
+<h2 id="why-does-percona-backup-for-mongodb-use-utc-timezone-instead-of-server-local-timezone">Why does Percona Backup for MongoDB use UTC timezone instead of server local timezone?<a data-markdown-ignore class="headerlink" href="#why-does-percona-backup-for-mongodb-use-utc-timezone-instead-of-server-local-timezone" title="Permanent link">¶</a></h2>
 <p><code>pbm-agents</code> use UTC time zone by design. The reason behind this is to avoid user misunderstandings when replica set / cluster nodes are distributed geographically in different time zones.</p>
 <p>Starting with version 2.0.1, you can change the time zone for <code>pbm logs</code> output.</p>
-<h2 id="can-i-restore-a-single-collection-with-percona-backup-for-mongodb">Can I restore a single collection with Percona Backup for MongoDB?<a class="headerlink" href="#can-i-restore-a-single-collection-with-percona-backup-for-mongodb" title="Permanent link">¶</a></h2>
+<h2 id="can-i-restore-a-single-collection-with-percona-backup-for-mongodb">Can I restore a single collection with Percona Backup for MongoDB?<a data-markdown-ignore class="headerlink" href="#can-i-restore-a-single-collection-with-percona-backup-for-mongodb" title="Permanent link">¶</a></h2>
 <p>Yes. Starting with version 2.0.0, you can restore a single collection with Percona Backup for MongoDB. This functionality is available for logical backups and restores only. To learn more, see <a href="../features/selective-backup.html">Selective backup and restore</a>.</p>
-<h2 id="can-i-back-up-specific-shards-in-a-cluster">Can I back up specific shards in a cluster?<a class="headerlink" href="#can-i-back-up-specific-shards-in-a-cluster" title="Permanent link">¶</a></h2>
+<h2 id="can-i-back-up-specific-shards-in-a-cluster">Can I back up specific shards in a cluster?<a data-markdown-ignore class="headerlink" href="#can-i-back-up-specific-shards-in-a-cluster" title="Permanent link">¶</a></h2>
 <p>No, since this would result in backups with inconsistent timestamps across the cluster. Such backups would be invalid for restore.</p>
 <p>Percona Backup for MongoDB backs up the whole state of a sharded cluster, and this guarantees data consistency during the restore.</p>
-<h2 id="do-i-need-to-stop-the-balancer-for-pitr-restore">Do I need to stop the balancer for PITR restore?<a class="headerlink" href="#do-i-need-to-stop-the-balancer-for-pitr-restore" title="Permanent link">¶</a></h2>
+<h2 id="do-i-need-to-stop-the-balancer-for-pitr-restore">Do I need to stop the balancer for PITR restore?<a data-markdown-ignore class="headerlink" href="#do-i-need-to-stop-the-balancer-for-pitr-restore" title="Permanent link">¶</a></h2>
 <p>Yes. The preconditions for both Point-in-Time Recovery restore and regular restore are the same:</p>
 <ol>
 <li>
@@ -6650,7 +6650,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Make sure no writes are made to the database during restore. This ensures data consistency.</p>
 </li>
 </ol>
-<h2 id="why-did-my-physical-backup-fail-with-location50917-or-location50915-errors">Why did my physical backup fail with Location50917 or Location50915 errors?<a class="headerlink" href="#why-did-my-physical-backup-fail-with-location50917-or-location50915-errors" title="Permanent link">¶</a></h2>
+<h2 id="why-did-my-physical-backup-fail-with-location50917-or-location50915-errors">Why did my physical backup fail with Location50917 or Location50915 errors?<a data-markdown-ignore class="headerlink" href="#why-did-my-physical-backup-fail-with-location50917-or-location50915-errors" title="Permanent link">¶</a></h2>
 <p>Both <code>Location50917</code> and <code>Location50915</code> errors happen when Percona Backup for MongoDB attempts to open a <code>$backupCursor</code> during WiredTiger checkpoint operations. </p>
 <p><strong>Location50917</strong> error occurs when opening a backup cursor conflicts with an active checkpoint operation
 <strong>Location50915</strong> is a similar timing conflict related to checkpoint operations during backup cursor initialization</p>
@@ -6672,9 +6672,9 @@ requiring manual intervention.</p>
 <li>Consider scheduling backups during periods of lower database activity if the issue persists</li>
 <li>Review checkpoint frequency settings if checkpoints are occurring excessively</li>
 </ol>
-<h2 id="can-i-install-pbm-on-macbook">Can I install PBM on MacBook?<a class="headerlink" href="#can-i-install-pbm-on-macbook" title="Permanent link">¶</a></h2>
+<h2 id="can-i-install-pbm-on-macbook">Can I install PBM on MacBook?<a data-markdown-ignore class="headerlink" href="#can-i-install-pbm-on-macbook" title="Permanent link">¶</a></h2>
 <p>You cannot install PBM on MacBook using the package manager. PBM packages are available and tested for Linux distributions only. However, you can run PBM on MacBook as a Docker container. See the <a href="../install/docker.html">Run in Docker</a> guide for guidelines. </p>
-<h2 id="can-i-connect-pbm-to-mongodb-with-disabled-authorization">Can I connect PBM to MongoDB with disabled authorization?<a class="headerlink" href="#can-i-connect-pbm-to-mongodb-with-disabled-authorization" title="Permanent link">¶</a></h2>
+<h2 id="can-i-connect-pbm-to-mongodb-with-disabled-authorization">Can I connect PBM to MongoDB with disabled authorization?<a data-markdown-ignore class="headerlink" href="#can-i-connect-pbm-to-mongodb-with-disabled-authorization" title="Permanent link">¶</a></h2>
 <p>While we <strong>don’t recommend</strong> disabling authorization for MongoDB due to security considerations, there might be scenarios (such as testing environments) where you need to connect PBM (Percona Backup Manager) to a MongoDB instance without authentication. Follow these steps to ensure a successful setup:</p>
 <ol>
 <li>If you’ve set the <a href="https://www.mongodb.com/docs/manual/reference/configuration-options/#mongodb-setting-net.bindIp"><code>bindIP</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> configuration parameter for your <code>mongod</code> or <code>mongos</code> processes, ensure that the <code>localhost</code> value is included in the list of allowed IP addresses. The <code>pbm-agent</code> process connects to its local MongoDB node using a standalone type of connection. </li>

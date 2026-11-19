@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6625,7 +6625,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="pbm-user-database-roles">PBM user database roles<a class="headerlink" href="#pbm-user-database-roles" title="Permanent link">¶</a></h1>
+<h1 id="pbm-user-database-roles">PBM user database roles<a data-markdown-ignore class="headerlink" href="#pbm-user-database-roles" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB requires a dedicated database user holding a specific set of MongoDB roles. The table below gives a quick overview; the sections that follow explain why each role is needed and what it does — and does not — grant.</p>
 <table>
 <thead>
@@ -6669,21 +6669,21 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="built-in-mongodb-roles">Built-in MongoDB roles<a class="headerlink" href="#built-in-mongodb-roles" title="Permanent link">¶</a></h2>
-<h3 id="readwrite-on-admin-db"><code>readWrite</code> (on <code>admin</code> db)<a class="headerlink" href="#readwrite-on-admin-db" title="Permanent link">¶</a></h3>
+<h2 id="built-in-mongodb-roles">Built-in MongoDB roles<a data-markdown-ignore class="headerlink" href="#built-in-mongodb-roles" title="Permanent link">¶</a></h2>
+<h3 id="readwrite-on-admin-db"><code>readWrite</code> (on <code>admin</code> db)<a data-markdown-ignore class="headerlink" href="#readwrite-on-admin-db" title="Permanent link">¶</a></h3>
 <p>PBM stores its operational metadata — backup status, restore progress, configuration, and agent coordination — in the PBM control collections in the <code>admin</code> database (for example, <code>admin.pbmConfig</code>, <code>admin.pbmBackups</code>, <code>admin.pbmAgents</code>, and others; see <a href="control-collections.html">PBM control collections</a>). The <code>readWrite</code> role grants PBM the ability to read from and write to these collections so all agents in a cluster can share state and coordinate operations.
 This role is scoped to the <code>admin</code> database only. It does not grant read or write access to application databases.</p>
-<h3 id="backup"><code>backup</code><a class="headerlink" href="#backup" title="Permanent link">¶</a></h3>
+<h3 id="backup"><code>backup</code><a data-markdown-ignore class="headerlink" href="#backup" title="Permanent link">¶</a></h3>
 <p>The <code>backup</code> role is a MongoDB built-in role that allows reading all data across all databases and collections (via <code>listDatabases</code>, <code>listCollections</code>, and <code>find</code> on all namespaces), as well as reading the oplog (<code>local.oplog.rs</code>). PBM requires this to stream a consistent snapshot of all data during a backup, including the oplog data needed for point-in-time recovery (PITR).</p>
 <p>This is a read-only role with respect to application data. No write access to application databases is granted by this role alone.</p>
-<h3 id="clustermonitor"><code>clusterMonitor</code><a class="headerlink" href="#clustermonitor" title="Permanent link">¶</a></h3>
+<h3 id="clustermonitor"><code>clusterMonitor</code><a data-markdown-ignore class="headerlink" href="#clustermonitor" title="Permanent link">¶</a></h3>
 <p>PBM agents need to query the cluster topology and health — member states, replication lag, shard configuration, and whether a node is primary or secondary — to make safe decisions about where to run a backup, when to wait for replication to catch up, and how to coordinate across a replica set or sharded cluster. The <code>clusterMonitor</code> role grants access to commands like <code>serverStatus</code>, <code>replSetGetStatus</code>, <code>listShards</code>, and similar diagnostic commands.</p>
 <p>This role grants read-only access to monitoring and operational metadata. It does not allow modifying cluster configuration or accessing application data.</p>
-<h3 id="restore"><code>restore</code><a class="headerlink" href="#restore" title="Permanent link">¶</a></h3>
+<h3 id="restore"><code>restore</code><a data-markdown-ignore class="headerlink" href="#restore" title="Permanent link">¶</a></h3>
 <p>During a restore operation, PBM needs to write data back into all databases and collections, recreate indexes, and replay oplog entries to reach a consistent point-in-time state. The <code>restore</code> role grants the necessary <code>insert</code>, <code>update</code>, and <code>createCollection</code>/<code>createIndex</code> privileges across all namespaces to perform these operations.</p>
 <p>This role is only exercised during a restore operation. It grants broad write privileges and should be treated as a sensitive, privileged role in your access review process.</p>
-<h2 id="custom-role">Custom role<a class="headerlink" href="#custom-role" title="Permanent link">¶</a></h2>
-<h3 id="pbmanyaction-custom-role-on-admin-db"><code>pbmAnyAction</code> (custom role on <code>admin</code> db)<a class="headerlink" href="#pbmanyaction-custom-role-on-admin-db" title="Permanent link">¶</a></h3>
+<h2 id="custom-role">Custom role<a data-markdown-ignore class="headerlink" href="#custom-role" title="Permanent link">¶</a></h2>
+<h3 id="pbmanyaction-custom-role-on-admin-db"><code>pbmAnyAction</code> (custom role on <code>admin</code> db)<a data-markdown-ignore class="headerlink" href="#pbmanyaction-custom-role-on-admin-db" title="Permanent link">¶</a></h3>
 <p>This custom role grants the <code>anyAction</code> privilege on <code>anyResource</code>, which is effectively full administrative access. PBM uses this capability for a limited set of commands that fall outside what the standard built-in roles cover:
 - <code>setParameter</code> / <code>getParameter</code> — to read or temporarily adjust certain <code>mongod</code> parameters during backup/restore (for example, disabling the balancer on sharded clusters).
 - <code>fsync</code> / <code>fsyncUnlock</code> — on some backup paths (particularly for physical/hot backups with Percona Server for MongoDB), PBM may need to flush and lock the WiredTiger storage engine.

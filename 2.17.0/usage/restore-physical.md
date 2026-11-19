@@ -1,0 +1,200 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Restore from a physical backup
+
+To restore a backup, use the [`pbm restore`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/incremental-backup.html)) and restores the database up to the [restore_to_time](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
+
+## Considerations
+
+1. Disable point-in-time recovery. Restore and point-in-time recovery oplog slicing operations are incompatible with each other and cannot be run simultaneously.
+
+   ```
+   pbm config --set pitr.enabled=false
+   ```
+
+1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+
+1. Make sure all nodes in the cluster are healthy (i.e. report either PRIMARY or SECONDARY). Each `pbm-agent` needs to be able to connect to its local node and run queries in order to perform the restore.
+
+1. For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.
+
+1. After a physical restore completes, the database remains offline because it is intentionally left down by `pbm-agent`. To bring the database back to normal operation, follow the steps in [Post-restore steps](#post-restore-steps).
+
+## Before you start
+
+1. Shut down all `mongos` nodes as the database won’t be available while the restore is in progress.
+
+1. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
+
+1. Stop the arbiter nodes manually since there’s no `pbm-agent` on these nodes to do that automatically.
+
+1. Check that the `systemctl` restart policy for the `pbm-agent.service` and `mongod.service` processes is not set to `always` or `on-success`:
+
+   ```
+   sudo systemctl show mongod.service | grep Restart
+   sudo systemctl show pbm-agent.service | grep Restart
+   ```
+
+   Sample output
+
+   ```
+   Restart=no
+   RestartUSec=100ms
+   ```
+
+   During physical restores, the database must not be automatically restarted as this is controlled by the `pbm-agent`.
+
+## Restore a database
+
+Warning
+
+If Encryption at Rest is enabled, the restore requires access to the same encryption key that was active when the backup was taken.
+
+- For manually managed key files, update mongod.conf on all nodes to point to the original key before starting the restore procedure.
+- For Hashicorp Vault-managed keys, ensure the historical key version is still available inside Vault. No changes to mongod.conf are required.
+
+1. List the backups
+
+   ```
+   pbm list
+   ```
+
+1. Make a restore
+
+   ```
+   pbm restore <backup_name>
+   ```
+
+   Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+   Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+   After that, `pbm-agent` processes stop `mongod` nodes, clean up the data directory and copy the data from the storage onto every node. During this process, the database is restarted several times.
+
+1. [Track the restore progress](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-progress.html) using the `pbm describe-restore` command. Don’t run any other commands since they may interrupt the restore flow and cause the issues with the database.
+
+   ```
+   pbm describe-restore <restore_name> -c pbm_config.yaml
+   ```
+
+A restore has the `Done` status when it succeeded on all nodes.
+
+If it failed on some nodes, it has the `partlyDone` status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the [Partially done physical restores](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/restore-partial.html) chapter.
+
+For either status, proceed with the [post-restore steps](#post-restore-steps).
+
+### Post-restore steps
+
+After the restore is complete, do the following:
+
+1. Remove the contents of the datadir on any arbiter nodes
+
+1. Restart all `mongod` nodes
+
+   Note
+
+   You may see the following message in the `mongod` logs after the cluster restart:
+
+   ```
+   "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
+   ```
+
+   This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
+
+1. Restart all `pbm-agents`
+
+1. Run the following command to resync the backup list with the storage:
+
+   ```
+   pbm config --force-resync -w
+   ```
+
+1. Start the balancer and start `mongos` nodes.
+
+1. We recommend to make a fresh backup to serve as the new base for future restores.
+
+1. [Enable point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.html#enable-point-in-time-recovery) if required.
+
+## Define a `mongod` binary location
+
+Version added: [2.0.4](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.4.html)
+
+During physical restores, Percona Backup for MongoDB starts a temporary database instance. By default, it uses the location of the `mongod` binaries from the `$PATH` variable to do so. If you have defined a custom path to the `mongod` binaries, make Percona Backup for MongoDB aware of it:
+
+**Configuration file**
+
+```
+restore:
+    mongodLocation: /path/to/mongod
+```
+
+**Command line**
+
+```
+pbm config --set restore.mongodLocation=/path/to/mongod/
+```
+
+If you have different paths to `mongod` binaries on every node of your cluster / replica set, use the `mongodLocationMap` option to specify the custom path for each node.
+
+```
+restore:
+    mongodLocationMap:
+       "node01:27017": /path/to/mongod
+       "node03:27017": /another/path/to/mongod
+```
+
+When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See [Run Percona Backup for MongoDB in a Docker container](https://docs.percona.com/percona-backup-mongodb/install/docker.html) for more information.
+
+### Parallel data download
+
+Version added: [2.1.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.1.0.html)
+
+Percona Backup for MongoDB downloads data chunks from S3 storage concurrently during physical restores, improving restore performance. For benchmarking results and implementation details, see the blog post [Speeding up MongoDB Restores in Percona Backup for MongoDB](https://www.percona.com/blog/speeding-up-restores-in-percona-backup-for-mongodb/) by *Andrew Pogrebnoi*.
+
+Here’s how it works:
+
+During the physical restore, Percona Backup for MongoDB starts the workers. The number of workers equals to the number of CPU cores by default. Each worker has a memory buffer allocated for it. The buffer is split into spans for the size of the data chunk. The worker acquires the span to download a data chunk and stores it into the buffer. When the buffer is full, the worker waits for the free span to continue the download.
+
+You can fine-tune the parallel download depending on your hardware resources and database load. Edit the PBM configuration file and specify the following settings:
+
+```
+restore:
+   numDownloadWorkers: <int>
+   maxDownloadBufferMb: <int>
+   downloadChunkMb: 32
+```
+
+- `numDownloadWorkers` - the number of workers to download data from the storage. By default, it equals to the number of CPU cores
+- `maxDownloadBufferMb` - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as `numDownloadWorkers * downloadChunkMb * 16`
+- `downloadChunkMb` is the size of the data chunk to download (by default, 32 MB)
+
+### Parallel file copy for filesystem or NFS storage
+
+By default, PBM copies backup files sequentially during a physical restore from filesystem or NFS storage. On fast NFS mounts, this limits restore throughput regardless of available network bandwidth.
+
+To copy files in parallel, set `restore.numParallelFiles` in the PBM configuration:
+
+```
+restore:
+  numParallelFiles: 4
+```
+
+Or pass `--num-parallel-files`:
+
+```
+pbm restore <backup_name> --num-parallel-files=4
+```
+
+Note
+
+Parallel file copy applies to **physical restores from filesystem or NFS storage only**. It has no effect on logical restores or on S3-compatible storage.
+
+## Next steps
+
+[Point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-physical.html)
+
+## Useful links
+
+- [View restore progress](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-progress.html)
+- [Restore into a new environment](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-new-env.html)
+- [Restore into a cluster under a different name](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-remapping.html)

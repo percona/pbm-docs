@@ -1,0 +1,19 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# pbm-agent
+
+A `pbm-agent` is a process that runs backup, restore, delete, and other operations available with Percona Backup for MongoDB.
+
+A `pbm-agent` instance must run for **every** `mongod` instance that is not an arbiter node. This includes replica set nodes that are currently secondaries and config server replica set nodes in a sharded cluster.
+
+An operation is triggered when the [`pbm` CLI](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#pbm-cli) makes an update to the [PBM Control collection](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#pbm-control-collections). All `pbm-agents` monitor changes to the PBM control collections, but only one `pbm-agent` in each replica set will be elected to execute an operation. The elections are done by a random choice among secondary nodes. If no secondary nodes respond, then the `pbm-agent` on the primary node is elected for an operation.
+
+The elected `pbm-agent` acquires a lock for an operation. This prevents mutually exclusive operations like backup and restore to be executed simultaneously.
+
+Nomination and election process within PBM
+
+If the `pbm-agent` running on the primary node of the replica set or on the primary node of the config replica set fails, the backup will not start as these agents are responsible for internal nomination process. You must therefore ensure that all the `pbm-agent` processes are up and running.
+
+When the operation is complete, the `pbm-agent` releases the lock and updates the PBM control collections.
+
+A single `pbm-agent` is involved with only one cluster (or non-sharded replica set). The `pbm` CLI utility can connect to any cluster to which it has network access, so it is possible for one user to list and launch backups or restores on many clusters.

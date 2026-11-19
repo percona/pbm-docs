@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6671,19 +6671,19 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2100-2025-06-26">Percona Backup for MongoDB 2.10.0 (2025-06-26)<a class="headerlink" href="#percona-backup-for-mongodb-2100-2025-06-26" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2100-2025-06-26">Percona Backup for MongoDB 2.10.0 (2025-06-26)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2100-2025-06-26" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release provides the following features and improvements:</p>
-<h3 id="fallback-strategy-for-physical-restores-to-ensure-cluster-operation">Fallback strategy for physical restores to ensure cluster operation<a class="headerlink" href="#fallback-strategy-for-physical-restores-to-ensure-cluster-operation" title="Permanent link">¶</a></h3>
+<h3 id="fallback-strategy-for-physical-restores-to-ensure-cluster-operation">Fallback strategy for physical restores to ensure cluster operation<a data-markdown-ignore class="headerlink" href="#fallback-strategy-for-physical-restores-to-ensure-cluster-operation" title="Permanent link">¶</a></h3>
 <p>You can now configure PBM to use a fallback directory during a physical restores. At the restore start, PBM copies the <code>dbPath</code> contents to a special fallback directory. Then, the restore flows as usual. </p>
 <p>If the restore is successful, PBM deletes the fallback directory. If PBM detects that the cluster is in an error state, it triggers the fallback procedure and restores the cluster to its pre-restore state. This ensures your cluster remains operational, allowing you to retry the restore from another backup or perform other maintenance tasks.</p>
 <p>Note that this functionality requires sufficient free disk space on each <code>mongod</code> instance to store the <code>dbPath</code> contents. At the restore start, PBM checks the available disk space and logs this information.</p>
 <p>With this feature, your cluster can remain operational even if errors occur during a physical restore. For more details about the fallback flow and configuration, see the <a href="../features/physical.html#physical-restores-with-a-fallback-directory">documentation</a>.</p>
-<h3 id="improved-security-via-the-updated-libraries">Improved security via the updated libraries<a class="headerlink" href="#improved-security-via-the-updated-libraries" title="Permanent link">¶</a></h3>
+<h3 id="improved-security-via-the-updated-libraries">Improved security via the updated libraries<a data-markdown-ignore class="headerlink" href="#improved-security-via-the-updated-libraries" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB now uses the AWS SDK v2 for Go, which includes the latest features, security updates and improvements. This ensures the secure communication with AWS services.</p>
-<h3 id="support-of-google-cloud-client-library">Support of Google Cloud Client library<a class="headerlink" href="#support-of-google-cloud-client-library" title="Permanent link">¶</a></h3>
+<h3 id="support-of-google-cloud-client-library">Support of Google Cloud Client library<a data-markdown-ignore class="headerlink" href="#support-of-google-cloud-client-library" title="Permanent link">¶</a></h3>
 <p>PBM now supports Google Cloud Client Library for interacting with Google Cloud Storage (GCS). PBM  communicates with Google Cloud Storage (GCS) via the JSON API and XML API. The preferred approach is to use the JSON API with a service account. HMAC keys are mainly used for compatibility with S3-style APIs. </p>
 <p>Note that PBM configuration for a backup storage now has a dedicated <code>gcs</code> subsection. If you’re upgrading to PBM 2.10.0 or later, you must update your backup configuration accordingly:</p>
 <ol>
@@ -6692,10 +6692,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ol>
 <p>Read more about available options in the <a href="../details/gcs.html">Google Cloud Storage (GCS)</a> chapter.</p>
 <p>This integration offers improved compatibility, more predictable API responses and better long-term support for GCS features.</p>
-<h2 id="packaging-changes">Packaging changes<a class="headerlink" href="#packaging-changes" title="Permanent link">¶</a></h2>
+<h2 id="packaging-changes">Packaging changes<a data-markdown-ignore class="headerlink" href="#packaging-changes" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB is no longer supported on Ubuntu 20.04 (Focal Fossa) as this operating system has reached end of life.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1506">PBM-1506</a> - Add support for concurrent downloading of the single file for GCS</p>
@@ -6704,7 +6704,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1507">PBM-1507</a>, <a href="https://perconadev.atlassian.net/browse/PBM-1511">PBM-1511</a> - Add the ability to make physical restores with a fallback directory to ensure cluster operation</p>
 </li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-772">PBM-772</a> - Use the “hello” command instead of “isMaster”</p>
@@ -6728,7 +6728,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1544">PBM-1544</a> - Add a new “Status” column  to <code>pbm status</code> output to explicitly show a backup status</p>
 </li>
 </ul>
-<h3 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
+<h3 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1238">PBM-1238</a> - Fixed the error of reading the timestamp from a cluster heartbeat when parsing the physical restore status from a metadata file. If that field is missing, uninitialized, or improperly formatted in the database, the parsing fails. The issue is fixed by processing the timestamp from the metadata file if it exists</p>

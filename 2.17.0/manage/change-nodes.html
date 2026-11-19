@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6491,10 +6491,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="adjust-pbm-configuration-when-the-number-of-replica-set-members-changes">Adjust PBM configuration when the number of replica set members changes<a class="headerlink" href="#adjust-pbm-configuration-when-the-number-of-replica-set-members-changes" title="Permanent link">¶</a></h1>
+<h1 id="adjust-pbm-configuration-when-the-number-of-replica-set-members-changes">Adjust PBM configuration when the number of replica set members changes<a data-markdown-ignore class="headerlink" href="#adjust-pbm-configuration-when-the-number-of-replica-set-members-changes" title="Permanent link">¶</a></h1>
 <p>You may add or remove replica set members depending on your workload. With the default configuration for node priorities and <code>mongod</code> binary paths, PBM scales up or down automatically. </p>
 <p>If you adjusted any of these configurations, here’s what you need to do to ensure that PBM continues to operate without errors:</p>
-<h2 class="power-number" id="add-a-new-replica-set-member">Add a new replica set member<a class="headerlink" href="#add-a-new-replica-set-member" title="Permanent link">¶</a></h2>
+<h2 class="power-number" id="add-a-new-replica-set-member">Add a new replica set member<a data-markdown-ignore class="headerlink" href="#add-a-new-replica-set-member" title="Permanent link">¶</a></h2>
 <ol>
 <li><a href="../installation.html">Install Percona Backup for MongoDB</a> on a new <code>mongod</code> node</li>
 <li>Add a new <code>mongod</code> node to a replica set </li>
@@ -6506,7 +6506,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Adjust PBM configuration for <a href="../usage/backup-priority.html">node priorities for backups</a>, <a href="../features/point-in-time-recovery.html#adjust-node-priority-for-oplog-slices">oplog slices</a> or <a href="../usage/restore-physical.html#define-a-mongod-binary-location">define custom paths to mongod binaries</a> to include the new node.</p>
 </li>
 </ol>
-<h2 class="power-number" id="remove-a-replica-set-member">Remove a replica set member<a class="headerlink" href="#remove-a-replica-set-member" title="Permanent link">¶</a></h2>
+<h2 class="power-number" id="remove-a-replica-set-member">Remove a replica set member<a data-markdown-ignore class="headerlink" href="#remove-a-replica-set-member" title="Permanent link">¶</a></h2>
 <ol>
 <li>Edit the PBM configuration for <a href="../usage/backup-priority.html">node priorities for backups</a>, <a href="../features/point-in-time-recovery.html#adjust-node-priority-for-oplog-slices">oplog slices</a> or <a href="../usage/restore-physical.html#define-a-mongod-binary-location">define custom paths to mongod binaries</a> to exclude the node you plan to remove.</li>
 <li>

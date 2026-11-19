@@ -1,0 +1,70 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Restore from an incremental backup
+
+To restore a backup, use the [`pbm restore`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/incremental-backup.html)) and restores the database up to the [restore_to_time](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
+
+## Considerations
+
+1. The Percona Server for MongoDB version for both backup and restore data must be within the same major release.
+1. Incremental backups made with PBM before PBM 2.1.0 are incompatible for restore with PBM 2.1.0 and onwards.
+1. Physical restores are not supported for deployments with arbiter nodes.
+
+## Before you start
+
+1. Shut down all `mongos` nodes, `pmm-agent` processes and clients that can do writes to the database as it won’t be available while the restore is in progress.
+
+1. Check that the `systemctl` restart policy for the `pbm-agent.service` is not set to `always` or `on-success`:
+
+   ```
+   sudo systemctl show pbm-agent.service | grep Restart
+   ```
+
+   Sample output
+
+   ```
+   Restart=no
+   RestartUSec=100ms
+   ```
+
+   During physical restores, the database must not be automatically restarted as this is controlled by the `pbm-agent`.
+
+## Restore a database
+
+Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the `pbm restore` command:
+
+```
+pbm restore 2022-11-25T14:13:43Z
+```
+
+Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.
+
+### Post-restore steps
+
+After the restore is complete, do the following:
+
+1. Restart all `mongod` nodes and `pbm-agents`.
+
+   Note
+
+   You may see the following message in the `mongod` logs after the cluster restart:
+
+   ```
+   "s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}}}
+   ```
+
+   This is expected behavior of periodic checks upon the database start. During the restore, the `config.system.sessions` collection is dropped but Percona Server for MongoDB recreates it eventually. It is a normal procedure. No action is required from your end.
+
+1. Resync the backup list from the storage.
+
+1. Start the balancer and the `mongos` node.
+
+1. As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.
+
+## Useful links
+
+- [View restore progress](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-progress.html)

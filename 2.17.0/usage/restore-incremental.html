@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6571,15 +6571,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="restore-from-an-incremental-backup">Restore from an incremental backup<a class="headerlink" href="#restore-from-an-incremental-backup" title="Permanent link">¶</a></h1>
+<h1 id="restore-from-an-incremental-backup">Restore from an incremental backup<a data-markdown-ignore class="headerlink" href="#restore-from-an-incremental-backup" title="Permanent link">¶</a></h1>
 <p>To restore a backup, use the <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or <a href="../features/incremental-backup.html">incremental</a>) and restores the database up to the <a href="../reference/glossary.html#completion-time">restore_to_time</a> timestamp (available in <code>pbm list</code> output starting with version 1.4.0).</p>
-<h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
+<h2 id="considerations">Considerations<a data-markdown-ignore class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
 <ol>
 <li>The Percona Server for MongoDB version for both backup and restore data must be within the same major release.</li>
 <li>Incremental backups made with PBM before PBM 2.1.0 are incompatible for restore with PBM 2.1.0 and onwards.</li>
 <li>Physical restores are not supported for deployments with arbiter nodes.</li>
 </ol>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <ol>
 <li>Shut down all <code>mongos</code> nodes, <code>pmm-agent</code> processes and clients that can do writes to the database as it won’t be available while the restore is in progress.</li>
 <li>
@@ -6595,7 +6595,7 @@ RestartUSec=100ms
 <p>During physical restores, the database must not be automatically restarted as this is controlled by the <code>pbm-agent</code>.</p>
 </li>
 </ol>
-<h2 id="restore-a-database">Restore a database<a class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
+<h2 id="restore-a-database">Restore a database<a data-markdown-ignore class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
 <p>Restore flow from an incremental backup is the same as the restore from a full physical backup: specify the backup name for the <code>pbm restore</code> command:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span><span class="m">2022</span>-11-25T14:13:43Z
 </code></pre></div>
@@ -6604,7 +6604,7 @@ RestartUSec=100ms
 <p>Before a restore operation is executed you have to confirm the action (to bypass it, add the <code>-y</code> or <code>--yes</code> flag).</p>
 </div>
 <p>Percona Backup for MongoDB recognizes the backup type, finds the base incremental backup, restores the data from it and then restores the modified data from applicable incremental backups.</p>
-<h3 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
+<h3 id="post-restore-steps">Post-restore steps<a data-markdown-ignore class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
 <p>After the restore is complete, do the following:</p>
 <ol>
 <li>
@@ -6623,7 +6623,7 @@ RestartUSec=100ms
 <li>Start the balancer and the <code>mongos</code> node.</li>
 <li>As the general recommendation, make a new base backup to renew the starting point for subsequent incremental backups.</li>
 </ol>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="restore-progress.html">View restore progress</a></li>
 </ul>

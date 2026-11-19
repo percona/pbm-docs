@@ -1,0 +1,95 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Point-in-time restore from physical backups
+
+## Preconditions
+
+Run [`pbm status`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-status) or [`pbm list`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-list) commands to check that the full backup snapshot exists and there are oplog slices.
+
+## Before you start
+
+Before restoring, prepare the cluster to prevent sharding metadata changes and ensure a consistent restore.
+
+1. Stop the balancer and `mongos` nodes.
+1. Make sure no writes are made to the database during restore.
+
+## Procedure
+
+Version added: [2.2.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.2.0.html)
+
+You can recover your database from a full or an incremental physical backup in the same automated fashion as from a logical one. Percona Backup for MongoDB restores the backup snapshot and automatically replays the oplog events on top of it up to the specified time, guaranteeing data consistency. This helps you prevent data loss during a disaster and gives you the same user experience when managing backups and restores.
+
+To restore a database from a physical backup, specify the time for the [`pbm restore`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-restore) command:
+
+```
+pbm restore --time <timestamp>
+```
+
+Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+Percona Backup for MongoDB uses a full or an incremental backup (if available) and restores the database from it up to the specified time.
+
+You can [track the restore progress](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-progress.html) using the `pbm describe-restore` command. Don’t run any other commands since they may interrupt the restore flow and cause the issues with the database.
+
+```
+pbm describe-restore <restore_name> -c pbm_config.yaml
+```
+
+Note
+
+For PBM versions earlier than 2.3.0, the command for the point-in-time recovery is the following:
+
+```
+pbm restore --base-snapshot=<backup_name> --time <timestamp>
+```
+
+The `--base-snapshot` flag is required. Otherwise, PBM will look for a logical backup even if there is none or there is a more recent physical backup.
+
+### Post-restore steps
+
+After the point-in-time recovery is complete, perform these post-restore steps:
+
+1. Restart all `mongod` nodes.
+
+1. Restart all `pbm-agents`.
+
+1. Resync the backup list with the storage:
+
+   ```
+   pbm config --force-resync
+   ```
+
+1. Start the balancer and start `mongos` nodes.
+
+1. Make a fresh backup to serve as the new base for future restores.
+
+1. [Enable point-in-time routine](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.html#enable-point-in-time-recovery) to resume saving oplog slices.
+
+Percona Backup for MongoDB version 2.1.0 and earlier
+
+For Percona Backup for MongoDB version 2.1.0 and earlier, point-in-time recovery consists of the following steps:
+
+- Restore from the physical backup snapshot.
+- Manual replay of oplog events on top of this snapshot up to a specific timestamp.
+
+For how to replay oplog events on top of a backup, see [Oplog replay for physical backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/oplog-replay.html#oplog-replay-for-physical-backups).
+
+### Implementation specifics
+
+During a physical restore with point-in-time recovery (PITR), PBM applies oplog entries to all nodes in each replica set. As a result, all nodes contain the same restored data files when the restore completes, allowing replica set members to be started in any order.
+
+Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+Previously, PITR entries were applied only on the primary node, and secondary nodes received the updated data after startup through replication catchup. This required starting the former primary node first to ensure correct data propagation. This limitation no longer applies.
+
+**PITR behavior and limitations in sharded clusters**
+
+- Due to the physical restore logic and flow, PBM replays oplog events on all nodes of every shard when Percona Server for MongoDB is shut down, allowing replica set members to be started in any order.
+- When performing point-in-time recovery for deployments with sharded collections, PBM writes data only to existing collections and does not create new collections. If you create a new sharded collection, make a new backup to ensure it is included in subsequent restore operations.
+
+## Useful links
+
+- [Restore a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore.html)
+- [Replay oplog from arbitrary start time](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/oplog-replay.html)

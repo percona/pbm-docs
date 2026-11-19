@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6471,7 +6471,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="point-in-time-recovery-from-selected-databases-and-collections">Point-in-time recovery from selected databases and collections<a class="headerlink" href="#point-in-time-recovery-from-selected-databases-and-collections" title="Permanent link">¶</a></h1>
+<h1 id="point-in-time-recovery-from-selected-databases-and-collections">Point-in-time recovery from selected databases and collections<a data-markdown-ignore class="headerlink" href="#point-in-time-recovery-from-selected-databases-and-collections" title="Permanent link">¶</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Supported only for replica sets.
@@ -6482,7 +6482,7 @@ Available for logical backups.</p>
 <li>Read <a href="../features/known-limitations.html#selective-backups-and-restores">known limitations for selective backups and restores</a>.</li>
 <li>Check that you <a href="backup-selective.html">have made a full backup</a> because it serves as the base for point-in-time recovery. Any selective backup is ignored.</li>
 </ol>
-<h2 id="restore-the-specified-database-or-collection-to-a-designated-point-in-time">Restore the specified database or collection to a designated point in time<a class="headerlink" href="#restore-the-specified-database-or-collection-to-a-designated-point-in-time" title="Permanent link">¶</a></h2>
+<h2 id="restore-the-specified-database-or-collection-to-a-designated-point-in-time">Restore the specified database or collection to a designated point in time<a data-markdown-ignore class="headerlink" href="#restore-the-specified-database-or-collection-to-a-designated-point-in-time" title="Permanent link">¶</a></h2>
 <p>Run the restore command as follows:</p>
 <div class="highlight"><pre><span></span><code>```bash
 pbm restore --base-snapshot &lt;backup_name&gt; --time &lt;timestamp&gt; \

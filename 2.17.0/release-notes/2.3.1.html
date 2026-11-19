@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6515,22 +6515,22 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-231-2023-12-04">Percona Backup for MongoDB 2.3.1 (2023-12-04)<a class="headerlink" href="#percona-backup-for-mongodb-231-2023-12-04" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-231-2023-12-04">Percona Backup for MongoDB 2.3.1 (2023-12-04)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-231-2023-12-04" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li>Added support for Percona Server for MongoDB 7.0.</li>
 <li>The ability to define custom endpoints when using Microsoft Azure Blob Storage for backups</li>
 <li>Improved PBM Docker image to allow making physical backups with the shared <code>mongodb</code> data volume</li>
 <li>Updated Golang libraries that include fixes for the security vulnerability CVE-2023-39325.</li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1195">PBM-1195</a> - Allow custom endpointUrl for Azure storage</li>
 <li><a href="https://jira.percona.com/browse/PBM-1205">PBM-1205</a> - Change the user in PBM Docker image to <code>mongod</code></li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1193">PBM-1193</a> - Fixed the <code>pbm-agent</code> failure when the connection to PSMDB is lost</li>
 </ul>

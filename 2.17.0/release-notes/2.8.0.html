@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6747,33 +6747,33 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-280-2024-12-12">Percona Backup for MongoDB 2.8.0 (2024-12-12)<a class="headerlink" href="#percona-backup-for-mongodb-280-2024-12-12" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-280-2024-12-12">Percona Backup for MongoDB 2.8.0 (2024-12-12)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-280-2024-12-12" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release provides the following features and improvements:</p>
-<h2 id="better-organization-of-selective-backups">Better organization of selective backups<a class="headerlink" href="#better-organization-of-selective-backups" title="Permanent link">¶</a></h2>
+<h2 id="better-organization-of-selective-backups">Better organization of selective backups<a data-markdown-ignore class="headerlink" href="#better-organization-of-selective-backups" title="Permanent link">¶</a></h2>
 <p>Now you can define multiple namespaces not only for selective restores but also for selective backups. This way you can better organize your backups as you accumulate the required data under a single backup. See how to make a backup of several namespaces in the <a href="../usage/backup-selective.html">tutorial</a>.</p>
-<h2 id="network-routing-control-in-communication-of-pbm-agents-with-the-backup-storage">Network routing control in communication of pbm-agents with the backup storage<a class="headerlink" href="#network-routing-control-in-communication-of-pbm-agents-with-the-backup-storage" title="Permanent link">¶</a></h2>
+<h2 id="network-routing-control-in-communication-of-pbm-agents-with-the-backup-storage">Network routing control in communication of pbm-agents with the backup storage<a data-markdown-ignore class="headerlink" href="#network-routing-control-in-communication-of-pbm-agents-with-the-backup-storage" title="Permanent link">¶</a></h2>
 <p>You can now control how pbm-agents reach the same remote backup storage by defining custom endpoints for them. This way you respect the network settings of the data centers where the servers running  pbm-agents reside and ensure the proper functioning of PBM. Custom endpoints are supported for AWS and Microsoft Azure Blob storages. Learn more about the endpoint definition in the <a href="../details/s3-storage.html#multiple-endpoints-to-the-same-s3-storage">documentation</a></p>
-<h2 id="simplified-troubleshooting-with-restoring-the-same-collection-under-a-different-name">Simplified troubleshooting with restoring the same collection under a different name<a class="headerlink" href="#simplified-troubleshooting-with-restoring-the-same-collection-under-a-different-name" title="Permanent link">¶</a></h2>
+<h2 id="simplified-troubleshooting-with-restoring-the-same-collection-under-a-different-name">Simplified troubleshooting with restoring the same collection under a different name<a data-markdown-ignore class="headerlink" href="#simplified-troubleshooting-with-restoring-the-same-collection-under-a-different-name" title="Permanent link">¶</a></h2>
 <p>Now you can restore a single collection under a different name up to a certain point in time alongside the current collection. The restored collection has the same data and indexes as the one you backed up. This makes it easier to compare the data in both collections and identify what caused the issue with the database. As a result, your troubleshooting efforts significantly reduce.</p>
 <p>To learn more about this functionality, refer to the <a href="../features/selective-backup.html#restore-a-collection-under-a-different-name">Restore a collection under a different name</a> section in the documentation</p>
-<h2 id="reduced-troubleshooting-time-with-diagnostics-report">Reduced troubleshooting time with diagnostics report<a class="headerlink" href="#reduced-troubleshooting-time-with-diagnostics-report" title="Permanent link">¶</a></h2>
+<h2 id="reduced-troubleshooting-time-with-diagnostics-report">Reduced troubleshooting time with diagnostics report<a data-markdown-ignore class="headerlink" href="#reduced-troubleshooting-time-with-diagnostics-report" title="Permanent link">¶</a></h2>
 <p>Collect all information required to troubleshoot backups and restores in one go. Generate the comprehensive diagnostics report about an operation execution and either dive deep yourself or file a bug report to our experts and attach  the diagnostics archive to it. This way you reduce the iteration time and speed up the issue resolution.</p>
 <p>Check the <a href="../troubleshoot/pbm-report.html">Diagnostics report</a> for more details.</p>
-<h2 id="improved-log-rotation-with-a-custom-path-for-log-output">Improved log rotation with a custom path for log output<a class="headerlink" href="#improved-log-rotation-with-a-custom-path-for-log-output" title="Permanent link">¶</a></h2>
+<h2 id="improved-log-rotation-with-a-custom-path-for-log-output">Improved log rotation with a custom path for log output<a data-markdown-ignore class="headerlink" href="#improved-log-rotation-with-a-custom-path-for-log-output" title="Permanent link">¶</a></h2>
 <p>You can now output logging information from every <code>pbm-agent</code> to a file at a custom path. This way you can introduce log rotation, manage the system log effectively and comply to security regulations for logging and auditing. </p>
 <p>Learn more about how to configure custom log path in the <a href="../manage/logpath.html">documentation</a></p>
-<h2 id="additional-flexibility-for-backups">Additional flexibility for backups<a class="headerlink" href="#additional-flexibility-for-backups" title="Permanent link">¶</a></h2>
+<h2 id="additional-flexibility-for-backups">Additional flexibility for backups<a data-markdown-ignore class="headerlink" href="#additional-flexibility-for-backups" title="Permanent link">¶</a></h2>
 <p>PBM no longer uses mongodump for making backups but uses its own dump implementation. This makes backup operations flexible as it lifts the mongodumps’ limitations and opens space for further improvements. </p>
-<h2 id="changes-in-supported-mongodb-versions">Changes in supported MongoDB versions<a class="headerlink" href="#changes-in-supported-mongodb-versions" title="Permanent link">¶</a></h2>
+<h2 id="changes-in-supported-mongodb-versions">Changes in supported MongoDB versions<a data-markdown-ignore class="headerlink" href="#changes-in-supported-mongodb-versions" title="Permanent link">¶</a></h2>
 <p>Starting from this release, PBM supports Percona Server for MongoDB 8.0 and MongoDB Community 8.0. </p>
 <p>At the same time, PBM no longer supports Percona Server for MongoDB 5.0 and MongoDB Community 5.0 as it entered the end-of-life stage. Existing functionality remains compatible with version 5.0. However, we will no longer test new features and improvements against this version.</p>
-<h2 id="known-limitation">Known limitation<a class="headerlink" href="#known-limitation" title="Permanent link">¶</a></h2>
+<h2 id="known-limitation">Known limitation<a data-markdown-ignore class="headerlink" href="#known-limitation" title="Permanent link">¶</a></h2>
 <p>Selective backups and restores fail for setups with config shards. Find more details in <a href="https://perconadev.atlassian.net/browse/PBM-1465">PBM-1465</a>.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-887">PBM-887</a> - Add the ability to generate diagnostics report</p>
@@ -6794,7 +6794,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1454">PBM-1454</a> Configuration file for all pbm-agent’s options</p>
 </li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1358">PBM-1358</a> - Improve the selective restore behavior for deployments having a Config shard</p>
@@ -6809,7 +6809,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1417">PBM-1417</a> - Allow defining multiple namespaces for selective backup</p>
 </li>
 </ul>
-<h3 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
+<h3 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1347">PBM-1347</a> - Report error in <code>pbm describe-restore</code> output if point-in-time restore fails because of inappropriate time to restore</p>

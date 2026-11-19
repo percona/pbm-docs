@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6513,7 +6513,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-configuration-in-a-cluster-or-non-sharded-replica-set">Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)<a class="headerlink" href="#percona-backup-for-mongodb-configuration-in-a-cluster-or-non-sharded-replica-set" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-configuration-in-a-cluster-or-non-sharded-replica-set">Percona Backup for MongoDB configuration in a cluster (or non-sharded replica set)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-configuration-in-a-cluster-or-non-sharded-replica-set" title="Permanent link">¶</a></h1>
 <p>The configuration information is stored in a single document of the <code>admin.pbmConfig</code> collection. That single copy is shared by all the <code>pbm-agent</code> processes in a cluster (or non-sharded replica set), and can be read or updated using the <code>pbm</code> CLI tool.</p>
 <p>You can see the whole config by running:</p>
 <div class="highlight"><pre><span></span><code><span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="err">“</span><span class="nx">admin</span><span class="err">”</span><span class="p">).</span><span class="nx">pbmConfig</span><span class="p">.</span><span class="nx">findOne</span><span class="p">()</span>
@@ -6535,7 +6535,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 <p>Run <a href="pbm-commands.html#pbm-config"><code>pbm config --list</code></a> to see the whole config. Sensitive fields such as keys will be redacted.</p>
-<h2 id="insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file">Insert the whole Percona Backup for MongoDB config from a YAML file<a class="headerlink" href="#insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file" title="Permanent link">¶</a></h2>
+<h2 id="insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file">Insert the whole Percona Backup for MongoDB config from a YAML file<a data-markdown-ignore class="headerlink" href="#insert-the-whole-percona-backup-for-mongodb-config-from-a-yaml-file" title="Permanent link">¶</a></h2>
 <p>If you are initializing a cluster or a non-sharded replica set for the first time, it is simplest to write the whole config as a YAML file and use the
 <code>pbm config --file</code> command to upload all the values in one command.</p>
 <p>You can use <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.17.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields. Or use it as a sample when writing your own one.</p>
@@ -6550,12 +6550,12 @@ cluster. Otherwise, connect to the non-sharded replica set as normal. (See
 <p class="admonition-title">Note</p>
 <p>You don’t need to keep the pbm_config.yaml file after running the pbm config command. Delete it to prevent potential exposure of sensitive information.</p>
 </div>
-<h2 id="accessing-or-updating-single-config-values">Accessing or updating single config values<a class="headerlink" href="#accessing-or-updating-single-config-values" title="Permanent link">¶</a></h2>
+<h2 id="accessing-or-updating-single-config-values">Accessing or updating single config values<a data-markdown-ignore class="headerlink" href="#accessing-or-updating-single-config-values" title="Permanent link">¶</a></h2>
 <p>You can set a single value at a time. For nested values, use dot-concatenated key names as shown in the following example:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>storage.s3.bucket<span class="o">=</span><span class="s2">"operator-testing"</span>
 </code></pre></div>
 <p>You can specify just the key name to list a single value.  If set, the command returns the value.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Success</label><label for="__tabbed_1_2">No value</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1">Success</label><label for="__tabbed_1_2">No value</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>storage.s3.bucket
@@ -6569,7 +6569,7 @@ Error:<span class="w"> </span>unable<span class="w"> </span>to<span class="w"> <
 </div>
 </div>
 </div>
-<h2 id="synchronize-configuration">Synchronize configuration<a class="headerlink" href="#synchronize-configuration" title="Permanent link">¶</a></h2>
+<h2 id="synchronize-configuration">Synchronize configuration<a data-markdown-ignore class="headerlink" href="#synchronize-configuration" title="Permanent link">¶</a></h2>
 <p>When you upload a configuration file to PBM either during the initial setup or after you make changes, PBM automatically detects whether it needs to update the local metadata about backups, restores, and point-in-time recovery chunks  in PBM Control collections. </p>
 <p>For example, if you change the storage configuration, the metadata also changes, and PBM imports it from the storage. But if you only enabled/disabled point-in-time recovery, the metadata remains unchanged.</p>
 <p>Though PBM synchronizes metadata automatically, there are cases when you need to run a manual synchronization:</p>

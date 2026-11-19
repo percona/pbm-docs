@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6491,7 +6491,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="list-backups">List backups<a class="headerlink" href="#list-backups" title="Permanent link">¶</a></h1>
+<h1 id="list-backups">List backups<a data-markdown-ignore class="headerlink" href="#list-backups" title="Permanent link">¶</a></h1>
 <p>Use the <code>pbm list</code> command to view all completed backups. </p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>list
 </code></pre></div>
@@ -6512,10 +6512,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
 </code></pre></div>
 </details>
-<h2 id="restore-to-time">Restore to time<a class="headerlink" href="#restore-to-time" title="Permanent link">¶</a></h2>
+<h2 id="restore-to-time">Restore to time<a data-markdown-ignore class="headerlink" href="#restore-to-time" title="Permanent link">¶</a></h2>
 <p>In logical backups, the completion time almost coincides with the backup finish time. To define the completion time, Percona Backup for MongoDB waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time.</p>
 <p>In physical backups, the completion time is only a few seconds after the backup start time. By holding the <code>$backupCursor</code> open guarantees that the checkpoint data won’t change during the backup, and Percona Backup for MongoDB can define the completion time ahead.</p>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="describe-backup.html">View detailed information about a backup</a></li>
 <li><a href="pitr-physical.html">Restore to a point-in-time</a></li>

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6581,7 +6581,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="remote-backup-storage">Remote backup storage<a class="headerlink" href="#remote-backup-storage" title="Permanent link">¶</a></h1>
+<h1 id="remote-backup-storage">Remote backup storage<a data-markdown-ignore class="headerlink" href="#remote-backup-storage" title="Permanent link">¶</a></h1>
 <p>Backup storage is a critical component of any database backup strategy. It serves as a secure, reliable place for your MongoDB data backups, ensuring that your data is protected and can be recovered when needed. The choice of backup storage directly impacts your backup strategy’s reliability, performance, and cost-effectiveness.</p>
 <p>The backup storage serves several purposes:</p>
 <ul>
@@ -6589,7 +6589,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Ensures data durability and availability</li>
 <li>Allows for backup data portability across different environments</li>
 </ul>
-<h2 id="supported-storage-types">Supported storage types<a class="headerlink" href="#supported-storage-types" title="Permanent link">¶</a></h2>
+<h2 id="supported-storage-types">Supported storage types<a data-markdown-ignore class="headerlink" href="#supported-storage-types" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB supports the following storage types:</p>
 <ul>
 <li><a href="s3-storage.html">Amazon S3</a></li>
@@ -6600,14 +6600,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="oci-storage.html">Oracle Cloud Infrastructure Object Storage</a></li>
 <li><a href="oss.html">Alibaba Cloud OSS storage</a></li>
 </ul>
-<h3 id="considerations-for-choosing-a-backup-storage-type-for-s3-compatible-storages">Considerations for choosing a backup storage type for s3-compatible storages<a class="headerlink" href="#considerations-for-choosing-a-backup-storage-type-for-s3-compatible-storages" title="Permanent link">¶</a></h3>
+<h3 id="considerations-for-choosing-a-backup-storage-type-for-s3-compatible-storages">Considerations for choosing a backup storage type for s3-compatible storages<a data-markdown-ignore class="headerlink" href="#considerations-for-choosing-a-backup-storage-type-for-s3-compatible-storages" title="Permanent link">¶</a></h3>
 <p>When configuring Percona Backup for MongoDB, choose the storage type based on your storage service:</p>
 <ul>
 <li><strong>AWS S3</strong>: Use the <code>s3</code> storage type for native Amazon S3 storage.</li>
 <li><strong>S3-compatible storage</strong>: For S3-compatible storage services that support Signature Version 4 (SigV4) used in AWS SDK v2, use the <code>s3</code> storage type. If you encounter upload or download errors in the PBM logs, switch to the <code>minio</code> storage type.</li>
 <li><strong>Google Cloud Storage</strong>: Always use the dedicated <code>gcs</code> storage type. See <a href="gcs.html">Google Cloud Storage</a> for configuration details.</li>
 </ul>
-<h2 id="how-pbm-organizes-backups-on-the-storage">How PBM organizes backups on the storage<a class="headerlink" href="#how-pbm-organizes-backups-on-the-storage" title="Permanent link">¶</a></h2>
+<h2 id="how-pbm-organizes-backups-on-the-storage">How PBM organizes backups on the storage<a data-markdown-ignore class="headerlink" href="#how-pbm-organizes-backups-on-the-storage" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB (PBM) saves backup data to a designated directory on the backup storage. It can be a specific directory you define for the storage or the root folder. </p>
 <p>Each backup is prefixed with the UTC starting time for easy identification and consists of:</p>
 <ul>
@@ -6622,7 +6622,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>The oplog entries ensure backup consistency, and the end time of the oplog slice(s) is the data-consistent point in time of a backup snapshot.</p>
 <p>Using the <a href="../reference/pbm-commands.html#pbm-list"><code>pbm list</code></a> or <a href="../reference/pbm-commands.html#pbm-status"><code>pbm status</code></a> commands, you can scan the backup directory to find existing backups, even if you never used PBM on your computer before.</p>
-<h2 id="permissions-setup">Permissions setup<a class="headerlink" href="#permissions-setup" title="Permanent link">¶</a></h2>
+<h2 id="permissions-setup">Permissions setup<a data-markdown-ignore class="headerlink" href="#permissions-setup" title="Permanent link">¶</a></h2>
 <p>Regardless of the remote backup storage you use, grant the <code>List/Get/Put/Delete</code> permissions to this storage for the user identified by the access credentials.</p>
 <p>The following example shows the permissions configuration to the <code>pbm-testing</code> bucket on the AWS S3 storage.</p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -6649,7 +6649,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">    </span><span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<h3 id="storage-specific-documentation">Storage-specific documentation<a class="headerlink" href="#storage-specific-documentation" title="Permanent link">¶</a></h3>
+<h3 id="storage-specific-documentation">Storage-specific documentation<a data-markdown-ignore class="headerlink" href="#storage-specific-documentation" title="Permanent link">¶</a></h3>
 <p>Please refer to the documentation of your selected storage for the data access management.</p>
 <div class="admonition admonition">
 <p class="admonition-title">See also</p>

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6779,7 +6779,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="backup-lifecycle-management">Backup lifecycle management<a class="headerlink" href="#backup-lifecycle-management" title="Permanent link">¶</a></h1>
+<h1 id="backup-lifecycle-management">Backup lifecycle management<a data-markdown-ignore class="headerlink" href="#backup-lifecycle-management" title="Permanent link">¶</a></h1>
 <p>Backup lifecycle management helps you control how long Percona Backup for MongoDB (PBM) keeps backups. You define a retention policy, and PBM identifies the backups that have aged out and can be removed.</p>
 <p>PBM uses a <a href="https://en.wikipedia.org/wiki/Backup_rotation_scheme#Grandfather-father-son" target="_blank">Grandfather-Father-Son (GFS) retention model <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. You can keep every recent backup, then retain fewer recovery points as the backups age. For example, you can keep all backups for seven days, one backup per week for four weeks, and one backup per month for 12 months.</p>
 <p>You can define a lifecycle policy for the main storage or for an individual <a href="../features/multi-storage.html">storage profile</a>.</p>
@@ -6787,7 +6787,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p class="admonition-title">Warning</p>
 <p>Lifecycle cleanup permanently deletes the selected backups. Always run <code>pbm cleanup --lifecycle --dry-run</code> and review the report before you proceed with deletion.</p>
 </div>
-<h2 id="how-retention-works">How retention works<a class="headerlink" href="#how-retention-works" title="Permanent link">¶</a></h2>
+<h2 id="how-retention-works">How retention works<a data-markdown-ignore class="headerlink" href="#how-retention-works" title="Permanent link">¶</a></h2>
 <p>A lifecycle policy can include three retention tiers:</p>
 <ul>
 <li><strong>Daily</strong> keeps every eligible backup within the configured number of days.</li>
@@ -6807,9 +6807,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 </div>
-<h2 id="choose-a-retention-strategy">Choose a retention strategy<a class="headerlink" href="#choose-a-retention-strategy" title="Permanent link">¶</a></h2>
+<h2 id="choose-a-retention-strategy">Choose a retention strategy<a data-markdown-ignore class="headerlink" href="#choose-a-retention-strategy" title="Permanent link">¶</a></h2>
 <p>PBM supports <code>rolling</code> and <code>calendar</code> retention strategies.</p>
-<h3 id="rolling-strategy">Rolling strategy<a class="headerlink" href="#rolling-strategy" title="Permanent link">¶</a></h3>
+<h3 id="rolling-strategy">Rolling strategy<a data-markdown-ignore class="headerlink" href="#rolling-strategy" title="Permanent link">¶</a></h3>
 <p>The <code>rolling</code> strategy is the default. It measures backup age from the time the lifecycle command runs and divides the history into fixed windows:</p>
 <ul>
 <li>Weekly retention uses seven-day windows.</li>
@@ -6819,7 +6819,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">strategy</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rolling</span>
 </code></pre></div>
-<h3 id="calendar-strategy">Calendar strategy<a class="headerlink" href="#calendar-strategy" title="Permanent link">¶</a></h3>
+<h3 id="calendar-strategy">Calendar strategy<a data-markdown-ignore class="headerlink" href="#calendar-strategy" title="Permanent link">¶</a></h3>
 <p>The <code>calendar</code> strategy groups backups by calendar week and calendar month. Within each period, PBM selects the backup closest to the configured target day:</p>
 <ul>
 <li><code>weeklyDay</code> sets the target weekday. Use <code>0</code> for Sunday through <code>6</code> for Saturday.</li>
@@ -6837,7 +6837,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </code></pre></div>
 <p>This policy keeps one backup of each type closest to Friday in every retained week and one backup of each type closest to the 15<sup>th</sup> in every retained month.</p>
 </details>
-<h2 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">¶</a></h2>
+<h2 id="configuration-options">Configuration options<a data-markdown-ignore class="headerlink" href="#configuration-options" title="Permanent link">¶</a></h2>
 <p>Define lifecycle settings in the <code>lifecycle</code> section of the <a href="../reference/config.html">PBM configuration</a>.</p>
 <table>
 <thead>
@@ -6911,8 +6911,8 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>To apply several settings together, add the <code>lifecycle</code> section to the configuration file:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>&lt;PATH_TO_CONFIG_FILE&gt;<span class="w"> </span>--wait
 </code></pre></div>
-<h2 id="example-policies">Example policies<a class="headerlink" href="#example-policies" title="Permanent link">¶</a></h2>
-<h3 id="rolling-retention">Rolling retention<a class="headerlink" href="#rolling-retention" title="Permanent link">¶</a></h3>
+<h2 id="example-policies">Example policies<a data-markdown-ignore class="headerlink" href="#example-policies" title="Permanent link">¶</a></h2>
+<h3 id="rolling-retention">Rolling retention<a data-markdown-ignore class="headerlink" href="#rolling-retention" title="Permanent link">¶</a></h3>
 <p>The following policy keeps all eligible backups for seven days, one backup of each type per week for four weeks, and one backup of each type per 30-day window for 12 months:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -6924,7 +6924,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">12</span>
 </code></pre></div>
 <p>With <code>purgeFailed: true</code>, failed and canceled backups are kept during the seven-day daily retention period and become eligible for deletion after that period.</p>
-<h3 id="calendar-retention">Calendar retention<a class="headerlink" href="#calendar-retention" title="Permanent link">¶</a></h3>
+<h3 id="calendar-retention">Calendar retention<a data-markdown-ignore class="headerlink" href="#calendar-retention" title="Permanent link">¶</a></h3>
 <p>The following policy keeps all eligible backups for 14 days, one backup of each type closest to Friday for eight calendar weeks, and one backup of each type closest to the 15<sup>th</sup> for six calendar months:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">lifecycle</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -6937,7 +6937,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">monthlyRetention</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6</span>
 <span class="w">  </span><span class="nt">monthlyDay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
 </code></pre></div>
-<h2 id="preview-and-run-lifecycle-cleanup">Preview and run lifecycle cleanup<a class="headerlink" href="#preview-and-run-lifecycle-cleanup" title="Permanent link">¶</a></h2>
+<h2 id="preview-and-run-lifecycle-cleanup">Preview and run lifecycle cleanup<a data-markdown-ignore class="headerlink" href="#preview-and-run-lifecycle-cleanup" title="Permanent link">¶</a></h2>
 <p class="power-number">Configure the policy and enable it before you run a dry run. When <code>lifecycle.enabled</code> is <code>false</code>, PBM reports all backups as retained and does not calculate deletion candidates.</p>
 <ol>
 <li>
@@ -6963,7 +6963,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </div>
 </li>
 </ol>
-<h2 id="apply-a-policy-to-a-storage-profile">Apply a policy to a storage profile<a class="headerlink" href="#apply-a-policy-to-a-storage-profile" title="Permanent link">¶</a></h2>
+<h2 id="apply-a-policy-to-a-storage-profile">Apply a policy to a storage profile<a data-markdown-ignore class="headerlink" href="#apply-a-policy-to-a-storage-profile" title="Permanent link">¶</a></h2>
 <p>The lifecycle policy in the main PBM configuration applies only to backups in the main storage. A policy in a storage profile applies only to backups created in that profile.</p>
 <p>For example, create <code>pbm-physical.conf</code> with the storage and lifecycle settings for the profile:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
@@ -6993,11 +6993,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </code></pre></div>
 <p>When you specify <code>--profile</code>, PBM uses the lifecycle policy from that profile and evaluates only its backups. Without <code>--profile</code>, PBM uses the main configuration and evaluates backups in the main storage.</p>
 <p>For details about creating and managing storage profiles, see <a href="../features/multi-storage.html">Multiple storages for backups</a>.</p>
-<h2 id="retention-by-backup-type">Retention by backup type<a class="headerlink" href="#retention-by-backup-type" title="Permanent link">¶</a></h2>
+<h2 id="retention-by-backup-type">Retention by backup type<a data-markdown-ignore class="headerlink" href="#retention-by-backup-type" title="Permanent link">¶</a></h2>
 <p>For weekly and monthly retention, PBM evaluates logical, physical, and incremental backups separately. One backup type cannot replace another as the retained backup for a window. If a weekly window contains eligible logical and physical backups, PBM keeps one of each type.</p>
 <p>The same retention values apply to all backup types in a given storage. To use different retention periods, send the backup types to separate storage profiles and define a lifecycle policy in each profile.</p>
 <p>PBM also preserves incremental backup dependencies. If any backup in an incremental chain must be retained, PBM keeps the complete chain required to restore it.</p>
-<h2 id="automate-lifecycle-cleanup">Automate lifecycle cleanup<a class="headerlink" href="#automate-lifecycle-cleanup" title="Permanent link">¶</a></h2>
+<h2 id="automate-lifecycle-cleanup">Automate lifecycle cleanup<a data-markdown-ignore class="headerlink" href="#automate-lifecycle-cleanup" title="Permanent link">¶</a></h2>
 <p>You can schedule lifecycle cleanup with <code>cron</code> or another scheduler. Use <code>--yes</code> so the command does not wait for confirmation, and keep <code>minKeep</code> enabled as a safeguard.</p>
 <p>Run lifecycle cleanup at a different time from scheduled backups. The following example evaluates the main storage every day at 03:00. It writes JSON output to one log file and progress messages or errors to another:</p>
 <div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/usr/bin/pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--yes<span class="w"> </span>--wait<span class="w"> </span>--out<span class="o">=</span>json<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle.jsonl<span class="w"> </span><span class="m">2</span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle.err
@@ -7005,7 +7005,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>To automate cleanup for a storage profile, include <code>--profile=&lt;PROFILE_NAME&gt;</code>:</p>
 <div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>*<span class="w"> </span>/usr/bin/pbm<span class="w"> </span>cleanup<span class="w"> </span>--lifecycle<span class="w"> </span>--profile<span class="o">=</span>physical-backup<span class="w"> </span>--yes<span class="w"> </span>--wait<span class="w"> </span>--out<span class="o">=</span>json<span class="w"> </span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle-physical.jsonl<span class="w"> </span><span class="m">2</span>&gt;&gt;<span class="w"> </span>/var/log/pbm-lifecycle-physical.err
 </code></pre></div>
-<h2 id="cleanup-safeguards">Cleanup safeguards<a class="headerlink" href="#cleanup-safeguards" title="Permanent link">¶</a></h2>
+<h2 id="cleanup-safeguards">Cleanup safeguards<a data-markdown-ignore class="headerlink" href="#cleanup-safeguards" title="Permanent link">¶</a></h2>
 <p>PBM applies the following safeguards when it evaluates and deletes backups:</p>
 <table>
 <thead>
@@ -7053,7 +7053,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../reference/config.html">Configure PBM</a></li>
 <li><a href="../features/multi-storage.html">Multiple storages for backups</a></li>

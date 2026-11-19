@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6593,16 +6593,16 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="point-in-time-restore-from-physical-backups">Point-in-time restore from physical backups<a class="headerlink" href="#point-in-time-restore-from-physical-backups" title="Permanent link">¶</a></h1>
-<h2 id="preconditions">Preconditions<a class="headerlink" href="#preconditions" title="Permanent link">¶</a></h2>
+<h1 id="point-in-time-restore-from-physical-backups">Point-in-time restore from physical backups<a data-markdown-ignore class="headerlink" href="#point-in-time-restore-from-physical-backups" title="Permanent link">¶</a></h1>
+<h2 id="preconditions">Preconditions<a data-markdown-ignore class="headerlink" href="#preconditions" title="Permanent link">¶</a></h2>
 <p>Run <a href="../reference/pbm-commands.html#pbm-status"><code>pbm status</code></a> or <a href="../reference/pbm-commands.html#pbm-list"><code>pbm list</code></a> commands to check that the full backup snapshot exists and there are oplog slices.</p>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <p class="power-number">Before restoring, prepare the cluster to prevent sharding metadata changes and ensure a consistent restore.</p>
 <ol>
 <li>Stop the balancer and <code>mongos</code> nodes.</li>
 <li>Make sure no writes are made to the database during restore. </li>
 </ol>
-<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">¶</a></h2>
+<h2 id="procedure">Procedure<a data-markdown-ignore class="headerlink" href="#procedure" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.2.0.html">2.2.0</a></p>
 </div>
@@ -6625,7 +6625,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </code></pre></div>
 <p>The <code>--base-snapshot</code> flag is required. Otherwise, PBM will look for a logical backup even if there is none or there is a more recent physical backup.    </p>
 </div>
-<h3 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
+<h3 id="post-restore-steps">Post-restore steps<a data-markdown-ignore class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
 <p class="power-number">After the point-in-time recovery is complete, perform these post-restore steps:</p>
 <ol>
 <li>
@@ -6658,7 +6658,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>For how to replay oplog events on top of a backup, see <a href="oplog-replay.html#oplog-replay-for-physical-backups">Oplog replay for physical backups</a>.</p>
 </details>
-<h3 id="implementation-specifics">Implementation specifics<a class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h3>
+<h3 id="implementation-specifics">Implementation specifics<a data-markdown-ignore class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h3>
 <p>During a physical restore with point-in-time recovery (PITR), PBM applies oplog entries to all nodes in each replica set. As a result, all nodes contain the same restored data files when the restore completes, allowing replica set members to be started in any order.</p>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.14.0.html">2.14.0</a></p>
@@ -6673,7 +6673,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>When performing point-in-time recovery for deployments with sharded collections, PBM writes data only to existing collections and does not create new collections. If you create a new sharded collection, make a new backup to ensure it is included in subsequent restore operations.</p>
 </li>
 </ul>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="restore.html">Restore a backup</a></li>
 <li><a href="oplog-replay.html">Replay oplog from arbitrary start time</a></li>

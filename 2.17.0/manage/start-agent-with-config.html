@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6491,14 +6491,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="start-pbm-agent-using-the-configuration-file">Start pbm-agent using the configuration file<a class="headerlink" href="#start-pbm-agent-using-the-configuration-file" title="Permanent link">¶</a></h1>
+<h1 id="start-pbm-agent-using-the-configuration-file">Start pbm-agent using the configuration file<a data-markdown-ignore class="headerlink" href="#start-pbm-agent-using-the-configuration-file" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.9.0.html">2.9.0</a></p>
 </div>
 <p>A <code>pbm-agent</code> requires a MongoDB connection string URI to start. You can define it either via the environment variable or use the configuration file. The latter option enables you to specify additional configuration like the number of parallel connections for backups and <a href="logpath.html">custom logging configuration</a>. </p>
 <p>This document explains how to start a <code>pbm-agent</code> using the configuration file. For how to use environment variables, see the <a href="../install/configure-authentication.html#set-the-mongodb-connection-uri-for-pbm-agent">Configure authentication in MongoDB</a></p>
 <p>The steps vary slightly based on your installation method. In the following example, we provide all available configuration options for reference. Note that for initial <code>pbm-agent</code> start, <code>mongodb-uri</code> is mandatory.</p>
-<h2 class="power-number" id="for-installation-from-packages">For installation from packages<a class="headerlink" href="#for-installation-from-packages" title="Permanent link">¶</a></h2>
+<h2 class="power-number" id="for-installation-from-packages">For installation from packages<a data-markdown-ignore class="headerlink" href="#for-installation-from-packages" title="Permanent link">¶</a></h2>
 <ol>
 <li>
 <p>Create a configuration file. For example, <code>/etc/pbm-agent.yaml</code>. </p>
@@ -6528,7 +6528,7 @@ ExecStart=/usr/bin/pbm-agent -f /etc/pbm-agent.yaml
 </code></pre></div>
 </li>
 </ol>
-<h2 class="power-number" id="for-installation-from-the-source-code-and-tarballs">For installation from the source code and tarballs<a class="headerlink" href="#for-installation-from-the-source-code-and-tarballs" title="Permanent link">¶</a></h2>
+<h2 class="power-number" id="for-installation-from-the-source-code-and-tarballs">For installation from the source code and tarballs<a data-markdown-ignore class="headerlink" href="#for-installation-from-the-source-code-and-tarballs" title="Permanent link">¶</a></h2>
 <p>For the initial <code>pbm-agent</code> start, you require the credentials of a <code>pbm</code> user. See the <a href="../install/configure-authentication.html#create-the-pbm-user">Create a pbm user</a> section for how to create this user. </p>
 <ol>
 <li>

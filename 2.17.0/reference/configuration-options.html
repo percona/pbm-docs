@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -8933,13 +8933,13 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="remote-backup-storage-options">Remote backup storage options<a class="headerlink" href="#remote-backup-storage-options" title="Permanent link">¶</a></h1>
-<h2 id="common-options">Common options<a class="headerlink" href="#common-options" title="Permanent link">¶</a></h2>
-<h3 id="storagetype">storage.type<a class="headerlink" href="#storagetype" title="Permanent link">¶</a></h3>
+<h1 id="remote-backup-storage-options">Remote backup storage options<a data-markdown-ignore class="headerlink" href="#remote-backup-storage-options" title="Permanent link">¶</a></h1>
+<h2 id="common-options">Common options<a data-markdown-ignore class="headerlink" href="#common-options" title="Permanent link">¶</a></h2>
+<h3 id="storagetype">storage.type<a data-markdown-ignore class="headerlink" href="#storagetype" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>:     YES   </p>
 <p>Remote backup storage type. Supported values: <code>s3</code>, <code>minio</code>, <code>gcs</code>, <code>filesystem</code>, <code>azure</code>, <code>oci</code>, <code>oss</code>.</p>
-<h2 id="aws-s3-storage-options">AWS S3 storage options<a class="headerlink" href="#aws-s3-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="aws-s3-storage-options">AWS S3 storage options<a data-markdown-ignore class="headerlink" href="#aws-s3-storage-options" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
@@ -8968,55 +8968,55 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">      </span><span class="nt">maxRetryDelay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5m</span>
 <span class="w">    </span><span class="nt">maxObjSizeGB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5018</span>
 </code></pre></div>
-<h3 id="storages3provider">storage.s3.provider<a class="headerlink" href="#storages3provider" title="Permanent link">¶</a></h3>
+<h3 id="storages3provider">storage.s3.provider<a data-markdown-ignore class="headerlink" href="#storages3provider" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The storage provider’s name. This field is deprecated.</p>
-<h3 id="storages3bucket">storage.s3.bucket<a class="headerlink" href="#storages3bucket" title="Permanent link">¶</a></h3>
+<h3 id="storages3bucket">storage.s3.bucket<a data-markdown-ignore class="headerlink" href="#storages3bucket" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of the storage bucket. See the <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules">AWS Bucket naming rules</a> for bucket name requirements.</p>
-<h3 id="storages3region">storage.s3.region<a class="headerlink" href="#storages3region" title="Permanent link">¶</a></h3>
+<h3 id="storages3region">storage.s3.region<a data-markdown-ignore class="headerlink" href="#storages3region" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (for AWS)</p>
 <p>The location of the storage bucket.
 Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">AWS region list</a>  to define the bucket region</p>
-<h3 id="storages3prefix">storage.s3.prefix<a class="headerlink" href="#storages3prefix" title="Permanent link">¶</a></h3>
+<h3 id="storages3prefix">storage.s3.prefix<a data-markdown-ignore class="headerlink" href="#storages3prefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
-<h3 id="storages3endpointurl">storage.s3.endpointUrl<a class="headerlink" href="#storages3endpointurl" title="Permanent link">¶</a></h3>
+<h3 id="storages3endpointurl">storage.s3.endpointUrl<a data-markdown-ignore class="headerlink" href="#storages3endpointurl" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (for MinIO)</p>
 <p>The URL to access the bucket. </p>
-<h3 id="storages3endpointurlmap">storage.s3.endpointUrlMap<a class="headerlink" href="#storages3endpointurlmap" title="Permanent link">¶</a></h3>
+<h3 id="storages3endpointurlmap">storage.s3.endpointUrlMap<a data-markdown-ignore class="headerlink" href="#storages3endpointurlmap" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: array of strings <br>
 <em>Required</em>: NO</p>
 <p>The list of custom paths for <code>pbm-agents</code> on different servers to the same storage. Use this option if <code>pbm-agents</code> reside on servers hidden behind different network configurations. Read more in the <a href="../details/endpoint-map.html">Support for multiple endpoints to the same S3 storage</a> section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.</p>
-<h3 id="storages3forcepathstyle">storage.s3.forcePathStyle<a class="headerlink" href="#storages3forcepathstyle" title="Permanent link">¶</a></h3>
+<h3 id="storages3forcepathstyle">storage.s3.forcePathStyle<a data-markdown-ignore class="headerlink" href="#storages3forcepathstyle" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Required</em>: NO</p>
 <p>By default, PBM uses the <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access">path-style URLs</a> for accessing the S3 bucket. Setting this option to <code>false</code> instructs PBM to send virtual-hosted–style requests instead.</p>
-<h3 id="storages3credentialsaccess-key-id">storage.s3.credentials.access-key-id<a class="headerlink" href="#storages3credentialsaccess-key-id" title="Permanent link">¶</a></h3>
+<h3 id="storages3credentialsaccess-key-id">storage.s3.credentials.access-key-id<a data-markdown-ignore class="headerlink" href="#storages3credentialsaccess-key-id" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>Your access key to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to <a href="../manage/automate-s3-access.html">Automate access to S3 buckets for Percona Backup for MongoDB</a></p>
-<h3 id="storages3credentialssecret-access-key">storage.s3.credentials.secret-access-key<a class="headerlink" href="#storages3credentialssecret-access-key" title="Permanent link">¶</a></h3>
+<h3 id="storages3credentialssecret-access-key">storage.s3.credentials.secret-access-key<a data-markdown-ignore class="headerlink" href="#storages3credentialssecret-access-key" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The key to sign your programmatic requests to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to <a href="../manage/automate-s3-access.html">Automate access to S3 buckets for Percona Backup for MongoDB</a></p>
-<h3 id="storages3credentialssession-token">storage.s3.credentials.session-token<a class="headerlink" href="#storages3credentialssession-token" title="Permanent link">¶</a></h3>
+<h3 id="storages3credentialssession-token">storage.s3.credentials.session-token<a data-markdown-ignore class="headerlink" href="#storages3credentialssession-token" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The AWS session token used to validate the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html">temporary security credentials</a> for accessing the S3 storage. </p>
-<h3 id="storages3uploadpartsize">storage.s3.uploadPartSize<a class="headerlink" href="#storages3uploadpartsize" title="Permanent link">¶</a></h3>
+<h3 id="storages3uploadpartsize">storage.s3.uploadPartSize<a data-markdown-ignore class="headerlink" href="#storages3uploadpartsize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO</p>
 <p>The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB</p>
 <p>Percona Backup for MongoDB automatically increases the <code>uploadPartSize</code> value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of <code>uploadPartSize</code> * <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants"><code>maxUploadParts</code></a> and is appr. 97,6 GB).</p>
 <p>The <code>uploadPartSize</code> value is printed in the <code>pbm-agent</code> log.</p>
 <p>By setting this option, you can manually adjust the size of data chunks if Percona Backup for MongoDB failed to do it for some reason. The defined <code>uploadPartSize</code> value overrides the default value and is used for calculating the max allowed file size</p>
-<h3 id="storages3maxuploadparts">storage.s3.maxUploadParts<a class="headerlink" href="#storages3maxuploadparts" title="Permanent link">¶</a></h3>
+<h3 id="storages3maxuploadparts">storage.s3.maxUploadParts<a data-markdown-ignore class="headerlink" href="#storages3maxuploadparts" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 10,000</p>
@@ -9024,12 +9024,12 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p>By setting this option, you can override the value defined in the <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#MaxUploadParts">AWS SDK</a>.</p>
 <p>It can be useful when using an S3 provider that supports a smaller number of chunks for multipart uploads.</p>
 <p>The <code>maxUploadParts</code> value is printed in the pbm-agent log.</p>
-<h3 id="storages3storageclass">storage.s3.storageClass<a class="headerlink" href="#storages3storageclass" title="Permanent link">¶</a></h3>
+<h3 id="storages3storageclass">storage.s3.storageClass<a data-markdown-ignore class="headerlink" href="#storages3storageclass" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO
 <em>Example</em>: STANDARD</p>
 <p>The <a href="https://aws.amazon.com/s3/storage-classes/">storage class <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> assigned to objects stored in the S3 bucket. If not provided, the <code>STANDARD</code> storage class will be used. </p>
-<h3 id="storages3debugloglevels">storage.s3.debugLogLevels<a class="headerlink" href="#storages3debugloglevels" title="Permanent link">¶</a></h3>
+<h3 id="storages3debugloglevels">storage.s3.debugLogLevels<a data-markdown-ignore class="headerlink" href="#storages3debugloglevels" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>Controls which AWS S3 client operations PBM writes to the <code>pbm logs</code> output. The values correspond to the <a href="https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode" target="_blank">client log modes in the AWS SDK for Go v2 <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
@@ -9051,7 +9051,7 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p class="admonition-title">Note</p>
 <p>Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see <a href="../manage/logpath.html#logging-configuration-options">Logging configuration options</a>.</p>
 </div>
-<h4 id="unsupported-values-and-replacements">Unsupported values and replacements<a class="headerlink" href="#unsupported-values-and-replacements" title="Permanent link">¶</a></h4>
+<h4 id="unsupported-values-and-replacements">Unsupported values and replacements<a data-markdown-ignore class="headerlink" href="#unsupported-values-and-replacements" title="Permanent link">¶</a></h4>
 <p>Starting with PBM 2.16.0, the values <code>LogDebug</code>, <code>HTTPBody</code>, <code>RequestRetries</code>, <code>RequestErrors</code>, and <code>EventStreamBody</code> are no longer supported. PBM no longer translates them automatically. If your configuration uses these values, replace them before upgrading:</p>
 <table>
 <thead>
@@ -9090,14 +9090,14 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p>To replace <code>LogDebug</code> with request and response logging, run:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>storage.s3.debugLogLevels<span class="o">=</span><span class="s2">"Request,Response"</span>
 </code></pre></div>
-<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h4>
+<h4 id="example">Example<a data-markdown-ignore class="headerlink" href="#example" title="Permanent link">¶</a></h4>
 <p>The following example logs request and response bodies when troubleshooting AWS S3 communication:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">debugLogLevels</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RequestWithBody, ResponseWithBody</span>
 </code></pre></div>
-<h3 id="storages3insecureskiptlsverify">storage.s3.insecureSkipTLSVerify<a class="headerlink" href="#storages3insecureskiptlsverify" title="Permanent link">¶</a></h3>
+<h3 id="storages3insecureskiptlsverify">storage.s3.insecureSkipTLSVerify<a data-markdown-ignore class="headerlink" href="#storages3insecureskiptlsverify" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: bool <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: False</p>
@@ -9106,47 +9106,47 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p class="admonition-title">Warning</p>
 <p>Use this option with caution as it might leave a hole for man-in-the-middle attacks.</p>
 </div>
-<h2 id="server-side-encryption-options">Server-side encryption options<a class="headerlink" href="#server-side-encryption-options" title="Permanent link">¶</a></h2>
-<h3 id="storages3serversideencryptionssealgorithm">storage.s3.serverSideEncryption.sseAlgorithm<a class="headerlink" href="#storages3serversideencryptionssealgorithm" title="Permanent link">¶</a></h3>
+<h2 id="server-side-encryption-options">Server-side encryption options<a data-markdown-ignore class="headerlink" href="#server-side-encryption-options" title="Permanent link">¶</a></h2>
+<h3 id="storages3serversideencryptionssealgorithm">storage.s3.serverSideEncryption.sseAlgorithm<a data-markdown-ignore class="headerlink" href="#storages3serversideencryptionssealgorithm" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO </p>
 <p>The key management mode used for server-side encryption with the encryption keys stored in AWS KMS.</p>
 <p>Supported value: <code>aws:kms</code></p>
-<h3 id="storages3serversideencryptionkmskeyid">storage.s3.serverSideEncryption.kmsKeyID<a class="headerlink" href="#storages3serversideencryptionkmskeyid" title="Permanent link">¶</a></h3>
+<h3 id="storages3serversideencryptionkmskeyid">storage.s3.serverSideEncryption.kmsKeyID<a data-markdown-ignore class="headerlink" href="#storages3serversideencryptionkmskeyid" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>Your customer-managed key stored in the AWS KMS.</p>
-<h3 id="storages3serversideencryptionssecustomeralgorithm">storage.s3.serverSideEncryption.sseCustomerAlgorithm<a class="headerlink" href="#storages3serversideencryptionssecustomeralgorithm" title="Permanent link">¶</a></h3>
+<h3 id="storages3serversideencryptionssecustomeralgorithm">storage.s3.serverSideEncryption.sseCustomerAlgorithm<a data-markdown-ignore class="headerlink" href="#storages3serversideencryptionssecustomeralgorithm" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO </p>
 <p>The key management mode for <a href="../details/s3-storage.html#server-side-encryption">server-side encryption with customer-provided keys (SSE-C)</a>.</p>
 <p>Supported value: <code>AES256</code></p>
-<h3 id="storages3serversideencryptionssecustomerkey">storage.s3.serverSideEncryption.sseCustomerKey<a class="headerlink" href="#storages3serversideencryptionssecustomerkey" title="Permanent link">¶</a></h3>
+<h3 id="storages3serversideencryptionssecustomerkey">storage.s3.serverSideEncryption.sseCustomerKey<a data-markdown-ignore class="headerlink" href="#storages3serversideencryptionssecustomerkey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>Your custom encryption key. This key is not stored on the S3 storage side. Thus, it is your responsibility to track what data is encrypted with what key and for storing the key. </p>
-<h2 id="upload-retry-options">Upload retry options<a class="headerlink" href="#upload-retry-options" title="Permanent link">¶</a></h2>
-<h3 id="storages3retryernummaxretries">storage.s3.retryer.numMaxRetries<a class="headerlink" href="#storages3retryernummaxretries" title="Permanent link">¶</a></h3>
+<h2 id="upload-retry-options">Upload retry options<a data-markdown-ignore class="headerlink" href="#upload-retry-options" title="Permanent link">¶</a></h2>
+<h3 id="storages3retryernummaxretries">storage.s3.retryer.numMaxRetries<a data-markdown-ignore class="headerlink" href="#storages3retryernummaxretries" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 3</p>
 <p>The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed. </p>
-<h3 id="storages3retryerminretrydelay">storage.s3.retryer.minRetryDelay<a class="headerlink" href="#storages3retryerminretrydelay" title="Permanent link">¶</a></h3>
+<h3 id="storages3retryerminretrydelay">storage.s3.retryer.minRetryDelay<a data-markdown-ignore class="headerlink" href="#storages3retryerminretrydelay" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 30ms</p>
 <p>The minimum time to wait before the next retry, specified as a <em>time.Duration</em>. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. </p>
-<h3 id="storages3retryermaxretrydelay">storage.s3.retryer.maxRetryDelay<a class="headerlink" href="#storages3retryermaxretrydelay" title="Permanent link">¶</a></h3>
+<h3 id="storages3retryermaxretrydelay">storage.s3.retryer.maxRetryDelay<a data-markdown-ignore class="headerlink" href="#storages3retryermaxretrydelay" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 5m</p>
 <p>The maximum time to wait before the next retry, specified as a <em>time.Duration</em>. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided. </p>
-<h3 id="storages3maxobjsizegb">storage.s3.maxObjSizeGB<a class="headerlink" href="#storages3maxobjsizegb" title="Permanent link">¶</a></h3>
+<h3 id="storages3maxobjsizegb">storage.s3.maxObjSizeGB<a data-markdown-ignore class="headerlink" href="#storages3maxobjsizegb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: float64 <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 5018</p>
 <p>The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about <a href="../features/split-merge-backup.html">Managing large backup files</a>.</p>
-<h2 id="minio-type-storage-options">MinIO type storage options<a class="headerlink" href="#minio-type-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="minio-type-storage-options">MinIO type storage options<a data-markdown-ignore class="headerlink" href="#minio-type-storage-options" title="Permanent link">¶</a></h2>
 <p>You can use this storage type for other S3-compatible storage services</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">minio</span>
@@ -9172,78 +9172,78 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w">    </span><span class="nt">maxObjSizeGB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5018</span>
 <span class="w">    </span><span class="nt">debugTrace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span>
 </code></pre></div>
-<h3 id="storageminioregion">storage.minio.region<a class="headerlink" href="#storageminioregion" title="Permanent link">¶</a></h3>
+<h3 id="storageminioregion">storage.minio.region<a data-markdown-ignore class="headerlink" href="#storageminioregion" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The location of the storage bucket. Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region">AWS region list</a> to define the bucket region. If not specified, the default <code>us-east-1</code> region is used.</p>
-<h3 id="storageminiobucket">storage.minio.bucket<a class="headerlink" href="#storageminiobucket" title="Permanent link">¶</a></h3>
+<h3 id="storageminiobucket">storage.minio.bucket<a data-markdown-ignore class="headerlink" href="#storageminiobucket" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of the storage bucket. See the <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules">AWS Bucket naming rules</a> for bucket name requirements.</p>
-<h3 id="storageminioprefix">storage.minio.prefix<a class="headerlink" href="#storageminioprefix" title="Permanent link">¶</a></h3>
+<h3 id="storageminioprefix">storage.minio.prefix<a data-markdown-ignore class="headerlink" href="#storageminioprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
-<h3 id="storageminioendpoint">storage.minio.endpoint<a class="headerlink" href="#storageminioendpoint" title="Permanent link">¶</a></h3>
+<h3 id="storageminioendpoint">storage.minio.endpoint<a data-markdown-ignore class="headerlink" href="#storageminioendpoint" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The network address (URL or IP:port) where your MinIO server is accessible.</p>
-<h3 id="storageminioendpointmap">storage.minio.endpointMap<a class="headerlink" href="#storageminioendpointmap" title="Permanent link">¶</a></h3>
+<h3 id="storageminioendpointmap">storage.minio.endpointMap<a data-markdown-ignore class="headerlink" href="#storageminioendpointmap" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: array of strings <br>
 <em>Required</em>: NO</p>
 <p>A mapping of custom endpoints for <code>pbm-agents</code> on different servers to the same MinIO storage. Use this option if <code>pbm-agents</code> reside on servers hidden behind different network configurations. Read more in the <a href="../details/endpoint-map.html">Support for multiple endpoints to the same S3 storage</a> section. Supported for Amazon S3, MinIO, and Microsoft Azure Blob storages. Available with version 2.8.0.</p>
-<h3 id="storageminiosecure">storage.minio.secure<a class="headerlink" href="#storageminiosecure" title="Permanent link">¶</a></h3>
+<h3 id="storageminiosecure">storage.minio.secure<a data-markdown-ignore class="headerlink" href="#storageminiosecure" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: false</p>
 <p>Defines whether to use HTTP or HTTPS protocol for communication between PBM and S3 storage. Default: <code>false</code>.</p>
-<h3 id="storageminioinsecureskiptlsverify">storage.minio.insecureSkipTLSVerify<a class="headerlink" href="#storageminioinsecureskiptlsverify" title="Permanent link">¶</a></h3>
+<h3 id="storageminioinsecureskiptlsverify">storage.minio.insecureSkipTLSVerify<a data-markdown-ignore class="headerlink" href="#storageminioinsecureskiptlsverify" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: false</p>
 <p>Disables the TLS verification of the MinIO / S3-compatible storage. This allows Percona Backup for MongoDB to upload data to MinIO / S3-compatible storages that use self-issued TLS certificates. Use it with caution as it might leave a hole for man-in-the-middle attacks.</p>
-<h3 id="storageminioforcepathstyle">storage.minio.forcePathStyle<a class="headerlink" href="#storageminioforcepathstyle" title="Permanent link">¶</a></h3>
+<h3 id="storageminioforcepathstyle">storage.minio.forcePathStyle<a data-markdown-ignore class="headerlink" href="#storageminioforcepathstyle" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: false</p>
 <p>Enforces the use of <a href="glossary.html#path-style-access-to-the-storage">path style access</a> to the storage. Default is <code>false</code> which means PBM uses the <a href="glossary.html#virtual-hosted-style-access">virtual-hosted-style</a> access to the storage</p>
-<h3 id="storageminiocredentialsaccess-key-id">storage.minio.credentials.access-key-id<a class="headerlink" href="#storageminiocredentialsaccess-key-id" title="Permanent link">¶</a></h3>
+<h3 id="storageminiocredentialsaccess-key-id">storage.minio.credentials.access-key-id<a data-markdown-ignore class="headerlink" href="#storageminiocredentialsaccess-key-id" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string<br>
 <em>Required</em>: YES</p>
 <p>Your access key to the storage bucket.</p>
-<h3 id="storageminiocredentialssecret-access-key">storage.minio.credentials.secret-access-key<a class="headerlink" href="#storageminiocredentialssecret-access-key" title="Permanent link">¶</a></h3>
+<h3 id="storageminiocredentialssecret-access-key">storage.minio.credentials.secret-access-key<a data-markdown-ignore class="headerlink" href="#storageminiocredentialssecret-access-key" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string<br>
 <em>Required</em>: YES</p>
 <p>The key to sign your programmatic requests to the storage bucket.</p>
-<h3 id="storageminiocredentialssession-token">storage.minio.credentials.session-token<a class="headerlink" href="#storageminiocredentialssession-token" title="Permanent link">¶</a></h3>
+<h3 id="storageminiocredentialssession-token">storage.minio.credentials.session-token<a data-markdown-ignore class="headerlink" href="#storageminiocredentialssession-token" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string<br>
 <em>Required</em>: NO</p>
 <p>The MinIO session token used to validate the temporary security credentials for accessing the storage.</p>
-<h3 id="storageminiocredentialssignature-ver">storage.minio.credentials.signature-ver<a class="headerlink" href="#storageminiocredentialssignature-ver" title="Permanent link">¶</a></h3>
+<h3 id="storageminiocredentialssignature-ver">storage.minio.credentials.signature-ver<a data-markdown-ignore class="headerlink" href="#storageminiocredentialssignature-ver" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string<br>
 <em>Required</em>: NO<br>
 <em>Default</em>: V4</p>
 <p>Specifies the AWS Signature version to use for authentication. Accepted values: <code>V2</code>, <code>V4</code>. </p>
 <p>Allows using the deprecated AWS Signature version 2 for backward compatibility with storages that don’t support Signature version 4. Default: <code>V4</code>.</p>
-<h3 id="storageminiopartsize">storage.minio.partSize<a class="headerlink" href="#storageminiopartsize" title="Permanent link">¶</a></h3>
+<h3 id="storageminiopartsize">storage.minio.partSize<a data-markdown-ignore class="headerlink" href="#storageminiopartsize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int<br>
 <em>Required</em>: NO</p>
 <p>The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB.</p>
-<h3 id="storageminioretryernummaxretries">storage.minio.retryer.numMaxRetries<a class="headerlink" href="#storageminioretryernummaxretries" title="Permanent link">¶</a></h3>
+<h3 id="storageminioretryernummaxretries">storage.minio.retryer.numMaxRetries<a data-markdown-ignore class="headerlink" href="#storageminioretryernummaxretries" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int<br>
 <em>Required</em>: NO<br>
 <em>Default</em>: 10</p>
 <p>The maximum number of retries to upload data to MinIO / S3-compatible storage. A zero value means no retries will be performed.</p>
-<h3 id="storageminiomaxobjsizegb">storage.minio.maxObjSizeGB<a class="headerlink" href="#storageminiomaxobjsizegb" title="Permanent link">¶</a></h3>
+<h3 id="storageminiomaxobjsizegb">storage.minio.maxObjSizeGB<a data-markdown-ignore class="headerlink" href="#storageminiomaxobjsizegb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: float64<br>
 <em>Required</em>: NO<br>
 <em>Default</em>: 5018</p>
 <p>The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about <a href="../features/split-merge-backup.html">Managing large backup files</a>.</p>
-<h3 id="storageminiodebugtrace">storage.minio.debugTrace<a class="headerlink" href="#storageminiodebugtrace" title="Permanent link">¶</a></h3>
+<h3 id="storageminiodebugtrace">storage.minio.debugTrace<a data-markdown-ignore class="headerlink" href="#storageminiodebugtrace" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean<br>
 <em>Required</em>: NO</p>
 <p>If set to <code>true</code>, outputs all http communication trace in PBM log. Default: false.</p>
-<h2 id="gcs-type-storage-options">GCS type storage options<a class="headerlink" href="#gcs-type-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="gcs-type-storage-options">GCS type storage options<a data-markdown-ignore class="headerlink" href="#gcs-type-storage-options" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
 <span class="w"> </span><span class="nt">gcs</span><span class="p">:</span>
@@ -9258,65 +9258,65 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w">      </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-private-key-here&gt;</span>
 <span class="w">    </span><span class="nt">maxObjSizeGB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5018</span>
 </code></pre></div>
-<h3 id="storagegcsbucket">storage.gcs.bucket<a class="headerlink" href="#storagegcsbucket" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsbucket">storage.gcs.bucket<a data-markdown-ignore class="headerlink" href="#storagegcsbucket" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of the storage bucket. See the <a href="https://cloud.google.com/storage/docs/naming-buckets#requirements">GCS bucket naming guidelines</a> for bucket name requirements.</p>
-<h3 id="storagegcschunksize">storage.gcs.chunkSize<a class="headerlink" href="#storagegcschunksize" title="Permanent link">¶</a></h3>
+<h3 id="storagegcschunksize">storage.gcs.chunkSize<a data-markdown-ignore class="headerlink" href="#storagegcschunksize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB for parallel uploads.</p>
-<h3 id="storagegcsclienttype">storage.gcs.clientType<a class="headerlink" href="#storagegcsclienttype" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsclienttype">storage.gcs.clientType<a data-markdown-ignore class="headerlink" href="#storagegcsclienttype" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO<br>
 <em>Default</em>: <code>json</code></p>
 <p>The GCS client used by PBM. Supported values are <code>json</code> and <code>grpc</code>. Parallel uploads require <code>grpc</code>.</p>
-<h3 id="storagegcsparalleluploadconcurrency">storage.gcs.parallelUploadConcurrency<a class="headerlink" href="#storagegcsparalleluploadconcurrency" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsparalleluploadconcurrency">storage.gcs.parallelUploadConcurrency<a data-markdown-ignore class="headerlink" href="#storagegcsparalleluploadconcurrency" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO<br>
 <em>Default</em>: 0</p>
 <p>The maximum number of parts PBM uploads concurrently. A value greater than <code>1</code> enables parallel uploads when <code>storage.gcs.clientType</code> is <code>grpc</code>.</p>
-<h3 id="storagegcsprefix">storage.gcs.prefix<a class="headerlink" href="#storagegcsprefix" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsprefix">storage.gcs.prefix<a data-markdown-ignore class="headerlink" href="#storagegcsprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
-<h3 id="storagegcscredentialsclientemail">storage.gcs.credentials.clientEmail<a class="headerlink" href="#storagegcscredentialsclientemail" title="Permanent link">¶</a></h3>
+<h3 id="storagegcscredentialsclientemail">storage.gcs.credentials.clientEmail<a data-markdown-ignore class="headerlink" href="#storagegcscredentialsclientemail" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The email address that uniquely identifies your service account in GCS. Required unless <code>storage.gcs.credentials.workloadIdentity</code> is <code>true</code>.</p>
-<h3 id="storagegcscredentialsprivatekey">storage.gcs.credentials.privateKey<a class="headerlink" href="#storagegcscredentialsprivatekey" title="Permanent link">¶</a></h3>
+<h3 id="storagegcscredentialsprivatekey">storage.gcs.credentials.privateKey<a data-markdown-ignore class="headerlink" href="#storagegcscredentialsprivatekey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The private key of the service account used to authenticate the request. Required unless <code>storage.gcs.credentials.workloadIdentity</code> is <code>true</code>.</p>
-<h3 id="storagegcscredentialsworkloadidentity">storage.gcs.credentials.workloadIdentity<a class="headerlink" href="#storagegcscredentialsworkloadidentity" title="Permanent link">¶</a></h3>
+<h3 id="storagegcscredentialsworkloadidentity">storage.gcs.credentials.workloadIdentity<a data-markdown-ignore class="headerlink" href="#storagegcscredentialsworkloadidentity" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: boolean <br>
 <em>Required</em>: NO<br>
 <em>Default</em>: <code>false</code></p>
 <p>Set this option to <code>true</code> to use Workload Identity instead of static service account JSON keys.</p>
-<h3 id="storagegcsretryerbackoffinitial">storage.gcs.retryer.backoffInitial<a class="headerlink" href="#storagegcsretryerbackoffinitial" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsretryerbackoffinitial">storage.gcs.retryer.backoffInitial<a data-markdown-ignore class="headerlink" href="#storagegcsretryerbackoffinitial" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO
 <em>Default</em>: 1s</p>
 <p>The time to wait to make an initial retry, specified as a time.Duration. Units like ms, s, etc., are supported. Valid time units are “ns”, “us” (or “µs”), “ms”, “s”, “m”, “h”.</p>
 <p>Defaults to nanoseconds if no unit is provided.</p>
-<h3 id="storagegcsretryerbackoffmax">storage.gcs.retryer.backoffMax<a class="headerlink" href="#storagegcsretryerbackoffmax" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsretryerbackoffmax">storage.gcs.retryer.backoffMax<a data-markdown-ignore class="headerlink" href="#storagegcsretryerbackoffmax" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO
 <em>Default</em>: 30s</p>
 <p>The maximum amount of time between retries, in seconds. Units like ms, s, etc., are supported. Valid time units are “ns”, “us” (or “µs”), “ms”, “s”, “m”, “h”.</p>
 <p>Defaults to nanoseconds if no unit is provided.</p>
-<h3 id="storagegcsretryerbackoffmultiplier">storage.gcs.retryer.backoffMultiplier<a class="headerlink" href="#storagegcsretryerbackoffmultiplier" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsretryerbackoffmultiplier">storage.gcs.retryer.backoffMultiplier<a data-markdown-ignore class="headerlink" href="#storagegcsretryerbackoffmultiplier" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO
 <em>Default</em>: 2</p>
 <p>Each time PBM fails and tries again, it increases the wait time by multiplying it by this number. Default value is 2 sec.</p>
 <p>For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.</p>
-<h3 id="storagegcsretryermaxattempts">storage.gcs.retryer.maxAttempts<a class="headerlink" href="#storagegcsretryermaxattempts" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsretryermaxattempts">storage.gcs.retryer.maxAttempts<a data-markdown-ignore class="headerlink" href="#storagegcsretryermaxattempts" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO
 <em>Default</em>: 5</p>
 <p>The maximum number of retries to upload data to GCS storage. A zero value means no retries will be performed. Available starting with version 2.12.0.</p>
-<h3 id="storagegcsretryerchunkretrydeadline">storage.gcs.retryer.chunkRetryDeadline<a class="headerlink" href="#storagegcsretryerchunkretrydeadline" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsretryerchunkretrydeadline">storage.gcs.retryer.chunkRetryDeadline<a data-markdown-ignore class="headerlink" href="#storagegcsretryerchunkretrydeadline" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO
 <em>Default</em>: 32s</p>
@@ -9325,28 +9325,28 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p>Units like ms, s, etc., are supported. Valid time units are “ns”, “us” (or “µs”), “ms”, “s”, “m”, “h”.</p>
 <p>Defaults to nanoseconds if no unit is provided.</p>
 <p>Available starting with version 2.12.0.</p>
-<h3 id="storagegcsmaxobjsizegb">storage.gcs.maxObjSizeGB<a class="headerlink" href="#storagegcsmaxobjsizegb" title="Permanent link">¶</a></h3>
+<h3 id="storagegcsmaxobjsizegb">storage.gcs.maxObjSizeGB<a data-markdown-ignore class="headerlink" href="#storagegcsmaxobjsizegb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: float64 <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 5018</p>
 <p>The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about <a href="../features/split-merge-backup.html">Managing large backup files</a>.</p>
-<h2 id="filesystem-storage-options">Filesystem storage options<a class="headerlink" href="#filesystem-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="filesystem-storage-options">Filesystem storage options<a data-markdown-ignore class="headerlink" href="#filesystem-storage-options" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">filesystem</span>
 <span class="w">  </span><span class="nt">filesystem</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span>
 <span class="w">  </span><span class="nt">maxObjSizeGB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5018</span>
 </code></pre></div>
-<h3 id="storagefilesystempath">storage.filesystem.path<a class="headerlink" href="#storagefilesystempath" title="Permanent link">¶</a></h3>
+<h3 id="storagefilesystempath">storage.filesystem.path<a data-markdown-ignore class="headerlink" href="#storagefilesystempath" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The path to the backup directory</p>
-<h3 id="storagefilesystemmaxobjsizegb">storage.filesystem.maxObjSizeGB<a class="headerlink" href="#storagefilesystemmaxobjsizegb" title="Permanent link">¶</a></h3>
+<h3 id="storagefilesystemmaxobjsizegb">storage.filesystem.maxObjSizeGB<a data-markdown-ignore class="headerlink" href="#storagefilesystemmaxobjsizegb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: float64 <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 5018</p>
 <p>The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about <a href="../features/split-merge-backup.html">Managing large backup files</a>.</p>
-<h2 id="microsoft-azure-blob-storage-options">Microsoft Azure Blob storage options<a class="headerlink" href="#microsoft-azure-blob-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="microsoft-azure-blob-storage-options">Microsoft Azure Blob storage options<a data-markdown-ignore class="headerlink" href="#microsoft-azure-blob-storage-options" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">azure</span>
 <span class="w">  </span><span class="nt">azure</span><span class="p">:</span>
@@ -9362,51 +9362,51 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w">      </span><span class="nt">minRetryDelay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">800ms</span>
 <span class="w">      </span><span class="nt">maxRetryDelay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">60s</span>
 </code></pre></div>
-<h3 id="storageazureaccount">storage.azure.account<a class="headerlink" href="#storageazureaccount" title="Permanent link">¶</a></h3>
+<h3 id="storageazureaccount">storage.azure.account<a data-markdown-ignore class="headerlink" href="#storageazureaccount" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of your storage account.</p>
-<h3 id="storageazurecontainer">storage.azure.container<a class="headerlink" href="#storageazurecontainer" title="Permanent link">¶</a></h3>
+<h3 id="storageazurecontainer">storage.azure.container<a data-markdown-ignore class="headerlink" href="#storageazurecontainer" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of the storage container. See the  <a href="https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names">Container names</a> for naming conventions.</p>
-<h3 id="storageazureendpointurl">storage.azure.endpointUrl<a class="headerlink" href="#storageazureendpointurl" title="Permanent link">¶</a></h3>
+<h3 id="storageazureendpointurl">storage.azure.endpointUrl<a data-markdown-ignore class="headerlink" href="#storageazureendpointurl" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The URL to access the data in Microsoft Azure Blob Storage. The default value is <code>https://&lt;storage-account&gt;.blob.core.windows.net</code>.</p>
-<h3 id="storageazureendpointurlmap">storage.azure.endpointUrlMap<a class="headerlink" href="#storageazureendpointurlmap" title="Permanent link">¶</a></h3>
+<h3 id="storageazureendpointurlmap">storage.azure.endpointUrlMap<a data-markdown-ignore class="headerlink" href="#storageazureendpointurlmap" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: object (host:port -&gt; endpoint URL) <br>
 <em>Required</em>: NO</p>
 <p>A mapping of custom endpoint URLs for <code>pbm-agents</code> on different servers to the same remote storage. Use this option if <code>pbm-agents</code> reside on servers hidden behind different network configurations. Read more in the <a href="../details/endpoint-map.html">Support for multiple endpoints to the same remote storage</a> section. Available with version 2.8.0.</p>
-<h3 id="storageazureprefix">storage.azure.prefix<a class="headerlink" href="#storageazureprefix" title="Permanent link">¶</a></h3>
+<h3 id="storageazureprefix">storage.azure.prefix<a data-markdown-ignore class="headerlink" href="#storageazureprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
-<h3 id="storageazurecredentialskey">storage.azure.credentials.key<a class="headerlink" href="#storageazurecredentialskey" title="Permanent link">¶</a></h3>
+<h3 id="storageazurecredentialskey">storage.azure.credentials.key<a data-markdown-ignore class="headerlink" href="#storageazurecredentialskey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>Your access key to authorize access to data in your storage account.</p>
-<h3 id="storageazuremaxobjsizegb">storage.azure.maxObjSizeGB<a class="headerlink" href="#storageazuremaxobjsizegb" title="Permanent link">¶</a></h3>
+<h3 id="storageazuremaxobjsizegb">storage.azure.maxObjSizeGB<a data-markdown-ignore class="headerlink" href="#storageazuremaxobjsizegb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: float64 <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 194560</p>
 <p>The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about <a href="../features/split-merge-backup.html">Managing large backup files</a>.</p>
-<h3 id="storageazureretryernummaxretries">storage.azure.retryer.numMaxRetries<a class="headerlink" href="#storageazureretryernummaxretries" title="Permanent link">¶</a></h3>
+<h3 id="storageazureretryernummaxretries">storage.azure.retryer.numMaxRetries<a data-markdown-ignore class="headerlink" href="#storageazureretryernummaxretries" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 3</p>
 <p>The maximum number of retries to upload data to Microsoft Azure storage. A zero value means no retries will be performed.</p>
-<h3 id="storageazureretryerminretrydelay">storage.azure.retryer.minRetryDelay<a class="headerlink" href="#storageazureretryerminretrydelay" title="Permanent link">¶</a></h3>
+<h3 id="storageazureretryerminretrydelay">storage.azure.retryer.minRetryDelay<a data-markdown-ignore class="headerlink" href="#storageazureretryerminretrydelay" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 800ms</p>
 <p>The minimum time to wait before the next retry, specified as a <code>time.Duration</code>. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.</p>
-<h3 id="storageazureretryermaxretrydelay">storage.azure.retryer.maxRetryDelay<a class="headerlink" href="#storageazureretryermaxretrydelay" title="Permanent link">¶</a></h3>
+<h3 id="storageazureretryermaxretrydelay">storage.azure.retryer.maxRetryDelay<a data-markdown-ignore class="headerlink" href="#storageazureretryermaxretrydelay" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: time.Duration <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 60s</p>
 <p>The maximum time to wait before the next retry, specified as a <code>time.Duration</code>. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.</p>
-<h2 id="oci-object-storage-options">OCI Object Storage options<a class="headerlink" href="#oci-object-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="oci-object-storage-options">OCI Object Storage options<a data-markdown-ignore class="headerlink" href="#oci-object-storage-options" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oci</span>
 <span class="w">  </span><span class="nt">oci</span><span class="p">:</span>
@@ -9425,52 +9425,52 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w">          </span><span class="no">...</span>
 <span class="w">          </span><span class="no">-----END PRIVATE KEY-----</span>
 </code></pre></div>
-<h3 id="storageociregion">storage.oci.region<a class="headerlink" href="#storageociregion" title="Permanent link">¶</a></h3>
+<h3 id="storageociregion">storage.oci.region<a data-markdown-ignore class="headerlink" href="#storageociregion" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The OCI region where your Object Storage bucket is located.</p>
-<h3 id="storageocinamespace">storage.oci.namespace<a class="headerlink" href="#storageocinamespace" title="Permanent link">¶</a></h3>
+<h3 id="storageocinamespace">storage.oci.namespace<a data-markdown-ignore class="headerlink" href="#storageocinamespace" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The Object Storage namespace for your OCI tenancy.</p>
-<h3 id="storageocibucket">storage.oci.bucket<a class="headerlink" href="#storageocibucket" title="Permanent link">¶</a></h3>
+<h3 id="storageocibucket">storage.oci.bucket<a data-markdown-ignore class="headerlink" href="#storageocibucket" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of the Object Storage bucket where PBM stores backups.</p>
-<h3 id="storageociprefix">storage.oci.prefix<a class="headerlink" href="#storageociprefix" title="Permanent link">¶</a></h3>
+<h3 id="storageociprefix">storage.oci.prefix<a data-markdown-ignore class="headerlink" href="#storageociprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path prefix in the bucket. If undefined, backups are stored in the bucket root.</p>
-<h3 id="storageocicredentialstype">storage.oci.credentials.type<a class="headerlink" href="#storageocicredentialstype" title="Permanent link">¶</a></h3>
+<h3 id="storageocicredentialstype">storage.oci.credentials.type<a data-markdown-ignore class="headerlink" href="#storageocicredentialstype" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: <code>userPrincipal</code></p>
 <p>Authentication type for OCI access. Supported values: <code>userPrincipal</code>, <code>instancePrincipal</code>, <code>okeWorkloadIdentity</code>.</p>
-<h3 id="storageocicredentialsuserprincipaltenancy">storage.oci.credentials.userPrincipal.tenancy<a class="headerlink" href="#storageocicredentialsuserprincipaltenancy" title="Permanent link">¶</a></h3>
+<h3 id="storageocicredentialsuserprincipaltenancy">storage.oci.credentials.userPrincipal.tenancy<a data-markdown-ignore class="headerlink" href="#storageocicredentialsuserprincipaltenancy" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (when <code>storage.oci.credentials.type=userPrincipal</code>)</p>
 <p>The tenancy OCID for OCI API signing key authentication.</p>
-<h3 id="storageocicredentialsuserprincipaluser">storage.oci.credentials.userPrincipal.user<a class="headerlink" href="#storageocicredentialsuserprincipaluser" title="Permanent link">¶</a></h3>
+<h3 id="storageocicredentialsuserprincipaluser">storage.oci.credentials.userPrincipal.user<a data-markdown-ignore class="headerlink" href="#storageocicredentialsuserprincipaluser" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (when <code>storage.oci.credentials.type=userPrincipal</code>)</p>
 <p>The user OCID for OCI API signing key authentication.</p>
-<h3 id="storageocicredentialsuserprincipalfingerprint">storage.oci.credentials.userPrincipal.fingerprint<a class="headerlink" href="#storageocicredentialsuserprincipalfingerprint" title="Permanent link">¶</a></h3>
+<h3 id="storageocicredentialsuserprincipalfingerprint">storage.oci.credentials.userPrincipal.fingerprint<a data-markdown-ignore class="headerlink" href="#storageocicredentialsuserprincipalfingerprint" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (when <code>storage.oci.credentials.type=userPrincipal</code>)</p>
 <p>The fingerprint of the uploaded OCI API signing public key.</p>
-<h3 id="storageocicredentialsuserprincipalprivatekey">storage.oci.credentials.userPrincipal.privateKey<a class="headerlink" href="#storageocicredentialsuserprincipalprivatekey" title="Permanent link">¶</a></h3>
+<h3 id="storageocicredentialsuserprincipalprivatekey">storage.oci.credentials.userPrincipal.privateKey<a data-markdown-ignore class="headerlink" href="#storageocicredentialsuserprincipalprivatekey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (when <code>storage.oci.credentials.type=userPrincipal</code>)</p>
 <p>The private key in PEM format that pairs with the uploaded OCI API signing public key.</p>
-<h3 id="storageociserversideencryptionkmskeyid">storage.oci.serverSideEncryption.kmsKeyID<a class="headerlink" href="#storageociserversideencryptionkmskeyid" title="Permanent link">¶</a></h3>
+<h3 id="storageociserversideencryptionkmskeyid">storage.oci.serverSideEncryption.kmsKeyID<a data-markdown-ignore class="headerlink" href="#storageociserversideencryptionkmskeyid" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>OCI KMS key OCID to enable server-side encryption with OCI KMS.</p>
-<h3 id="storageociserversideencryptionssecustomerkey">storage.oci.serverSideEncryption.sseCustomerKey<a class="headerlink" href="#storageociserversideencryptionssecustomerkey" title="Permanent link">¶</a></h3>
+<h3 id="storageociserversideencryptionssecustomerkey">storage.oci.serverSideEncryption.sseCustomerKey<a data-markdown-ignore class="headerlink" href="#storageociserversideencryptionssecustomerkey" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>Base64-encoded 256-bit key for SSE-C encryption. Do not set this together with <code>storage.oci.serverSideEncryption.kmsKeyID</code>.</p>
-<h2 id="alibaba-cloud-oss-storage-options">Alibaba Cloud OSS storage options<a class="headerlink" href="#alibaba-cloud-oss-storage-options" title="Permanent link">¶</a></h2>
+<h2 id="alibaba-cloud-oss-storage-options">Alibaba Cloud OSS storage options<a data-markdown-ignore class="headerlink" href="#alibaba-cloud-oss-storage-options" title="Permanent link">¶</a></h2>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oss</span>
 <span class="w">  </span><span class="nt">oss</span><span class="p">:</span>
@@ -9497,63 +9497,63 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <span class="w">      </span><span class="nt">maxBackoff</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">300s</span>
 <span class="w">      </span><span class="nt">baseDelay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30ms</span>
 </code></pre></div>
-<h3 id="storageossregion">storage.oss.region<a class="headerlink" href="#storageossregion" title="Permanent link">¶</a></h3>
+<h3 id="storageossregion">storage.oss.region<a data-markdown-ignore class="headerlink" href="#storageossregion" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The region where your OSS bucket is located. Refer to the <a href="https://www.alibabacloud.com/help/en/oss/user-guide/regions-and-endpoints">OSS regions and endpoints</a> for the list of available regions.</p>
-<h3 id="storageossendpointurl">storage.oss.endpointUrl<a class="headerlink" href="#storageossendpointurl" title="Permanent link">¶</a></h3>
+<h3 id="storageossendpointurl">storage.oss.endpointUrl<a data-markdown-ignore class="headerlink" href="#storageossendpointurl" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>A domain name to access OSS over the Internet. The endpoint must correspond to the region that you selected when you created the bucket. </p>
-<h3 id="storageossbucket">storage.oss.bucket<a class="headerlink" href="#storageossbucket" title="Permanent link">¶</a></h3>
+<h3 id="storageossbucket">storage.oss.bucket<a data-markdown-ignore class="headerlink" href="#storageossbucket" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The name of the storage bucket. See the <a href="https://www.alibabacloud.com/help/en/oss/user-guide/bucket-naming-conventions">OSS bucket naming rules</a> for bucket name requirements.</p>
-<h3 id="storageossprefix">storage.oss.prefix<a class="headerlink" href="#storageossprefix" title="Permanent link">¶</a></h3>
+<h3 id="storageossprefix">storage.oss.prefix<a data-markdown-ignore class="headerlink" href="#storageossprefix" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.</p>
-<h3 id="storageosscredentialsaccesskeyid">storage.oss.credentials.accessKeyId<a class="headerlink" href="#storageosscredentialsaccesskeyid" title="Permanent link">¶</a></h3>
+<h3 id="storageosscredentialsaccesskeyid">storage.oss.credentials.accessKeyId<a data-markdown-ignore class="headerlink" href="#storageosscredentialsaccesskeyid" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The Access Key ID associated with the RAM user used to access Alibaba Cloud OSS.</p>
-<h3 id="storageosscredentialsaccesskeysecret">storage.oss.credentials.accessKeySecret<a class="headerlink" href="#storageosscredentialsaccesskeysecret" title="Permanent link">¶</a></h3>
+<h3 id="storageosscredentialsaccesskeysecret">storage.oss.credentials.accessKeySecret<a data-markdown-ignore class="headerlink" href="#storageosscredentialsaccesskeysecret" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The Access Key Secret associated with the RAM user used to access Alibaba Cloud OSS. The secret is used to encrypt and verify the signature string.</p>
-<h3 id="storageosscredentialssecuritytoken">storage.oss.credentials.securityToken<a class="headerlink" href="#storageosscredentialssecuritytoken" title="Permanent link">¶</a></h3>
+<h3 id="storageosscredentialssecuritytoken">storage.oss.credentials.securityToken<a data-markdown-ignore class="headerlink" href="#storageosscredentialssecuritytoken" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES when using temporary credentials</p>
 <p>The security token that is used together with temporary access key ID and access key secret. You receive the token when you request temporary access credentials by using the <a href="https://www.alibabacloud.com/help/en/ram/product-overview/what-is-sts">Security Token Service</a>.</p>
-<h3 id="storageosscredentialsrolearn">storage.oss.credentials.roleArn<a class="headerlink" href="#storageosscredentialsrolearn" title="Permanent link">¶</a></h3>
+<h3 id="storageosscredentialsrolearn">storage.oss.credentials.roleArn<a data-markdown-ignore class="headerlink" href="#storageosscredentialsrolearn" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The Alibaba Cloud Resource Name (ARN) of the RAM role to assume. PBM uses this role to obtain required permissions for accessing OSS resources.</p>
-<h3 id="storageosscredentialssessionname">storage.oss.credentials.sessionName<a class="headerlink" href="#storageosscredentialssessionname" title="Permanent link">¶</a></h3>
+<h3 id="storageosscredentialssessionname">storage.oss.credentials.sessionName<a data-markdown-ignore class="headerlink" href="#storageosscredentialssessionname" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>Identifier for the assumed role session</p>
-<h3 id="storageossserversideencryptionssealgorithm">storage.oss.serverSideEncryption.sseAlgorithm<a class="headerlink" href="#storageossserversideencryptionssealgorithm" title="Permanent link">¶</a></h3>
+<h3 id="storageossserversideencryptionssealgorithm">storage.oss.serverSideEncryption.sseAlgorithm<a data-markdown-ignore class="headerlink" href="#storageossserversideencryptionssealgorithm" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO </p>
 <p>The encryption algorithm used to encrypt data before storing it in OSS. Supported values: <code>AES256</code>, <code>KMS</code>, <code>SM4</code>. Default: <code>AES256</code></p>
-<h3 id="storageossserversideencryptionkmsmasterkeyid">storage.oss.serverSideEncryption.kmsMasterKeyId<a class="headerlink" href="#storageossserversideencryptionkmsmasterkeyid" title="Permanent link">¶</a></h3>
+<h3 id="storageossserversideencryptionkmsmasterkeyid">storage.oss.serverSideEncryption.kmsMasterKeyId<a data-markdown-ignore class="headerlink" href="#storageossserversideencryptionkmsmasterkeyid" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES (when using a custom KMS key)</p>
 <p>The ID of the customer master key used for encryption.</p>
-<h3 id="storageossserversideencryptionkmsdataencryption">storage.oss.serverSideEncryption.kmsDataEncryption<a class="headerlink" href="#storageossserversideencryptionkmsdataencryption" title="Permanent link">¶</a></h3>
+<h3 id="storageossserversideencryptionkmsdataencryption">storage.oss.serverSideEncryption.kmsDataEncryption<a data-markdown-ignore class="headerlink" href="#storageossserversideencryptionkmsdataencryption" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO</p>
 <p>The encryption algorithm for encrypting data when SSE-KMS is used. Can be set only when <code>storage.oss.serverSideEncryption.sseAlgorithm</code> is set to <code>KMS</code>.</p>
 <p>Supported values: <code>AES256</code>, <code>SM4</code>. Default: <code>AES256</code></p>
-<h3 id="storageossuploadpartsize">storage.oss.uploadPartSize<a class="headerlink" href="#storageossuploadpartsize" title="Permanent link">¶</a></h3>
+<h3 id="storageossuploadpartsize">storage.oss.uploadPartSize<a data-markdown-ignore class="headerlink" href="#storageossuploadpartsize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO</p>
 <p>The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB</p>
 <p>Percona Backup for MongoDB automatically increases the <code>uploadPartSize</code> value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of <code>uploadPartSize</code> * <a href="https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants"><code>maxUploadParts</code></a> and is appr. 97,6 GB).</p>
 <p>The <code>uploadPartSize</code> value is printed in the <code>pbm-agent</code> log.</p>
 <p>By setting this option, you can manually adjust the size of data chunks if Percona Backup for MongoDB failed to do it for some reason. The defined <code>uploadPartSize</code> value overrides the default value and is used for calculating the max allowed file size</p>
-<h3 id="storageossmaxuploadparts">storage.oss.maxUploadParts<a class="headerlink" href="#storageossmaxuploadparts" title="Permanent link">¶</a></h3>
+<h3 id="storageossmaxuploadparts">storage.oss.maxUploadParts<a data-markdown-ignore class="headerlink" href="#storageossmaxuploadparts" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 10,000</p>
@@ -9561,22 +9561,22 @@ Use the <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_reg
 <p>By setting this option, you can override the value defined in the <a href="https://www.alibabacloud.com/help/en/oss/developer-reference/multipart-upload-3?spm=a3c0i.29367734.6737026690.4.43067d3faLVHMa">Multipart upload</a> method.</p>
 <p>It can be useful to specify a smaller number of chunks for multipart uploads.</p>
 <p>The <code>maxUploadParts</code> value is printed in the pbm-agent log.</p>
-<h3 id="storageossconnecttimeout">storage.oss.connectTimeout<a class="headerlink" href="#storageossconnecttimeout" title="Permanent link">¶</a></h3>
+<h3 id="storageossconnecttimeout">storage.oss.connectTimeout<a data-markdown-ignore class="headerlink" href="#storageossconnecttimeout" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 5s</p>
 <p>The connection timeout in seconds when PBM connects to the OSS storage. Default value is 5 seconds.</p>
-<h3 id="storageossretryermaxattempts">storage.oss.retryer.maxAttempts<a class="headerlink" href="#storageossretryermaxattempts" title="Permanent link">¶</a></h3>
+<h3 id="storageossretryermaxattempts">storage.oss.retryer.maxAttempts<a data-markdown-ignore class="headerlink" href="#storageossretryermaxattempts" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 300</p>
 <p>The maximum number of retry attempts for failed requests to the OSS storage. Default value is 5.</p>
-<h3 id="storageossretryermaxbackoff">storage.oss.retryer.maxBackoff<a class="headerlink" href="#storageossretryermaxbackoff" title="Permanent link">¶</a></h3>
+<h3 id="storageossretryermaxbackoff">storage.oss.retryer.maxBackoff<a data-markdown-ignore class="headerlink" href="#storageossretryermaxbackoff" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 300s</p>
 <p>The maximum time in seconds to wait between retry attempts for failed requests to the OSS storage. Default value is 5 minutes (300 seconds).</p>
-<h3 id="storageossretryerbasedelay">storage.oss.retryer.baseDelay<a class="headerlink" href="#storageossretryerbasedelay" title="Permanent link">¶</a></h3>
+<h3 id="storageossretryerbasedelay">storage.oss.retryer.baseDelay<a data-markdown-ignore class="headerlink" href="#storageossretryerbasedelay" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: 30ms</p>

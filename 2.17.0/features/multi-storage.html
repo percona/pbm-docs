@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6713,7 +6713,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="multiple-storages-for-backups">Multiple storages for backups<a class="headerlink" href="#multiple-storages-for-backups" title="Permanent link">¶</a></h1>
+<h1 id="multiple-storages-for-backups">Multiple storages for backups<a data-markdown-ignore class="headerlink" href="#multiple-storages-for-backups" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.6.0.html">2.6.0</a></p>
 </div>
@@ -6729,10 +6729,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Saves costs on data transfer in case of cloud storages</li>
 <li>Increases effectiveness of following your organization’s backup policy either via your own applications and tools interfaced with PBM or via Percona Everest</li>
 </ul>
-<h2 id="configuration-profiles">Configuration profiles<a class="headerlink" href="#configuration-profiles" title="Permanent link">¶</a></h2>
+<h2 id="configuration-profiles">Configuration profiles<a data-markdown-ignore class="headerlink" href="#configuration-profiles" title="Permanent link">¶</a></h2>
 <p>By default, PBM stores backups and point-in-time recovery oplog slices to the remote backup storage which you defined in the configuration file during the initial setup. This is the <strong>main</strong> backup storage.</p>
 <p>To make backups to additional – <strong>external</strong> backup storages, a concept of a configuration profile is introduced. A configuration profile is a file that stores only the configuration for an external backup storage.</p>
-<h3 id="select-a-storage-with-profile">Select a storage with –profile<a class="headerlink" href="#select-a-storage-with-profile" title="Permanent link">¶</a></h3>
+<h3 id="select-a-storage-with-profile">Select a storage with –profile<a data-markdown-ignore class="headerlink" href="#select-a-storage-with-profile" title="Permanent link">¶</a></h3>
 <p>When multiple storages are configured, PBM commands can operate on:</p>
 <ul>
 <li>
@@ -6743,7 +6743,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 <p>To choose which storage a command should use, pass the <code>--profile</code> flag.</p>
-<h4 id="commands-that-support-profile">Commands that support <code>--profile</code><a class="headerlink" href="#commands-that-support-profile" title="Permanent link">¶</a></h4>
+<h4 id="commands-that-support-profile">Commands that support <code>--profile</code><a data-markdown-ignore class="headerlink" href="#commands-that-support-profile" title="Permanent link">¶</a></h4>
 <p>These PBM commands accept the <code>--profile</code> flag:</p>
 <ul>
 <li>
@@ -6763,7 +6763,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 <p>If you do not specify <code>--profile</code>, PBM uses the command’s default behavior.</p>
-<h4 id="allowed-values">Allowed values<a class="headerlink" href="#allowed-values" title="Permanent link">¶</a></h4>
+<h4 id="allowed-values">Allowed values<a data-markdown-ignore class="headerlink" href="#allowed-values" title="Permanent link">¶</a></h4>
 <p>You can set <code>--profile</code> to one of the following:</p>
 <ul>
 <li>
@@ -6788,18 +6788,18 @@ pbm<span class="w"> </span>status<span class="w"> </span>--profile<span class="o
 pbm<span class="w"> </span>backup<span class="w"> </span>-t<span class="w"> </span>physical<span class="w"> </span>--profile<span class="o">=</span>minio<span class="w"> </span>--wait
 </code></pre></div>
 </details>
-<h4 id="reserved-names-and-profile-naming-rules">Reserved names and profile naming rules<a class="headerlink" href="#reserved-names-and-profile-naming-rules" title="Permanent link">¶</a></h4>
+<h4 id="reserved-names-and-profile-naming-rules">Reserved names and profile naming rules<a data-markdown-ignore class="headerlink" href="#reserved-names-and-profile-naming-rules" title="Permanent link">¶</a></h4>
 <ul>
 <li><code>main</code> is a reserved CLI keyword that always refers to the <strong>main storage</strong>.</li>
 <li>PBM CLI will reject empty string <code>("")</code> and <code>main</code> as profile names.</li>
 </ul>
-<h4 id="removing-a-legacy-profile-named-main">Removing a legacy profile named main<a class="headerlink" href="#removing-a-legacy-profile-named-main" title="Permanent link">¶</a></h4>
+<h4 id="removing-a-legacy-profile-named-main">Removing a legacy profile named main<a data-markdown-ignore class="headerlink" href="#removing-a-legacy-profile-named-main" title="Permanent link">¶</a></h4>
 <p>If a profile named <code>main</code> already exists from older configurations, rename it by removing and re-adding it under a different name. For compatibility, the command below treats main as a profile name (not the reserved keyword):</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>remove<span class="w"> </span><span class="s2">"main"</span>
 pbm<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </span><span class="s2">"different_name"</span><span class="w"> </span>/path/to/config.yaml
 </code></pre></div>
 <p>After renaming, use <code>--profile=main</code> to reference the main storage, and <code>--profile=&lt;different_name&gt;</code> to reference the external profile.</p>
-<h4 id="example-configuration-profile">Example: Configuration profile<a class="headerlink" href="#example-configuration-profile" title="Permanent link">¶</a></h4>
+<h4 id="example-configuration-profile">Example: Configuration profile<a data-markdown-ignore class="headerlink" href="#example-configuration-profile" title="Permanent link">¶</a></h4>
 <div class="highlight"><span class="filename">minio.yaml</span><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">s3</span>
 <span class="w">  </span><span class="nt">s3</span><span class="p">:</span>
@@ -6817,7 +6817,7 @@ pbm<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>show<span class="w"> </span>&lt;profile_name&gt;
 </code></pre></div>
 <p>See the full list of the configuration profile management commands in the <a href="../reference/pbm-commands.html">pbm commands</a> reference.</p>
-<h2 id="make-a-backup-to-an-external-storage">Make a backup to an external storage<a class="headerlink" href="#make-a-backup-to-an-external-storage" title="Permanent link">¶</a></h2>
+<h2 id="make-a-backup-to-an-external-storage">Make a backup to an external storage<a data-markdown-ignore class="headerlink" href="#make-a-backup-to-an-external-storage" title="Permanent link">¶</a></h2>
 <p>To make a backup to an external backup storage, pass the profile name with the <code>--profile</code> flag for the <code>pbm backup</code> command. For example, to run a physical backup and store it in the MinIO storage defined via the <code>minio</code> configuration profile, run the following command:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>-t<span class="w"> </span>physical<span class="w"> </span>--profile<span class="o">=</span>minio<span class="w"> </span>--wait<span class="w"> </span>
 </code></pre></div>
@@ -6829,7 +6829,7 @@ pbm<span class="w"> </span>profile<span class="w"> </span>add<span class="w"> </
 <p>You can make any type of backups except snapshot-based ones on an external storage.</p>
 <p>Note that point-in-time recovery oplog slicing is not stopped automatically for backups made to an external storage. Thus, PBM saves oplog chunks related to such backups on both the main and the external storages.</p>
 <p>When you make incremental backups, make sure to keep the whole backup chain on the same storage. To switch the backup storage, you must make a new base backup on it to start the new incremental chain. </p>
-<h2 id="restore-from-an-external-storage">Restore from an external storage<a class="headerlink" href="#restore-from-an-external-storage" title="Permanent link">¶</a></h2>
+<h2 id="restore-from-an-external-storage">Restore from an external storage<a data-markdown-ignore class="headerlink" href="#restore-from-an-external-storage" title="Permanent link">¶</a></h2>
 <p>Before you start, make sure that <code>pbm-agents</code> have the read permissions to backups on the remote storage(s). Also, <a href="../usage/restore.html#before-you-start">make all preparations for the restore</a>.</p>
 <ol>
 <li>
@@ -6863,9 +6863,9 @@ PITR &lt;on&gt;:
 </ol>
 </li>
 </ol>
-<h2 id="delete-backups">Delete backups<a class="headerlink" href="#delete-backups" title="Permanent link">¶</a></h2>
+<h2 id="delete-backups">Delete backups<a data-markdown-ignore class="headerlink" href="#delete-backups" title="Permanent link">¶</a></h2>
 <p>You can delete backups from an external storage by name or by specifying a time threshold with the <code>--profile</code> flag. To delete backups older than a specified time from an external storage, you must run PBM version 2.13.0 and newer.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Delete by backup name</label><label for="__tabbed_1_2">Delete backups older than specified time</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1">Delete by backup name</label><label for="__tabbed_1_2">Delete backups older than specified time</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Run the <code>pbm delete-backup</code> command and pass the backup name:</p>
@@ -6886,7 +6886,7 @@ The <code>--profile</code> flag works only with the <code>--older-than</code> fl
 </div>
 </div>
 </div>
-<h2 id="implementation-specifics">Implementation specifics<a class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h2>
+<h2 id="implementation-specifics">Implementation specifics<a data-markdown-ignore class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h2>
 <ol>
 <li>You can make backups of any type except snapshot-based ones on the external storage.</li>
 <li>To start point-in-time recovery oplog slicing, you must make a backup on the main storage. A backup from an external storage is not considered a valid base backup for oplog slicing.</li>

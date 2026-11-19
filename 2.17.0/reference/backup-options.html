@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6657,7 +6657,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="backup-options">Backup options<a class="headerlink" href="#backup-options" title="Permanent link">¶</a></h1>
+<h1 id="backup-options">Backup options<a data-markdown-ignore class="headerlink" href="#backup-options" title="Permanent link">¶</a></h1>
 <div class="highlight"><pre><span></span><code><span class="nt">backup</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">priority</span><span class="p">:</span>
 <span class="w">    </span><span class="s">"localhost:28019"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.5</span>
@@ -6672,7 +6672,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">numParallelCollections</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">numParallelFiles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 </code></pre></div>
-<h2 id="priority">priority<a class="headerlink" href="#priority" title="Permanent link">¶</a></h2>
+<h2 id="priority">priority<a data-markdown-ignore class="headerlink" href="#priority" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: array of strings</p>
 <p>The list of <code>mongod</code> nodes and their priority for making backups. The node with the highest priority is elected for making a backup. If several nodes have the same priority, the one among them is randomly elected to make a backup.</p>
 <p>If not set, the replica set nodes have the default priority as follows:</p>
@@ -6681,14 +6681,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>secondary nodes - 1.0</li>
 <li>primary node - 0.5</li>
 </ul>
-<h2 id="backupcompression">backup.compression<a class="headerlink" href="#backupcompression" title="Permanent link">¶</a></h2>
+<h2 id="backupcompression">backup.compression<a data-markdown-ignore class="headerlink" href="#backupcompression" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: string <br>
 <em>Default</em>: s2</p>
 <p>The compression method for backup snapshots. </p>
 <p>When <code>none</code> is specified, backups are made without compression.</p>
 <p>Supported values: <code>gzip</code>, <code>snappy</code>, <code>lz4</code>, <code>s2</code>, <code>pgzip</code>, <code>zstd</code>. Default: <code>s2</code>.</p>
 <!-- backup-compression-level: -->
-<h2 id="backupcompressionlevel">backup.compressionLevel<a class="headerlink" href="#backupcompressionlevel" title="Permanent link">¶</a></h2>
+<h2 id="backupcompressionlevel">backup.compressionLevel<a data-markdown-ignore class="headerlink" href="#backupcompressionlevel" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: int</p>
 <p>The compression level. The default value depends on the compression method used. </p>
 <p>The following table shows available compression levels per compression method:</p>
@@ -6724,9 +6724,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tbody>
 </table>
 <p>Note that the greater value you specify, the more time and computing resources it will take to compress the data.</p>
-<h2 id="backup-timeouts">Backup timeouts<a class="headerlink" href="#backup-timeouts" title="Permanent link">¶</a></h2>
+<h2 id="backup-timeouts">Backup timeouts<a data-markdown-ignore class="headerlink" href="#backup-timeouts" title="Permanent link">¶</a></h2>
 <p>Timeout options control how long Percona Backup for MongoDB (PBM) waits for specific conditions during backup operations.</p>
-<h3 id="backuptimeoutsbalancerstop">backup.timeouts.balancerStop<a class="headerlink" href="#backuptimeoutsbalancerstop" title="Permanent link">¶</a></h3>
+<h3 id="backuptimeoutsbalancerstop">backup.timeouts.balancerStop<a data-markdown-ignore class="headerlink" href="#backuptimeoutsbalancerstop" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 0 (unlimited)</p>
 <p>Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a backup. If set to <strong>0</strong>, PBM waits indefinitely for the balancer to stop.</p>
@@ -6745,7 +6745,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Enforce stricter operational time limits in automated environments</li>
 <li>Detect and fail fast if the balancer cannot be stopped</li>
 </ul>
-<h3 id="backuptimeoutsstartingstatus">backup.timeouts.startingStatus<a class="headerlink" href="#backuptimeoutsstartingstatus" title="Permanent link">¶</a></h3>
+<h3 id="backuptimeoutsstartingstatus">backup.timeouts.startingStatus<a data-markdown-ignore class="headerlink" href="#backuptimeoutsstartingstatus" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: uint32 <br>
 <em>Default</em>: 33</p>
 <p>The wait time (in seconds) for PBM to start backups. This timeout controls how long PBM waits for the backup to transition from initial state to running status.</p>
@@ -6759,15 +6759,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>Applies to all backup types (logical, physical, incremental, external) on both single replica sets and sharded clusters.</p>
 <p>The 0 (zero) value resets the timeout to the default 33 seconds.</p>
-<h2 id="backupoplogspanmin">backup.oplogSpanMin<a class="headerlink" href="#backupoplogspanmin" title="Permanent link">¶</a></h2>
+<h2 id="backupoplogspanmin">backup.oplogSpanMin<a data-markdown-ignore class="headerlink" href="#backupoplogspanmin" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: float64 <br></p>
 <p>The duration (in minutes) of oplog slices saved with the logical backup snapshot. By default, the duration of backup oplog slices equals to the value defined for the <a href="pitr-options.html#pitroplogspanmin"><code>pitr.oplogSpanMin</code></a> option (default - 10 minutes). You can reduce the duration in heavy-loaded environments. Note that setting the duration to shorter periods may increase the overall backup execution time. </p>
-<h2 id="backupnumparallelcollections">backup.numParallelCollections<a class="headerlink" href="#backupnumparallelcollections" title="Permanent link">¶</a></h2>
+<h2 id="backupnumparallelcollections">backup.numParallelCollections<a data-markdown-ignore class="headerlink" href="#backupnumparallelcollections" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: int <br>
 <em>Default</em>: number of CPU cores / 2</p>
 <p>The number of parallel collections to process during a logical backup. By default, the number of parallel collections is half of the number of CPU cores. By setting the value for this option you define the new default.
 Available starting with version 2.7.0.</p>
-<h2 id="backupnumparallelfiles">backup.numParallelFiles<a class="headerlink" href="#backupnumparallelfiles" title="Permanent link">¶</a></h2>
+<h2 id="backupnumparallelfiles">backup.numParallelFiles<a data-markdown-ignore class="headerlink" href="#backupnumparallelfiles" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 1 <br>
 <em>Storage</em>: Filesystem / NFS only <br>

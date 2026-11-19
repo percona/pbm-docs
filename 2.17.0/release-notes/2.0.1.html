@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6537,7 +6537,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-201-2022-10-12">Percona Backup for MongoDB 2.0.1 (2022-10-12)<a class="headerlink" href="#percona-backup-for-mongodb-201-2022-10-12" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-201-2022-10-12">Percona Backup for MongoDB 2.0.1 (2022-10-12)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-201-2022-10-12" title="Permanent link">¶</a></h1>
 <table>
 <thead>
 <tr>
@@ -6553,7 +6553,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tbody>
 </table>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li>The support of <a href="../details/s3-storage.html#server-side-encryption">server-side encryption with customer-provided keys managed on the customer side (SSE-C)</a> enables you to use the S3-compatible storage of your choice thus preventing the vendor lock-in and saving your costs on AWS KMS (Key Management Service).</li>
 <li>The ability to <a href="../manage/configure-remotely.html">configure Percona Backup for MongoDB remotely</a> simplifies its management when PBM is deployed in Docker, Kubernetes or other cloud services. </li>
@@ -6566,12 +6566,12 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 </li>
 </ul>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
+<h2 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-733">PBM-733</a>: Allow changing the timezone of logs in PBM</li>
 <li><a href="https://jira.percona.com/browse/PBM-877">PBM-877</a>: Enable PBM to read the config file from stdin</li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-949">PBM-949</a>: Improve handling of arbiter nodes</li>
 <li><a href="https://jira.percona.com/browse/PBM-948">PBM-948</a>: Align <code>pbm describe-backup</code> and <code>pbm describe-restore</code> outputs</li>
@@ -6579,7 +6579,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="https://jira.percona.com/browse/PBM-922">PBM-922</a>: Add support for SSE-C for S3 providers (Thanks to Richard Bateman for reporting this issue and contributing to it)</li>
 <li><a href="https://jira.percona.com/browse/PBM-897">PBM-897</a>: Add the ability to dynamically follow PBM logs</li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-978">PBM-978</a>: Fixed the physical restore on replica sets having hidden nodes </li>
 <li><a href="https://jira.percona.com/browse/PBM-975">PBM-975</a>: Fixed the issue with the display of point-in-time recovery chunks without base snapshot after storage resync</li>

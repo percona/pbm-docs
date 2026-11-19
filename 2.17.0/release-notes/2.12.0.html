@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6705,19 +6705,19 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2120-2025-11-04">Percona Backup for MongoDB 2.12.0 (2025-11-04)<a class="headerlink" href="#percona-backup-for-mongodb-2120-2025-11-04" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2120-2025-11-04">Percona Backup for MongoDB 2.12.0 (2025-11-04)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2120-2025-11-04" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release focuses on improvements to backup storages. It includes new storage types, enhances Azure and GCS implementations and fixes issues with S3-compatible storage services. </p>
 <p>Details below:</p>
-<h3 id="support-of-alibaba-cloud-as-the-backup-storage">Support of Alibaba Cloud as the backup storage<a class="headerlink" href="#support-of-alibaba-cloud-as-the-backup-storage" title="Permanent link">¶</a></h3>
+<h3 id="support-of-alibaba-cloud-as-the-backup-storage">Support of Alibaba Cloud as the backup storage<a data-markdown-ignore class="headerlink" href="#support-of-alibaba-cloud-as-the-backup-storage" title="Permanent link">¶</a></h3>
 <p>With <strong>Percona Backup for MongoDB (PBM)</strong> now supporting <strong>Alibaba Cloud OSS</strong> as a remote backup destination, you can seamlessly integrate your backup workflows into the Alibaba Cloud ecosystem. This means you can store any type of backups directly in OSS without extra tools or manual steps, taking full advantage of Alibaba’s scalable infrastructure and strong regional performance. </p>
 <p>You can authenticate directly using your OSS Access Key ID and Secret, or take advantage of full support for Alibaba Cloud’s Security Token Service (STS) AssumeRole, which includes automatic security token refresh. The latter authentication flow is ideal for organizations that require temporary credentials for enhanced security. </p>
 <p>This integration empowers teams already invested in Alibaba Cloud to adopt PBM better. Whether you’re operating in Asia-Pacific or building cloud-native infrastructure, this gives you a secure, scalable, and compliant way to protect your data.</p>
-<h3 id="ensure-data-upload-to-azure-blob-storage-even-during-unstable-network">Ensure data upload to Azure Blob storage even during unstable network<a class="headerlink" href="#ensure-data-upload-to-azure-blob-storage-even-during-unstable-network" title="Permanent link">¶</a></h3>
+<h3 id="ensure-data-upload-to-azure-blob-storage-even-during-unstable-network">Ensure data upload to Azure Blob storage even during unstable network<a data-markdown-ignore class="headerlink" href="#ensure-data-upload-to-azure-blob-storage-even-during-unstable-network" title="Permanent link">¶</a></h3>
 <p>You can now <a href="../details/azure.html#upload-retries">control the number of upload retries to Azure in PBM configuration</a>. This enhancement ensures your data reaches its destination—even when the network is unstable or intermittent. By customizing retry behavior, you gain greater resilience and reliability in backup and sync workflows. It’s a simple way to reduce failed uploads and improve peace of mind.</p>
-<h3 id="native-minio-support-in-pbm">Native MinIO Support in PBM<a class="headerlink" href="#native-minio-support-in-pbm" title="Permanent link">¶</a></h3>
+<h3 id="native-minio-support-in-pbm">Native MinIO Support in PBM<a data-markdown-ignore class="headerlink" href="#native-minio-support-in-pbm" title="Permanent link">¶</a></h3>
 <p>PBM now includes a native support for the MinIO storage by adding the <strong>MinIo Go client library</strong>. This integration makes it easier to use custom S3-compatible storage services for backup and restore. </p>
 <p>Not all S3-compatible storage services support Signature Version 4 (SigV4) used in AWS SDK v2, which may result in compatibility and connectivity issues.</p>
 <p>To solve this, PBM now uses the MinIo Go client and supports a new <code>minio</code> storage type in its configuration. </p>
@@ -6732,16 +6732,16 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">      </span><span class="nt">secret-access-key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-secret-key-here&gt;</span>
 </code></pre></div>
 <p>If your custom S3-compatible storage is not compatible with AWS SDK v2, consider re-configuring PBM to use the <code>minio</code> storage type after the upgrade. However, be aware of the current <a href="#known-limitation-for-using-the-minio-storage-type">known limitation</a> for using the MinIO storage type.</p>
-<h4 id="known-limitation-for-using-the-minio-storage-type">Known limitation for using the MinIO storage type<a class="headerlink" href="#known-limitation-for-using-the-minio-storage-type" title="Permanent link">¶</a></h4>
+<h4 id="known-limitation-for-using-the-minio-storage-type">Known limitation for using the MinIO storage type<a data-markdown-ignore class="headerlink" href="#known-limitation-for-using-the-minio-storage-type" title="Permanent link">¶</a></h4>
 <p>While MinIo SDK supports concurrency, its implementation interferes with PBM’s backup logic and affects PBM functionality.  Therefore, currently PBM uploads backups using a single thread which results in slower backup performance compared to S3. We’re actively investigating safe ways to improve throughput without compromising reliability.</p>
-<h3 id="deprecation-of-hmac-keys-support-for-google-cloud-storage">Deprecation of HMAC keys support for Google Cloud Storage<a class="headerlink" href="#deprecation-of-hmac-keys-support-for-google-cloud-storage" title="Permanent link">¶</a></h3>
+<h3 id="deprecation-of-hmac-keys-support-for-google-cloud-storage">Deprecation of HMAC keys support for Google Cloud Storage<a data-markdown-ignore class="headerlink" href="#deprecation-of-hmac-keys-support-for-google-cloud-storage" title="Permanent link">¶</a></h3>
 <p>Accessing Google Cloud Storage with HMAC keys relies on AWS Signature Version 2 (SigV2), an outdated authentication method that has been officially deprecated. Google Cloud Storage doesn’t support a new Signature Version 4 (SigV4) and only supports SigV2 for HMAC authentication.</p>
 <p>Continuing to use SigV2 can lead to serious issues: Percona Backup for MongoDB may incorrectly mark incomplete backups as successful and upload corrupted data to storage. This puts your restore process at risk and undermines backup reliability.</p>
 <p>Using the outdated Signature Version 2 (SigV2) authentication for Google Cloud Storage is not recommended because it lacks important security enhancements, is no longer maintained, and can introduce critical reliability issues.</p>
 <p>To prevent this, support for HMAC keys is now deprecated. We strongly recommend migrating to a native GCS connection type <a href="https://cloud.google.com/iam/docs/keys-create-delete#creating">with JSON keys <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Refer to the <a href="../details/gcs.html#adjust-pbm-configuration-to-use-gcs">documentation</a> for guidance on adjusting PBM configuration to use JSON keys.</p>
 <p>We will end-of-life HMAC support and remove it in the PBM release after April 30, 2026.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1588">PBM-1588</a> - Percona Backup for MongoDB now supports Alibaba Cloud Object storage Service (OSS) as the remote backup storage (Thank you Imre Nagi for reporting and contributing to this feature).</p>
@@ -6750,7 +6750,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1631">PBM-1631</a> - Use MinIO client for S3-compatible storage to improve compatibility.</p>
 </li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1321">PBM-1321</a> - Improved PBM logs for logical backups by providing clearer status messages during the backup process.</p>
@@ -6762,7 +6762,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1628">PBM-1628</a> - Backups to Google Cloud Storage (GCS) are now more resilient to temporary network interruptions.</p>
 </li>
 </ul>
-<h2 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
+<h2 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1093">PBM-1093</a> - Added the ability to retry data upload to Azure Blob storage in case of connection issues, ensuring reliable backups.</p>

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6649,21 +6649,21 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-290-2025-02-19">Percona Backup for MongoDB 2.9.0 (2025-02-19)<a class="headerlink" href="#percona-backup-for-mongodb-290-2025-02-19" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-290-2025-02-19">Percona Backup for MongoDB 2.9.0 (2025-02-19)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-290-2025-02-19" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release provides the following features and improvements:</p>
-<h3 id="amazon-linux-2023-support">Amazon Linux 2023 support<a class="headerlink" href="#amazon-linux-2023-support" title="Permanent link">¶</a></h3>
+<h3 id="amazon-linux-2023-support">Amazon Linux 2023 support<a data-markdown-ignore class="headerlink" href="#amazon-linux-2023-support" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB is now available and fully supported on Amazon Linux 2023 (AL23), simplifying its AWS deployment. You can safely run PBM on AL23 to build a secure, stable, high-performance environment for developing and running cloud applications, with seamless integration with various AWS services and development tools. </p>
-<h3 id="centralized-management-of-pbm-agent-setup">Centralized management of <code>pbm-agent</code> setup<a class="headerlink" href="#centralized-management-of-pbm-agent-setup" title="Permanent link">¶</a></h3>
+<h3 id="centralized-management-of-pbm-agent-setup">Centralized management of <code>pbm-agent</code> setup<a data-markdown-ignore class="headerlink" href="#centralized-management-of-pbm-agent-setup" title="Permanent link">¶</a></h3>
 <p>You can now define a <code>pbm-agent</code> configuration in a single file and start the agent using it. The configuration includes the MongoDB connection URI, the custom log path and the number of parallel workers for a backup. In addition, you can adjust the log level on runtime without having to restart the <code>pbm-agent</code>.</p>
 <p>This helps you keep all your <code>pbm-agent</code> setup in a single place and simplifies its management. </p>
 <p>Learn more about how to <a href="../manage/start-agent-with-config.html">start pbm-agent using the configuration file</a> as well as <a href="../manage/logpath.html">all the ways to configure a custom log path</a></p>
-<h3 id="improved-security-for-docker-images">Improved security for Docker images<a class="headerlink" href="#improved-security-for-docker-images" title="Permanent link">¶</a></h3>
+<h3 id="improved-security-for-docker-images">Improved security for Docker images<a data-markdown-ignore class="headerlink" href="#improved-security-for-docker-images" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB Docker image is now based on Universal Base Image (UBI) version 9, which includes the latest security fixes. This makes the image compliant with the Red Hat certification and ensures the seamless work of containers on Red Hat OpenShift Container Platform.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1454">PBM-1454</a> - Add the ability to define all pbm-agent’s options via a configuration file</p>
@@ -6672,11 +6672,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1466">PBM-1466</a> - Remove kingpin dependency from PBM CLI</p>
 </li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1452">PBM-1452</a> - Stop the balancer and chunks autosplit automatically during restore</li>
 </ul>
-<h3 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
+<h3 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1465">PBM-1465</a> - Fixed failing selective backup/restore for sharded collections in setups with config shards</p>

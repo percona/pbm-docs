@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6491,7 +6491,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="view-backup-logs">View backup logs<a class="headerlink" href="#view-backup-logs" title="Permanent link">¶</a></h1>
+<h1 id="view-backup-logs">View backup logs<a data-markdown-ignore class="headerlink" href="#view-backup-logs" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/1.4.0.html">1.4.0</a></p>
 </div>
@@ -6521,7 +6521,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 <li><code>-i</code>, <code>--opid</code> - Filter logs by the operation ID</li>
 </ul>
-<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">¶</a></h2>
+<h2 id="examples">Examples<a data-markdown-ignore class="headerlink" href="#examples" title="Permanent link">¶</a></h2>
 <p>The following are some examples of filtering logs:</p>
 <p><strong>Show logs for all backups</strong></p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs<span class="w"> </span>--event<span class="o">=</span>backup
@@ -6533,7 +6533,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs<span class="w"> </span>-n<span class="w"> </span>rs1<span class="w"> </span>-s<span class="w"> </span>E
 </code></pre></div>
 <p>The output includes log messages of the specified severity type and all higher levels. Thus, when <code>ERROR</code> is specified, both <code>ERROR</code> and <code>FATAL</code> messages are shown in the output.</p>
-<h2 id="implementation-details">Implementation details<a class="headerlink" href="#implementation-details" title="Permanent link">¶</a></h2>
+<h2 id="implementation-details">Implementation details<a data-markdown-ignore class="headerlink" href="#implementation-details" title="Permanent link">¶</a></h2>
 <p><code>pbm-agents</code> write log information into the <code>pbmLog</code> collection in the <a href="../reference/glossary.html#pbm-control-collections">PBM Control collections</a>. Every <code>pbm-agent</code> also writes log information to <code>stderr</code> so that you can retrieve it when there is no healthy <code>mongod</code> node in your cluster or replica set. For how to view an individual <code>pbm-agent</code> log, see <a href="../install/start-pbm-agent.html#how-to-see-the-pbm-agent-log">How to see the pbm-agent log</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

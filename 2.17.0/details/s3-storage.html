@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6747,7 +6747,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="aws-s3-storage">AWS S3 storage<a class="headerlink" href="#aws-s3-storage" title="Permanent link">¶</a></h1>
+<h1 id="aws-s3-storage">AWS S3 storage<a data-markdown-ignore class="headerlink" href="#aws-s3-storage" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB (PBM) works with AWS S3 and other S3-compatible storage services. We test PBM with the following services:</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/s3/index.html">Amazon Simple Storage Service <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a></li>
@@ -6755,7 +6755,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>This document provides overview for the native AWS S3 services. To use MinIO and other S3-compatible storage services, see <a href="minio.html">S3-compatible storage</a>.</p>
 <p><a class="md-button" href="#configuration-example">Configuration example <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11 4h2v12l5.5-5.5 1.42 1.42L12 19.84l-7.92-7.92L5.5 10.5 11 16z"></path></svg></span></a></p>
-<h2 id="storage-bucket-creation">Storage bucket creation<a class="headerlink" href="#storage-bucket-creation" title="Permanent link">¶</a></h2>
+<h2 id="storage-bucket-creation">Storage bucket creation<a data-markdown-ignore class="headerlink" href="#storage-bucket-creation" title="Permanent link">¶</a></h2>
 <p class="power-number">To create a bucket, do the following.</p>
 <ol>
 <li>
@@ -6773,7 +6773,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ol>
 <p>After the bucket is created, apply the proper <a href="storage-configuration.html#permissions-setup">permissions for PBM to use the bucket</a>.</p>
-<h2 id="configuration-example">Configuration example<a class="headerlink" href="#configuration-example" title="Permanent link">¶</a></h2>
+<h2 id="configuration-example">Configuration example<a data-markdown-ignore class="headerlink" href="#configuration-example" title="Permanent link">¶</a></h2>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Percona Backup for MongoDB (PBM) needs its own dedicated S3 bucket exclusively for backup-related files. Ensure that this <a href="#storage-bucket-creation">bucket is created</a> and managed solely by PBM.</p>
@@ -6793,7 +6793,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">      </span><span class="nt">kmsKeyID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-kms-key-here&gt;</span>
 </code></pre></div>
 <p>For the description of configuration options, see <a href="../reference/configuration-options.html">Configuration file options</a>.</p>
-<h2 id="fine-tune-storage-configuration">Fine-tune storage configuration<a class="headerlink" href="#fine-tune-storage-configuration" title="Permanent link">¶</a></h2>
+<h2 id="fine-tune-storage-configuration">Fine-tune storage configuration<a data-markdown-ignore class="headerlink" href="#fine-tune-storage-configuration" title="Permanent link">¶</a></h2>
 <p>The following sections describe how you can fine-tune your storage configuration: </p>
 <ul>
 <li><a href="#server-side-encryption">server-side encryption</a> </li>
@@ -6802,20 +6802,20 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="#upload-retries">upload retries</a> </li>
 <li><a href="endpoint-map.html">multiple endpoints to the same S3 storage</a> </li>
 </ul>
-<h3 id="server-side-encryption">Server-side encryption<a class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h3>
+<h3 id="server-side-encryption">Server-side encryption<a data-markdown-ignore class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB supports <a href="../reference/glossary.html#server-side-encryption">server-side encryption</a> for <a href="../reference/glossary.html#bucket">S3 buckets</a> with the following encryption types:</p>
 <ul>
 <li><a href="#using-aws-kms-keys-sse-kms">customer-provided keys stored in AWS KMS (SSE-KMS)</a></li>
 <li><a href="#using-customer-provided-keys-sse-c">customer-provided keys stored on the client side (SSE-C)</a></li>
 <li><a href="#using-amazon-s3-managed-keys-sse-s3">Amazon S3 managed encryption keys (SSE-S3)</a></li>
 </ul>
-<h4 id="using-aws-kms-keys-sse-kms">Using AWS KMS keys (SSE-KMS)<a class="headerlink" href="#using-aws-kms-keys-sse-kms" title="Permanent link">¶</a></h4>
+<h4 id="using-aws-kms-keys-sse-kms">Using AWS KMS keys (SSE-KMS)<a data-markdown-ignore class="headerlink" href="#using-aws-kms-keys-sse-kms" title="Permanent link">¶</a></h4>
 <p>To use the SSE-KMS encryption, specify the following parameters in the Percona Backup for MongoDB configuration file: </p>
 <div class="highlight"><pre><span></span><code><span class="nt">serverSideEncryption</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">kmsKeyID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;kms_key_ID&gt;</span>
 <span class="w">   </span><span class="nt">sseAlgorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aws:kms</span>
 </code></pre></div>
-<h4 id="using-customer-provided-keys-sse-c">Using customer-provided keys (SSE-C)<a class="headerlink" href="#using-customer-provided-keys-sse-c" title="Permanent link">¶</a></h4>
+<h4 id="using-customer-provided-keys-sse-c">Using customer-provided keys (SSE-C)<a data-markdown-ignore class="headerlink" href="#using-customer-provided-keys-sse-c" title="Permanent link">¶</a></h4>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.0.1.html">2.0.1</a></p>
 </div>
@@ -6832,7 +6832,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">sseCustomerAlgorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AES256</span>
 <span class="w">  </span><span class="nt">sseCustomerKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your_encryption_key&gt;</span>
 </code></pre></div>
-<h4 id="using-amazon-s3-managed-keys-sse-s3">Using Amazon S3 managed keys (SSE-S3)<a class="headerlink" href="#using-amazon-s3-managed-keys-sse-s3" title="Permanent link">¶</a></h4>
+<h4 id="using-amazon-s3-managed-keys-sse-s3">Using Amazon S3 managed keys (SSE-S3)<a data-markdown-ignore class="headerlink" href="#using-amazon-s3-managed-keys-sse-s3" title="Permanent link">¶</a></h4>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.6.0.html">2.6.0</a></p>
 </div>
@@ -6841,12 +6841,12 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code><span class="nt">serverSideEncryption</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">sseAlgorithm</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">AES256</span>
 </code></pre></div>
-<h3 id="debug-logging">Debug logging<a class="headerlink" href="#debug-logging" title="Permanent link">¶</a></h3>
+<h3 id="debug-logging">Debug logging<a data-markdown-ignore class="headerlink" href="#debug-logging" title="Permanent link">¶</a></h3>
 <p>You can enable debug logging for different types of S3 requests in Percona Backup for MongoDB. Percona Backup for MongoDB prints S3 log messages in the <code>pbm logs</code> output so that you can debug and diagnose S3 request issues or failures.</p>
 <p>To enable S3 debug logging, set the <code>storage.s3.debugLogLevels</code> option in the PBM configuration. Supported values are <code>Signing</code>, <code>Retries</code>, <code>Request</code>, <code>RequestWithBody</code>, <code>Response</code>, <code>ResponseWithBody</code>, and <code>DeprecatedUsage</code>.</p>
 <p>Starting with PBM 2.16.0, PBM rejects unsupported debug log values. If your configuration uses earlier values such as <code>LogDebug</code> or <code>HTTPBody</code>, <a href="../reference/configuration-options.html#unsupported-values-and-replacements">replace them with supported values</a> before upgrading.</p>
 <p>See <a href="../reference/configuration-options.html#storages3debugloglevels">AWS S3 storage options</a> for details and an example.</p>
-<h3 id="storage-classes">Storage classes<a class="headerlink" href="#storage-classes" title="Permanent link">¶</a></h3>
+<h3 id="storage-classes">Storage classes<a data-markdown-ignore class="headerlink" href="#storage-classes" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB supports <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 storage classes <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Knowing your data access patterns, you can set the S3 storage class in Percona Backup for MongoDB configuration. When Percona Backup for MongoDB uploads data to S3, the data is distributed to the corresponding storage class. The support of S3 bucket storage types allows you to effectively manage S3 storage space and costs.</p>
 <p>To set the storage class, specify the <code>storage.s3.storageClass</code> option in Percona Backup for MongoDB configuration file:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
@@ -6855,7 +6855,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">    </span><span class="nt">storageClass</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">INTELLIGENT_TIERING</span>
 </code></pre></div>
 <p>When the option is undefined, the S3 Standard (<code>STANDARD</code>) storage type is used.</p>
-<h3 id="upload-retries">Upload retries<a class="headerlink" href="#upload-retries" title="Permanent link">¶</a></h3>
+<h3 id="upload-retries">Upload retries<a data-markdown-ignore class="headerlink" href="#upload-retries" title="Permanent link">¶</a></h3>
 <p>You can set up the number of attempts for Percona Backup for MongoDB to upload data to S3 storage as well as the min and max time to wait for the next retry. Set the options <code>storage.s3.retryer.numMaxRetries</code>, <code>storage.s3.retryer.minRetryDelay</code> and <code>storage.s3.retryer.maxRetryDelay</code> in Percona Backup for MongoDB configuration.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">retryer</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">numMaxRetries</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span>
@@ -6863,7 +6863,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">maxRetryDelay</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
 </code></pre></div>
 <p>This upload retry increases the chances of data upload completion in cases of unstable connection.</p>
-<h2 id="data-upload-to-storage-with-self-signed-tls-certificates">Data upload to storage with self-signed TLS certificates<a class="headerlink" href="#data-upload-to-storage-with-self-signed-tls-certificates" title="Permanent link">¶</a></h2>
+<h2 id="data-upload-to-storage-with-self-signed-tls-certificates">Data upload to storage with self-signed TLS certificates<a data-markdown-ignore class="headerlink" href="#data-upload-to-storage-with-self-signed-tls-certificates" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB supports data upload to S3-compatible storage service over HTTPS with a self-signed or a private CA certificate. This feature is especially important when you use services like MinIO, Ceph, or internal S3 gateways that don’t use certificates signed by public Certificate Authorities (CAs).</p>
 <p>If your <a href="../features/multi-storage.html">storage profiles</a> use services with different certificates, PBM needs to trust all of them. You can provide the certificates in one of two ways:</p>
 <ul>
@@ -6871,7 +6871,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Set <code>SSL_CERT_DIR</code> to a directory that contains separate PEM files.</li>
 </ul>
 <p>If neither variable is set, PBM uses the system root certificates. For details about these environment variables, see <a href="https://pkg.go.dev/crypto/x509#SystemCertPool" target="_blank">Go certificate loading <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
-<h3 id="usage-example">Usage example<a class="headerlink" href="#usage-example" title="Permanent link">¶</a></h3>
+<h3 id="usage-example">Usage example<a data-markdown-ignore class="headerlink" href="#usage-example" title="Permanent link">¶</a></h3>
 <p class="power-number">Configure certificate trust on each host where <code>pbm-agent</code> or the PBM CLI runs:</p>
 <ol>
 <li>

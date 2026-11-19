@@ -1,0 +1,967 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Remote backup storage options
+
+## Common options
+
+### storage.type
+
+*Type*: string\
+*Required*: YES
+
+Remote backup storage type. Supported values: `s3`, `minio`, `gcs`, `filesystem`, `azure`, `oci`, `oss`.
+
+## AWS S3 storage options
+
+```
+storage:
+  type: s3
+  s3:
+    region: <string>
+    bucket: <string>
+    prefix: <string>
+    endpointUrl: <string>
+    endpointUrlMap: 
+      "node01:2017": <string>
+      "node02:2017": <string>
+    credentials:
+      access-key-id: <your-access-key-id-here>
+      secret-access-key: <your-secret-key-here>
+      session-token: <string>
+    uploadPartSize: <int>
+    maxUploadParts: <int>
+    storageClass: STANDARD
+    serverSideEncryption:
+      sseAlgorithm: aws:kms
+      kmsKeyID: <your-kms-key-here>
+      sseCustomerAlgorithm: AES256
+      sseCustomerKey: <your_encryption_key>
+    retryer:
+      numMaxRetries: 3
+      minRetryDelay: 30ms
+      maxRetryDelay: 5m
+    maxObjSizeGB: 5018
+```
+
+### storage.s3.provider
+
+*Type*: string\
+*Required*: NO
+
+The storage provider’s name. This field is deprecated.
+
+### storage.s3.bucket
+
+*Type*: string\
+*Required*: YES
+
+The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) for bucket name requirements.
+
+### storage.s3.region
+
+*Type*: string\
+*Required*: YES (for AWS)
+
+The location of the storage bucket. Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) to define the bucket region
+
+### storage.s3.prefix
+
+*Type*: string\
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.
+
+### storage.s3.endpointUrl
+
+*Type*: string\
+*Required*: YES (for MinIO)
+
+The URL to access the bucket.
+
+### storage.s3.endpointUrlMap
+
+*Type*: array of strings\
+*Required*: NO
+
+The list of custom paths for `pbm-agents` on different servers to the same storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/endpoint-map.html) section. Supported for Amazon S3 and Microsoft Azure Blob storages. Available with version 2.8.0.
+
+### storage.s3.forcePathStyle
+
+*Type*: boolean\
+*Required*: NO
+
+By default, PBM uses the [path-style URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html#path-style-access) for accessing the S3 bucket. Setting this option to `false` instructs PBM to send virtual-hosted–style requests instead.
+
+### storage.s3.credentials.access-key-id
+
+*Type*: string\
+*Required*: YES
+
+Your access key to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to [Automate access to S3 buckets for Percona Backup for MongoDB](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/automate-s3-access.html)
+
+### storage.s3.credentials.secret-access-key
+
+*Type*: string\
+*Required*: YES
+
+The key to sign your programmatic requests to the storage bucket. This option can be omitted when you run Percona Backup for MongoDB using an EC2 instance profile. To learn more, refer to [Automate access to S3 buckets for Percona Backup for MongoDB](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/automate-s3-access.html)
+
+### storage.s3.credentials.session-token
+
+*Type*: string\
+*Required*: NO
+
+The AWS session token used to validate the [temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html) for accessing the S3 storage.
+
+### storage.s3.uploadPartSize
+
+*Type*: int\
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB
+
+Percona Backup for MongoDB automatically increases the `uploadPartSize` value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of `uploadPartSize` * [`maxUploadParts`](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants) and is appr. 97,6 GB).
+
+The `uploadPartSize` value is printed in the `pbm-agent` log.
+
+By setting this option, you can manually adjust the size of data chunks if Percona Backup for MongoDB failed to do it for some reason. The defined `uploadPartSize` value overrides the default value and is used for calculating the max allowed file size
+
+### storage.s3.maxUploadParts
+
+*Type*: int\
+*Required*: NO\
+*Default*: 10,000
+
+The maximum number of data chunks to be uploaded to the storage bucket. Default: 10,000
+
+By setting this option, you can override the value defined in the [AWS SDK](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#MaxUploadParts).
+
+It can be useful when using an S3 provider that supports a smaller number of chunks for multipart uploads.
+
+The `maxUploadParts` value is printed in the pbm-agent log.
+
+### storage.s3.storageClass
+
+*Type*: string\
+*Required*: NO *Example*: STANDARD
+
+The [storage class](https://aws.amazon.com/s3/storage-classes/) assigned to objects stored in the S3 bucket. If not provided, the `STANDARD` storage class will be used.
+
+### storage.s3.debugLogLevels
+
+*Type*: string\
+*Required*: NO
+
+Controls which AWS S3 client operations PBM writes to the `pbm logs` output. The values correspond to the [client log modes in the AWS SDK for Go v2](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#ClientLogMode) .
+
+- `Signing` - logs the request signing process
+- `Retries` - logs each retry attempt when a request fails with a retryable error, including the retry count
+- `Request` - logs outgoing HTTP request metadata (method, URL, headers) without the body
+- `RequestWithBody` - logs outgoing HTTP requests, including the full request body; may expose sensitive data such as object contents, credentials, tokens, or headers
+- `Response` - logs incoming HTTP response metadata (status code, headers) without the body
+- `ResponseWithBody` - logs incoming HTTP responses, including the full response body; may expose sensitive data such as object contents, credentials, tokens, or headers
+- `DeprecatedUsage` - logs deprecated usage of AWS S3 endpoints
+
+Warning
+
+`Request` and `RequestWithBody` can log sensitive request headers, while `RequestWithBody` and `ResponseWithBody` can also log full HTTP payloads. Enable these modes only temporarily for troubleshooting and only in controlled environments where exposing object contents, credentials, tokens, or headers is acceptable.
+
+To specify several values, separate them by comma. When undefined, no S3 debug logging is performed.
+
+Note
+
+Debug logging can generate a large number of log entries. By default, PBM stores log entries in a capped collection in your database. To write them to a file instead, see [Logging configuration options](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/logpath.html#logging-configuration-options).
+
+#### Unsupported values and replacements
+
+Starting with PBM 2.16.0, the values `LogDebug`, `HTTPBody`, `RequestRetries`, `RequestErrors`, and `EventStreamBody` are no longer supported. PBM no longer translates them automatically. If your configuration uses these values, replace them before upgrading:
+
+| Removed value     | Replacement                           |
+| ----------------- | ------------------------------------- |
+| `LogDebug`        | `Request`, `Response`                 |
+| `HTTPBody`        | `RequestWithBody`, `ResponseWithBody` |
+| `RequestRetries`  | `Retries`                             |
+| `RequestErrors`   | `Response`                            |
+| `EventStreamBody` | `RequestWithBody`, `ResponseWithBody` |
+
+`RequestEventMessage` and `ResponseEventMessage` are also unsupported. Use the supported values listed above.
+
+PBM rejects unsupported values when you apply a configuration file or set this option with `pbm config --set`. An existing unsupported value also prevents storage initialization. For example, `LogDebug` produces an error containing:
+
+```
+unsupported S3 client debug log level "LogDebug"
+```
+
+To replace `LogDebug` with request and response logging, run:
+
+```
+pbm config --set storage.s3.debugLogLevels="Request,Response"
+```
+
+#### Example
+
+The following example logs request and response bodies when troubleshooting AWS S3 communication:
+
+```
+storage:
+  type: s3
+  s3:
+    debugLogLevels: RequestWithBody, ResponseWithBody
+```
+
+### storage.s3.insecureSkipTLSVerify
+
+*Type*: bool\
+*Required*: NO\
+*Default*: False
+
+Disables the TLS verification of the S3 storage. This allows Percona Backup for MongoDB to upload data to S3-like storages that use self-issued TLS certificates.
+
+Warning
+
+Use this option with caution as it might leave a hole for man-in-the-middle attacks.
+
+## Server-side encryption options
+
+### storage.s3.serverSideEncryption.sseAlgorithm
+
+*Type*: string\
+*Required*: NO
+
+The key management mode used for server-side encryption with the encryption keys stored in AWS KMS.
+
+Supported value: `aws:kms`
+
+### storage.s3.serverSideEncryption.kmsKeyID
+
+*Type*: string\
+*Required*: NO
+
+Your customer-managed key stored in the AWS KMS.
+
+### storage.s3.serverSideEncryption.sseCustomerAlgorithm
+
+*Type*: string\
+*Required*: NO
+
+The key management mode for [server-side encryption with customer-provided keys (SSE-C)](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/s3-storage.html#server-side-encryption).
+
+Supported value: `AES256`
+
+### storage.s3.serverSideEncryption.sseCustomerKey
+
+*Type*: string\
+*Required*: NO
+
+Your custom encryption key. This key is not stored on the S3 storage side. Thus, it is your responsibility to track what data is encrypted with what key and for storing the key.
+
+## Upload retry options
+
+### storage.s3.retryer.numMaxRetries
+
+*Type*: int\
+*Required*: NO\
+*Default*: 3
+
+The maximum number of retries to upload data to S3 storage. A zero value means no retries will be performed.
+
+### storage.s3.retryer.minRetryDelay
+
+*Type*: time.Duration\
+*Required*: NO\
+*Default*: 30ms
+
+The minimum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+### storage.s3.retryer.maxRetryDelay
+
+*Type*: time.Duration\
+*Required*: NO\
+*Default*: 5m
+
+The maximum time to wait before the next retry, specified as a *time.Duration*. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+### storage.s3.maxObjSizeGB
+
+*Type*: float64\
+*Required*: NO\
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/split-merge-backup.html).
+
+## MinIO type storage options
+
+You can use this storage type for other S3-compatible storage services
+
+```
+storage:
+  type: minio
+  minio:
+    region: <string>
+    bucket: <string>
+    prefix: <string>
+    endpoint: <string>
+    endpointMap: 
+      "node01:2017": <string>
+      "node02:2017": <string>
+    secure: false
+    insecureSkipTLSVerify: false
+    forcePathStyle: false
+    credentials:
+      access-key-id: <string>
+      secret-access-key: <string>
+      session-token: <string>
+      signature-ver: V4
+    partSize: 10485760 (10 MB)
+    retryer:
+      numMaxRetries: 10
+    maxObjSizeGB: 5018
+    debugTrace: false
+```
+
+### storage.minio.region
+
+*Type*: string\
+*Required*: NO
+
+The location of the storage bucket. Use the [AWS region list](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) to define the bucket region. If not specified, the default `us-east-1` region is used.
+
+### storage.minio.bucket
+
+*Type*: string\
+*Required*: YES
+
+The name of the storage bucket. See the [AWS Bucket naming rules](https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules) for bucket name requirements.
+
+### storage.minio.prefix
+
+*Type*: string\
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.
+
+### storage.minio.endpoint
+
+*Type*: string\
+*Required*: YES
+
+The network address (URL or IP:port) where your MinIO server is accessible.
+
+### storage.minio.endpointMap
+
+*Type*: array of strings\
+*Required*: NO
+
+A mapping of custom endpoints for `pbm-agents` on different servers to the same MinIO storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same S3 storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/endpoint-map.html) section. Supported for Amazon S3, MinIO, and Microsoft Azure Blob storages. Available with version 2.8.0.
+
+### storage.minio.secure
+
+*Type*: boolean\
+*Required*: NO\
+*Default*: false
+
+Defines whether to use HTTP or HTTPS protocol for communication between PBM and S3 storage. Default: `false`.
+
+### storage.minio.insecureSkipTLSVerify
+
+*Type*: boolean\
+*Required*: NO\
+*Default*: false
+
+Disables the TLS verification of the MinIO / S3-compatible storage. This allows Percona Backup for MongoDB to upload data to MinIO / S3-compatible storages that use self-issued TLS certificates. Use it with caution as it might leave a hole for man-in-the-middle attacks.
+
+### storage.minio.forcePathStyle
+
+*Type*: boolean\
+*Required*: NO\
+*Default*: false
+
+Enforces the use of [path style access](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#path-style-access-to-the-storage) to the storage. Default is `false` which means PBM uses the [virtual-hosted-style](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#virtual-hosted-style-access) access to the storage
+
+### storage.minio.credentials.access-key-id
+
+*Type*: string\
+*Required*: YES
+
+Your access key to the storage bucket.
+
+### storage.minio.credentials.secret-access-key
+
+*Type*: string\
+*Required*: YES
+
+The key to sign your programmatic requests to the storage bucket.
+
+### storage.minio.credentials.session-token
+
+*Type*: string\
+*Required*: NO
+
+The MinIO session token used to validate the temporary security credentials for accessing the storage.
+
+### storage.minio.credentials.signature-ver
+
+*Type*: string\
+*Required*: NO\
+*Default*: V4
+
+Specifies the AWS Signature version to use for authentication. Accepted values: `V2`, `V4`.
+
+Allows using the deprecated AWS Signature version 2 for backward compatibility with storages that don’t support Signature version 4. Default: `V4`.
+
+### storage.minio.partSize
+
+*Type*: int\
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB.
+
+### storage.minio.retryer.numMaxRetries
+
+*Type*: int\
+*Required*: NO\
+*Default*: 10
+
+The maximum number of retries to upload data to MinIO / S3-compatible storage. A zero value means no retries will be performed.
+
+### storage.minio.maxObjSizeGB
+
+*Type*: float64\
+*Required*: NO\
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the limit. Read more about [Managing large backup files](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/split-merge-backup.html).
+
+### storage.minio.debugTrace
+
+*Type*: boolean\
+*Required*: NO
+
+If set to `true`, outputs all http communication trace in PBM log. Default: false.
+
+## GCS type storage options
+
+```
+storage:
+ type: gcs
+ gcs:
+    bucket: pbm-testing
+    clientType: json
+    chunkSize: <int>
+    parallelUploadConcurrency: <int>
+    prefix: pbm/test
+    credentials:
+      workloadIdentity: <bool>
+      clientEmail: <your-client-email-here>
+      privateKey: <your-private-key-here>
+    maxObjSizeGB: 5018
+```
+
+### storage.gcs.bucket
+
+*Type*: string\
+*Required*: YES
+
+The name of the storage bucket. See the [GCS bucket naming guidelines](https://cloud.google.com/storage/docs/naming-buckets#requirements) for bucket name requirements.
+
+### storage.gcs.chunkSize
+
+*Type*: string\
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket in a single request. Larger data chunks will be split over multiple requests. The default chunk size is 10 MiB for standard uploads and 16 MiB for parallel uploads.
+
+### storage.gcs.clientType
+
+*Type*: string\
+*Required*: NO\
+*Default*: `json`
+
+The GCS client used by PBM. Supported values are `json` and `grpc`. Parallel uploads require `grpc`.
+
+### storage.gcs.parallelUploadConcurrency
+
+*Type*: int\
+*Required*: NO\
+*Default*: 0
+
+The maximum number of parts PBM uploads concurrently. A value greater than `1` enables parallel uploads when `storage.gcs.clientType` is `grpc`.
+
+### storage.gcs.prefix
+
+*Type*: string\
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.
+
+### storage.gcs.credentials.clientEmail
+
+*Type*: string\
+*Required*: NO
+
+The email address that uniquely identifies your service account in GCS. Required unless `storage.gcs.credentials.workloadIdentity` is `true`.
+
+### storage.gcs.credentials.privateKey
+
+*Type*: string\
+*Required*: NO
+
+The private key of the service account used to authenticate the request. Required unless `storage.gcs.credentials.workloadIdentity` is `true`.
+
+### storage.gcs.credentials.workloadIdentity
+
+*Type*: boolean\
+*Required*: NO\
+*Default*: `false`
+
+Set this option to `true` to use Workload Identity instead of static service account JSON keys.
+
+### storage.gcs.retryer.backoffInitial
+
+*Type*: time.Duration\
+*Required*: NO *Default*: 1s
+
+The time to wait to make an initial retry, specified as a time.Duration. Units like ms, s, etc., are supported. Valid time units are “ns”, “us” (or “µs”), “ms”, “s”, “m”, “h”.
+
+Defaults to nanoseconds if no unit is provided.
+
+### storage.gcs.retryer.backoffMax
+
+*Type*: time.Duration\
+*Required*: NO *Default*: 30s
+
+The maximum amount of time between retries, in seconds. Units like ms, s, etc., are supported. Valid time units are “ns”, “us” (or “µs”), “ms”, “s”, “m”, “h”.
+
+Defaults to nanoseconds if no unit is provided.
+
+### storage.gcs.retryer.backoffMultiplier
+
+*Type*: int\
+*Required*: NO *Default*: 2
+
+Each time PBM fails and tries again, it increases the wait time by multiplying it by this number. Default value is 2 sec.
+
+For example, if the first wait time is 1 second, the next will be 2 seconds, then 4 seconds, and so on, until it reaches the maximum. Default value is 2 sec.
+
+### storage.gcs.retryer.maxAttempts
+
+*Type*: int\
+*Required*: NO *Default*: 5
+
+The maximum number of retries to upload data to GCS storage. A zero value means no retries will be performed. Available starting with version 2.12.0.
+
+### storage.gcs.retryer.chunkRetryDeadline
+
+*Type*: time.Duration\
+*Required*: NO *Default*: 32s
+
+When you upload large files to GCS using resumable uploads, the data is sent in chunks. If a chunk fails to upload due to a network issue, timeout or transient error, GCS will retry sending that chunk.
+
+The `chunkRetryDeadline` sets a time limit in seconds for how long GCS will keep retrying a failed chunk. Once this deadline is reached, GCS stops retrying and marks the upload as failed.
+
+Units like ms, s, etc., are supported. Valid time units are “ns”, “us” (or “µs”), “ms”, “s”, “m”, “h”.
+
+Defaults to nanoseconds if no unit is provided.
+
+Available starting with version 2.12.0.
+
+### storage.gcs.maxObjSizeGB
+
+*Type*: float64\
+*Required*: NO\
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/split-merge-backup.html).
+
+## Filesystem storage options
+
+```
+storage:
+  type: filesystem
+  filesystem:
+    path: <string>
+  maxObjSizeGB: 5018
+```
+
+### storage.filesystem.path
+
+*Type*: string\
+*Required*: YES
+
+The path to the backup directory
+
+### storage.filesystem.maxObjSizeGB
+
+*Type*: float64\
+*Required*: NO\
+*Default*: 5018
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/split-merge-backup.html).
+
+## Microsoft Azure Blob storage options
+
+```
+storage:
+  type: azure
+  azure:
+    account: <string>
+    container: <string>
+    endpointUrl: <string>
+    prefix: <string>
+    credentials:
+      key: <your-access-key>
+    maxObjSizeGB: 194560
+    retryer:
+      numMaxRetries: 3
+      minRetryDelay: 800ms
+      maxRetryDelay: 60s
+```
+
+### storage.azure.account
+
+*Type*: string\
+*Required*: YES
+
+The name of your storage account.
+
+### storage.azure.container
+
+*Type*: string\
+*Required*: YES
+
+The name of the storage container. See the [Container names](https://docs.microsoft.com/en-us/rest/api/storageservices/naming-and-referencing-containers--blobs--and-metadata#container-names) for naming conventions.
+
+### storage.azure.endpointUrl
+
+*Type*: string\
+*Required*: NO
+
+The URL to access the data in Microsoft Azure Blob Storage. The default value is `https://<storage-account>.blob.core.windows.net`.
+
+### storage.azure.endpointUrlMap
+
+*Type*: object (host:port -> endpoint URL)\
+*Required*: NO
+
+A mapping of custom endpoint URLs for `pbm-agents` on different servers to the same remote storage. Use this option if `pbm-agents` reside on servers hidden behind different network configurations. Read more in the [Support for multiple endpoints to the same remote storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/endpoint-map.html) section. Available with version 2.8.0.
+
+### storage.azure.prefix
+
+*Type*: string\
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.
+
+### storage.azure.credentials.key
+
+*Type*: string\
+*Required*: YES
+
+Your access key to authorize access to data in your storage account.
+
+### storage.azure.maxObjSizeGB
+
+*Type*: float64\
+*Required*: NO\
+*Default*: 194560
+
+The maximum file size to be stored on the backup storage. If the file to upload exceeds this limit, PBM splits it in pieces, each of which falls within the defined limit. Read more about [Managing large backup files](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/split-merge-backup.html).
+
+### storage.azure.retryer.numMaxRetries
+
+*Type*: int\
+*Required*: NO\
+*Default*: 3
+
+The maximum number of retries to upload data to Microsoft Azure storage. A zero value means no retries will be performed.
+
+### storage.azure.retryer.minRetryDelay
+
+*Type*: time.Duration\
+*Required*: NO\
+*Default*: 800ms
+
+The minimum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+### storage.azure.retryer.maxRetryDelay
+
+*Type*: time.Duration\
+*Required*: NO\
+*Default*: 60s
+
+The maximum time to wait before the next retry, specified as a `time.Duration`. Units like ms, s, etc., are supported. Defaults to nanoseconds if no unit is provided.
+
+## OCI Object Storage options
+
+```
+storage:
+  type: oci
+  oci:
+    region: <string>
+    namespace: <string>
+    bucket: <string>
+    prefix: <string>
+    credentials:
+      type: userPrincipal
+      userPrincipal:
+        tenancy: <string>
+        user: <string>
+        fingerprint: <string>
+        privateKey: |
+          -----BEGIN PRIVATE KEY-----
+          ...
+          -----END PRIVATE KEY-----
+```
+
+### storage.oci.region
+
+*Type*: string\
+*Required*: YES
+
+The OCI region where your Object Storage bucket is located.
+
+### storage.oci.namespace
+
+*Type*: string\
+*Required*: YES
+
+The Object Storage namespace for your OCI tenancy.
+
+### storage.oci.bucket
+
+*Type*: string\
+*Required*: YES
+
+The name of the Object Storage bucket where PBM stores backups.
+
+### storage.oci.prefix
+
+*Type*: string\
+*Required*: NO
+
+The path prefix in the bucket. If undefined, backups are stored in the bucket root.
+
+### storage.oci.credentials.type
+
+*Type*: string\
+*Required*: NO\
+*Default*: `userPrincipal`
+
+Authentication type for OCI access. Supported values: `userPrincipal`, `instancePrincipal`, `okeWorkloadIdentity`.
+
+### storage.oci.credentials.userPrincipal.tenancy
+
+*Type*: string\
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The tenancy OCID for OCI API signing key authentication.
+
+### storage.oci.credentials.userPrincipal.user
+
+*Type*: string\
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The user OCID for OCI API signing key authentication.
+
+### storage.oci.credentials.userPrincipal.fingerprint
+
+*Type*: string\
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The fingerprint of the uploaded OCI API signing public key.
+
+### storage.oci.credentials.userPrincipal.privateKey
+
+*Type*: string\
+*Required*: YES (when `storage.oci.credentials.type=userPrincipal`)
+
+The private key in PEM format that pairs with the uploaded OCI API signing public key.
+
+### storage.oci.serverSideEncryption.kmsKeyID
+
+*Type*: string\
+*Required*: NO
+
+OCI KMS key OCID to enable server-side encryption with OCI KMS.
+
+### storage.oci.serverSideEncryption.sseCustomerKey
+
+*Type*: string\
+*Required*: NO
+
+Base64-encoded 256-bit key for SSE-C encryption. Do not set this together with `storage.oci.serverSideEncryption.kmsKeyID`.
+
+## Alibaba Cloud OSS storage options
+
+```
+storage:
+  type: oss
+  oss:
+    region: <string>
+    endpointUrl: <string>
+    bucket: <string>
+    prefix: <string>
+    credentials:
+      accessKeyId: 'LTAI5t...EXAMPLE'
+      accessKeySecret: 'n4VpW...EXAMPLE'
+      securityToken: 'CAIS...EXAMPLE'
+      roleArn: acs:ram::1234567890123456:role/db-backup-role
+      sessionName: <string>
+    serverSideEncryption:
+      sseAlgorithm: <string>
+      KMSMasterKeyID: <string>
+      KMSDataEncryption: <string>
+    uploadPartSize: <int>
+    maxUploadParts: <int>
+    connectTimeout: 5s
+    maxObjSizeGB: 48700
+    retryer:
+      maxAttempts: 5
+      maxBackoff: 300s
+      baseDelay: 30ms
+```
+
+### storage.oss.region
+
+*Type*: string\
+*Required*: YES
+
+The region where your OSS bucket is located. Refer to the [OSS regions and endpoints](https://www.alibabacloud.com/help/en/oss/user-guide/regions-and-endpoints) for the list of available regions.
+
+### storage.oss.endpointUrl
+
+*Type*: string\
+*Required*: YES
+
+A domain name to access OSS over the Internet. The endpoint must correspond to the region that you selected when you created the bucket.
+
+### storage.oss.bucket
+
+*Type*: string\
+*Required*: YES
+
+The name of the storage bucket. See the [OSS bucket naming rules](https://www.alibabacloud.com/help/en/oss/user-guide/bucket-naming-conventions) for bucket name requirements.
+
+### storage.oss.prefix
+
+*Type*: string\
+*Required*: NO
+
+The path to the data directory in the bucket. If undefined, backups are stored in the bucket’s root directory.
+
+### storage.oss.credentials.accessKeyId
+
+*Type*: string\
+*Required*: YES
+
+The Access Key ID associated with the RAM user used to access Alibaba Cloud OSS.
+
+### storage.oss.credentials.accessKeySecret
+
+*Type*: string\
+*Required*: YES
+
+The Access Key Secret associated with the RAM user used to access Alibaba Cloud OSS. The secret is used to encrypt and verify the signature string.
+
+### storage.oss.credentials.securityToken
+
+*Type*: string\
+*Required*: YES when using temporary credentials
+
+The security token that is used together with temporary access key ID and access key secret. You receive the token when you request temporary access credentials by using the [Security Token Service](https://www.alibabacloud.com/help/en/ram/product-overview/what-is-sts).
+
+### storage.oss.credentials.roleArn
+
+*Type*: string\
+*Required*: NO
+
+The Alibaba Cloud Resource Name (ARN) of the RAM role to assume. PBM uses this role to obtain required permissions for accessing OSS resources.
+
+### storage.oss.credentials.sessionName
+
+*Type*: string\
+*Required*: NO
+
+Identifier for the assumed role session
+
+### storage.oss.serverSideEncryption.sseAlgorithm
+
+*Type*: string\
+*Required*: NO
+
+The encryption algorithm used to encrypt data before storing it in OSS. Supported values: `AES256`, `KMS`, `SM4`. Default: `AES256`
+
+### storage.oss.serverSideEncryption.kmsMasterKeyId
+
+*Type*: string\
+*Required*: YES (when using a custom KMS key)
+
+The ID of the customer master key used for encryption.
+
+### storage.oss.serverSideEncryption.kmsDataEncryption
+
+*Type*: string\
+*Required*: NO
+
+The encryption algorithm for encrypting data when SSE-KMS is used. Can be set only when `storage.oss.serverSideEncryption.sseAlgorithm` is set to `KMS`.
+
+Supported values: `AES256`, `SM4`. Default: `AES256`
+
+### storage.oss.uploadPartSize
+
+*Type*: int\
+*Required*: NO
+
+The size of data chunks in bytes to be uploaded to the storage bucket. Default: 10MB
+
+Percona Backup for MongoDB automatically increases the `uploadPartSize` value if the size of the file to be uploaded exceeds the max allowed file size. (The max allowed file size is calculated with the default values of `uploadPartSize` * [`maxUploadParts`](https://docs.aws.amazon.com/sdk-for-go/api/service/s3/s3manager/#pkg-constants) and is appr. 97,6 GB).
+
+The `uploadPartSize` value is printed in the `pbm-agent` log.
+
+By setting this option, you can manually adjust the size of data chunks if Percona Backup for MongoDB failed to do it for some reason. The defined `uploadPartSize` value overrides the default value and is used for calculating the max allowed file size
+
+### storage.oss.maxUploadParts
+
+*Type*: int\
+*Required*: NO\
+*Default*: 10,000
+
+The maximum number of data chunks to be uploaded to the storage bucket. Default: 10,000
+
+By setting this option, you can override the value defined in the [Multipart upload](https://www.alibabacloud.com/help/en/oss/developer-reference/multipart-upload-3?spm=a3c0i.29367734.6737026690.4.43067d3faLVHMa) method.
+
+It can be useful to specify a smaller number of chunks for multipart uploads.
+
+The `maxUploadParts` value is printed in the pbm-agent log.
+
+### storage.oss.connectTimeout
+
+*Type*: int\
+*Required*: NO\
+*Default*: 5s
+
+The connection timeout in seconds when PBM connects to the OSS storage. Default value is 5 seconds.
+
+### storage.oss.retryer.maxAttempts
+
+*Type*: int\
+*Required*: NO\
+*Default*: 300
+
+The maximum number of retry attempts for failed requests to the OSS storage. Default value is 5.
+
+### storage.oss.retryer.maxBackoff
+
+*Type*: int\
+*Required*: NO\
+*Default*: 300s
+
+The maximum time in seconds to wait between retry attempts for failed requests to the OSS storage. Default value is 5 minutes (300 seconds).
+
+### storage.oss.retryer.baseDelay
+
+*Type*: int\
+*Required*: NO\
+*Default*: 30ms
+
+The initial delay before the first retry attempt. Default value is 30 ms.

@@ -1,0 +1,189 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Restore from a logical backup
+
+To restore a backup, use the [`pbm restore`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-restore) command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or [incremental](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/incremental-backup.html)) and restores the database up to the [restore_to_time](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.html#completion-time) timestamp (available in `pbm list` output starting with version 1.4.0).
+
+## Considerations
+
+Before starting a restore, review the following:
+
+1. While the restore is running, prevent clients from accessing the database. The data will naturally be incomplete while the restore is in progress, and writes the clients make cause the final restored data to differ from the backed-up data.
+1. For versions 2.3.1 and earlier, disable [Point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.html) before running `pbm restore`. This is because Point-in-Time recovery oplog slicing and restore are incompatible operations and cannot be run together.
+
+## Before you start
+
+Before starting a restore, complete the following steps:
+
+1. Stop the balancer and disable chunks autosplit. To verify that both are disabled, run the following command:
+
+   ```
+    sh.status()
+   ```
+
+   You should see the following output:
+
+   ```
+   autosplit:
+           Currently enabled: no
+     balancer:
+           Currently enabled: no
+           Currently running: no
+   ```
+
+1. Shut down all `mongos` nodes to stop clients from accessing the database while restore is in progress. This ensures that the final restored data doesn’t differ from the backed-up data.
+
+1. Shut down all `pmm-agent` and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.
+
+1. For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see [Point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.html).
+
+## Restore time series collections
+
+During a logical restore, PBM bypasses document validation when it replays the oplog. This lets you restore time series collections that were backed up during sustained writes. No extra PBM configuration is needed. Follow the [restore procedure](#restore-a-database) or [point-in-time recovery from logical backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-tutorial.html).
+
+### Collections with `expireAfterSeconds`
+
+If a time series collection uses [`expireAfterSeconds`](https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/) , the TTL monitor can delete buckets that oplog replay still needs. The restore then fails with an error like this:
+
+```
+applyOps: (Location6781400) Time series bucket document is missing 'control' field
+```
+
+This applies only to the `expireAfterSeconds` collection option. Regular TTL indexes aren’t affected.
+
+To avoid the failure, disable the TTL monitor before you start the logical restore, including point-in-time recovery. Keep it disabled for the duration of the restore:
+
+1. Connect directly to each data-bearing `mongod` in the target deployment.
+
+1. Note the current value of [`ttlMonitorEnabled`](https://www.mongodb.com/docs/v8.0/reference/parameters/#mongodb-parameter-param.ttlMonitorEnabled) , then set it to `false`:
+
+   ```
+   db.adminCommand({ getParameter: 1, ttlMonitorEnabled: 1 })
+   db.adminCommand({ setParameter: 1, ttlMonitorEnabled: false })
+   ```
+
+1. Run the restore.
+
+1. Set `ttlMonitorEnabled` back to its original value on each instance, even if the restore fails.
+
+Warning
+
+While the TTL monitor is off, expiration stops for all TTL-managed data and some MongoDB internal operations can be affected. Restore each instance’s original setting as soon as the restore ends.
+
+Sharded time series collections are not supported. See [Known limitations for backups and restores](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/known-limitations.html).
+
+## Restore a database
+
+To restore a database, follow these steps:
+
+1. List the backups to restore from
+
+   ```
+   pbm list
+   ```
+
+1. Restore from a desired backup. Replace the `<backup_name>` with the desired backup in the following command:
+
+   ```
+   pbm restore <backup_name>
+   ```
+
+   Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+   Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+   Note
+
+   You can restore a sharded backup only into a sharded environment. It can be your existing cluster or a new one.
+
+   To learn how to restore a backup into a new environment, see [Restoring a backup into a new environment](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-new-env.html).
+
+### Post-restore steps
+
+After a cluster’s restore is complete, do the following:
+
+1. Start the balancer and all `mongos` nodes to reload the sharding metadata.
+1. We recommend to make a fresh backup to serve as the new base for future restores.
+1. Point-in-time recovery is re-enabled automatically upon backup completion. Otherwise, [enable point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.html#enable-point-in-time-recovery) to be able to restore to a specific time.
+
+## Adjust memory consumption
+
+Starting with version 1.3.2, Percona Backup for MongoDB config includes the restore options to adjust the memory consumption by the `pbm-agent` in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.
+
+```
+restore:
+  batchSize: 500
+  numInsertionWorkers: 10
+```
+
+The default values were adjusted to fit the setups with the memory allocation of 1GB and less for the agent.
+
+Starting with version 2.8.0, you can override the number of insertion workers per collection and the number of collections to process in parallel during a logical restore. For example:
+
+```
+pbm restore <backup_name>  --num-insertion-workers-per-collection 4 --num-parallel-collections 8
+```
+
+Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+Increasing the number may increase the restore speed. However, it may also lead to unexpectedly high disk and CPU usage. Consider the trade-offs carefully before making adjustments to ensure optimal performance without overloading resources.
+
+## Restore from a logical backup made on previous major version of Percona Server for MongoDB
+
+In some cases you may need to restore from a backup made on previous major version of Percona Server for MongoDB. To make this happen, [Feature Compatibility Version (FCV)](https://www.mongodb.com/docs/manual/reference/command/setFeatureCompatibilityVersion/) values in both backup and the destination environment must match.
+
+Starting with version 2.1.0, Percona Backup for MongoDB stores the FCV value in the backup metadata. If it doesn’t match the FCV value on the destination environment, you will see the error in the [`pbm status`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-status) output.
+
+```
+2023-04-10T10:48:54Z 302.80KB <logical> [ERROR: backup FCV "6.0" is incompatible with the running mongo FCV "5.0"] [2023-04-10T10:49:14Z]
+2023-04-10T08:40:10Z 172.25KB <logical> [ERROR: backup mongo version "6.0.5-4" is incompatible with the running mongo version "5.0.15-13"] [2023-04-10T08:40:28Z]
+```
+
+The following example illustrates the restore from a backup made on Percona Server for MongoDB 4.4 on Percona Server for MongoDB 5.0.
+
+1. Check the FCV value for the backup
+
+   ```
+   pbm status
+   ```
+
+   Sample output
+
+   ```
+   Snapshots:
+   2023-04-10T10:51:28Z 530.73KB <logical> [ERROR: backup FCV "4.4" is incompatible with the running mongo FCV "5.0"]     [2023-04-10T10:51:44Z]
+   ```
+
+1. Set the Feature Compatibility Version value to 4.4
+
+   ```
+   db.adminCommand( { setFeatureCompatibilityVersion: "4.4" } )
+   ```
+
+1. Restore the database
+
+   ```
+   pbm restore 2023-04-10T10:51:28Z
+   ```
+
+   Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+   Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+1. Set the Feature Compatibility Version value to 5.0
+
+   ```
+   db.adminCommand( { setFeatureCompatibilityVersion: "5.0" } )
+   ```
+
+## Next steps
+
+[Point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-tutorial.html)
+
+## Useful links
+
+- [View restore progress](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-progress.html)
+- [Restore into a new environment](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-new-env.html)
+- [Restore into a cluster under a different name](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-remapping.html)

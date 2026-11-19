@@ -1,0 +1,196 @@
+# Percona Backup for MongoDB
+
+> documentation
+
+Each page below is also available as markdown. For the documentation of all Percona products, see https://docs.percona.com/llms.txt.
+
+## Overview
+
+- [Home](https://docs.percona.com/percona-backup-mongodb/2.17.0/index.md)
+- [Get help from Percona](https://docs.percona.com/percona-backup-mongodb/2.17.0/get-help.md)
+- [PBM commands](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.md)
+
+## Get started
+
+- [Quickstart](https://docs.percona.com/percona-backup-mongodb/2.17.0/installation.md)
+- [System-requirements](https://docs.percona.com/percona-backup-mongodb/2.17.0/system-requirements.md)
+- [From repositories](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/repos.md)
+- [Download tarballs](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/tarball.md)
+- [Build from source](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/source.md)
+- [Run in Docker](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/docker.md)
+- [Initial setup](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/initial-setup.md)
+- [Configure authentication in MongoDB](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/configure-authentication.md)
+- [Secure credentials with systemd](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/secure-credentials-systemd.md)
+- [Configure remote backup storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/backup-storage.md)
+- [Start the pbm-agent process](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/start-pbm-agent.md)
+
+## Backup and restore
+
+- [Backup and restore types](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/backup-types.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/logical.md)
+- [Make a logical backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/start-backup.md)
+- [Restore logical backups and time series collections](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/physical.md)
+- [Make a physical backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/backup-physical.md)
+- [Restore from a physical backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-physical.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/incremental-backup.md)
+- [Make an incremental backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/backup-incremental.md)
+- [Restore from an incremental backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-incremental.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/selective-backup.md)
+- [Make a selective backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/backup-selective.md)
+- [Make a selective restore](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-selective.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/snapshots.md)
+- [Make a snapshot-based backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/backup-external.md)
+- [Restore from a snapshot-based backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-external.md)
+- [External restore with pbm-agent restart](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-external-agent-restart.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.md)
+- [From logical backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-tutorial.md)
+- [From physical backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-physical.md)
+- [From selective backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-selective.md)
+- [Backups in sharded clusters](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/backup-sharding.md)
+- [Restore from a backup into a new environment](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-new-env.md)
+- [Restoring into a cluster / replica set with a different name](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/restore-remapping.md)
+- [Known limitations for backups and restores](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/known-limitations.md)
+
+## Manage backups
+
+- [List backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/list-backup.md)
+- [View detailed information about a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/describe-backup.md)
+- [Schedule backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/schedule-backup.md)
+- [Cancel a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/cancel-backup.md)
+- [Backup lifecycle management](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/backup-lifecycle-management.md)
+- [Delete backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/delete-backup.md)
+- [View restore progress](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore-progress.md)
+- [Adjust node priority for backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/backup-priority.md)
+- [Configure backup compression](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/compression.md)
+- [Replay oplog from arbitrary start time](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/oplog-replay.md)
+- [View backup logs](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/logs.md)
+- [Backup management via PMM](https://docs.percona.com/percona-backup-mongodb/2.17.0/pmm.md)
+
+## Storage
+
+- [Remote backup storage overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/storage-configuration.md)
+- [AWS S3 storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/s3-storage.md)
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/oci-storage.md)
+- [Workload Identity authentication (OCI)](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/oci-wif.md)
+- [MinIO and S3-compatible storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/minio.md)
+- [Google Cloud Storage (GCS)](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/gcs.md)
+- [Workload Identity authentication](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/workload-identity-auth.md)
+- [Azure Blob storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/azure.md)
+- [Alibaba Cloud Object Storage Service (OSS)](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/oss.md)
+- [Filesystem storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/filesystem-storage.md)
+- [Multiple endpoints to the same storage](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/endpoint-map.md)
+- [Multiple storages for backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/multi-storage.md)
+- [Manage large backup files upload](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/split-merge-backup.md)
+
+## Configuration file
+
+- [Percona Backup for MongoDB configuration in a cluster](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/config.md)
+- [Remote backup storage options](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/configuration-options.md)
+- [Point-in-time recovery options](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pitr-options.md)
+- [Backup options](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/backup-options.md)
+- [Restore options](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/restore-options.md)
+- [Logging options](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/logging-options.md)
+- [pbm-agent configuration file options](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-agent-config-options.md)
+
+## Administer PBM
+
+- [Administer PBM](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/overview.md)
+- [PBM configuration via pipelines](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/configure-remotely.md)
+- [Automate access to S3 buckets for PBM](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/automate-s3-access.md)
+- [Output pbm-agent logs to a file](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/logpath.md)
+- [Start pbm-agent using the configuration file](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/start-agent-with-config.md)
+- [Adjust PBM configuration when the number of replica set members changes](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/change-nodes.md)
+- [Upgrade PBM](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/upgrading.md)
+- [Remove PBM](https://docs.percona.com/percona-backup-mongodb/2.17.0/manage/uninstalling.md)
+
+## Compatibility with MongoDB
+
+- [Compatibility with MongoDB](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/versions.md)
+- [Comparison with MongoDB](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/comparison.md)
+- [Supported MongoDB deployments](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/deployments.md)
+
+## Troubleshooting & FAQ
+
+- [Overview](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/index.md)
+- [Diagnose PBM](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/troubleshooting.md)
+- [Check status](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/status.md)
+- [Diagnostics report](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/pbm-report.md)
+- [Partially done physical restores](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/restore-partial.md)
+- [Troubleshoot backup management via PMM](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/pbm-pmm.md)
+- [FAQ](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/faq.md)
+
+## PBM internals
+
+- [PBM internals](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/architecture.md)
+- [pbm-agent](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/pbm-agent.md)
+- [PBM CLI](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/cli.md)
+- [PBM control collections](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/control-collections.md)
+- [How PBM works](https://docs.percona.com/percona-backup-mongodb/2.17.0/intro.md)
+- [Authentication](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/authentication.md)
+- [PBM user database roles](https://docs.percona.com/percona-backup-mongodb/2.17.0/details/pbm-user-roles.md)
+
+## Release notes
+
+- [Release notes](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes.md)
+- [Percona Backup for MongoDB 2.17.0 (2026-10-14)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.17.0.md)
+- [Percona Backup for MongoDB 2.16.0 (2026-09-24)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.16.0.md)
+- [Percona Backup for MongoDB 2.15.0 (2026-06-17)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.15.0.md)
+- [Percona Backup for MongoDB 2.14.0 (2026-04-29)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.md)
+- [Percona Backup for MongoDB 2.13.0 (2026-03-03)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.13.0.md)
+- [Percona Backup for MongoDB 2.12.0 (2025-11-04)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.12.0.md)
+- [Percona Backup for MongoDB 2.11.0 (2025-09-25)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.11.0.md)
+- [Percona Backup for MongoDB 2.10.0 (2025-06-26)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.10.0.md)
+- [Percona Backup for MongoDB 2.9.1 (2025-03-27)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.9.1.md)
+- [Percona Backup for MongoDB 2.9.0 (2025-02-19)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.9.0.md)
+- [Percona Backup for MongoDB 2.8.0 (2024-12-12)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.8.0.md)
+- [Percona Backup for MongoDB 2.7.0 (2024-10-09)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.7.0.md)
+- [Percona Backup for MongoDB 2.6.0 (2024-09-02)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.6.0.md)
+- [Percona Backup for MongoDB 2.5.0 (2024-05-16)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.5.0.md)
+- [Percona Backup for MongoDB 2.4.1 (2024-03-25)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.4.1.md)
+- [Percona Backup for MongoDB 2.4.0 (2024-03-05)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.4.0.md)
+- [Percona Backup for MongoDB 2.3.1 (2023-12-04)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.3.1.md)
+- [Percona Backup for MongoDB 2.3.0 (2023-09-25)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.3.0.md)
+- [Percona Backup for MongoDB 2.2.1 (2023-07-27)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.2.1.md)
+- [Percona Backup for MongoDB 2.2.0 (2023-07-13)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.2.0.md)
+- [Percona Backup for MongoDB 2.1.0 (2023-04-18)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.1.0.md)
+- [Percona Backup for MongoDB 2.0.5 (2023-03-23)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.5.md)
+- [Percona Backup for MongoDB 2.0.4 (2023-02-21)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.4.md)
+- [Percona Backup for MongoDB 2.0.3 (2023-01-11)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.3.md)
+- [Percona Backup for MongoDB 2.0.2 (2022-10-27)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.2.md)
+- [Percona Backup for MongoDB 2.0.1 (2022-10-12)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.1.md)
+- [Percona Backup for MongoDB 2.0.0 (2022-09-21)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.0.0.md)
+- [Percona Backup for MongoDB 1.8.1 (2022-07-12)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.8.1.md)
+- [Percona Backup for MongoDB 1.8.0 (2022-06-09)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.8.0.md)
+- [Percona Backup for MongoDB 1.7.0 (2022-04-18)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.7.0.md)
+- [Percona Backup for MongoDB 1.6.1 (2021-11-04)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.6.1.md)
+- [Percona Backup for MongoDB 1.6.0 (2021-08-16)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.6.0.md)
+- [Percona Backup for MongoDB 1.5.0 (2021-05-10)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.5.0.md)
+- [Percona Backup for MongoDB 1.4.1 (2021-01-28)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.4.1.md)
+- [Percona Backup for MongoDB 1.4.0 (2020-12-24)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.4.0.md)
+- [Percona Backup for MongoDB 1.3.4 (2020-11-19)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.3.4.md)
+- [Percona Backup for MongoDB 1.3.3 (2020-11-04)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.3.3.md)
+- [Percona Backup for MongoDB 1.3.2 (2020-10-14)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.3.2.md)
+- [Percona Backup for MongoDB 1.3.1 (2020-09-03)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.3.1.md)
+- [Percona Backup for MongoDB 1.3.0 (2020-08-26)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.3.0.md)
+- [Percona Backup for MongoDB 1.2.1 (2020-07-27)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.2.1.md)
+- [Percona Backup for MongoDB 1.2.0 (2020-05-13)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.2.0.md)
+- [Percona Backup for MongoDB 1.1.3 (2020-04-14)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.1.3.md)
+- [Percona Backup for MongoDB 1.1.1 (2020-01-31)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.1.1.md)
+- [Percona Backup for MongoDB 1.1.0 (2020-01-16)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.1.0.md)
+- [Percona Backup for MongoDB 1.0.0 (2019-09-19)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/1.0.0.md)
+- [Percona Backup for MongoDB 0.5.0 (2019-06-17)](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/0.5.0.md)
+
+## Reference
+
+- [About Percona Backup for MongoDB documentation](https://docs.percona.com/percona-backup-mongodb/2.17.0/about-docs.md)
+- [Software Bill of Materials](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/sboms-pbm.md)
+- [Glossary](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/glossary.md)
+- [Copyright and licensing](https://docs.percona.com/percona-backup-mongodb/2.17.0/copyright.md)
+- [Trademark policy](https://docs.percona.com/percona-backup-mongodb/2.17.0/trademark-policy.md)
+- [Code of conduct](https://docs.percona.com/percona-backup-mongodb/2.17.0/CODE_OF_CONDUCT.md)
+
+## Optional
+
+- [Legal Notice](https://docs.percona.com/percona-backup-mongodb/2.17.0/legal-notice.md)
+

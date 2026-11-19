@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6557,7 +6557,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="pbm-agent-configuration-file-options">pbm-agent configuration file options<a class="headerlink" href="#pbm-agent-configuration-file-options" title="Permanent link">¶</a></h1>
+<h1 id="pbm-agent-configuration-file-options">pbm-agent configuration file options<a data-markdown-ignore class="headerlink" href="#pbm-agent-configuration-file-options" title="Permanent link">¶</a></h1>
 <p>The following options are available for the <code>pbm-agent</code> configuration file. Read more about how to use the configuration file in the <a href="../manage/start-agent-with-config.html">Start pbm-agent using the configuration file</a> chapter.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">mongodb-uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb://pbm:mysecret@localhost:27017/</span>
 <span class="nt">backup</span><span class="p">:</span>
@@ -6567,27 +6567,27 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">  </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="s">"I"</span>
 <span class="w">  </span><span class="nt">json</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-<h2 id="mongodb-uri">mongodb-uri<a class="headerlink" href="#mongodb-uri" title="Permanent link">¶</a></h2>
+<h2 id="mongodb-uri">mongodb-uri<a data-markdown-ignore class="headerlink" href="#mongodb-uri" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: string <br>
 <em>Required</em>: YES</p>
 <p>The MongoDB connection string URI that the <code>pbm-agent</code> uses to connect to the local <code>mongod</code> node. This option is mandatory to start the <code>pbm-agent</code>.</p>
-<h2 id="backupdump-parallel-collections">backup.dump-parallel-collections<a class="headerlink" href="#backupdump-parallel-collections" title="Permanent link">¶</a></h2>
+<h2 id="backupdump-parallel-collections">backup.dump-parallel-collections<a data-markdown-ignore class="headerlink" href="#backupdump-parallel-collections" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: int <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: number of CPU cores / 2 (minimum 1)</p>
 <p>The number of collections to dump in parallel during a logical backup. By default, the number of parallel collections is half of the number of CPU cores, with a minimum value of 1.</p>
-<h2 id="logpath">log.path<a class="headerlink" href="#logpath" title="Permanent link">¶</a></h2>
+<h2 id="logpath">log.path<a data-markdown-ignore class="headerlink" href="#logpath" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: <code>/dev/stderr</code></p>
 <p>The path to the log file where a <code>pbm-agent</code> writes its logs. The file is created if it doesn’t exist. The default value is <code>/dev/stderr</code>, which means that logs are written to the standard error output. If PBM cannot write logs to the specified path due to an error, it falls back to the default path.</p>
-<h2 id="loglevel">log.level<a class="headerlink" href="#loglevel" title="Permanent link">¶</a></h2>
+<h2 id="loglevel">log.level<a data-markdown-ignore class="headerlink" href="#loglevel" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: string <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: <code>D</code></p>
 <p>The log severity level. Supported levels are (from low to high): <code>D</code> - Debug (default), <code>I</code> - Info, <code>W</code> - Warning, <code>E</code> - Error, <code>F</code> - Fatal.</p>
 <p>The output includes both the specified severity level and all higher ones. For example, if you set the level to <code>I</code> (Info), the output will include Info, Warning, Error, and Fatal messages.</p>
-<h2 id="logjson">log.json<a class="headerlink" href="#logjson" title="Permanent link">¶</a></h2>
+<h2 id="logjson">log.json<a data-markdown-ignore class="headerlink" href="#logjson" title="Permanent link">¶</a></h2>
 <p><em>Type</em>: boolean <br>
 <em>Required</em>: NO <br>
 <em>Default</em>: <code>false</code></p>

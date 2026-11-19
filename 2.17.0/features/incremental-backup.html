@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6493,11 +6493,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="incremental-physical-backups">Incremental physical backups<a class="headerlink" href="#incremental-physical-backups" title="Permanent link">¶</a></h1>
+<h1 id="incremental-physical-backups">Incremental physical backups<a data-markdown-ignore class="headerlink" href="#incremental-physical-backups" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.0.3.html">2.0.3</a></p>
 </div>
-<h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
+<h2 id="considerations">Considerations<a data-markdown-ignore class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> Incremental backups made with Percona Backup for MongoDB prior to <a href="../release-notes/2.1.0.html">2.1.0</a> are incompatible for restore with Percona Backup for MongoDB 2.1.0. This is because of the changed set of metadata files that are now stored in backups. These files are absent in backups made with previous PBM versions but are required for the restore with PBM 2.1.0.</p>
@@ -6515,7 +6515,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   A[Full physical ] --&gt; B([Increment 1 ]);
   B --&gt; C([Increment 2 ]);
   C --&gt; |.....| D([Increment n ]);</code></pre>
-<h2 id="implementation-specifics">Implementation specifics<a class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h2>
+<h2 id="implementation-specifics">Implementation specifics<a data-markdown-ignore class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h2>
 <ol>
 <li>
 <p>Percona Backup for MongoDB tracks the backup history only on the node where the base incremental backup was taken. This means that subsequent incremental backups must always be run on that very node. To make this happen, Percona Backup for MongoDB tries to schedule backups on that same node.</p>

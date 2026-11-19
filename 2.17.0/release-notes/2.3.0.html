@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6571,32 +6571,32 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-230-2023-09-25">Percona Backup for MongoDB 2.3.0 (2023-09-25)<a class="headerlink" href="#percona-backup-for-mongodb-230-2023-09-25" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-230-2023-09-25">Percona Backup for MongoDB 2.3.0 (2023-09-25)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-230-2023-09-25" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li>The support for MongoDB 4.2 is deprecated. Existing functionality in Percona Backup for MongoDB remains compatible with MongoDB 4.2 and Percona Server for MongoDB 4.2; however, further enhancements and bug fixes are no longer tested against this version.</li>
 <li>The ability to <a href="../usage/describe-backup.html">view the backup contents</a> improves troubleshooting of backups in environments where databases are often created and / or dropped. </li>
 <li>The ability to <a href="../features/physical.html#physical-backups-in-mixed-deployments">make physical backups in mixed deployments</a> with MongoDB Community and Percona Server for MongoDB (PSMDB) nodes streamlines the backup flow for organizations that are still evaluating or migrating their data sets against PSMDB.</li>
 <li>Improved validation of a base backup snapshot for point-in-time recovery aligns the recovery flow for logical and physical backups.</li>
 </ul>
-<h3 id="supported-platforms-changes">Supported platforms changes<a class="headerlink" href="#supported-platforms-changes" title="Permanent link">¶</a></h3>
+<h3 id="supported-platforms-changes">Supported platforms changes<a data-markdown-ignore class="headerlink" href="#supported-platforms-changes" title="Permanent link">¶</a></h3>
 <ul>
 <li>A Docker image for Percona Backup for MongoDB is now available for ARM64 architectures. This improves the user experience with PBM for developers with ARM-based MacBooks.</li>
 <li>Percona Backup for MongoDB packages are now available for Debian 12 (bookworm). Percona Server for MongoDB is adding support for Debian 12 with the 7.0.x version. </li>
 </ul>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
+<h2 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-848">PBM-848</a> - List databases and collections from backup</li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1147">PBM-1147</a>, <a href="https://jira.percona.com/browse/PBM-885">PBM-885</a> - Support symlinks as the <code>path</code> for filesystem storage type and properly retrieve data during resync</li>
 <li><a href="https://jira.percona.com/browse/PBM-1162">PBM-1162</a>, <a href="https://jira.percona.com/browse/PBM-1166">PBM-1166</a> - Improve validation of physical and incremental backups as the base for point-in-time recovery</li>
 <li><a href="https://jira.percona.com/browse/PBM-1171">PBM-1171</a> - Add ability to make physical backups in mixed deployments</li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-1161">PBM-1161</a> - Rebuild indexes only for the selected namespaces after selective restore</li>
 <li><a href="https://jira.percona.com/browse/PBM-1173">PBM-1173</a>, <a href="https://jira.percona.com/browse/PBM-1180">PBM-1180</a> - Fixed the issue with the primary node crash after the point-in-time recovery from physical backup</li>

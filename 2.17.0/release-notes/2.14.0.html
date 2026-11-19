@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6627,11 +6627,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2140-2026-04-29">Percona Backup for MongoDB 2.14.0 (2026-04-29)<a class="headerlink" href="#percona-backup-for-mongodb-2140-2026-04-29" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2140-2026-04-29">Percona Backup for MongoDB 2.14.0 (2026-04-29)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2140-2026-04-29" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
-<h2 id="release-highlights">Release highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
-<h3 id="concurrent-streaming-for-faster-uploads-to-remote-storage-via-minio-sdk">Concurrent streaming for faster uploads to remote storage via MinIO SDK<a class="headerlink" href="#concurrent-streaming-for-faster-uploads-to-remote-storage-via-minio-sdk" title="Permanent link">¶</a></h3>
+<h2 id="release-highlights">Release highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h3 id="concurrent-streaming-for-faster-uploads-to-remote-storage-via-minio-sdk">Concurrent streaming for faster uploads to remote storage via MinIO SDK<a data-markdown-ignore class="headerlink" href="#concurrent-streaming-for-faster-uploads-to-remote-storage-via-minio-sdk" title="Permanent link">¶</a></h3>
 <p>This release significantly improves the performance of uploading files to S3-compatible custom storage providers through MinIO SDK. By enabling concurrent part uploads, large file transfers can achieve improved throughput and efficiency.</p>
 <p>To ensure reliability, PBM includes built‑in optimizations and fallbacks:</p>
 <ul>
@@ -6640,7 +6640,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>These safeguards ensure that concurrent uploads deliver performance benefits without compromising stability.</p>
 <p>To learn more and get started, follow <a href="../details/minio.html">MinIO and S3-compatible storage</a> page.</p>
-<h3 id="interactive-confirmation-for-the-restore-command">Interactive confirmation for the restore command<a class="headerlink" href="#interactive-confirmation-for-the-restore-command" title="Permanent link">¶</a></h3>
+<h3 id="interactive-confirmation-for-the-restore-command">Interactive confirmation for the restore command<a data-markdown-ignore class="headerlink" href="#interactive-confirmation-for-the-restore-command" title="Permanent link">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Breaking change</p>
 <p>Since an interactive prompt is now printed, automation and scripts must use the <code>-y</code> or <code>--yes</code> flag to bypass this confirmation.</p>
@@ -6656,8 +6656,8 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 </code></pre></div>
 </details>
 <p>For users who are automating PBM operations, PBM CLI introduces the <code>-y</code> and <code>--yes</code> flags to force the execution of a given command without a confirmation prompt. See details in <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm</code> commands</a> reference.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1598">PBM-1598</a>: Added a new configuration file setting for restore - <code>backup.timeouts.balancerStop</code> that defines a timeout value in seconds, to control how long PBM waits for the MongoDB balancer to stop when executing the admin command <code>_configsvrBalancerStop</code>. This change prevents backup and restore operations from hanging indefinitely due to extended chunk migrations.</p>
@@ -6669,7 +6669,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1730">PBM-1730</a>: Previously, if the balancer was not stopped before initiating a restore, PBM would only log an error followed by a warning from the subsequent balancer status check. While this behavior was generally acceptable for physical restores (since <code>mongod</code> is shut down later in the process), it could lead to issues during logical restores. PBM now provides clearer handling of balancer state during restore operations, reducing the risk of restore inconsistencies and improving reliability for logical restore workflows.</p>
 </li>
 </ul>
-<h3 id="improvement">Improvement<a class="headerlink" href="#improvement" title="Permanent link">¶</a></h3>
+<h3 id="improvement">Improvement<a data-markdown-ignore class="headerlink" href="#improvement" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1167">PBM-1167</a>: Physical restore with Point-in-Time Recovery (PITR) has been enhanced to provide more consistent and flexible recovery behavior across replica set nodes. PITR oplog entries are now applied to all nodes, not just the former Primary, ensuring that all nodes have identical data files and oplog history after restore.</p>
@@ -6690,7 +6690,7 @@ Starting restore 2026-03-31T13:37:06.852575976Z to point-in-time 2026-03-31T13:2
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1721">PBM-1721</a>: Improved physical restores behavior when a restore would hang indefinitely if PBM encountered an “Unauthorized” error while attempting to shut down a <code>mongod</code> node via a non-localhost connection interface. The restore process now correctly detects this error and terminates with a descriptive message, clarifying that localhost connections are required for node shutdown when running MongoDB without authentication. This use case was added to <a href="../features/known-limitations.html">Known limitations for backups and restores</a>.</p>
 </li>
 </ul>
-<h2 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
+<h2 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1345">PBM-1345</a>: Fixed an issue where a PITR slicer failure on one replica set did not stop the overall PITR process. PBM now correctly stops the PITR operation when a slicer fails on any replica set, preventing incomplete or inconsistent PITR execution.</p>

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6693,9 +6693,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="restore-from-a-logical-backup">Restore from a logical backup<a class="headerlink" href="#restore-from-a-logical-backup" title="Permanent link">¶</a></h1>
+<h1 id="restore-from-a-logical-backup">Restore from a logical backup<a data-markdown-ignore class="headerlink" href="#restore-from-a-logical-backup" title="Permanent link">¶</a></h1>
 <p>To restore a backup, use the <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or <a href="../features/incremental-backup.html">incremental</a>) and restores the database up to the <a href="../reference/glossary.html#completion-time">restore_to_time</a> timestamp (available in <code>pbm list</code> output starting with version 1.4.0).</p>
-<h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
+<h2 id="considerations">Considerations<a data-markdown-ignore class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
 <p class="power-number">Before starting a restore, review the following:</p>
 <ol>
 <li>
@@ -6705,7 +6705,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>For versions 2.3.1 and earlier, disable <a href="../features/point-in-time-recovery.html">Point-in-time recovery</a> before running <code>pbm restore</code>. This is because Point-in-Time recovery oplog slicing and restore are incompatible operations and cannot be run together.</p>
 </li>
 </ol>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <p class="power-number">Before starting a restore, complete the following steps:</p>
 <ol>
 <li>
@@ -6730,9 +6730,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>For PBM version 2.3.1 and earlier, manually disable point-in-time recovery if it is enabled. To learn more about point-in-time recovery, see <a href="../features/point-in-time-recovery.html">Point-in-time recovery</a>.</p>
 </li>
 </ol>
-<h2 id="restore-time-series-collections">Restore time series collections<a class="headerlink" href="#restore-time-series-collections" title="Permanent link">¶</a></h2>
+<h2 id="restore-time-series-collections">Restore time series collections<a data-markdown-ignore class="headerlink" href="#restore-time-series-collections" title="Permanent link">¶</a></h2>
 <p>During a logical restore, PBM bypasses document validation when it replays the oplog. This lets you restore time series collections that were backed up during sustained writes. No extra PBM configuration is needed. Follow the <a href="#restore-a-database">restore procedure</a> or <a href="pitr-tutorial.html">point-in-time recovery from logical backups</a>.</p>
-<h3 id="collections-with-expireafterseconds">Collections with <code>expireAfterSeconds</code><a class="headerlink" href="#collections-with-expireafterseconds" title="Permanent link">¶</a></h3>
+<h3 id="collections-with-expireafterseconds">Collections with <code>expireAfterSeconds</code><a data-markdown-ignore class="headerlink" href="#collections-with-expireafterseconds" title="Permanent link">¶</a></h3>
 <p>If a time series collection uses <a href="https://www.mongodb.com/docs/v8.0/core/timeseries/timeseries-automatic-removal/" target="_blank"><code>expireAfterSeconds</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>, the TTL monitor can delete buckets that oplog replay still needs. The restore then fails with an error like this:</p>
 <div class="highlight"><pre><span></span><code>applyOps: (Location6781400) Time series bucket document is missing 'control' field
 </code></pre></div>
@@ -6756,7 +6756,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>While the TTL monitor is off, expiration stops for all TTL-managed data and some MongoDB internal operations can be affected. Restore each instance’s original setting as soon as the restore ends.</p>
 </div>
 <p>Sharded time series collections are not supported. See <a href="../features/known-limitations.html">Known limitations for backups and restores</a>.</p>
-<h2 id="restore-a-database">Restore a database<a class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
+<h2 id="restore-a-database">Restore a database<a data-markdown-ignore class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
 <p class="power-number">To restore a database, follow these steps:</p>
 <ol>
 <li>
@@ -6779,14 +6779,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </div>
 </li>
 </ol>
-<h3 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
+<h3 id="post-restore-steps">Post-restore steps<a data-markdown-ignore class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
 <p class="power-number">After a cluster’s restore is complete, do the following:</p>
 <ol>
 <li>Start the balancer and all <code>mongos</code> nodes to reload the sharding metadata. </li>
 <li>We recommend to make a fresh backup to serve as the new base for future restores. </li>
 <li>Point-in-time recovery is re-enabled automatically upon backup completion. Otherwise, <a href="../features/point-in-time-recovery.html#enable-point-in-time-recovery">enable point-in-time recovery</a> to be able to restore to a specific time.</li>
 </ol>
-<h2 id="adjust-memory-consumption">Adjust memory consumption<a class="headerlink" href="#adjust-memory-consumption" title="Permanent link">¶</a></h2>
+<h2 id="adjust-memory-consumption">Adjust memory consumption<a data-markdown-ignore class="headerlink" href="#adjust-memory-consumption" title="Permanent link">¶</a></h2>
 <p>Starting with version 1.3.2, Percona Backup for MongoDB config includes the restore options to adjust the memory consumption by the <code>pbm-agent</code> in environments with tight memory bounds. This allows preventing out of memory errors during the restore operation.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">batchSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">500</span>
@@ -6801,7 +6801,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Before a restore operation is executed you have to confirm the action (to bypass it, add the <code>-y</code> or <code>--yes</code> flag).</p>
 </div>
 <p>Increasing the number may increase the restore speed. However, it may also lead to unexpectedly high disk and CPU usage. Consider the trade-offs carefully before making adjustments to ensure optimal performance without overloading resources.</p>
-<h2 id="restore-from-a-logical-backup-made-on-previous-major-version-of-percona-server-for-mongodb">Restore from a logical backup made on previous major version of Percona Server for MongoDB<a class="headerlink" href="#restore-from-a-logical-backup-made-on-previous-major-version-of-percona-server-for-mongodb" title="Permanent link">¶</a></h2>
+<h2 id="restore-from-a-logical-backup-made-on-previous-major-version-of-percona-server-for-mongodb">Restore from a logical backup made on previous major version of Percona Server for MongoDB<a data-markdown-ignore class="headerlink" href="#restore-from-a-logical-backup-made-on-previous-major-version-of-percona-server-for-mongodb" title="Permanent link">¶</a></h2>
 <p>In some cases you may need to restore from a backup made on previous major version of Percona Server for MongoDB. To make this happen, <a href="https://www.mongodb.com/docs/manual/reference/command/setFeatureCompatibilityVersion/">Feature Compatibility Version (FCV) <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> values in both backup and the destination environment must match. </p>
 <p>Starting with version 2.1.0, Percona Backup for MongoDB stores the FCV value in the backup metadata. If it doesn’t match the FCV value on the destination environment, you will see the error in the <a href="../reference/pbm-commands.html#pbm-status"><code>pbm status</code></a> output.</p>
 <div class="no-copy highlight"><pre><span></span><code><span class="m">2023</span>-04-10T10:48:54Z<span class="w"> </span><span class="m">302</span>.80KB<span class="w"> </span>&lt;logical&gt;<span class="w"> </span><span class="o">[</span>ERROR:<span class="w"> </span>backup<span class="w"> </span>FCV<span class="w"> </span><span class="s2">"6.0"</span><span class="w"> </span>is<span class="w"> </span>incompatible<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>running<span class="w"> </span>mongo<span class="w"> </span>FCV<span class="w"> </span><span class="s2">"5.0"</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="m">2023</span>-04-10T10:49:14Z<span class="o">]</span>
@@ -6840,9 +6840,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </code></pre></div>
 </li>
 </ol>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="pitr-tutorial.html">Point-in-time recovery</a></p>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="restore-progress.html">View restore progress</a></li>
 <li><a href="../features/restore-new-env.html">Restore into a new environment</a></li>

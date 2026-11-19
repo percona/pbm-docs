@@ -140,7 +140,7 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6951,7 +6951,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="oracle-cloud-infrastructure-object-storage">Oracle Cloud Infrastructure Object Storage<a class="headerlink" href="#oracle-cloud-infrastructure-object-storage" title="Permanent link">¶</a></h1>
+<h1 id="oracle-cloud-infrastructure-object-storage">Oracle Cloud Infrastructure Object Storage<a data-markdown-ignore class="headerlink" href="#oracle-cloud-infrastructure-object-storage" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB (PBM) supports <a href="https://docs.oracle.com/en-us/iaas/Content/Object/Concepts/objectstorageoverview.htm">OCI Object Storage</a>
 as a remote backup destination through a dedicated OCI native
 driver. PBM connects to OCI Object Storage using one of the following authentication types:</p>
@@ -6978,7 +6978,7 @@ driver. PBM connects to OCI Object Storage using one of the following authentica
 </tbody>
 </table>
 <p>For information on workload identity based authentication methods, refer to the sections on <a href="oci-wif.html#instanceprincipal">Instance Principal</a> and <a href="oci-wif.html#okeworkloadidentity">OKE Workload Identity</a>.</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<h2 id="prerequisites">Prerequisites<a data-markdown-ignore class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
 <p>Before configuring PBM, ensure that you have:</p>
 <ul>
 <li>An active OCI tenancy with at least one subscribed region</li>
@@ -7001,7 +7001,7 @@ the fingerprint matches <code>~/.oci/config</code>.</p>
 <div class="highlight"><pre><span></span><code>oci<span class="w"> </span>setup<span class="w"> </span>repair-file-permissions<span class="w"> </span>--file<span class="w"> </span>~/.oci/config
 oci<span class="w"> </span>setup<span class="w"> </span>repair-file-permissions<span class="w"> </span>--file<span class="w"> </span>~/.oci/oci_api_key.pem
 </code></pre></div>
-<h2 id="verify-region-access">Verify region access<a class="headerlink" href="#verify-region-access" title="Permanent link">¶</a></h2>
+<h2 id="verify-region-access">Verify region access<a data-markdown-ignore class="headerlink" href="#verify-region-access" title="Permanent link">¶</a></h2>
 <p>Check the regions available to your tenancy:</p>
 <div class="highlight"><pre><span></span><code>oci<span class="w"> </span>iam<span class="w"> </span>region-subscription<span class="w"> </span>list<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--region<span class="w"> </span>&lt;HOME_REGION&gt;<span class="w"> </span><span class="se">\</span>
@@ -7011,8 +7011,8 @@ oci<span class="w"> </span>setup<span class="w"> </span>repair-file-permissions<
 <p class="admonition-title">Note</p>
 <p>The region specified in the configuration must be enabled and subscribed to in your OCI tenancy.</p>
 </div>
-<h2 id="set-up-oci-resources">Set up OCI resources<a class="headerlink" href="#set-up-oci-resources" title="Permanent link">¶</a></h2>
-<h3 id="export-variables">Export variables<a class="headerlink" href="#export-variables" title="Permanent link">¶</a></h3>
+<h2 id="set-up-oci-resources">Set up OCI resources<a data-markdown-ignore class="headerlink" href="#set-up-oci-resources" title="Permanent link">¶</a></h2>
+<h3 id="export-variables">Export variables<a data-markdown-ignore class="headerlink" href="#export-variables" title="Permanent link">¶</a></h3>
 <p>Set the following variables before running any commands in this 
 section. All subsequent commands reference them.</p>
 <p></p><div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">HOME_REGION</span><span class="o">=</span>&lt;your-home-region&gt;<span class="w">     </span><span class="c1"># e.g. us-ashburn-1</span>
@@ -7047,7 +7047,7 @@ Retrieve and export the values PBM requires:<p></p>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"NAMESPACE:    </span><span class="nv">$NAMESPACE</span><span class="s2">"</span>
 </code></pre></div>
 Verify all five values are populated before continuing. An empty value means the OCI CLI is not authenticated or the variable was not set correctly.<p></p>
-<h3 id="create-a-compartment">Create a compartment<a class="headerlink" href="#create-a-compartment" title="Permanent link">¶</a></h3>
+<h3 id="create-a-compartment">Create a compartment<a data-markdown-ignore class="headerlink" href="#create-a-compartment" title="Permanent link">¶</a></h3>
 <div class="admonition tip">
 <p class="admonition-title">Important</p>
 <p>While OCI resources always require a compartment, creating a dedicated one for PBM backup resources is optional. You can use the root compartment. However, Percona recommends using a separate compartment for PBM resources to improve organization and simplify IAM policy management.</p>
@@ -7072,7 +7072,7 @@ Wait until the compartment is active, then export its OCID:<p></p>
 
 <span class="nb">echo</span><span class="w"> </span><span class="s2">"COMPARTMENT_OCID: </span><span class="nv">$COMPARTMENT_OCID</span><span class="s2">"</span>
 </code></pre></div>
-<h3 id="create-an-object-storage-bucket">Create an Object Storage bucket<a class="headerlink" href="#create-an-object-storage-bucket" title="Permanent link">¶</a></h3>
+<h3 id="create-an-object-storage-bucket">Create an Object Storage bucket<a data-markdown-ignore class="headerlink" href="#create-an-object-storage-bucket" title="Permanent link">¶</a></h3>
 <p>Create the bucket:</p>
 <div class="highlight"><pre><span></span><code>oci<span class="w"> </span>os<span class="w"> </span>bucket<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
@@ -7088,7 +7088,7 @@ Wait until the compartment is active, then export its OCID:<p></p>
 <span class="w">  </span>--query<span class="w"> </span><span class="s1">'data.{name:name,namespace:namespace}'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--output<span class="w"> </span>table
 </code></pre></div>
-<h3 id="create-iam-policies">Create IAM policies<a class="headerlink" href="#create-iam-policies" title="Permanent link">¶</a></h3>
+<h3 id="create-iam-policies">Create IAM policies<a data-markdown-ignore class="headerlink" href="#create-iam-policies" title="Permanent link">¶</a></h3>
 <p>PBM must be able to create, read, overwrite, and delete backup objects.</p>
 <p>Ensure your OCI user (or the group it belongs to) has permissions to manage objects in the target bucket/compartment.</p>
 <p>Additionally, PBM requires a native copy policy that grants the OCI Object Storage service permission to copy objects internally (for server-side copy operations):</p>
@@ -7109,8 +7109,8 @@ Wait until the compartment is active, then export its OCID:<p></p>
 <p class="admonition-title">Note</p>
 <p>IAM policy changes can take up to 2 minutes to propagate. If PBM reports an authorization error immediately after creating the policies, wait 2 minutes and retry.</p>
 </div>
-<h2 id="configure-pbm">Configure PBM<a class="headerlink" href="#configure-pbm" title="Permanent link">¶</a></h2>
-<h3 id="userprincipal">userPrincipal<a class="headerlink" href="#userprincipal" title="Permanent link">¶</a></h3>
+<h2 id="configure-pbm">Configure PBM<a data-markdown-ignore class="headerlink" href="#configure-pbm" title="Permanent link">¶</a></h2>
+<h3 id="userprincipal">userPrincipal<a data-markdown-ignore class="headerlink" href="#userprincipal" title="Permanent link">¶</a></h3>
 <p>Use this when PBM runs outside OCI, or when you want to 
 authenticate with OCI API signing keys.</p>
 <p>Generate the correctly indented private key before creating 
@@ -7148,14 +7148,14 @@ a 401 authentication failure.</p>
 <div class="highlight"><pre><span></span><code>sed<span class="w"> </span><span class="s1">'s/^/          /'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$KEY_FILE</span><span class="s2">"</span>
 </code></pre></div>
 </div>
-<h2 id="apply-the-pbm-configuration">Apply the PBM configuration<a class="headerlink" href="#apply-the-pbm-configuration" title="Permanent link">¶</a></h2>
+<h2 id="apply-the-pbm-configuration">Apply the PBM configuration<a data-markdown-ignore class="headerlink" href="#apply-the-pbm-configuration" title="Permanent link">¶</a></h2>
 <p>Apply the configuration:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--file<span class="w"> </span>/path/to/oci-config.yaml
 </code></pre></div>
 <p>Force PBM to resync the storage configuration:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span>--force-resync
 </code></pre></div>
-<h2 id="verify-the-configuration">Verify the configuration<a class="headerlink" href="#verify-the-configuration" title="Permanent link">¶</a></h2>
+<h2 id="verify-the-configuration">Verify the configuration<a data-markdown-ignore class="headerlink" href="#verify-the-configuration" title="Permanent link">¶</a></h2>
 <p>Verify all agents connected and storage initialized successfully:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>status
 </code></pre></div>
@@ -7208,12 +7208,12 @@ NAME<span class="w">   </span>TYPE<span class="w">   </span>PROFILE<span class="
 PITR<span class="w"> </span>&lt;off&gt;:
 </code></pre></div>
 </details>
-<h2 id="server-side-encryption">Server-side encryption<a class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h2>
+<h2 id="server-side-encryption">Server-side encryption<a data-markdown-ignore class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h2>
 <p>PBM supports OCI Object Storage server-side encryption using either OCI Key Management Service (KMS) keys or customer-provided encryption keys (SSE-C). These methods are mutually exclusive. Configure only one encryption mode at a time.</p>
 <p>OCI Object Storage always encrypts data at rest using server-side encryption (SSE). By default, OCI uses Oracle-managed encryption keys and encryption cannot be disabled. The encryption settings described in this section are intended for environments that require greater control over key management, such as using customer-managed keys in OCI Key Management Service (KMS) or customer-provided encryption keys (SSE-C).</p>
-<h3 id="sse-with-oci-kms">SSE with OCI KMS<a class="headerlink" href="#sse-with-oci-kms" title="Permanent link">¶</a></h3>
+<h3 id="sse-with-oci-kms">SSE with OCI KMS<a data-markdown-ignore class="headerlink" href="#sse-with-oci-kms" title="Permanent link">¶</a></h3>
 <p>Use OCI KMS encryption when you want OCI to manage encryption and key lifecycle through OCI Vault and Key Management.</p>
-<h4 id="create-a-kms-key">Create a KMS key<a class="headerlink" href="#create-a-kms-key" title="Permanent link">¶</a></h4>
+<h4 id="create-a-kms-key">Create a KMS key<a data-markdown-ignore class="headerlink" href="#create-a-kms-key" title="Permanent link">¶</a></h4>
 <p>In the OCI Console, navigate to:</p>
 <p><strong>Identity &amp; Security → Key Management &amp; Secret Management → Vault</strong></p>
 <p>Open an existing vault or create a new vault in <code>$BUCKET_REGION</code>, then select:</p>
@@ -7232,7 +7232,7 @@ PITR<span class="w"> </span>&lt;off&gt;:
 <p>If your tenancy uses identity domains, specify the group name in identity-domain-qualified format:</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">OCI_GROUP_NAME</span><span class="o">=</span><span class="s2">"'Default'/'&lt;your-oci-group-name&gt;'"</span>
 </code></pre></div>
-<h4 id="create-iam-policies-for-kms-access">Create IAM policies for KMS access<a class="headerlink" href="#create-iam-policies-for-kms-access" title="Permanent link">¶</a></h4>
+<h4 id="create-iam-policies-for-kms-access">Create IAM policies for KMS access<a data-markdown-ignore class="headerlink" href="#create-iam-policies-for-kms-access" title="Permanent link">¶</a></h4>
 <p>Create a policy that allows both the PBM user group and the regional Object Storage service to use the KMS key.</p>
 <p>The object access statement is only required if the OCI group does not already have Object Storage permissions in the target compartment.</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">KMS_OBJECT_POLICY_STATEMENT</span><span class="o">=</span><span class="s2">"Allow group </span><span class="nv">$OCI_GROUP_NAME</span><span class="s2"> to manage object-family in compartment </span><span class="nv">$COMPARTMENT_NAME</span><span class="s2">"</span>
@@ -7251,7 +7251,7 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 <p>Wait 1–2 minutes for OCI IAM policy propagation before applying the PBM configuration.</p>
 <p>Without the Object Storage service policy, PBM uploads fail with <code>NotAuthorizedOrFoundKmsKey</code> during <code>CreateMultipartUpload</code> operations.</p>
 </div>
-<h4 id="configure-pbm_1">Configure PBM<a class="headerlink" href="#configure-pbm_1" title="Permanent link">¶</a></h4>
+<h4 id="configure-pbm_1">Configure PBM<a data-markdown-ignore class="headerlink" href="#configure-pbm_1" title="Permanent link">¶</a></h4>
 <p>Add the following to the OCI storage configuration:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">serverSideEncryption</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">kmsKeyID</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;KMS_KEY_OCID&gt;</span>
@@ -7260,19 +7260,19 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 <p class="admonition-title">Warning</p>
 <p>Do not configure <code>sseCustomerKey</code> together with <code>kmsKeyID</code>. PBM treats OCI KMS encryption and SSE-C as mutually exclusive options.</p>
 </div>
-<h3 id="sse-c-customer-provided-encryption-keys">SSE-C (Customer-Provided Encryption Keys)<a class="headerlink" href="#sse-c-customer-provided-encryption-keys" title="Permanent link">¶</a></h3>
+<h3 id="sse-c-customer-provided-encryption-keys">SSE-C (Customer-Provided Encryption Keys)<a data-markdown-ignore class="headerlink" href="#sse-c-customer-provided-encryption-keys" title="Permanent link">¶</a></h3>
 <p>Use SSE-C when you want full control of the encryption key material used to encrypt backup objects. PBM sends the encryption key with every Object Storage request. OCI uses the supplied key to encrypt and decrypt objects but does not persist the key.</p>
-<h4 id="generate-an-sse-c-key">Generate an SSE-C key<a class="headerlink" href="#generate-an-sse-c-key" title="Permanent link">¶</a></h4>
+<h4 id="generate-an-sse-c-key">Generate an SSE-C key<a data-markdown-ignore class="headerlink" href="#generate-an-sse-c-key" title="Permanent link">¶</a></h4>
 <p>Generate a 256-bit AES key and encode it in Base64:</p>
 <div class="highlight"><pre><span></span><code>openssl<span class="w"> </span>rand<span class="w"> </span><span class="m">32</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64
 </code></pre></div>
 <p>Store the generated value securely. PBM requires the same key for all future backup, restore, and object access operations.</p>
-<h4 id="configure-pbm_2">Configure PBM<a class="headerlink" href="#configure-pbm_2" title="Permanent link">¶</a></h4>
+<h4 id="configure-pbm_2">Configure PBM<a data-markdown-ignore class="headerlink" href="#configure-pbm_2" title="Permanent link">¶</a></h4>
 <p>Add the customer-provided key to the storage configuration:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">serverSideEncryption</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">sseCustomerKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;BASE64_ENCODED_AES256_KEY&gt;</span>
 </code></pre></div>
-<h4 id="verify-encryption">Verify encryption<a class="headerlink" href="#verify-encryption" title="Permanent link">¶</a></h4>
+<h4 id="verify-encryption">Verify encryption<a data-markdown-ignore class="headerlink" href="#verify-encryption" title="Permanent link">¶</a></h4>
 <p>After a successful backup, verify that uploaded objects are encrypted with SSE-C:</p>
 <div class="highlight"><pre><span></span><code>oci<span class="w"> </span>os<span class="w"> </span>object<span class="w"> </span>head<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--region<span class="w"> </span><span class="s2">"</span><span class="nv">$BUCKET_REGION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>

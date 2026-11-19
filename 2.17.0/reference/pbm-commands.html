@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -7019,10 +7019,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="pbm-commands"><code>pbm</code> commands<a class="headerlink" href="#pbm-commands" title="Permanent link">¶</a></h1>
+<h1 id="pbm-commands"><code>pbm</code> commands<a data-markdown-ignore class="headerlink" href="#pbm-commands" title="Permanent link">¶</a></h1>
 <p><code>pbm</code> CLI is the command line utility to control the backup system. This page describes <code>pbm</code> commands available in Percona Backup for MongoDB.</p>
 <p>For how to get started with Percona Backup for MongoDB, see <a href="../install/initial-setup.html">Initial setup</a>.</p>
-<h2 id="pbm-backup">pbm backup<a class="headerlink" href="#pbm-backup" title="Permanent link">¶</a></h2>
+<h2 id="pbm-backup">pbm backup<a data-markdown-ignore class="headerlink" href="#pbm-backup" title="Permanent link">¶</a></h2>
 <p>Creates a backup snapshot and saves it in the remote backup storage.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -7091,12 +7091,12 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-backup-finish">pbm backup-finish<a class="headerlink" href="#pbm-backup-finish" title="Permanent link">¶</a></h2>
+<h2 id="pbm-backup-finish">pbm backup-finish<a data-markdown-ignore class="headerlink" href="#pbm-backup-finish" title="Permanent link">¶</a></h2>
 <p>Closes the <code>backupCursor</code> and finishes the external backup. Must be run after running <code>pbm backup -t external</code>. To learn more, refer to <a href="../features/snapshots.html">API for snapshot-based physical backups</a>.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup-finish<span class="w"> </span><span class="o">[</span>backup-name<span class="o">]</span><span class="w"> </span>
 </code></pre></div>
-<h2 id="pbm-cancel-backup">pbm cancel-backup<a class="headerlink" href="#pbm-cancel-backup" title="Permanent link">¶</a></h2>
+<h2 id="pbm-cancel-backup">pbm cancel-backup<a data-markdown-ignore class="headerlink" href="#pbm-cancel-backup" title="Permanent link">¶</a></h2>
 <p>Cancels a running backup. The backup is marked as canceled in the backup list.</p>
 <p>The command accepts the following flags:</p>
 <table>
@@ -7120,7 +7120,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-cleanup">pbm cleanup<a class="headerlink" href="#pbm-cleanup" title="Permanent link">¶</a></h2>
+<h2 id="pbm-cleanup">pbm cleanup<a data-markdown-ignore class="headerlink" href="#pbm-cleanup" title="Permanent link">¶</a></h2>
 <p>Deletes outdated backup snapshots and point-in-time recovery oplog slices.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -7160,7 +7160,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-config">pbm config<a class="headerlink" href="#pbm-config" title="Permanent link">¶</a></h2>
+<h2 id="pbm-config">pbm config<a data-markdown-ignore class="headerlink" href="#pbm-config" title="Permanent link">¶</a></h2>
 <p>Sets, changes or lists Percona Backup for MongoDB configuration.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>config<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;key&gt;<span class="o">]</span>
@@ -7245,7 +7245,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="p">]</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-delete-backup">pbm delete-backup<a class="headerlink" href="#pbm-delete-backup" title="Permanent link">¶</a></h2>
+<h2 id="pbm-delete-backup">pbm delete-backup<a data-markdown-ignore class="headerlink" href="#pbm-delete-backup" title="Permanent link">¶</a></h2>
 <p>Deletes the specified backup snapshot or all backup snapshots that are older than the specified time with the option to filter by specific type. The command deletes backups that are not running regardless of the remote backup storage being used.</p>
 <p>The following is the command syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>delete-backup<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;name&gt;<span class="o">]</span>
@@ -7285,7 +7285,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-delete-pitr">pbm delete-pitr<a class="headerlink" href="#pbm-delete-pitr" title="Permanent link">¶</a></h2>
+<h2 id="pbm-delete-pitr">pbm delete-pitr<a data-markdown-ignore class="headerlink" href="#pbm-delete-pitr" title="Permanent link">¶</a></h2>
 <p>Deletes oplog slices produced for Point-in-Time Recovery.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>delete-pitr<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -7333,7 +7333,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-describe-backup">pbm describe-backup<a class="headerlink" href="#pbm-describe-backup" title="Permanent link">¶</a></h2>
+<h2 id="pbm-describe-backup">pbm describe-backup<a data-markdown-ignore class="headerlink" href="#pbm-describe-backup" title="Permanent link">¶</a></h2>
 <p>Provides the detailed information about a backup:</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>describe-backup<span class="w"> </span><span class="o">[</span>&lt;backup-name&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span><span class="w"> </span>
@@ -7360,7 +7360,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">¶</a></h3>
+<h3 id="output">Output<a data-markdown-ignore class="headerlink" href="#output" title="Permanent link">¶</a></h3>
 <p>The output document contains the following fields: </p>
 <details class="admonition">
 <summary>JSON output</summary>
@@ -7543,7 +7543,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   </tbody>
 </table>
 
-<h2 id="pbm-describe-restore">pbm describe-restore<a class="headerlink" href="#pbm-describe-restore" title="Permanent link">¶</a></h2>
+<h2 id="pbm-describe-restore">pbm describe-restore<a data-markdown-ignore class="headerlink" href="#pbm-describe-restore" title="Permanent link">¶</a></h2>
 <p>Shows the detailed information about the restore:</p>
 <ul>
 <li>Restore name</li>
@@ -7583,7 +7583,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h3 id="output_1">Output<a class="headerlink" href="#output_1" title="Permanent link">¶</a></h3>
+<h3 id="output_1">Output<a data-markdown-ignore class="headerlink" href="#output_1" title="Permanent link">¶</a></h3>
 <p>The output document contains the following fields:</p>
 <details class="admonition">
 <summary>Selective restore status</summary>
@@ -7705,7 +7705,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-diagnostic">pbm diagnostic<a class="headerlink" href="#pbm-diagnostic" title="Permanent link">¶</a></h2>
+<h2 id="pbm-diagnostic">pbm diagnostic<a data-markdown-ignore class="headerlink" href="#pbm-diagnostic" title="Permanent link">¶</a></h2>
 <p>Generates the report with the detailed information about a specific backup or a restore. You can also use it for other commands. To learn more, refer to the <a href="../troubleshoot/pbm-report.html">Diagnostics report</a>.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>diagnose<span class="w"> </span>--path<span class="w"> </span>path<span class="w"> </span>--name<span class="w"> </span>&lt;backup-name&gt;<span class="w"> </span>--opid<span class="w"> </span>&lt;OPID&gt;
@@ -7737,9 +7737,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-help">pbm help<a class="headerlink" href="#pbm-help" title="Permanent link">¶</a></h2>
+<h2 id="pbm-help">pbm help<a data-markdown-ignore class="headerlink" href="#pbm-help" title="Permanent link">¶</a></h2>
 <p>Returns the help information about <code>pbm</code> commands.</p>
-<h2 id="pbm-list">pbm list<a class="headerlink" href="#pbm-list" title="Permanent link">¶</a></h2>
+<h2 id="pbm-list">pbm list<a data-markdown-ignore class="headerlink" href="#pbm-list" title="Permanent link">¶</a></h2>
 <p>Provides the list of backups and their states in a tabular format, making backup information easier to read and scan.</p>
 <ul>
 <li>In progress - A backup is running</li>
@@ -7904,7 +7904,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">]</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-logs">pbm logs<a class="headerlink" href="#pbm-logs" title="Permanent link">¶</a></h2>
+<h2 id="pbm-logs">pbm logs<a data-markdown-ignore class="headerlink" href="#pbm-logs" title="Permanent link">¶</a></h2>
 <p>Shows log information from all <code>pbm-agent</code> processes.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>logs<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -7977,7 +7977,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">]</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-oplog-replay">pbm oplog-replay<a class="headerlink" href="#pbm-oplog-replay" title="Permanent link">¶</a></h2>
+<h2 id="pbm-oplog-replay">pbm oplog-replay<a data-markdown-ignore class="headerlink" href="#pbm-oplog-replay" title="Permanent link">¶</a></h2>
 <p>Allows to replay the oplog on top of any backup: logical, physical, storage level snapshot (like EBS-snapshot) and restore it to a specific point in time.</p>
 <p>To learn more about the usage, refer to Point-in-Time Recovery oplog replay.</p>
 <p>The command has the following syntax:</p>
@@ -8014,7 +8014,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-profile-add">pbm profile add<a class="headerlink" href="#pbm-profile-add" title="Permanent link">¶</a></h2>
+<h2 id="pbm-profile-add">pbm profile add<a data-markdown-ignore class="headerlink" href="#pbm-profile-add" title="Permanent link">¶</a></h2>
 <p>Saves an external storage configuration to PBM. This information is defined via configuration profiles. </p>
 <p>To learn more about configuration profiles, see <a href="../features/multi-storage.html">Multiple storages for backups</a>.</p>
 <p>The command has the following syntax:</p>
@@ -8054,7 +8054,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-profile-list">pbm profile list<a class="headerlink" href="#pbm-profile-list" title="Permanent link">¶</a></h2>
+<h2 id="pbm-profile-list">pbm profile list<a data-markdown-ignore class="headerlink" href="#pbm-profile-list" title="Permanent link">¶</a></h2>
 <p>Provides information about <a href="../features/multi-storage.html#configuration-profiles">configuration profiles</a> added to PBM. </p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -8092,7 +8092,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-profile-remove">pbm profile remove<a class="headerlink" href="#pbm-profile-remove" title="Permanent link">¶</a></h2>
+<h2 id="pbm-profile-remove">pbm profile remove<a data-markdown-ignore class="headerlink" href="#pbm-profile-remove" title="Permanent link">¶</a></h2>
 <p>Removes the specified configuration profile from PBM.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>remove<span class="w"> </span>&lt;profile-name&gt;<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -8127,7 +8127,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-profile-show">pbm profile show<a class="headerlink" href="#pbm-profile-show" title="Permanent link">¶</a></h2>
+<h2 id="pbm-profile-show">pbm profile show<a data-markdown-ignore class="headerlink" href="#pbm-profile-show" title="Permanent link">¶</a></h2>
 <p>Shows the external storage configuration according to the specified configuration profile.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>show<span class="w"> </span>&lt;profile-name&gt;<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -8161,7 +8161,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-profile-sync">pbm profile sync<a class="headerlink" href="#pbm-profile-sync" title="Permanent link">¶</a></h2>
+<h2 id="pbm-profile-sync">pbm profile sync<a data-markdown-ignore class="headerlink" href="#pbm-profile-sync" title="Permanent link">¶</a></h2>
 <p>Syncs the backup list from the external storage according to the specified configuration profile.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>profile<span class="w"> </span>sync<span class="w"> </span>&lt;profile-name&gt;<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
@@ -8197,7 +8197,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-restore">pbm restore<a class="headerlink" href="#pbm-restore" title="Permanent link">¶</a></h2>
+<h2 id="pbm-restore">pbm restore<a data-markdown-ignore class="headerlink" href="#pbm-restore" title="Permanent link">¶</a></h2>
 <p>Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical, physical, or a snapshot-based restore.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span><span class="o">[</span>&lt;flags&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;backup_name&gt;<span class="o">]</span>
@@ -8306,7 +8306,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-restore-finish">pbm restore-finish<a class="headerlink" href="#pbm-restore-finish" title="Permanent link">¶</a></h2>
+<h2 id="pbm-restore-finish">pbm restore-finish<a data-markdown-ignore class="headerlink" href="#pbm-restore-finish" title="Permanent link">¶</a></h2>
 <p>Instructs PBM to complete the snapshot-based physical restore. Must be run after running <code>pbm restore --external</code>. To learn more, refer to <a href="../features/snapshots.html">API for snapshot-based physical backups</a>.</p>
 <p>The command has the following syntax:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore-finish<span class="w"> </span>&lt;restore_name&gt;<span class="w"> </span><span class="o">[</span>flags<span class="o">]</span>
@@ -8326,7 +8326,7 @@ NAME<span class="w">                      </span>TYPE<span class="w">          <
 </tr>
 </tbody>
 </table>
-<h2 id="pbm-status">pbm status<a class="headerlink" href="#pbm-status" title="Permanent link">¶</a></h2>
+<h2 id="pbm-status">pbm status<a data-markdown-ignore class="headerlink" href="#pbm-status" title="Permanent link">¶</a></h2>
 <p>Shows the status of backups and their states in a tabular format, making backup information easier to read and scan.</p>
 <p>The output provides the following information:</p>
 <ul>
@@ -8476,7 +8476,7 @@ http://minio:9000/mybackups
 <span class="p">}</span>
 </code></pre></div>
 </details>
-<h2 id="pbm-version">pbm version<a class="headerlink" href="#pbm-version" title="Permanent link">¶</a></h2>
+<h2 id="pbm-version">pbm version<a data-markdown-ignore class="headerlink" href="#pbm-version" title="Permanent link">¶</a></h2>
 <p>Shows the version of Percona Backup for MongoDB.</p>
 <p>The command accepts the following flags:</p>
 <table>

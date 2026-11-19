@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6469,14 +6469,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="configure-backup-compression">Configure backup compression<a class="headerlink" href="#configure-backup-compression" title="Permanent link">¶</a></h1>
+<h1 id="configure-backup-compression">Configure backup compression<a data-markdown-ignore class="headerlink" href="#configure-backup-compression" title="Permanent link">¶</a></h1>
 <p>By default, Percona Backup for MongoDB uses the <code>s2</code> compression method when making a backup.</p>
 <p>You can start a backup with a different compression method by passing the <code>--compression</code> flag to the <strong>pbm backup</strong> command.</p>
 <p>For example, to start a backup with <code>gzip</code> compression, use the following command:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--compression<span class="o">=</span>gzip
 </code></pre></div>
 <p>Supported compression types are: <code>gzip</code>, <code>snappy</code>, <code>lz4</code>, <code>pgzip</code>, <code>zstd</code>.  The <code>none</code> value means no compression is done during backup.</p>
-<h2 id="compression-level-setup">Compression level setup<a class="headerlink" href="#compression-level-setup" title="Permanent link">¶</a></h2>
+<h2 id="compression-level-setup">Compression level setup<a data-markdown-ignore class="headerlink" href="#compression-level-setup" title="Permanent link">¶</a></h2>
 <p>You can configure the compression level for backups. Specify the value for the <a href="../reference/backup-options.html#backupcompressionlevel"><code>--compression-level</code></a> flag. </p>
 <p>Default compression levels differ per compression method used. </p>
 <p>The following table shows available compression levels per compression method:</p>

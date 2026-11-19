@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6615,11 +6615,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="make-a-selective-restore-from-a-logical-backup">Make a selective restore from a logical backup<a class="headerlink" href="#make-a-selective-restore-from-a-logical-backup" title="Permanent link">¶</a></h1>
+<h1 id="make-a-selective-restore-from-a-logical-backup">Make a selective restore from a logical backup<a data-markdown-ignore class="headerlink" href="#make-a-selective-restore-from-a-logical-backup" title="Permanent link">¶</a></h1>
 <p>To restore a backup, use the <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or <a href="../features/incremental-backup.html">incremental</a>) and restores the database up to the <a href="../reference/glossary.html#completion-time">restore_to_time</a> timestamp (available in <code>pbm list</code> output starting with version 1.4.0).</p>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <p>You can restore a specific database or a collection either from a full or a selective backup. Read about <a href="../features/known-limitations.html#selective-backups-and-restores">known limitations of selective restores</a>.</p>
-<h2 id="restore-a-database-with-users-and-roles">Restore a database with users and roles<a class="headerlink" href="#restore-a-database-with-users-and-roles" title="Permanent link">¶</a></h2>
+<h2 id="restore-a-database-with-users-and-roles">Restore a database with users and roles<a data-markdown-ignore class="headerlink" href="#restore-a-database-with-users-and-roles" title="Permanent link">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <ul>
@@ -6674,7 +6674,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </details>
 </li>
 </ol>
-<h3 id="namespace-requirements">Namespace requirements<a class="headerlink" href="#namespace-requirements" title="Permanent link">¶</a></h3>
+<h3 id="namespace-requirements">Namespace requirements<a data-markdown-ignore class="headerlink" href="#namespace-requirements" title="Permanent link">¶</a></h3>
 <p class="power-number">The following are the namespace requirements:</p>
 <ol>
 <li>
@@ -6685,7 +6685,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Use <code>--with-users-and-roles</code> only with selective restore (i.e., when you specify <code>--ns</code>). If you are not using <code>--ns</code>, you are not performing a selective restore, and this option is not required.</p>
 </li>
 </ol>
-<h2 id="restore-a-collection-under-a-different-name">Restore a collection under a different name<a class="headerlink" href="#restore-a-collection-under-a-different-name" title="Permanent link">¶</a></h2>
+<h2 id="restore-a-collection-under-a-different-name">Restore a collection under a different name<a data-markdown-ignore class="headerlink" href="#restore-a-collection-under-a-different-name" title="Permanent link">¶</a></h2>
 <p>You can restore a specific collection under a different name alongside the current collection. This is useful when you troubleshoot database issues and need to compare the data in both collections to identify the root of the issue.</p>
 <p>Note that in version 2.8.0 you can restore a single collection and this collection must be unsharded.</p>
 <p>To restore a collection, pass the collection name from the backup for the <code>--ns-from</code> flag and the new name for the <code>--ns-to</code> flag:</p>
@@ -6699,15 +6699,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p class="admonition-title">Version added: <a href="../release-notes/2.14.0.html">2.14.0</a></p>
 <p>Before a restore operation is executed you have to confirm the action (to bypass it, add the <code>-y</code> or <code>--yes</code> flag).</p>
 </div>
-<h2 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h2>
+<h2 id="post-restore-steps">Post-restore steps<a data-markdown-ignore class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h2>
 <p class="power-number">After the restore is complete, do the following:</p>
 <ol>
 <li>Start the balancer and all mongos nodes to reload the sharding metadata.</li>
 <li>We recommend to make a fresh backup to serve as the new base for future restores.</li>
 </ol>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="pitr-selective.html">Point-in-time recovery</a></p>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="restore-progress.html">View restore progress</a></li>
 </ul>

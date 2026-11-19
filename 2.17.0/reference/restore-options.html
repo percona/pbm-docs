@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6689,7 +6689,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="restore-options">Restore options<a class="headerlink" href="#restore-options" title="Permanent link">¶</a></h1>
+<h1 id="restore-options">Restore options<a data-markdown-ignore class="headerlink" href="#restore-options" title="Permanent link">¶</a></h1>
 <div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">batchSize</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
 <span class="w">  </span><span class="nt">numInsertionWorkers</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;int&gt;</span>
@@ -6703,38 +6703,38 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">     </span><span class="s">"node01:2017"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span>
 <span class="w">     </span><span class="s">"node03:27017"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;string&gt;</span>
 </code></pre></div>
-<h3 id="restorebatchsize">restore.batchSize<a class="headerlink" href="#restorebatchsize" title="Permanent link">¶</a></h3>
+<h3 id="restorebatchsize">restore.batchSize<a data-markdown-ignore class="headerlink" href="#restorebatchsize" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 500</p>
 <p>The number of documents to buffer.</p>
-<h3 id="restorenuminsertionworkers">restore.numInsertionWorkers<a class="headerlink" href="#restorenuminsertionworkers" title="Permanent link">¶</a></h3>
+<h3 id="restorenuminsertionworkers">restore.numInsertionWorkers<a data-markdown-ignore class="headerlink" href="#restorenuminsertionworkers" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 10</p>
 <p>Specifies the number of insertion workers to run concurrently per collection. </p>
-<h3 id="restorenumparallelcollections">restore.numParallelCollections<a class="headerlink" href="#restorenumparallelcollections" title="Permanent link">¶</a></h3>
+<h3 id="restorenumparallelcollections">restore.numParallelCollections<a data-markdown-ignore class="headerlink" href="#restorenumparallelcollections" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: number of CPU cores / 2</p>
 <p>The number of collections to process in parallel during a logical restore. The default value is half of the number of CPU cores. By setting the value for this option you define the new default.
 Available starting with version 2.7.0.</p>
-<h3 id="restorenumdownloadworkers">restore.numDownloadWorkers<a class="headerlink" href="#restorenumdownloadworkers" title="Permanent link">¶</a></h3>
+<h3 id="restorenumdownloadworkers">restore.numDownloadWorkers<a data-markdown-ignore class="headerlink" href="#restorenumdownloadworkers" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: number of CPU cores</p>
 <p>The number of workers that request data chunks from the storage during the restore. The default value equals to the number of CPU cores.</p>
-<h3 id="restoremaxdownloadbuffermb">restore.maxDownloadBufferMb<a class="headerlink" href="#restoremaxdownloadbuffermb" title="Permanent link">¶</a></h3>
+<h3 id="restoremaxdownloadbuffermb">restore.maxDownloadBufferMb<a data-markdown-ignore class="headerlink" href="#restoremaxdownloadbuffermb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: <code>numDownloadWorkers * downloadChunkMb * 16</code> MB when unspecified or set to <code>0</code></p>
 <p>The maximum size of the in-memory buffer that is used to download files from the S3 storage. When unspecified or set to 0, the size cannot exceed the value calculated as <code>numDownloadWorkers * downloadChunkMb * 16</code> MB. By default, the number of CPU cores * 32 * 16 MB.</p>
-<h3 id="restoredownloadchunkmb">restore.downloadChunkMb<a class="headerlink" href="#restoredownloadchunkmb" title="Permanent link">¶</a></h3>
+<h3 id="restoredownloadchunkmb">restore.downloadChunkMb<a data-markdown-ignore class="headerlink" href="#restoredownloadchunkmb" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 32</p>
 <p>The size of the data chunk in MB to download from the S3 storage.</p>
-<h3 id="restoremongodlocation">restore.mongodLocation<a class="headerlink" href="#restoremongodlocation" title="Permanent link">¶</a></h3>
+<h3 id="restoremongodlocation">restore.mongodLocation<a data-markdown-ignore class="headerlink" href="#restoremongodlocation" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string</p>
 <p>The custom path to <code>mongod</code> binaries. When undefined, Percona Backup for MongoDB uses the default path to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.</p>
-<h3 id="restoremongodlocationmap">restore.mongodLocationMap<a class="headerlink" href="#restoremongodlocationmap" title="Permanent link">¶</a></h3>
+<h3 id="restoremongodlocationmap">restore.mongodLocationMap<a data-markdown-ignore class="headerlink" href="#restoremongodlocationmap" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: array of strings</p>
 <p>The list of custom paths to <code>mongod</code> binaries on every node. Percona Backup for MongoDB uses the values to start the temporary instances required during physical restore. After a physical restore the database is not started automatically.</p>
-<h3 id="restoretimeoutsbalancerstop">restore.timeouts.balancerStop<a class="headerlink" href="#restoretimeoutsbalancerstop" title="Permanent link">¶</a></h3>
+<h3 id="restoretimeoutsbalancerstop">restore.timeouts.balancerStop<a data-markdown-ignore class="headerlink" href="#restoretimeoutsbalancerstop" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 0 (unlimited)</p>
 <p>Defines the maximum time (in seconds) that PBM waits for the balancer to stop before starting a logical restore. If set to <code>0</code> or not set (default), PBM waits indefinitely until the balancer stops.</p>
@@ -6757,14 +6757,14 @@ Available starting with version 2.7.0.</p>
 <li>Enforce time limits in automated workflows</li>
 <li>Fail fast if the balancer cannot be stopped</li>
 </ul>
-<h3 id="restorenumparallelfiles">restore.numParallelFiles<a class="headerlink" href="#restorenumparallelfiles" title="Permanent link">¶</a></h3>
+<h3 id="restorenumparallelfiles">restore.numParallelFiles<a data-markdown-ignore class="headerlink" href="#restorenumparallelfiles" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: int <br>
 <em>Default</em>: 0
 <em>Storage</em>: Filesystem / NFS only <br>
 <em>Restore type:</em> Physical only</p>
 <p>The number of files to copy in parallel during a physical restore from filesystem or NFS storage.</p>
 <p>The default value is <code>0</code>, which performs a sequential restore. This is equivalent to setting the value to <code>1</code>.</p>
-<h3 id="restoreindexcommitquorum">restore.indexCommitQuorum<a class="headerlink" href="#restoreindexcommitquorum" title="Permanent link">¶</a></h3>
+<h3 id="restoreindexcommitquorum">restore.indexCommitQuorum<a data-markdown-ignore class="headerlink" href="#restoreindexcommitquorum" title="Permanent link">¶</a></h3>
 <p><em>Type</em>: string or int <br>
 <em>Default</em>: <code>votingMembers</code></p>
 <p>Specifies how many data-bearing voting nodes must complete an index build before the primary node commits the index during a <strong>logical restore</strong> operation.</p>

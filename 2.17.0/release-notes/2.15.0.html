@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6683,13 +6683,13 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2150-2026-06-17">Percona Backup for MongoDB 2.15.0 (2026-06-17)<a class="headerlink" href="#percona-backup-for-mongodb-2150-2026-06-17" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2150-2026-06-17">Percona Backup for MongoDB 2.15.0 (2026-06-17)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2150-2026-06-17" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
-<h2 id="release-highlights">Release highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
-<h3 id="oracle-cloud-infrastructure-support">Oracle Cloud Infrastructure support<a class="headerlink" href="#oracle-cloud-infrastructure-support" title="Permanent link">¶</a></h3>
+<h2 id="release-highlights">Release highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h3 id="oracle-cloud-infrastructure-support">Oracle Cloud Infrastructure support<a data-markdown-ignore class="headerlink" href="#oracle-cloud-infrastructure-support" title="Permanent link">¶</a></h3>
 <p>PBM now supports Oracle Cloud Infrastructure (OCI) Object Storage as a remote backup destination through a dedicated OCI-native driver. This integration enables seamless backup and restore operations across OCI environments.</p>
-<h4 id="authentication-methods">Authentication methods<a class="headerlink" href="#authentication-methods" title="Permanent link">¶</a></h4>
+<h4 id="authentication-methods">Authentication methods<a data-markdown-ignore class="headerlink" href="#authentication-methods" title="Permanent link">¶</a></h4>
 <p>PBM supports multiple authentication mechanisms for OCI Object Storage, including Workload Identity authentication. This approach allows secure access to OCI resources without requiring API signing keys, reducing operational overhead and strengthening security.</p>
 <p>Supported authentication methods:</p>
 <ul>
@@ -6697,7 +6697,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Choose <strong>Instance Principal</strong> when PBM runs on OCI Compute instances.</li>
 <li>Choose <strong>OKE Workload Identity</strong> when PBM runs in Oracle Kubernetes Engine (OKE) enhanced clusters.</li>
 </ul>
-<h4 id="benefits">Benefits<a class="headerlink" href="#benefits" title="Permanent link">¶</a></h4>
+<h4 id="benefits">Benefits<a data-markdown-ignore class="headerlink" href="#benefits" title="Permanent link">¶</a></h4>
 <ul>
 <li>
 <p>Secure access with OCI-native identity integration</p>
@@ -6710,7 +6710,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 <p>For detailed information on OCI, refer to our comprehensive <a href="https://docs.percona.com/percona-backup-mongodb/details/oci-storage.html">documentation</a>.</p>
-<h3 id="software-bills-of-materials-sboms">Software Bills of Materials (SBOMs)<a class="headerlink" href="#software-bills-of-materials-sboms" title="Permanent link">¶</a></h3>
+<h3 id="software-bills-of-materials-sboms">Software Bills of Materials (SBOMs)<a data-markdown-ignore class="headerlink" href="#software-bills-of-materials-sboms" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB (PBM) now provides Software Bills of Materials (SBOMs). SBOMs improve transparency in the software supply chain by documenting the components and dependencies in a build. They are generated automatically as part of the release pipeline in the industry-standard <code>CycloneDX 1.6</code> format.</p>
 <p>SBOMs are distributed through the following channels:</p>
 <ul>
@@ -6728,14 +6728,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 <p>If you want to dig deeper into this topic, refer to our <a href="https://docs.percona.com/percona-backup-mongodb/reference/sboms-pbm.html">documentation</a>.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1727">PBM-1727</a>: Percona Backup for MongoDB (PBM) now supports OCI Object Storage as a remote backup destination through a dedicated OCI-native driver.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1728">PBM-1728</a>: Percona Backup for MongoDB (PBM) now supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1710">PBM-1710</a>: Percona Backup for MongoDB (PBM) now provides Software Bills of Materials (SBOMs) for every release.</li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1370">PBM-1370</a>: Agent logs now include the reference date or interval supplied to cleanup commands. Previously, only the command receipt and epoch timestamp were recorded, making it difficult to determine which cleanup criteria were applied during troubleshooting and audit investigations.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1668">PBM-1668</a>: The restore command now accepts a <code>commitQuorum</code> option that controls when the primary commits an index during a restore operation. You can set this to <code>majority</code>, <code>votingMembers</code>, or a specific number of nodes.
@@ -6743,7 +6743,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1715">PBM-1715</a>: Physical backups and restores now support a <code>numParallelFiles</code> option that controls how many files PBM copies simultaneously during a backup operation. Increasing this value can improve backup performance on systems with high disk throughput.</li>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1754">PBM-1754</a>: PBM now allows configuring the buffer size used during physical backup and restore operations. This enhancement provides greater flexibility for tuning memory usage and data transfer performance, enabling you to optimize backup and restore throughput based on your environment and workload requirements.</li>
 </ul>
-<h3 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h3>
+<h3 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h3>
 <ul>
 <li><a href="https://perconadev.atlassian.net/browse/PBM-1687">PBM-1687</a>: Fixed an issue where point-in-time recovery (PITR) was blocked when two backup commands were executed simultaneously.</li>
 </ul>

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6679,7 +6679,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="google-cloud-storage-gcs">Google Cloud Storage (GCS)<a class="headerlink" href="#google-cloud-storage-gcs" title="Permanent link">¶</a></h1>
+<h1 id="google-cloud-storage-gcs">Google Cloud Storage (GCS)<a data-markdown-ignore class="headerlink" href="#google-cloud-storage-gcs" title="Permanent link">¶</a></h1>
 <p>You can use Google Cloud Storage (GCS) as a remote backup storage for Percona Backup for MongoDB. </p>
 <div class="admonition admonition">
 <p>Starting from version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. See how to <a href="#adjust-pbm-configuration-to-use-gcs">adjust your PBM configuration to use GCS</a> after the upgrade.</p>
@@ -6696,7 +6696,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li><a href="#create-a-bucket">create a bucket</a></li>
 <li><a href="#configuration-example">add the GCS configuration to PBM</a> </li>
 </ul>
-<h2 id="create-a-bucket">Create a bucket<a class="headerlink" href="#create-a-bucket" title="Permanent link">¶</a></h2>
+<h2 id="create-a-bucket">Create a bucket<a data-markdown-ignore class="headerlink" href="#create-a-bucket" title="Permanent link">¶</a></h2>
 <p class="power-number">To create a bucket, follow these steps:</p>
 <ol>
 <li>
@@ -6714,7 +6714,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ol>
 <p>After the bucket is created, apply the proper <a href="storage-configuration.html#permissions-setup">permissions for PBM to use the bucket</a>.</p>
-<h2 id="configuration-example">Configuration example<a class="headerlink" href="#configuration-example" title="Permanent link">¶</a></h2>
+<h2 id="configuration-example">Configuration example<a data-markdown-ignore class="headerlink" href="#configuration-example" title="Permanent link">¶</a></h2>
 <p>You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.17.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w"> </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
@@ -6725,7 +6725,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <span class="w">       </span><span class="nt">clientEmail</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-service-account-email-here&gt;</span>
 <span class="w">       </span><span class="nt">privateKey</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;your-private-key-here&gt;</span>
 </code></pre></div>
-<h2 id="parallel-uploads-to-gcs">Parallel uploads to GCS<a class="headerlink" href="#parallel-uploads-to-gcs" title="Permanent link">¶</a></h2>
+<h2 id="parallel-uploads-to-gcs">Parallel uploads to GCS<a data-markdown-ignore class="headerlink" href="#parallel-uploads-to-gcs" title="Permanent link">¶</a></h2>
 <p>Parallel uploads can reduce the time required to send large backup files to Google Cloud Storage. The improvement depends on the available network bandwidth, storage performance, and resources on the host running <code>pbm-agent</code>.</p>
 <p>This feature applies only when PBM writes data to GCS. It does not change how PBM downloads backup data during a restore.</p>
 <div class="admonition warning">
@@ -6736,11 +6736,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Evaluate parallel uploads with a representative backup before enabling them in production. For details, see the upstream <a href="https://pkg.go.dev/cloud.google.com/go/storage#ParallelUploadConfig" target="_blank"><code>ParallelUploadConfig</code> documentation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</li>
 </ul>
 </div>
-<h3 id="how-parallel-uploads-work">How parallel uploads work<a class="headerlink" href="#how-parallel-uploads-work" title="Permanent link">¶</a></h3>
+<h3 id="how-parallel-uploads-work">How parallel uploads work<a data-markdown-ignore class="headerlink" href="#how-parallel-uploads-work" title="Permanent link">¶</a></h3>
 <p>The Google Cloud Storage client divides a large backup object into parts and uploads multiple parts concurrently. The <code>chunkSize</code> option controls the size of each part. The <code>parallelUploadConcurrency</code> option controls the maximum number of concurrent uploads.</p>
 <p>GCS composes the uploaded parts into the final backup object. The client then makes a best-effort attempt to remove the temporary part objects. If the upload process exits unexpectedly, some temporary objects may remain in the bucket.</p>
 <p>For details, see the upstream <a href="https://pkg.go.dev/cloud.google.com/go/storage#hdr-Parallel_Uploads" target="_blank">Parallel Uploads documentation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
-<h3 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h3>
+<h3 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h3>
 <p>Make sure that:</p>
 <ul>
 <li>You are running PBM 2.16.0 or later.</li>
@@ -6749,7 +6749,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>The destination bucket does not have settings that prevent PBM from deleting temporary objects.</li>
 </ul>
 <p>Parallel uploads work with both service account credentials and Workload Identity authentication. Keep the authentication configuration already defined for your GCS storage. For Workload Identity configuration, see <a href="workload-identity-auth.html">Workload Identity authentication</a>.</p>
-<h3 id="configure-parallel-uploads">Configure parallel uploads<a class="headerlink" href="#configure-parallel-uploads" title="Permanent link">¶</a></h3>
+<h3 id="configure-parallel-uploads">Configure parallel uploads<a data-markdown-ignore class="headerlink" href="#configure-parallel-uploads" title="Permanent link">¶</a></h3>
 <p>Set <code>clientType</code> to <code>grpc</code> and <code>parallelUploadConcurrency</code> to a value greater than <code>1</code>:</p>
 <p></p><div class="highlight"><pre><span></span><code><span class="nt">storage</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gcs</span>
@@ -6773,7 +6773,7 @@ In this example, <code>chunkSize</code> is omitted, so PBM uses the 16 MiB defau
 </code></pre></div>
 </li>
 </ol>
-<h3 id="configuration-options">Configuration options<a class="headerlink" href="#configuration-options" title="Permanent link">¶</a></h3>
+<h3 id="configuration-options">Configuration options<a data-markdown-ignore class="headerlink" href="#configuration-options" title="Permanent link">¶</a></h3>
 <table>
 <thead>
 <tr>
@@ -6801,12 +6801,12 @@ In this example, <code>chunkSize</code> is omitted, so PBM uses the 16 MiB defau
 </tbody>
 </table>
 <p>For the complete list of GCS settings, see <a href="../reference/configuration-options.html">Remote backup storage options</a>.</p>
-<h3 id="choose-a-concurrency-value">Choose a concurrency value<a class="headerlink" href="#choose-a-concurrency-value" title="Permanent link">¶</a></h3>
+<h3 id="choose-a-concurrency-value">Choose a concurrency value<a data-markdown-ignore class="headerlink" href="#choose-a-concurrency-value" title="Permanent link">¶</a></h3>
 <p>A higher concurrency value does not always produce a faster backup. The value that works best depends on the available resources and workload.</p>
-<h3 id="disable-parallel-uploads">Disable parallel uploads<a class="headerlink" href="#disable-parallel-uploads" title="Permanent link">¶</a></h3>
+<h3 id="disable-parallel-uploads">Disable parallel uploads<a data-markdown-ignore class="headerlink" href="#disable-parallel-uploads" title="Permanent link">¶</a></h3>
 <p>To disable parallel uploads, remove <code>parallelUploadConcurrency</code> from the configuration or set it to a value that is not greater than <code>1</code>.</p>
 <p>You can continue using the <code>grpc</code> client with parallel uploads disabled. You do not need to switch back to the <code>json</code> client.</p>
-<h2 id="adjust-pbm-configuration-to-use-gcs">Adjust PBM configuration to use GCS<a class="headerlink" href="#adjust-pbm-configuration-to-use-gcs" title="Permanent link">¶</a></h2>
+<h2 id="adjust-pbm-configuration-to-use-gcs">Adjust PBM configuration to use GCS<a data-markdown-ignore class="headerlink" href="#adjust-pbm-configuration-to-use-gcs" title="Permanent link">¶</a></h2>
 <p class="power-number">Starting with version 2.10.0, PBM uses the Google Cloud SDK instead of AWS SDK. If you are upgrading from an earlier version, you need to adjust your PBM configuration as follows:</p>
 <ol>
 <li>Change the <code>storage.type</code> from <code>s3</code> to <code>gcs</code>.</li>

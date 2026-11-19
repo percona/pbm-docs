@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6491,14 +6491,14 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="partially-done-physical-restores">Partially done physical restores<a class="headerlink" href="#partially-done-physical-restores" title="Permanent link">¶</a></h1>
+<h1 id="partially-done-physical-restores">Partially done physical restores<a data-markdown-ignore class="headerlink" href="#partially-done-physical-restores" title="Permanent link">¶</a></h1>
 <p>When you restore a physical backup, the operation can result in the following statuses:</p>
 <ul>
 <li><strong>Done</strong>: The restore completed successfully on all nodes.</li>
 <li><strong>Error</strong>: The restore failed and could not be completed.</li>
 <li><strong>Partly-Done</strong>: The restore was successful on at least one node in each replica set, but failed on some nodes. </li>
 </ul>
-<h2 id="restore-status-decision-flow">Restore status decision flow<a class="headerlink" href="#restore-status-decision-flow" title="Permanent link">¶</a></h2>
+<h2 id="restore-status-decision-flow">Restore status decision flow<a data-markdown-ignore class="headerlink" href="#restore-status-decision-flow" title="Permanent link">¶</a></h2>
 <p><img alt="image" src="../_images/restore-status.png"></p>
 <p>The decision flow is explained below:</p>
 <ol>
@@ -6521,7 +6521,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 </li>
 </ol>
-<h2 id="post-restore-steps-for-partlydone-restores">Post-restore steps for <code>partlyDone</code> restores<a class="headerlink" href="#post-restore-steps-for-partlydone-restores" title="Permanent link">¶</a></h2>
+<h2 id="post-restore-steps-for-partlydone-restores">Post-restore steps for <code>partlyDone</code> restores<a data-markdown-ignore class="headerlink" href="#post-restore-steps-for-partlydone-restores" title="Permanent link">¶</a></h2>
 <p>If your restore finishes with the <strong>partlyDone</strong> status, you can still start the cluster and wait for the failed node to receive the data via the initial sync. Here’s what you need to do:</p>
 <ol>
 <li>Check the restore status with <code>pbm status</code> or <code>pbm describe-restore &lt;restore_name&gt;</code>.</li>

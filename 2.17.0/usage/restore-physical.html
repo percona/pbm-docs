@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6671,9 +6671,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="restore-from-a-physical-backup">Restore from a physical backup<a class="headerlink" href="#restore-from-a-physical-backup" title="Permanent link">¶</a></h1>
+<h1 id="restore-from-a-physical-backup">Restore from a physical backup<a data-markdown-ignore class="headerlink" href="#restore-from-a-physical-backup" title="Permanent link">¶</a></h1>
 <p>To restore a backup, use the <a href="../reference/pbm-commands.html#pbm-restore"><code>pbm restore</code></a> command supplying the backup name from which you intend to restore. Percona Backup for MongoDB identifies the type of the backup (physical, logical or <a href="../features/incremental-backup.html">incremental</a>) and restores the database up to the <a href="../reference/glossary.html#completion-time">restore_to_time</a> timestamp (available in <code>pbm list</code> output starting with version 1.4.0).</p>
-<h2 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
+<h2 id="considerations">Considerations<a data-markdown-ignore class="headerlink" href="#considerations" title="Permanent link">¶</a></h2>
 <ol>
 <li>
 <p>Disable point-in-time recovery. Restore and point-in-time recovery oplog slicing operations are incompatible with each other and cannot be run simultaneously. </p>
@@ -6687,7 +6687,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>For PBM versions before 2.1.0, physical restores are not supported for deployments with arbiter nodes.</li>
 <li>After a physical restore completes, the database remains offline because it is intentionally left down by <code>pbm-agent</code>. To bring the database back to normal operation, follow the steps in <a href="#post-restore-steps">Post-restore steps</a>.</li>
 </ol>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <ol>
 <li>Shut down all <code>mongos</code> nodes as the database won’t be available while the restore is in progress. </li>
 <li>Shut down all <code>pmm-agent</code> and other clients that can do the write operations to the database. This is required to ensure data consistency after the restore.</li>
@@ -6706,7 +6706,7 @@ RestartUSec=100ms
 <p>During physical restores, the database must not be automatically restarted as this is controlled by the <code>pbm-agent</code>.</p>
 </li>
 </ol>
-<h2 id="restore-a-database">Restore a database<a class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
+<h2 id="restore-a-database">Restore a database<a data-markdown-ignore class="headerlink" href="#restore-a-database" title="Permanent link">¶</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If Encryption at Rest is enabled, the restore requires access to the same encryption key that was active when the backup was taken.  <br>
@@ -6738,7 +6738,7 @@ RestartUSec=100ms
 <p>A restore has the <code>Done</code> status when it succeeded on all nodes. </p>
 <p>If it failed on some nodes, it has the <code>partlyDone</code> status but you can still start the cluster. The failed nodes will receive the data via the initial sync. Learn more about partially done restores in the <a href="../troubleshoot/restore-partial.html">Partially done physical restores</a> chapter. </p>
 <p>For either status, proceed with the <a href="#post-restore-steps">post-restore steps</a>. </p>
-<h3 id="post-restore-steps">Post-restore steps<a class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
+<h3 id="post-restore-steps">Post-restore steps<a data-markdown-ignore class="headerlink" href="#post-restore-steps" title="Permanent link">¶</a></h3>
 <p>After the restore is complete, do the following:</p>
 <ol>
 <li>Remove the contents of the datadir on any arbiter nodes</li>
@@ -6768,12 +6768,12 @@ RestartUSec=100ms
 </li>
 <li><a href="../features/point-in-time-recovery.html#enable-point-in-time-recovery">Enable point-in-time recovery</a> if required.</li>
 </ol>
-<h2 id="define-a-mongod-binary-location">Define a <code>mongod</code> binary location<a class="headerlink" href="#define-a-mongod-binary-location" title="Permanent link">¶</a></h2>
+<h2 id="define-a-mongod-binary-location">Define a <code>mongod</code> binary location<a data-markdown-ignore class="headerlink" href="#define-a-mongod-binary-location" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.0.4.html">2.0.4</a></p>
 </div>
 <p>During physical restores, Percona Backup for MongoDB starts a temporary database instance. By default, it uses the location of the <code>mongod</code> binaries from the <code>$PATH</code> variable to do so. If you have defined a custom path to the <code>mongod</code> binaries, make Percona Backup for MongoDB aware of it: </p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
@@ -6793,7 +6793,7 @@ RestartUSec=100ms
 <span class="w">       </span><span class="s">"node03:27017"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/another/path/to/mongod</span>
 </code></pre></div>
 <p>When running physical restores in Docker environments, you need to include Percona Backup for MongoDB files together with your MongoDB binaries in the same container. See <a href="https://docs.percona.com/percona-backup-mongodb/install/docker.html">Run Percona Backup for MongoDB in a Docker container</a> for more information.</p>
-<h3 id="parallel-data-download">Parallel data download<a class="headerlink" href="#parallel-data-download" title="Permanent link">¶</a></h3>
+<h3 id="parallel-data-download">Parallel data download<a data-markdown-ignore class="headerlink" href="#parallel-data-download" title="Permanent link">¶</a></h3>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.1.0.html">2.1.0</a></p>
 </div>
@@ -6811,7 +6811,7 @@ RestartUSec=100ms
 <li><code>maxDownloadBufferMb</code> - the maximum size of memory buffer to store the downloaded data chunks for decompression and ordering. It is calculated as <code>numDownloadWorkers * downloadChunkMb * 16</code></li>
 <li><code>downloadChunkMb</code> is the size of the data chunk to download (by default, 32 MB)</li>
 </ul>
-<h3 id="parallel-file-copy-for-filesystem-or-nfs-storage">Parallel file copy for filesystem or NFS storage<a class="headerlink" href="#parallel-file-copy-for-filesystem-or-nfs-storage" title="Permanent link">¶</a></h3>
+<h3 id="parallel-file-copy-for-filesystem-or-nfs-storage">Parallel file copy for filesystem or NFS storage<a data-markdown-ignore class="headerlink" href="#parallel-file-copy-for-filesystem-or-nfs-storage" title="Permanent link">¶</a></h3>
 <p>By default, PBM copies backup files sequentially during a physical restore from filesystem or NFS storage. On fast NFS mounts, this limits restore throughput regardless of available network bandwidth.</p>
 <p>To copy files in parallel, set <code>restore.numParallelFiles</code> in the PBM configuration:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
@@ -6824,9 +6824,9 @@ RestartUSec=100ms
 <p class="admonition-title">Note</p>
 <p>Parallel file copy applies to <strong>physical restores from filesystem or NFS storage only</strong>. It has no effect on logical restores or on S3-compatible storage.</p>
 </div>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="pitr-physical.html">Point-in-time recovery</a></p>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="restore-progress.html">View restore progress</a></li>
 <li><a href="../features/restore-new-env.html">Restore into a new environment</a></li>

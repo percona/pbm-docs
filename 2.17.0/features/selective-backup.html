@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6583,7 +6583,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="selective-backup-and-restore">Selective backup and restore<a class="headerlink" href="#selective-backup-and-restore" title="Permanent link">¶</a></h1>
+<h1 id="selective-backup-and-restore">Selective backup and restore<a data-markdown-ignore class="headerlink" href="#selective-backup-and-restore" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.0.0.html">2.0.0</a></p>
 </div>
@@ -6638,7 +6638,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <li>Make a point-in time recovery for the specified databases/collections. Available for replica sets only.</li>
 <li>Perform selective restore of databases and collections, with the option to include users and roles defined in the database. </li>
 </ol>
-<h2 id="sharded-collections">Sharded collections<a class="headerlink" href="#sharded-collections" title="Permanent link">¶</a></h2>
+<h2 id="sharded-collections">Sharded collections<a data-markdown-ignore class="headerlink" href="#sharded-collections" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.1.0.html">2.1.0</a></p>
 </div>
@@ -6650,10 +6650,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>The restore for sharded time series collections is not supported.</p>
 <p>Note that selective backups and restores operate only with data and router configuration. The cluster configuration and topology-related settings are ignored. Therefore, we recommended to restore the databases/collections on the same environment.</p>
-<h3 id="implementation-specifics">Implementation specifics<a class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h3>
+<h3 id="implementation-specifics">Implementation specifics<a data-markdown-ignore class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h3>
 <p>During the selective restore, the primary shard for a database is set to the state it had during the backup. For example, the primary shard for the database “Staff” during backup was A. After you restore the  “Staff” database, the primary shard will be set to A even if you moved the primary from A to B before the restore. All non-sharded collections will be restored on A; however, they will not be deleted from B. You must take needed actions (cleanup or move the primary back to B) to maintain them. </p>
-<h2 id="restore-with-users-and-roles">Restore with users and roles<a class="headerlink" href="#restore-with-users-and-roles" title="Permanent link">¶</a></h2>
-<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h3>
+<h2 id="restore-with-users-and-roles">Restore with users and roles<a data-markdown-ignore class="headerlink" href="#restore-with-users-and-roles" title="Permanent link">¶</a></h2>
+<h3 id="overview">Overview<a data-markdown-ignore class="headerlink" href="#overview" title="Permanent link">¶</a></h3>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.5.0.html">2.5.0</a></p>
 </div>
@@ -6668,7 +6668,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>restore<span class="w"> </span>--ns<span class="o">=</span><span class="s2">"mydb.*"</span><span class="w"> </span>--with-users-and-roles<span class="w"> </span>&lt;backup-name&gt;
 </code></pre></div>
 <p>To dive deep into this topic, see the section <a href="../usage/restore-selective.html#restore-a-database-with-users-and-roles">selective restore with users and roles</a>.</p>
-<h2 id="restore-a-collection-under-a-different-name">Restore a collection under a different name<a class="headerlink" href="#restore-a-collection-under-a-different-name" title="Permanent link">¶</a></h2>
+<h2 id="restore-a-collection-under-a-different-name">Restore a collection under a different name<a data-markdown-ignore class="headerlink" href="#restore-a-collection-under-a-different-name" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.8.0.html">2.8.0</a></p>
 </div>

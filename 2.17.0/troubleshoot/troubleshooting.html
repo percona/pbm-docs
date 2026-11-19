@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6547,9 +6547,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-diagnostics-tools">Percona Backup for MongoDB diagnostics tools<a class="headerlink" href="#percona-backup-for-mongodb-diagnostics-tools" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-diagnostics-tools">Percona Backup for MongoDB diagnostics tools<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-diagnostics-tools" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB provides diagnostics tools to operate data backups.</p>
-<h2 id="pbm-speed-test">pbm-speed-test<a class="headerlink" href="#pbm-speed-test" title="Permanent link">¶</a></h2>
+<h2 id="pbm-speed-test">pbm-speed-test<a data-markdown-ignore class="headerlink" href="#pbm-speed-test" title="Permanent link">¶</a></h2>
 <p><strong>pbm-speed-test</strong> allows field-testing compression and backup upload speed of logical backups. You can use it:</p>
 <ul>
 <li>
@@ -6562,7 +6562,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>By default, <strong>pbm-speed-test</strong> operates with fake semi random data documents. To
 run <strong>pbm-speed-test</strong> on a real collection, provide a valid MongoDB connection URI string for the <code>--mongodb-uri</code> flag.</p>
 <p>Run <strong>pbm-speed-test</strong> for the full set of available commands.</p>
-<h3 id="compression-test">Compression test<a class="headerlink" href="#compression-test" title="Permanent link">¶</a></h3>
+<h3 id="compression-test">Compression test<a data-markdown-ignore class="headerlink" href="#compression-test" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code>pbm-speed-test<span class="w"> </span>compression<span class="w"> </span>--compression<span class="o">=</span>s2<span class="w"> </span>--size-gb<span class="w"> </span><span class="m">10</span>
 </code></pre></div>
 <details class="example">
@@ -6598,7 +6598,7 @@ usage: pbm-speed-test compression</p>
                                  Compression level (specific to the compression type)
                                  <none>/<gzip>/<snappy>/<lz4>/<s2>/<pgzip>/<zstd></zstd></pgzip></s2></lz4></snappy></gzip></none></zstd></pgzip></s2></lz4></snappy></gzip></none></p>
 </details>
-<h3 id="upload-speed-test">Upload speed test<a class="headerlink" href="#upload-speed-test" title="Permanent link">¶</a></h3>
+<h3 id="upload-speed-test">Upload speed test<a data-markdown-ignore class="headerlink" href="#upload-speed-test" title="Permanent link">¶</a></h3>
 <div class="highlight"><pre><span></span><code>pbm-speed-test<span class="w"> </span>storage<span class="w"> </span>--compression<span class="o">=</span>s2
 </code></pre></div>
 <details class="example">
@@ -6631,7 +6631,7 @@ usage: pbm-speed-test storage</p>
       –compression-level=COMPRESSION-LEVEL
                                 Compression level (specific to the compression type)</zstd></pgzip></s2></lz4></snappy></gzip></none></p>
 </details>
-<h2 id="parallel-uploads-in-gcs">Parallel uploads in GCS<a class="headerlink" href="#parallel-uploads-in-gcs" title="Permanent link">¶</a></h2>
+<h2 id="parallel-uploads-in-gcs">Parallel uploads in GCS<a data-markdown-ignore class="headerlink" href="#parallel-uploads-in-gcs" title="Permanent link">¶</a></h2>
 <p>If PBM does not use parallel uploads, check that:</p>
 <ul>
 <li>PBM is version 2.16.0 or later.</li>

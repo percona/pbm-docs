@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6583,16 +6583,16 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-270-2024-10-09">Percona Backup for MongoDB 2.7.0 (2024-10-09)<a class="headerlink" href="#percona-backup-for-mongodb-270-2024-10-09" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-270-2024-10-09">Percona Backup for MongoDB 2.7.0 (2024-10-09)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-270-2024-10-09" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release primarily focuses on code stability and bug fixing. However, it also provides the following improvement:</p>
-<h3 id="single-authentication-point-for-pbm-running-in-amazon-eks">Single authentication point for PBM running in Amazon EKS<a class="headerlink" href="#single-authentication-point-for-pbm-running-in-amazon-eks" title="Permanent link">¶</a></h3>
+<h3 id="single-authentication-point-for-pbm-running-in-amazon-eks">Single authentication point for PBM running in Amazon EKS<a data-markdown-ignore class="headerlink" href="#single-authentication-point-for-pbm-running-in-amazon-eks" title="Permanent link">¶</a></h3>
 <p>Now PBM running in Amazon Elastic Kubernetes Service (EKS) can access AWS services using the credentials from the IAM role associated with the service account that is assigned to the Pod where PBM is running. Since with this improvement you don’t have to pass the credentials to every individual Pods, the overall security of your infrastructure increases.</p>
 <p>Consider the following limitation if you run Percona Operator for MongoDB: a restore does not work with this feature without the modification of default serviceAccount. It will be improved in future releases of the Operator to cover this case.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1312">PBM-1312</a>, <a href="https://perconadev.atlassian.net/browse/PBM-1362">PBM-1362</a>, <a href="https://perconadev.atlassian.net/browse/PBM-1400">PBM-1400</a> - Allow changing logical backup concurrency </p>
@@ -6604,7 +6604,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1397">PBM-1397</a> - Add file checks for physical and incremental backups</p>
 </li>
 </ul>
-<h3 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
+<h3 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-397">PBM-397</a> - Fixed the issue when multiple <code>pbm-agents</code> run for the same <code>mongod</code> process by checking and logging unexpected heartbeat updates. </p>

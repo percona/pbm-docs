@@ -1,0 +1,1035 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# `pbm` commands
+
+`pbm` CLI is the command line utility to control the backup system. This page describes `pbm` commands available in Percona Backup for MongoDB.
+
+For how to get started with Percona Backup for MongoDB, see [Initial setup](https://docs.percona.com/percona-backup-mongodb/2.17.0/install/initial-setup.html).
+
+## pbm backup
+
+Creates a backup snapshot and saves it in the remote backup storage.
+
+The command has the following syntax:
+
+```
+pbm backup [<flags>]
+```
+
+For more information about using `pbm backup`, see [Starting a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/start-backup.html)
+
+The command accepts the following flags:
+
+| Flag                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-t`, `--type`               | The type of backup. Supported values: physical, logical (default), incremental, [external](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/snapshots.html). When not specified, Percona Backup for MongoDB makes a logical backup.                                                                                                                                                                                                                                                                                                                                                    |
+| `--base`                     | For incremental backups only. Set the backup as the base and start tracking the incremental backup history to calculate and save the difference in data blocks for subsequent incremental backups.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `--compression`              | Create a backup with compression. Supported compression methods: `gzip`, `snappy`, `lz4`, `s2`, `pgzip`, `zstd`. Default: `s2` The `none` value means no compression is done during backup.                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `--compression-level`        | Configure the compression level from 0 to 10. The default value depends on the compression method used.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `--num-parallel-collections` | Sets the number of collections to process in parallel during a specific logical backup. When undefined, `pbm-agent` processes the number of parallel collections defined for the `backup.numParallelCollections` configuration parameter. If that is undefined, the default number of collections to process in parallel is the half of the number of logical CPUs. Available starting with version 2.7.0.                                                                                                                                                                                            |
+| `--num-parallel-files`       | Sets the number of files to process in parallel during a specific physical backup. When undefined, `pbm-agent` uses the value defined for the `backup.numParallelFiles` configuration parameter. If that is undefined, the default number of files to process in parallel is `1`.                                                                                                                                                                                                                                                                                                                     |
+| `-o`, `--out=text`           | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `--wait`                     | Wait for the backup to finish. The flag blocks the shell session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `--wait-time`                | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+| `-l`, `--list-files`         | For external backups only. Shows the list of files per node to copy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `--ns="database.collection"` | Makes a logical backup of the specified namespace - the database and collection(s). To back up all collections in the database, specify the value in the `--ns="database.*"` format. Starting with version 2.8.0, you can pass multiple namespaces as a comma-separated list for the backup. The format is `ns=db1.*,db2.coll2,db3.coll1,db3.collX` .                                                                                                                                                                                                                                                 |
+
+JSON output
+
+```
+{
+  "name": "<backup_name>",
+  "storage": "<my-backup-dir>"
+}
+```
+
+## pbm backup-finish
+
+Closes the `backupCursor` and finishes the external backup. Must be run after running `pbm backup -t external`. To learn more, refer to [API for snapshot-based physical backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/snapshots.html).
+
+The command has the following syntax:
+
+```
+pbm backup-finish [backup-name]
+```
+
+## pbm cancel-backup
+
+Cancels a running backup. The backup is marked as canceled in the backup list.
+
+The command accepts the following flags:
+
+| Flag               | Description                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+JSON output
+
+```
+{
+  "msg": "Backup cancellation has started"
+}
+```
+
+## pbm cleanup
+
+Deletes outdated backup snapshots and point-in-time recovery oplog slices.
+
+The command has the following syntax:
+
+```
+pbm cleanup [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format: - `%Y-%M-%DT%H:%M:%S` (for example 2020-04-20T13:13:20), - `%Y-%M-%D` (for example 2020-04-20), - `XXd` (for example 30d). Only days are supported                                                                                                                                                                                                                                                                                                                                                                                    |
+| `--profile=PROFILE_NAME` | Specifies the configuration profile for the storage to clean up. If not specified, cleanup runs on the main storage. Available starting with version 2.13.0                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `-w`, `--wait`           | Wait for the cleanup to finish. The flag blocks the shell session                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `--wait-time`            | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+| `-y`, `--yes`            | Cleans up the data storage without asking for a user’s confirmation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `--dry-run`              | Checks for the old data to be deleted without deleting it. Allows to verify what data to delete                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+
+## pbm config
+
+Sets, changes or lists Percona Backup for MongoDB configuration.
+
+The command has the following syntax:
+
+```
+pbm config [<flags>] [<key>]
+```
+
+The command accepts the following flags:
+
+| Flag                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--force-resync`     | Resync PBM’s metadata (backup, point-in-time recovery chunks, restore) stored within PBM control collections with the data from the current storage. Starting with version 2.10.0, PBM retrieves restore metadata from the storage only for the latest restore to improve resync performance. To retrieve the full restore history, also add the `--include-restores` flag. Resync for backup and point-in-time recovery chunks remains unchanged.                                                                                                                                                   |
+| `--list`             | List current settings                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `--file=FILE`        | Upload the config information from a YAML file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `--set=SET`          | Set a new config option value. Specify the option in the `<key.name=value>` format.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `-o`, `--out=text`   | Shows the output format as either plain text or a JSON object. Supported values: text, json                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `-w`, `--wait`       | Wait for resync of the backup list with the storage to finish. You can only use this flag together with the `--force-resync` flag.                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `--wait-time`        | The time to wait for PBM to report the status of the resync execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+| `--include-restores` | Resync the full restore metadata history from the storage. Use this flag together with the `--force-resync` flag. Note that retrieving the full restore history may affect resync performance. Available starting with version 2.10.0.                                                                                                                                                                                                                                                                                                                                                               |
+
+PBM configuration output
+
+```
+{
+  "pitr": {
+    "enabled": false,
+    "oplogSpanMin": 0
+  },
+  "storage": {
+    "type": "filesystem",
+    "s3": {
+      "region": "",
+      "endpointUrl": "",
+      "bucket": ""
+    },
+    "azure": {},
+    "filesystem": {
+      "path": "<my-backup-dir>"
+    }
+  },
+  "restore": {
+    "batchSize": 500,
+    "numInsertionWorkers": 10
+  },
+  "backup": {}
+}
+```
+
+Setting a config value
+
+```
+[
+  {
+    "key": "pitr.enabled",
+    "value": "true"
+  }
+]
+```
+
+## pbm delete-backup
+
+Deletes the specified backup snapshot or all backup snapshots that are older than the specified time with the option to filter by specific type. The command deletes backups that are not running regardless of the remote backup storage being used.
+
+The following is the command syntax:
+
+```
+pbm delete-backup [<flags>] [<name>]
+```
+
+The command accepts the following flags:
+
+| Flag                     | Description                                                                                                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--older-than=TIMESTAMP` | Deletes backups older than date / time specified in the format: - `%Y-%M-%DT%H:%M:%S` (for example 2023-04-20T13:13:20) or - `%Y-%M-%D` (for example 2023-04-20)              |
+| `--profile=PROFILE_NAME` | Specifies the configuration profile for the storage from which to delete backups. If not specified, deletion runs on the main storage. Available starting with version 2.13.0 |
+| `--type=TYPE`            | Deletes backups of the specified type. Must be used together with the `-older-than` flag. Available starting with version 2.4.0                                               |
+| `--force`                | Forcibly deletes backups without asking for user’s confirmation. Deprecated. Use the `--yes` flag instead.                                                                    |
+| `-y`, `--yes`            | Deletes backups without asking for user’s confirmation                                                                                                                        |
+| `--dry-run`              | Prints the list of backup snapshots to be deleted without deleting them. You can use the flag to check what exactly will be deleted. Available starting with version 2.4.0.   |
+
+## pbm delete-pitr
+
+Deletes oplog slices produced for Point-in-Time Recovery.
+
+The command has the following syntax:
+
+```
+pbm delete-pitr [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-a`, `--all`            | Deletes all oplog slices. Deprecated. Use the `--older-than flag instead`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `--older-than=TIMESTAMP` | Deletes oplog slices older than date / time specified in the format: - `%Y-%M-%DT%H:%M:%S` (for example 2020-04-20T13:13:20) or - `%Y-%M-%D` (for example 2020-04-20) When you specify a timestamp, Percona Backup for MongoDB rounds it down to align with the completion time of the closest backup snapshot and deletes oplog slices that precede this time. Thus, extra slices remain. This is done to ensure oplog continuity. To illustrate, the PITR time range is `2021-08-11T11:16:21 - 2021-08-12T08:55:25` and backup snapshots are: `2021-08-12T08:49:46Z 13.49MB [restore_to_time: 2021-08-12T08:50:06]` `2021-08-11T11:36:17Z 7.37MB [restore_to_time: 2021-08-11T11:36:38]` Say you specify the timestamp `2021-08-11T19:16:21`. The closest backup is `2021-08-11T11:36:17Z 7.37KB [restore_to_time: 2021-08-11T11:36:38]`. PBM rounds down the timestamp to `2021-08-11T11:36:38` and deletes all slices that precede this time. As a result, your PITR time range is `2021-08-11T11:36:38 - 2021-08-12T09:00:25`. **NOTE**: Percona Backup for MongoDB doesn’t delete the oplog slices that follow the most recent backup. This is done to ensure point in time recovery from that backup snapshot. For example, if the snapshot is `2021-07-20T07:05:23Z [restore_to_time: 2021-07-21T07:05:44]` and you specify the timestamp `2021-07-20T07:05:45`, Percona Backup for MongoDB deletes only slices that were made before `2021-07-20T07:05:23Z`. |
+| `--force`                | Forcibly deletes oplog slices without asking a user’s confirmation. Deprecated. Use the `-y`/`--yes` flag instead.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `-o`, `--out=json`       | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `--yes`                  | Deletes backups without asking for user’s confirmation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `--dry-run`              | Prints the list of oplog slices to be deleted without deleting them. You can use the flag to check what exactly will be deleted. Available starting with version 2.4.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `-w`, `--wait`           | Wait for the deletion operation to complete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `--wait-time`            | The time to wait for PBM to report the status of the command execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+
+## pbm describe-backup
+
+Provides the detailed information about a backup:
+
+The command has the following syntax:
+
+```
+pbm describe-backup [<backup-name>] [<flags>]
+```
+
+| Flag                 | Description                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `-o`, `--out=text`   | Shows the status as either plain text or a JSON object. Supported values: `text`, `json`                            |
+| `-l`, `--list-files` | Shows the list of files being copied for snapshot-based backups                                                     |
+| `--with-collections` | Shows the collections included in the backup. For logical and selective backups only. Available with version 2.3.0. |
+
+### Output
+
+The output document contains the following fields:
+
+JSON output
+
+```
+{
+  "name": "<backup_name>",
+  "opid": "<string>",
+  "type": "logical",
+  "last_write_ts": Timestamp,
+  "last_transition_ts": Timestamp,
+  "last_write_time": "2022-09-30T14:02:49Z",
+  "last_transition_time": "2022-09-30T14:02:54Z",
+  "namespaces": [
+    "flight.booking"
+  ],
+  "mongodb_version": "<version>",
+  "fcv": "<version>",
+  "pbm_version": "<version>",
+  "status": "done",
+  "size": 470805945,
+  "size_h": "449.0 MiB",
+  "replsets": [
+    {
+      "name": "<name>",
+      "status": "done",
+      "node": "example.mongodb.com:27017",
+      "last_write_ts": Timestamp,
+      "last_transition_ts": Timestamp,
+      "last_write_time": "2022-09-30T14:02:49Z",
+      "last_transition_time": "2022-09-30T14:02:53Z",
+      "configsvr": true,
+      "security": {
+        "enableEncryption": true,
+        "kmip": {
+          "serverName": "cosmian",
+          "port": 5696,
+          "clientCertificateFile": "/etc/pykmip/mongod.pem",
+          "serverCAFile": "/etc/pykmip/ca.crt",
+          "keyIdentifier": "cbe0a6b4-7d7a-47c3-aa40-39abfc9a6f96"
+        },
+        "vault": {
+          "serverName": "cosmian",
+          "port": 5696,
+          "tokenFile": "/etc/vault/token",
+          "secret": "secret/data/mongo",
+          "secretVersion": 5,
+          "disableTLSForTesting": false
+        }
+      }
+    },
+    {...},
+    {...}
+  ]
+}
+```
+
+| Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                 | The backup name                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `opid`                 | A unique identifier of an operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `type`                 | The backup type. Supported values: logical, physical, incremental, external                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `last_write_ts`        | The timestamp of the last write                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `last_transition_ts`   | The timestamp when a backup changed its status                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `last_write_time`      | The human-readable indication of the last write                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `last_transition_time` | The human-readable indication of the time when a backup changed its status                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `namespaces`           | The list of namespaces included in the backup. Available for selective backup                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `mongodb_version`      | The MongoDB version                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `fcv`                  | The feature compatibility version                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `pbm_version`          | The Percona Backup for MongoDB version                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `status`               | The backup status. Supported values: running, dumpDone, done, copyReady, error, canceled                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `size`                 | The backup size in bytes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `size_h`               | The backup size in human-readable format                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `error`                | The error message for a failed backup                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `replsets`             | The list of replica sets included in the backup. Each replica set has the following fields: - `name` - the replica set name - `status` - the backup status on this replica set - `node` - the node name and port - `files` - list of backup files (only populated for snapshot-based backups) - `size` - size of the backup in bytes - `size_h` - human-readable size string (for example, "1.5 GiB") - `size_uncompressed` - uncompressed size of the backup in bytes - `size_uncompressed_h` - human-readable uncompressed size string (for example, "1.6 GiB") - `error` - the error message for failed backup - `last_write_ts` - MongoDB Timestamp-style value of the last write operation (for example, `1662039300,2`) - `last_transition_ts` - MongoDB Timestamp-style value of the last status transition (for example, `1662039300,2`) - `last_write_time` - the human-readable indication of the last write - `last_transition_time` - the human-readable indication of the time when a backup changed its status - `security` - the security options of the `mongod` process. Contains the following configuration options: - `enableEncryption` - boolean flag indicating if encryption at rest is enabled. - `encryptionCipherMode` - cipher mode used for encryption (for example, "AES256-CBC", "AES256-GCM"). - `encryptionKeyFile` - path to the local key file for encryption. - `relaxPermChecks` - boolean to relax permission checks on encryption key files. - `vault` - when using HashiCorp Vault as the key management service: - `serverName` - Vault server hostname. - `port` - Vault server port. - `tokenFile` - path to the file containing the Vault token. - `secret` - Vault secret name/path. - `secretVersion` - version number of the Vault secret. Requires Percona Server for MongoDB 7.0.22-12 and 8.0.12-4 or higher. - `disableTLSForTesting` - flag to disable TLS (testing only). - `kmip` - when using Key Management Interoperability Protocol (KMIP) as the key management service: - `serverName` - KMIP server hostname. - `port` - KMIP server port. - `clientCertificateFile` - client certificate for KMIP authentication. - `serverCAFile` - CA certificate for server verification. - `keyIdentifier` - unique identifier for the encryption key. Requires Percona Server for MongoDB 7.0.22-12 and 8.0.12-4 or higher. - `configsvr` - indicates that this is a config server replica set - `configshard` - indicates that this is a config shard replica set - `collections` - the list of collections included in the backup for logical and selective backups. This field is populated only when `--with-collections` is used. Available since 2.3.0. |
+
+## pbm describe-restore
+
+Shows the detailed information about the restore:
+
+- Restore name
+- opID
+- The name of the backup from which the database was restored
+- Type
+- Status
+- Start and finish time of the restore
+- Last transition time – the time when the restore process changed its status
+- The name of every replica set, its restore status and the last transition time
+
+For **physical backups only**, the following additional information is provided:
+
+- The node name
+- Restore status on the node
+- Last transition time
+
+The command has the following syntax:
+
+```
+pbm describe-restore [<restore-timestamp>] [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                    | Description                                                                                                                                                                                                                    |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `-c`, `--config=CONFIG` | Only for **physical restores**. Points Percona Backup for MongoDB to a configuration file so it can read the restore status from the remote storage. For example, `pbm describe-restore -c /etc/pbm/conf.yaml <restore-name>`. |
+| `-o`, `--out=TEXT`      | Shows the output as either the plain text (default) or a JSON object. Supported values: `text`, `json`.                                                                                                                        |
+
+### Output
+
+The output document contains the following fields:
+
+Selective restore status
+
+```
+{
+ "name": "<restore_name>",
+ "opid": "string",
+ "backup": "<backup_name>",
+ "type": "logical",
+ "status": "done",
+ "start": "Time"
+ "finish": "Time"
+ "namespaces": [
+    "<database.*>"
+ "last_transition_time": "Time"
+ ]
+ "replsets": [
+   {
+     "name": "rs1",
+     "status": "done",
+     "last_transition_time": "Time"
+   },
+   {
+    "name": "rs0",
+    "status": "done",
+    "last_transition_time": "Time"
+   },
+   {
+     "name": "cfg",
+     "status": "done",
+     "last_transition_time": "Time"
+   }
+ ],
+}
+```
+
+Physical restore status
+
+```
+{
+ "name": "<restore_name>",
+ "opid": "string",
+ "backup": "<backup_name>",
+ "type": "physical",
+ "status": "done",
+ "start": "Time"
+ "finish": "Time"
+ "last_transition_time": "Time",
+ "replsets": [
+   {
+     "name": "rs1",
+     "status": "done",
+     "last_transition_time": "Timestamp",
+     "nodes": [
+       {
+         "name": "IP:port",
+         "status": "done",
+         "last_transition_time": "Timestamp"
+       }
+     ]
+   }
+ ],
+}
+```
+
+| Field                  | Description                                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                 | The restore name                                                                                                                                                                                                                                                                                                                                                                                          |
+| `opid`                 | A unique identifier of an operation                                                                                                                                                                                                                                                                                                                                                                       |
+| `backup`               | The name of the backup from which the database was restored                                                                                                                                                                                                                                                                                                                                               |
+| `type`                 | The restore type. Supported values: logical, physical                                                                                                                                                                                                                                                                                                                                                     |
+| `status`               | The restore status. Supported values: running, copyReady, done, error                                                                                                                                                                                                                                                                                                                                     |
+| `start`                | The time when the restore started                                                                                                                                                                                                                                                                                                                                                                         |
+| `finish`               | The time when the restore finished. Available only for successful restores (with the status `done`)                                                                                                                                                                                                                                                                                                       |
+| `error`                | The error message for a failed restore                                                                                                                                                                                                                                                                                                                                                                    |
+| `last_transition_time` | The human-readable indication of the time when the restore process changed its status                                                                                                                                                                                                                                                                                                                     |
+| `namespaces`           | The list of namespaces included in the restore. Available for selective restore                                                                                                                                                                                                                                                                                                                           |
+| `replsets`             | The list of replica sets included in the restore. Each replica set has the following fields: - `name` - the replica set name - `status` - the restore status on this replica set - `error` - the error message for failed restore - `last_transition_time` - the human-readable indication of the time when the restore process changed its status - `nodes` - the list of nodes included in the restore. |
+| `replsets.nodes`       | The list of nodes included in the restore. Each node has the following fields: - `name` - the node name and port - `status` - the restore status on the node - `error` - the error message for failed restore - `last_transition_time` - the human-readable indication of the time when the restore process changed its status                                                                            |
+
+## pbm diagnostic
+
+Generates the report with the detailed information about a specific backup or a restore. You can also use it for other commands. To learn more, refer to the [Diagnostics report](https://docs.percona.com/percona-backup-mongodb/2.17.0/troubleshoot/pbm-report.html).
+
+The command has the following syntax:
+
+```
+pbm diagnose --path path --name <backup-name> --opid <OPID>
+```
+
+The command accepts the following flags:
+
+| Flag        | Description                                                                                                                                                                                      |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--path`    | The path where to save the report. If the directory doesn’t exist, PBM creates it during the report generation. Make sure that the user that runs PBM CLI has write access to the specified path |
+| `--name`    | The name of the required backup or a restore                                                                                                                                                     |
+| `--opid`    | The unique Operation ID of the specified command. You can retrieve it from the `pbm logs`, `pbm describe-backup` / `pbm describe-restore` output.                                                |
+| `--archive` | Creates a .zip archive of the report in the specified path.                                                                                                                                      |
+
+## pbm help
+
+Returns the help information about `pbm` commands.
+
+## pbm list
+
+Provides the list of backups and their states in a tabular format, making backup information easier to read and scan.
+
+- In progress - A backup is running
+- Canceled - A backup was canceled
+- Error - A backup was finished with an error
+- No status means a backup is complete
+
+Only successfully completed backups are listed. To view information about a running or a failed backup, run [`pbm status`](#pbm-status).
+
+When Point-in-Time Recovery is enabled, the `pbm list` also provides the list of valid time ranges for recovery and point-in-time recovery status.
+
+The command has the following syntax:
+
+```
+pbm list [<flags>]
+```
+
+**Select a storage when listing backups**
+
+If you use multiple storages, you can list backups from a specific storage using the `--profile` flag:
+
+- `--profile=main` to list backups from the main storage
+- `--profile=<profile_name>` to list backups from an external storage configured as a profile
+
+**Example:**
+
+```
+pbm list --profile=main
+pbm list --profile=minio
+```
+
+**Sample output**
+
+```
+Backup snapshots:
+NAME                      TYPE          PROFILE               SELECTIVE   BASE    RESTORE TIME         DURATION
+---------------------------------------------------------------------------------------------------------------
+2026-08-24T12:17:24Z      physical                            no          no      2026-08-24T12:17:27  20s
+2026-08-24T12:17:58Z      logical                             no          no      2026-08-24T12:21:36  3m51s
+```
+
+For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with –profile](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/multi-storage.html#select-a-storage-with---profile).
+
+The command accepts the following flags:
+
+| Flag                  | Description                                                                                                                                                      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--profile`           | Selects the storage to `--profile=main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used.      |
+| `--restore`           | Shows last N restores. Starting with version 2.0, the output shows restore names instead of backup names, as multiple restores can be done from a single backup. |
+| `--size=0`            | Shows last N backups. It also provides the information whether the restore is a selective one.                                                                   |
+| `-o`, `--out=text`    | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                                                                  |
+| `--unbacked`          | Shows Point-in-Time Recovery oplog slices that were saved without the base backup snapshot. Available starting with version 1.8.0.                               |
+| `--replset-remapping` | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`                                |
+
+List of backups
+
+```
+{
+  "snapshots": [
+      {
+        "name": "<backup-name>",
+        "status": "done",
+        "restoreTo": Timestamp,
+        "pbmVersion": "<version>",
+        "type": "logical",
+        "src": ""
+      },
+      {
+        "name": "<backup-name>",
+        "status": "done",
+        "restoreTo": Timestamp,
+        "pbmVersion": "<version>",
+        "type": "logical",
+        "src": "",
+        "storage": "<storage-name>"
+      }
+  ],
+  "pitr": {
+    "on": false,
+    "ranges": [
+      {
+        "range": {
+          "start": Timestamp,
+          "end": Timestamp
+        }
+      },
+      {
+        "range": {
+          "start": Timestamp,
+          "end": Timestamp
+        },
+      {
+        "range": {
+          "start": Timestamp,
+          "end": Timestamp (no base snapshot)
+        }
+      }
+    ]
+  }
+}
+```
+
+Restore history
+
+Full restore
+
+```
+ {
+    "start": Timestamp,
+    "status": "done",
+    "type": "snapshot",
+    "snapshot": "<backup_name>",
+    "name": "<restore_name>"
+  }
+```
+
+Selective restore
+
+```
+  {
+    "start": Timestamp,
+    "status": "done",
+    "type": "snapshot",
+    "snapshot": "<backup_name>",
+    "name": "<restore_name>",
+    "namespaces": [
+      "<database.collection>"
+    ]
+  }
+```
+
+Point-in-time restore
+
+```
+  {
+    "start": Timestamp,
+    "status": "done",
+    "type": "pitr",
+    "snapshot": "<backup_name>",
+    "point-in-time": Timestamp,
+    "name": "<restore_name>"
+  }
+```
+
+Selective point-in-time restore
+
+```
+{
+    "start": Timestamp,
+    "status": "done",
+    "type": "pitr",
+    "snapshot": "<backup_name>",
+    "point-in-time": Timestamp,
+    "name": "<restore_name>",
+    "namespaces": [
+      "<database.collection>"
+    ]
+  }
+]
+```
+
+## pbm logs
+
+Shows log information from all `pbm-agent` processes.
+
+The command has the following syntax:
+
+```
+pbm logs [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                  | Description                                                                                                                                                                                                                 |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-t`, `--tail=20`     | Shows last N entries. By default, the output shows last 20 entries. `0` means to show all log messages.                                                                                                                     |
+| `-e`, `--event=EVENT` | Shows logs filtered by a specified event. Supported events: - backup - restore - resyncBcpList - pitr - pitrestore - delete                                                                                                 |
+| `-o`, `--out=text`    | Shows log information as text (default) or in JSON format. Supported values: `text`, `json`                                                                                                                                 |
+| `-n`, `--node=NODE`   | Shows logs for a specified node or a replica set. Specify the node in the format `replset[/host:port]`                                                                                                                      |
+| `-f`, `--follow`      | Follow log output. Allow to view the logs dynamically                                                                                                                                                                       |
+| `-s`, `--severity=I`  | Shows logs filtered by severity level. Supported levels are (from low to high): D - Debug, I - Info (default), W - Warning, E - Error, F - Fatal. The output includes both the specified severity level and all higher ones |
+| `--timezone=TIMEZONE` | Timezone of the log output. Supported values: `UTC` (default), `local` or the timezone in the [IANA timezone format](https://en.wikipedia.org/wiki/Tz_database) (for example `America/New_York`)                            |
+| `-i`, `--opid=OPID`   | Show logs for an operation in progress. The operation is identified by the OpID                                                                                                                                             |
+| `-x`, `--extra`       | Show extra data in the text format                                                                                                                                                                                          |
+
+Find the usage examples in [Viewing backup logs](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/logs.html).
+
+Logs output
+
+```
+[
+  {
+    "t": "",
+    "s": 3,
+    "rs": "rs0",
+    "node": "example.mongodb.com:27017",
+    "e": "",
+    "eobj": "",
+    "ep": {
+      "T": 0,
+      "I": 0
+    },
+    "msg": "listening for the commands"
+  },
+  ....
+]
+```
+
+## pbm oplog-replay
+
+Allows to replay the oplog on top of any backup: logical, physical, storage level snapshot (like EBS-snapshot) and restore it to a specific point in time.
+
+To learn more about the usage, refer to Point-in-Time Recovery oplog replay.
+
+The command has the following syntax:
+
+```
+pbm oplog-replay [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `start=timestamp`     | The start time for the oplog replay.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `end=timestamp`       | The end time for the oplog replay.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--replset-remapping` | Maps the replica set names for the oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `-w`, `--wait`        | Wait for the oplog replay operation to complete.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `--wait-time`         | The time to wait for PBM to report the status of the oplog replay execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+
+## pbm profile add
+
+Saves an external storage configuration to PBM. This information is defined via configuration profiles.
+
+To learn more about configuration profiles, see [Multiple storages for backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/multi-storage.html).
+
+The command has the following syntax:
+
+```
+pbm profile add [<flags>] <profile-name> <path/to/profile.yaml>
+```
+
+The command accepts the following flags:
+
+| Flag          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| –sync         | Add a profile defining an external storage and sync the backup list from this storage                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| –wait         | Wait for the profile to be added. The flag blocks the shell session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `--wait-time` | The time to wait for PBM to report the status of adding the profile and backup sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+| -o, –out=text | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+
+Add profile
+
+```
+{
+  "msg": "OK"
+}
+```
+
+## pbm profile list
+
+Provides information about [configuration profiles](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/multi-storage.html#configuration-profiles) added to PBM.
+
+The command has the following syntax:
+
+```
+pbm profile list [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag               | Description                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+List profiles
+
+```
+{
+  "profiles": [
+    {
+      "name": "test1",
+      "profile": true,
+      "storage": {
+        "type": "filesystem",
+        "filesystem": {
+          "path": "/tmp/local_backups"
+        }
+      }
+    }
+  ]
+}
+```
+
+## pbm profile remove
+
+Removes the specified configuration profile from PBM.
+
+The command has the following syntax:
+
+```
+pbm profile remove <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--wait`           | Wait for the profile to be removed. The flag blocks the shell session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `--wait-time`      | The time to wait for PBM to report the status of the profile removal. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+| `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+
+Delete profile
+
+```
+{
+  "msg": "OK"
+}
+```
+
+## pbm profile show
+
+Shows the external storage configuration according to the specified configuration profile.
+
+The command has the following syntax:
+
+```
+pbm profile show <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag               | Description                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json` |
+
+Show profile
+
+```
+{
+  "name": "test1",
+  "profile": true,
+  "storage": {
+    "type": "filesystem",
+    "filesystem": {
+      "path": "/tmp/local_backups"
+    }
+  }
+}
+```
+
+## pbm profile sync
+
+Syncs the backup list from the external storage according to the specified configuration profile.
+
+The command has the following syntax:
+
+```
+pbm profile sync <profile-name> [<flags>]
+```
+
+The command accepts the following flags:
+
+| Flag               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--all`            | Syncs backup lists from all the storages.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `--clear`          | Clears the backup list from the storage. To clear the backup list from a specific storage, pass the profile name. When used with `--all`, clears backup lists from all storages.                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `--wait`           | Wait for the profile to be synced. The flag blocks the shell session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `--wait-time`      | The time to wait for PBM to report the status of the profile sync. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0. |
+| `-o`, `--out=text` | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+
+## pbm restore
+
+Restores database from a specified backup / to a specified point in time. Depending on the backup type, makes either logical, physical, or a snapshot-based restore.
+
+The command has the following syntax:
+
+```
+pbm restore [<flags>] [<backup_name>]
+```
+
+For more information about using `pbm restore`, see [Restoring a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore.html).
+
+The command accepts the following flags:
+
+| Flag                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--exit`                                 | Stops the agent automatically after it reaches the `copyReady` state.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `--external`                             | Indicates the backup as the one made outside PBM (for example, snapshot-based)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `--time=TIME`                            | Restores the database to the specified point in time. Available for logical restores and if [Point-in-time recovery](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/point-in-time-recovery.html) is enabled.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| `-w`                                     | Wait for the restore to finish. The flag blocks the shell session.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `--wait-time`                            | The time to wait for PBM to report the status of the restore execution. Use this flag together with the `--wait` flag. You can specify the duration in minutes or hours (for example 5m, 1h). When not set, PBM waits till the command executes. If it takes longer than the defined waiting time to execute the command, PBM prints the `Operation is in progress. Check pbm status and logs` error message and unblocks the shell session. The `pbm-agent` continues to execute the command enabling you to track its progress via the `pbm status` command. Available starting with version 2.6.0.                                                                                                                                                                                                                                                                                                                             |
+| `-o`, `--out=text`                       | Shows the output format as either plain text or a JSON object. Supported values: `text`, `json`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `--base-snapshot`                        | Restores the database from a specified backup to the specified point in time. Without this flag, the most recent backup preceding the timestamp is used for point in recovery. In version 2.3.0, this flag is optional for [point-in-time recovery from physical backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-physical.html). In version 2.2.0, this flag is mandatory for making a [point-in-time recovery from physical backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/pitr-physical.html). Without it, PBM looks for a logical backup to restore from.                                                                                                                                                                                                                                                                                                                    |
+| `--replset-remapping`                    | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `--ns=<database.collection>`             | Restores the specified namespace(s) - databases and collections. To restore all collections in the database, specify the values as `--ns=<database.*>`. The `--ns` flag accepts several namespaces as the comma-separated list. For example, `--ns=db1.*,db2.coll2,db3.coll1,db3.collX`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `--with-users-and-roles`                 | Restores users and roles created in custom databases during selective restore. Use this flag with the `--ns` flag. Available starting with version 2.5.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `-c`, `--config`                         | The path to the `mongod.conf` file                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `--num-parallel-collections`             | Sets the number of collections to process in parallel during a specific logical restore. When undefined, `pbm-agent` processes the number of parallel collections defined for the `restore.numParallelCollections` configuration parameter. If that is undefined, the default number of collections is the half of the number of logical CPUs. Available starting with version 2.7.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| `--num-parallel-files`                   | Sets the number of files to copy in parallel during a specific physical restore from filesystem or NFS storage. When undefined, PBM uses the value configured for the `restore.numParallelFiles` option (default: `1`).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `--num-insertion-workers-per-collection` | Specifies the number of insertion workers to run concurrently per collection. Increasing the number for large import may increase the speed of the import. Available starting with version 2.8.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `--ns-from`=”database.collection”        | Specifies the name of the collection you want to restore under a new name. It indicates the collection present in the backup that you are targeting for restoration. Available starting with version 2.8.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `--ns-to`=”database.collection”          | Specifies the new name for the collection you are restoring from the original one. Available starting with version 2.8.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `--fallback-enabled`                     | Enables the use of fallback directory for a physical restore. At the restore start, PBM copies the contents of the `dbPath` to a special `.fallback` directory. If a restore is successful, PBM deletes the `.fallback` directory. If the restore ends with an error, PBM triggers the fallback procedure, deleting the downloaded backup files from `dbPath` and copying files from the `.fallback` directory back, thus reverting the cluster to its initial state before the restore. Disabled by default. Available starting with version 2.10.0                                                                                                                                                                                                                                                                                                                                                                              |
+| `--allow-partly-done`                    | Instructs how PBM handles restores with the “partlyDone” status. When enabled, PBM considers restore successful and the failed nodes receive the data via the initial sync. At least one node on each shard must restore successfully to serve as the data source for the remaining nodes. When all nodes within a replica set fail to restore, the restore is considered as failed. When disabled, PBM starts the fallback operation if you use `--allow-partly-done` together with `--fallback-enabled`. Otherwise, the restore won’t start. Enabled by default. Available starting with version 2.10.0. Note that when you restore from backups made with PBM versions before 2.10.0, you must not set the `--allow-partly-done` flag to `false`: PBM automatically disables the `--fallback-enabled` setting, if it is enabled, and cannot start the restore at all because these two flags cannot be disabled simultaneously |
+| `-y`, `--yes`                            | Restores from a backup without asking for the user’s confirmation. Available starting with version 2.14.0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+
+Restore output
+
+```
+{
+   "name": "<restore_name>"
+   "snapshot": "<backup_name>"
+}
+```
+
+Point-in-time restore
+
+```
+{
+  "name":"<restore_name>",
+  "point-in-time":"<backup_name>"
+}
+```
+
+## pbm restore-finish
+
+Instructs PBM to complete the snapshot-based physical restore. Must be run after running `pbm restore --external`. To learn more, refer to [API for snapshot-based physical backups](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/snapshots.html).
+
+The command has the following syntax:
+
+```
+pbm restore-finish <restore_name> [flags]
+```
+
+The command accepts the following flags:
+
+| Flag | Description                                                               |
+| ---- | ------------------------------------------------------------------------- |
+| `-c` | The path to the PBM configuration file. Required to complete the restore. |
+
+## pbm status
+
+Shows the status of backups and their states in a tabular format, making backup information easier to read and scan.
+
+The output provides the following information:
+
+- `pbm-agent` processes version, state and node type it is running on (primary or secondary)
+- Currently running backups or restores
+- Backups stored in the remote storage, including their duration and status
+- Point-in-Time Recovery status
+- Valid time ranges for point-in-time recovery and the data size
+
+**Select a storage when checking status**
+
+If multiple storages are configured, you can query status information for a specific storage using the –profile flag:
+
+- `--profile=main` to use the main storage
+- `--profile=<profile_name>` to use an external storage profile
+
+Example:
+
+```
+pbm status --profile=minio
+```
+
+**Sample output**
+
+```
+Cluster:
+=======
+  MongoDB version: 6.0.5
+  PBM version:     2.15.0
+  Storage:         http://minio:9000/mybackups
+
+PBM Agents:
+==========
+  Node1:27017: OK
+  Node2:27017: OK
+  Node3:27017: OK
+
+Backups:
+=======
+http://minio:9000/mybackups
+  Snapshots:
+    NAME                      SIZE        TYPE          PROFILE  SEL    BASE  RESTORE TIME         DURATION    STATUS
+    -----------------------------------------------------------------------------------------------------------------
+    2026-02-20T10:00:01Z      491.98KB    logical       minio    no     no    2026-02-20T10:00:22  21s         done
+    2026-02-21T14:30:00Z      284.06KB    physical      minio    no     no    2026-02-21T14:38:10  8m10s       done
+    2026-02-22T09:00:00Z      840.17MB    logical       minio    yes    no    2026-02-22T09:03:45  2m45s       done
+  PITR chunks [233.60MB]:
+    2026-02-20T10:05:23Z - 2026-02-21T14:29:59Z 145.20MB
+    2026-02-21T14:38:11Z - 2026-02-22T08:59:59Z  88.40MB
+```
+
+For details and naming rules (reserved values and invalid empty profile), see the section [Select a storage with –profile](https://docs.percona.com/percona-backup-mongodb/2.17.0/features/multi-storage.html#select-a-storage-with---profile).
+
+The command accepts the following flags:
+
+| Flag                        | Description                                                                                                                                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--profile`                 | Selects the storage to `--profile=main` for the main storage, or `<profile_name>` for an external storage profile. If omitted, the default storage is used.         |
+| `-o`, `--out=text`          | Shows the status as either plain text or a JSON object. Supported values: `text`, `json`                                                                            |
+| `-p`, `--priority`          | Shows the node priorities for the backup and point-in-time recovery oplog slicing. Available starting with version 2.6.0.                                           |
+| `--replset-remapping`       | Maps the replica set names for the data restore / oplog replay. The value format is `to_name_1=from_name_1,to_name_2=from_name_2`                                   |
+| `-s`, `--sections=SECTIONS` | Shows the status for the specified section. You can pass several flags to view the status for multiple sections. Supported values: cluster, pitr, running, backups. |
+
+Status information
+
+```
+{
+  "backups": {
+    "type": "FS",
+    "path": "<my-backup-dir>",
+    "snapshot": [
+       ...
+      {
+        "name": "<backup_name>",
+        "size": 3143396168,
+        "status": "done",
+        "printStatus": "success",
+        "restoreTo": Timestamp,
+        "pbmVersion": "2.10.0",
+        "type": "logical",
+        "src": ""
+  },
+      },
+    ],
+    "pitrChunks": {
+      "pitrChunks": [
+         ...
+        {
+          "range": {
+            "start": Timestamp,
+            "end": Timestamp
+          }
+        },
+        {
+          "range": {
+            "start": Timestamp,
+            "end": Timestamp (no base snapshot) !!! no backup found
+          }
+        },
+      ],
+      "size": 677901884
+    }
+  },
+  "cluster": [
+    {
+      "rs": "<replSet_name>",
+      "nodes": [
+        {
+          "host": "<replSet_name>/example.mongodb:27017",
+          "agent": "<version>",
+          "role": "",
+          "prio_pitr": "1.0",
+          "prio_backup": "1.0",
+          "ok": true
+        }
+      ]
+    }
+  ],
+  "pitr": {
+    "conf": true,
+    "run": false,
+    "error": "Timestamp.000+0000 E [<replSet_name>/example.mongodb:27017] [pitr] <error_message>"
+  },
+  "running": {
+      "type": "backup",
+      "name": "<backup_name>",
+      "startTS": Timestamp,
+      "status": "oplog backup",
+      "opID": "6113b631ea9ba5b815fee7c6"
+    }
+}
+```
+
+## pbm version
+
+Shows the version of Percona Backup for MongoDB.
+
+The command accepts the following flags:
+
+| Flag               | Description                                                                              |
+| ------------------ | ---------------------------------------------------------------------------------------- |
+| `--short`          | Shows only version info                                                                  |
+| `--commit`         | Shows only git commit info                                                               |
+| `-o`, `--out=text` | Shows the output as either plain text or a JSON object. Supported values: `text`, `json` |
+
+Version information
+
+```
+{
+  "Version": "2.6.0",
+  "Platform": "linux/amd64",
+  "GitCommit": "f9b9948bb8201ba1a6400f6558496934a0685efd",
+  "GitBranch": "main",
+  "BuildTime": "2026-07-28_15:24_UTC",
+  "GoVersion": "go1.16.6"
+}
+```

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6513,7 +6513,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="replay-oplog-from-arbitrary-start-time">Replay oplog from arbitrary start time<a class="headerlink" href="#replay-oplog-from-arbitrary-start-time" title="Permanent link">¶</a></h1>
+<h1 id="replay-oplog-from-arbitrary-start-time">Replay oplog from arbitrary start time<a data-markdown-ignore class="headerlink" href="#replay-oplog-from-arbitrary-start-time" title="Permanent link">¶</a></h1>
 <p>You can have PBM save oplog slices without the mandatory base backup snapshot. This behavior is controlled by the <a href="../reference/pitr-options.html"><code>pitr.oplogOnly</code></a> configuration parameter:</p>
 <div class="highlight"><pre><span></span><code><span class="nt">pitr</span><span class="p">:</span>
 <span class="w">   </span><span class="nt">oplogOnly</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -6524,7 +6524,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p class="admonition-title">Warning</p>
 <p>Use the oplog replay functionality with caution, only when you are sure about the starting time from which to replay oplog.</p>
 </div>
-<h2 id="ways-to-specify-time-for-oplog-replay">Ways to specify time for oplog replay<a class="headerlink" href="#ways-to-specify-time-for-oplog-replay" title="Permanent link">¶</a></h2>
+<h2 id="ways-to-specify-time-for-oplog-replay">Ways to specify time for oplog replay<a data-markdown-ignore class="headerlink" href="#ways-to-specify-time-for-oplog-replay" title="Permanent link">¶</a></h2>
 <p>PBM uses MongoDB’s timestamp format for oplog replay, which provides operation-level resolution. Each oplog operation is identified by <code>(epoch, ordinal)</code>, where <code>epoch</code> is the Unix time in seconds and <code>ordinal</code> distinguishes multiple operations within the same second. The specified operation is always included in the replay.</p>
 <p>You can define the oplog replay stop point in two ways:</p>
 <ol>
@@ -6537,7 +6537,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
    Specify the stop point as <code>epoch,ordinal</code> (e.g., <code>1764576382,20</code>). PBM includes all operations up to that exact operation. Use this method when you need precise control over which specific operations within a second to include. </p>
 </li>
 </ol>
-<h2 id="oplog-replay-for-physical-backups">Oplog replay for physical backups<a class="headerlink" href="#oplog-replay-for-physical-backups" title="Permanent link">¶</a></h2>
+<h2 id="oplog-replay-for-physical-backups">Oplog replay for physical backups<a data-markdown-ignore class="headerlink" href="#oplog-replay-for-physical-backups" title="Permanent link">¶</a></h2>
 <div class="admonition note">
 <p>Starting with version 2.2.0, oplog replay on top of physical backups made with Percona Backup for MongoDB is done automatically as part of <a href="pitr-physical.html">point-in-time recovery</a>. </p>
 </div>
@@ -6552,7 +6552,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 <li>
 <p>Run the <code>pbm oplog-replay</code> command and specify the <code>--start</code> and <code>--end</code> flags. See <a href="#ways-to-specify-time-for-oplog-replay">how you can specify the time</a>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Use timestamp</label><label for="__tabbed_1_2">Use <code>epoch,ordinal</code></label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1">Use timestamp</label><label for="__tabbed_1_2">Use <code>epoch,ordinal</code></label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>oplog-replay<span class="w"> </span>--start<span class="o">=</span><span class="s2">"2026-01-02T15:00:00"</span><span class="w"> </span>--end<span class="o">=</span><span class="s2">"2026-01-03T15:00:00"</span>
@@ -6570,7 +6570,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>After the oplog replay, make a fresh backup and enable the point-in-time recovery oplog slicing.</p>
 </li>
 </ol>
-<h2 id="oplog-replay-for-storage-level-snapshots">Oplog replay for storage-level snapshots<a class="headerlink" href="#oplog-replay-for-storage-level-snapshots" title="Permanent link">¶</a></h2>
+<h2 id="oplog-replay-for-storage-level-snapshots">Oplog replay for storage-level snapshots<a data-markdown-ignore class="headerlink" href="#oplog-replay-for-storage-level-snapshots" title="Permanent link">¶</a></h2>
 <p>This section describes how to <strong>manually</strong> replay oplog on top of snapshot backups.</p>
 <p>After you <a href="restore-external.html">restore a snapshot backup</a>, do the following:</p>
 <ol>

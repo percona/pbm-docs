@@ -1,0 +1,7 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Copyright and licensing information
+
+## Documentation licensing
+
+Percona Backup for MongoDB documentation is (C)2016-2026 Percona LLC and/or its affiliates and is distributed under the [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/) license.

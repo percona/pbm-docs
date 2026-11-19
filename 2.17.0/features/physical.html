@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6615,7 +6615,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="physical-backups-and-restores">Physical backups and restores<a class="headerlink" href="#physical-backups-and-restores" title="Permanent link">¶</a></h1>
+<h1 id="physical-backups-and-restores">Physical backups and restores<a data-markdown-ignore class="headerlink" href="#physical-backups-and-restores" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/1.7.0.html">1.7.0</a></p>
 </div>
@@ -6665,7 +6665,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="availability-and-system-requirements">Availability and system requirements<a class="headerlink" href="#availability-and-system-requirements" title="Permanent link">¶</a></h2>
+<h2 id="availability-and-system-requirements">Availability and system requirements<a data-markdown-ignore class="headerlink" href="#availability-and-system-requirements" title="Permanent link">¶</a></h2>
 <ul>
 <li>For current Percona Backup for MongoDB versions, physical backups require Percona Server for MongoDB 7.0 or newer. For support on older Percona Server for MongoDB versions, see the compatibility matrix in <a href="../details/versions.html">Supported versions</a>.</li>
 <li>WiredTiger storage engine, since physical backups heavily rely on the WiredTiger <a href="https://docs.percona.com/percona-server-for-mongodb/latest/backup-cursor.html"><code>$backupCursor</code> <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> functionality.</li>
@@ -6684,7 +6684,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </div>
 <p><a class="md-button" href="../usage/backup-physical.html">Make a backup</a>
 <a class="md-button" href="../usage/restore-physical.html">Restore a backup</a></p>
-<h2 id="physical-backups-in-mixed-deployments">Physical backups in mixed deployments<a class="headerlink" href="#physical-backups-in-mixed-deployments" title="Permanent link">¶</a></h2>
+<h2 id="physical-backups-in-mixed-deployments">Physical backups in mixed deployments<a data-markdown-ignore class="headerlink" href="#physical-backups-in-mixed-deployments" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.3.0.html">2.3.0</a></p>
 </div>
@@ -6695,7 +6695,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Consider the following flow for <a href="incremental-backup.html">incremental backups</a>:
 By default, PBM picks the node from where it made the incremental base backup when it makes subsequent backups. PBM assigns priority <code>3.0</code> to this node ensuring that it is the first in the list. If you change the node priority, make a new incremental base backup to ensure data continuity.</p>
 <p>The physical restore in mixed deployments has no restrictions except the versions in backup and in the source cluster must match.</p>
-<h2 id="physical-restores-with-data-at-rest-encryption">Physical restores with data-at-rest encryption<a class="headerlink" href="#physical-restores-with-data-at-rest-encryption" title="Permanent link">¶</a></h2>
+<h2 id="physical-restores-with-data-at-rest-encryption">Physical restores with data-at-rest encryption<a data-markdown-ignore class="headerlink" href="#physical-restores-with-data-at-rest-encryption" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.0.0.html">2.0.0</a></p>
 </div>
@@ -6712,7 +6712,7 @@ By default, PBM picks the node from where it made the incremental base backup wh
 <li><a href="https://docs.percona.com/percona-server-for-mongodb/latest/vault.html#key-rotation">Master key rotation in HashiCorp Vault server <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a></li>
 <li><a href="https://www.mongodb.com/docs/manual/tutorial/rotate-encryption-key/#kmip-master-key-rotation">KMIP master key rotation <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a></li>
 </ul>
-<h2 id="physical-restores-with-a-fallback-directory">Physical restores with a fallback directory<a class="headerlink" href="#physical-restores-with-a-fallback-directory" title="Permanent link">¶</a></h2>
+<h2 id="physical-restores-with-a-fallback-directory">Physical restores with a fallback directory<a data-markdown-ignore class="headerlink" href="#physical-restores-with-a-fallback-directory" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.10.0.html">2.10.0</a></p>
 </div>
@@ -6724,7 +6724,7 @@ By default, PBM picks the node from where it made the incremental base backup wh
 <p class="admonition-title">Warning</p>
 <p>Note that this functionality comes with a tradeoff: you must have enough disk space on every <code>mongod</code> instance to copy the contents of the <code>dbPath</code> to a fallback directory. For this reason, fallback directory usage is disabled by default. Read more about disk space requirements in the <a href="#disk-space-evaluation">Disk space evaluation</a> section.</p>
 </div>
-<h3 id="disk-space-evaluation">Disk space evaluation<a class="headerlink" href="#disk-space-evaluation" title="Permanent link">¶</a></h3>
+<h3 id="disk-space-evaluation">Disk space evaluation<a data-markdown-ignore class="headerlink" href="#disk-space-evaluation" title="Permanent link">¶</a></h3>
 <p>Each <code>mongod</code> node must have enough free space for PBM to copy the contents of the <code>dbPath</code> into the fallback directory. In addition, at least 15% of total disk capacity must remain free after the backup files are copied back to ensure operational stability.</p>
 <p>Before initiating a restore, PBM performs a comprehensive disk space evaluation on every <code>mongod</code> instance. This includes:</p>
 <ul>
@@ -6744,9 +6744,9 @@ By default, PBM picks the node from where it made the incremental base backup wh
 <p>The backup size must be less than 2.5 GB to proceed with the restore using the fallback directory.</p>
 <p>PBM logs this evaluation in detail. You can view it using the <code>pbm logs</code> command.</p>
 <p>If even one node in the cluster lacks sufficient disk space according to this calculation, PBM aborts the restore process.  </p>
-<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">¶</a></h3>
+<h3 id="configuration">Configuration<a data-markdown-ignore class="headerlink" href="#configuration" title="Permanent link">¶</a></h3>
 <p>To configure physical restores with a fallback directory, use either the PBM configuration file or the command line:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label><label for="__tabbed_1_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Specify the following option in the PBM configuration file:</p>
@@ -6762,7 +6762,7 @@ By default, PBM picks the node from where it made the incremental base backup wh
 </div>
 </div>
 <p>A restore can succeed on most nodes, but it might fail on a few, resulting in a “partlyDone” status. You can configure PBM how to proceed with such partial restores:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label><label for="__tabbed_2_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_2_1"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 3a2 2 0 0 1 2-2h9.982a2 2 0 0 1 1.414.586l4.018 4.018A2 2 0 0 1 21 7.018V21a2 2 0 0 1-2 2H4.75a.75.75 0 0 1 0-1.5H19a.5.5 0 0 0 .5-.5V8.5h-4a2 2 0 0 1-2-2v-4H5a.5.5 0 0 0-.5.5v6.25a.75.75 0 0 1-1.5 0Zm12-.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 0-.146-.336l-4.018-4.018A.5.5 0 0 0 15 2.5"></path><path d="M4.53 12.24a.75.75 0 0 1-.039 1.06l-2.639 2.45 2.64 2.45a.75.75 0 1 1-1.022 1.1l-3.23-3a.75.75 0 0 1 0-1.1l3.23-3a.75.75 0 0 1 1.06.04m3.979 1.06a.75.75 0 1 1 1.02-1.1l3.231 3a.75.75 0 0 1 0 1.1l-3.23 3a.75.75 0 1 1-1.021-1.1l2.639-2.45-2.64-2.45Z"></path></svg></span> Configuration file</label><label for="__tabbed_2_2"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 19V7H4v12zm0-16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-7 14v-2h5v2zm-3.42-4L5.57 9H8.4l3.3 3.3c.39.39.39 1.03 0 1.42L8.42 17H5.59z"></path></svg></span> Command line</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><span class="nt">restore</span><span class="p">:</span>
@@ -6781,7 +6781,7 @@ By default, PBM picks the node from where it made the incremental base backup wh
 </div>
 <p>If you allow partial restores (default value), PBM finalizes the restore. Once the cluster is up and running, the failed node receives the necessary data from other members through an initial sync. </p>
 <p>If you deny partial restores, PBM treats a cluster as unhealthy and falls it back to the original state. In this case you must have the <code>restore.fallbackEnabled</code> option set to <code>true</code> or run the <code>pbm restore</code> command with the <code>--fallback-enabled</code> flag. Otherwise, a restore won’t start.</p>
-<h3 id="implementation-specifics">Implementation specifics<a class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h3>
+<h3 id="implementation-specifics">Implementation specifics<a data-markdown-ignore class="headerlink" href="#implementation-specifics" title="Permanent link">¶</a></h3>
 <ol>
 <li>The use of fallback directory is supported for both replica set and sharded cluster deployments. </li>
 <li>The use of fallback directory is supported for both full physical and physical incremental backups</li>

@@ -139,7 +139,7 @@ those backups to a specific point in time.">
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6538,7 +6538,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-200-2022-09-21">Percona Backup for MongoDB 2.0.0 (2022-09-21)<a class="headerlink" href="#percona-backup-for-mongodb-200-2022-09-21" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-200-2022-09-21">Percona Backup for MongoDB 2.0.0 (2022-09-21)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-200-2022-09-21" title="Permanent link">¶</a></h1>
 <table>
 <thead>
 <tr>
@@ -6555,25 +6555,25 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </table>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring
 those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li>Physical backups and restores are now generally available. This enables you to use them in production environments.</li>
 <li><a href="../features/physical.html#physical-restores-with-data-at-rest-encryption">Data-at-rest encryption</a> is supported for physical backups and restores. This enables you to comply to data security regulations and save time on operating with large data sets.</li>
 <li>By <a href="../usage/restore-progress.html">tracking physical restore progress</a>, you have a clear picture of your restore operations and can timely react to any changes or issues.</li>
 <li><a href="../features/selective-backup.html">Logical backups and restores</a> can now be done selectively. This is a tech preview feature <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup> yet it enables you to work only with the desired subset of data and thereby save time on database maintenance and costs on storage. </li>
 </ul>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
+<h2 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-790">PBM-790</a>: Add the ability to make selective backups and restores. This is the tech preview feature <sup id="fnref2:1"><a class="footnote-ref" href="#fn:1">1</a></sup></li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-896">PBM-896</a>: Enable physical restores for data encrypted at rest</li>
 <li><a href="https://jira.percona.com/browse/PBM-898">PBM-898</a>,<a href="https://jira.percona.com/browse/PBM-811">PBM-811</a>, <a href="https://jira.percona.com/browse/PBM-812">PBM-812</a>: Log temporary mongod process during physical restore</li>
 <li><a href="https://jira.percona.com/browse/PBM-911">PBM-911</a>: Rename backup’s complete time in <code>pbm status</code> and <code>pbm list</code> outputs</li>
 <li><a href="https://jira.percona.com/browse/PBM-813">PBM-813</a>: Enable <code>pbm-agents</code> to send heartbeats via storage during physical restore</li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="https://jira.percona.com/browse/PBM-909">PBM-909</a>: Consider the storage settings during physical restore</li>
 <li><a href="https://jira.percona.com/browse/PBM-943">PBM-943</a>: Fix the display of pbm status for filesystem storage</li>

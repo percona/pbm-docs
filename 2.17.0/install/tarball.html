@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6593,21 +6593,21 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="download-percona-backup-for-mongodb-from-percona-website">Download Percona Backup for MongoDB from Percona website<a class="headerlink" href="#download-percona-backup-for-mongodb-from-percona-website" title="Permanent link">¶</a></h1>
+<h1 id="download-percona-backup-for-mongodb-from-percona-website">Download Percona Backup for MongoDB from Percona website<a data-markdown-ignore class="headerlink" href="#download-percona-backup-for-mongodb-from-percona-website" title="Permanent link">¶</a></h1>
 <p>You can download Percona Backup for MongoDB from <a href="https://www.percona.com/downloads/percona-backup-mongodb/">Percona website <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and install it:</p>
 <ul>
 <li><a href="#install-from-binary-tarballs">From binary tarballs</a>.</li>
 <li>Manually, from the installation packages using <code>dpkg</code> (Debian and Ubuntu) or <code>rpm</code> (Red Hat Enterprise Linux and CentOS). However, you must make sure that all dependencies are satisfied.</li>
 </ul>
-<h2 id="what-nodes-to-install-on">What nodes to install on<a class="headerlink" href="#what-nodes-to-install-on" title="Permanent link">¶</a></h2>
-<h3 id="pbm-agent"><code>pbm-agent</code><a class="headerlink" href="#pbm-agent" title="Permanent link">¶</a></h3>
+<h2 id="what-nodes-to-install-on">What nodes to install on<a data-markdown-ignore class="headerlink" href="#what-nodes-to-install-on" title="Permanent link">¶</a></h2>
+<h3 id="pbm-agent"><code>pbm-agent</code><a data-markdown-ignore class="headerlink" href="#pbm-agent" title="Permanent link">¶</a></h3>
 <p>Install <a href="../details/pbm-agent.html"><code>pbm-agent</code></a> on all servers that have <code>mongod</code> nodes in the
 MongoDB cluster (or non-sharded replica set). You don’t need to start it on the <code>arbiter</code> node, since it doesn’t have the data set.</p>
-<h3 id="pbm-cli"><code>pbm</code> CLI<a class="headerlink" href="#pbm-cli" title="Permanent link">¶</a></h3>
+<h3 id="pbm-cli"><code>pbm</code> CLI<a data-markdown-ignore class="headerlink" href="#pbm-cli" title="Permanent link">¶</a></h3>
 <p>You can install <a href="../details/cli.html"><code>pbm</code> CLI</a> on any or all servers or desktop computers you wish to use it from. Those computers must not be network-blocked from accessing the MongoDB cluster.</p>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <p>Check the <a href="../system-requirements.html">system requirements</a> and <a href="../details/versions.html">supported MongoDB versions</a>.</p>
-<h2 id="install-from-binary-tarballs">Install from binary tarballs<a class="headerlink" href="#install-from-binary-tarballs" title="Permanent link">¶</a></h2>
+<h2 id="install-from-binary-tarballs">Install from binary tarballs<a data-markdown-ignore class="headerlink" href="#install-from-binary-tarballs" title="Permanent link">¶</a></h2>
 <p class="power-number">Find the link to the binary tarballs under the <strong>Generic Linux</strong> menu item on <a href="https://www.percona.com/downloads/percona-backup-mongodb/">Percona website <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>.</p>
 <ol>
 <li>
@@ -6654,7 +6654,7 @@ MongoDB cluster (or non-sharded replica set). You don’t need to start it on th
 </tr>
 </tbody>
 </table>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="initial-setup.html">Initial setup <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg></span></a></p>
 <hr>
 <div class="md-source-file">

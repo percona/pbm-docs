@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6549,7 +6549,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication">Oracle Cloud Infrastructure (OCI) Object Storage with Workload Identity Authentication<a class="headerlink" href="#oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication" title="Permanent link">¶</a></h1>
+<h1 id="oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication">Oracle Cloud Infrastructure (OCI) Object Storage with Workload Identity Authentication<a data-markdown-ignore class="headerlink" href="#oracle-cloud-infrastructure-oci-object-storage-with-workload-identity-authentication" title="Permanent link">¶</a></h1>
 <p>Percona Backup for MongoDB (PBM) supports multiple authentication methods for Oracle Cloud Infrastructure (OCI) Object Storage, including Workload Identity. With Workload Identity, PBM can access OCI resources without storing or managing API keys, reducing operational overhead and improving security.</p>
 <p>Percona Backup for MongoDB (PBM) supports the following keyless (identity-based) authentication options:</p>
 <table>
@@ -6570,15 +6570,15 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tr>
 </tbody>
 </table>
-<h2 id="instanceprincipal">instancePrincipal<a class="headerlink" href="#instanceprincipal" title="Permanent link">¶</a></h2>
+<h2 id="instanceprincipal">instancePrincipal<a data-markdown-ignore class="headerlink" href="#instanceprincipal" title="Permanent link">¶</a></h2>
 <p>Choose <code>instancePrincipal</code> when PBM runs directly on an OCI Compute instance. PBM automatically obtains OCI credentials from the instance, eliminating the need for credential files or API keys.</p>
-<h3 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h3>
+<h3 id="before-you-begin">Before you begin<a data-markdown-ignore class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h3>
 <p>You need:</p>
 <ul>
 <li>The <a href="https://docs.oracle.com/en-us/iaas/Content/General/Concepts/identifiers.htm#Oracle" target="_blank">Oracle Cloud Identifier (OCID) <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> of the OCI Compute instance running PBM</li>
 <li>The name of the OCI bucket PBM will use for backups.</li>
 </ul>
-<h3 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">¶</a></h3>
+<h3 id="procedure">Procedure<a data-markdown-ignore class="headerlink" href="#procedure" title="Permanent link">¶</a></h3>
 <p>Follow these steps to set up OCI using <strong><code>instancePrincipal</code>:</strong></p>
 <ol>
 <li>
@@ -6672,7 +6672,7 @@ oci<span class="w"> </span>iam<span class="w"> </span>policy<span class="w"> </s
 </code></pre></div>
 </li>
 </ol>
-<h2 id="okeworkloadidentity">okeWorkloadIdentity<a class="headerlink" href="#okeworkloadidentity" title="Permanent link">¶</a></h2>
+<h2 id="okeworkloadidentity">okeWorkloadIdentity<a data-markdown-ignore class="headerlink" href="#okeworkloadidentity" title="Permanent link">¶</a></h2>
 <p>Choose <code>okeWorkloadIdentity</code> when PBM runs as a workload in an Oracle Kubernetes Engine (OKE) enhanced cluster. The Kubernetes service account token is exchanged for OCI credentials automatically by the OKE Workload Identity service.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

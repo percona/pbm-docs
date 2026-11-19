@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6513,7 +6513,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="workload-identity-authentication-for-google-cloud-storage">Workload Identity authentication for Google Cloud Storage<a class="headerlink" href="#workload-identity-authentication-for-google-cloud-storage" title="Permanent link">¶</a></h1>
+<h1 id="workload-identity-authentication-for-google-cloud-storage">Workload Identity authentication for Google Cloud Storage<a data-markdown-ignore class="headerlink" href="#workload-identity-authentication-for-google-cloud-storage" title="Permanent link">¶</a></h1>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: 2.13.0</p>
 <p>Workload Identity Federation (WIF) for Google Cloud Storage (GCS) is supported in PBM version 2.13.0 or later.</p>
@@ -6525,7 +6525,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p class="admonition-title">Note</p>
 <p>The exact configuration steps depend on where PBM is deployed (GCE VM, GKE, on-prem, AWS, Azure, GitHub Actions, etc.). This section outlines the requirements for PBM and provides a comprehensive end-to-end example for GCE VM, which is the simplest setup.</p>
 </div>
-<h2 id="how-it-works-with-pbm">How it works with PBM<a class="headerlink" href="#how-it-works-with-pbm" title="Permanent link">¶</a></h2>
+<h2 id="how-it-works-with-pbm">How it works with PBM<a data-markdown-ignore class="headerlink" href="#how-it-works-with-pbm" title="Permanent link">¶</a></h2>
 <p class="power-number">PBM integrates with Workload Identity Federation as follows:</p>
 <ol>
 <li>
@@ -6545,7 +6545,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ol>
 <p>With Workload Identity Authentication, PBM uses <a href="https://cloud.google.com/docs/authentication/application-default-credentials">Application Default Credentials <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> (ADC) provided by the runtime, such as the GKE metadata server or an external Workload Identity Federation credential configuration file. When ADC is available, PBM can upload and download backups from Google Cloud Storage (GCS) <strong>without the need to embed JSON private keys</strong> in the PBM configuration.</p>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<h2 id="prerequisites">Prerequisites<a data-markdown-ignore class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
 <p class="power-number">To use Workload Identity with GCS, you must have the following:</p>
 <ol>
 <li>
@@ -6575,7 +6575,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 PBM will then use the ADC credentials provided by the environment (rather than a static JSON private key). You can find <a href="https://github.com/percona/percona-backup-mongodb/blob/v2.17.0/packaging/conf/pbm-conf-reference.yml">the configuration file template <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a> and uncomment the required fields.<p></p>
 </li>
 </ol>
-<h2 id="use-case-gce-virtual-machine-simplest-path">Use case: GCE Virtual Machine (simplest path)<a class="headerlink" href="#use-case-gce-virtual-machine-simplest-path" title="Permanent link">¶</a></h2>
+<h2 id="use-case-gce-virtual-machine-simplest-path">Use case: GCE Virtual Machine (simplest path)<a data-markdown-ignore class="headerlink" href="#use-case-gce-virtual-machine-simplest-path" title="Permanent link">¶</a></h2>
 <div class="admonition info">
 <p class="admonition-title">Important</p>
 <p>These commands assume the <strong>Google Cloud CLI</strong> (gcloud) is installed and configured on the machine you run them from, and that you have permission to create service accounts, VMs, and update IAM.</p>

@@ -1,0 +1,82 @@
+> For the complete documentation index, see [llms.txt](https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt).
+
+# Point-in-time restore from logical backups
+
+## Preconditions
+
+Run [`pbm status`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-status) or [`pbm list`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-list) commands to check that the full backup snapshot exists and there are oplog slices.
+
+## Before you start
+
+Before restoring, prepare the cluster to prevent sharding metadata changes and ensure a consistent restore.
+
+1. Stop the balancer and `mongos` nodes.
+1. Make sure no writes are made to the database during restore.
+
+If your backup includes time series collections, refer to [Restore time series collections](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore.html#restore-time-series-collections) before you start. Collections with expiration need extra steps.
+
+## Procedure
+
+Run [`pbm restore`](https://docs.percona.com/percona-backup-mongodb/2.17.0/reference/pbm-commands.html#pbm-restore) and specify the timestamp from the valid range:
+
+```
+pbm restore --time="2022-12-14T14:27:04"
+```
+
+Version added: [2.14.0](https://docs.percona.com/percona-backup-mongodb/2.17.0/release-notes/2.14.0.html)
+
+Before a restore operation is executed you have to confirm the action (to bypass it, add the `-y` or `--yes` flag).
+
+The timestamp you specify for the restore must be within the time ranges in the PITR section of `pbm list` output. Percona Backup for MongoDB automatically selects the most recent backup among logical, physical and incremental in relation to the specified timestamp and uses that as the base for the restore.
+
+To illustrate this behavior, let’s use the following `pbm list` output as the example.
+
+```
+$ pbm list    
+
+  2025-03-04T13:00:58Z [restore_to_time: 2025-03-04T13:01:23]
+  2025-03-05T13:00:47Z [restore_to_time: 2025-03-05T13:01:11]
+  2025-03-06T08:02:44Z [restore_to_time: 2025-03-06T08:03:09]
+  2025-03-06T08:03:43Z [restore_to_time: 2025-03-06T08:04:08]
+  2025-03-06T08:18:17Z [restore_to_time: 2025-03-06T08:18:41] 
+
+PITR <off>:
+  2025-03-04T13:01:24 - 2025-03-05T13:00:11
+  2025-03-06T08:03:10 - 2025-03-06T08:18:29
+  2025-03-06T08:18:42 - 2025-03-06T08:33:09
+```
+
+For timestamp `2025-03-06T08:10:10`, the backup snapshot `2025-03-06T08:02:44Z [restore_to_time: 2025-03-06T08:03:09]` is used as the base for the restore as it is the most recent one.
+
+If you [select a backup snapshot for the restore with the `–-base-snapshot` option](#select-a-backup-snapshot-for-the-restore), the timestamp for the restore must also be later than the selected backup.
+
+See also
+
+[Restore a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore.html)
+
+### Post-restore steps
+
+A restore operation changes the time line of oplog events. Therefore, all oplog slices made after the restore time stamp and before the last backup become invalid. After the restore is complete, do the following:
+
+1. Make a new backup to serve as the starting point for oplog updates:
+
+   ```
+   pbm backup
+   ```
+
+1. Re-enable point-in-time recovery to resume saving oplog slices:
+
+   ```
+   pbm config --set pitr.enabled=true
+   ```
+
+## Select a backup snapshot for the restore
+
+You can recover your database to the specific point in time using any backup snapshot, and not only the most recent one. Run the `pbm restore` command with the `--base-snapshot=<backup_name>` flag where you specify the desired backup snapshot.
+
+To restore from any backup snapshot, Percona Backup for MongoDB requires continuous oplog. After the backup snapshot is made and point-in-time recovery is re-enabled, it copies the oplog saved with the backup snapshot and creates oplog slices from the end time of the latest slice to the new starting point thus making the oplog continuous.
+
+## Useful links
+
+- [Restore a backup](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/restore.html)
+- [Replay oplog from arbitrary start time](https://docs.percona.com/percona-backup-mongodb/2.17.0/usage/oplog-replay.html)

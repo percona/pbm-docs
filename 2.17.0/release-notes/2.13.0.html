@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6627,21 +6627,21 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2130-2026-03-03">Percona Backup for MongoDB 2.13.0 (2026-03-03)<a class="headerlink" href="#percona-backup-for-mongodb-2130-2026-03-03" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2130-2026-03-03">Percona Backup for MongoDB 2.13.0 (2026-03-03)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2130-2026-03-03" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">🛡️ Workload Identity Federation</label><label for="__tabbed_1_2">🔐 Selective backups</label></div>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1">🛡️ Workload Identity Federation</label><label for="__tabbed_1_2">🔐 Selective backups</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<h3 id="secure-backups-in-google-cloud-storage-gcs-with-workload-identity-federation-wif">Secure backups in Google Cloud Storage (GCS) with Workload Identity Federation (WIF)<a class="headerlink" href="#secure-backups-in-google-cloud-storage-gcs-with-workload-identity-federation-wif" title="Permanent link">¶</a></h3>
+<h3 id="secure-backups-in-google-cloud-storage-gcs-with-workload-identity-federation-wif">Secure backups in Google Cloud Storage (GCS) with Workload Identity Federation (WIF)<a data-markdown-ignore class="headerlink" href="#secure-backups-in-google-cloud-storage-gcs-with-workload-identity-federation-wif" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB (PBM) 2.13.0 now supports <strong>Workload Identity Federation (WIF)</strong> when authenticating with Google Cloud Storage (GCS).</p>
 <p>With WIF, you can upload backups to GCS without relying on long-lived service account JSON keys. PBM authenticates using short-lived tokens obtained through federation with an external identity provider (IdP).</p>
 <p>Workload Identity Federation lets on-premises or multicloud workloads access Google Cloud resources using federated identities instead of a service account key, eliminating the maintenance and security burden of service account keys.</p>
 <p>For detailed information, refer to our comprehensive <a href="https://docs.percona.com/percona-backup-mongodb/2.14.0/details/workload-identity-auth.html">documentation</a>.</p>
 </div>
 <div class="tabbed-block">
-<h3 id="selective-backups-including-users-and-roles">Selective backups including users and roles<a class="headerlink" href="#selective-backups-including-users-and-roles" title="Permanent link">¶</a></h3>
+<h3 id="selective-backups-including-users-and-roles">Selective backups including users and roles<a data-markdown-ignore class="headerlink" href="#selective-backups-including-users-and-roles" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB already supports selective backups of databases and collections. Now, the selective backup can also include users and roles defined within the database. This ensures that access control is restored along with the data.</p>
 <p>To back up a specific namespace and include users and roles:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--ns<span class="o">=</span><span class="s2">"mydb.*"</span><span class="w"> </span>--with-users-and-roles
@@ -6650,8 +6650,8 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </div>
 </div>
 </div>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1660">PBM-1660</a>: Percona Backup for MongoDB (PBM) 2.13.0 now supports <strong>Workload Identity Federation (WIF)</strong> for authenticating with Google Cloud Storage (GCS).</p>
@@ -6660,7 +6660,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1294">PBM-1294</a>: Percona Backup for MongoDB already supports selective backups of databases and collections. Now, the selective backup can also include users and roles defined within the database.</p>
 </li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1438">PBM-1438</a>: Added indexes across all PBM collections to improve query efficiency and reduce response times when accessing <code>pbmLog</code> data. This enhancement ensures faster log retrieval and smoother performance during backup and restore operations, particularly in environments with large datasets or frequent queries.</p>
@@ -6690,7 +6690,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1690">PBM-1690</a>: Percona Backup for MongoDB now supports restarting <code>pbm-agent</code> <strong>only at the copyReady</strong> step during external (snapshot-based) restores. At this stage, <code>mongod</code> is stopped, and the data directory has been cleared, so nodes remain on hold, awaiting new snapshot data files provided via an external mechanism (for example, snapshot restore or rsync).</p>
 </li>
 </ul>
-<h2 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
+<h2 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1488">PBM-1488</a>: Fixed an issue where Point-in-Time Recovery (PITR) would stop saving oplog slices if a failure occurred during the oplog copy process from a backup.</p>

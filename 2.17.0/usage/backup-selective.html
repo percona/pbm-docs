@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6593,8 +6593,8 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="make-a-selective-logical-backup">Make a selective logical backup<a class="headerlink" href="#make-a-selective-logical-backup" title="Permanent link">¶</a></h1>
-<h2 id="before-you-start">Before you start<a class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
+<h1 id="make-a-selective-logical-backup">Make a selective logical backup<a data-markdown-ignore class="headerlink" href="#make-a-selective-logical-backup" title="Permanent link">¶</a></h1>
+<h2 id="before-you-start">Before you start<a data-markdown-ignore class="headerlink" href="#before-you-start" title="Permanent link">¶</a></h2>
 <p class="power-number">Before taking a backup, verify PBM is installed and running.</p>
 <ol>
 <li><a href="../installation.html">Install</a> and <a href="../install/initial-setup.html">set up Percona Backup for MongoDB</a></li>
@@ -6608,7 +6608,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 </li>
 </ol>
-<h2 id="procedure">Procedure<a class="headerlink" href="#procedure" title="Permanent link">¶</a></h2>
+<h2 id="procedure">Procedure<a data-markdown-ignore class="headerlink" href="#procedure" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.0.0.html">2.0.0</a></p>
 </div>
@@ -6620,11 +6620,11 @@ To back up the <strong>Invoices</strong> database and all collections that it in
 <p></p><div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--ns<span class="o">=</span>invoices.*
 </code></pre></div>
 To back up multiple namespaces, specify them as a comma-separated list for the –ns flag: <code>&lt;db1.col1&gt;,&lt;db2.*&gt;,&lt;db3.*&gt;</code>. The number of namespaces to specify is unlimited.<p></p>
-<h2 id="selective-backup-with-users-and-roles">Selective backup with users and roles<a class="headerlink" href="#selective-backup-with-users-and-roles" title="Permanent link">¶</a></h2>
+<h2 id="selective-backup-with-users-and-roles">Selective backup with users and roles<a data-markdown-ignore class="headerlink" href="#selective-backup-with-users-and-roles" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.13.0.html">2.13.0</a></p>
 </div>
-<h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h3>
+<h3 id="overview">Overview<a data-markdown-ignore class="headerlink" href="#overview" title="Permanent link">¶</a></h3>
 <p>Percona Backup for MongoDB allows you to create selective backups of databases and collections, <strong>including the users and roles</strong> defined within the database. This ensures that access control is restored along with the data.</p>
 <p>To back up a specific namespace and include users and roles:</p>
 <div class="admonition warning">
@@ -6650,10 +6650,10 @@ To back up multiple namespaces, specify them as a comma-separated list for the �
 <li>Global administrative roles or users defined in other databases are excluded.</li>
 </ul>
 </details>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p><a class="md-button" href="list-backup.html">List backups</a>
 <a class="md-button" href="restore-selective.html">Make a restore</a></p>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../features/backup-types.html">Backup and restore types</a></li>
 <li><a href="schedule-backup.html">Schedule backups</a></li>

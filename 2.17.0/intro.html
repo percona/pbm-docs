@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6513,11 +6513,11 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="how-percona-backup-for-mongodb-works">How Percona Backup for MongoDB works<a class="headerlink" href="#how-percona-backup-for-mongodb-works" title="Permanent link">¶</a></h1>
+<h1 id="how-percona-backup-for-mongodb-works">How Percona Backup for MongoDB works<a data-markdown-ignore class="headerlink" href="#how-percona-backup-for-mongodb-works" title="Permanent link">¶</a></h1>
 <p>Even in a highly-available architecture, such as with MongoDB replication, backups are still required even though losing one server is not fatal. Be it a complete or partial data disaster, you can use PBM (Percona Backup for MongoDB) to go back in time to the best available backup snapshot.</p>
 <p>Percona Backup for MongoDB is a command line interface tool. It provides <a href="reference/pbm-commands.html">the set of commands</a> to manage backup and restore operations in your database.</p>
 <p><a class="md-button" href="features/backup-types.html">What backup to choose?</a></p>
-<h2 id="usage-example">Usage example<a class="headerlink" href="#usage-example" title="Permanent link">¶</a></h2>
+<h2 id="usage-example">Usage example<a data-markdown-ignore class="headerlink" href="#usage-example" title="Permanent link">¶</a></h2>
 <p>Let’s have a look at how Percona Backup for MongoDB works.</p>
 <p>With <a href="installation.html">Percona Backup for MongoDB up and running</a> in your environment, make a backup:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup<span class="w"> </span>--type<span class="o">=</span>logical
@@ -6545,10 +6545,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>backup
 </code></pre></div>
 <p>This backup refreshes the timeline and serves as the base for saving oplog slices. The point-in-time recovery routine is re-enabled automatically. It copies the slices taken during the backup and continues oplog slicing from the latest timestamp to ensure oplog continuity.</p>
-<h2 id="next-steps">Next steps<a class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
+<h2 id="next-steps">Next steps<a data-markdown-ignore class="headerlink" href="#next-steps" title="Permanent link">¶</a></h2>
 <p>Ready to try it out? </p>
 <p><a class="md-button" href="installation.html">Quickstart</a></p>
-<h2 id="useful-links">Useful links<a class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
+<h2 id="useful-links">Useful links<a data-markdown-ignore class="headerlink" href="#useful-links" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="details/architecture.html">PBM architecture</a></li>
 <li><a href="features/backup-types.html">Backup types</a></li>

@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6627,28 +6627,28 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2170-2026-10-14">Percona Backup for MongoDB 2.17.0 (2026-10-14)<a class="headerlink" href="#percona-backup-for-mongodb-2170-2026-10-14" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2170-2026-10-14">Percona Backup for MongoDB 2.17.0 (2026-10-14)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2170-2026-10-14" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
 <p>PBM 2.17.0 improves physical point-in-time recovery (PITR) and restores of time series collections. It also helps you identify why an incremental backup failed and delete backups left in an unfinished state.</p>
-<h2 id="release-highlights">Release highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
-<h3 id="physical-point-in-time-recovery-restores-index-changes">Physical point-in-time recovery restores index changes<a class="headerlink" href="#physical-point-in-time-recovery-restores-index-changes" title="Permanent link">¶</a></h3>
+<h2 id="release-highlights">Release highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h3 id="physical-point-in-time-recovery-restores-index-changes">Physical point-in-time recovery restores index changes<a data-markdown-ignore class="headerlink" href="#physical-point-in-time-recovery-restores-index-changes" title="Permanent link">¶</a></h3>
 <p>Physical PITR now applies index creation, deletion, and modification operations from the oplog. Previously, PBM skipped them. The restored database now has the same indexes as the source at the restore target time.</p>
 <p>Physical restores, with or without PITR, are also more stable. PBM now disables the time-to-live (TTL) monitor for the duration of the restore, so TTL deletions no longer interfere with oplog replay or cause duplicate key errors in collections with unique indexes. TTL monitoring resumes by default when you start MongoDB after the restore.</p>
 <p>This release also fixes a storage download deadlock that could leave physical PITR waiting indefinitely. Oplog replay no longer blocks the reads PBM uses to track restore progress.</p>
 <p>For details, see <a href="../usage/pitr-physical.html">Restore to a point in time from a physical backup</a>.</p>
-<h3 id="time-series-collections-restore-without-errors">Time series collections restore without errors<a class="headerlink" href="#time-series-collections-restore-without-errors" title="Permanent link">¶</a></h3>
+<h3 id="time-series-collections-restore-without-errors">Time series collections restore without errors<a data-markdown-ignore class="headerlink" href="#time-series-collections-restore-without-errors" title="Permanent link">¶</a></h3>
 <p>PBM fixes two issues that could interrupt restores of time series collections:</p>
 <ul>
 <li>Index creation during PITR no longer fails with <code>IllegalOperation</code> errors.</li>
 <li>Logical restores, including PITR, no longer fail with <code>DocumentValidationFailure</code> errors when the time series collections were backed up under high write throughput. PBM now bypasses document validation during oplog replay.</li>
 </ul>
 <p>For additional details, refer to the <a href="../usage/restore.html#restore-time-series-collections">Restore time series collections</a> documentation.</p>
-<h3 id="improved-error-reporting-for-incremental-backups">Improved error reporting for incremental backups<a class="headerlink" href="#improved-error-reporting-for-incremental-backups" title="Permanent link">¶</a></h3>
+<h3 id="improved-error-reporting-for-incremental-backups">Improved error reporting for incremental backups<a data-markdown-ignore class="headerlink" href="#improved-error-reporting-for-incremental-backups" title="Permanent link">¶</a></h3>
 <p>When an incremental backup fails on a shard, PBM reports the underlying error instead of a generic convergence timeout. The message helps you identify the cause and decide what to do next.</p>
 <p>For example, if the previous incremental backup was made on another node, PBM explains that the incremental backup history is unavailable and that you need to create a new base incremental backup.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1775">PBM-1775</a>: PBM now reports the failing shard’s error for backups in sharded clusters, including missing incremental backup history, instead of a generic convergence timeout.</p>
@@ -6657,7 +6657,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1821">PBM-1821</a>: Updated Go to 1.27.1, along with the MongoDB Go driver, MongoDB Database Tools, and other third-party dependencies.</p>
 </li>
 </ul>
-<h3 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h3>
+<h3 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1762">PBM-1762</a>: Corrected index creation during PITR of time series collections to prevent <code>IllegalOperation</code> errors.</p>

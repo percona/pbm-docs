@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6749,12 +6749,12 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-2160-2026-09-24">Percona Backup for MongoDB 2.16.0 (2026-09-24)<a class="headerlink" href="#percona-backup-for-mongodb-2160-2026-09-24" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-2160-2026-09-24">Percona Backup for MongoDB 2.16.0 (2026-09-24)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-2160-2026-09-24" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB (PBM) is a distributed, low-impact solution for creating consistent backups of MongoDB sharded clusters and replica sets, and restoring them to a specific point in time.</p>
 <p>PBM 2.16.0 introduces lifecycle policies for managing backup retention and experimental parallel uploads to Google Cloud Storage (GCS). Moreover, it extends platform support to Debian 13 (x64 and ARM64) and Red Hat Enterprise Linux 10, and compatibility to MongoDB Community and Percona Server for MongoDB 8.3.</p>
-<h2 id="release-highlights">Release highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
-<h3 id="backup-lifecycle-management">Backup lifecycle management<a class="headerlink" href="#backup-lifecycle-management" title="Permanent link">¶</a></h3>
+<h2 id="release-highlights">Release highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h3 id="backup-lifecycle-management">Backup lifecycle management<a data-markdown-ignore class="headerlink" href="#backup-lifecycle-management" title="Permanent link">¶</a></h3>
 <p>PBM now supports backup retention policies based on the <a href="https://en.wikipedia.org/wiki/Backup_rotation_scheme#Grandfather-father-son" target="_blank">grandfather-father-son (GFS) model <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2m6.854-1h4.146a.25.25 0 0 1 .25.25v4.146a.25.25 0 0 1-.427.177L13.03 4.03 9.28 7.78a.75.75 0 0 1-1.042-.018.75.75 0 0 1-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0 1 10.604 1"></path></svg></span></a>. Configure retention periods in the <code>lifecycle</code> section, then apply the policy with <code>pbm cleanup --lifecycle</code>.</p>
 <p>The policy combines three retention periods:</p>
 <table>
@@ -6810,7 +6810,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>The policy takes effect when you run <code>pbm cleanup --lifecycle</code>. Use an external scheduler for recurring cleanup.</p>
 </div>
 <p>For a deep dive into this feature, see the <a href="https://docs.percona.com/percona-backup-mongodb/latest/usage/backup-lifecycle-management.html">documentation</a>.</p>
-<h3 id="parallel-uploads-to-google-cloud-storage">Parallel uploads to Google Cloud Storage<a class="headerlink" href="#parallel-uploads-to-google-cloud-storage" title="Permanent link">¶</a></h3>
+<h3 id="parallel-uploads-to-google-cloud-storage">Parallel uploads to Google Cloud Storage<a data-markdown-ignore class="headerlink" href="#parallel-uploads-to-google-cloud-storage" title="Permanent link">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Experimental feature</p>
 <ul>
@@ -6834,7 +6834,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 <p>The <code>parallelUploadConcurrency</code> value must be greater than <code>1</code>. Test the configuration with your workload because the additional overhead may not benefit smaller objects.</p>
 <p>For more insights into this feature, see the <a href="https://docs.percona.com/percona-backup-mongodb/details/gcs.html#parallel-uploads-to-gcs">documentation</a>.</p>
-<h3 id="extended-platform-support">Extended platform support<a class="headerlink" href="#extended-platform-support" title="Permanent link">¶</a></h3>
+<h3 id="extended-platform-support">Extended platform support<a data-markdown-ignore class="headerlink" href="#extended-platform-support" title="Permanent link">¶</a></h3>
 <p>PBM 2.16.0 adds support for these platforms:</p>
 <ul>
 <li>
@@ -6845,18 +6845,18 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 </ul>
 <p>Red Hat packages use <code>systemd</code> to manage <code>pbm-agent</code>. The packages no longer include <code>SysV init</code> scripts.</p>
-<h2 id="upgrade-considerations">Upgrade considerations<a class="headerlink" href="#upgrade-considerations" title="Permanent link">¶</a></h2>
-<h3 id="s3-debug-logging">S3 debug logging<a class="headerlink" href="#s3-debug-logging" title="Permanent link">¶</a></h3>
+<h2 id="upgrade-considerations">Upgrade considerations<a data-markdown-ignore class="headerlink" href="#upgrade-considerations" title="Permanent link">¶</a></h2>
+<h3 id="s3-debug-logging">S3 debug logging<a data-markdown-ignore class="headerlink" href="#s3-debug-logging" title="Permanent link">¶</a></h3>
 <p>PBM now validates storage.s3.debugLogLevels for Amazon Simple Storage Service (Amazon S3) and S3-compatible storage. If the configuration contains an unsupported value, PBM cannot initialize the storage and reports an error.</p>
 <p>Before upgrading, verify that this option contains only the following supported values:</p>
 <p><code>Signing</code>, <code>Retries</code>, <code>Request</code>, <code>RequestWithBody</code>, <code>Response</code>, <code>ResponseWithBody</code>, and <code>DeprecatedUsage</code>.</p>
 <p>For detailed information about these options, refer to the <a href="https://docs.percona.com/percona-backup-mongodb/latest/reference/configuration-options.html#storages3debugloglevels">documentation</a>.</p>
-<h3 id="service-management-on-red-hat-platforms">Service management on Red Hat platforms<a class="headerlink" href="#service-management-on-red-hat-platforms" title="Permanent link">¶</a></h3>
+<h3 id="service-management-on-red-hat-platforms">Service management on Red Hat platforms<a data-markdown-ignore class="headerlink" href="#service-management-on-red-hat-platforms" title="Permanent link">¶</a></h3>
 <p>Red Hat packages no longer include <code>SysV init</code> scripts. If your automation uses these scripts to manage <code>pbm-agent</code>, update it to use <code>systemd</code> before upgrading.</p>
-<h3 id="deprecated-hmac-client-for-gcs">Deprecated HMAC client for GCS<a class="headerlink" href="#deprecated-hmac-client-for-gcs" title="Permanent link">¶</a></h3>
+<h3 id="deprecated-hmac-client-for-gcs">Deprecated HMAC client for GCS<a data-markdown-ignore class="headerlink" href="#deprecated-hmac-client-for-gcs" title="Permanent link">¶</a></h3>
 <p>Removed the HMAC-based client for Google Cloud Storage. PBM no longer recognizes HMAC configuration options for GCS. Before upgrading to PBM 2.16.0, reconfigure GCS storage to use the native JSON client and service account credentials.</p>
-<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
-<h3 id="new-features">New features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
+<h2 id="changelog">Changelog<a data-markdown-ignore class="headerlink" href="#changelog" title="Permanent link">¶</a></h2>
+<h3 id="new-features">New features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1699">PBM-1699</a>: Added backup start time, finish time, and duration to agent logs and <code>pbm describe-backup</code> output. The <code>pbm list</code> and <code>pbm status</code> outputs also show the backup duration.</p>
@@ -6883,7 +6883,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1806">PBM-1806</a>: Added packages for Red Hat Enterprise Linux 10. Red Hat packages use <code>systemd</code> and no longer include SysV init scripts.</p>
 </li>
 </ul>
-<h3 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
+<h3 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1776">PBM-1776</a>: Added experimental parallel uploads through the native GCS client’s <code>grpc</code> client type.</p>
@@ -6895,7 +6895,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1780">PBM-1780</a>: Removed the HMAC-based client for Google Cloud Storage. PBM no longer recognizes HMAC configuration options for GCS.</p>
 </li>
 </ul>
-<h3 id="fixed-bugs">Fixed bugs<a class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h3>
+<h3 id="fixed-bugs">Fixed bugs<a data-markdown-ignore class="headerlink" href="#fixed-bugs" title="Permanent link">¶</a></h3>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1675">PBM-1675</a>: Corrected backup compatibility checks for sharded clusters. PBM also rejects connections through <code>mongos</code> with a clear error.</p>

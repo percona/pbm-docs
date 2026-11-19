@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6693,9 +6693,9 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="delete-backups">Delete backups<a class="headerlink" href="#delete-backups" title="Permanent link">¶</a></h1>
+<h1 id="delete-backups">Delete backups<a data-markdown-ignore class="headerlink" href="#delete-backups" title="Permanent link">¶</a></h1>
 <p>Use <a href="../reference/pbm-commands.html#pbm-delete-backup"><code>pbm delete-backup</code></a> to delete backup snapshots and <a href="../reference/pbm-commands.html#pbm-delete-pitr"><code>pbm delete-pitr</code></a> to delete point-in-time recovery oplog slices. Use the <code>pbm cleanup --older-than</code> command to <a href="schedule-backup.html#backup-storage-cleanup">automate backup storage cleanup</a>.</p>
-<h2 id="delete-outdated-data">Delete outdated data<a class="headerlink" href="#delete-outdated-data" title="Permanent link">¶</a></h2>
+<h2 id="delete-outdated-data">Delete outdated data<a data-markdown-ignore class="headerlink" href="#delete-outdated-data" title="Permanent link">¶</a></h2>
 <div class="admonition admonition">
 <p class="admonition-title">Version added: <a href="../release-notes/2.1.0.html">2.1.0</a></p>
 </div>
@@ -6714,7 +6714,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>cleanup<span class="w"> </span>--older-than<span class="w"> </span>30d<span class="w"> </span>--profile<span class="o">=</span>minio
 </code></pre></div>
 <p>When you run cleanup on the main storage, PBM automatically updates the metadata without requiring a manual resync.</p>
-<h3 id="behavior">Behavior<a class="headerlink" href="#behavior" title="Permanent link">¶</a></h3>
+<h3 id="behavior">Behavior<a data-markdown-ignore class="headerlink" href="#behavior" title="Permanent link">¶</a></h3>
 <p>The timestamp you specify is considered to be the time to which you would wish to restore. Therefore, PBM doesn’t delete all backup snapshots and oplog slices that could be used to restore to this time.</p>
 <p>Here’s how the cleanup works:</p>
 <ul>
@@ -6770,8 +6770,8 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 </li>
 </ul>
-<h2 id="delete-backup-snapshots">Delete backup snapshots<a class="headerlink" href="#delete-backup-snapshots" title="Permanent link">¶</a></h2>
-<h3 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link">¶</a></h3>
+<h2 id="delete-backup-snapshots">Delete backup snapshots<a data-markdown-ignore class="headerlink" href="#delete-backup-snapshots" title="Permanent link">¶</a></h2>
+<h3 id="considerations">Considerations<a data-markdown-ignore class="headerlink" href="#considerations" title="Permanent link">¶</a></h3>
 <ol>
 <li>
 <p>You can only delete a backup that is not running (has the “done” or the “error” state). To check the backup state, run the <a href="../reference/pbm-commands.html#pbm-status"><code>pbm status</code></a> command.</p>
@@ -6781,7 +6781,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </li>
 <li>
 <p>To ensure oplog continuity for <a href="pitr-tutorial.html">point-in-time restore</a>, the <code>pbm delete-backup</code> command deletes any backup(s) except the following:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Version 2.4.0 and higher</label><label for="__tabbed_1_2">Version 2.3.1 and earlier</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_1_1">Version 2.4.0 and higher</label><label for="__tabbed_1_2">Version 2.3.1 and earlier</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>The backup snapshot (logical, physical, base incremental) that can serve as the base for point-in-time recovery if point-in-time recovery is enabled. Such a backup is a valid base if there are continuous oplog slices deriving from it up to the <code>now</code> timestamp. </p>
@@ -6822,9 +6822,9 @@ PITR<span class="w"> </span>&lt;on&gt;:
 <li>The backup is one of the following types: logical, physical, base incremental</li>
 <li>There are continuous oplog slices derived from this backup for the desired restore to a specific timestamp. </li>
 </ul>
-<h3 id="behavior_1">Behavior<a class="headerlink" href="#behavior_1" title="Permanent link">¶</a></h3>
+<h3 id="behavior_1">Behavior<a data-markdown-ignore class="headerlink" href="#behavior_1" title="Permanent link">¶</a></h3>
 <p>You can delete either a specified backup snapshot or all backup snapshots older than the specified time. Starting with version 2.0.0, you can also delete <a href="../features/selective-backup.html">selective backups</a>. Starting with version 2.13.0, you can delete backup snapshots older than the specified time from external storages.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Specified backup</label><label for="__tabbed_2_2">Backups older than the specified time</label><label for="__tabbed_2_3">Specific types of backups</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><input id="__tabbed_2_3" name="__tabbed_2" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_2_1">Specified backup</label><label for="__tabbed_2_2">Backups older than the specified time</label><label for="__tabbed_2_3">Specific types of backups</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>To delete a backup, specify the <code>&lt;backup_name&gt;</code> as an argument.</p>
@@ -6839,7 +6839,7 @@ PITR<span class="w"> </span>&lt;on&gt;:
 <li><code>%Y-%M-%DT%H:%M:%S</code> (for example, 2021-04-20T13:13:20Z) or</li>
 <li><code>%Y-%M-%D</code> (2021-04-20).</li>
 </ul>
-<h4 id="example">Example<a class="headerlink" href="#example" title="Permanent link">¶</a></h4>
+<h4 id="example">Example<a data-markdown-ignore class="headerlink" href="#example" title="Permanent link">¶</a></h4>
 <p>View backups:</p>
 <div class="highlight"><pre><span></span><code>pbm<span class="w"> </span>list
 </code></pre></div>
@@ -6869,7 +6869,7 @@ PITR<span class="w"> </span>&lt;on&gt;:
 <div class="tabbed-block">
 <p>To delete backups of a specific type that were created before the specified time, run the <code>pbm delete backup</code> with the <code>--type</code> and the <code>--older-than</code> flags. PBM deletes all backups that don’t serve as the base for restore to the specified timestamp.</p>
 <p>Note that you must specify both flags to delete backups of the desired type.</p>
-<h4 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">¶</a></h4>
+<h4 id="example_1">Example<a data-markdown-ignore class="headerlink" href="#example_1" title="Permanent link">¶</a></h4>
 <p>You have the following list of backups:</p>
 <div class="no-copy highlight"><pre><span></span><code>Backups:
   Snapshots:
@@ -6910,11 +6910,11 @@ Waiting for delete to be done .[done]
 </div>
 </div>
 </div>
-<h2 id="delete-oplog-slices">Delete oplog slices<a class="headerlink" href="#delete-oplog-slices" title="Permanent link">¶</a></h2>
+<h2 id="delete-oplog-slices">Delete oplog slices<a data-markdown-ignore class="headerlink" href="#delete-oplog-slices" title="Permanent link">¶</a></h2>
 <p>You can delete oplog slices saved before the specified time or all slices altogether. By deleting old and/or unnecessary slices, you can save storage space. </p>
-<h3 id="behavior_2">Behavior<a class="headerlink" href="#behavior_2" title="Permanent link">¶</a></h3>
+<h3 id="behavior_2">Behavior<a data-markdown-ignore class="headerlink" href="#behavior_2" title="Permanent link">¶</a></h3>
 <p>To view oplog slices, run the <a href="../reference/pbm-commands.html#pbm-list"><code>pbm list</code></a> command. If you have <a href="#delete-backup-snapshots">deleted the snapshot</a> and want to delete the respective oplog slices, run the <code>pbm list --unbacked</code> command to view them.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div class="tabbed-labels"><label for="__tabbed_3_1">Delete all oplog slices</label><label for="__tabbed_3_2">Earlier than the specified timestamp</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio"><input id="__tabbed_3_2" name="__tabbed_3" type="radio"><div data-markdown-ignore class="tabbed-labels"><label for="__tabbed_3_1">Delete all oplog slices</label><label for="__tabbed_3_2">Earlier than the specified timestamp</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Run the <code>pbm delete-pitr</code> and pass the <code>--all</code> flag:</p>

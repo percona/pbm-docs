@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6515,10 +6515,10 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-240-2024-03-05">Percona Backup for MongoDB 2.4.0 (2024-03-05)<a class="headerlink" href="#percona-backup-for-mongodb-240-2024-03-05" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-240-2024-03-05">Percona Backup for MongoDB 2.4.0 (2024-03-05)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-240-2024-03-05" title="Permanent link">¶</a></h1>
 <p><a class="md-button" href="../installation.html">Installation</a></p>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li>You can now <a href="../usage/delete-backup.html#__tabbed_2_3">delete backup snapshots of a specific type</a>. For example, delete only logical backups which you might have created and no longer need. You can also check what exactly will be deleted with the new <code>--dry-run flag</code>. This improvement helps you better meet the organization’s backup policy and improves your experience with cleaning up outdated data.</li>
 <li>Point-in-time recovery oplog slicing is now running in parallel with backup snapshots. This ensures that you can make a <a href="../usage/pitr-tutorial.html">point-in-time recovery</a> to any timestamp from very large backups that take hours to make.</li>
@@ -6532,7 +6532,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </ul>
 </li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-907">PBM-907</a> - Upload oplog chunks during backups</p>
@@ -6544,7 +6544,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1187">PBM-1187</a> Add <code>--wait</code> option to <code>pbm config --force-resync</code></p>
 </li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://perconadev.atlassian.net/browse/PBM-1210">PBM-1210</a> - Fixed the issue with backups not cancelling when running <code>pbm cancel backup</code> </p>

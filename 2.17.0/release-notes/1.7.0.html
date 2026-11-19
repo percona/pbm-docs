@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6537,7 +6537,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-170-2022-04-18">Percona Backup for MongoDB 1.7.0 (2022-04-18)<a class="headerlink" href="#percona-backup-for-mongodb-170-2022-04-18" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-170-2022-04-18">Percona Backup for MongoDB 1.7.0 (2022-04-18)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-170-2022-04-18" title="Permanent link">¶</a></h1>
 <table>
 <thead>
 <tr>
@@ -6553,7 +6553,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tbody>
 </table>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a single replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p>Support for physical backups in Percona Server for MongoDB starting from versions 4.2.15-16 and 4.4.6-8 and higher. Physical backups drastically speed up backup and restore performance for large databases (several terabytes). This is a technical preview feature .</p>
@@ -6571,7 +6571,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p>Ability to configure the number of upload retries. This facilitates data upload in case of unstable network connection.</p>
 </li>
 </ul>
-<h2 id="new-features">New Features<a class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
+<h2 id="new-features">New Features<a data-markdown-ignore class="headerlink" href="#new-features" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://jira.percona.com/browse/PBM-734">PBM-734</a>: Add the config option to set debug log levels for S3  requests</p>
@@ -6583,7 +6583,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://jira.percona.com/browse/PBM-742">PBM-742</a>: Add the ability to replay oplog from arbitrary start time. This reduces Recovery Point Objective (RPO) when database is recovered from physical backups.</p>
 </li>
 </ul>
-<h2 id="improvements">Improvements<a class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
+<h2 id="improvements">Improvements<a data-markdown-ignore class="headerlink" href="#improvements" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://jira.percona.com/browse/PBM-680">PBM-680</a>: Skip TLS verification for object storage. This can be useful for private object storage with self-signed certificates.</p>
@@ -6607,7 +6607,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 <p><a href="https://jira.percona.com/browse/PBM-577">PBM-577</a>: It is now possible to choose an S3 storage class for granular control over various S3 tiers (Thanks to Damiano Albani for the contribution)</p>
 </li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://jira.percona.com/browse/PBM-721">PBM-721</a>: Fixed a bug where an upload of the backup to S3-storage was failing due to unstable network connection. Percona Backup for MongoDB can now be configured to retry the upload with flexible timeouts.</p>

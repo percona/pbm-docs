@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -6493,7 +6493,7 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="percona-backup-for-mongodb-205-2023-03-23">Percona Backup for MongoDB 2.0.5 (2023-03-23)<a class="headerlink" href="#percona-backup-for-mongodb-205-2023-03-23" title="Permanent link">¶</a></h1>
+<h1 id="percona-backup-for-mongodb-205-2023-03-23">Percona Backup for MongoDB 2.0.5 (2023-03-23)<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb-205-2023-03-23" title="Permanent link">¶</a></h1>
 <table>
 <thead>
 <tr>
@@ -6509,13 +6509,13 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 </tbody>
 </table>
 <p>Percona Backup for MongoDB is a distributed, low-impact solution for consistent backups of MongoDB sharded clusters and replica sets. This is a tool for creating consistent backups across a MongoDB sharded cluster (or a non-sharded replica set), and for restoring those backups to a specific point in time.</p>
-<h2 id="release-highlights">Release Highlights<a class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
+<h2 id="release-highlights">Release Highlights<a data-markdown-ignore class="headerlink" href="#release-highlights" title="Permanent link">¶</a></h2>
 <p>This release introduces the following fixes:</p>
 <ul>
 <li>for the physical restore process for deployments where the mongod <code>--dbpath</code> option has a forward slash (‘/’) as the last char</li>
 <li>security vulnerability <a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41723">CVE-2022-41723</a> by updating the Golang library dependencies to the latest versions</li>
 </ul>
-<h2 id="bugs-fixed">Bugs Fixed<a class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
+<h2 id="bugs-fixed">Bugs Fixed<a data-markdown-ignore class="headerlink" href="#bugs-fixed" title="Permanent link">¶</a></h2>
 <ul>
 <li>
 <p><a href="https://jira.percona.com/browse/PBM-1058">PBM-1058</a> - Fixed the physical restore issue if the <code>--dbpath</code> option has a tailing slash.</p>

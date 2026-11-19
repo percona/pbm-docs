@@ -138,7 +138,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"><div class="agent-hint" aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap">For AI agents: an index of this documentation is at <a href="https://docs.percona.com/percona-backup-mongodb/2.17.0/llms.txt" tabindex="-1">llms.txt</a>.</div>
   
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
@@ -7129,76 +7129,76 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   
 
 
-<h1 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">¶</a></h1>
-<h2 id="acid">ACID<a class="headerlink" href="#acid" title="Permanent link">¶</a></h2>
+<h1 id="glossary">Glossary<a data-markdown-ignore class="headerlink" href="#glossary" title="Permanent link">¶</a></h1>
+<h2 id="acid">ACID<a data-markdown-ignore class="headerlink" href="#acid" title="Permanent link">¶</a></h2>
 <p>Set of properties that guarantee database transactions are processed reliably. Stands for <a href="#atomicity"><code>Atomicity</code></a>, <a href="#consistency"><code>Consistency</code></a>, <a href="#isolation"><code>Isolation</code></a>, <a href="#durability"><code>Durability</code></a>.</p>
-<h2 id="amazon-s3">Amazon S3<a class="headerlink" href="#amazon-s3" title="Permanent link">¶</a></h2>
+<h2 id="amazon-s3">Amazon S3<a data-markdown-ignore class="headerlink" href="#amazon-s3" title="Permanent link">¶</a></h2>
 <p>Amazon S3 (Simple Storage Service) is an object storage service provided through a web service interface offered by Amazon Web Services.</p>
-<h2 id="atomicity">Atomicity<a class="headerlink" href="#atomicity" title="Permanent link">¶</a></h2>
+<h2 id="atomicity">Atomicity<a data-markdown-ignore class="headerlink" href="#atomicity" title="Permanent link">¶</a></h2>
 <p>Atomicity means that database operations are applied following an “all or nothing” rule. A transaction is either fully applied or not at all.</p>
-<h2 id="blob">Blob<a class="headerlink" href="#blob" title="Permanent link">¶</a></h2>
+<h2 id="blob">Blob<a data-markdown-ignore class="headerlink" href="#blob" title="Permanent link">¶</a></h2>
 <p>A blob stands for Binary Large Object, which includes objects such as images and multimedia files. In other words these are various data files that you store in Microsoft’s data storage platform. Blobs are organized in <a href="#container">containers</a> which are kept in Azure Blob storage under your storage account.</p>
-<h2 id="bucket">Bucket<a class="headerlink" href="#bucket" title="Permanent link">¶</a></h2>
+<h2 id="bucket">Bucket<a data-markdown-ignore class="headerlink" href="#bucket" title="Permanent link">¶</a></h2>
 <p>A bucket is a container on the s3 remote storage that stores backups.</p>
-<h2 id="collection">Collection<a class="headerlink" href="#collection" title="Permanent link">¶</a></h2>
+<h2 id="collection">Collection<a data-markdown-ignore class="headerlink" href="#collection" title="Permanent link">¶</a></h2>
 <p>A collection is the way data is organized in MongoDB. It is analogous to a table in relational databases.</p>
-<h2 id="completion-time">Completion time<a class="headerlink" href="#completion-time" title="Permanent link">¶</a></h2>
+<h2 id="completion-time">Completion time<a data-markdown-ignore class="headerlink" href="#completion-time" title="Permanent link">¶</a></h2>
 <p>Starting with version 2.0.0, the completion time is renamed “restore_to_time”</p>
 <p>The completion time is the time to which the sharded cluster / non-shared replica set will be returned to after the restore.  It is reflected in the “complete” section of the <code>pbm list</code> / <code>pbm status</code> command outputs.</p>
 <p>In <code>logical</code> backups, the completion time almost coincides with the backup finish time. To define the completion time, Percona Backup for MongoDB waits for the backup snapshot to finish on all cluster nodes. Then it captures the oplog from the backup start time up to that time. </p>
 <p>In <code>physical</code> backups, the completion time is only a few seconds after the backup start time. By holding the <code>$backupCursor</code> open, Percona Backup for MongoDB guarantees that the checkpoint data won’t change during the backup. In such a way Percona Backup for MongoDB can define the completion time ahead.</p>
-<h2 id="consistency">Consistency<a class="headerlink" href="#consistency" title="Permanent link">¶</a></h2>
+<h2 id="consistency">Consistency<a data-markdown-ignore class="headerlink" href="#consistency" title="Permanent link">¶</a></h2>
 <p>In the context of backup and restore, consistency means that the data restored will be consistent in a given point in time. Partial or incomplete writes to disk of atomic operations (for example, to table and index data structures separately) won’t be served to the client after the restore. The same applies to multi-document transactions that started but didn’t complete by the time the backup was finished.</p>
-<h2 id="container">Container<a class="headerlink" href="#container" title="Permanent link">¶</a></h2>
+<h2 id="container">Container<a data-markdown-ignore class="headerlink" href="#container" title="Permanent link">¶</a></h2>
 <p>A container is like a directory in Azure Blob storage that contains a set of <a href="#blob">blobs</a>.</p>
-<h2 id="durability">Durability<a class="headerlink" href="#durability" title="Permanent link">¶</a></h2>
+<h2 id="durability">Durability<a data-markdown-ignore class="headerlink" href="#durability" title="Permanent link">¶</a></h2>
 <p>Once a transaction is committed, it will remain so.</p>
-<h2 id="ebs-snapshot">EBS-snapshot<a class="headerlink" href="#ebs-snapshot" title="Permanent link">¶</a></h2>
+<h2 id="ebs-snapshot">EBS-snapshot<a data-markdown-ignore class="headerlink" href="#ebs-snapshot" title="Permanent link">¶</a></h2>
 <p>An EBS (Amazon Elastic Block Storage) snapshot is the point-in-time copy of your data, and can be used to enable disaster recovery, migrate data across regions and accounts, and improve backup compliance.</p>
-<h2 id="endpoint">Endpoint<a class="headerlink" href="#endpoint" title="Permanent link">¶</a></h2>
+<h2 id="endpoint">Endpoint<a data-markdown-ignore class="headerlink" href="#endpoint" title="Permanent link">¶</a></h2>
 <p>The network address (URL or IP) where an S3-compatible storage service (like MinIO) is accessible.  </p>
-<h2 id="gcp">GCP<a class="headerlink" href="#gcp" title="Permanent link">¶</a></h2>
+<h2 id="gcp">GCP<a data-markdown-ignore class="headerlink" href="#gcp" title="Permanent link">¶</a></h2>
 <p>GCP (Google Cloud Platform) is the set of services, including storage service, that runs on Google Cloud infrastructure.</p>
-<h2 id="isolation">Isolation<a class="headerlink" href="#isolation" title="Permanent link">¶</a></h2>
+<h2 id="isolation">Isolation<a data-markdown-ignore class="headerlink" href="#isolation" title="Permanent link">¶</a></h2>
 <p>The Isolation requirement means that no transaction can interfere with another.</p>
-<h2 id="jenkins">Jenkins<a class="headerlink" href="#jenkins" title="Permanent link">¶</a></h2>
+<h2 id="jenkins">Jenkins<a data-markdown-ignore class="headerlink" href="#jenkins" title="Permanent link">¶</a></h2>
 <p><a href="http://www.jenkins-ci.org">Jenkins</a> is a continuous integration system that we use to help ensure the continued quality of the software we produce. It helps us achieve the aims of:</p>
 <ul>
 <li>No failed tests in trunk on any platform</li>
 <li>Aid developers in ensuring merge requests build and test on all platforms,</li>
 <li>No known performance regressions (without a damn good explanation).</li>
 </ul>
-<h2 id="minio">MinIO<a class="headerlink" href="#minio" title="Permanent link">¶</a></h2>
+<h2 id="minio">MinIO<a data-markdown-ignore class="headerlink" href="#minio" title="Permanent link">¶</a></h2>
 <p>MinIO is a cloud storage server compatible with <a href="#amazon-s3">Amazon S3</a>, released under Apache License v2.</p>
-<h2 id="oplog">Oplog<a class="headerlink" href="#oplog" title="Permanent link">¶</a></h2>
+<h2 id="oplog">Oplog<a data-markdown-ignore class="headerlink" href="#oplog" title="Permanent link">¶</a></h2>
 <p>Oplog (operations log) is a fixed-size collection that keeps a rolling record of all operations that modify data in the database. </p>
-<h2 id="oplog-slice">Oplog slice<a class="headerlink" href="#oplog-slice" title="Permanent link">¶</a></h2>
+<h2 id="oplog-slice">Oplog slice<a data-markdown-ignore class="headerlink" href="#oplog-slice" title="Permanent link">¶</a></h2>
 <p>A compressed bundle of <a href="#oplog">oplog</a> entries stored in the Oplog Store database in MongoDB. The oplog size captures an approximately 10-minute frame. For a snapshot, the oplog size is defined by the time that the slowest replica set member requires to perform mongodump.    </p>
-<h2 id="opid">OpID<a class="headerlink" href="#opid" title="Permanent link">¶</a></h2>
+<h2 id="opid">OpID<a data-markdown-ignore class="headerlink" href="#opid" title="Permanent link">¶</a></h2>
 <p>A unique identifier of an operation such as backup, restore, resync. When a pbm-agent starts processing an operation, it acquires a lock and an opID. This prevents processing the same operation twice (for example, if there are network issues in distributed systems). Using opID as a log filter allows viewing logs for an operation in progress.</p>
-<h2 id="path-style-access-to-the-storage">Path-style access to the storage<a class="headerlink" href="#path-style-access-to-the-storage" title="Permanent link">¶</a></h2>
+<h2 id="path-style-access-to-the-storage">Path-style access to the storage<a data-markdown-ignore class="headerlink" href="#path-style-access-to-the-storage" title="Permanent link">¶</a></h2>
 <p>A method of constructing S3 URLs where the bucket name appears in the path portion of the URL. The URL format is <code>&lt;https://s3.example.com/bucket-name/object-key&gt;</code>. Preferred for S3-compatible storage systems like MinIO, especially in environments without wildcard DNS or custom SSL certificates.</p>
-<h2 id="pbm-agent"><code>pbm-agent</code><a class="headerlink" href="#pbm-agent" title="Permanent link">¶</a></h2>
+<h2 id="pbm-agent"><code>pbm-agent</code><a data-markdown-ignore class="headerlink" href="#pbm-agent" title="Permanent link">¶</a></h2>
 <p>A <code>pbm-agent</code> is a PBM process running on the mongod node for backup and restore operations. A pbm-agent instance is required for every mongod node (including replica set secondary members and config server replica set nodes).   </p>
-<h2 id="pbm-cli">pbm CLI<a class="headerlink" href="#pbm-cli" title="Permanent link">¶</a></h2>
+<h2 id="pbm-cli">pbm CLI<a data-markdown-ignore class="headerlink" href="#pbm-cli" title="Permanent link">¶</a></h2>
 <p>Command-line interface for controlling the backup system. PBM CLI can connect to several clusters so that a user can manage backups on many clusters.</p>
-<h2 id="pbm-control-collections">PBM Control collections<a class="headerlink" href="#pbm-control-collections" title="Permanent link">¶</a></h2>
+<h2 id="pbm-control-collections">PBM Control collections<a data-markdown-ignore class="headerlink" href="#pbm-control-collections" title="Permanent link">¶</a></h2>
 <p>PBM Control collections are <a href="#collection">collections</a> with config, authentication data and backup states. They are stored in the admin db  in the cluster or non-sharded replica set and serve as the communication channel between <a href="#pbm-agent"><code>pbm-agent</code></a> and <a href="#pbm-cli"><code>pbm CLI</code></a>. <code>pbm CLI</code> creates a new <code>pbmCmd</code> document for a new operation. <code>pbm-agents</code> monitor it and update as they process the operation.</p>
-<h2 id="percona-backup-for-mongodb">Percona Backup for MongoDB<a class="headerlink" href="#percona-backup-for-mongodb" title="Permanent link">¶</a></h2>
+<h2 id="percona-backup-for-mongodb">Percona Backup for MongoDB<a data-markdown-ignore class="headerlink" href="#percona-backup-for-mongodb" title="Permanent link">¶</a></h2>
 <p>Percona Backup for MongoDB (PBM) is a low-impact backup solution for MongoDB non-sharded replica sets and clusters. It supports both <a href="#percona-server-for-mongodb">Percona Server for MongoDB</a> and MongoDB Community Edition. </p>
-<h2 id="percona-server-for-mongodb">Percona Server for MongoDB<a class="headerlink" href="#percona-server-for-mongodb" title="Permanent link">¶</a></h2>
+<h2 id="percona-server-for-mongodb">Percona Server for MongoDB<a data-markdown-ignore class="headerlink" href="#percona-server-for-mongodb" title="Permanent link">¶</a></h2>
 <p>Percona Server for MongoDB is a drop-in replacement for MongoDB Community Edition with enterprise-grade features.</p>
-<h2 id="point-in-time-recovery">Point-in-Time Recovery<a class="headerlink" href="#point-in-time-recovery" title="Permanent link">¶</a></h2>
+<h2 id="point-in-time-recovery">Point-in-Time Recovery<a data-markdown-ignore class="headerlink" href="#point-in-time-recovery" title="Permanent link">¶</a></h2>
 <p>Point-in-Time Recovery is restoring the database up to a specific moment in time. The data is restored from the backup snapshot and then events that occurred to the data are replayed from oplog. </p>
-<h2 id="replica-set">Replica set<a class="headerlink" href="#replica-set" title="Permanent link">¶</a></h2>
+<h2 id="replica-set">Replica set<a data-markdown-ignore class="headerlink" href="#replica-set" title="Permanent link">¶</a></h2>
 <p>A replica set is a group of <code>mongod</code> nodes that host the same data set.</p>
-<h2 id="s3-compatible-storage">S3 compatible storage<a class="headerlink" href="#s3-compatible-storage" title="Permanent link">¶</a></h2>
+<h2 id="s3-compatible-storage">S3 compatible storage<a data-markdown-ignore class="headerlink" href="#s3-compatible-storage" title="Permanent link">¶</a></h2>
 <p>This is the storage that is built on the <a href="#amazon-s3">S3</a> API.</p>
-<h2 id="server-side-encryption">Server-side encryption<a class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h2>
+<h2 id="server-side-encryption">Server-side encryption<a data-markdown-ignore class="headerlink" href="#server-side-encryption" title="Permanent link">¶</a></h2>
 <p>Server-side encryption is the encryption of data by the remote storage server as it receives it. The data is encrypted when it is written to S3 bucket and decrypted when you access the data. </p>
-<h2 id="technical-preview-feature">Technical preview feature<a class="headerlink" href="#technical-preview-feature" title="Permanent link">¶</a></h2>
+<h2 id="technical-preview-feature">Technical preview feature<a data-markdown-ignore class="headerlink" href="#technical-preview-feature" title="Permanent link">¶</a></h2>
 <p>Technical preview features are not yet ready for enterprise use and are not included in support via SLA. They are included in this release so that users can provide feedback prior to the full release of the feature in a future GA release (or removal of the feature if it is deemed not useful). This functionality can change (APIs, CLIs, etc.) from tech preview to GA. </p>
-<h2 id="virtual-hosted-style-access">Virtual-hosted-style access<a class="headerlink" href="#virtual-hosted-style-access" title="Permanent link">¶</a></h2>
+<h2 id="virtual-hosted-style-access">Virtual-hosted-style access<a data-markdown-ignore class="headerlink" href="#virtual-hosted-style-access" title="Permanent link">¶</a></h2>
 <p>A method of constructing S3 URLs where the bucket name is part of the domain name. The URL format is <code>&lt;https://bucket-name.s3.example.com/object-key&gt;</code>. Required by AWS S3 in newer regions; enables better routing and performance in large-scale deployments.</p>
 <hr>
 <div class="md-source-file">
