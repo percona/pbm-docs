@@ -8,7 +8,7 @@ This document provides an overview of MinIO as the closest S3-compatible storage
 
 !!! admonition "Version added: [2.12.0](../release-notes/2.12.0.md)"
 
-    The `minio` storage type is available starting with PBM 2.12.0. For earlier versions, use `type: s3` with a `storage.s3` configuration block and set [`storage.s3.endpointUrl`](../reference/configuration-options.md#storages3endpointurl) to your MinIO endpoint URL.
+    The `minio` storage type requires PBM 2.12.0 or later. For earlier versions, use `type: s3` with a `storage.s3` configuration block. Set [`storage.s3.endpointUrl`](../reference/configuration-options.md#storages3endpointurl) to your MinIO endpoint URL.
 
 ## When to use the minio storage type
 
@@ -70,6 +70,28 @@ storage:
 ```
 
 For the description of configuration options, see [Configuration file options](../reference/configuration-options.md).
+
+### PBM versions before 2.12.0
+
+For PBM versions before 2.12.0, configure MinIO through the `s3` storage type:
+
+```yaml
+storage:
+  type: s3
+  s3:
+    region: us-east-1
+    endpointUrl: "https://minio.example.com:9000"
+    bucket: my-minio-bucket
+    prefix: pbm
+    forcePathStyle: true
+    credentials:
+      access-key-id: <access-key-id>
+      secret-access-key: <secret-access-key>
+```
+
+Replace the endpoint, bucket, region, prefix, and credentials with your deployment's values.
+The `forcePathStyle: true` setting uses path-style bucket URLs.
+PBM 2.11.0 uses this value by default.
 
 ## Fine-tune storage configuration
 
