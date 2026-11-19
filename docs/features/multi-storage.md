@@ -90,17 +90,18 @@ After renaming, use `--profile=main` to reference the main storage, and `--profi
 
 #### Example: Configuration profile
 
+This example uses the `s3` storage type for a MinIO server. The profile name does not select the storage type. The native `minio` storage type requires PBM 2.12.0 or later. See [MinIO configuration](../details/minio.md#configuration-example) for native storage settings.
+
 ```yaml title="minio.yaml"
 storage:
   type: s3
   s3:
-	endpointUrl: "http://localhost:9000"
-	bucket: mybucket
-	region: my-region
-	credentials:
-		access_key_id: myaccesskey
-		secret_access_key: mysecretkey
-	
+    endpointUrl: "http://localhost:9000"
+    bucket: mybucket
+    region: my-region
+    credentials:
+      access-key-id: <access-key-id>
+      secret-access-key: <secret-access-key>
 ```
 
 To upload the configuration profile to PBM, use the [`pbm profile add`](../reference/pbm-commands.md#pbm-profile-add) command and specify the path to the profile.

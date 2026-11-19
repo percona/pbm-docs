@@ -292,6 +292,10 @@ The maximum file size to be stored on the backup storage. If the file to upload 
 
 ## MinIO type storage options
 
+!!! admonition "Version added: [2.12.0](../release-notes/2.12.0.md)"
+
+    The `minio` storage type requires PBM 2.12.0 or later. For earlier versions, use the [S3 configuration for MinIO](../details/minio.md#pbm-versions-before-2120).
+
 You can use this storage type for other S3-compatible storage services
 
 ```yaml
