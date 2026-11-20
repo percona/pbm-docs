@@ -13,7 +13,7 @@ Percona Backup for MongoDB (PBM) supports the following keyless (identity-based)
 
 Choose `instancePrincipal` when PBM runs directly on an OCI Compute instance. PBM automatically obtains OCI credentials from the instance, eliminating the need for credential files or API keys.
 
-For custom regions and realms, including Oracle Alloy, see
+For custom OCI regions, see
 [Custom regions and realms](oci-storage.md#custom-regions-and-realms)
 for region metadata and authentication endpoint configuration.
 

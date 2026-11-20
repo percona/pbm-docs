@@ -738,8 +738,8 @@ The OCI region where your Object Storage bucket is located.
 *Required*: NO <br>
 *Available with version*: 2.18.0
 
-The full OCI Object Storage endpoint URL, including the scheme. Use this
-option for a custom endpoint, such as an Oracle Alloy endpoint. If omitted,
+The full OCI Object Storage endpoint URL with the scheme. Use this
+option for a custom Object Storage endpoint. If you omit `storage.oci.endpointUrl`,
 the OCI SDK derives the endpoint from the region and its realm metadata.
 Keep `storage.oci.region` set to the actual bucket region.
 
@@ -753,14 +753,16 @@ for configuration examples and region metadata setup.
 *Default*: `false` <br>
 *Available with version*: 2.18.0
 
-Enables OCI Instance Metadata Service (IMDS) lookup of the instance region's
-realm mapping. Use this option on OCI Compute instances. It does not
-discover metadata for other regions. Supply those mappings through
+`storage.oci.enableIMDS` enables OCI Instance Metadata Service (IMDS) lookup
+of the instance region's metadata. Use this option on OCI Compute instances.
+Region metadata lookup does not discover metadata for other regions.
+Supply metadata for other regions through
 `~/.oci/regions-config.json` or `OCI_REGION_METADATA`.
 
-Setting this option to `false` does not disable instance-principal access
-to identity metadata. To disable previously enabled region metadata lookup
-or reset cached mappings, restart the agents after changing the configuration.
+A `false` value does not disable instance-principal access to identity metadata.
+Set `storage.oci.enableIMDS: false` to disable region metadata lookup.
+Restart the agents to apply the change. An agent restart also clears cached
+region metadata.
 
 See [Custom regions and realms](../details/oci-storage.md#custom-regions-and-realms)
 for setup instructions.
