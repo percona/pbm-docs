@@ -234,8 +234,7 @@ and `storage.oci.enableIMDS`. These options support
 [Oracle Alloy :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/dedicated/alloy/oracle-alloy-overview.htm){:target="_blank"}
 environments.
 
-Use these settings when the OCI SDK does not recognize your region.
-PBM provides the following configuration options:
+Use these settings when the OCI SDK does not recognize your region. PBM provides the following configuration options:
 
 - Region metadata from a file, `OCI_REGION_METADATA`, or `storage.oci.enableIMDS`
 
@@ -253,9 +252,7 @@ Configure your bucket and IAM policies before you configure PBM.
 See [OCI resources](#set-up-oci-resources).
 
 !!! note
-
-    PBM storage configuration does not require the tenancy home region.
-    PBM does not make IAM calls to manage the tenancy.
+    PBM storage configuration does not require the tenancy home region. PBM does not make IAM calls to manage the tenancy.
 
 #### Supply region metadata
 
@@ -347,13 +344,9 @@ User-principal authentication needs no separate authentication URL.
 
 #### Make the settings available to PBM
 
-Make the configuration file or environment variables available to the agents
-and other relevant PBM processes. For a service or container,
-configure its runtime environment. An `export` in your shell applies only
-to processes that you start from that shell.
+Make the configuration file or environment variables available to the agents and other relevant PBM processes. For a service or container, configure its runtime environment. An `export` in your shell applies only to processes that you start from that shell.
 
 !!! note "Disable IMDS region metadata lookup"
-
     Set `storage.oci.enableIMDS: false` in the PBM configuration.
     Restart the agents after you apply the configuration.
     The setting alone does not disable previously enabled lookup.
@@ -361,6 +354,7 @@ to processes that you start from that shell.
 ## Apply the PBM configuration
 
 Complete the following steps:
+{.power-number}
 
 1. Apply your OCI configuration:
 
