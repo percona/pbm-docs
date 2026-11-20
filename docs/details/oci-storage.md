@@ -216,8 +216,8 @@ storage:
           -----END PRIVATE KEY-----
 ```
 !!! warning
-    The `user` value must be a user OCID starting with 
-    `ocid1.user.`. A bucket or compartment OCID causes
+    Set `user` to a user OCID with the prefix `ocid1.user.`.
+    A bucket or compartment OCID causes
     a 401 authentication failure.
 
 !!! tip
@@ -248,18 +248,24 @@ Set up your bucket and IAM policies first. See Set up OCI resources.
 
 !!! note 
   PBM doesn't need the tenancy home region. PBM performs no tenancy-management IAM calls.
+### Custom regions and realms
+
+!!! admonition "Version added: 2.18.0"
+
+    Configure custom OCI regions and realms with `storage.oci.endpointUrl`
+    and `storage.oci.enableIMDS`. These options support Oracle Alloy environments.
 
 #### Supply region metadata
 
-For regions unknown to the OCI SDK, provide a mapping between the region and
-its realm. Obtain `regionIdentifier`, `regionKey`, `realmKey`, and
-`realmDomainComponent` from your cloud operator. Supply the metadata using
+For regions unknown to the OCI SDK, provide region metadata that maps the
+region to its realm. Obtain `regionIdentifier`, `regionKey`, `realmKey`, and
+`realmDomainComponent` from your cloud operator. Supply the metadata with
 one of these methods:
 
 === "Configuration file"
 
-    Create `~/.oci/regions-config.json` for the operating system user running
-    each relevant PBM process. The file accepts an array of region definitions:
+    Create `~/.oci/regions-config.json` in the home directory of each user
+    that runs a relevant PBM process. The file accepts an array of region definitions:
 
     ```json
     [
@@ -296,15 +302,16 @@ one of these methods:
     The lookup covers only the instance's own region. Supply metadata for any other region through the file or the variable.
 
     For more information, see Oracle's [Adding regions
+For more information, see Oracle's [region metadata documentation
 :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdk_adding_new_region_endpoints.htm){:target="_blank"}.
 
 #### Set the storage endpoint
 
-Set `storage.oci.endpointUrl` to the full Object Storage endpoint URL,
-including `https://`. Specify the namespace and bucket in their separate
-fields. Keep `storage.oci.region` set to the actual bucket region, including
-when the endpoint uses a custom domain. PBM also uses this region for
-server-side copy operations.
+Set `storage.oci.endpointUrl` to the full Object Storage endpoint URL with
+the `https://` scheme. Specify the namespace and bucket in their separate
+fields. Keep `storage.oci.region` set to the actual bucket region when the
+endpoint uses a custom domain. PBM also uses this region for server-side
+copy operations.
 
 The following example uses instance-principal authentication and instance
 metadata lookup. Replace the placeholders with your deployment's values:
@@ -328,7 +335,7 @@ and its realm metadata.
 
 #### Configure the authentication endpoint
 
-Instance-principal authentication also needs the instance region's mapping
+Instance-principal authentication also needs the instance region's metadata
 to locate the authentication service. If that service requires a custom
 URL, set `OCI_SDK_AUTH_CLIENT_REGION_URL` in each relevant PBM process's
 environment. Obtain the URL from your cloud operator. 
@@ -337,23 +344,23 @@ User-principal authentication signs storage requests directly and needs no separ
 authentication URL.
 
 #### Make the settings available to PBM
+environment. Obtain the URL from your cloud operator. User-principal
+authentication signs storage requests directly. User-principal authentication
+needs no separate authentication URL.
 
-Make the configuration file or environment variables available to every
-relevant PBM process, including the agents. For a service or container,
+Make the configuration file or environment variables available to the agents
+and other relevant PBM processes. For a service or container,
 configure its runtime environment. An `export` in your shell applies only
-to processes started from that shell.
+to processes that you start from that shell.
 
-Apply the PBM configuration, then restart the agents after changing region
-metadata or environment variables. To disable a previously enabled IMDS
-lookup, set `enableIMDS: false` and restart the agents. Changing the setting
-alone does not clear previously enabled lookup or cached region mappings.
+Apply the PBM configuration. Restart the agents after changes to region
+metadata or environment variables. Set `enableIMDS: false` to disable region
+metadata lookup. Restart the agents to apply the change. The setting alone
+does not clear previously enabled lookup or cached region metadata.
 
-## Apply the configuration and restart the agents
+## Apply the PBM configuration
 
-The agents need a restart to apply changes to region metadata and environment variables.
-{.power-number}
-
-1. Apply the configuration:
+Apply the configuration:
 
   ```bash
   pbm config --file /path/to/oci-config.yaml
