@@ -217,7 +217,7 @@ storage:
 ```
 !!! warning
     The `user` value must be a user OCID starting with 
-    `ocid1.user.oc1`. A bucket or compartment OCID causes 
+    `ocid1.user.`. A bucket or compartment OCID causes
     a 401 authentication failure.
 
 !!! tip
@@ -226,6 +226,102 @@ storage:
     ```sh
     sed 's/^/          /' "$KEY_FILE"
     ```
+
+### Custom regions and realms
+
+!!! admonition "Version added: 2.18.0"
+
+    Use `storage.oci.endpointUrl` and `storage.oci.enableIMDS` to configure
+    custom OCI regions and realms, including Oracle Alloy environments.
+
+#### Supply region metadata
+
+For regions unknown to the OCI SDK, provide a mapping between the region and
+its realm. Obtain `regionIdentifier`, `regionKey`, `realmKey`, and
+`realmDomainComponent` from your cloud operator. Supply the metadata using
+one of these methods:
+
+=== "Configuration file"
+
+    Create `~/.oci/regions-config.json` for the operating system user running
+    each relevant PBM process. The file accepts an array of region definitions:
+
+    ```json
+    [
+      {
+        "regionIdentifier": "<region-identifier>",
+        "regionKey": "<region-key>",
+        "realmKey": "<realm-key>",
+        "realmDomainComponent": "<realm-domain>"
+      }
+    ]
+    ```
+
+=== "Environment variable"
+
+    Set `OCI_REGION_METADATA` in the environment of each relevant PBM process.
+    The variable accepts one region definition:
+
+    ```bash
+    export OCI_REGION_METADATA='{"regionIdentifier":"<region-identifier>","regionKey":"<region-key>","realmKey":"<realm-key>","realmDomainComponent":"<realm-domain>"}'
+    ```
+
+=== "Instance metadata"
+
+    On OCI Compute instances, set `storage.oci.enableIMDS: true` to enable
+    automatic region metadata lookup. The default is `false`. Lookup covers
+    only the instance's region. Supply metadata for other custom regions
+    through the configuration file or environment variable.
+
+For more information, see Oracle's [Adding regions
+:octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdk_adding_new_region_endpoints.htm){:target="_blank"}.
+
+#### Set the storage endpoint
+
+Set `storage.oci.endpointUrl` to the full Object Storage endpoint URL,
+including `https://`. Specify the namespace and bucket in their separate
+fields. Keep `storage.oci.region` set to the actual bucket region, including
+when the endpoint uses a custom domain. PBM also uses this region for
+server-side copy operations.
+
+The following example uses instance-principal authentication and instance
+metadata lookup. Replace the placeholders with your deployment's values:
+
+```yaml
+storage:
+  type: oci
+  oci:
+    region: "<bucket-region>"
+    endpointUrl: "https://objectstorage.<bucket-region>.<realm-domain>"
+    enableIMDS: true
+    namespace: "<namespace>"
+    bucket: "<bucket-name>"
+    prefix: pbm
+    credentials:
+      type: instancePrincipal
+```
+
+If you omit `endpointUrl`, the OCI SDK derives the endpoint from the region
+and its realm metadata.
+
+#### Configure authentication and restart agents
+
+Instance-principal authentication also needs the instance region's mapping
+to locate the authentication service. If that service requires a custom
+URL, set `OCI_SDK_AUTH_CLIENT_REGION_URL` in each relevant PBM process's
+environment. Obtain the URL from your cloud operator. User-principal
+authentication signs storage requests directly and needs no separate
+authentication URL.
+
+Make the configuration file or environment variables available to every
+relevant PBM process, including the agents. For a service or container,
+configure its runtime environment. An `export` in your shell applies only
+to processes started from that shell.
+
+Apply the PBM configuration, then restart the agents after changing region
+metadata or environment variables. To disable a previously enabled IMDS
+lookup, set `enableIMDS: false` and restart the agents. Changing the setting
+alone does not clear previously enabled lookup or cached region mappings.
 
 ## Apply the PBM configuration
 
