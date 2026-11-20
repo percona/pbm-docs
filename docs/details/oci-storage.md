@@ -229,12 +229,10 @@ storage:
 
 ### Use custom OCI regions and realms { #custom-regions-and-realms }
 
-!!! admonition "Version added: 2.18.0"
-
-    Configure custom OCI regions and realms with `storage.oci.endpointUrl`
-    and `storage.oci.enableIMDS`. These options support
-    [Oracle Alloy :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/dedicated/alloy/oracle-alloy-overview.htm){:target="_blank"}
-    environments.
+Configure custom OCI regions and realms with `storage.oci.endpointUrl`
+and `storage.oci.enableIMDS`. These options support
+[Oracle Alloy :octicons-link-external-16:](https://docs.oracle.com/en-us/iaas/Content/dedicated/alloy/oracle-alloy-overview.htm){:target="_blank"}
+environments.
 
 Use these settings when the OCI SDK does not recognize your region.
 PBM provides the following configuration options:
