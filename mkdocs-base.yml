@@ -1,7 +1,7 @@
 # MkDocs configuration for builds with material theme
 
 site_name: Percona Backup for MongoDB
-site_description: documentation
+site_description: "Percona Backup for MongoDB, an open source tool for consistent backups and point-in-time restores of MongoDB sharded clusters and replica sets, with installation, configuration and command reference"
 site_author: Percona LLC
 copyright: >
   <a href="https://www.percona.com/about">Percona LLC</a> and/or its affiliates © 2026
